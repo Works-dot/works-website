@@ -570,29 +570,17 @@ async function syncServiceTitles(strapi: any) {
 }
 
 async function ensurePublicPermissions(strapi: any) {
-  const actions = [
-    "api::project.project.find",
-    "api::project.project.findOne",
-    "api::blog-post.blog-post.find",
-    "api::blog-post.blog-post.findOne",
-    "api::service.service.find",
-    "api::service.service.findOne",
-    "api::team-member.team-member.find",
-    "api::team-member.team-member.findOne",
-    "api::client.client.find",
-    "api::client.client.findOne",
-    "api::tag.tag.find",
-    "api::tag.tag.findOne",
-    "api::career-position.career-position.find",
-    "api::career-position.career-position.findOne",
-    "api::homepage.homepage.find",
-    "api::about-page.about-page.find",
-    "api::blog-page.blog-page.find",
-    "api::career-page.career-page.find",
-    "api::contact-page.contact-page.find",
-    "api::projects-page.projects-page.find",
-    "api::global-setting.global-setting.find",
-  ];
+  const actions: string[] = [];
+
+  for (const [uid, contentType] of Object.entries<any>(strapi.contentTypes)) {
+    if (!uid.startsWith("api::")) continue;
+
+    actions.push(`${uid}.find`);
+
+    if (contentType.kind !== "singleType") {
+      actions.push(`${uid}.findOne`);
+    }
+  }
 
   const publicRole = await strapi
     .query("plugin::users-permissions.role")
