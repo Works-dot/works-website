@@ -1,0 +1,139 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@plugin "@tailwindcss/typography";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
+
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+  --color-card-border: hsl(var(--card-border));
+
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+
+  --color-destructive: hsl(var(--destructive));
+  --color-destructive-foreground: hsl(var(--destructive-foreground));
+
+  --color-sidebar: hsl(var(--sidebar));
+  --color-sidebar-foreground: hsl(var(--sidebar-foreground));
+  --color-sidebar-border: hsl(var(--sidebar-border));
+  --color-sidebar-primary: hsl(var(--sidebar-primary));
+  --color-sidebar-primary-foreground: hsl(var(--sidebar-primary-foreground));
+  --color-sidebar-accent: hsl(var(--sidebar-accent));
+  --color-sidebar-accent-foreground: hsl(var(--sidebar-accent-foreground));
+  --color-sidebar-ring: hsl(var(--sidebar-ring));
+
+  /* Works. Brand Colors */
+  --color-works-primary: #E73352;
+  --color-works-dark: #3F1C4A;
+  --color-works-light: #f0edf1;
+  --color-works-muted: #e3dbe5;
+  --color-works-accent: #959EF1;
+  --color-works-bg: #FAFAFA;
+  --color-works-deepdark: #1A0C1F;
+
+  --animate-marquee: marquee 40s linear infinite;
+
+  --font-sans: var(--app-font-sans);
+  --font-serif: var(--app-font-serif);
+  --font-mono: var(--app-font-mono);
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+:root {
+  --background: 0 0% 98%;
+  --foreground: 284 44% 8%;
+
+  --border: 288 16% 88%;
+
+  --card: 0 0% 100%;
+  --card-foreground: 284 44% 8%;
+  --card-border: 288 16% 88%;
+
+  --sidebar: 0 0% 100%;
+  --sidebar-foreground: 284 44% 8%;
+  --sidebar-border: 288 16% 88%;
+  --sidebar-primary: 350 79% 55%;
+  --sidebar-primary-foreground: 0 0% 100%;
+  --sidebar-accent: 285 13% 94%;
+  --sidebar-accent-foreground: 284 44% 8%;
+  --sidebar-ring: 350 79% 55%;
+
+  --popover: 0 0% 100%;
+  --popover-foreground: 284 44% 8%;
+  --popover-border: 288 16% 88%;
+
+  --primary: 350 79% 55%;
+  --primary-foreground: 0 0% 100%;
+
+  --secondary: 285 13% 94%;
+  --secondary-foreground: 284 44% 8%;
+
+  --muted: 288 16% 88%;
+  --muted-foreground: 286 25% 40%;
+
+  --accent: 234 77% 76%;
+  --accent-foreground: 0 0% 100%;
+
+  --destructive: 0 84% 60%;
+  --destructive-foreground: 0 0% 100%;
+
+  --input: 288 16% 85%;
+  --ring: 350 79% 55%;
+
+  --app-font-sans: 'Mulish', sans-serif;
+  --app-font-serif: Georgia, serif;
+  --app-font-mono: Menlo, monospace;
+  
+  --radius: .625rem;
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-\[marquee_30s_linear_infinite\],
+  .animate-\[marquee_40s_linear_infinite\],
+  .animate-\[marquee_50s_linear_infinite\] {
+    animation: none !important;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply font-sans antialiased bg-works-bg text-works-dark overflow-x-hidden;
+  }
+
+}
+
+@layer utilities {
+  input[type="search"]::-webkit-search-cancel-button {
+    @apply hidden;
+  }
+}

@@ -1,4 +1,16 @@
-modules = ["nodejs-24"]
+modules = ["nodejs-22", "postgresql-16"]
+
+[[artifacts]]
+id = "artifacts/api-server"
+
+[[artifacts]]
+id = "artifacts/mockup-sandbox"
+
+[[artifacts]]
+id = "artifacts/works-website"
+
+[[artifacts]]
+id = "artifacts/strapi"
 
 [deployment]
 router = "application"
@@ -9,7 +21,6 @@ args = ["pnpm", "store", "prune"]
 env = { "CI" = "true" }
 
 [workflows]
-runButton = "Project"
 
 [agent]
 stack = "PNPM_WORKSPACE"
@@ -17,12 +28,11 @@ expertMode = true
 
 [postMerge]
 path = "scripts/post-merge.sh"
-timeoutMs = 20000
+timeoutMs = 180000
 
-[[ports]]
-localPort = 8080
-externalPort = 8080
+[userenv]
 
-[[ports]]
-localPort = 8081
-externalPort = 80
+[userenv.shared]
+
+[nix]
+channel = "stable-25_05"

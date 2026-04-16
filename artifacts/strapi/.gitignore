@@ -1,0 +1,6 @@
+.env
+.tmp
+.cache
+build
+dist
+node_modules

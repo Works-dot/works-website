@@ -1,0 +1,11 @@
+packages:
+  "framer-motion": "For premium page transitions and scroll animations"
+  "lucide-react": "For modern UI icons"
+  "clsx": "Utility for constructing className strings conditionally"
+  "tailwind-merge": "Utility for merging tailwind classes efficiently"
+
+images: []
+
+notes:
+  - "Frontend only application with mock data. Using a simulated mutation for the newsletter form."
+  - "The design strictly follows the Works. brand guidelines, utilizing provided colors and typography."

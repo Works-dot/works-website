@@ -1,0 +1,217 @@
+Projekt áttekintés
+
+A cél egy modern, reszponzív vállalati weboldal megtervezése és felépítése a Works. számára.
+
+A Works. egy digitális ügynökség, amely az alábbi területeken működik:
+
+UX kutatás
+
+Service design
+
+UI tervezés
+
+Akadálymentességi audit
+
+User research
+
+AI-alapú tervezés és fejlesztés (appok és weboldalak)
+
+A weboldal célja, hogy:
+
+professzionális képet adjon
+
+strukturált és átlátható legyen
+
+tükrözze az emberközpontú gondolkodást
+
+innovatív és előremutató legyen
+
+Márka és értékek
+
+A weboldal hangulatának tükröznie kell:
+
+közösségközpontúság
+
+együttműködés ereje
+
+empátia és bizalom
+
+partneri hozzáállás
+
+szakmai hitelesség
+
+rugalmasság és adaptivitás
+
+nyitottság az új technológiákra
+
+proaktív gondolkodás
+
+Hangulat:
+
+professzionális, de emberi
+
+átgondolt és intelligens
+
+nyugodt, strukturált
+
+nem sablonos / nem corporate sablon
+
+Oldalstruktúra (magas szint)
+
+Főoldal
+
+Szolgáltatások (7+ oldal, bővíthető)
+
+Referenciák / projektek
+
+Blog
+
+lista oldal
+
+cikk oldal
+
+Karrier / állások
+
+Rólunk
+
+rövid bemutatkozás
+
+csapattagok
+
+⚠️ Első körben csak:
+
+header
+
+főoldal
+
+footer
+
+Design irány
+
+A Figma design:
+
+👉 vizuális referenciaként szolgál
+
+Felhasználható:
+
+spacing
+
+tipográfia hangulat
+
+színhasználat
+
+kompozíció
+
+Tilos:
+
+layout másolása
+
+konkrét szekciók lemásolása
+
+Stílus:
+
+letisztult
+
+sok whitespace
+
+modern
+
+editorial jelleg
+
+absztrakt vizuális elemek
+
+Vizuális alapok
+
+Font:
+
+Mulish
+
+Színek:
+
+#E73352 (primary)
+
+#3F1C4A (dark)
+
+#f0edf1
+
+#e3dbe5
+
+#959EF1
+
+#FAFAFA
+
+#1A0C1F
+
+Vizuális elemek:
+
+absztrakt formák
+
+finom gradiensek
+
+letisztult UI elemek
+
+Tartalom
+
+nincs lorem ipsum
+
+értelmes placeholder szöveg
+
+UX/design témához illeszkedő
+
+Hangnem:
+
+profi
+
+tiszta
+
+enyhén editorial
+
+Technikai elvárások
+
+modern frontend
+
+komponens alapú felépítés
+
+tiszta, átlátható kód
+
+ne legyen túlbonyolítva
+
+Reszponzivitás
+
+mobile-first
+
+tiszta breakpointok
+
+konzisztens spacing
+
+CMS-kompatibilitás
+
+A frontend később CMS-re lesz kötve, ezért:
+
+ismétlődő elemek legyenek komponensek:
+
+service card
+
+project card
+
+blog card
+
+tartalom legyen könnyen API-ra cserélhető
+
+Assetek
+
+Később kerülnek feltöltésre:
+
+logó
+
+absztrakt grafikák
+
+Első fázis célja
+
+Egy olyan frontend alap létrehozása, ami:
+
+vizuálisan erős
+
+jól skálázható
+
+később CMS-re köthető

@@ -1,0 +1,18 @@
+kind = "web"
+previewPath = "/strapi"
+title = "Strapi CMS"
+version = "1.0.0"
+id = "artifacts/strapi"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/strapi" ]
+localPort = 8099
+
+[services.development]
+run = "PORT=8099 STRAPI_ADMIN_BACKEND_URL=/strapi pnpm --filter @workspace/strapi run dev"
+
+[services.env]
+PORT = "8099"
+STRAPI_ADMIN_BACKEND_URL = "/strapi"
