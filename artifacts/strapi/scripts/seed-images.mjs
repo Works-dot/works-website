@@ -110,14 +110,6 @@ const TEAM_IMAGE_MAP = {
   'Lakatos Péter': 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=400&h=400&fit=crop&crop=face',
 };
 
-const WHY_US_IMAGE_MAP = [
-  'https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&h=500&fit=crop',
-  'https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&h=500&fit=crop',
-  'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=800&h=500&fit=crop',
-  'https://images.unsplash.com/photo-1517048676732-d65bc937f952?w=800&h=500&fit=crop',
-  'https://images.unsplash.com/photo-1543269865-cbf427effbad?w=800&h=500&fit=crop',
-];
-
 const GALLERY_IMAGES = [
   { url: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&h=600&fit=crop', name: 'gallery-teamwork.jpg', alt: 'Csapatmunka a Works. irodában' },
   { url: 'https://images.unsplash.com/photo-1531498860502-7c67cf02f657?w=600&h=800&fit=crop', name: 'gallery-workshop.jpg', alt: 'Workshop vezetés' },
@@ -189,18 +181,7 @@ async function seed() {
     }
   }
 
-  console.log('\n4. Uploading why-us card images...');
-  const whyUsImageIds = [];
-  for (let i = 0; i < WHY_US_IMAGE_MAP.length; i++) {
-    const url = WHY_US_IMAGE_MAP[i];
-    const uploaded = await uploadFromUrl(url, `why-us-${i + 1}.jpg`);
-    if (uploaded) {
-      whyUsImageIds.push(uploaded.id);
-      console.log(`  ✓ why-us-${i + 1}.jpg (id: ${uploaded.id})`);
-    }
-  }
-
-  console.log('\n5. Uploading gallery images...');
+  console.log('\n4. Uploading gallery images...');
   const galleryFileIds = [];
   for (const g of GALLERY_IMAGES) {
     const uploaded = await uploadFromUrl(g.url, g.name);
@@ -210,7 +191,7 @@ async function seed() {
     }
   }
 
-  console.log('\n6. Linking images to projects...');
+  console.log('\n5. Linking images to projects...');
   const projects = await getAll('projects');
   for (const proj of projects) {
     const imgs = projectImageIds[proj.slug];
@@ -239,7 +220,7 @@ async function seed() {
     console.log(`  ${res ? '✓' : '✗'} ${proj.slug}`);
   }
 
-  console.log('\n7. Linking images to blog posts...');
+  console.log('\n6. Linking images to blog posts...');
   const blogPosts = await getAll('blog-posts');
   for (const post of blogPosts) {
     const imageId = blogImageIds[post.slug];
@@ -267,7 +248,7 @@ async function seed() {
     console.log(`  ${res ? '✓' : '✗'} ${post.slug}`);
   }
 
-  console.log('\n8. Linking images to team members...');
+  console.log('\n7. Linking images to team members...');
   const members = await getAll('team-members');
   for (const member of members) {
     const imageId = teamImageIds[member.name];
@@ -276,17 +257,7 @@ async function seed() {
     console.log(`  ${res ? '✓' : '✗'} ${member.name}`);
   }
 
-  console.log('\n9. Linking images to why-us cards...');
-  const whyUsCards = await getAll('why-us-cards');
-  const sortedCards = whyUsCards.sort((a, b) => (a.order || 0) - (b.order || 0));
-  for (let i = 0; i < sortedCards.length; i++) {
-    const card = sortedCards[i];
-    if (!whyUsImageIds[i]) continue;
-    const res = await updateEntry('why-us-cards', card.documentId, { image: whyUsImageIds[i] });
-    console.log(`  ${res ? '✓' : '✗'} ${card.title}`);
-  }
-
-  console.log('\n10. Linking gallery images to about page...');
+  console.log('\n8. Linking gallery images to about page...');
   const aboutPage = await api('/about-page');
   if (aboutPage?.data) {
     const res = await api('/about-page', 'PUT', {
@@ -295,7 +266,7 @@ async function seed() {
     console.log(`  ${res ? '✓' : '✗'} About page gallery`);
   }
 
-  console.log('\n11. Uploading hero background and linking to global settings...');
+  console.log('\n9. Uploading hero background and linking to global settings...');
   const heroBgPath = path.join(WEBSITE_ASSETS, 'hero-bg-pattern.png');
   if (fs.existsSync(heroBgPath)) {
     const uploaded = await uploadFile(heroBgPath, 'hero-bg-pattern.png');

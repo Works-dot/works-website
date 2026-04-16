@@ -123,7 +123,7 @@ async function seed() {
   console.log('Seeding Strapi...\n');
 
   console.log('Cleaning existing data...');
-  for (const plural of ['blog-posts', 'career-positions', 'projects', 'services', 'why-us-cards', 'clients', 'team-members', 'tags']) {
+  for (const plural of ['blog-posts', 'career-positions', 'projects', 'services', 'clients', 'team-members', 'tags']) {
     await deleteAll(plural);
   }
   console.log('  Done.\n');
@@ -263,7 +263,7 @@ async function seed() {
   }
   console.log(`  Clients created: ${clients.length}\n`);
 
-  console.log('Creating 5 why-us cards...');
+  console.log('Preparing 5 why-us items for career page...');
   const whyUsUnsplashUrls = [
     'https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&h=500&fit=crop',
     'https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&h=500&fit=crop',

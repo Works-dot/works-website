@@ -164,75 +164,6 @@ async function updateAllLabels(strapi: any) {
   }
 }
 
-async function migrateWhyUsCardsToCareerPage(strapi: any) {
-  const knex = strapi.db.connection;
-
-  const tableExists = await knex.schema.withSchema("strapi").hasTable("why_us_cards");
-  if (!tableExists) {
-    strapi.log.info("Why-us migration: no legacy why_us_cards table found — skipping");
-    return;
-  }
-
-  const careerPage = await strapi.documents("api::career-page.career-page").findFirst({
-    populate: ["whyUs", "whyUs.items", "whyUs.items.image"],
-  });
-
-  if (careerPage?.whyUs?.items?.length > 0) {
-    strapi.log.info("Why-us migration: career page already has whyUs items — skipping");
-    return;
-  }
-
-  const legacyCards = await knex
-    .select("wuc.id", "wuc.title", "wuc.description", "wuc.order")
-    .from("strapi.why_us_cards as wuc")
-    .orderBy("wuc.order", "asc");
-
-  if (legacyCards.length === 0) {
-    strapi.log.info("Why-us migration: no legacy cards found — skipping");
-    return;
-  }
-
-  const fileRelations = await knex
-    .select("fr.related_id", "fr.file_id")
-    .from("strapi.files_related_morphs as fr")
-    .where("fr.related_type", "api::why-us-card.why-us-card")
-    .where("fr.field", "image");
-
-  const fileMap = new Map<number, number>();
-  for (const fr of fileRelations) {
-    fileMap.set(fr.related_id, fr.file_id);
-  }
-
-  const items = legacyCards.map((card: any) => ({
-    title: card.title,
-    description: card.description,
-    image: fileMap.get(card.id) || undefined,
-  }));
-
-  if (!careerPage) {
-    await strapi.documents("api::career-page.career-page").create({
-      data: {
-        whyUs: {
-          sectionHeading: "Miért jó nálunk dolgozni?",
-          items,
-        },
-      },
-    });
-  } else {
-    await strapi.documents("api::career-page.career-page").update({
-      documentId: careerPage.documentId,
-      data: {
-        whyUs: {
-          sectionHeading: "Miért jó nálunk dolgozni?",
-          items,
-        },
-      },
-    });
-  }
-
-  strapi.log.info(`Why-us migration: moved ${items.length} cards to career page whyUs`);
-}
-
 async function uploadSvgIcon(strapi: any, filePath: string, name: string): Promise<number | null> {
   const fs = require("fs");
   const path = require("path");
@@ -634,12 +565,9 @@ export default {
     const httpServer = strapi.server?.httpServer;
     if (httpServer) {
       httpServer.once("listening", () => {
-        Promise.all([
-          migrateWhyUsCardsToCareerPage(strapi),
-          migrateServicesToSections(strapi)
-            .then(() => migrateSlugToGeneral(strapi))
-            .then(() => syncServiceTitles(strapi)),
-        ])
+        migrateServicesToSections(strapi)
+          .then(() => migrateSlugToGeneral(strapi))
+          .then(() => syncServiceTitles(strapi))
           .then(() => strapi.log.info("Bootstrap tasks completed successfully"))
           .catch((err: any) => {
             strapi.log.error(`Bootstrap task failed: ${err.message}`);
@@ -647,7 +575,6 @@ export default {
           });
       });
     } else {
-      await migrateWhyUsCardsToCareerPage(strapi);
       await migrateServicesToSections(strapi);
       await migrateSlugToGeneral(strapi);
       await syncServiceTitles(strapi);
