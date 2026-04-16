@@ -569,6 +569,13 @@ async function syncServiceTitles(strapi: any) {
   }
 }
 
+const PUBLIC_WRITE_SUFFIXES = ["-submission"];
+
+function isPublicWriteType(uid: string): boolean {
+  const typeName = uid.replace(/^api::/, "").split(".")[0];
+  return PUBLIC_WRITE_SUFFIXES.some((suffix) => typeName.endsWith(suffix));
+}
+
 async function ensurePublicPermissions(strapi: any) {
   const actions: string[] = [];
 
@@ -579,6 +586,10 @@ async function ensurePublicPermissions(strapi: any) {
 
     if (contentType.kind !== "singleType") {
       actions.push(`${uid}.findOne`);
+    }
+
+    if (isPublicWriteType(uid)) {
+      actions.push(`${uid}.create`);
     }
   }
 
