@@ -319,8 +319,12 @@ async function main() {
     console.log(`\nStrapi data cached to ${path.relative(root, outPath)}`);
   } catch (err) {
     console.warn(`\n⚠ Could not fetch Strapi data: ${err.message}`);
-    console.warn("  Cache reset to empty — build will use hardcoded fallback data.\n");
-    fs.writeFileSync(outPath, JSON.stringify({}), "utf-8");
+    if (fs.existsSync(outPath)) {
+      console.warn("  Keeping the existing cached data — build will use the previously fetched content.\n");
+    } else {
+      console.warn("  No previous cache found — writing empty cache; build will use hardcoded fallback data.\n");
+      fs.writeFileSync(outPath, JSON.stringify({}), "utf-8");
+    }
   }
 }
 

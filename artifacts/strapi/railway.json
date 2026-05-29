@@ -1,0 +1,12 @@
+{
+  "$schema": "https://railway.com/railway.schema.json",
+  "build": {
+    "builder": "NIXPACKS",
+    "buildCommand": "pnpm install --frozen-lockfile --prod=false && pnpm --filter @workspace/strapi run build && rm -rf artifacts/strapi/public/uploads-seed && cp -r artifacts/strapi/public/uploads artifacts/strapi/public/uploads-seed"
+  },
+  "deploy": {
+    "startCommand": "node artifacts/strapi/scripts/seed-uploads.mjs && NODE_ENV=production pnpm --filter @workspace/strapi run start",
+    "restartPolicyType": "ON_FAILURE",
+    "restartPolicyMaxRetries": 10
+  }
+}
