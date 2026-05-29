@@ -28,7 +28,7 @@ app.disable("x-powered-by");
 
 app.use(
   createProxyMiddleware({
-    pathFilter: ["/strapi", "/strapi/**"],
+    pathFilter: (pathname) => pathname === "/strapi" || pathname.startsWith("/strapi/"),
     target: STRAPI_TARGET,
     changeOrigin: true,
     xfwd: true,
