@@ -86,13 +86,20 @@ async function triggerRebuild(strapi: StrapiLike, reason: string) {
   }
 
   try {
-    await railwayRequest(
+    const data = await railwayRequest(
       token,
       `mutation redeploy($environmentId: String!, $serviceId: String!) {
         serviceInstanceRedeploy(environmentId: $environmentId, serviceId: $serviceId)
       }`,
       { environmentId, serviceId },
     );
+    const ok = data?.serviceInstanceRedeploy;
+    if (ok === false || ok === null || ok === undefined) {
+      strapi.log.error(
+        "[auto-rebuild] Railway accepted the request but returned no redeploy result — check RAILWAY_WEBSITE_SERVICE_ID / environmentId",
+      );
+      return;
+    }
     strapi.log.info(
       `[auto-rebuild] website rebuild triggered (reason: ${reason})`,
     );
