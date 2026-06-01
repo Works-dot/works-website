@@ -63,6 +63,13 @@ ahogy most Replit-en.
 | `API_TOKEN_SALT` | a generált érték |
 | `TRANSFER_TOKEN_SALT` | a generált érték |
 | `JWT_SECRET` | a generált érték |
+| `WEBSITE_REBUILD_TOKEN` | a Railway API token (a weboldal automatikus újraépítéséhez) |
+| `WEBSITE_REBUILD_SERVICE_ID` | a **website** szolgáltatás azonosítója (Service ID) |
+
+> **Automatikus újraépítés:** a `WEBSITE_REBUILD_TOKEN` és a `WEBSITE_REBUILD_SERVICE_ID`
+> teszi lehetővé, hogy publikáláskor a weboldal magától újraépüljön. **Fontos:** ezeknek a
+> neve **ne** kezdődjön `RAILWAY_`-jel — a Railway a `RAILWAY_` előtagú saját változókat
+> nem adja át a futó programnak, ezért nem működne.
 
 > A `PORT`-ot a Railway automatikusan beállítja — ne add meg kézzel.
 > A `NODE_ENV=production`-t **ne** állítsd be szolgáltatás-szintű változóként (a build
@@ -138,5 +145,11 @@ TARGET_DATABASE_URL="postgres://...railway..." ./scripts/railway/restore-strapi-
 ## Tartalom frissítése a jövőben
 
 A weboldal statikus (build időben tölti le a Strapi tartalmát). Ha tartalmat módosítasz az
-adminban, és szeretnéd a publikus oldalon is látni, indíts egy **Redeploy**-t a **website**
-szolgáltatáson — a build újra letölti a friss tartalmat és újragenerálja az oldalt.
+adminban, **kattints a Publish (Publikálás) gombra** — ekkor a weboldal kb. 45 másodperc
+múlva automatikusan újraépül, és pár percen belül élesedik a változás. (A sima Mentés csak
+piszkozatot ment, és szándékosan nem indít újraépítést.)
+
+Ehhez a Strapi szolgáltatáson be kell állítani a `WEBSITE_REBUILD_TOKEN` és a
+`WEBSITE_REBUILD_SERVICE_ID` változókat (lásd fent). Ha ezek hiányoznak, a Strapi a
+naplóban `[auto-rebuild] disabled` üzenetet ír, és kézzel kell **Redeploy**-t indítani a
+**website** szolgáltatáson.

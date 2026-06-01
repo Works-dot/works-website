@@ -1,18 +1,32 @@
 type StrapiLike = any;
 
 const RAILWAY_GRAPHQL = "https://backboard.railway.app/graphql/v2";
-const DEBOUNCE_MS = Number(process.env.RAILWAY_REBUILD_DEBOUNCE_MS) || 45000;
+const DEBOUNCE_MS =
+  Number(
+    process.env.WEBSITE_REBUILD_DEBOUNCE_MS ||
+      process.env.RAILWAY_REBUILD_DEBOUNCE_MS,
+  ) || 45000;
 
 let rebuildTimer: ReturnType<typeof setTimeout> | null = null;
 let ready = false;
 let pendingReason = "";
 let cachedEnvironmentId = "";
 
+// NOTE: Railway reserves the `RAILWAY_` prefix for its own platform-provided
+// variables and does NOT expose user-defined `RAILWAY_*` variables to the
+// running container. So the user must set WEBSITE_REBUILD_TOKEN /
+// WEBSITE_REBUILD_SERVICE_ID. The old `RAILWAY_*` names are kept only as a
+// fallback for backward compatibility. `RAILWAY_ENVIRONMENT_ID` IS provided by
+// Railway itself, so it can still be read for auto environment resolution.
 function getConfig() {
   return {
-    token: process.env.RAILWAY_API_TOKEN || "",
-    serviceId: process.env.RAILWAY_WEBSITE_SERVICE_ID || "",
+    token: process.env.WEBSITE_REBUILD_TOKEN || process.env.RAILWAY_API_TOKEN || "",
+    serviceId:
+      process.env.WEBSITE_REBUILD_SERVICE_ID ||
+      process.env.RAILWAY_WEBSITE_SERVICE_ID ||
+      "",
     environmentId:
+      process.env.WEBSITE_REBUILD_ENVIRONMENT_ID ||
       process.env.RAILWAY_WEBSITE_ENVIRONMENT_ID ||
       process.env.RAILWAY_ENVIRONMENT_ID ||
       cachedEnvironmentId ||
@@ -80,7 +94,7 @@ async function triggerRebuild(strapi: StrapiLike, reason: string) {
   }
   if (!environmentId) {
     strapi.log.error(
-      "[auto-rebuild] no environmentId available — set RAILWAY_WEBSITE_ENVIRONMENT_ID",
+      "[auto-rebuild] no environmentId available — set WEBSITE_REBUILD_ENVIRONMENT_ID",
     );
     return;
   }
@@ -96,7 +110,7 @@ async function triggerRebuild(strapi: StrapiLike, reason: string) {
     const ok = data?.serviceInstanceRedeploy;
     if (ok === false || ok === null || ok === undefined) {
       strapi.log.error(
-        "[auto-rebuild] Railway accepted the request but returned no redeploy result — check RAILWAY_WEBSITE_SERVICE_ID / environmentId",
+        "[auto-rebuild] Railway accepted the request but returned no redeploy result — check WEBSITE_REBUILD_SERVICE_ID / environmentId",
       );
       return;
     }
@@ -123,7 +137,7 @@ function scheduleRebuild(strapi: StrapiLike, reason: string) {
   }, DEBOUNCE_MS);
 }
 
-const WATCHED_ACTIONS = new Set([
+const MEDIA_ACTIONS = new Set([
   "afterCreate",
   "afterUpdate",
   "afterDelete",
@@ -132,28 +146,53 @@ const WATCHED_ACTIONS = new Set([
   "afterDeleteMany",
 ]);
 
-function isWatchedModel(uid: string): boolean {
-  if (!uid) return false;
-  return uid.startsWith("api::") || uid === "plugin::upload.file";
-}
-
 export function setupWebsiteAutoRebuild(strapi: StrapiLike) {
   const { token, serviceId } = getConfig();
   if (!token || !serviceId) {
     strapi.log.info(
-      "[auto-rebuild] disabled (RAILWAY_API_TOKEN / RAILWAY_WEBSITE_SERVICE_ID not set)",
+      "[auto-rebuild] disabled (WEBSITE_REBUILD_TOKEN / WEBSITE_REBUILD_SERVICE_ID not set)",
     );
     return;
   }
 
+  // Media (upload) has no draft & publish — every upload/delete affects the live
+  // site immediately, so keep watching it via the database lifecycle.
   strapi.db.lifecycles.subscribe((event: any) => {
-    if (!WATCHED_ACTIONS.has(event.action)) return;
-    if (!isWatchedModel(event.model?.uid)) return;
+    if (!MEDIA_ACTIONS.has(event.action)) return;
+    if (event.model?.uid !== "plugin::upload.file") return;
     scheduleRebuild(strapi, `${event.action} ${event.model.uid}`);
   });
 
+  // Content changes go through the document service. The public website only
+  // shows PUBLISHED content, so rebuild only when an editor actually
+  // publishes/unpublishes — never on plain draft saves.
+  // Content types without draft & publish write straight to the live site, so
+  // their create/update/delete must still trigger a rebuild.
+  strapi.documents.use(async (ctx: any, next: () => Promise<unknown>) => {
+    const result = await next();
+    try {
+      const uid: string = ctx?.uid || "";
+      if (uid.startsWith("api::")) {
+        const hasDraftAndPublish =
+          ctx?.contentType?.options?.draftAndPublish === true;
+        const action: string = ctx?.action || "";
+        const shouldTrigger = hasDraftAndPublish
+          ? action === "publish" || action === "unpublish"
+          : action === "create" || action === "update" || action === "delete";
+        if (shouldTrigger) {
+          scheduleRebuild(strapi, `${action} ${uid}`);
+        }
+      }
+    } catch (err: any) {
+      strapi.log.error(
+        `[auto-rebuild] document middleware error: ${err.message}`,
+      );
+    }
+    return result;
+  });
+
   strapi.log.info(
-    `[auto-rebuild] enabled — content changes trigger a website rebuild (debounce ${DEBOUNCE_MS}ms)`,
+    `[auto-rebuild] enabled — publish/unpublish triggers a website rebuild (debounce ${DEBOUNCE_MS}ms)`,
   );
 }
 
