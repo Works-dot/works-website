@@ -1,3 +1,8 @@
+import {
+  setupWebsiteAutoRebuild,
+  markWebsiteAutoRebuildReady,
+} from "./website-rebuild";
+
 function camelToLabel(field: string): string {
   const upperAbbreviations: Record<string, string> = {
     seo: "SEO",
@@ -561,6 +566,7 @@ export default {
   async bootstrap({ strapi }) {
     await updateAllLabels(strapi);
     await ensurePublicPermissions(strapi);
+    setupWebsiteAutoRebuild(strapi);
 
     const httpServer = strapi.server?.httpServer;
     if (httpServer) {
@@ -572,13 +578,15 @@ export default {
           .catch((err: any) => {
             strapi.log.error(`Bootstrap task failed: ${err.message}`);
             strapi.log.error(`Stack: ${err.stack}`);
-          });
+          })
+          .finally(() => markWebsiteAutoRebuildReady());
       });
     } else {
       await migrateServicesToSections(strapi);
       await migrateSlugToGeneral(strapi);
       await syncServiceTitles(strapi);
       strapi.log.info("Bootstrap tasks completed successfully");
+      markWebsiteAutoRebuildReady();
     }
   },
   destroy(/* { strapi } */) {},
