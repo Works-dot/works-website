@@ -1,3 +1,5 @@
+import { ArrowClockwise } from '@strapi/icons';
+
 declare const window: {
   localStorage: Storage;
   document: Document;
@@ -22,6 +24,20 @@ export default {
         'app.components.LeftMenu.navbrand.workplace': 'Admin',
       },
     },
+  },
+  register(app: any) {
+    app.widgets.register({
+      icon: ArrowClockwise,
+      title: {
+        id: 'widget.website-rebuild.title',
+        defaultMessage: 'Weboldal frissítése',
+      },
+      component: async () => {
+        const { RebuildWidget } = await import('./components/RebuildWidget');
+        return RebuildWidget;
+      },
+      id: 'website-rebuild-status',
+    });
   },
   bootstrap() {
     if (typeof window === 'undefined') return;

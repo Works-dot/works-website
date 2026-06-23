@@ -1,0 +1,4 @@
+- [Railway deploy & auto-rebuild](railway-deploy.md) — Works. site is static SSG on Railway; Strapi triggers website rebuild via serviceInstanceRedeploy GraphQL on content change.
+- [Strapi v5 admin extensions](strapi-admin-extensions.md) — admin endpoints can't live under src/api (forced content-api); register via strapi.server.routes type:'admin' in register(); homepage widget build gotchas.
+- [Strapi service seed sources](strapi-service-seed-sources.md) — service section TEXT lived only in seed.mjs; migrations only icon-decorated existing items; backfill migration added to fill empty activities/benefits/tools.
+- [Railway Strapi admin login & DB origin](railway-strapi-admin.md) — dev & prod DBs are separate but prod was pg_dump-seeded from dev (creds drift); reset/create prod admin via env-gated resetAdminFromEnv (ADMIN_RESET_EMAIL/PASSWORD); ADMIN_JWT_SECRET is not the password.

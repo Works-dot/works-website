@@ -6,11 +6,19 @@ function strapiImageUrl(url: string | undefined | null): string {
   return `/strapi${url}`;
 }
 
+function getPreviewStatus(): "draft" | null {
+  if (typeof window === "undefined") return null;
+  const status = new URLSearchParams(window.location.search).get("status");
+  return status === "draft" ? "draft" : null;
+}
+
 async function fetchApi<T>(path: string, params?: Record<string, string>): Promise<T> {
   const url = new URL(`${window.location.origin}${STRAPI_API}${path}`);
   if (params) {
     Object.entries(params).forEach(([k, v]) => url.searchParams.set(k, v));
   }
+  const previewStatus = getPreviewStatus();
+  if (previewStatus) url.searchParams.set("status", previewStatus);
   const res = await fetch(url.toString());
   if (!res.ok) throw new Error(`Strapi API error: ${res.status} ${res.statusText}`);
   return res.json();

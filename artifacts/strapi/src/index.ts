@@ -1,7 +1,40 @@
 import {
   setupWebsiteAutoRebuild,
   markWebsiteAutoRebuildReady,
+  getWebsiteRebuildStatus,
+  triggerWebsiteRebuildNow,
 } from "./website-rebuild";
+
+function registerWebsiteRebuildAdminRoutes(strapi: any) {
+  strapi.server.routes({
+    type: "admin",
+    routes: [
+      {
+        method: "GET",
+        path: "/website-rebuild/status",
+        handler: async (ctx: any) => {
+          ctx.body = await getWebsiteRebuildStatus(strapi);
+        },
+        config: { policies: [] },
+      },
+      {
+        method: "POST",
+        path: "/website-rebuild/trigger",
+        handler: async (ctx: any) => {
+          const result = await triggerWebsiteRebuildNow(strapi);
+          if (!result.ok) {
+            ctx.throw(
+              result.error === "not configured" ? 503 : 502,
+              result.error || "rebuild failed",
+            );
+          }
+          ctx.body = { ok: true };
+        },
+        config: { policies: [] },
+      },
+    ],
+  });
+}
 
 function camelToLabel(field: string): string {
   const upperAbbreviations: Record<string, string> = {
@@ -218,6 +251,20 @@ const SERVICE_SEED_DATA = [
     serviceIcon: "search",
     activityIcons: ["target", "zap", "users", "search", "bar-chart-3", "file-check"],
     benefitIcons: ["shield", "rocket", "heart"],
+    activities: [
+      { title: "Felhasználói interjúk", description: "Strukturált interjúk készítése célcsoportokkal, hogy megértsük a valós motivációkat és akadályokat." },
+      { title: "Használhatósági tesztelés", description: "Meglévő vagy tervezett felületek tesztelése valós felhasználókkal, hogy feltárjuk a problémás pontokat." },
+      { title: "Perszóna készítés", description: "Adatokra épülő felhasználói perszónák létrehozása, amelyek a teljes csapat számára használhatók." },
+      { title: "Versenytárs elemzés", description: "A piaci környezet és a versenytársak digitális megoldásainak áttekintése." },
+      { title: "Felhasználói út térképezés", description: "User journey map-ek készítése, amelyek vizualizálják a felhasználói élmény egészét." },
+      { title: "Adatelemzés", description: "Meglévő analitikai adatok értelmezése és összevetése a kvalitatív eredményekkel." },
+    ],
+    benefits: [
+      { title: "Kisebb fejlesztési kockázat", description: "A kutatás csökkenti annak esélyét, hogy olyan funkciókat fejlesszünk, amelyeket senki sem használ." },
+      { title: "Gyorsabb piacra kerülés", description: "A célzott fejlesztés kevésbé pazarolja az erőforrásokat és gyorsabban jut el az értékes megoldásig." },
+      { title: "Magasabb felhasználói elégedettség", description: "Az adatokra építő tervezés eredményeképpen a felhasználók elégedettebbek lesznek a végtermékkel." },
+    ],
+    tools: ["Hotjar", "Google Analytics", "Maze", "Lookback", "Miro", "Optimal Workshop", "UserTesting", "Dovetail", "FigJam"],
     processSteps: [
       { step: "01", title: "Megismerés", description: "Megismerjük az üzleti célokat, a meglévő adatokat és a kutatás céljait. Közösen meghatározzuk a kutatási kérdéseket." },
       { step: "02", title: "Kutatástervezés", description: "Kiválasztjuk a megfelelő módszertant, elkészítjük a kutatási tervet és a toborzási kritériumokat." },
@@ -236,6 +283,20 @@ const SERVICE_SEED_DATA = [
     serviceIcon: "monitor",
     activityIcons: ["palette", "book-open", "monitor", "eye", "zap", "file-check"],
     benefitIcons: ["shield", "rocket", "heart"],
+    activities: [
+      { title: "Vizuális tervezés", description: "Pixel-pontos UI tervek készítése, amelyek tükrözik a márka identitását és a felhasználói elvárásokat." },
+      { title: "Design rendszer építés", description: "Skálázható, konzisztens komponenskönyvtárak létrehozása, amelyek gyorsítják a fejlesztést." },
+      { title: "Prototípus készítés", description: "Interaktív prototípusok, amelyekkel már a fejlesztés előtt tesztelhető a felhasználói élmény." },
+      { title: "Reszponzív design", description: "Minden képernyőméretre optimalizált felületek, mobilon és desktopon egyaránt." },
+      { title: "Motion design", description: "Célzott mikro-animációk és átmenetek, amelyek javítják a felhasználói élményt." },
+      { title: "Fejlesztői átadás", description: "Részletes specifikáció és asset-készítés a zökkenőmentes implementációért." },
+    ],
+    benefits: [
+      { title: "Erősebb márkaélmény", description: "A konzisztens, átgondolt vizuális rendszer erősíti a márkaészlelést és a bizalmat." },
+      { title: "Magasabb konverzió", description: "A jól megtervezett felhasználói útvonalak több látogatót alakítanak ügyféllé." },
+      { title: "Hatékonyabb fejlesztés", description: "A design rendszer csökkenti a fejlesztési időt és a kommunikációs súrlódásokat." },
+    ],
+    tools: ["Figma", "Adobe Creative Suite", "Framer", "Principle", "Storybook", "Zeplin", "Abstract", "InVision"],
     processSteps: [
       { step: "01", title: "Vizuális irány", description: "Moodboard-ok és stílus-explorációk készítése, amelyek segítenek megtalálni a megfelelő vizuális hangot." },
       { step: "02", title: "Wireframe és struktúra", description: "Az oldal struktúrájának és információs architektúrájának kialakítása alacsony-fidelitású tervekkel." },
@@ -254,6 +315,20 @@ const SERVICE_SEED_DATA = [
     serviceIcon: "eye",
     activityIcons: ["target", "file-check", "monitor", "eye", "users", "bar-chart-3"],
     benefitIcons: ["shield", "rocket", "heart"],
+    activities: [
+      { title: "Akadálymentesítési audit", description: "Meglévő weboldalak és alkalmazások átfogó WCAG 2.1 szabálynak megfelelő értékelése." },
+      { title: "Javítási terv készítés", description: "Prioritizált, lépésről lépésre követhető javítási terv összeállítása a feltárt problémák alapján." },
+      { title: "Asszisztív technológiás tesztelés", description: "Tesztelés képernyőolvasókkal, billentyűzetes navigációval és egyéb segédeszközökkel." },
+      { title: "Akadálymentes design review", description: "Design fázisban végzett ellenőrzés, mielőtt a fejlesztés megkezdődne." },
+      { title: "Csapat képzés", description: "Fejlesztők, tervezők és tartalomkészítők képzése az akadálymentes gyakorlatokról." },
+      { title: "Folyamatos monitoring", description: "Rendszeres ellenőrzés és jelentéskészítés, hogy a megfelelés hosszú távon is megmaradjon." },
+    ],
+    benefits: [
+      { title: "Jogszabályi megfelelés", description: "Az EU Akadálymentesítési irányelv és a WCAG 2.1 szabványoknak való megfelelés biztosítása." },
+      { title: "Szélesebb elérhetőség", description: "A populáció mintegy 15%-a él valamilyen fogyatékossággal — az akadálymentes termék őket is eléri." },
+      { title: "Jobb felhasználói élmény mindenkinek", description: "Az akadálymentesítés javítja a használhatóságot minden felhasználó számára, nem csak a fogyatékossággal élőkét." },
+    ],
+    tools: ["axe DevTools", "WAVE", "Lighthouse", "NVDA", "VoiceOver", "JAWS", "Pa11y", "Contrast Checker", "Accessibility Insights"],
     processSteps: [
       { step: "01", title: "Helyzetértékelés", description: "A jelenlegi állapot felmérése automatizált és manuális eszközökkel, WCAG 2.1 szabvány szerint." },
       { step: "02", title: "Részletes audit", description: "Oldalról oldalra haladó, komponensszintű vizsgálat dokumentált eredményekkel." },
@@ -505,6 +580,123 @@ async function syncServiceTitles(strapi: any) {
   }
 }
 
+async function backfillServiceSections(strapi: any) {
+  const path = require("path");
+  const store = strapi.store({ type: "plugin", name: "migrations" });
+  const done = await store.get({ key: "service_sections_backfill_v1" });
+  if (done) {
+    strapi.log.info("Service sections backfill: already completed (flag set) — skipping");
+    return;
+  }
+
+  const strapiRoot = path.resolve(__dirname, "..", "..");
+  const iconsDir = path.join(strapiRoot, "src", "seed-icons");
+  const iconCache: Record<string, number> = {};
+  async function getIconId(name: string): Promise<number | null> {
+    if (iconCache[name] !== undefined) return iconCache[name];
+    const filePath = path.join(iconsDir, `${name}.svg`);
+    const id = await uploadSvgIcon(strapi, filePath, name);
+    if (id) iconCache[name] = id;
+    return id;
+  }
+
+  const services = await strapi.documents("api::service.service").findMany({
+    populate: ["activities", "benefits", "tools", "general"],
+  });
+
+  if (services.length === 0) {
+    strapi.log.info("Service sections backfill: no services found — will retry on next restart");
+    return;
+  }
+
+  let filled = 0;
+  for (const svc of services) {
+    const svcSlug = svc.general?.slug || "";
+    const seed = SERVICE_SEED_DATA.find((s) => s.slug === svcSlug);
+    if (!seed) {
+      strapi.log.info(`Service sections backfill: no seed data for "${svcSlug}" — skipping`);
+      continue;
+    }
+
+    const hasActivities = (svc.activities || []).length > 0;
+    const hasBenefits = (svc.benefits || []).length > 0;
+    const hasTools = (svc.tools || []).length > 0;
+    if (hasActivities && hasBenefits && hasTools) {
+      strapi.log.info(`Service sections backfill: "${svcSlug}" already has content — skipping`);
+      continue;
+    }
+
+    const data: Record<string, any> = {};
+
+    if (!hasActivities && Array.isArray((seed as any).activities)) {
+      const acts: any[] = [];
+      for (let i = 0; i < (seed as any).activities.length; i++) {
+        const iconName = seed.activityIcons[i % seed.activityIcons.length];
+        acts.push({
+          title: (seed as any).activities[i].title,
+          description: (seed as any).activities[i].description,
+          icon: (await getIconId(iconName)) || undefined,
+        });
+      }
+      data.activities = acts;
+    }
+
+    if (!hasBenefits && Array.isArray((seed as any).benefits)) {
+      const bens: any[] = [];
+      for (let i = 0; i < (seed as any).benefits.length; i++) {
+        const iconName = seed.benefitIcons[i % seed.benefitIcons.length];
+        bens.push({
+          title: (seed as any).benefits[i].title,
+          description: (seed as any).benefits[i].description,
+          icon: (await getIconId(iconName)) || undefined,
+        });
+      }
+      data.benefits = bens;
+    }
+
+    if (!hasTools && Array.isArray((seed as any).tools)) {
+      data.tools = (seed as any).tools.map((name: string) => ({ name }));
+    }
+
+    if (Object.keys(data).length === 0) continue;
+
+    await strapi.documents("api::service.service").update({
+      documentId: svc.documentId,
+      data,
+    });
+    await strapi.documents("api::service.service").publish({
+      documentId: svc.documentId,
+    });
+    filled++;
+    strapi.log.info(`Service sections backfill: filled empty sections for "${svcSlug}"`);
+  }
+
+  const targetSlugs = SERVICE_SEED_DATA.map((s) => s.slug);
+  const postCheck = await strapi.documents("api::service.service").findMany({
+    populate: ["activities", "benefits", "tools", "general"],
+  });
+  const incomplete = targetSlugs.filter((slug) => {
+    const matches = postCheck.filter((s: any) => s.general?.slug === slug);
+    if (matches.length === 0) return true;
+    return matches.some(
+      (s: any) =>
+        (s.activities || []).length === 0 ||
+        (s.benefits || []).length === 0 ||
+        (s.tools || []).length === 0,
+    );
+  });
+
+  if (incomplete.length > 0) {
+    strapi.log.warn(
+      `Service sections backfill: still incomplete for [${incomplete.join(", ")}] — flag not set, will retry on next restart`,
+    );
+    return;
+  }
+
+  await store.set({ key: "service_sections_backfill_v1", value: true });
+  strapi.log.info(`Service sections backfill: completed (${filled} service(s) updated)`);
+}
+
 const PUBLIC_WRITE_SUFFIXES = ["-submission"];
 
 function isPublicWriteType(uid: string): boolean {
@@ -561,9 +753,61 @@ async function ensurePublicPermissions(strapi: any) {
   }
 }
 
+async function resetAdminFromEnv(strapi: any) {
+  const email = (process.env.ADMIN_RESET_EMAIL || "").trim().toLowerCase();
+  const password = process.env.ADMIN_RESET_PASSWORD || "";
+  if (!email || !password) return;
+  if (password.length < 8) {
+    strapi.log.error(
+      "[admin-reset] ADMIN_RESET_PASSWORD must be at least 8 characters — skipping",
+    );
+    return;
+  }
+  try {
+    const userService = strapi.service("admin::user");
+    const existing = await strapi.db
+      .query("admin::user")
+      .findOne({ where: { email } });
+    if (existing) {
+      await userService.updateById(existing.id, {
+        password,
+        isActive: true,
+        blocked: false,
+      });
+      strapi.log.info(
+        `[admin-reset] password reset for existing admin: ${email}`,
+      );
+    } else {
+      const superAdminRole = await strapi.db
+        .query("admin::role")
+        .findOne({ where: { code: "strapi-super-admin" } });
+      if (!superAdminRole) {
+        strapi.log.error(
+          "[admin-reset] super admin role not found — skipping",
+        );
+        return;
+      }
+      await userService.create({
+        email,
+        firstname: "Works",
+        lastname: "Admin",
+        password,
+        isActive: true,
+        roles: [superAdminRole.id],
+      });
+      strapi.log.info(`[admin-reset] created new super admin: ${email}`);
+    }
+  } catch (err: any) {
+    strapi.log.error(`[admin-reset] failed: ${err.message}`);
+  }
+}
+
 export default {
-  register(/* { strapi } */) {},
+  register({ strapi }) {
+    registerWebsiteRebuildAdminRoutes(strapi);
+  },
   async bootstrap({ strapi }) {
+    await resetAdminFromEnv(strapi);
     await updateAllLabels(strapi);
     await ensurePublicPermissions(strapi);
     setupWebsiteAutoRebuild(strapi);
@@ -574,6 +818,7 @@ export default {
         migrateServicesToSections(strapi)
           .then(() => migrateSlugToGeneral(strapi))
           .then(() => syncServiceTitles(strapi))
+          .then(() => backfillServiceSections(strapi))
           .then(() => strapi.log.info("Bootstrap tasks completed successfully"))
           .catch((err: any) => {
             strapi.log.error(`Bootstrap task failed: ${err.message}`);
@@ -585,6 +830,7 @@ export default {
       await migrateServicesToSections(strapi);
       await migrateSlugToGeneral(strapi);
       await syncServiceTitles(strapi);
+      await backfillServiceSections(strapi);
       strapi.log.info("Bootstrap tasks completed successfully");
       markWebsiteAutoRebuildReady();
     }

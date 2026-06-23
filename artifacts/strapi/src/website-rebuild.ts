@@ -18,6 +18,15 @@ let cachedEnvironmentId = "";
 // WEBSITE_REBUILD_SERVICE_ID. The old `RAILWAY_*` names are kept only as a
 // fallback for backward compatibility. `RAILWAY_ENVIRONMENT_ID` IS provided by
 // Railway itself, so it can still be read for auto environment resolution.
+
+type TriggerSource = "auto" | "manual";
+
+let lastTriggeredAt: string | null = null;
+let lastTriggerReason = "";
+let lastTriggerSource: TriggerSource | null = null;
+let lastTriggerOk: boolean | null = null;
+let lastTriggerError = "";
+
 function getConfig() {
   return {
     token: process.env.WEBSITE_REBUILD_TOKEN || process.env.RAILWAY_API_TOKEN || "",
@@ -77,9 +86,13 @@ async function resolveEnvironmentId(
   return edges[0]?.node?.environmentId || "";
 }
 
-async function triggerRebuild(strapi: StrapiLike, reason: string) {
+async function triggerRebuild(
+  strapi: StrapiLike,
+  reason: string,
+  source: TriggerSource = "auto",
+): Promise<{ ok: boolean; error?: string }> {
   const { token, serviceId } = getConfig();
-  if (!token || !serviceId) return;
+  if (!token || !serviceId) return { ok: false, error: "not configured" };
 
   let { environmentId } = getConfig();
   if (!environmentId) {
@@ -93,10 +106,11 @@ async function triggerRebuild(strapi: StrapiLike, reason: string) {
     }
   }
   if (!environmentId) {
-    strapi.log.error(
-      "[auto-rebuild] no environmentId available — set WEBSITE_REBUILD_ENVIRONMENT_ID",
-    );
-    return;
+    const msg =
+      "no environmentId available — set WEBSITE_REBUILD_ENVIRONMENT_ID";
+    strapi.log.error(`[auto-rebuild] ${msg}`);
+    recordTrigger(reason, source, false, msg);
+    return { ok: false, error: msg };
   }
 
   try {
@@ -109,17 +123,35 @@ async function triggerRebuild(strapi: StrapiLike, reason: string) {
     );
     const ok = data?.serviceInstanceRedeploy;
     if (ok === false || ok === null || ok === undefined) {
-      strapi.log.error(
-        "[auto-rebuild] Railway accepted the request but returned no redeploy result — check WEBSITE_REBUILD_SERVICE_ID / environmentId",
-      );
-      return;
+      const msg =
+        "Railway accepted the request but returned no redeploy result — check WEBSITE_REBUILD_SERVICE_ID / environmentId";
+      strapi.log.error(`[auto-rebuild] ${msg}`);
+      recordTrigger(reason, source, false, msg);
+      return { ok: false, error: msg };
     }
     strapi.log.info(
-      `[auto-rebuild] website rebuild triggered (reason: ${reason})`,
+      `[auto-rebuild] website rebuild triggered (source: ${source}, reason: ${reason})`,
     );
+    recordTrigger(reason, source, true, "");
+    return { ok: true };
   } catch (err: any) {
     strapi.log.error(`[auto-rebuild] website rebuild failed: ${err.message}`);
+    recordTrigger(reason, source, false, err.message);
+    return { ok: false, error: err.message };
   }
+}
+
+function recordTrigger(
+  reason: string,
+  source: TriggerSource,
+  ok: boolean,
+  error: string,
+) {
+  lastTriggeredAt = new Date().toISOString();
+  lastTriggerReason = reason;
+  lastTriggerSource = source;
+  lastTriggerOk = ok;
+  lastTriggerError = error;
 }
 
 function scheduleRebuild(strapi: StrapiLike, reason: string) {
@@ -198,4 +230,107 @@ export function setupWebsiteAutoRebuild(strapi: StrapiLike) {
 
 export function markWebsiteAutoRebuildReady() {
   ready = true;
+}
+
+async function fetchLatestDeployment(
+  token: string,
+  serviceId: string,
+  environmentId: string,
+): Promise<{ status: string; createdAt: string } | null> {
+  const data = await railwayRequest(
+    token,
+    `query deployments($serviceId: String!, $environmentId: String!) {
+      deployments(
+        first: 1
+        input: { serviceId: $serviceId, environmentId: $environmentId }
+      ) {
+        edges { node { status createdAt } }
+      }
+    }`,
+    { serviceId, environmentId },
+  );
+  const node = data?.deployments?.edges?.[0]?.node;
+  if (!node) return null;
+  return { status: node.status, createdAt: node.createdAt };
+}
+
+export type WebsiteRebuildStatus = {
+  enabled: boolean;
+  pending: boolean;
+  lastTrigger: {
+    at: string | null;
+    reason: string;
+    source: TriggerSource | null;
+    ok: boolean | null;
+    error: string;
+  };
+  deployment: {
+    status: string;
+    createdAt: string;
+  } | null;
+  deploymentError?: string;
+};
+
+export async function getWebsiteRebuildStatus(
+  strapi: StrapiLike,
+): Promise<WebsiteRebuildStatus> {
+  const { token, serviceId } = getConfig();
+  const enabled = Boolean(token && serviceId);
+
+  const base: WebsiteRebuildStatus = {
+    enabled,
+    pending: rebuildTimer !== null,
+    lastTrigger: {
+      at: lastTriggeredAt,
+      reason: lastTriggerReason,
+      source: lastTriggerSource,
+      ok: lastTriggerOk,
+      error: lastTriggerError,
+    },
+    deployment: null,
+  };
+
+  if (!enabled) return base;
+
+  let { environmentId } = getConfig();
+  if (!environmentId) {
+    try {
+      environmentId = await resolveEnvironmentId(token, serviceId);
+      cachedEnvironmentId = environmentId;
+    } catch (err: any) {
+      base.deploymentError = err.message;
+      return base;
+    }
+  }
+  if (!environmentId) {
+    base.deploymentError = "no environmentId available";
+    return base;
+  }
+
+  try {
+    base.deployment = await fetchLatestDeployment(
+      token,
+      serviceId,
+      environmentId,
+    );
+  } catch (err: any) {
+    base.deploymentError = err.message;
+  }
+
+  return base;
+}
+
+export async function triggerWebsiteRebuildNow(
+  strapi: StrapiLike,
+): Promise<{ ok: boolean; error?: string }> {
+  const { token, serviceId } = getConfig();
+  if (!token || !serviceId) {
+    return { ok: false, error: "not configured" };
+  }
+  if (rebuildTimer) {
+    clearTimeout(rebuildTimer);
+    rebuildTimer = null;
+    pendingReason = "";
+  }
+  return triggerRebuild(strapi, "manual rebuild from admin", "manual");
 }
