@@ -19,6 +19,89 @@ const fadeUp = {
 const inputClass =
   "w-full px-5 py-4 border border-works-dark/10 bg-white text-works-dark placeholder:text-works-dark/30 focus:outline-none focus:ring-2 focus:ring-works-primary/30 focus:border-works-primary transition-colors";
 
+// A Google Maps csak a speciális beágyazó (embed) linket engedi <iframe>-be.
+// Ez a függvény a leggyakoribb, adminban beragasztott link-formákat alakítja
+// át beágyazható linkké, hogy a térkép akkor is megjelenjen, ha nem a hivatalos
+// embed linket adták meg. Biztonság: iframe-be CSAK https + Google Maps domain
+// kerülhet; minden más esetben üres sztringet ad vissza, és a hívó a biztonságos
+// alapértelmezett térképre esik vissza.
+function isGoogleMapsHost(host: string): boolean {
+  const h = host.toLowerCase();
+  return (
+    h === "google.com" ||
+    h.endsWith(".google.com") ||
+    h === "google.hu" ||
+    h.endsWith(".google.hu")
+  );
+}
+
+function googleQueryEmbed(q: string): string {
+  return `https://maps.google.com/maps?q=${encodeURIComponent(q)}&output=embed`;
+}
+
+function toMapEmbedUrl(raw: string): string {
+  const value = (raw || "").trim();
+  if (!value) return "";
+
+  // Teljes <iframe ...> kódot illesztettek be — emeljük ki a src-et.
+  let candidate = value;
+  if (value.toLowerCase().includes("<iframe")) {
+    const m = value.match(/src=["']([^"']+)["']/i);
+    candidate = m ? m[1].replace(/&amp;/g, "&") : value;
+  }
+
+  // Koordináták a linkben: .../@47.5045,19.0514,15z/...
+  const at = candidate.match(/@(-?\d+\.\d+),(-?\d+\.\d+)(?:,(\d+(?:\.\d+)?)z)?/);
+  if (at) {
+    const [, lat, lng, zoom] = at;
+    const z = zoom ? `&z=${Math.round(Number(zoom))}` : "";
+    return `https://maps.google.com/maps?q=${lat},${lng}${z}&output=embed`;
+  }
+
+  // Sima koordináták: "47.5045,19.0514".
+  if (/^-?\d+\.\d+\s*,\s*-?\d+\.\d+$/.test(candidate)) {
+    return googleQueryEmbed(candidate.replace(/\s+/g, ""));
+  }
+
+  let parsed: URL | null = null;
+  try {
+    parsed = new URL(candidate);
+  } catch {
+    parsed = null;
+  }
+
+  // Nem URL (sima cím) — keresésként ágyazzuk be.
+  if (!parsed) return googleQueryEmbed(candidate);
+
+  // Csak https + Google Maps domain engedélyezett iframe-ben; minden más tiltott.
+  if (parsed.protocol !== "https:" || !isGoogleMapsHost(parsed.hostname)) {
+    return "";
+  }
+
+  // Már beágyazható Google link.
+  if (
+    parsed.pathname.includes("/maps/embed") ||
+    parsed.searchParams.get("output") === "embed"
+  ) {
+    return candidate;
+  }
+
+  // Kifejezett q= paraméter (pl. ?q=Szabadság+tér).
+  const q = parsed.searchParams.get("q");
+  if (q) return googleQueryEmbed(q);
+
+  // /place/<név>/ szakasz a path-ban.
+  const place = parsed.pathname.match(/\/place\/([^/@]+)/);
+  if (place) {
+    const name = decodeURIComponent(place[1].replace(/\+/g, " "));
+    return googleQueryEmbed(name);
+  }
+
+  // Google host, de ismeretlen forma — biztonságos próba output=embed-del.
+  const sep = candidate.includes("?") ? "&" : "?";
+  return `${candidate}${sep}output=embed`;
+}
+
 export default function Contact() {
   const { data: contactPage } = useStrapiQuery<ContactPageData>("contactPage", getContactPage, fallbackContactPage);
   const { data: globalSettings } = useStrapiQuery<GlobalSettings>("globalSettings", getGlobalSettings, fallbackGlobalSettings);
@@ -49,7 +132,7 @@ export default function Contact() {
   const successTitle = contactPage?.successTitle || "Üzenet elküldve!";
   const successMessage = contactPage?.successMessage || "Köszönjük megkeresésed, hamarosan válaszolunk.";
   const mapHeading = contactPage?.mapHeading || "Itt találsz minket";
-  const mapEmbedUrl = contactPage?.mapEmbedUrl || "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2695.4!2d19.0514!3d47.5045!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4741dc14ca087e31%3A0x6a06c4f9e5a2e0!2sSzabads%C3%A1g%20t%C3%A9r%2C%20Budapest%2C%201054!5e0!3m2!1shu!2shu!4v1700000000000!5m2!1shu!2shu";
+  const mapEmbedUrl = toMapEmbedUrl(contactPage?.mapEmbedUrl || "") || "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2695.4!2d19.0514!3d47.5045!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4741dc14ca087e31%3A0x6a06c4f9e5a2e0!2sSzabads%C3%A1g%20t%C3%A9r%2C%20Budapest%2C%201054!5e0!3m2!1shu!2shu!4v1700000000000!5m2!1shu!2shu";
   const formSubjects = contactPage?.formSubjects || [];
 
   const address = globalSettings?.address || "1054 Budapest, Szabadság tér 7.";

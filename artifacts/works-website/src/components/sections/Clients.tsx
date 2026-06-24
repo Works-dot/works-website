@@ -39,8 +39,19 @@ export function Clients() {
               key={i} 
               className="flex-shrink-0 flex flex-col items-center justify-center w-56 h-24 mx-4 bg-works-bg border border-works-muted/50 hover:border-works-muted hover:shadow-md transition-all duration-300 cursor-default gap-1"
             >
-              <span className="text-works-dark/20 font-bold text-2xl tracking-wider">{client.initials}</span>
-              <span className="text-works-dark/30 text-xs font-medium">{client.name}</span>
+              {client.logo ? (
+                <img
+                  src={client.logo}
+                  alt={client.name}
+                  loading="lazy"
+                  className="max-h-12 max-w-[75%] w-auto object-contain"
+                />
+              ) : (
+                <>
+                  <span className="text-works-dark/20 font-bold text-2xl tracking-wider">{client.initials}</span>
+                  <span className="text-works-dark/30 text-xs font-medium">{client.name}</span>
+                </>
+              )}
             </div>
           ))}
         </div>
