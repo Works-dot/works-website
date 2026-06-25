@@ -1,6 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { mapContentBlocks, strapiImageUrl } from "../src/lib/content-blocks.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const root = path.resolve(__dirname, "..");
@@ -14,32 +15,6 @@ async function fetchApi(endpoint) {
   const res = await fetch(url);
   if (!res.ok) throw new Error(`${res.status} ${res.statusText} — ${url}`);
   return res.json();
-}
-
-function strapiImageUrl(url) {
-  if (!url) return "";
-  if (url.startsWith("http")) return url;
-  return `/strapi${url}`;
-}
-
-function mapContentBlocks(blocks) {
-  if (!blocks) return [];
-  return blocks.map((b) => {
-    if (b.__component === "content.text-block") {
-      return { type: "text", content: b.body || "" };
-    }
-    if (b.__component === "content.highlight-block") {
-      return { type: "highlight", content: b.quote || "" };
-    }
-    if (b.__component === "content.image-block") {
-      return {
-        type: "image",
-        content: strapiImageUrl(b.image?.url),
-        caption: b.caption,
-      };
-    }
-    return { type: "text", content: "" };
-  });
 }
 
 function mapProject(p) {

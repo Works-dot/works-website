@@ -10,6 +10,7 @@
     "strapi": "strapi"
   },
   "dependencies": {
+    "@strapi/admin": "^5.12.6",
     "@strapi/design-system": "2.2.0",
     "@strapi/icons": "2.2.0",
     "@strapi/plugin-users-permissions": "^5.12.6",

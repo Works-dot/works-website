@@ -1,10 +1,6 @@
-const STRAPI_API = "/strapi/api";
+import { mapContentBlocks, strapiImageUrl } from "./content-blocks.js";
 
-function strapiImageUrl(url: string | undefined | null): string {
-  if (!url) return "";
-  if (url.startsWith("http")) return url;
-  return `/strapi${url}`;
-}
+const STRAPI_API = "/strapi/api";
 
 function getPreviewStatus(): "draft" | null {
   if (typeof window === "undefined") return null;
@@ -267,26 +263,6 @@ export interface CareerPosition {
 
 const CAREER_LOCATION = "Budapest / Hybrid";
 const CAREER_TYPE = "Teljes munkaidő";
-
-function mapContentBlocks(blocks: StrapiContentBlock[]): ContentBlock[] {
-  if (!blocks) return [];
-  return blocks.map((b) => {
-    if (b.__component === "content.text-block") {
-      return { type: "text" as const, content: b.body || "" };
-    }
-    if (b.__component === "content.highlight-block") {
-      return { type: "highlight" as const, content: b.quote || "" };
-    }
-    if (b.__component === "content.image-block") {
-      return {
-        type: "image" as const,
-        content: strapiImageUrl(b.image?.url),
-        caption: b.caption,
-      };
-    }
-    return { type: "text" as const, content: "" };
-  });
-}
 
 function mapProject(p: StrapiProject): Project {
   return {

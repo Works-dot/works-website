@@ -15,6 +15,15 @@ const markdownClasses = [
   "prose-blockquote:border-works-primary prose-blockquote:text-works-dark",
 ].join(" ");
 
+const highlightMarkdownClasses = [
+  "prose prose-lg max-w-none",
+  "text-xl font-semibold text-works-dark leading-relaxed",
+  "prose-p:text-xl prose-p:font-semibold prose-p:text-works-dark prose-p:leading-relaxed",
+  "prose-p:my-0 first:prose-p:mt-0 last:prose-p:mb-0",
+  "prose-strong:text-works-dark prose-strong:font-bold",
+  "prose-a:text-works-primary prose-a:font-semibold prose-a:no-underline hover:prose-a:underline",
+].join(" ");
+
 export function ContentBlock({ block }: { block: ContentBlockType }) {
   if (block.type === "text") {
     return (
@@ -27,9 +36,9 @@ export function ContentBlock({ block }: { block: ContentBlockType }) {
   if (block.type === "highlight") {
     return (
       <blockquote className="border-l-4 border-works-primary bg-works-light px-8 py-6 my-10">
-        <p className="text-xl font-semibold text-works-dark leading-relaxed">
-          {block.content}
-        </p>
+        <div className={highlightMarkdownClasses}>
+          <ReactMarkdown remarkPlugins={[remarkGfm]}>{block.content}</ReactMarkdown>
+        </div>
       </blockquote>
     );
   }
