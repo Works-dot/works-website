@@ -7,49 +7,9 @@ import { Footer } from "@/components/layout/Footer";
 import SEOHead from "@/components/SEOHead";
 import { useStrapiQuery } from "@/hooks/useStrapiQuery";
 import { getCareerPositions, getNextPosition } from "@/lib/strapi";
-import type { CareerPosition, ContentBlock as ContentBlockType } from "@/lib/strapi";
+import type { CareerPosition } from "@/lib/strapi";
+import { ContentBlock } from "@/components/ContentBlock";
 import { fallbackPositions, heroBackgroundFallbackImg } from "@/data/fallback";
-
-function ContentBlock({ block }: { block: ContentBlockType }) {
-  if (block.type === "text") {
-    return (
-      <p className="text-lg text-works-dark/80 leading-relaxed mb-8">
-        {block.content}
-      </p>
-    );
-  }
-
-  if (block.type === "highlight") {
-    return (
-      <blockquote className="border-l-4 border-works-primary bg-works-light px-8 py-6 my-10">
-        <p className="text-xl font-semibold text-works-dark leading-relaxed">
-          {block.content}
-        </p>
-      </blockquote>
-    );
-  }
-
-  if (block.type === "image") {
-    return (
-      <figure className="my-10">
-        <div className="overflow-hidden bg-works-light">
-          <img
-            src={block.content}
-            alt={block.caption || ""}
-            className="w-full h-auto object-cover"
-          />
-        </div>
-        {block.caption && (
-          <figcaption className="mt-3 text-sm text-works-dark/50 text-center">
-            {block.caption}
-          </figcaption>
-        )}
-      </figure>
-    );
-  }
-
-  return null;
-}
 
 export default function CareerDetail() {
   const { slug } = useParams<{ slug: string }>();
