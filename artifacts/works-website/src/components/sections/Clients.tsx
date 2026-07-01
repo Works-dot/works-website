@@ -44,7 +44,7 @@ export function Clients() {
                   src={client.logo}
                   alt={client.name}
                   loading="lazy"
-                  className="h-10 max-w-[70%] w-auto object-contain grayscale opacity-60 transition-all duration-300 group-hover/card:grayscale-0 group-hover/card:opacity-100"
+                  className="h-10 max-w-[70%] w-auto object-contain"
                 />
               ) : (
                 <>
