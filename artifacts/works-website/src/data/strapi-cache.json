@@ -53,7 +53,7 @@
       "description": "Belső használatú vállalatirányítási rendszer modernizálása. A munkatársak napi folyamatait feltérképezve egy olyan UI-t alkottunk, ami napi átlagosan 2 órát takarít meg felhasználónként.",
       "image": "/strapi/uploads/project_logistics_mockup_0425102430.png",
       "homepageImage": "/strapi/uploads/project_logistics_clean_0ae7f0d86a.png",
-      "featured": false,
+      "featured": true,
       "caseStudy": {
         "heroSubtitle": "Egy vállalatirányítási rendszer modernizálása, ami napi 2 órát takarít meg felhasználónként.",
         "client": "LogisticsPro Kft.",
@@ -95,7 +95,7 @@
       "description": "Egy nemzetközi webáruház teljes átvilágítása és javítása WCAG 2.1 AA szintnek megfelelően. A látássérült és mozgásukban korlátozott felhasználók számára is zökkenőmentessé tettük a vásárlást.",
       "image": "/strapi/uploads/project_accessibility_mockup_c51aa80b06.png",
       "homepageImage": "/strapi/uploads/project_accessibility_clean_b9c4ae55b2.png",
-      "featured": false,
+      "featured": true,
       "caseStudy": {
         "heroSubtitle": "Teljes WCAG 2.1 AA megfelelés elérése egy nemzetközi webáruház számára.",
         "client": "RetailGiant International",

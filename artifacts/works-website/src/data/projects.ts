@@ -98,6 +98,7 @@ export const projects: Project[] = [
       "Belső használatú vállalatirányítási rendszer modernizálása. A munkatársak napi folyamatait feltérképezve egy olyan UI-t alkottunk, ami napi átlagosan 2 órát takarít meg felhasználónként.",
     image: projectLogistics,
     homepageImage: projectLogisticsClean,
+    featured: true,
     caseStudy: {
       heroSubtitle: "Egy vállalatirányítási rendszer modernizálása, ami napi 2 órát takarít meg felhasználónként.",
       client: "LogisticsPro Kft.",
@@ -140,6 +141,7 @@ export const projects: Project[] = [
       "Egy nemzetközi webáruház teljes átvilágítása és javítása WCAG 2.1 AA szintnek megfelelően. A látássérült és mozgásukban korlátozott felhasználók számára is zökkenőmentessé tettük a vásárlást.",
     image: projectAccessibility,
     homepageImage: projectAccessibilityClean,
+    featured: true,
     caseStudy: {
       heroSubtitle: "Teljes WCAG 2.1 AA megfelelés elérése egy nemzetközi webáruház számára.",
       client: "RetailGiant International",

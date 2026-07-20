@@ -697,6 +697,55 @@ async function backfillServiceSections(strapi: any) {
   strapi.log.info(`Service sections backfill: completed (${filled} service(s) updated)`);
 }
 
+const FEATURED_PROJECT_SLUGS = [
+  "banki-applikacio",
+  "logisztikai-szoftver",
+  "e-kereskedelmi-akadalymentesites",
+];
+
+async function backfillFeaturedProjects(strapi: any) {
+  const store = strapi.store({ type: "plugin", name: "migrations" });
+  const done = await store.get({ key: "featured_projects_backfill_v1" });
+  if (done) {
+    strapi.log.info("Featured projects backfill: already completed (flag set) — skipping");
+    return;
+  }
+
+  const projects = await strapi.documents("api::project.project").findMany({
+    pagination: { pageSize: 200 },
+  });
+
+  if (!projects || projects.length === 0) {
+    strapi.log.info("Featured projects backfill: no projects found — will retry on next restart");
+    return;
+  }
+
+  let updated = 0;
+  for (const slug of FEATURED_PROJECT_SLUGS) {
+    const project = projects.find((p: any) => p.slug === slug);
+    if (!project) {
+      strapi.log.warn(`Featured projects backfill: project "${slug}" not found — skipping`);
+      continue;
+    }
+    if (project.featured === true) {
+      strapi.log.info(`Featured projects backfill: "${slug}" already featured — skipping`);
+      continue;
+    }
+    await strapi.documents("api::project.project").update({
+      documentId: project.documentId,
+      data: { featured: true },
+    });
+    await strapi.documents("api::project.project").publish({
+      documentId: project.documentId,
+    });
+    updated++;
+    strapi.log.info(`Featured projects backfill: marked "${slug}" as featured`);
+  }
+
+  await store.set({ key: "featured_projects_backfill_v1", value: true });
+  strapi.log.info(`Featured projects backfill: completed (${updated} project(s) updated)`);
+}
+
 const PUBLIC_WRITE_SUFFIXES = ["-submission"];
 
 function isPublicWriteType(uid: string): boolean {
@@ -819,6 +868,7 @@ export default {
           .then(() => migrateSlugToGeneral(strapi))
           .then(() => syncServiceTitles(strapi))
           .then(() => backfillServiceSections(strapi))
+          .then(() => backfillFeaturedProjects(strapi))
           .then(() => strapi.log.info("Bootstrap tasks completed successfully"))
           .catch((err: any) => {
             strapi.log.error(`Bootstrap task failed: ${err.message}`);
@@ -831,6 +881,7 @@ export default {
       await migrateSlugToGeneral(strapi);
       await syncServiceTitles(strapi);
       await backfillServiceSections(strapi);
+      await backfillFeaturedProjects(strapi);
       strapi.log.info("Bootstrap tasks completed successfully");
       markWebsiteAutoRebuildReady();
     }

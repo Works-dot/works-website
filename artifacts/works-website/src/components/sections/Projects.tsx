@@ -9,7 +9,9 @@ export function Projects() {
   const { data: projects, loading } = useStrapiQuery<Project[]>("projects", getProjects, fallbackProjects);
   const { data: homepage } = useStrapiQuery<HomepageData>("homepage", getHomepage, fallbackHomepage);
 
-  const featuredProjects = (projects || []).slice(0, 3);
+  const allProjects = projects || [];
+  const flagged = allProjects.filter((p) => p.featured);
+  const featuredProjects = (flagged.length > 0 ? flagged : allProjects).slice(0, 3);
   const bgGraphic2 = bgGraphic2FallbackImg;
 
   return (
