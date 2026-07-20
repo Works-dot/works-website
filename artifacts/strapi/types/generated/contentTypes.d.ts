@@ -799,6 +799,7 @@ export interface ApiProjectProject extends Struct.CollectionTypeSchema {
       'api::project.project'
     > &
       Schema.Attribute.Private;
+    order: Schema.Attribute.Integer;
     publishedAt: Schema.Attribute.DateTime;
     seo: Schema.Attribute.Component<'shared.seo', false>;
     services: Schema.Attribute.Relation<'manyToMany', 'api::service.service'>;
@@ -858,7 +859,13 @@ export interface ApiServiceService extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    deliverablesSection: Schema.Attribute.Component<
+      'service.deliverables-section',
+      false
+    >;
+    faqSection: Schema.Attribute.Component<'service.faq-section', false>;
     general: Schema.Attribute.Component<'service.general', false>;
+    helpSection: Schema.Attribute.Component<'service.help-section', false>;
     howWeWork: Schema.Attribute.RichText;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
@@ -867,10 +874,30 @@ export interface ApiServiceService extends Struct.CollectionTypeSchema {
     > &
       Schema.Attribute.Private;
     order: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<0>;
+    processSection: Schema.Attribute.Component<
+      'service.process-section',
+      false
+    >;
+    projectExamplesIntro: Schema.Attribute.Component<
+      'service.section-intro',
+      false
+    >;
     publishedAt: Schema.Attribute.DateTime;
+    questionsSection: Schema.Attribute.Component<
+      'service.questions-section',
+      false
+    >;
     relatedProjects: Schema.Attribute.Relation<
       'manyToMany',
       'api::project.project'
+    >;
+    relatedServices: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::service.service'
+    >;
+    relatedServicesIntro: Schema.Attribute.Component<
+      'service.section-intro',
+      false
     >;
     seo: Schema.Attribute.Component<'shared.seo', false>;
     title: Schema.Attribute.String;

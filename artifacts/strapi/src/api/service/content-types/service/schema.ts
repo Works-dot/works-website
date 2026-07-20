@@ -47,6 +47,46 @@ export default {
     "howWeWork": {
       "type": "richtext"
     },
+    "questionsSection": {
+      "type": "component",
+      "repeatable": false,
+      "component": "service.questions-section"
+    },
+    "helpSection": {
+      "type": "component",
+      "repeatable": false,
+      "component": "service.help-section"
+    },
+    "processSection": {
+      "type": "component",
+      "repeatable": false,
+      "component": "service.process-section"
+    },
+    "deliverablesSection": {
+      "type": "component",
+      "repeatable": false,
+      "component": "service.deliverables-section"
+    },
+    "projectExamplesIntro": {
+      "type": "component",
+      "repeatable": false,
+      "component": "service.section-intro"
+    },
+    "faqSection": {
+      "type": "component",
+      "repeatable": false,
+      "component": "service.faq-section"
+    },
+    "relatedServicesIntro": {
+      "type": "component",
+      "repeatable": false,
+      "component": "service.section-intro"
+    },
+    "relatedServices": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::service.service"
+    },
     "relatedProjects": {
       "type": "relation",
       "relation": "manyToMany",

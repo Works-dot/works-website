@@ -11,7 +11,16 @@ export function Projects() {
 
   const allProjects = projects || [];
   const flagged = allProjects.filter((p) => p.featured);
-  const featuredProjects = (flagged.length > 0 ? flagged : allProjects).slice(0, 3);
+  const sortByOrder = (list: Project[]) =>
+    [...list].sort((a, b) => {
+      const ao = a.order ?? null;
+      const bo = b.order ?? null;
+      if (ao === null && bo === null) return 0;
+      if (ao === null) return 1;
+      if (bo === null) return -1;
+      return ao - bo;
+    });
+  const featuredProjects = sortByOrder(flagged.length > 0 ? flagged : allProjects).slice(0, 3);
   const bgGraphic2 = bgGraphic2FallbackImg;
 
   return (

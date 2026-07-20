@@ -112,6 +112,19 @@ const componentUids = [
   "service.activity",
   "service.benefit",
   "service.tool",
+  "service.section-intro",
+  "service.question-card",
+  "service.questions-section",
+  "service.help-card",
+  "service.help-section",
+  "service.process-step",
+  "service.process-section",
+  "service.bullet-point",
+  "service.deliverable-card",
+  "service.deliverable-group",
+  "service.deliverables-section",
+  "service.faq-item",
+  "service.faq-section",
   "shared.hero",
   "shared.legal-link",
   "shared.opening-hours",
@@ -697,6 +710,440 @@ async function backfillServiceSections(strapi: any) {
   strapi.log.info(`Service sections backfill: completed (${filled} service(s) updated)`);
 }
 
+const SERVICE_RESTRUCTURE_SEED: Record<string, any> = {
+  "ux-kutatas": {
+    kicker: "UX kutatás",
+    questionsIntro: {
+      kicker: "A kihívásaid",
+      heading: "Milyen kérdésekre segítünk választ találni?",
+      description: "Ha ezek a kérdések ismerősek, a UX kutatás segít megalapozott döntéseket hozni.",
+    },
+    questions: [
+      { title: "„Miért nem használják a felhasználók a terméket úgy, ahogy vártuk?”", description: "Feltárjuk a valós használati mintákat és a mögöttük álló okokat, hogy tudd, hol akad el a felhasználó." },
+      { title: "„Melyik fejlesztésbe érdemes befektetni?”", description: "A kutatási eredmények alapján priorizálható, mi hoz valódi értéket a felhasználóknak és az üzletnek." },
+      { title: "„Kik a valódi felhasználóink és mit akarnak?”", description: "Adatokra épülő perszónákkal és interjúkkal pontos képet adunk a célcsoportjaidról." },
+      { title: "„Miért alacsony a konverzió?”", description: "Használhatósági teszteléssel azonosítjuk azokat a pontokat, ahol a felhasználók elakadnak vagy kilépnek." },
+    ],
+    helpIntro: {
+      kicker: "Szakértelem",
+      heading: "Miben tudunk segíteni?",
+      description: "A felhasználói kutatás teljes eszköztárával dolgozunk — a tervezéstől az akcióképes javaslatokig.",
+    },
+    helpCta: {
+      text: "Nem tudod, melyik módszer illik a helyzetedhez? Segítünk kiválasztani.",
+      buttonText: "Kérj konzultációt",
+      buttonLink: "/kapcsolat",
+    },
+    processIntro: {
+      kicker: "A folyamat",
+      heading: "Hogyan dolgozunk?",
+      description: "Átlátható, lépésről lépésre haladó kutatási folyamat, amelynek minden fázisában látod, hol tartunk.",
+    },
+    deliverablesIntro: {
+      kicker: "Kézzelfogható eredmény",
+      heading: "Amit a projektből kapsz",
+      description: "A kutatás végén nem csak elemzést kapsz, hanem konkrét, azonnal használható anyagokat.",
+    },
+    deliverablesVariant: "smallCards",
+    deliverablesSmall: [
+      { icon: "file-check", title: "Kutatási riport", description: "Részletes, mégis áttekinthető összefoglaló a legfontosabb megállapításokkal." },
+      { icon: "users", title: "Perszónák", description: "Adatokra épülő felhasználói profilok, amelyeket a teljes csapat használhat." },
+      { icon: "target", title: "Priorizált javaslatlista", description: "Konkrét, hatás szerint rangsorolt fejlesztési javaslatok." },
+      { icon: "bar-chart-3", title: "Adatelemzési összefoglaló", description: "A kvantitatív adatok értelmezése és összevetése a kvalitatív eredményekkel." },
+      { icon: "eye", title: "Használhatósági jegyzőkönyv", description: "A tesztek dokumentált eredményei, videórészletekkel és idézetekkel." },
+      { icon: "zap", title: "Vezetői összefoglaló", description: "Döntéshozóknak szánt tömör kivonat a legfontosabb tanulságokkal." },
+    ],
+    deliverablesLarge: [
+      { icon: "search", title: "Kutatási eredmények", description: "Minden, amit a felhasználóidról megtudtunk, rendszerezve.", bullets: ["Kutatási riport", "Interjú-összefoglalók", "Videórészletek"] },
+      { icon: "users", title: "Felhasználói modellek", description: "A célcsoport megértését segítő eszközök.", bullets: ["Perszónák", "Felhasználói út térképek", "Fájdalompont-lista"] },
+      { icon: "target", title: "Akcióterv", description: "Konkrét lépések a továbblépéshez.", bullets: ["Priorizált javaslatok", "Quick win lista", "Vezetői összefoglaló"] },
+    ],
+    faqIntro: {
+      kicker: "Gyakori kérdések",
+      heading: "Amit érdemes tisztázni a kutatás előtt",
+      description: "Összegyűjtöttük a leggyakrabban felmerülő kérdéseket — ha másra is kíváncsi vagy, keress minket bátran.",
+    },
+    faq: [
+      { question: "Mikor érdemes UX kutatást végezni?", answer: "Ideális esetben még a fejlesztés előtt, de meglévő termék esetén is bármikor értékes — például átalakítás, bővítés vagy alacsony konverzió esetén." },
+      { question: "Mennyi ideig tart egy kutatási projekt?", answer: "A terjedelemtől függően jellemzően 3–8 hét. Egy fókuszált használhatósági teszt gyorsabb, egy átfogó feltáró kutatás hosszabb." },
+      { question: "Hány felhasználóra van szükség?", answer: "Kvalitatív kutatásnál már 5–8 résztvevő is feltárja a problémák többségét. A pontos számot a kutatási célok határozzák meg." },
+      { question: "Mennyi ideig tart egy UX kutatási projekt?", answer: "A legtöbb projekt 3–8 hét alatt lezajlik, a módszertantól és a résztvevők számától függően." },
+      { question: "Online is működik a kutatás?", answer: "Igen — az interjúk és tesztek többsége távolról is elvégezhető, ami gyorsabb és költséghatékonyabb is lehet." },
+      { question: "Mit kezdjünk az eredményekkel?", answer: "Minden kutatást priorizált, akcióképes javaslatokkal zárunk, és igény esetén a megvalósításban is támogatunk." },
+    ],
+    projectExamplesIntro: {
+      kicker: "Referenciák",
+      heading: "Kiemelt projektek",
+      description: "Néhány projekt, ahol a kutatás kézzelfogható üzleti eredményt hozott.",
+    },
+    relatedIntro: {
+      kicker: "További szolgáltatások",
+      heading: "Kapcsolódó szolgáltatások",
+      description: "A kutatás önmagában is értékes, de más szolgáltatásainkkal együtt fejti ki a legnagyobb hatást.",
+    },
+    relatedProjectSlugs: ["banki-applikacio", "logisztikai-szoftver"],
+  },
+  "ui-design": {
+    kicker: "UI Design",
+    questionsIntro: {
+      kicker: "A kihívásaid",
+      heading: "Milyen kérdésekre segítünk választ találni?",
+      description: "Ha ezek a kérdések foglalkoztatnak, a tudatos felülettervezés a megoldás.",
+    },
+    questions: [
+      { title: "„Miért tűnik elavultnak a felületünk?”", description: "Friss, a márkádhoz illő vizuális rendszert alakítunk ki, amely bizalmat épít." },
+      { title: "„Miért nem konzisztens a termékünk kinézete?”", description: "Design rendszerrel biztosítjuk, hogy minden képernyő egységes és karbantartható legyen." },
+      { title: "„Hogyan lehetne magasabb a konverziónk?”", description: "A felhasználói útvonalak áttervezésével több látogatóból lesz ügyfél." },
+      { title: "„Hogyan gyorsítható a fejlesztés?”", description: "A komponensalapú tervezés csökkenti a fejlesztési időt és a félreértéseket." },
+    ],
+    helpIntro: {
+      kicker: "Szakértelem",
+      heading: "Miben tudunk segíteni?",
+      description: "A vizuális iránytól a fejlesztői átadásig a felülettervezés minden fázisát lefedjük.",
+    },
+    helpCta: {
+      text: "Csak egy részterületen kell segítség? Rugalmasan alkalmazkodunk.",
+      buttonText: "Beszéljük meg",
+      buttonLink: "/kapcsolat",
+    },
+    processIntro: {
+      kicker: "A folyamat",
+      heading: "Hogyan dolgozunk?",
+      description: "Iteratív tervezési folyamat, ahol minden lépésnél véleményezheted és alakíthatod az irányt.",
+    },
+    deliverablesIntro: {
+      kicker: "Kézzelfogható eredmény",
+      heading: "Amit a projektből kapsz",
+      description: "A projekt végén minden anyagot átadunk, rendezetten és fejlesztésre készen.",
+    },
+    deliverablesVariant: "largeCards",
+    deliverablesSmall: [
+      { icon: "palette", title: "UI tervek", description: "Pixel-pontos, minden képernyőméretre optimalizált felületi tervek." },
+      { icon: "book-open", title: "Design rendszer", description: "Dokumentált komponenskönyvtár, amely gyorsítja a fejlesztést." },
+      { icon: "monitor", title: "Interaktív prototípus", description: "Kattintható prototípus, amellyel a fejlesztés előtt tesztelhető az élmény." },
+      { icon: "zap", title: "Mikro-animációk", description: "Motion design specifikáció az átmenetekhez és visszajelzésekhez." },
+      { icon: "file-check", title: "Fejlesztői specifikáció", description: "Részletes átadási dokumentáció a zökkenőmentes implementációhoz." },
+      { icon: "target", title: "Asset csomag", description: "Exportált ikonok, képek és grafikai elemek, fejlesztésre készen." },
+    ],
+    deliverablesLarge: [
+      { icon: "palette", title: "Kész UI tervek", description: "A teljes termék végleges vizuális terve.", bullets: ["Minden képernyő terve", "Reszponzív változatok", "Sötét/világos mód (igény szerint)"] },
+      { icon: "book-open", title: "Design rendszer", description: "Skálázható alap a további fejlesztéshez.", bullets: ["Komponenskönyvtár", "Stílus-útmutató", "Használati dokumentáció"] },
+      { icon: "monitor", title: "Prototípus és átadás", description: "Minden, ami a megvalósításhoz kell.", bullets: ["Interaktív prototípus", "Fejlesztői specifikáció", "Exportált assetek"] },
+    ],
+    faqIntro: {
+      kicker: "Gyakori kérdések",
+      heading: "Amit érdemes tisztázni a tervezés előtt",
+      description: "A leggyakrabban felmerülő kérdések — ha más is érdekel, keress minket bátran.",
+    },
+    faq: [
+      { question: "Kell kész arculat a UI tervezéshez?", answer: "Nem feltétlenül — meglévő arculatra is építünk, de a vizuális irány kialakításában is tudunk segíteni." },
+      { question: "Mennyi ideig tart egy UI design projekt?", answer: "Egy kisebb termék 4–6 hét, egy összetettebb alkalmazás 2–4 hónap — a pontos ütemtervet az elején rögzítjük." },
+      { question: "Figma-ban dolgoztok?", answer: "Igen, elsősorban Figma-t használunk, így a tervek könnyen megoszthatók és a fejlesztők számára is jól használhatók." },
+      { question: "A fejlesztést is vállaljátok?", answer: "A tervek implementálásában partnereinkkel együttműködve tudunk támogatni, és a fejlesztés alatt is elérhetők maradunk." },
+      { question: "Mi történik, ha később új képernyők kellenek?", answer: "A design rendszer pontosan ezt szolgálja: az új felületek gyorsan, konzisztensen bővíthetők." },
+    ],
+    projectExamplesIntro: {
+      kicker: "Portfólió",
+      heading: "Projektpéldák",
+      description: "Néhány felület, amelyet mi terveztünk.",
+    },
+    relatedIntro: {
+      kicker: "További szolgáltatások",
+      heading: "Kapcsolódó szolgáltatások",
+      description: "A UI design más szolgáltatásainkkal kombinálva hozza a legjobb eredményt.",
+    },
+    relatedProjectSlugs: ["banki-applikacio", "logisztikai-szoftver"],
+  },
+  "akadalymentesites": {
+    kicker: "Akadálymentesítés",
+    questionsIntro: {
+      kicker: "A kihívásaid",
+      heading: "Milyen kérdésekre segítünk választ találni?",
+      description: "Ha ezek a kérdések felmerültek nálatok, az akadálymentesítés nem várhat tovább.",
+    },
+    questions: [
+      { title: "„Megfelel a weboldalunk a jogszabályoknak?”", description: "Auditunk pontos képet ad arról, hol álltok az EU-s akadálymentesítési előírásokhoz képest." },
+      { title: "„Kiket veszítünk el a jelenlegi felülettel?”", description: "Feltárjuk, mely felhasználói csoportok ütköznek akadályokba, és mekkora ez a kör." },
+      { title: "„Mennyi munka lenne a megfelelés?”", description: "Priorizált javítási tervvel megmutatjuk, mit érdemes először és mit később javítani." },
+      { title: "„Hogyan előzhetők meg az újabb hibák?”", description: "Képzéssel és folyamatba épített ellenőrzéssel a csapat hosszú távon is akadálymentes terméket készít." },
+    ],
+    helpIntro: {
+      kicker: "Szakértelem",
+      heading: "Miben tudunk segíteni?",
+      description: "Az auditálástól a csapatképzésig az akadálymentesítés teljes folyamatát lefedjük.",
+    },
+    helpCta: {
+      text: "Nem tudod, hol kezdjétek? Egy gyors állapotfelméréssel segítünk tisztán látni.",
+      buttonText: "Kérj állapotfelmérést",
+      buttonLink: "/kapcsolat",
+    },
+    processIntro: {
+      kicker: "A folyamat",
+      heading: "Hogyan dolgozunk?",
+      description: "Szabványokra épülő, dokumentált folyamat — az első felméréstől a megfelelési nyilatkozatig.",
+    },
+    deliverablesIntro: {
+      kicker: "Kézzelfogható eredmény",
+      heading: "Amit a projektből kapsz",
+      description: "Minden szakaszban dokumentált, ellenőrizhető eredményeket adunk át.",
+    },
+    deliverablesVariant: "smallCards",
+    deliverablesSmall: [
+      { icon: "file-check", title: "Audit riport", description: "Részletes, WCAG 2.1 szerinti hibalista súlyosság szerint rendezve." },
+      { icon: "target", title: "Javítási ütemterv", description: "Priorizált feladatlista, amely mentén a csapat haladni tud." },
+      { icon: "shield", title: "Megfelelési nyilatkozat", description: "A javítások utáni validáció és a hivatalos nyilatkozat elkészítése." },
+      { icon: "users", title: "Csapatképzési anyagok", description: "Gyakorlati útmutatók fejlesztőknek, tervezőknek és tartalomkészítőknek." },
+      { icon: "eye", title: "Tesztelési jegyzőkönyv", description: "Képernyőolvasós és billentyűzetes tesztek dokumentált eredményei." },
+      { icon: "bar-chart-3", title: "Monitoring riportok", description: "Rendszeres ellenőrzési jelentések a tartós megfelelésért." },
+    ],
+    deliverablesLarge: [
+      { icon: "file-check", title: "Audit csomag", description: "A teljes állapotfelmérés eredményei.", bullets: ["WCAG 2.1 hibalista", "Súlyossági besorolás", "Képernyőképes dokumentáció"] },
+      { icon: "target", title: "Javítási terv", description: "Világos útiterv a megfeleléshez.", bullets: ["Priorizált feladatlista", "Becsült ráfordítások", "Quick win javaslatok"] },
+      { icon: "shield", title: "Megfelelés és fenntartás", description: "Hosszú távú biztonság.", bullets: ["Megfelelési nyilatkozat", "Csapatképzés", "Monitoring terv"] },
+    ],
+    faqIntro: {
+      kicker: "Gyakori kérdések",
+      heading: "Amit érdemes tisztázni az audit előtt",
+      description: "A leggyakoribb kérdések az akadálymentesítésről — ha más is érdekel, keress minket.",
+    },
+    faq: [
+      { question: "Kötelező az akadálymentesítés?", answer: "Az EU Akadálymentesítési irányelve alapján egyre több szervezet számára igen — 2025-től a legtöbb online szolgáltatásra is vonatkozik." },
+      { question: "Mennyi ideig tart egy audit?", answer: "Egy átlagos weboldal auditja 2–4 hét, az oldal méretétől és összetettségétől függően." },
+      { question: "A javításokat is elvégzitek?", answer: "A javítási terv alapján a fejlesztőcsapatot támogatjuk kód review-kkal és konzultációval, illetve partnereinkkel a kivitelezésben is segítünk." },
+      { question: "Elég egy automatikus ellenőrzés?", answer: "Nem — az automatizált eszközök a problémák kb. 30–40%-át találják meg. A teljes képhez manuális és asszisztív technológiás tesztelés is szükséges." },
+      { question: "Mi történik az audit után?", answer: "Priorizált javítási tervet adunk át, majd a javítások után újratesztelünk és megfelelési nyilatkozatot készítünk." },
+    ],
+    projectExamplesIntro: {
+      kicker: "Referenciák",
+      heading: "Projektpéldák",
+      description: "Projektek, ahol az akadálymentesítés valódi üzleti értéket hozott.",
+    },
+    relatedIntro: {
+      kicker: "További szolgáltatások",
+      heading: "Kapcsolódó szolgáltatások",
+      description: "Az akadálymentesítés a tervezéssel és kutatással együtt a leghatékonyabb.",
+    },
+    relatedProjectSlugs: ["e-kereskedelmi-akadalymentesites"],
+  },
+};
+
+async function backfillServiceRestructure(strapi: any) {
+  const path = require("path");
+  const store = strapi.store({ type: "plugin", name: "migrations" });
+  const done = await store.get({ key: "service_restructure_v2" });
+  if (done) {
+    strapi.log.info("Service restructure backfill: already completed (flag set) — skipping");
+    return;
+  }
+
+  const strapiRoot = path.resolve(__dirname, "..", "..");
+  const iconsDir = path.join(strapiRoot, "src", "seed-icons");
+  const iconCache: Record<string, number> = {};
+  async function getIconId(name: string): Promise<number | null> {
+    if (iconCache[name] !== undefined) return iconCache[name];
+    const filePath = path.join(iconsDir, `${name}.svg`);
+    const id = await uploadSvgIcon(strapi, filePath, name);
+    if (id) iconCache[name] = id;
+    return id;
+  }
+
+  const services = await strapi.documents("api::service.service").findMany({
+    populate: [
+      "general",
+      "general.icon",
+      "general.heroImage",
+      "activities",
+      "activities.icon",
+      "questionsSection",
+      "helpSection",
+      "processSection",
+      "deliverablesSection",
+      "projectExamplesIntro",
+      "faqSection",
+      "relatedServicesIntro",
+      "relatedServices",
+      "relatedProjects",
+    ],
+  });
+
+  if (services.length === 0) {
+    strapi.log.info("Service restructure backfill: no services found — will retry on next restart");
+    return;
+  }
+
+  const projects = await strapi.documents("api::project.project").findMany({
+    pagination: { pageSize: 200 },
+  });
+
+  let incomplete = 0;
+  for (const svc of services) {
+    const svcSlug = svc.general?.slug || "";
+    const seed = SERVICE_RESTRUCTURE_SEED[svcSlug];
+    const oldSeed = SERVICE_SEED_DATA.find((s) => s.slug === svcSlug);
+    if (!seed) {
+      strapi.log.info(`Service restructure backfill: no seed data for "${svcSlug}" — skipping`);
+      continue;
+    }
+
+    const data: Record<string, any> = {};
+
+    const generalIconId =
+      svc.general?.icon?.id ||
+      (oldSeed?.serviceIcon ? await getIconId(oldSeed.serviceIcon) : null);
+    if (svc.general && (!svc.general.kicker || (!svc.general.icon && generalIconId))) {
+      data.general = {
+        ...svc.general,
+        icon: generalIconId || undefined,
+        heroImage: svc.general.heroImage?.id || undefined,
+        kicker: svc.general.kicker || seed.kicker,
+      };
+    }
+
+    if (!svc.questionsSection) {
+      data.questionsSection = {
+        intro: seed.questionsIntro,
+        cards: seed.questions,
+      };
+    }
+
+    if (!svc.helpSection) {
+      const sourceCards =
+        (svc.activities || []).length > 0
+          ? (svc.activities || []).map((a: any) => ({
+              title: a.title,
+              description: a.description,
+              icon: a.icon?.id || undefined,
+            }))
+          : await Promise.all(
+              (oldSeed?.activities || []).map(async (a: any, i: number) => ({
+                title: a.title,
+                description: a.description,
+                icon:
+                  (await getIconId(
+                    (oldSeed?.activityIcons || [])[i % (oldSeed?.activityIcons?.length || 1)] ||
+                      "check-circle-2",
+                  )) || undefined,
+              })),
+            );
+      data.helpSection = {
+        intro: seed.helpIntro,
+        cards: sourceCards,
+        ctaText: seed.helpCta.text,
+        ctaButtonText: seed.helpCta.buttonText,
+        ctaButtonLink: seed.helpCta.buttonLink,
+      };
+    }
+
+    if (!svc.processSection) {
+      data.processSection = {
+        intro: seed.processIntro,
+        steps: (oldSeed?.processSteps || []).map((ps: any) => ({
+          title: ps.title,
+          description: ps.description,
+        })),
+      };
+    }
+
+    if (!svc.deliverablesSection) {
+      const smallCards = [];
+      for (const item of seed.deliverablesSmall) {
+        smallCards.push({
+          title: item.title,
+          description: item.description,
+          icon: (await getIconId(item.icon)) || undefined,
+        });
+      }
+      const largeCards = [];
+      for (const item of seed.deliverablesLarge) {
+        largeCards.push({
+          title: item.title,
+          description: item.description,
+          icon: (await getIconId(item.icon)) || undefined,
+          bullets: item.bullets.map((text: string) => ({ text })),
+        });
+      }
+      data.deliverablesSection = {
+        intro: seed.deliverablesIntro,
+        variant: seed.deliverablesVariant,
+        smallCards,
+        largeCards,
+      };
+    }
+
+    if (!svc.projectExamplesIntro) {
+      data.projectExamplesIntro = seed.projectExamplesIntro;
+    }
+
+    if (!svc.faqSection) {
+      data.faqSection = {
+        intro: seed.faqIntro,
+        items: seed.faq,
+      };
+    }
+
+    if (!svc.relatedServicesIntro) {
+      data.relatedServicesIntro = seed.relatedIntro;
+    }
+
+    if ((svc.relatedServices || []).length === 0) {
+      const others = services.filter((s: any) => s.documentId !== svc.documentId);
+      if (others.length > 0) {
+        data.relatedServices = others.map((s: any) => s.documentId);
+      }
+    }
+
+    if ((svc.relatedProjects || []).length === 0 && projects.length > 0) {
+      const preferred = (seed.relatedProjectSlugs || [])
+        .map((slug: string) => projects.find((p: any) => p.slug === slug))
+        .filter(Boolean);
+      const chosen = preferred.length > 0 ? preferred : projects.slice(0, 2);
+      data.relatedProjects = chosen.map((p: any) => p.documentId);
+    }
+
+    if (Object.keys(data).length === 0) {
+      strapi.log.info(`Service restructure backfill: "${svcSlug}" already complete — skipping`);
+      continue;
+    }
+
+    try {
+      await strapi.documents("api::service.service").update({
+        documentId: svc.documentId,
+        data,
+      });
+      await strapi.documents("api::service.service").publish({
+        documentId: svc.documentId,
+      });
+      strapi.log.info(
+        `Service restructure backfill: filled [${Object.keys(data).join(", ")}] for "${svcSlug}"`,
+      );
+    } catch (err: any) {
+      incomplete++;
+      strapi.log.error(
+        `Service restructure backfill: failed for "${svcSlug}": ${err.message}`,
+      );
+    }
+  }
+
+  const postCheck = await strapi.documents("api::service.service").findMany({
+    populate: ["general", "questionsSection", "helpSection", "processSection", "deliverablesSection", "faqSection"],
+  });
+  const stillMissing = postCheck.filter(
+    (s: any) =>
+      SERVICE_RESTRUCTURE_SEED[s.general?.slug || ""] &&
+      (!s.questionsSection || !s.helpSection || !s.processSection || !s.deliverablesSection || !s.faqSection),
+  );
+
+  if (incomplete > 0 || stillMissing.length > 0) {
+    strapi.log.warn(
+      `Service restructure backfill: incomplete (${incomplete} error(s), ${stillMissing.length} missing) — flag not set, will retry on next restart`,
+    );
+    return;
+  }
+
+  await store.set({ key: "service_restructure_v2", value: true });
+  strapi.log.info("Service restructure backfill: completed successfully");
+}
+
 const FEATURED_PROJECT_SLUGS = [
   "banki-applikacio",
   "logisztikai-szoftver",
@@ -868,6 +1315,7 @@ export default {
           .then(() => migrateSlugToGeneral(strapi))
           .then(() => syncServiceTitles(strapi))
           .then(() => backfillServiceSections(strapi))
+          .then(() => backfillServiceRestructure(strapi))
           .then(() => backfillFeaturedProjects(strapi))
           .then(() => strapi.log.info("Bootstrap tasks completed successfully"))
           .catch((err: any) => {
@@ -881,6 +1329,7 @@ export default {
       await migrateSlugToGeneral(strapi);
       await syncServiceTitles(strapi);
       await backfillServiceSections(strapi);
+      await backfillServiceRestructure(strapi);
       await backfillFeaturedProjects(strapi);
       strapi.log.info("Bootstrap tasks completed successfully");
       markWebsiteAutoRebuildReady();

@@ -70,6 +70,7 @@ interface StrapiProject {
   image: StrapiMedia | null;
   homepageImage: StrapiMedia | null;
   featured: boolean;
+  order: number | null;
   tags: StrapiTag[];
   caseStudy: StrapiCaseStudy | null;
   contentBlocks: StrapiContentBlock[];
@@ -178,6 +179,7 @@ export interface Project {
   image: string;
   homepageImage?: string;
   featured?: boolean;
+  order?: number | null;
   caseStudy: {
     heroSubtitle: string;
     client: string;
@@ -273,6 +275,7 @@ function mapProject(p: StrapiProject): Project {
     image: strapiImageUrl(p.image?.url),
     homepageImage: p.homepageImage ? strapiImageUrl(p.homepageImage.url) : undefined,
     featured: p.featured,
+    order: p.order ?? null,
     caseStudy: {
       heroSubtitle: p.caseStudy?.heroSubtitle || "",
       client: p.caseStudy?.client || "",
@@ -302,7 +305,7 @@ const PROJECT_POPULATE =
 
 export async function getProjects(): Promise<Project[]> {
   const res = await fetchApi<StrapiListResponse<StrapiProject>>(
-    `/projects?${PROJECT_POPULATE}&pagination[pageSize]=100&sort=createdAt:asc`
+    `/projects?${PROJECT_POPULATE}&pagination[pageSize]=100&sort[0]=order:asc&sort[1]=createdAt:asc`
   );
   return res.data.map(mapProject);
 }

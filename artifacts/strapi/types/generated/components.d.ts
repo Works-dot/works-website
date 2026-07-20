@@ -225,6 +225,90 @@ export interface ServiceBenefit extends Struct.ComponentSchema {
   };
 }
 
+export interface ServiceBulletPoint extends Struct.ComponentSchema {
+  collectionName: 'components_service_bullet_points';
+  info: {
+    description: 'Egyetlen felsorol\u00E1si pont';
+    displayName: 'Felsorol\u00E1s pont';
+    icon: 'bulletList';
+  };
+  attributes: {
+    text: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
+export interface ServiceDeliverableCard extends Struct.ComponentSchema {
+  collectionName: 'components_service_deliverable_cards';
+  info: {
+    description: 'Amit a projektb\u0151l kapsz \u2014 kis k\u00E1rtya';
+    displayName: 'Kis ikonos k\u00E1rtya (A v\u00E1ltozat)';
+    icon: 'apps';
+  };
+  attributes: {
+    description: Schema.Attribute.Text;
+    icon: Schema.Attribute.Media<'images'>;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
+export interface ServiceDeliverableGroup extends Struct.ComponentSchema {
+  collectionName: 'components_service_deliverable_groups';
+  info: {
+    description: 'Amit a projektb\u0151l kapsz \u2014 nagy k\u00E1rtya felsorol\u00E1ssal';
+    displayName: 'Nagy k\u00E1rtya felsorol\u00E1ssal (B v\u00E1ltozat)';
+    icon: 'apps';
+  };
+  attributes: {
+    bullets: Schema.Attribute.Component<'service.bullet-point', true>;
+    description: Schema.Attribute.Text;
+    icon: Schema.Attribute.Media<'images'>;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
+export interface ServiceDeliverablesSection extends Struct.ComponentSchema {
+  collectionName: 'components_service_deliverables_sections';
+  info: {
+    description: 'K\u00E9t megjelen\u00EDt\u00E9si v\u00E1ltozat: kis k\u00E1rty\u00E1k vagy nagy k\u00E1rty\u00E1k felsorol\u00E1ssal';
+    displayName: 'Amit a projektb\u0151l kapsz szekci\u00F3';
+    icon: 'gift';
+  };
+  attributes: {
+    intro: Schema.Attribute.Component<'service.section-intro', false>;
+    largeCards: Schema.Attribute.Component<'service.deliverable-group', true>;
+    smallCards: Schema.Attribute.Component<'service.deliverable-card', true>;
+    variant: Schema.Attribute.Enumeration<['smallCards', 'largeCards']> &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'smallCards'>;
+  };
+}
+
+export interface ServiceFaqItem extends Struct.ComponentSchema {
+  collectionName: 'components_service_faq_items';
+  info: {
+    description: 'K\u00E9rd\u00E9s-v\u00E1lasz p\u00E1r';
+    displayName: 'GYIK elem';
+    icon: 'question';
+  };
+  attributes: {
+    answer: Schema.Attribute.Text;
+    question: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
+export interface ServiceFaqSection extends Struct.ComponentSchema {
+  collectionName: 'components_service_faq_sections';
+  info: {
+    description: 'Gyakran ism\u00E9telt k\u00E9rd\u00E9sek';
+    displayName: 'GYIK szekci\u00F3';
+    icon: 'question';
+  };
+  attributes: {
+    intro: Schema.Attribute.Component<'service.section-intro', false>;
+    items: Schema.Attribute.Component<'service.faq-item', true>;
+  };
+}
+
 export interface ServiceGeneral extends Struct.ComponentSchema {
   collectionName: 'components_service_generals';
   info: {
@@ -236,11 +320,108 @@ export interface ServiceGeneral extends Struct.ComponentSchema {
     heroDescription: Schema.Attribute.Text;
     heroImage: Schema.Attribute.Media<'images'>;
     icon: Schema.Attribute.Media<'images'>;
+    kicker: Schema.Attribute.String;
     slug: Schema.Attribute.String &
       Schema.Attribute.Required &
       Schema.Attribute.Unique;
     subtitle: Schema.Attribute.String;
     title: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
+export interface ServiceHelpCard extends Struct.ComponentSchema {
+  collectionName: 'components_service_help_cards';
+  info: {
+    description: 'Miben tudunk seg\u00EDteni k\u00E1rtya';
+    displayName: 'Seg\u00EDts\u00E9g k\u00E1rtya';
+    icon: 'check-circle';
+  };
+  attributes: {
+    description: Schema.Attribute.Text;
+    icon: Schema.Attribute.Media<'images'>;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
+export interface ServiceHelpSection extends Struct.ComponentSchema {
+  collectionName: 'components_service_help_sections';
+  info: {
+    description: 'K\u00E1rtyar\u00E1cs kiemelt CTA k\u00E1rty\u00E1val';
+    displayName: 'Miben tudunk seg\u00EDteni szekci\u00F3';
+    icon: 'grid';
+  };
+  attributes: {
+    cards: Schema.Attribute.Component<'service.help-card', true>;
+    ctaButtonLink: Schema.Attribute.String;
+    ctaButtonText: Schema.Attribute.String;
+    ctaText: Schema.Attribute.Text;
+    intro: Schema.Attribute.Component<'service.section-intro', false>;
+  };
+}
+
+export interface ServiceProcessSection extends Struct.ComponentSchema {
+  collectionName: 'components_service_process_sections';
+  info: {
+    description: 'Sz\u00E1mozott folyamatl\u00E9p\u00E9sek';
+    displayName: 'Hogyan dolgozunk szekci\u00F3';
+    icon: 'arrow-right';
+  };
+  attributes: {
+    intro: Schema.Attribute.Component<'service.section-intro', false>;
+    steps: Schema.Attribute.Component<'service.process-step', true>;
+  };
+}
+
+export interface ServiceProcessStep extends Struct.ComponentSchema {
+  collectionName: 'components_service_process_steps';
+  info: {
+    description: 'Hogyan dolgozunk l\u00E9p\u00E9s';
+    displayName: 'Folyamat l\u00E9p\u00E9s';
+    icon: 'arrow-right';
+  };
+  attributes: {
+    description: Schema.Attribute.Text;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
+export interface ServiceQuestionCard extends Struct.ComponentSchema {
+  collectionName: 'components_service_question_cards';
+  info: {
+    description: 'K\u00E9rd\u00E9sk\u00E1rtya c\u00EDm \u00E9s le\u00EDr\u00E1s';
+    displayName: 'K\u00E9rd\u00E9sk\u00E1rtya';
+    icon: 'question';
+  };
+  attributes: {
+    description: Schema.Attribute.Text;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
+export interface ServiceQuestionsSection extends Struct.ComponentSchema {
+  collectionName: 'components_service_questions_sections';
+  info: {
+    description: 'Milyen k\u00E9rd\u00E9sekre seg\u00EDt\u00FCnk v\u00E1laszt tal\u00E1lni?';
+    displayName: 'K\u00E9rd\u00E9sek szekci\u00F3';
+    icon: 'question';
+  };
+  attributes: {
+    cards: Schema.Attribute.Component<'service.question-card', true>;
+    intro: Schema.Attribute.Component<'service.section-intro', false>;
+  };
+}
+
+export interface ServiceSectionIntro extends Struct.ComponentSchema {
+  collectionName: 'components_service_section_intros';
+  info: {
+    description: 'Szekci\u00F3 fels\u0151 c\u00EDmke, c\u00EDm \u00E9s le\u00EDr\u00E1s';
+    displayName: 'Szekci\u00F3 bevezet\u0151';
+    icon: 'layout';
+  };
+  attributes: {
+    description: Schema.Attribute.Text;
+    heading: Schema.Attribute.String;
+    kicker: Schema.Attribute.String;
   };
 }
 
@@ -356,7 +537,20 @@ declare module '@strapi/strapi' {
       'project.case-study': ProjectCaseStudy;
       'service.activity': ServiceActivity;
       'service.benefit': ServiceBenefit;
+      'service.bullet-point': ServiceBulletPoint;
+      'service.deliverable-card': ServiceDeliverableCard;
+      'service.deliverable-group': ServiceDeliverableGroup;
+      'service.deliverables-section': ServiceDeliverablesSection;
+      'service.faq-item': ServiceFaqItem;
+      'service.faq-section': ServiceFaqSection;
       'service.general': ServiceGeneral;
+      'service.help-card': ServiceHelpCard;
+      'service.help-section': ServiceHelpSection;
+      'service.process-section': ServiceProcessSection;
+      'service.process-step': ServiceProcessStep;
+      'service.question-card': ServiceQuestionCard;
+      'service.questions-section': ServiceQuestionsSection;
+      'service.section-intro': ServiceSectionIntro;
       'service.tool': ServiceTool;
       'service.value-proposition': ServiceValueProposition;
       'shared.hero': SharedHero;

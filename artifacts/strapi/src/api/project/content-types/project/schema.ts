@@ -38,6 +38,9 @@ export default {
       "type": "boolean",
       "default": false
     },
+    "order": {
+      "type": "integer"
+    },
     "tags": {
       "type": "relation",
       "relation": "manyToMany",
