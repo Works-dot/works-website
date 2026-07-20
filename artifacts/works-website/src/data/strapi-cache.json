@@ -40,6 +40,11 @@
             "content": "Az eredmények önmagukért beszélnek: az első hónapban 40%-kal nőtt a sikeres regisztrációk száma, a felhasználói elégedettségi mutató (NPS) pedig 32-ről 71-re emelkedett. A bank azóta is a mi csapatunkkal fejleszti tovább az alkalmazást."
           }
         ]
+      },
+      "seo": {
+        "metaTitle": "Banki applikáció újratervezése | Works.",
+        "metaDescription": "Hogyan növeltük 40%-kal a sikeres regisztrációkat egy vezető hazai bank mobil applikációjában.",
+        "ogImage": ""
       }
     },
     {
@@ -82,6 +87,11 @@
             "content": "A bevezetés után az átlagos feladatvégzési idő 34%-kal csökkent, a felhasználói hibák száma 60%-kal esett vissza. A rendszert azóta a cég 3 másik részlegére is kiterjesztették."
           }
         ]
+      },
+      "seo": {
+        "metaTitle": "Logisztikai szoftver ergonómia | Works.",
+        "metaDescription": "Egy vállalatirányítási rendszer modernizálása, ami napi 2 órát takarít meg felhasználónként.",
+        "ogImage": ""
       }
     },
     {
@@ -124,6 +134,11 @@
             "content": "A projekt végére a platform teljes mértékben megfelelt a WCAG 2.1 AA szabványnak. A javítások hatására a fogyatékossággal élő felhasználók körében 45%-kal nőtt a sikeres vásárlások aránya."
           }
         ]
+      },
+      "seo": {
+        "metaTitle": "E-kereskedelmi akadálymentesítés | Works.",
+        "metaDescription": "Teljes WCAG 2.1 AA megfelelés elérése egy nemzetközi webáruház számára.",
+        "ogImage": ""
       }
     },
     {
@@ -165,6 +180,11 @@
             "content": "A launch után 3 hónapon belül a felhasználói bázis megháromszorozódott. Az alkalmazás 4.7-es értékelést kapott az App Store-ban, és a befektetők átlagos visszatérési rátája 85% fölötti."
           }
         ]
+      },
+      "seo": {
+        "metaTitle": "Fintech mobilapp UX stratégia | Works.",
+        "metaDescription": "Komplex pénzügyi adatok egyszerű megjelenítése egy befektetési alkalmazásban.",
+        "ogImage": ""
       }
     },
     {
@@ -206,6 +226,11 @@
             "content": "A portál indulása után a telefonos megkeresések 60%-kal csökkentek, az online időpontfoglalások száma pedig megháromszorozódott. A felhasználói elégedettség 4.2/5-re emelkedett."
           }
         ]
+      },
+      "seo": {
+        "metaTitle": "Egészségügyi portál újragondolása | Works.",
+        "metaDescription": "Egy országos egészségügyi portál, amely 60%-kal csökkentette a telefonos megkereséseket.",
+        "ogImage": ""
       }
     },
     {
@@ -247,6 +272,11 @@
             "content": "A béta teszt első hónapjában 200+ designer regisztrált. Az átlagos design iterációs idő 40%-kal csökkent az AI javaslatok használatával. A platform jelenleg seed finanszírozási körben van."
           }
         ]
+      },
+      "seo": {
+        "metaTitle": "Branding",
+        "metaDescription": "Mesterséges intelligencia a kreatív munka szolgálatában — egy SaaS platform születése.",
+        "ogImage": ""
       }
     }
   ],
@@ -297,7 +327,12 @@
           "type": "text",
           "content": "A Works. csapatánál minden projektet akadálymentességi audittal zárunk. Tapasztalataink szerint a legtöbb probléma már a tervezési fázisban megelőzhető, ha az akadálymentesség nem utólagos gondolat, hanem a folyamat szerves része."
         }
-      ]
+      ],
+      "seo": {
+        "metaTitle": "Az akadálymentes tervezés jövője | Works. Blog",
+        "metaDescription": "Miért elengedhetetlen a digitális termékeknél az a11y szabványok követése, és hogyan kezdjünk hozzá a gyakorlatban?",
+        "ogImage": ""
+      }
     },
     {
       "slug": "mikro-interakciok-ux-titka",
@@ -345,7 +380,12 @@
           "type": "text",
           "content": "A Works. csapatánál a Framer Motion és a Lottie könyvtárakat használjuk leggyakrabban React projektekben. Ezek lehetővé teszik a komplex animációk deklaratív leírását, és kiválóan optimalizáltak a teljesítményre."
         }
-      ]
+      ],
+      "seo": {
+        "metaTitle": "Mikro-interakciók: A kiváló UX titka | Works. Blog",
+        "metaDescription": "Hogyan tehetik emlékezetessé a legapróbb animációk is az alkalmazásodat.",
+        "ogImage": ""
+      }
     },
     {
       "slug": "design-system-epites",
@@ -393,7 +433,12 @@
           "type": "text",
           "content": "A sikerhez kulcsfontosságú a csapat bevonása: rendszeres design critique sessionok, fejlesztői feedback és közös döntéshozás. A design system csak akkor működik, ha mindenki használja és hisz benne."
         }
-      ]
+      ],
+      "seo": {
+        "metaTitle": "Design System építés nulláról | Works. Blog",
+        "metaDescription": "Hogyan hoztunk létre egy skálázható design rendszert egy nagyvállalati ügyfelünknek.",
+        "ogImage": ""
+      }
     },
     {
       "slug": "ai-a-ux-tervezesben",
@@ -442,7 +487,12 @@
           "type": "text",
           "content": "A Works. csapatánál tudatosan integrálunk AI eszközöket a munkafolyamatainkba. Használjuk őket kutatáshoz, ötletgeneráláshoz és prototípus-készítéshez, de a végső designdöntéseket mindig tapasztalt designerek hozzák meg."
         }
-      ]
+      ],
+      "seo": {
+        "metaTitle": "AI a UX tervezésben | Works. Blog",
+        "metaDescription": "Hogyan használhatjuk az AI eszközeit a felhasználói élmény tervezésénél?",
+        "ogImage": ""
+      }
     },
     {
       "slug": "ux-kutatasi-modszerek",
@@ -494,7 +544,12 @@
           "type": "text",
           "content": "5. Napló-tanulmány (Diary Study): A felhasználók 1-4 héten keresztül dokumentálják a tapasztalataikat. Ez a módszer a hosszú távú használati mintázatokat és az időszakos frusztrációkat tárja fel, amelyeket egyszeri tesztekkel lehetetlen felismerni."
         }
-      ]
+      ],
+      "seo": {
+        "metaTitle": "5 UX kutatási módszer | Works. Blog",
+        "metaDescription": "Bemutatjuk a leghatékonyabb módszereket, amelyekkel valós felhasználói igényeket tárhatunk fel.",
+        "ogImage": ""
+      }
     },
     {
       "slug": "mobile-first-tervezes",
@@ -543,7 +598,12 @@
           "type": "text",
           "content": "A Works. csapatánál minden projektet mobilról indítunk. A wireframe-ek első verziói mindig 375px széles képernyőre készülnek, és csak ezt követően bővítjük ki tablet és desktop méretekre. Ez a megközelítés biztosítja, hogy a végeredmény minden eszközön kiválóan működjön."
         }
-      ]
+      ],
+      "seo": {
+        "metaTitle": "Mobile-first tervezés | Works. Blog",
+        "metaDescription": "A mobil forgalom meghaladja a 60%-ot. Hogyan tervezzük a felületeinket mobilra és desktopra egyaránt?",
+        "ogImage": ""
+      }
     }
   ],
   "services": [
@@ -783,7 +843,8 @@
           "description": "Segítünk, hogy digitális termékeid mindenki számára elérhetőek és használhatóak legyenek — a jogszabályi megfeleléstől a valódi inkluzivitásig.",
           "icon": "/strapi/uploads/eye_3615829ec8.svg"
         }
-      ]
+      ],
+      "seo": null
     },
     {
       "slug": "ui-design",
@@ -1017,7 +1078,8 @@
           "description": "Segítünk, hogy digitális termékeid mindenki számára elérhetőek és használhatóak legyenek — a jogszabályi megfeleléstől a valódi inkluzivitásig.",
           "icon": "/strapi/uploads/eye_3615829ec8.svg"
         }
-      ]
+      ],
+      "seo": null
     },
     {
       "slug": "akadalymentesites",
@@ -1250,7 +1312,8 @@
           "description": "Olyan felhasználói felületeket tervezünk, amelyek nem csak szépek, hanem érthetőek, használhatók és üzleti eredményeket hoznak.",
           "icon": "/strapi/uploads/monitor_147cb28f4e.svg"
         }
-      ]
+      ],
+      "seo": null
     }
   ],
   "teamMembers": [
@@ -1406,7 +1469,12 @@
           "type": "text",
           "content": "Amit kínálunk: versenyképes fizetés, rugalmas munkaidő és hibrid munkavégzés, éves képzési keret, modern budapesti iroda és egy csapat, amelyik valóban törődik a munkája minőségével."
         }
-      ]
+      ],
+      "seo": {
+        "metaTitle": "Senior UX Researcher — Karrier | Works.",
+        "metaDescription": "Vezető kutatóként komplex felhasználói kutatási projekteket vezetsz.",
+        "ogImage": ""
+      }
     },
     {
       "slug": "ui-designer",
@@ -1446,7 +1514,12 @@
           "type": "text",
           "content": "Amit kínálunk: kreatív szabadság, változatos projektek startuptól a nagyvállalatokig, szakmai fejlődési lehetőségek és egy inspiráló csapat."
         }
-      ]
+      ],
+      "seo": {
+        "metaTitle": "UI Designer — Karrier | Works.",
+        "metaDescription": "Vizuálisan kiemelkedő, felhasználóbarát felületeket tervezel webes és mobil alkalmazásokhoz.",
+        "ogImage": ""
+      }
     },
     {
       "slug": "frontend-fejleszto",
@@ -1486,7 +1559,12 @@
           "type": "text",
           "content": "Amit kínálunk: teljes remote lehetőség, versenyképes fizetés, modern technológiai stack, és egy csapat ahol a kódminőség nem kompromisszum kérdése."
         }
-      ]
+      ],
+      "seo": {
+        "metaTitle": "Frontend Fejlesztő — Karrier | Works.",
+        "metaDescription": "Modern webes alkalmazásokat fejlesztesz React és TypeScript technológiákkal.",
+        "ogImage": ""
+      }
     },
     {
       "slug": "service-designer",
@@ -1526,7 +1604,12 @@
           "type": "text",
           "content": "Amit kínálunk: stratégiai szintű projektek vezető hazai és nemzetközi ügyfelekkel, szakmai közösség, és a lehetőség, hogy valódi hatást gyakorolj a digitális szolgáltatások világára."
         }
-      ]
+      ],
+      "seo": {
+        "metaTitle": "Service Designer — Karrier | Works.",
+        "metaDescription": "Komplex szolgáltatás-tervezési projekteket vezetsz az ügyfél üzleti céljainak és a felhasználói igényeknek az összehangolásával.",
+        "ogImage": ""
+      }
     }
   ],
   "galleryImages": [],
@@ -1607,7 +1690,12 @@
         "value": "other"
       }
     ],
-    "backgroundImage": "/strapi/uploads/contact_bg_1774518452836_75c2598f4c.png"
+    "backgroundImage": "/strapi/uploads/contact_bg_1774518452836_75c2598f4c.png",
+    "seo": {
+      "metaTitle": "Kapcsolat | Works.",
+      "metaDescription": "Vedd fel velünk a kapcsolatot! Budapesti irodánkban vagy online is elérhetőek vagyunk UX, UI és webfejlesztési projektekhez.",
+      "ogImage": ""
+    }
   },
   "homepage": {
     "hero": {
@@ -1636,6 +1724,11 @@
       "heading": "Van egy ötleted? Beszéljünk róla!",
       "ctaText": "Kapcsolatfelvétel",
       "ctaLink": "/kapcsolat"
+    },
+    "seo": {
+      "metaTitle": "Works. | Digitális Ügynökség",
+      "metaDescription": "Magyar digitális ügynökség — UX kutatás, service design, UI design, akadálymentesítés, AI-alapú tervezés, webfejlesztés.",
+      "ogImage": ""
     }
   },
   "aboutPage": {
@@ -1647,6 +1740,11 @@
     "intro": {
       "heading": "Kik vagyunk?",
       "description": "A Works. egy budapesti digitális ügynökség, amelyet 2018-ban alapítottunk azzal a hittel, hogy a design és a technológia együtt képes valódi hatást elérni. Csapatunk UX kutatókból, UI designerekből, fejlesztőkből és stratégákból áll, akik közösen dolgoznak azon, hogy ügyfeleink digitális termékei ne csak szépek, hanem használhatóak és eredményesek is legyenek."
+    },
+    "seo": {
+      "metaTitle": "Rólunk | Works.",
+      "metaDescription": "Ismerd meg a Works. csapatát — tapasztalt UX kutatók, UI designerek és fejlesztők, akik digitális termékekkel tesznek hatást.",
+      "ogImage": ""
     }
   },
   "careerPage": {
@@ -1688,6 +1786,11 @@
           "image": ""
         }
       ]
+    },
+    "seo": {
+      "metaTitle": "Karrier | Works.",
+      "metaDescription": "Csatlakozz a Works. csapatához! Nyitott pozícióink UX kutatás, UI design, fejlesztés és service design területeken.",
+      "ogImage": ""
     }
   }
 }

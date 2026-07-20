@@ -32,11 +32,6 @@ export default {
       "repeatable": false,
       "component": "homepage.cta-banner"
     },
-    "clientsSection": {
-      "type": "component",
-      "repeatable": false,
-      "component": "homepage.clients-section"
-    },
     "blogSection": {
       "type": "component",
       "repeatable": false,

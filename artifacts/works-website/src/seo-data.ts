@@ -1,12 +1,28 @@
-import { projects } from "./data/projects";
-import { blogPosts } from "./data/blog-posts";
-import { services } from "./data/services";
-import { positions } from "./data/careers";
+import {
+  fallbackProjects,
+  fallbackBlogPosts,
+  fallbackServices,
+  fallbackPositions,
+  fallbackHomepage,
+  fallbackAboutPage,
+  fallbackContactPage,
+  fallbackCareerPage,
+} from "./data/fallback";
+import type { SeoOverride } from "./lib/strapi";
 
 export interface PageMeta {
   title: string;
   description: string;
   ogImage?: string;
+}
+
+function withOverride(base: PageMeta, seo?: SeoOverride | null): PageMeta {
+  if (!seo) return base;
+  return {
+    title: seo.metaTitle?.trim() || base.title,
+    description: seo.metaDescription?.trim() || base.description,
+    ogImage: seo.ogImage || base.ogImage,
+  };
 }
 
 const DEFAULT_TITLE = "Works. | Digitális Ügynökség";
@@ -50,54 +66,73 @@ const staticMeta: Record<string, PageMeta> = {
   },
 };
 
+const pageSeoOverrides: Record<string, SeoOverride | null | undefined> = {
+  "/": fallbackHomepage?.seo,
+  "/rolunk": fallbackAboutPage?.seo,
+  "/kapcsolat": fallbackContactPage?.seo,
+  "/karrier": fallbackCareerPage?.seo,
+};
+
 export function getPageMeta(route: string): PageMeta {
   if (staticMeta[route]) {
-    return staticMeta[route];
+    return withOverride(staticMeta[route], pageSeoOverrides[route]);
   }
 
   const projectMatch = route.match(/^\/projektek\/(.+)$/);
   if (projectMatch) {
-    const project = projects.find((p) => p.slug === projectMatch[1]);
+    const project = fallbackProjects.find((p) => p.slug === projectMatch[1]);
     if (project) {
-      return {
-        title: formatTitle(project.title),
-        description: project.caseStudy.heroSubtitle,
-        ogImage: project.image,
-      };
+      return withOverride(
+        {
+          title: formatTitle(project.title),
+          description: project.caseStudy.heroSubtitle,
+          ogImage: project.image,
+        },
+        project.seo
+      );
     }
   }
 
   const blogMatch = route.match(/^\/blog\/(.+)$/);
   if (blogMatch) {
-    const post = blogPosts.find((p) => p.slug === blogMatch[1]);
+    const post = fallbackBlogPosts.find((p) => p.slug === blogMatch[1]);
     if (post) {
-      return {
-        title: formatTitle(post.title),
-        description: post.excerpt,
-        ogImage: post.image,
-      };
+      return withOverride(
+        {
+          title: formatTitle(post.title),
+          description: post.excerpt,
+          ogImage: post.image,
+        },
+        post.seo
+      );
     }
   }
 
   const serviceMatch = route.match(/^\/szolgaltatasok\/(.+)$/);
   if (serviceMatch) {
-    const service = services.find((s) => s.slug === serviceMatch[1]);
+    const service = fallbackServices.find((s) => s.slug === serviceMatch[1]);
     if (service) {
-      return {
-        title: formatTitle(service.title),
-        description: service.heroDescription,
-      };
+      return withOverride(
+        {
+          title: formatTitle(service.title),
+          description: service.heroDescription,
+        },
+        service.seo
+      );
     }
   }
 
   const careerMatch = route.match(/^\/karrier\/(.+)$/);
   if (careerMatch) {
-    const position = positions.find((p) => p.slug === careerMatch[1]);
+    const position = fallbackPositions.find((p) => p.slug === careerMatch[1]);
     if (position) {
-      return {
-        title: formatTitle(`${position.title} — Karrier`),
-        description: position.excerpt,
-      };
+      return withOverride(
+        {
+          title: formatTitle(`${position.title} — Karrier`),
+          description: position.excerpt,
+        },
+        position.seo
+      );
     }
   }
 

@@ -10,7 +10,6 @@ export interface AboutIntro extends Struct.ComponentSchema {
   attributes: {
     body: Schema.Attribute.RichText;
     heading: Schema.Attribute.String & Schema.Attribute.Required;
-    image: Schema.Attribute.Media<'images'>;
   };
 }
 
@@ -107,18 +106,6 @@ export interface HomepageBlogSection extends Struct.ComponentSchema {
     description: 'Blog szekci\u00F3';
     displayName: 'Blog Section';
     icon: 'file-text';
-  };
-  attributes: {
-    heading: Schema.Attribute.String & Schema.Attribute.Required;
-  };
-}
-
-export interface HomepageClientsSection extends Struct.ComponentSchema {
-  collectionName: 'components_homepage_clients_sections';
-  info: {
-    description: '\u00DCgyfelek szekci\u00F3';
-    displayName: 'Clients Section';
-    icon: 'users';
   };
   attributes: {
     heading: Schema.Attribute.String & Schema.Attribute.Required;
@@ -476,7 +463,6 @@ declare module '@strapi/strapi' {
       'content.image-block': ContentImageBlock;
       'content.text-block': ContentTextBlock;
       'homepage.blog-section': HomepageBlogSection;
-      'homepage.clients-section': HomepageClientsSection;
       'homepage.cta-banner': HomepageCtaBanner;
       'homepage.hero': HomepageHero;
       'homepage.projects-section': HomepageProjectsSection;

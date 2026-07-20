@@ -38,6 +38,27 @@ interface StrapiMedia {
   alternativeText?: string;
 }
 
+interface StrapiSeo {
+  metaTitle: string | null;
+  metaDescription: string | null;
+  ogImage: StrapiMedia | null;
+}
+
+export interface SeoOverride {
+  metaTitle?: string;
+  metaDescription?: string;
+  ogImage?: string;
+}
+
+function mapSeo(seo: StrapiSeo | null | undefined): SeoOverride | null {
+  if (!seo) return null;
+  return {
+    metaTitle: seo.metaTitle || "",
+    metaDescription: seo.metaDescription || "",
+    ogImage: seo.ogImage?.url ? strapiImageUrl(seo.ogImage.url) : "",
+  };
+}
+
 interface StrapiTag {
   id: number;
   documentId: string;
@@ -74,6 +95,7 @@ interface StrapiProject {
   tags: StrapiTag[];
   caseStudy: StrapiCaseStudy | null;
   contentBlocks: StrapiContentBlock[];
+  seo?: StrapiSeo | null;
 }
 
 interface StrapiTeamMember {
@@ -97,6 +119,7 @@ interface StrapiBlogPost {
   tags: StrapiTag[];
   readingTime: string;
   contentBlocks: StrapiContentBlock[];
+  seo?: StrapiSeo | null;
 }
 
 interface StrapiServiceGeneral {
@@ -173,6 +196,7 @@ interface StrapiService {
   faqSection: { intro: StrapiSectionIntro | null; items: StrapiFaqItem[] } | null;
   relatedServicesIntro: StrapiSectionIntro | null;
   relatedServices: { general: (StrapiServiceGeneral & { kicker?: string | null }) | null }[];
+  seo?: StrapiSeo | null;
 }
 
 interface StrapiClient {
@@ -196,6 +220,7 @@ interface StrapiCareerPosition {
   excerpt: string;
   isActive: boolean;
   contentBlocks: StrapiContentBlock[];
+  seo?: StrapiSeo | null;
 }
 
 export interface ContentBlock {
@@ -220,6 +245,7 @@ export interface Project {
     duration: string;
     blocks: ContentBlock[];
   };
+  seo?: SeoOverride | null;
 }
 
 export interface BlogPost {
@@ -232,6 +258,7 @@ export interface BlogPost {
   tags: string[];
   readingTime: string;
   content: ContentBlock[];
+  seo?: SeoOverride | null;
 }
 
 export interface TeamMember {
@@ -305,6 +332,7 @@ export interface Service {
   faqSection: ServiceFaqSection | null;
   relatedServicesIntro: SectionIntro | null;
   relatedServices: RelatedServiceSummary[];
+  seo?: SeoOverride | null;
 }
 
 export interface Client {
@@ -340,6 +368,7 @@ export interface CareerPosition {
   tags: string[];
   excerpt: string;
   content: ContentBlock[];
+  seo?: SeoOverride | null;
 }
 
 const CAREER_LOCATION = "Budapest / Hybrid";
@@ -362,6 +391,7 @@ function mapProject(p: StrapiProject): Project {
       duration: p.caseStudy?.duration || "",
       blocks: mapContentBlocks(p.contentBlocks),
     },
+    seo: mapSeo(p.seo),
   };
 }
 
@@ -376,11 +406,12 @@ function mapBlogPost(p: StrapiBlogPost): BlogPost {
     tags: p.tags?.map((t) => t.name) || [],
     readingTime: p.readingTime || "",
     content: mapContentBlocks(p.contentBlocks),
+    seo: mapSeo(p.seo),
   };
 }
 
 const PROJECT_POPULATE =
-  "populate[0]=image&populate[1]=homepageImage&populate[2]=tags&populate[3]=caseStudy&populate[4]=contentBlocks.image";
+  "populate[0]=image&populate[1]=homepageImage&populate[2]=tags&populate[3]=caseStudy&populate[4]=contentBlocks.image&populate[5]=seo.ogImage";
 
 export async function getProjects(): Promise<Project[]> {
   const res = await fetchApi<StrapiListResponse<StrapiProject>>(
@@ -402,7 +433,7 @@ export function getNextProject(projects: Project[], currentSlug: string): Projec
 }
 
 const BLOG_POPULATE =
-  "populate[0]=image&populate[1]=tags&populate[2]=contentBlocks.image&populate[3]=author";
+  "populate[0]=image&populate[1]=tags&populate[2]=contentBlocks.image&populate[3]=author&populate[4]=seo.ogImage";
 
 export async function getBlogPosts(): Promise<BlogPost[]> {
   const res = await fetchApi<StrapiListResponse<StrapiBlogPost>>(
@@ -445,7 +476,7 @@ export async function getGalleryImages(): Promise<GalleryImage[]> {
 }
 
 const SERVICE_POPULATE =
-  "populate[0]=general&populate[1]=general.icon&populate[2]=general.heroImage&populate[3]=relatedProjects&populate[4]=seo" +
+  "populate[0]=general&populate[1]=general.icon&populate[2]=general.heroImage&populate[3]=relatedProjects&populate[4]=seo.ogImage" +
   "&populate[5]=questionsSection.intro&populate[6]=questionsSection.cards" +
   "&populate[7]=helpSection.intro&populate[8]=helpSection.cards.icon" +
   "&populate[9]=processSection.intro&populate[10]=processSection.steps" +
@@ -539,6 +570,7 @@ function mapService(s: StrapiService): Service {
         description: r.general?.heroDescription || "",
         icon: strapiImageUrl(r.general?.icon?.url),
       })),
+    seo: mapSeo(s.seo),
   };
 }
 
@@ -570,7 +602,7 @@ export async function getClients(): Promise<Client[]> {
 }
 
 
-const CAREER_POPULATE = "populate[0]=tags&populate[1]=contentBlocks&populate[2]=contentBlocks.image";
+const CAREER_POPULATE = "populate[0]=tags&populate[1]=contentBlocks&populate[2]=contentBlocks.image&populate[3]=seo.ogImage";
 
 export async function getCareerPositions(): Promise<CareerPosition[]> {
   const res = await fetchApi<StrapiListResponse<StrapiCareerPosition>>(
@@ -585,6 +617,7 @@ export async function getCareerPositions(): Promise<CareerPosition[]> {
     tags: c.tags?.map((t) => t.name) || [],
     excerpt: c.excerpt || "",
     content: mapContentBlocks(c.contentBlocks),
+    seo: mapSeo(c.seo),
   }));
 }
 
@@ -602,6 +635,7 @@ export async function getCareerPositionBySlug(slug: string): Promise<CareerPosit
         tags: res.data[0].tags?.map((t) => t.name) || [],
         excerpt: res.data[0].excerpt || "",
         content: mapContentBlocks(res.data[0].contentBlocks),
+        seo: mapSeo(res.data[0].seo),
       }
     : null;
 }
@@ -626,6 +660,7 @@ export interface HomepageData {
   projectsSection: { heading: string };
   blogSection: { heading: string };
   ctaBanner: { heading: string; ctaText: string; ctaLink: string };
+  seo?: SeoOverride | null;
 }
 
 export async function getHomepage(): Promise<HomepageData> {
@@ -644,7 +679,8 @@ export async function getHomepage(): Promise<HomepageData> {
     projectsSection: HomepageData["projectsSection"];
     blogSection: HomepageData["blogSection"];
     ctaBanner: HomepageData["ctaBanner"] | null;
-  }>>("/homepage?populate[0]=hero&populate[1]=servicesSection&populate[2]=projectsSection&populate[3]=blogSection&populate[4]=hero.backgroundImage&populate[5]=ctaBanner");
+    seo?: StrapiSeo | null;
+  }>>("/homepage?populate[0]=hero&populate[1]=servicesSection&populate[2]=projectsSection&populate[3]=blogSection&populate[4]=hero.backgroundImage&populate[5]=ctaBanner&populate[6]=seo.ogImage");
   const d = res.data;
   const h = d.hero;
   return {
@@ -668,6 +704,7 @@ export async function getHomepage(): Promise<HomepageData> {
           ctaLink: d.ctaBanner.ctaLink || "",
         }
       : { heading: "", ctaText: "", ctaLink: "" },
+    seo: mapSeo(d.seo),
   };
 }
 
@@ -680,6 +717,7 @@ export interface ContactPageData {
   mapEmbedUrl: string;
   formSubjects: { label: string; value: string }[];
   backgroundImage: string;
+  seo?: SeoOverride | null;
 }
 
 export async function getContactPage(): Promise<ContactPageData> {
@@ -692,7 +730,8 @@ export async function getContactPage(): Promise<ContactPageData> {
     mapEmbedUrl: string;
     formSubjects: { id: number; label: string; value: string }[];
     backgroundImage: StrapiMedia | null;
-  }>>("/contact-page?populate[0]=hero&populate[1]=formSubjects&populate[2]=hero.backgroundImage&populate[3]=backgroundImage");
+    seo?: StrapiSeo | null;
+  }>>("/contact-page?populate[0]=hero&populate[1]=formSubjects&populate[2]=hero.backgroundImage&populate[3]=backgroundImage&populate[4]=seo.ogImage");
   const d = res.data;
   return {
     hero: {
@@ -707,6 +746,7 @@ export async function getContactPage(): Promise<ContactPageData> {
     mapEmbedUrl: d.mapEmbedUrl || "",
     formSubjects: (d.formSubjects || []).map((s) => ({ label: s.label, value: s.value })),
     backgroundImage: strapiImageUrl(d.backgroundImage?.url),
+    seo: mapSeo(d.seo),
   };
 }
 
@@ -772,13 +812,15 @@ export async function getGlobalSettings(): Promise<GlobalSettings> {
 export interface AboutPageData {
   hero: { heading: string; description: string; backgroundImage: string };
   intro: { heading: string; description: string };
+  seo?: SeoOverride | null;
 }
 
 export async function getAboutPage(): Promise<AboutPageData> {
   const res = await fetchApi<StrapiSingleResponse<{
     hero: { heading: string; description: string; backgroundImage: StrapiMedia | null };
     intro: { heading: string; body: string } | null;
-  }>>("/about-page?populate[0]=hero&populate[1]=hero.backgroundImage&populate[2]=intro");
+    seo?: StrapiSeo | null;
+  }>>("/about-page?populate[0]=hero&populate[1]=hero.backgroundImage&populate[2]=intro&populate[3]=seo.ogImage");
   const d = res.data;
   return {
     hero: {
@@ -790,6 +832,7 @@ export async function getAboutPage(): Promise<AboutPageData> {
       heading: d.intro?.heading || "",
       description: d.intro?.body || "",
     },
+    seo: mapSeo(d.seo),
   };
 }
 
@@ -797,6 +840,7 @@ export interface CareerPageData {
   hero: { heading: string; description: string; backgroundImage: string };
   workWithUs: CareerWorkWithUs;
   whyUs: CareerWhyUsSection;
+  seo?: SeoOverride | null;
 }
 
 export async function getCareerPage(): Promise<CareerPageData> {
@@ -807,7 +851,8 @@ export async function getCareerPage(): Promise<CareerPageData> {
       sectionHeading: string;
       items: { title: string; description: string; image: StrapiMedia | null }[];
     } | null;
-  }>>("/career-page?populate[0]=hero&populate[1]=hero.backgroundImage&populate[2]=workWithUs&populate[3]=whyUs&populate[4]=whyUs.items&populate[5]=whyUs.items.image");
+    seo?: StrapiSeo | null;
+  }>>("/career-page?populate[0]=hero&populate[1]=hero.backgroundImage&populate[2]=workWithUs&populate[3]=whyUs&populate[4]=whyUs.items&populate[5]=whyUs.items.image&populate[6]=seo.ogImage");
   const d = res.data;
   return {
     hero: {
@@ -827,6 +872,7 @@ export async function getCareerPage(): Promise<CareerPageData> {
         image: strapiImageUrl(item.image?.url),
       })),
     },
+    seo: mapSeo(d.seo),
   };
 }
 

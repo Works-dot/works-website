@@ -13,11 +13,6 @@ export default {
     },
     "body": {
       "type": "richtext"
-    },
-    "image": {
-      "type": "media",
-      "multiple": false,
-      "allowedTypes": ["images"]
     }
   }
 };

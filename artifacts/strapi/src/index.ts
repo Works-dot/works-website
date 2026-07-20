@@ -109,10 +109,8 @@ const SERVICE_EDIT_ORDER = [
 const singleTypeUids = [
   "api::homepage.homepage",
   "api::about-page.about-page",
-  "api::blog-page.blog-page",
   "api::career-page.career-page",
   "api::contact-page.contact-page",
-  "api::projects-page.projects-page",
   "api::global-setting.global-setting",
 ];
 
@@ -133,7 +131,6 @@ const componentUids = [
   "content.image-block",
   "content.text-block",
   "homepage.blog-section",
-  "homepage.clients-section",
   "homepage.cta-banner",
   "homepage.hero",
   "homepage.projects-section",
@@ -1124,6 +1121,52 @@ async function dropRemovedServiceFields(strapi: any) {
   }
 }
 
+async function dropUnusedAdminFields(strapi: any) {
+  const knex = strapi.db.connection;
+  const store = strapi.store({ type: "plugin", name: "migrations" });
+  const done = await store.get({ key: "unused_admin_fields_drop_v1" });
+  if (done) {
+    strapi.log.info("Unused admin fields drop: already completed (flag set) — skipping");
+    return;
+  }
+
+  try {
+    const clientsRows = await knex("strapi.homepages_cmps")
+      .where("component_type", "homepage.clients-section")
+      .del();
+    strapi.log.info(`Unused admin fields drop: removed ${clientsRows} clients-section link row(s)`);
+
+    const droppedTables = [
+      "components_homepage_clients_sections",
+      "blog_pages_cmps",
+      "blog_pages",
+      "projects_pages_cmps",
+      "projects_pages",
+    ];
+    for (const table of droppedTables) {
+      await knex.raw(`DROP TABLE IF EXISTS strapi."${table}" CASCADE`);
+    }
+    strapi.log.info("Unused admin fields drop: removed blog-page/projects-page/clients-section tables");
+
+    await knex.raw(`ALTER TABLE strapi.about_pages DROP COLUMN IF EXISTS team_section_heading`);
+    await knex.raw(`ALTER TABLE strapi.about_pages DROP COLUMN IF EXISTS gallery_section_heading`);
+    await knex.raw(`ALTER TABLE strapi.clients DROP COLUMN IF EXISTS website`);
+    await knex.raw(`ALTER TABLE strapi.global_settings DROP COLUMN IF EXISTS default_meta_title`);
+    await knex.raw(`ALTER TABLE strapi.global_settings DROP COLUMN IF EXISTS default_meta_description`);
+    strapi.log.info("Unused admin fields drop: unused columns dropped");
+
+    await knex("strapi.files_related_mph")
+      .where({ related_type: "about.intro", field: "image" })
+      .del();
+    strapi.log.info("Unused admin fields drop: about intro image links removed");
+
+    await store.set({ key: "unused_admin_fields_drop_v1", value: true });
+    strapi.log.info("Unused admin fields drop: completed successfully");
+  } catch (err: any) {
+    strapi.log.error(`Unused admin fields drop: failed — will retry on next restart: ${err.message}`);
+  }
+}
+
 export default {
   register({ strapi }) {
     registerWebsiteRebuildAdminRoutes(strapi);
@@ -1142,6 +1185,7 @@ export default {
           .then(() => backfillServiceRestructure(strapi))
           .then(() => backfillFeaturedProjects(strapi))
           .then(() => dropRemovedServiceFields(strapi))
+          .then(() => dropUnusedAdminFields(strapi))
           .then(() => strapi.log.info("Bootstrap tasks completed successfully"))
           .catch((err: any) => {
             strapi.log.error(`Bootstrap task failed: ${err.message}`);
@@ -1155,6 +1199,7 @@ export default {
       await backfillServiceRestructure(strapi);
       await backfillFeaturedProjects(strapi);
       await dropRemovedServiceFields(strapi);
+      await dropUnusedAdminFields(strapi);
       strapi.log.info("Bootstrap tasks completed successfully");
       markWebsiteAutoRebuildReady();
     }

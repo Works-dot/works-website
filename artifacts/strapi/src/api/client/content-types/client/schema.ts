@@ -24,9 +24,6 @@ export default {
       "multiple": false,
       "allowedTypes": ["images"]
     },
-    "website": {
-      "type": "string"
-    },
     "order": {
       "type": "integer",
       "default": 0

@@ -31,12 +31,6 @@ export default {
       "multiple": false,
       "allowedTypes": ["images"]
     },
-    "defaultMetaTitle": {
-      "type": "string"
-    },
-    "defaultMetaDescription": {
-      "type": "text"
-    },
     "socialLinks": {
       "type": "component",
       "repeatable": true,

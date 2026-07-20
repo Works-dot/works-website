@@ -27,12 +27,6 @@ export default {
       "repeatable": false,
       "component": "about.intro"
     },
-    "teamSectionHeading": {
-      "type": "string"
-    },
-    "gallerySectionHeading": {
-      "type": "string"
-    },
     "galleryImages": {
       "type": "media",
       "multiple": true,

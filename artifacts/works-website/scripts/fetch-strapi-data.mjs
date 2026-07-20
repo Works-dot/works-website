@@ -17,6 +17,15 @@ async function fetchApi(endpoint) {
   return res.json();
 }
 
+function mapSeo(seo) {
+  if (!seo) return null;
+  return {
+    metaTitle: seo.metaTitle || "",
+    metaDescription: seo.metaDescription || "",
+    ogImage: seo.ogImage?.url ? strapiImageUrl(seo.ogImage.url) : "",
+  };
+}
+
 function mapProject(p) {
   return {
     slug: p.slug,
@@ -33,6 +42,7 @@ function mapProject(p) {
       duration: p.caseStudy?.duration || "",
       blocks: mapContentBlocks(p.contentBlocks),
     },
+    seo: mapSeo(p.seo),
   };
 }
 
@@ -47,6 +57,7 @@ function mapBlogPost(p) {
     tags: p.tags?.map((t) => t.name) || [],
     readingTime: p.readingTime || "",
     content: mapContentBlocks(p.contentBlocks),
+    seo: mapSeo(p.seo),
   };
 }
 
@@ -136,6 +147,7 @@ function mapService(s) {
         description: r.general?.heroDescription || "",
         icon: strapiImageUrl(r.general?.icon?.url),
       })),
+    seo: mapSeo(s.seo),
   };
 }
 
@@ -143,7 +155,7 @@ async function fetchAll() {
   const cache = {};
 
   const PROJECT_POPULATE =
-    "populate[0]=image&populate[1]=homepageImage&populate[2]=tags&populate[3]=caseStudy&populate[4]=contentBlocks.image";
+    "populate[0]=image&populate[1]=homepageImage&populate[2]=tags&populate[3]=caseStudy&populate[4]=contentBlocks.image&populate[5]=seo.ogImage";
   const projectsRes = await fetchApi(
     `/projects?${PROJECT_POPULATE}&pagination[pageSize]=100&sort=createdAt:asc`
   );
@@ -151,7 +163,7 @@ async function fetchAll() {
   console.log(`  ✓ ${cache.projects.length} project(s)`);
 
   const BLOG_POPULATE =
-    "populate[0]=image&populate[1]=tags&populate[2]=contentBlocks.image&populate[3]=author";
+    "populate[0]=image&populate[1]=tags&populate[2]=contentBlocks.image&populate[3]=author&populate[4]=seo.ogImage";
   const blogRes = await fetchApi(
     `/blog-posts?${BLOG_POPULATE}&pagination[pageSize]=100&sort=date:desc`
   );
@@ -159,7 +171,7 @@ async function fetchAll() {
   console.log(`  ✓ ${cache.blogPosts.length} blog post(s)`);
 
   const SERVICE_POPULATE =
-    "populate[0]=general&populate[1]=general.icon&populate[2]=general.heroImage&populate[3]=relatedProjects&populate[4]=seo" +
+    "populate[0]=general&populate[1]=general.icon&populate[2]=general.heroImage&populate[3]=relatedProjects&populate[4]=seo.ogImage" +
     "&populate[5]=questionsSection.intro&populate[6]=questionsSection.cards" +
     "&populate[7]=helpSection.intro&populate[8]=helpSection.cards.icon" +
     "&populate[9]=processSection.intro&populate[10]=processSection.steps" +
@@ -194,7 +206,7 @@ async function fetchAll() {
   }));
   console.log(`  ✓ ${cache.clients.length} client(s)`);
 
-  const CAREER_POPULATE = "populate[0]=tags&populate[1]=contentBlocks&populate[2]=contentBlocks.image";
+  const CAREER_POPULATE = "populate[0]=tags&populate[1]=contentBlocks&populate[2]=contentBlocks.image&populate[3]=seo.ogImage";
   const careersRes = await fetchApi(
     `/career-positions?${CAREER_POPULATE}&pagination[pageSize]=100&filters[isActive][$eq]=true`
   );
@@ -207,6 +219,7 @@ async function fetchAll() {
     tags: c.tags?.map((t) => t.name) || [],
     excerpt: c.excerpt || "",
     content: mapContentBlocks(c.contentBlocks),
+    seo: mapSeo(c.seo),
   }));
   console.log(`  ✓ ${cache.positions.length} career position(s)`);
 
@@ -254,7 +267,7 @@ async function fetchAll() {
   }
 
   try {
-    const contactRes = await fetchApi("/contact-page?populate[0]=hero&populate[1]=formSubjects&populate[2]=hero.backgroundImage&populate[3]=backgroundImage");
+    const contactRes = await fetchApi("/contact-page?populate[0]=hero&populate[1]=formSubjects&populate[2]=hero.backgroundImage&populate[3]=backgroundImage&populate[4]=seo.ogImage");
     const cd = contactRes.data;
     cache.contactPage = {
       hero: {
@@ -269,6 +282,7 @@ async function fetchAll() {
       mapEmbedUrl: cd.mapEmbedUrl || "",
       formSubjects: (cd.formSubjects || []).map((s) => ({ label: s.label, value: s.value })),
       backgroundImage: strapiImageUrl(cd.backgroundImage?.url),
+      seo: mapSeo(cd.seo),
     };
     console.log("  ✓ contact page");
   } catch {
@@ -278,7 +292,7 @@ async function fetchAll() {
 
   try {
     const homepageRes = await fetchApi(
-      "/homepage?populate[0]=hero&populate[1]=servicesSection&populate[2]=projectsSection&populate[3]=blogSection&populate[4]=hero.backgroundImage&populate[5]=ctaBanner"
+      "/homepage?populate[0]=hero&populate[1]=servicesSection&populate[2]=projectsSection&populate[3]=blogSection&populate[4]=hero.backgroundImage&populate[5]=ctaBanner&populate[6]=seo.ogImage"
     );
     const hd = homepageRes.data;
     const hh = hd.hero;
@@ -303,6 +317,7 @@ async function fetchAll() {
             ctaLink: hd.ctaBanner.ctaLink || "",
           }
         : null,
+      seo: mapSeo(hd.seo),
     };
     console.log("  ✓ homepage");
   } catch {
@@ -311,7 +326,7 @@ async function fetchAll() {
   }
 
   try {
-    const aboutRes = await fetchApi("/about-page?populate[0]=hero&populate[1]=hero.backgroundImage&populate[2]=intro");
+    const aboutRes = await fetchApi("/about-page?populate[0]=hero&populate[1]=hero.backgroundImage&populate[2]=intro&populate[3]=seo.ogImage");
     cache.aboutPage = {
       hero: {
         heading: aboutRes.data?.hero?.heading || "",
@@ -322,6 +337,7 @@ async function fetchAll() {
         heading: aboutRes.data?.intro?.heading || "",
         description: aboutRes.data?.intro?.body || "",
       },
+      seo: mapSeo(aboutRes.data?.seo),
     };
     console.log("  ✓ about page");
   } catch {
@@ -330,7 +346,7 @@ async function fetchAll() {
   }
 
   try {
-    const careerRes = await fetchApi("/career-page?populate[0]=hero&populate[1]=hero.backgroundImage&populate[2]=workWithUs&populate[3]=whyUs&populate[4]=whyUs.items&populate[5]=whyUs.items.image");
+    const careerRes = await fetchApi("/career-page?populate[0]=hero&populate[1]=hero.backgroundImage&populate[2]=workWithUs&populate[3]=whyUs&populate[4]=whyUs.items&populate[5]=whyUs.items.image&populate[6]=seo.ogImage");
     const cd2 = careerRes.data;
     cache.careerPage = {
       hero: {
@@ -350,6 +366,7 @@ async function fetchAll() {
           image: strapiImageUrl(item.image?.url),
         })),
       },
+      seo: mapSeo(cd2?.seo),
     };
     console.log("  ✓ career page");
   } catch {

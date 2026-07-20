@@ -734,8 +734,6 @@ async function seed() {
 
   await createSingle('global-setting', {
     siteName: 'Works.',
-    defaultMetaTitle: 'Works. | Digitális Ügynökség',
-    defaultMetaDescription: 'Magyar digitális ügynökség — UX kutatás, service design, UI design, akadálymentesítés, AI-alapú tervezés, webfejlesztés.',
     contactEmail: 'hello@works.hu',
     contactPhone: '+36 1 234 5678',
     address: '1054 Budapest, Szabadság tér 7.',
@@ -775,7 +773,6 @@ async function seed() {
     servicesSection: { heading: 'Szolgáltatásaink' },
     projectsSection: { heading: 'Kiemelt munkáink' },
     ctaBanner: { heading: 'Van egy ötleted? Beszéljünk róla!', ctaText: 'Kapcsolatfelvétel', ctaLink: '/kapcsolat' },
-    clientsSection: { heading: 'Ügyfeleink' },
     blogSection: { heading: 'Friss a blogról' },
   });
   console.log('  Homepage done.');
@@ -787,8 +784,6 @@ async function seed() {
       heading: 'Kik vagyunk?',
       body: 'A Works. egy budapesti digitális ügynökség, amelyet 2018-ban alapítottunk azzal a hittel, hogy a design és a technológia együtt képes valódi hatást elérni. Csapatunk UX kutatókból, UI designerekből, fejlesztőkből és stratégákból áll, akik közösen dolgoznak azon, hogy ügyfeleink digitális termékei ne csak szépek, hanem használhatóak és eredményesek is legyenek.',
     },
-    teamSectionHeading: 'Csapatunk',
-    gallerySectionHeading: 'Betekintés a mindennapjainkba',
   });
   console.log('  About page done.');
 
@@ -821,18 +816,6 @@ async function seed() {
     whyUs: { sectionHeading: 'Miért jó nálunk dolgozni?', items: whyUsItems },
   });
   console.log('  Career page done.');
-
-  await createSingle('blog-page', {
-    seo: { metaTitle: 'Blog | Works.', metaDescription: 'UX, UI design és digitális stratégia cikkek a Works. csapatától — szakmai inspiráció designereknek és termékcsapatoknak.' },
-    hero: { heading: 'Blog', description: 'Szakmai cikkek, esettanulmányok és gondolatok a digitális világ legfrissebb trendjeivel.' },
-  });
-  console.log('  Blog page done.');
-
-  await createSingle('projects-page', {
-    seo: { metaTitle: 'Projektjeink | Works.', metaDescription: 'Válogatás a Works. referencia munkáiból — UX kutatás, UI design, akadálymentesítés és webfejlesztési projektek.' },
-    hero: { heading: 'Projektjeink', description: 'Büszkék vagyunk minden projektünkre. Íme néhány, amelyben a legnagyobb hatást értük el.' },
-  });
-  console.log('  Projects page done.');
 
   console.log('\nLinking images to single types and media fields...');
 
