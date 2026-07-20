@@ -1125,12 +1125,32 @@ async function backfillServiceRestructure(strapi: any) {
   }
 
   const postCheck = await strapi.documents("api::service.service").findMany({
-    populate: ["general", "questionsSection", "helpSection", "processSection", "deliverablesSection", "faqSection"],
+    populate: [
+      "general",
+      "questionsSection",
+      "helpSection",
+      "processSection",
+      "deliverablesSection",
+      "projectExamplesIntro",
+      "faqSection",
+      "relatedServicesIntro",
+      "relatedServices",
+      "relatedProjects",
+    ],
   });
   const stillMissing = postCheck.filter(
     (s: any) =>
       SERVICE_RESTRUCTURE_SEED[s.general?.slug || ""] &&
-      (!s.questionsSection || !s.helpSection || !s.processSection || !s.deliverablesSection || !s.faqSection),
+      (!s.general?.kicker ||
+        !s.questionsSection ||
+        !s.helpSection ||
+        !s.processSection ||
+        !s.deliverablesSection ||
+        !s.projectExamplesIntro ||
+        !s.faqSection ||
+        !s.relatedServicesIntro ||
+        (s.relatedServices || []).length === 0 ||
+        (s.relatedProjects || []).length === 0),
   );
 
   if (incomplete > 0 || stillMissing.length > 0) {
