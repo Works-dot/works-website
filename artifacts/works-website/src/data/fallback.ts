@@ -321,5 +321,6 @@ export const fallbackCareerPage: CareerPageData = (() => {
     whyUs: cached.whyUs?.items?.length
       ? cached.whyUs as CareerPageData["whyUs"]
       : hardcodedCareerPage.whyUs,
+    seo: cached.seo ?? null,
   };
 })();
