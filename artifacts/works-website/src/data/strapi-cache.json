@@ -553,89 +553,8 @@
       "subtitle": "Felhasználók megértése, adatalappal",
       "kicker": "UX kutatás",
       "heroDescription": "Feltárjuk a felhasználói igényeket, viselkedési mintákat és fájdalompontokat, hogy a termékfejlesztés valós adatokon alapuljon — ne feltételezéseken.",
-      "valueQuestion": "Tudod pontosan, mit akarnak a felhasználóid? Vagy csak azt, amit gondolsz, hogy akarnak?",
-      "valueAnswer": "A legjobb digitális termékek mögött mindig mély felhasználói megértés áll. Mi segítünk eljutni oda.",
       "heroImage": "",
       "icon": "/strapi/uploads/search_f7153fb932.svg",
-      "activities": [
-        {
-          "title": "Felhasználói interjúk",
-          "description": "Strukturált interjúk készítése célcsoportokkal, hogy megértsük a valós motivációkat és akadályokat.",
-          "icon": "/strapi/uploads/target_5e3cc03ea2.svg"
-        },
-        {
-          "title": "Használhatósági tesztelés",
-          "description": "Meglévő vagy tervezett felületek tesztelése valós felhasználókkal, hogy feltárjuk a problémás pontokat.",
-          "icon": "/strapi/uploads/zap_b1d6bfdfda.svg"
-        },
-        {
-          "title": "Perszóna készítés",
-          "description": "Adatokra épülő felhasználói perszónák létrehozása, amelyek a teljes csapat számára használhatók.",
-          "icon": "/strapi/uploads/users_7f703f05a6.svg"
-        },
-        {
-          "title": "Versenytárs elemzés",
-          "description": "A piaci környezet és a versenytársak digitális megoldásainak áttekintése.",
-          "icon": "/strapi/uploads/search_c258190a69.svg"
-        },
-        {
-          "title": "Felhasználói út térképezés",
-          "description": "User journey map-ek készítése, amelyek vizualizálják a felhasználói élmény egészét.",
-          "icon": "/strapi/uploads/bar_chart_3_55704ad420.svg"
-        },
-        {
-          "title": "Adatelemzés",
-          "description": "Meglévő analitikai adatok értelmezése és összevetése a kvalitatív eredményekkel.",
-          "icon": "/strapi/uploads/file_check_af75094b92.svg"
-        }
-      ],
-      "benefits": [
-        {
-          "title": "Kisebb fejlesztési kockázat",
-          "description": "A kutatás csökkenti annak esélyét, hogy olyan funkciókat fejlesszünk, amelyeket senki sem használ.",
-          "icon": "/strapi/uploads/shield_99ea3c55de.svg"
-        },
-        {
-          "title": "Gyorsabb piacra kerülés",
-          "description": "A célzott fejlesztés kevésbé pazarolja az erőforrásokat és gyorsabban jut el az értékes megoldásig.",
-          "icon": "/strapi/uploads/rocket_bdac62a8cd.svg"
-        },
-        {
-          "title": "Magasabb felhasználói elégedettség",
-          "description": "Az adatokra építő tervezés eredményeképpen a felhasználók elégedettebbek lesznek a végtermékkel.",
-          "icon": "/strapi/uploads/heart_5fff84213c.svg"
-        }
-      ],
-      "tools": [
-        {
-          "name": "Hotjar"
-        },
-        {
-          "name": "Google Analytics"
-        },
-        {
-          "name": "Maze"
-        },
-        {
-          "name": "Lookback"
-        },
-        {
-          "name": "Miro"
-        },
-        {
-          "name": "Optimal Workshop"
-        },
-        {
-          "name": "UserTesting"
-        },
-        {
-          "name": "Dovetail"
-        },
-        {
-          "name": "FigJam"
-        }
-      ],
-      "howWeWork": "<h3>01. Megismerés</h3>\n<p>Megismerjük az üzleti célokat, a meglévő adatokat és a kutatás céljait. Közösen meghatározzuk a kutatási kérdéseket.</p>\n\n<h3>02. Kutatástervezés</h3>\n<p>Kiválasztjuk a megfelelő módszertant, elkészítjük a kutatási tervet és a toborzási kritériumokat.</p>\n\n<h3>03. Terepmunka</h3>\n<p>Elvégezzük az interjúkat, teszteket és megfigyeléseket a meghatározott módszertan szerint.</p>\n\n<h3>04. Elemzés és szintézis</h3>\n<p>Az összegyűjtött adatokat elemezzük, mintákat azonosítunk és akcióképes insightokat fogalmazunk meg.</p>\n\n<h3>05. Átadás és javaslatok</h3>\n<p>Prezentáljuk az eredményeket és konkrét, prioritizált javaslatokkal segítjük a továbblépést.</p>",
       "relatedProjectSlugs": [
         "banki-applikacio",
         "logisztikai-szoftver"
@@ -872,86 +791,8 @@
       "subtitle": "Felületek, amelyek működnek és hatnak",
       "kicker": "UI Design",
       "heroDescription": "Olyan felhasználói felületeket tervezünk, amelyek nem csak szépek, hanem érthetőek, használhatók és üzleti eredményeket hoznak.",
-      "valueQuestion": "Szükséged van egy szakértőre, aki érti az üzleted céljait és a felhasználók elvárásait is?",
-      "valueAnswer": "Megértjük a felhasználóid elvárásait, szokásait és céljait. Erre építjük a felületeket.",
       "heroImage": "",
       "icon": "/strapi/uploads/monitor_147cb28f4e.svg",
-      "activities": [
-        {
-          "title": "Vizuális tervezés",
-          "description": "Pixel-pontos UI tervek készítése, amelyek tükrözik a márka identitását és a felhasználói elvárásokat.",
-          "icon": "/strapi/uploads/palette_58dd069c14.svg"
-        },
-        {
-          "title": "Design rendszer építés",
-          "description": "Skálázható, konzisztens komponenskönyvtárak létrehozása, amelyek gyorsítják a fejlesztést.",
-          "icon": "/strapi/uploads/book_open_5b932cbc1f.svg"
-        },
-        {
-          "title": "Prototípus készítés",
-          "description": "Interaktív prototípusok, amelyekkel már a fejlesztés előtt tesztelhető a felhasználói élmény.",
-          "icon": "/strapi/uploads/monitor_1c73ee9576.svg"
-        },
-        {
-          "title": "Reszponzív design",
-          "description": "Minden képernyőméretre optimalizált felületek, mobilon és desktopon egyaránt.",
-          "icon": "/strapi/uploads/eye_cab7196f1e.svg"
-        },
-        {
-          "title": "Motion design",
-          "description": "Célzott mikro-animációk és átmenetek, amelyek javítják a felhasználói élményt.",
-          "icon": "/strapi/uploads/zap_b1d6bfdfda.svg"
-        },
-        {
-          "title": "Fejlesztői átadás",
-          "description": "Részletes specifikáció és asset-készítés a zökkenőmentes implementációért.",
-          "icon": "/strapi/uploads/file_check_af75094b92.svg"
-        }
-      ],
-      "benefits": [
-        {
-          "title": "Erősebb márkaélmény",
-          "description": "A konzisztens, átgondolt vizuális rendszer erősíti a márkaészlelést és a bizalmat.",
-          "icon": "/strapi/uploads/shield_99ea3c55de.svg"
-        },
-        {
-          "title": "Magasabb konverzió",
-          "description": "A jól megtervezett felhasználói útvonalak több látogatót alakítanak ügyféllé.",
-          "icon": "/strapi/uploads/rocket_bdac62a8cd.svg"
-        },
-        {
-          "title": "Hatékonyabb fejlesztés",
-          "description": "A design rendszer csökkenti a fejlesztési időt és a kommunikációs súrlódásokat.",
-          "icon": "/strapi/uploads/heart_5fff84213c.svg"
-        }
-      ],
-      "tools": [
-        {
-          "name": "Figma"
-        },
-        {
-          "name": "Adobe Creative Suite"
-        },
-        {
-          "name": "Framer"
-        },
-        {
-          "name": "Principle"
-        },
-        {
-          "name": "Storybook"
-        },
-        {
-          "name": "Zeplin"
-        },
-        {
-          "name": "Abstract"
-        },
-        {
-          "name": "InVision"
-        }
-      ],
-      "howWeWork": "<h3>01. Vizuális irány</h3>\n<p>Moodboard-ok és stílus-explorációk készítése, amelyek segítenek megtalálni a megfelelő vizuális hangot.</p>\n\n<h3>02. Wireframe és struktúra</h3>\n<p>Az oldal struktúrájának és információs architektúrájának kialakítása alacsony-fidelitású tervekkel.</p>\n\n<h3>03. UI tervezés</h3>\n<p>A végleges, magas fidelitású felületi tervek elkészítése minden breakpointra.</p>\n\n<h3>04. Prototípus és teszt</h3>\n<p>Kattintható prototípus készítése és tesztelése felhasználókkal a végső finomhangolás előtt.</p>\n\n<h3>05. Design rendszer és átadás</h3>\n<p>A végleges design rendszer dokumentálása és átadása a fejlesztő csapatnak.</p>",
       "relatedProjectSlugs": [
         "banki-applikacio",
         "logisztikai-szoftver"
@@ -1184,89 +1025,8 @@
       "subtitle": "Digitális termékek mindenki számára",
       "kicker": "Akadálymentesítés",
       "heroDescription": "Segítünk, hogy digitális termékeid mindenki számára elérhetőek és használhatóak legyenek — a jogszabályi megfeleléstől a valódi inkluzivitásig.",
-      "valueQuestion": "A felhasználóid jelentős része akadályokba ütközik a terméked használata során — tudsz róla?",
-      "valueAnswer": "Az akadálymentesítés nem csak kötelezettség. Jobb terméket jelent mindenkinek.",
       "heroImage": "",
       "icon": "/strapi/uploads/eye_3615829ec8.svg",
-      "activities": [
-        {
-          "title": "Akadálymentesítési audit",
-          "description": "Meglévő weboldalak és alkalmazások átfogó WCAG 2.1 szabálynak megfelelő értékelése.",
-          "icon": "/strapi/uploads/target_5e3cc03ea2.svg"
-        },
-        {
-          "title": "Javítási terv készítés",
-          "description": "Prioritizált, lépésről lépésre követhető javítási terv összeállítása a feltárt problémák alapján.",
-          "icon": "/strapi/uploads/file_check_af75094b92.svg"
-        },
-        {
-          "title": "Asszisztív technológiás tesztelés",
-          "description": "Tesztelés képernyőolvasókkal, billentyűzetes navigációval és egyéb segédeszközökkel.",
-          "icon": "/strapi/uploads/monitor_1c73ee9576.svg"
-        },
-        {
-          "title": "Akadálymentes design review",
-          "description": "Design fázisban végzett ellenőrzés, mielőtt a fejlesztés megkezdődne.",
-          "icon": "/strapi/uploads/eye_cab7196f1e.svg"
-        },
-        {
-          "title": "Csapat képzés",
-          "description": "Fejlesztők, tervezők és tartalomkészítők képzése az akadálymentes gyakorlatokról.",
-          "icon": "/strapi/uploads/users_7f703f05a6.svg"
-        },
-        {
-          "title": "Folyamatos monitoring",
-          "description": "Rendszeres ellenőrzés és jelentéskészítés, hogy a megfelelés hosszú távon is megmaradjon.",
-          "icon": "/strapi/uploads/bar_chart_3_55704ad420.svg"
-        }
-      ],
-      "benefits": [
-        {
-          "title": "Jogszabályi megfelelés",
-          "description": "Az EU Akadálymentesítési irányelv és a WCAG 2.1 szabványoknak való megfelelés biztosítása.",
-          "icon": "/strapi/uploads/shield_99ea3c55de.svg"
-        },
-        {
-          "title": "Szélesebb elérhetőség",
-          "description": "A populáció mintegy 15%-a él valamilyen fogyatékossággal — az akadálymentes termék őket is eléri.",
-          "icon": "/strapi/uploads/rocket_bdac62a8cd.svg"
-        },
-        {
-          "title": "Jobb felhasználói élmény mindenkinek",
-          "description": "Az akadálymentesítés javítja a használhatóságot minden felhasználó számára, nem csak a fogyatékossággal élőkét.",
-          "icon": "/strapi/uploads/heart_5fff84213c.svg"
-        }
-      ],
-      "tools": [
-        {
-          "name": "axe DevTools"
-        },
-        {
-          "name": "WAVE"
-        },
-        {
-          "name": "Lighthouse"
-        },
-        {
-          "name": "NVDA"
-        },
-        {
-          "name": "VoiceOver"
-        },
-        {
-          "name": "JAWS"
-        },
-        {
-          "name": "Pa11y"
-        },
-        {
-          "name": "Contrast Checker"
-        },
-        {
-          "name": "Accessibility Insights"
-        }
-      ],
-      "howWeWork": "<h3>01. Helyzetértékelés</h3>\n<p>A jelenlegi állapot felmérése automatizált és manuális eszközökkel, WCAG 2.1 szabvány szerint.</p>\n\n<h3>02. Részletes audit</h3>\n<p>Oldalról oldalra haladó, komponensszintű vizsgálat dokumentált eredményekkel.</p>\n\n<h3>03. Javítási ütemterv</h3>\n<p>Prioritizált feladatlista a kritikus, közepes és alacsony súlyosságú problémákra bontva.</p>\n\n<h3>04. Implementációs támogatás</h3>\n<p>A fejlesztő csapat támogatása a javítások során, kód review-kkal és konzultációval.</p>\n\n<h3>05. Végső validáció</h3>\n<p>A javítások utáni újratesztelés és a megfelelési nyilatkozat elkészítése.</p>",
       "relatedProjectSlugs": [
         "e-kereskedelmi-akadalymentesites"
       ],
