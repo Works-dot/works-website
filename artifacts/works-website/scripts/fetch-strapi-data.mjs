@@ -209,7 +209,7 @@ async function fetchAll() {
 
   try {
     const homepageRes = await fetchApi(
-      "/homepage?populate[0]=hero&populate[1]=servicesSection&populate[2]=projectsSection&populate[3]=blogSection&populate[4]=hero.backgroundImage"
+      "/homepage?populate[0]=hero&populate[1]=servicesSection&populate[2]=projectsSection&populate[3]=blogSection&populate[4]=hero.backgroundImage&populate[5]=ctaBanner"
     );
     const hd = homepageRes.data;
     const hh = hd.hero;
@@ -227,6 +227,13 @@ async function fetchAll() {
       servicesSection: hd.servicesSection || null,
       projectsSection: hd.projectsSection || null,
       blogSection: hd.blogSection || null,
+      ctaBanner: hd.ctaBanner
+        ? {
+            heading: hd.ctaBanner.heading || "",
+            ctaText: hd.ctaBanner.ctaText || "",
+            ctaLink: hd.ctaBanner.ctaLink || "",
+          }
+        : null,
     };
     console.log("  ✓ homepage");
   } catch {

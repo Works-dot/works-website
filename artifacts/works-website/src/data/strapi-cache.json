@@ -9,8 +9,8 @@
         "Konverziós stratégia"
       ],
       "description": "Teljeskörű felhasználói kutatás és felülettervezés egy vezető hazai bank számára. A projekt során az onboarding folyamatot egyszerűsítettük, amivel 40%-kal növeltük a sikeres regisztrációk számát az első hónapban.",
-      "image": "/strapi/uploads/project_banking_mockup_c7db1aeb13.png",
-      "homepageImage": "/strapi/uploads/project_banking_clean_e2a8698866.png",
+      "image": "/strapi/uploads/project_banking_mockup_ed94acc41b.png",
+      "homepageImage": "/strapi/uploads/project_banking_clean_9bca314d3f.png",
       "featured": true,
       "caseStudy": {
         "heroSubtitle": "Hogyan növeltük 40%-kal a sikeres regisztrációkat egy vezető hazai bank mobil applikációjában.",
@@ -28,7 +28,7 @@
           },
           {
             "type": "image",
-            "content": "/strapi/uploads/project_banking_mockup_c7db1aeb13.png",
+            "content": "/strapi/uploads/project_banking_mockup_ed94acc41b.png",
             "caption": "Banki applikáció újratervezése a jobb konverzióért — projekt képernyőkép"
           },
           {
@@ -51,8 +51,8 @@
         "User Research"
       ],
       "description": "Belső használatú vállalatirányítási rendszer modernizálása. A munkatársak napi folyamatait feltérképezve egy olyan UI-t alkottunk, ami napi átlagosan 2 órát takarít meg felhasználónként.",
-      "image": "/strapi/uploads/project_logistics_mockup_9d5fc83022.png",
-      "homepageImage": "/strapi/uploads/project_logistics_clean_e2c9eb522d.png",
+      "image": "/strapi/uploads/project_logistics_mockup_0425102430.png",
+      "homepageImage": "/strapi/uploads/project_logistics_clean_0ae7f0d86a.png",
       "featured": false,
       "caseStudy": {
         "heroSubtitle": "Egy vállalatirányítási rendszer modernizálása, ami napi 2 órát takarít meg felhasználónként.",
@@ -70,7 +70,7 @@
           },
           {
             "type": "image",
-            "content": "/strapi/uploads/project_logistics_mockup_9d5fc83022.png",
+            "content": "/strapi/uploads/project_logistics_mockup_0425102430.png",
             "caption": "Komplex logisztikai szoftver ergonómia — projekt képernyőkép"
           },
           {
@@ -93,8 +93,8 @@
         "UX Elemzés"
       ],
       "description": "Egy nemzetközi webáruház teljes átvilágítása és javítása WCAG 2.1 AA szintnek megfelelően. A látássérült és mozgásukban korlátozott felhasználók számára is zökkenőmentessé tettük a vásárlást.",
-      "image": "/strapi/uploads/project_accessibility_mockup_1a6c4f7150.png",
-      "homepageImage": "/strapi/uploads/project_accessibility_clean_b20bb53e96.png",
+      "image": "/strapi/uploads/project_accessibility_mockup_c51aa80b06.png",
+      "homepageImage": "/strapi/uploads/project_accessibility_clean_b9c4ae55b2.png",
       "featured": false,
       "caseStudy": {
         "heroSubtitle": "Teljes WCAG 2.1 AA megfelelés elérése egy nemzetközi webáruház számára.",
@@ -112,7 +112,7 @@
           },
           {
             "type": "image",
-            "content": "/strapi/uploads/project_accessibility_mockup_1a6c4f7150.png",
+            "content": "/strapi/uploads/project_accessibility_mockup_c51aa80b06.png",
             "caption": "E-kereskedelmi platform akadálymentesítése — projekt képernyőkép"
           },
           {
@@ -135,7 +135,7 @@
         "Service Design"
       ],
       "description": "Egy fintech startup számára terveztünk befektetési mobilalkalmazást. A komplex pénzügyi adatokat közérthető, vizuálisan vonzó formában jelenítettük meg, ami 3x-os felhasználói növekedést eredményezett.",
-      "image": "/strapi/uploads/project_fintech_mockup_a75998855f.png",
+      "image": "/strapi/uploads/project_fintech_mockup_ffef75832e.png",
       "featured": false,
       "caseStudy": {
         "heroSubtitle": "Komplex pénzügyi adatok egyszerű megjelenítése egy befektetési alkalmazásban.",
@@ -153,7 +153,7 @@
           },
           {
             "type": "image",
-            "content": "/strapi/uploads/project_fintech_mockup_a75998855f.png",
+            "content": "/strapi/uploads/project_fintech_mockup_ffef75832e.png",
             "caption": "Fintech mobilalkalmazás UX stratégia — projekt képernyőkép"
           },
           {
@@ -176,7 +176,7 @@
         "Akadálymentesítés"
       ],
       "description": "Egy országos egészségügyi portál teljes újratervezése, ahol a páciensek időpontot foglalhatnak, receptet kérhetnek és hozzáférhetnek leleteikhez. Az új felület 60%-kal csökkentette a telefonos megkereséseket.",
-      "image": "/strapi/uploads/project_healthcare_mockup_31d8fd2b51.png",
+      "image": "/strapi/uploads/project_healthcare_mockup_93db4a51aa.png",
       "featured": false,
       "caseStudy": {
         "heroSubtitle": "Egy országos egészségügyi portál, amely 60%-kal csökkentette a telefonos megkereséseket.",
@@ -194,7 +194,7 @@
           },
           {
             "type": "image",
-            "content": "/strapi/uploads/project_healthcare_mockup_31d8fd2b51.png",
+            "content": "/strapi/uploads/project_healthcare_mockup_93db4a51aa.png",
             "caption": "Egészségügyi portál újragondolása — projekt képernyőkép"
           },
           {
@@ -209,21 +209,21 @@
       }
     },
     {
-      "slug": "ai-design-platform",
-      "title": "AI-alapú design platform prototípus",
+      "slug": "jubileumi-markamegujulas",
+      "title": "Brand design",
       "tags": [
-        "AI Design",
         "UI Design",
-        "Webfejlesztés"
+        "Branding"
       ],
-      "description": "Egy innovatív SaaS platform tervezése és fejlesztése, amely mesterséges intelligenciával segíti a designereket a kreatív munkában. A prototípus 3 hónap alatt készült el, és azóta béta tesztelés alatt áll.",
-      "image": "/strapi/uploads/project_ai_design_mockup_98cda7ced0.png",
+      "description": "Az egyik jelentős hazai fejlesztő cég az alapításának 20. évfordulójára időzítette a márka megújulását, melyet iroda költöztetéssel párosított. Komplex szolgáltatás portfóliót kellett bemutatnunk lazább, kreatív stílusban. A weboldal átalakításán kívül az egyéb digitális felületek és az új iroda falfelületeinek illusztrációit és kreatívját is mi alakítottuk ki.",
+      "image": "/strapi/uploads/Rolunk_1366_182287b9ed.png",
+      "homepageImage": "/strapi/uploads/Szolgaltatasaink_360_2d02cabef4.png",
       "featured": false,
       "caseStudy": {
-        "heroSubtitle": "Mesterséges intelligencia a kreatív munka szolgálatában — egy SaaS platform születése.",
-        "client": "AI Creative Labs",
-        "year": "2024",
-        "duration": "3 hónap",
+        "heroSubtitle": "Kreatív történetmesélés egy komplex szolgáltatásportfólióhoz — online és offline",
+        "client": "Alerant Zrt.",
+        "year": "2023",
+        "duration": "6 hónap",
         "blocks": [
           {
             "type": "text",
@@ -235,7 +235,7 @@
           },
           {
             "type": "image",
-            "content": "/strapi/uploads/project_ai_design_mockup_98cda7ced0.png",
+            "content": "/strapi/uploads/project_ai_design_mockup_b8301ecb0c.png",
             "caption": "AI-alapú design platform prototípus — projekt képernyőkép"
           },
           {
@@ -257,7 +257,7 @@
       "excerpt": "Miért elengedhetetlen a digitális termékeknél az a11y szabványok követése, és hogyan kezdjünk hozzá a gyakorlatban?",
       "date": "2024-03-15",
       "author": "Kovács Anna",
-      "image": "/strapi/uploads/blog_accessibility_bd43c2371c.png",
+      "image": "/strapi/uploads/blog_accessibility_1f965d53f9.png",
       "tags": [
         "Akadálymentesítés",
         "UX"
@@ -274,7 +274,7 @@
         },
         {
           "type": "image",
-          "content": "/strapi/uploads/blog_accessibility_bd43c2371c.png",
+          "content": "/strapi/uploads/blog_accessibility_1f965d53f9.png",
           "caption": "Az akadálymentes tervezés jövője a modern felületeken — illusztráció"
         },
         {
@@ -305,7 +305,7 @@
       "excerpt": "Hogyan tehetik emlékezetessé a legapróbb animációk is az alkalmazásodat, és milyen buktatókra érdemes figyelni.",
       "date": "2024-02-28",
       "author": "Nagy Bence",
-      "image": "/strapi/uploads/blog_microinteractions_b550240d20.png",
+      "image": "/strapi/uploads/blog_microinteractions_a7b9bb2b1a.png",
       "tags": [
         "UX",
         "UI Design"
@@ -322,7 +322,7 @@
         },
         {
           "type": "image",
-          "content": "/strapi/uploads/blog_microinteractions_b550240d20.png",
+          "content": "/strapi/uploads/blog_microinteractions_a7b9bb2b1a.png",
           "caption": "Mikro-interakciók: A kiváló UX titkos fegyvere — illusztráció"
         },
         {
@@ -353,7 +353,7 @@
       "excerpt": "Lépésről lépésre bemutatjuk, hogyan hoztunk létre egy skálázható és fenntartható design rendszert egy nagyvállalati ügyfelünknek.",
       "date": "2024-02-10",
       "author": "Szabó Márk",
-      "image": "/strapi/uploads/blog_designsystem_1286c19a0a.png",
+      "image": "/strapi/uploads/blog_designsystem_53f1ecfd9e.png",
       "tags": [
         "Design System",
         "UI Design"
@@ -370,7 +370,7 @@
         },
         {
           "type": "image",
-          "content": "/strapi/uploads/blog_designsystem_1286c19a0a.png",
+          "content": "/strapi/uploads/blog_designsystem_53f1ecfd9e.png",
           "caption": "Design System építés nulláról — illusztráció"
         },
         {
@@ -401,7 +401,7 @@
       "excerpt": "Hogyan használhatjuk az AI eszközeit a felhasználói élmény tervezésénél, és hol vannak a technológia jelenlegi határai?",
       "date": "2024-01-22",
       "author": "Tóth Eszter",
-      "image": "/strapi/uploads/blog_ai_ux_c19bcc1458.png",
+      "image": "/strapi/uploads/blog_ai_ux_b721563dc2.png",
       "tags": [
         "AI",
         "UX",
@@ -419,7 +419,7 @@
         },
         {
           "type": "image",
-          "content": "/strapi/uploads/blog_ai_ux_c19bcc1458.png",
+          "content": "/strapi/uploads/blog_ai_ux_b721563dc2.png",
           "caption": "Mesterséges intelligencia a UX tervezésben: lehetőségek és korlátok — illusztráció"
         },
         {
@@ -450,7 +450,7 @@
       "excerpt": "A felhasználói kutatás nem luxus, hanem szükségesség. Bemutatjuk a leghatékonyabb módszereket, amelyekkel valós felhasználói igényeket tárhatunk fel.",
       "date": "2024-01-08",
       "author": "Kovács Anna",
-      "image": "/strapi/uploads/blog_ux_research_db475720c7.png",
+      "image": "/strapi/uploads/blog_ux_research_fb033f1d4a.png",
       "tags": [
         "UX Research",
         "Stratégia"
@@ -467,7 +467,7 @@
         },
         {
           "type": "image",
-          "content": "/strapi/uploads/blog_ux_research_db475720c7.png",
+          "content": "/strapi/uploads/blog_ux_research_fb033f1d4a.png",
           "caption": "5 UX kutatási módszer, amit minden termékcsapatnak ismernie kell — illusztráció"
         },
         {
@@ -502,7 +502,7 @@
       "excerpt": "A mobil forgalom ma már meghaladja a 60%-ot. Hogyan tervezzük úgy a felületeinket, hogy mobilon és desktopon is tökéletes élményt nyújtisanak?",
       "date": "2023-12-20",
       "author": "Nagy Bence",
-      "image": "/strapi/uploads/blog_mobile_first_cfaa886d6e.png",
+      "image": "/strapi/uploads/blog_mobile_first_c46d1086e0.png",
       "tags": [
         "Mobile",
         "UX",
@@ -520,7 +520,7 @@
         },
         {
           "type": "image",
-          "content": "/strapi/uploads/blog_mobile_first_cfaa886d6e.png",
+          "content": "/strapi/uploads/blog_mobile_first_c46d1086e0.png",
           "caption": "Mobile-first tervezés: Stratégia, nem trend — illusztráció"
         },
         {
@@ -548,155 +548,61 @@
   ],
   "services": [
     {
-      "slug": "ux-kutatas",
-      "title": "UX Kutatás",
-      "subtitle": "Felhasználók megértése, adatalappal",
-      "heroDescription": "Feltárjuk a felhasználói igényeket, viselkedési mintákat és fájdalompontokat, hogy a termékfejlesztés valós adatokon alapuljon — ne feltételezéseken.",
-      "valueQuestion": "Tudod pontosan, mit akarnak a felhasználóid? Vagy csak azt, amit gondolsz, hogy akarnak?",
-      "valueAnswer": "A legjobb digitális termékek mögött mindig mély felhasználói megértés áll. Mi segítünk eljutni oda.",
-      "heroImage": "/strapi/uploads/service_bg_1774270906434_7aa06431e7.png",
-      "icon": "/strapi/uploads/search_013212e1b4.svg",
-      "activities": [
-        {
-          "title": "Felhasználói interjúk",
-          "description": "Strukturált interjúk készítése célcsoportokkal, hogy megértsük a valós motivációkat és akadályokat.",
-          "icon": "/strapi/uploads/target_349c389278.svg"
-        },
-        {
-          "title": "Használhatósági tesztelés",
-          "description": "Meglévő vagy tervezett felületek tesztelése valós felhasználókkal, hogy feltárjuk a problémás pontokat.",
-          "icon": "/strapi/uploads/zap_a88bed6ad9.svg"
-        },
-        {
-          "title": "Perszóna készítés",
-          "description": "Adatokra épülő felhasználói perszónák létrehozása, amelyek a teljes csapat számára használhatók.",
-          "icon": "/strapi/uploads/users_97019c5d2d.svg"
-        },
-        {
-          "title": "Versenytárs elemzés",
-          "description": "A piaci környezet és a versenytársak digitális megoldásainak áttekintése.",
-          "icon": "/strapi/uploads/search_013212e1b4.svg"
-        },
-        {
-          "title": "Felhasználói út térképezés",
-          "description": "User journey map-ek készítése, amelyek vizualizálják a felhasználói élmény egészét.",
-          "icon": "/strapi/uploads/bar_chart_3_27f5d37803.svg"
-        },
-        {
-          "title": "Adatelemzés",
-          "description": "Meglévő analitikai adatok értelmezése és összevetése a kvalitatív eredményekkel.",
-          "icon": "/strapi/uploads/file_check_2583b115b4.svg"
-        }
-      ],
-      "benefits": [
-        {
-          "title": "Kisebb fejlesztési kockázat",
-          "description": "A kutatás csökkenti annak esélyét, hogy olyan funkciókat fejlesszünk, amelyeket senki sem használ.",
-          "icon": "/strapi/uploads/shield_dc3e6d9bfc.svg"
-        },
-        {
-          "title": "Gyorsabb piacra kerülés",
-          "description": "A célzott fejlesztés kevésbé pazarolja az erőforrásokat és gyorsabban jut el az értékes megoldásig.",
-          "icon": "/strapi/uploads/rocket_5adf0784c1.svg"
-        },
-        {
-          "title": "Magasabb felhasználói elégedettség",
-          "description": "Az adatokra építő tervezés eredményeképpen a felhasználók elégedettebbek lesznek a végtermékkel.",
-          "icon": "/strapi/uploads/heart_59765bb1a0.svg"
-        }
-      ],
-      "tools": [
-        {
-          "name": "Hotjar"
-        },
-        {
-          "name": "Google Analytics"
-        },
-        {
-          "name": "Maze"
-        },
-        {
-          "name": "Lookback"
-        },
-        {
-          "name": "Miro"
-        },
-        {
-          "name": "Optimal Workshop"
-        },
-        {
-          "name": "UserTesting"
-        },
-        {
-          "name": "Dovetail"
-        },
-        {
-          "name": "FigJam"
-        }
-      ],
-      "howWeWork": "<h3>01. Megismerés</h3>\n<p>Megismerjük az üzleti célokat, a meglévő adatokat és a kutatás céljait. Közösen meghatározzuk a kutatási kérdéseket.</p>\n\n<h3>02. Kutatástervezés</h3>\n<p>Kiválasztjuk a megfelelő módszertant, elkészítjük a kutatási tervet és a toborzási kritériumokat.</p>\n\n<h3>03. Terepmunka</h3>\n<p>Elvégezzük az interjúkat, teszteket és megfigyeléseket a meghatározott módszertan szerint.</p>\n\n<h3>04. Elemzés és szintézis</h3>\n<p>Az összegyűjtött adatokat elemezzük, mintákat azonosítunk és akcióképes insightokat fogalmazunk meg.</p>\n\n<h3>05. Átadás és javaslatok</h3>\n<p>Prezentáljuk az eredményeket és konkrét, prioritizált javaslatokkal segítjük a továbblépést.</p>",
-      "relatedProjectSlugs": [
-        "banki-applikacio",
-        "fintech-mobilapp",
-        "egeszsegugyi-portal"
-      ]
-    },
-    {
       "slug": "ui-design",
       "title": "UI Design",
       "subtitle": "Felületek, amelyek működnek és hatnak",
       "heroDescription": "Olyan felhasználói felületeket tervezünk, amelyek nem csak szépek, hanem érthetőek, használhatók és üzleti eredményeket hoznak.",
       "valueQuestion": "Szükséged van egy szakértőre, aki érti az üzleted céljait és a felhasználók elvárásait is?",
       "valueAnswer": "Megértjük a felhasználóid elvárásait, szokásait és céljait. Erre építjük a felületeket.",
-      "heroImage": "/strapi/uploads/service_bg_1774270906434_7aa06431e7.png",
-      "icon": "/strapi/uploads/monitor_2262128aff.svg",
+      "heroImage": "",
+      "icon": "/strapi/uploads/monitor_8b52aa527e.svg",
       "activities": [
         {
           "title": "Vizuális tervezés",
           "description": "Pixel-pontos UI tervek készítése, amelyek tükrözik a márka identitását és a felhasználói elvárásokat.",
-          "icon": "/strapi/uploads/palette_9d39bacd83.svg"
+          "icon": "/strapi/uploads/palette_58dd069c14.svg"
         },
         {
           "title": "Design rendszer építés",
           "description": "Skálázható, konzisztens komponenskönyvtárak létrehozása, amelyek gyorsítják a fejlesztést.",
-          "icon": "/strapi/uploads/book_open_5e9c69413f.svg"
+          "icon": "/strapi/uploads/book_open_5b932cbc1f.svg"
         },
         {
           "title": "Prototípus készítés",
           "description": "Interaktív prototípusok, amelyekkel már a fejlesztés előtt tesztelhető a felhasználói élmény.",
-          "icon": "/strapi/uploads/monitor_2262128aff.svg"
+          "icon": "/strapi/uploads/monitor_1c73ee9576.svg"
         },
         {
           "title": "Reszponzív design",
           "description": "Minden képernyőméretre optimalizált felületek, mobilon és desktopon egyaránt.",
-          "icon": "/strapi/uploads/eye_4c890fd8ac.svg"
+          "icon": "/strapi/uploads/eye_cab7196f1e.svg"
         },
         {
           "title": "Motion design",
           "description": "Célzott mikro-animációk és átmenetek, amelyek javítják a felhasználói élményt.",
-          "icon": "/strapi/uploads/zap_a88bed6ad9.svg"
+          "icon": "/strapi/uploads/zap_b1d6bfdfda.svg"
         },
         {
           "title": "Fejlesztői átadás",
           "description": "Részletes specifikáció és asset-készítés a zökkenőmentes implementációért.",
-          "icon": "/strapi/uploads/file_check_2583b115b4.svg"
+          "icon": "/strapi/uploads/file_check_af75094b92.svg"
         }
       ],
       "benefits": [
         {
           "title": "Erősebb márkaélmény",
           "description": "A konzisztens, átgondolt vizuális rendszer erősíti a márkaészlelést és a bizalmat.",
-          "icon": "/strapi/uploads/shield_dc3e6d9bfc.svg"
+          "icon": "/strapi/uploads/shield_99ea3c55de.svg"
         },
         {
           "title": "Magasabb konverzió",
           "description": "A jól megtervezett felhasználói útvonalak több látogatót alakítanak ügyféllé.",
-          "icon": "/strapi/uploads/rocket_5adf0784c1.svg"
+          "icon": "/strapi/uploads/rocket_bdac62a8cd.svg"
         },
         {
           "title": "Hatékonyabb fejlesztés",
           "description": "A design rendszer csökkenti a fejlesztési időt és a kommunikációs súrlódásokat.",
-          "icon": "/strapi/uploads/heart_59765bb1a0.svg"
+          "icon": "/strapi/uploads/heart_5fff84213c.svg"
         }
       ],
       "tools": [
@@ -726,11 +632,7 @@
         }
       ],
       "howWeWork": "<h3>01. Vizuális irány</h3>\n<p>Moodboard-ok és stílus-explorációk készítése, amelyek segítenek megtalálni a megfelelő vizuális hangot.</p>\n\n<h3>02. Wireframe és struktúra</h3>\n<p>Az oldal struktúrájának és információs architektúrájának kialakítása alacsony-fidelitású tervekkel.</p>\n\n<h3>03. UI tervezés</h3>\n<p>A végleges, magas fidelitású felületi tervek elkészítése minden breakpointra.</p>\n\n<h3>04. Prototípus és teszt</h3>\n<p>Kattintható prototípus készítése és tesztelése felhasználókkal a végső finomhangolás előtt.</p>\n\n<h3>05. Design rendszer és átadás</h3>\n<p>A végleges design rendszer dokumentálása és átadása a fejlesztő csapatnak.</p>",
-      "relatedProjectSlugs": [
-        "banki-applikacio",
-        "fintech-mobilapp",
-        "ai-design-platform"
-      ]
+      "relatedProjectSlugs": []
     },
     {
       "slug": "akadalymentesites",
@@ -739,55 +641,55 @@
       "heroDescription": "Segítünk, hogy digitális termékeid mindenki számára elérhetőek és használhatóak legyenek — a jogszabályi megfeleléstől a valódi inkluzivitásig.",
       "valueQuestion": "A felhasználóid jelentős része akadályokba ütközik a terméked használata során — tudsz róla?",
       "valueAnswer": "Az akadálymentesítés nem csak kötelezettség. Jobb terméket jelent mindenkinek.",
-      "heroImage": "/strapi/uploads/service_bg_1774270906434_7aa06431e7.png",
-      "icon": "/strapi/uploads/eye_4c890fd8ac.svg",
+      "heroImage": "",
+      "icon": "/strapi/uploads/eye_2d4d8a7e1d.svg",
       "activities": [
         {
           "title": "Akadálymentesítési audit",
           "description": "Meglévő weboldalak és alkalmazások átfogó WCAG 2.1 szabálynak megfelelő értékelése.",
-          "icon": "/strapi/uploads/target_349c389278.svg"
+          "icon": "/strapi/uploads/target_5e3cc03ea2.svg"
         },
         {
           "title": "Javítási terv készítés",
           "description": "Prioritizált, lépésről lépésre követhető javítási terv összeállítása a feltárt problémák alapján.",
-          "icon": "/strapi/uploads/file_check_2583b115b4.svg"
+          "icon": "/strapi/uploads/file_check_af75094b92.svg"
         },
         {
           "title": "Asszisztív technológiás tesztelés",
           "description": "Tesztelés képernyőolvasókkal, billentyűzetes navigációval és egyéb segédeszközökkel.",
-          "icon": "/strapi/uploads/monitor_2262128aff.svg"
+          "icon": "/strapi/uploads/monitor_1c73ee9576.svg"
         },
         {
           "title": "Akadálymentes design review",
           "description": "Design fázisban végzett ellenőrzés, mielőtt a fejlesztés megkezdődne.",
-          "icon": "/strapi/uploads/eye_4c890fd8ac.svg"
+          "icon": "/strapi/uploads/eye_cab7196f1e.svg"
         },
         {
           "title": "Csapat képzés",
           "description": "Fejlesztők, tervezők és tartalomkészítők képzése az akadálymentes gyakorlatokról.",
-          "icon": "/strapi/uploads/users_97019c5d2d.svg"
+          "icon": "/strapi/uploads/users_7f703f05a6.svg"
         },
         {
           "title": "Folyamatos monitoring",
           "description": "Rendszeres ellenőrzés és jelentéskészítés, hogy a megfelelés hosszú távon is megmaradjon.",
-          "icon": "/strapi/uploads/bar_chart_3_27f5d37803.svg"
+          "icon": "/strapi/uploads/bar_chart_3_55704ad420.svg"
         }
       ],
       "benefits": [
         {
           "title": "Jogszabályi megfelelés",
           "description": "Az EU Akadálymentesítési irányelv és a WCAG 2.1 szabványoknak való megfelelés biztosítása.",
-          "icon": "/strapi/uploads/shield_dc3e6d9bfc.svg"
+          "icon": "/strapi/uploads/shield_99ea3c55de.svg"
         },
         {
           "title": "Szélesebb elérhetőség",
           "description": "A populáció mintegy 15%-a él valamilyen fogyatékossággal — az akadálymentes termék őket is eléri.",
-          "icon": "/strapi/uploads/rocket_5adf0784c1.svg"
+          "icon": "/strapi/uploads/rocket_bdac62a8cd.svg"
         },
         {
           "title": "Jobb felhasználói élmény mindenkinek",
           "description": "Az akadálymentesítés javítja a használhatóságot minden felhasználó számára, nem csak a fogyatékossággal élőkét.",
-          "icon": "/strapi/uploads/heart_59765bb1a0.svg"
+          "icon": "/strapi/uploads/heart_5fff84213c.svg"
         }
       ],
       "tools": [
@@ -820,62 +722,149 @@
         }
       ],
       "howWeWork": "<h3>01. Helyzetértékelés</h3>\n<p>A jelenlegi állapot felmérése automatizált és manuális eszközökkel, WCAG 2.1 szabvány szerint.</p>\n\n<h3>02. Részletes audit</h3>\n<p>Oldalról oldalra haladó, komponensszintű vizsgálat dokumentált eredményekkel.</p>\n\n<h3>03. Javítási ütemterv</h3>\n<p>Prioritizált feladatlista a kritikus, közepes és alacsony súlyosságú problémákra bontva.</p>\n\n<h3>04. Implementációs támogatás</h3>\n<p>A fejlesztő csapat támogatása a javítások során, kód review-kkal és konzultációval.</p>\n\n<h3>05. Végső validáció</h3>\n<p>A javítások utáni újratesztelés és a megfelelési nyilatkozat elkészítése.</p>",
-      "relatedProjectSlugs": [
-        "e-kereskedelmi-akadalymentesites",
-        "egeszsegugyi-portal"
-      ]
+      "relatedProjectSlugs": []
+    },
+    {
+      "slug": "ux-kutatas",
+      "title": "UX Kutatás",
+      "subtitle": "Felhasználók megértése, adatalappal",
+      "heroDescription": "Feltárjuk a felhasználói igényeket, viselkedési mintákat és fájdalompontokat, hogy a termékfejlesztés valós adatokon alapuljon — ne feltételezéseken.",
+      "valueQuestion": "Tudod pontosan, mit akarnak a felhasználóid? Vagy csak azt, amit gondolsz, hogy akarnak?",
+      "valueAnswer": "A legjobb digitális termékek mögött mindig mély felhasználói megértés áll. Mi segítünk eljutni oda.",
+      "heroImage": "",
+      "icon": "/strapi/uploads/search_fd9773e11e.svg",
+      "activities": [
+        {
+          "title": "Felhasználói interjúk",
+          "description": "Strukturált interjúk készítése célcsoportokkal, hogy megértsük a valós motivációkat és akadályokat.",
+          "icon": "/strapi/uploads/target_5e3cc03ea2.svg"
+        },
+        {
+          "title": "Használhatósági tesztelés",
+          "description": "Meglévő vagy tervezett felületek tesztelése valós felhasználókkal, hogy feltárjuk a problémás pontokat.",
+          "icon": "/strapi/uploads/zap_b1d6bfdfda.svg"
+        },
+        {
+          "title": "Perszóna készítés",
+          "description": "Adatokra épülő felhasználói perszónák létrehozása, amelyek a teljes csapat számára használhatók.",
+          "icon": "/strapi/uploads/users_7f703f05a6.svg"
+        },
+        {
+          "title": "Versenytárs elemzés",
+          "description": "A piaci környezet és a versenytársak digitális megoldásainak áttekintése.",
+          "icon": "/strapi/uploads/search_c258190a69.svg"
+        },
+        {
+          "title": "Felhasználói út térképezés",
+          "description": "User journey map-ek készítése, amelyek vizualizálják a felhasználói élmény egészét.",
+          "icon": "/strapi/uploads/bar_chart_3_55704ad420.svg"
+        },
+        {
+          "title": "Adatelemzés",
+          "description": "Meglévő analitikai adatok értelmezése és összevetése a kvalitatív eredményekkel.",
+          "icon": "/strapi/uploads/file_check_af75094b92.svg"
+        }
+      ],
+      "benefits": [
+        {
+          "title": "Kisebb fejlesztési kockázat",
+          "description": "A kutatás csökkenti annak esélyét, hogy olyan funkciókat fejlesszünk, amelyeket senki sem használ.",
+          "icon": "/strapi/uploads/shield_99ea3c55de.svg"
+        },
+        {
+          "title": "Gyorsabb piacra kerülés",
+          "description": "A célzott fejlesztés kevésbé pazarolja az erőforrásokat és gyorsabban jut el az értékes megoldásig.",
+          "icon": "/strapi/uploads/rocket_bdac62a8cd.svg"
+        },
+        {
+          "title": "Magasabb felhasználói elégedettség",
+          "description": "Az adatokra építő tervezés eredményeképpen a felhasználók elégedettebbek lesznek a végtermékkel.",
+          "icon": "/strapi/uploads/heart_5fff84213c.svg"
+        }
+      ],
+      "tools": [
+        {
+          "name": "Hotjar"
+        },
+        {
+          "name": "Google Analytics"
+        },
+        {
+          "name": "Maze"
+        },
+        {
+          "name": "Lookback"
+        },
+        {
+          "name": "Miro"
+        },
+        {
+          "name": "Optimal Workshop"
+        },
+        {
+          "name": "UserTesting"
+        },
+        {
+          "name": "Dovetail"
+        },
+        {
+          "name": "FigJam"
+        }
+      ],
+      "howWeWork": "<h3>01. Megismerés</h3>\n<p>Megismerjük az üzleti célokat, a meglévő adatokat és a kutatás céljait. Közösen meghatározzuk a kutatási kérdéseket.</p>\n\n<h3>02. Kutatástervezés</h3>\n<p>Kiválasztjuk a megfelelő módszertant, elkészítjük a kutatási tervet és a toborzási kritériumokat.</p>\n\n<h3>03. Terepmunka</h3>\n<p>Elvégezzük az interjúkat, teszteket és megfigyeléseket a meghatározott módszertan szerint.</p>\n\n<h3>04. Elemzés és szintézis</h3>\n<p>Az összegyűjtött adatokat elemezzük, mintákat azonosítunk és akcióképes insightokat fogalmazunk meg.</p>\n\n<h3>05. Átadás és javaslatok</h3>\n<p>Prezentáljuk az eredményeket és konkrét, prioritizált javaslatokkal segítjük a továbblépést.</p>",
+      "relatedProjectSlugs": []
     }
   ],
   "teamMembers": [
     {
       "name": "Kovács Anna",
       "title": "UX Research Lead",
-      "image": "/strapi/uploads/team_member_0_bd10563af9.jpg"
+      "image": "/strapi/uploads/team_member_0_4ea62c014d.jpg"
     },
     {
       "name": "Szabó Márk",
       "title": "Design Director",
-      "image": "/strapi/uploads/team_member_1_cc0daac2fb.jpg"
+      "image": "/strapi/uploads/team_member_1_803dcec0fb.jpg"
     },
     {
       "name": "Tóth Eszter",
       "title": "UI Designer",
-      "image": "/strapi/uploads/team_member_2_ac01bf705d.jpg"
+      "image": "/strapi/uploads/team_member_2_101458420a.jpg"
     },
     {
       "name": "Nagy Bence",
       "title": "Frontend Developer",
-      "image": "/strapi/uploads/team_member_3_5e2f78a630.jpg"
+      "image": "/strapi/uploads/team_member_3_4f392565bf.jpg"
     },
     {
       "name": "Kiss Réka",
       "title": "Service Designer",
-      "image": "/strapi/uploads/team_member_4_9632b16fd0.jpg"
+      "image": "/strapi/uploads/team_member_4_8c243aa35b.jpg"
     },
     {
       "name": "Horváth Dániel",
       "title": "Full-Stack Developer",
-      "image": "/strapi/uploads/team_member_5_d0e8d48f8b.jpg"
+      "image": "/strapi/uploads/team_member_5_f5f79afff6.jpg"
     },
     {
       "name": "Varga Lili",
       "title": "UX Writer",
-      "image": "/strapi/uploads/team_member_6_88512289ad.jpg"
+      "image": "/strapi/uploads/team_member_6_313a5d76fc.jpg"
     },
     {
       "name": "Molnár Ádám",
       "title": "Accessibility Specialist",
-      "image": "/strapi/uploads/team_member_7_8be9629828.jpg"
+      "image": "/strapi/uploads/team_member_7_14716fbbed.jpg"
     },
     {
       "name": "Fehér Nóra",
       "title": "Project Manager",
-      "image": "/strapi/uploads/team_member_8_adcbf36487.jpg"
+      "image": "/strapi/uploads/team_member_8_92848e70a6.jpg"
     },
     {
       "name": "Lakatos Péter",
       "title": "Creative Technologist",
-      "image": "/strapi/uploads/team_member_9_2dba1be0ff.jpg"
+      "image": "/strapi/uploads/team_member_9_c4c0a74ed2.jpg"
     }
   ],
   "clients": [
@@ -960,7 +949,7 @@
         },
         {
           "type": "image",
-          "content": "/strapi/uploads/UI_Design_1773998868111_6289b8f665.png",
+          "content": "/strapi/uploads/UI_Design_1773998868111_e68995782c.png",
           "caption": "Senior UX Researcher — munkakörnyezet"
         },
         {
@@ -1000,7 +989,7 @@
         },
         {
           "type": "image",
-          "content": "/strapi/uploads/UI_Design_1773998868111_6289b8f665.png",
+          "content": "/strapi/uploads/UI_Design_1773998868111_e68995782c.png",
           "caption": "UI Designer — munkakörnyezet"
         },
         {
@@ -1040,7 +1029,7 @@
         },
         {
           "type": "image",
-          "content": "/strapi/uploads/UI_Design_1773998868111_6289b8f665.png",
+          "content": "/strapi/uploads/UI_Design_1773998868111_e68995782c.png",
           "caption": "Frontend Fejlesztő — munkakörnyezet"
         },
         {
@@ -1080,7 +1069,7 @@
         },
         {
           "type": "image",
-          "content": "/strapi/uploads/UI_Design_1773998868111_6289b8f665.png",
+          "content": "/strapi/uploads/UI_Design_1773998868111_e68995782c.png",
           "caption": "Service Designer — munkakörnyezet"
         },
         {
@@ -1102,32 +1091,7 @@
       ]
     }
   ],
-  "galleryImages": [
-    {
-      "src": "/strapi/uploads/gallery_teamwork_133453eeb4.jpg",
-      "alt": ""
-    },
-    {
-      "src": "/strapi/uploads/gallery_workshop_62bb032357.jpg",
-      "alt": ""
-    },
-    {
-      "src": "/strapi/uploads/gallery_sprint_22df41fbe5.jpg",
-      "alt": ""
-    },
-    {
-      "src": "/strapi/uploads/gallery_brainstorm_259e3e84dd.jpg",
-      "alt": ""
-    },
-    {
-      "src": "/strapi/uploads/gallery_event_2abe5d1b9c.jpg",
-      "alt": ""
-    },
-    {
-      "src": "/strapi/uploads/gallery_presentation_c1bd4aa71b.jpg",
-      "alt": ""
-    }
-  ],
+  "galleryImages": [],
   "globalSettings": {
     "siteName": "Works.",
     "contactEmail": "hello@works.hu",
@@ -1137,12 +1101,12 @@
     "copyrightText": "2024 Works. Minden jog fenntartva.",
     "newsletterHeading": "Iratkozz fel hírlevelünkre",
     "newsletterDescription": "Havonta egyszer küldünk friss UX/UI tippeket, esettanulmányokat és szakmai újdonságokat.",
-    "heroBackgroundPatternUrl": "/strapi/uploads/homepage_graphic_1773999340930_76577fd29c.png",
-    "logoUrl": "/strapi/uploads/New_logo_1773998946128_294c677a74.png",
-    "bgGraphic1Url": "/strapi/uploads/bg_graphic_1774009634501_6f4239fcc7.png",
-    "bgGraphic2Url": "/strapi/uploads/bg_graphic2_1774011568340_3e2f788bfe.png",
-    "faviconUrl": "/strapi/uploads/New_logo_1773998946128_294c677a74.png",
-    "ogImageUrl": "/strapi/uploads/works_background_1774441334981_cd170781f8.png",
+    "heroBackgroundPatternUrl": "/strapi/uploads/homepage_graphic_1773999340930_ace17c6480.png",
+    "logoUrl": "/strapi/uploads/New_logo_1773998946128_b9aaae37ad.png",
+    "bgGraphic1Url": "/strapi/uploads/bg_graphic_1774009634501_6f046d67af.png",
+    "bgGraphic2Url": "/strapi/uploads/bg_graphic2_1774011568340_bb671557c5.png",
+    "faviconUrl": "/strapi/uploads/New_logo_1773998946128_b9aaae37ad.png",
+    "ogImageUrl": "/strapi/uploads/works_background_1774441334981_732aab5a80.png",
     "openingHours": [
       {
         "day": "Hétfő - Péntek",
@@ -1176,7 +1140,7 @@
     "hero": {
       "heading": "Kapcsolat",
       "description": "Beszéljünk a következő projektedről!",
-      "backgroundImage": "/strapi/uploads/contact_bg_1774518452836_c850a6e24a.png"
+      "backgroundImage": "/strapi/uploads/contact_bg_1774518452836_75c2598f4c.png"
     },
     "formHeading": "Írj nekünk",
     "successTitle": "Köszönjük!",
@@ -1205,37 +1169,42 @@
         "value": "other"
       }
     ],
-    "backgroundImage": "/strapi/uploads/contact_bg_1774518452836_c850a6e24a.png"
+    "backgroundImage": "/strapi/uploads/contact_bg_1774518452836_75c2598f4c.png"
   },
   "homepage": {
     "hero": {
-      "heading": "Kutatunk. Tervezünk. Építünk.",
-      "highlightedWord": "Építünk.",
+      "heading": "Digitális élményeket tervezünk",
+      "highlightedWord": "élményeket",
       "description": "UX kutatás, UI design és fejlesztés — egy csapattól. Segítünk, hogy digitális termékeid valódi értéket teremtsenek.",
       "primaryCtaText": "Projektjeink",
       "primaryCtaLink": "/projektek",
       "secondaryCtaText": "Kapcsolat",
       "secondaryCtaLink": "/kapcsolat",
-      "backgroundImage": "/strapi/uploads/homepage_graphic_1773999340930_76577fd29c.png"
+      "backgroundImage": "/strapi/uploads/homepage_graphic_1773999340930_ace17c6480.png"
     },
     "servicesSection": {
-      "id": 26,
+      "id": 6,
       "heading": "Szolgáltatásaink"
     },
     "projectsSection": {
-      "id": 26,
+      "id": 6,
       "heading": "Kiemelt munkáink"
     },
     "blogSection": {
-      "id": 26,
+      "id": 6,
       "heading": "Friss a blogról"
+    },
+    "ctaBanner": {
+      "heading": "Van egy ötleted? Beszéljünk róla!",
+      "ctaText": "Kapcsolatfelvétel",
+      "ctaLink": "/kapcsolat"
     }
   },
   "aboutPage": {
     "hero": {
       "heading": "Rólunk",
       "description": "Egy csapat, amely hisz abban, hogy a jó design megváltoztatja a világot.",
-      "backgroundImage": "/strapi/uploads/Purposeful_1774354143676_ca3d3a17e1.png"
+      "backgroundImage": "/strapi/uploads/Purposeful_1774354143676_da4d5e3ab8.png"
     },
     "intro": {
       "heading": "Kik vagyunk?",
@@ -1246,34 +1215,39 @@
     "hero": {
       "heading": "Karrier",
       "description": "Csatlakozz egy csapathoz, ahol a munkád valódi hatást tesz.",
-      "backgroundImage": "/strapi/uploads/Frame_26081029_1774516588825_155f130c4c.png"
+      "backgroundImage": "/strapi/uploads/Frame_26081029_1774516588825_ac6fd641ad.png"
     },
     "workWithUs": {
-      "heading": "Dolgozz velünk",
-      "description": "A Works. egy magyar digitális ügynökség, ahol UX kutatók, designerek, fejlesztők és stratégák dolgoznak együtt azon, hogy a digitális világot egy kicsit jobbá tegyék. Nálunk minden projekt a felhasználók megértésével indul, és a megvalósítás minőségével zárul.\n\nHiszünk abban, hogy a legjobb munkát inspiráló környezetben, erős csapatban és valódi szabadsággal lehet végezni. Ha te is így gondolod, nézd meg nyitott pozícióinkat."
+      "heading": "",
+      "description": ""
     },
     "whyUs": {
       "sectionHeading": "Miért jó nálunk dolgozni?",
       "items": [
         {
           "title": "Valódi hatás",
-          "description": "Nem csak pixeleket mozgatunk — olyan digitális termékeket építünk, amelyek emberek százezreinek életét teszik jobbá. Minden projektünknek mérhető eredménye van.",
-          "image": "/strapi/uploads/photo_1522071820081_009f0129c71c_34fbaf902e.jpg"
+          "description": "Nem csak pixeleket mozgatunk — olyan digitális termékeket építünk, amelyek emberek százezreinek életét teszik jobbá.",
+          "image": ""
         },
         {
           "title": "Folyamatos tanulás",
           "description": "Konferenciák, workshopok, belső tudásmegosztás és éves képzési keret. Nálunk a szakmai fejlődés nem szlogen, hanem a mindennapok része.",
-          "image": "/strapi/uploads/photo_1552664730_d307ca884978_ec6c0c17dd.jpg"
+          "image": ""
         },
         {
           "title": "Rugalmas munkavégzés",
           "description": "Hibrid munkavégzés, rugalmas munkaidő és modern budapesti iroda. Te döntöd el, honnan és mikor dolgozol a legjobban.",
-          "image": "/strapi/uploads/photo_1600880292203_757bb62b4baf_ee71174d91.jpg"
+          "image": ""
         },
         {
           "title": "Erős csapat",
-          "description": "Tapasztalt szakemberek, akik szívesen segítenek és osztják meg tudásukat. Nálunk a mentorálás természetes — senki nem marad egyedül egy problémával.",
-          "image": "/strapi/uploads/photo_1517048676732_d65bc937f952_e4e62f333e.jpg"
+          "description": "Tapasztalt szakemberek, akik szívesen segítenek és osztják meg tudásukat. Nálunk a mentorálás természetes.",
+          "image": ""
+        },
+        {
+          "title": "Változatos projektek",
+          "description": "Startupoktól a nagyvállalatokig, fintechttől az egészségügyig. Garantáljuk, hogy nem fogsz unatkozni.",
+          "image": ""
         }
       ]
     }

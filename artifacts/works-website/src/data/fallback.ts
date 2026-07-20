@@ -209,6 +209,11 @@ const hardcodedHomepage: HomepageData = {
   blogSection: {
     heading: "Blog",
   },
+  ctaBanner: {
+    heading: "A designer feladata nem csupán szép felületek tervezése — hanem valódi problémák megoldása.",
+    ctaText: "Segíthetünk?",
+    ctaLink: "/kapcsolat",
+  },
 };
 
 const hardcodedAboutPage: AboutPageData = {

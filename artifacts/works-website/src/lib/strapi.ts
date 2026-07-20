@@ -474,6 +474,7 @@ export interface HomepageData {
   servicesSection: { heading: string };
   projectsSection: { heading: string };
   blogSection: { heading: string };
+  ctaBanner: { heading: string; ctaText: string; ctaLink: string };
 }
 
 export async function getHomepage(): Promise<HomepageData> {
@@ -491,7 +492,8 @@ export async function getHomepage(): Promise<HomepageData> {
     servicesSection: HomepageData["servicesSection"];
     projectsSection: HomepageData["projectsSection"];
     blogSection: HomepageData["blogSection"];
-  }>>("/homepage?populate[0]=hero&populate[1]=servicesSection&populate[2]=projectsSection&populate[3]=blogSection&populate[4]=hero.backgroundImage");
+    ctaBanner: HomepageData["ctaBanner"] | null;
+  }>>("/homepage?populate[0]=hero&populate[1]=servicesSection&populate[2]=projectsSection&populate[3]=blogSection&populate[4]=hero.backgroundImage&populate[5]=ctaBanner");
   const d = res.data;
   const h = d.hero;
   return {
@@ -508,6 +510,13 @@ export async function getHomepage(): Promise<HomepageData> {
     servicesSection: d.servicesSection || { heading: "" },
     projectsSection: d.projectsSection || { heading: "" },
     blogSection: d.blogSection || { heading: "" },
+    ctaBanner: d.ctaBanner
+      ? {
+          heading: d.ctaBanner.heading || "",
+          ctaText: d.ctaBanner.ctaText || "",
+          ctaLink: d.ctaBanner.ctaLink || "",
+        }
+      : { heading: "", ctaText: "", ctaLink: "" },
   };
 }
 
