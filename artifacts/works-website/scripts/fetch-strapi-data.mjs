@@ -50,11 +50,21 @@ function mapBlogPost(p) {
   };
 }
 
+function mapSectionIntro(i) {
+  if (!i) return null;
+  return {
+    kicker: i.kicker || "",
+    heading: i.heading || "",
+    description: i.description || "",
+  };
+}
+
 function mapService(s) {
   return {
     slug: s.general?.slug || "",
     title: s.general?.title || "",
     subtitle: s.general?.subtitle || "",
+    kicker: s.general?.kicker || "",
     heroDescription: s.general?.heroDescription || "",
     valueQuestion: s.valueProposition?.question || "",
     valueAnswer: s.valueProposition?.answer || "",
@@ -73,6 +83,73 @@ function mapService(s) {
     tools: (s.tools || []).map((t) => ({ name: t.name })),
     howWeWork: s.howWeWork || "",
     relatedProjectSlugs: (s.relatedProjects || []).map((p) => p.slug),
+    questionsSection: s.questionsSection
+      ? {
+          intro: mapSectionIntro(s.questionsSection.intro),
+          cards: (s.questionsSection.cards || []).map((c) => ({
+            title: c.title,
+            description: c.description || "",
+          })),
+        }
+      : null,
+    helpSection: s.helpSection
+      ? {
+          intro: mapSectionIntro(s.helpSection.intro),
+          cards: (s.helpSection.cards || []).map((c) => ({
+            title: c.title,
+            description: c.description || "",
+            icon: strapiImageUrl(c.icon?.url),
+          })),
+          ctaText: s.helpSection.ctaText || "",
+          ctaButtonText: s.helpSection.ctaButtonText || "",
+          ctaButtonLink: s.helpSection.ctaButtonLink || "",
+        }
+      : null,
+    processSection: s.processSection
+      ? {
+          intro: mapSectionIntro(s.processSection.intro),
+          steps: (s.processSection.steps || []).map((st) => ({
+            title: st.title,
+            description: st.description || "",
+          })),
+        }
+      : null,
+    deliverablesSection: s.deliverablesSection
+      ? {
+          intro: mapSectionIntro(s.deliverablesSection.intro),
+          variant: s.deliverablesSection.variant === "largeCards" ? "largeCards" : "smallCards",
+          smallCards: (s.deliverablesSection.smallCards || []).map((c) => ({
+            title: c.title,
+            description: c.description || "",
+            icon: strapiImageUrl(c.icon?.url),
+          })),
+          largeCards: (s.deliverablesSection.largeCards || []).map((c) => ({
+            title: c.title,
+            description: c.description || "",
+            icon: strapiImageUrl(c.icon?.url),
+            bullets: (c.bullets || []).map((b) => b.text),
+          })),
+        }
+      : null,
+    projectExamplesIntro: mapSectionIntro(s.projectExamplesIntro),
+    faqSection: s.faqSection
+      ? {
+          intro: mapSectionIntro(s.faqSection.intro),
+          items: (s.faqSection.items || []).map((it) => ({
+            question: it.question,
+            answer: it.answer || "",
+          })),
+        }
+      : null,
+    relatedServicesIntro: mapSectionIntro(s.relatedServicesIntro),
+    relatedServices: (s.relatedServices || [])
+      .filter((r) => r.general?.slug)
+      .map((r) => ({
+        slug: r.general?.slug || "",
+        title: r.general?.title || "",
+        description: r.general?.heroDescription || "",
+        icon: strapiImageUrl(r.general?.icon?.url),
+      })),
   };
 }
 
@@ -96,7 +173,13 @@ async function fetchAll() {
   console.log(`  ✓ ${cache.blogPosts.length} blog post(s)`);
 
   const SERVICE_POPULATE =
-    "populate[0]=general&populate[1]=general.icon&populate[2]=general.heroImage&populate[3]=valueProposition&populate[4]=activities&populate[5]=activities.icon&populate[6]=benefits&populate[7]=benefits.icon&populate[8]=tools&populate[9]=relatedProjects&populate[10]=seo";
+    "populate[0]=general&populate[1]=general.icon&populate[2]=general.heroImage&populate[3]=valueProposition&populate[4]=activities.icon&populate[5]=benefits.icon&populate[6]=tools&populate[7]=relatedProjects&populate[8]=seo" +
+    "&populate[9]=questionsSection.intro&populate[10]=questionsSection.cards" +
+    "&populate[11]=helpSection.intro&populate[12]=helpSection.cards.icon" +
+    "&populate[13]=processSection.intro&populate[14]=processSection.steps" +
+    "&populate[15]=deliverablesSection.intro&populate[16]=deliverablesSection.smallCards.icon&populate[17]=deliverablesSection.largeCards.icon&populate[18]=deliverablesSection.largeCards.bullets" +
+    "&populate[19]=projectExamplesIntro&populate[20]=faqSection.intro&populate[21]=faqSection.items" +
+    "&populate[22]=relatedServicesIntro&populate[23]=relatedServices.general.icon";
   const servicesRes = await fetchApi(
     `/services?${SERVICE_POPULATE}&pagination[pageSize]=100&sort=order:asc`
   );

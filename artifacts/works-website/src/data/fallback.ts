@@ -126,10 +126,21 @@ const hardcodedGalleryImages: GalleryImage[] = rawGalleryImages.map(
   })
 );
 
+function parseHowWeWorkSteps(html: string): { title: string; description: string }[] {
+  const steps: { title: string; description: string }[] = [];
+  const regex = /<h3>\s*(?:\d+\.\s*)?([^<]+)<\/h3>\s*<p>([^<]+)<\/p>/g;
+  let match: RegExpExecArray | null;
+  while ((match = regex.exec(html)) !== null) {
+    steps.push({ title: match[1].trim(), description: match[2].trim() });
+  }
+  return steps;
+}
+
 const hardcodedServices: Service[] = rawServices.map((s) => ({
   slug: s.slug,
   title: s.title,
   subtitle: s.subtitle,
+  kicker: s.subtitle,
   heroDescription: s.heroDescription,
   valueQuestion: s.valueQuestion,
   valueAnswer: s.valueAnswer,
@@ -140,6 +151,23 @@ const hardcodedServices: Service[] = rawServices.map((s) => ({
   tools: s.tools.map((t: string) => ({ name: t })),
   howWeWork: s.howWeWork,
   relatedProjectSlugs: s.relatedProjectSlugs,
+  questionsSection: null,
+  helpSection: {
+    intro: { kicker: "Szakértelem", heading: "Miben tudunk segíteni?", description: "" },
+    cards: s.activities.map((a) => ({ title: a.title, description: a.description, icon: "" })),
+    ctaText: "Beszéljük meg, hogyan segíthetünk a projektedben.",
+    ctaButtonText: "Kérj konzultációt",
+    ctaButtonLink: "/kapcsolat",
+  },
+  processSection: {
+    intro: { kicker: "A folyamat", heading: "Hogyan dolgozunk?", description: "" },
+    steps: parseHowWeWorkSteps(s.howWeWork),
+  },
+  deliverablesSection: null,
+  projectExamplesIntro: { kicker: "Referenciák", heading: "Projektpéldák", description: "" },
+  faqSection: null,
+  relatedServicesIntro: null,
+  relatedServices: [],
 }));
 
 const hardcodedGlobalSettings: GlobalSettings = {

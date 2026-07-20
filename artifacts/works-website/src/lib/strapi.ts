@@ -129,10 +129,50 @@ interface StrapiValueProposition {
   answer: string;
 }
 
+interface StrapiSectionIntro {
+  kicker: string | null;
+  heading: string | null;
+  description: string | null;
+}
+
+interface StrapiQuestionCard {
+  title: string;
+  description: string | null;
+}
+
+interface StrapiHelpCard {
+  title: string;
+  description: string | null;
+  icon: StrapiMedia | null;
+}
+
+interface StrapiProcessStep {
+  title: string;
+  description: string | null;
+}
+
+interface StrapiDeliverableCard {
+  title: string;
+  description: string | null;
+  icon: StrapiMedia | null;
+}
+
+interface StrapiDeliverableGroup {
+  title: string;
+  description: string | null;
+  icon: StrapiMedia | null;
+  bullets: { text: string }[];
+}
+
+interface StrapiFaqItem {
+  question: string;
+  answer: string | null;
+}
+
 interface StrapiService {
   id: number;
   documentId: string;
-  general: StrapiServiceGeneral | null;
+  general: (StrapiServiceGeneral & { kicker?: string | null }) | null;
   valueProposition: StrapiValueProposition | null;
   activities: StrapiActivity[];
   benefits: StrapiBenefit[];
@@ -140,6 +180,25 @@ interface StrapiService {
   howWeWork: string;
   relatedProjects: StrapiProject[];
   order: number;
+  questionsSection: { intro: StrapiSectionIntro | null; cards: StrapiQuestionCard[] } | null;
+  helpSection: {
+    intro: StrapiSectionIntro | null;
+    cards: StrapiHelpCard[];
+    ctaText: string | null;
+    ctaButtonText: string | null;
+    ctaButtonLink: string | null;
+  } | null;
+  processSection: { intro: StrapiSectionIntro | null; steps: StrapiProcessStep[] } | null;
+  deliverablesSection: {
+    intro: StrapiSectionIntro | null;
+    variant: "smallCards" | "largeCards";
+    smallCards: StrapiDeliverableCard[];
+    largeCards: StrapiDeliverableGroup[];
+  } | null;
+  projectExamplesIntro: StrapiSectionIntro | null;
+  faqSection: { intro: StrapiSectionIntro | null; items: StrapiFaqItem[] } | null;
+  relatedServicesIntro: StrapiSectionIntro | null;
+  relatedServices: { general: (StrapiServiceGeneral & { kicker?: string | null }) | null }[];
 }
 
 interface StrapiClient {
@@ -212,10 +271,54 @@ export interface GalleryImage {
   alt: string;
 }
 
+export interface SectionIntro {
+  kicker: string;
+  heading: string;
+  description: string;
+}
+
+export interface ServiceQuestionsSection {
+  intro: SectionIntro | null;
+  cards: { title: string; description: string }[];
+}
+
+export interface ServiceHelpSection {
+  intro: SectionIntro | null;
+  cards: { title: string; description: string; icon: string }[];
+  ctaText: string;
+  ctaButtonText: string;
+  ctaButtonLink: string;
+}
+
+export interface ServiceProcessSection {
+  intro: SectionIntro | null;
+  steps: { title: string; description: string }[];
+}
+
+export interface ServiceDeliverablesSection {
+  intro: SectionIntro | null;
+  variant: "smallCards" | "largeCards";
+  smallCards: { title: string; description: string; icon: string }[];
+  largeCards: { title: string; description: string; icon: string; bullets: string[] }[];
+}
+
+export interface ServiceFaqSection {
+  intro: SectionIntro | null;
+  items: { question: string; answer: string }[];
+}
+
+export interface RelatedServiceSummary {
+  slug: string;
+  title: string;
+  description: string;
+  icon: string;
+}
+
 export interface Service {
   slug: string;
   title: string;
   subtitle: string;
+  kicker: string;
   heroDescription: string;
   valueQuestion: string;
   valueAnswer: string;
@@ -226,6 +329,14 @@ export interface Service {
   tools: { name: string }[];
   howWeWork: string;
   relatedProjectSlugs: string[];
+  questionsSection: ServiceQuestionsSection | null;
+  helpSection: ServiceHelpSection | null;
+  processSection: ServiceProcessSection | null;
+  deliverablesSection: ServiceDeliverablesSection | null;
+  projectExamplesIntro: SectionIntro | null;
+  faqSection: ServiceFaqSection | null;
+  relatedServicesIntro: SectionIntro | null;
+  relatedServices: RelatedServiceSummary[];
 }
 
 export interface Client {
@@ -366,13 +477,29 @@ export async function getGalleryImages(): Promise<GalleryImage[]> {
 }
 
 const SERVICE_POPULATE =
-  "populate[0]=general&populate[1]=general.icon&populate[2]=general.heroImage&populate[3]=valueProposition&populate[4]=activities&populate[5]=activities.icon&populate[6]=benefits&populate[7]=benefits.icon&populate[8]=tools&populate[9]=relatedProjects&populate[10]=seo";
+  "populate[0]=general&populate[1]=general.icon&populate[2]=general.heroImage&populate[3]=valueProposition&populate[4]=activities.icon&populate[5]=benefits.icon&populate[6]=tools&populate[7]=relatedProjects&populate[8]=seo" +
+  "&populate[9]=questionsSection.intro&populate[10]=questionsSection.cards" +
+  "&populate[11]=helpSection.intro&populate[12]=helpSection.cards.icon" +
+  "&populate[13]=processSection.intro&populate[14]=processSection.steps" +
+  "&populate[15]=deliverablesSection.intro&populate[16]=deliverablesSection.smallCards.icon&populate[17]=deliverablesSection.largeCards.icon&populate[18]=deliverablesSection.largeCards.bullets" +
+  "&populate[19]=projectExamplesIntro&populate[20]=faqSection.intro&populate[21]=faqSection.items" +
+  "&populate[22]=relatedServicesIntro&populate[23]=relatedServices.general.icon";
+
+function mapSectionIntro(i: StrapiSectionIntro | null | undefined): SectionIntro | null {
+  if (!i) return null;
+  return {
+    kicker: i.kicker || "",
+    heading: i.heading || "",
+    description: i.description || "",
+  };
+}
 
 function mapService(s: StrapiService): Service {
   return {
     slug: s.general?.slug || "",
     title: s.general?.title || "",
     subtitle: s.general?.subtitle || "",
+    kicker: s.general?.kicker || "",
     heroDescription: s.general?.heroDescription || "",
     valueQuestion: s.valueProposition?.question || "",
     valueAnswer: s.valueProposition?.answer || "",
@@ -391,6 +518,73 @@ function mapService(s: StrapiService): Service {
     tools: (s.tools || []).map((t) => ({ name: t.name })),
     howWeWork: s.howWeWork || "",
     relatedProjectSlugs: (s.relatedProjects || []).map((p) => p.slug),
+    questionsSection: s.questionsSection
+      ? {
+          intro: mapSectionIntro(s.questionsSection.intro),
+          cards: (s.questionsSection.cards || []).map((c) => ({
+            title: c.title,
+            description: c.description || "",
+          })),
+        }
+      : null,
+    helpSection: s.helpSection
+      ? {
+          intro: mapSectionIntro(s.helpSection.intro),
+          cards: (s.helpSection.cards || []).map((c) => ({
+            title: c.title,
+            description: c.description || "",
+            icon: strapiImageUrl(c.icon?.url),
+          })),
+          ctaText: s.helpSection.ctaText || "",
+          ctaButtonText: s.helpSection.ctaButtonText || "",
+          ctaButtonLink: s.helpSection.ctaButtonLink || "",
+        }
+      : null,
+    processSection: s.processSection
+      ? {
+          intro: mapSectionIntro(s.processSection.intro),
+          steps: (s.processSection.steps || []).map((st) => ({
+            title: st.title,
+            description: st.description || "",
+          })),
+        }
+      : null,
+    deliverablesSection: s.deliverablesSection
+      ? {
+          intro: mapSectionIntro(s.deliverablesSection.intro),
+          variant: s.deliverablesSection.variant === "largeCards" ? "largeCards" : "smallCards",
+          smallCards: (s.deliverablesSection.smallCards || []).map((c) => ({
+            title: c.title,
+            description: c.description || "",
+            icon: strapiImageUrl(c.icon?.url),
+          })),
+          largeCards: (s.deliverablesSection.largeCards || []).map((c) => ({
+            title: c.title,
+            description: c.description || "",
+            icon: strapiImageUrl(c.icon?.url),
+            bullets: (c.bullets || []).map((b) => b.text),
+          })),
+        }
+      : null,
+    projectExamplesIntro: mapSectionIntro(s.projectExamplesIntro),
+    faqSection: s.faqSection
+      ? {
+          intro: mapSectionIntro(s.faqSection.intro),
+          items: (s.faqSection.items || []).map((it) => ({
+            question: it.question,
+            answer: it.answer || "",
+          })),
+        }
+      : null,
+    relatedServicesIntro: mapSectionIntro(s.relatedServicesIntro),
+    relatedServices: (s.relatedServices || [])
+      .filter((r) => r.general?.slug)
+      .map((r) => ({
+        slug: r.general?.slug || "",
+        title: r.general?.title || "",
+        description: r.general?.heroDescription || "",
+        icon: strapiImageUrl(r.general?.icon?.url),
+      })),
   };
 }
 

@@ -548,191 +548,15 @@
   ],
   "services": [
     {
-      "slug": "ui-design",
-      "title": "UI Design",
-      "subtitle": "Felületek, amelyek működnek és hatnak",
-      "heroDescription": "Olyan felhasználói felületeket tervezünk, amelyek nem csak szépek, hanem érthetőek, használhatók és üzleti eredményeket hoznak.",
-      "valueQuestion": "Szükséged van egy szakértőre, aki érti az üzleted céljait és a felhasználók elvárásait is?",
-      "valueAnswer": "Megértjük a felhasználóid elvárásait, szokásait és céljait. Erre építjük a felületeket.",
-      "heroImage": "",
-      "icon": "/strapi/uploads/monitor_8b52aa527e.svg",
-      "activities": [
-        {
-          "title": "Vizuális tervezés",
-          "description": "Pixel-pontos UI tervek készítése, amelyek tükrözik a márka identitását és a felhasználói elvárásokat.",
-          "icon": "/strapi/uploads/palette_58dd069c14.svg"
-        },
-        {
-          "title": "Design rendszer építés",
-          "description": "Skálázható, konzisztens komponenskönyvtárak létrehozása, amelyek gyorsítják a fejlesztést.",
-          "icon": "/strapi/uploads/book_open_5b932cbc1f.svg"
-        },
-        {
-          "title": "Prototípus készítés",
-          "description": "Interaktív prototípusok, amelyekkel már a fejlesztés előtt tesztelhető a felhasználói élmény.",
-          "icon": "/strapi/uploads/monitor_1c73ee9576.svg"
-        },
-        {
-          "title": "Reszponzív design",
-          "description": "Minden képernyőméretre optimalizált felületek, mobilon és desktopon egyaránt.",
-          "icon": "/strapi/uploads/eye_cab7196f1e.svg"
-        },
-        {
-          "title": "Motion design",
-          "description": "Célzott mikro-animációk és átmenetek, amelyek javítják a felhasználói élményt.",
-          "icon": "/strapi/uploads/zap_b1d6bfdfda.svg"
-        },
-        {
-          "title": "Fejlesztői átadás",
-          "description": "Részletes specifikáció és asset-készítés a zökkenőmentes implementációért.",
-          "icon": "/strapi/uploads/file_check_af75094b92.svg"
-        }
-      ],
-      "benefits": [
-        {
-          "title": "Erősebb márkaélmény",
-          "description": "A konzisztens, átgondolt vizuális rendszer erősíti a márkaészlelést és a bizalmat.",
-          "icon": "/strapi/uploads/shield_99ea3c55de.svg"
-        },
-        {
-          "title": "Magasabb konverzió",
-          "description": "A jól megtervezett felhasználói útvonalak több látogatót alakítanak ügyféllé.",
-          "icon": "/strapi/uploads/rocket_bdac62a8cd.svg"
-        },
-        {
-          "title": "Hatékonyabb fejlesztés",
-          "description": "A design rendszer csökkenti a fejlesztési időt és a kommunikációs súrlódásokat.",
-          "icon": "/strapi/uploads/heart_5fff84213c.svg"
-        }
-      ],
-      "tools": [
-        {
-          "name": "Figma"
-        },
-        {
-          "name": "Adobe Creative Suite"
-        },
-        {
-          "name": "Framer"
-        },
-        {
-          "name": "Principle"
-        },
-        {
-          "name": "Storybook"
-        },
-        {
-          "name": "Zeplin"
-        },
-        {
-          "name": "Abstract"
-        },
-        {
-          "name": "InVision"
-        }
-      ],
-      "howWeWork": "<h3>01. Vizuális irány</h3>\n<p>Moodboard-ok és stílus-explorációk készítése, amelyek segítenek megtalálni a megfelelő vizuális hangot.</p>\n\n<h3>02. Wireframe és struktúra</h3>\n<p>Az oldal struktúrájának és információs architektúrájának kialakítása alacsony-fidelitású tervekkel.</p>\n\n<h3>03. UI tervezés</h3>\n<p>A végleges, magas fidelitású felületi tervek elkészítése minden breakpointra.</p>\n\n<h3>04. Prototípus és teszt</h3>\n<p>Kattintható prototípus készítése és tesztelése felhasználókkal a végső finomhangolás előtt.</p>\n\n<h3>05. Design rendszer és átadás</h3>\n<p>A végleges design rendszer dokumentálása és átadása a fejlesztő csapatnak.</p>",
-      "relatedProjectSlugs": []
-    },
-    {
-      "slug": "akadalymentesites",
-      "title": "Akadálymentesítés",
-      "subtitle": "Digitális termékek mindenki számára",
-      "heroDescription": "Segítünk, hogy digitális termékeid mindenki számára elérhetőek és használhatóak legyenek — a jogszabályi megfeleléstől a valódi inkluzivitásig.",
-      "valueQuestion": "A felhasználóid jelentős része akadályokba ütközik a terméked használata során — tudsz róla?",
-      "valueAnswer": "Az akadálymentesítés nem csak kötelezettség. Jobb terméket jelent mindenkinek.",
-      "heroImage": "",
-      "icon": "/strapi/uploads/eye_2d4d8a7e1d.svg",
-      "activities": [
-        {
-          "title": "Akadálymentesítési audit",
-          "description": "Meglévő weboldalak és alkalmazások átfogó WCAG 2.1 szabálynak megfelelő értékelése.",
-          "icon": "/strapi/uploads/target_5e3cc03ea2.svg"
-        },
-        {
-          "title": "Javítási terv készítés",
-          "description": "Prioritizált, lépésről lépésre követhető javítási terv összeállítása a feltárt problémák alapján.",
-          "icon": "/strapi/uploads/file_check_af75094b92.svg"
-        },
-        {
-          "title": "Asszisztív technológiás tesztelés",
-          "description": "Tesztelés képernyőolvasókkal, billentyűzetes navigációval és egyéb segédeszközökkel.",
-          "icon": "/strapi/uploads/monitor_1c73ee9576.svg"
-        },
-        {
-          "title": "Akadálymentes design review",
-          "description": "Design fázisban végzett ellenőrzés, mielőtt a fejlesztés megkezdődne.",
-          "icon": "/strapi/uploads/eye_cab7196f1e.svg"
-        },
-        {
-          "title": "Csapat képzés",
-          "description": "Fejlesztők, tervezők és tartalomkészítők képzése az akadálymentes gyakorlatokról.",
-          "icon": "/strapi/uploads/users_7f703f05a6.svg"
-        },
-        {
-          "title": "Folyamatos monitoring",
-          "description": "Rendszeres ellenőrzés és jelentéskészítés, hogy a megfelelés hosszú távon is megmaradjon.",
-          "icon": "/strapi/uploads/bar_chart_3_55704ad420.svg"
-        }
-      ],
-      "benefits": [
-        {
-          "title": "Jogszabályi megfelelés",
-          "description": "Az EU Akadálymentesítési irányelv és a WCAG 2.1 szabványoknak való megfelelés biztosítása.",
-          "icon": "/strapi/uploads/shield_99ea3c55de.svg"
-        },
-        {
-          "title": "Szélesebb elérhetőség",
-          "description": "A populáció mintegy 15%-a él valamilyen fogyatékossággal — az akadálymentes termék őket is eléri.",
-          "icon": "/strapi/uploads/rocket_bdac62a8cd.svg"
-        },
-        {
-          "title": "Jobb felhasználói élmény mindenkinek",
-          "description": "Az akadálymentesítés javítja a használhatóságot minden felhasználó számára, nem csak a fogyatékossággal élőkét.",
-          "icon": "/strapi/uploads/heart_5fff84213c.svg"
-        }
-      ],
-      "tools": [
-        {
-          "name": "axe DevTools"
-        },
-        {
-          "name": "WAVE"
-        },
-        {
-          "name": "Lighthouse"
-        },
-        {
-          "name": "NVDA"
-        },
-        {
-          "name": "VoiceOver"
-        },
-        {
-          "name": "JAWS"
-        },
-        {
-          "name": "Pa11y"
-        },
-        {
-          "name": "Contrast Checker"
-        },
-        {
-          "name": "Accessibility Insights"
-        }
-      ],
-      "howWeWork": "<h3>01. Helyzetértékelés</h3>\n<p>A jelenlegi állapot felmérése automatizált és manuális eszközökkel, WCAG 2.1 szabvány szerint.</p>\n\n<h3>02. Részletes audit</h3>\n<p>Oldalról oldalra haladó, komponensszintű vizsgálat dokumentált eredményekkel.</p>\n\n<h3>03. Javítási ütemterv</h3>\n<p>Prioritizált feladatlista a kritikus, közepes és alacsony súlyosságú problémákra bontva.</p>\n\n<h3>04. Implementációs támogatás</h3>\n<p>A fejlesztő csapat támogatása a javítások során, kód review-kkal és konzultációval.</p>\n\n<h3>05. Végső validáció</h3>\n<p>A javítások utáni újratesztelés és a megfelelési nyilatkozat elkészítése.</p>",
-      "relatedProjectSlugs": []
-    },
-    {
       "slug": "ux-kutatas",
       "title": "UX Kutatás",
       "subtitle": "Felhasználók megértése, adatalappal",
+      "kicker": "UX kutatás",
       "heroDescription": "Feltárjuk a felhasználói igényeket, viselkedési mintákat és fájdalompontokat, hogy a termékfejlesztés valós adatokon alapuljon — ne feltételezéseken.",
       "valueQuestion": "Tudod pontosan, mit akarnak a felhasználóid? Vagy csak azt, amit gondolsz, hogy akarnak?",
       "valueAnswer": "A legjobb digitális termékek mögött mindig mély felhasználói megértés áll. Mi segítünk eljutni oda.",
       "heroImage": "",
-      "icon": "/strapi/uploads/search_fd9773e11e.svg",
+      "icon": "/strapi/uploads/search_f7153fb932.svg",
       "activities": [
         {
           "title": "Felhasználói interjúk",
@@ -812,7 +636,861 @@
         }
       ],
       "howWeWork": "<h3>01. Megismerés</h3>\n<p>Megismerjük az üzleti célokat, a meglévő adatokat és a kutatás céljait. Közösen meghatározzuk a kutatási kérdéseket.</p>\n\n<h3>02. Kutatástervezés</h3>\n<p>Kiválasztjuk a megfelelő módszertant, elkészítjük a kutatási tervet és a toborzási kritériumokat.</p>\n\n<h3>03. Terepmunka</h3>\n<p>Elvégezzük az interjúkat, teszteket és megfigyeléseket a meghatározott módszertan szerint.</p>\n\n<h3>04. Elemzés és szintézis</h3>\n<p>Az összegyűjtött adatokat elemezzük, mintákat azonosítunk és akcióképes insightokat fogalmazunk meg.</p>\n\n<h3>05. Átadás és javaslatok</h3>\n<p>Prezentáljuk az eredményeket és konkrét, prioritizált javaslatokkal segítjük a továbblépést.</p>",
-      "relatedProjectSlugs": []
+      "relatedProjectSlugs": [
+        "banki-applikacio",
+        "logisztikai-szoftver"
+      ],
+      "questionsSection": {
+        "intro": {
+          "kicker": "A kihívásaid",
+          "heading": "Milyen kérdésekre segítünk választ találni?",
+          "description": "Ha ezek a kérdések ismerősek, a UX kutatás segít megalapozott döntéseket hozni."
+        },
+        "cards": [
+          {
+            "title": "„Miért nem használják a felhasználók a terméket úgy, ahogy vártuk?”",
+            "description": "Feltárjuk a valós használati mintákat és a mögöttük álló okokat, hogy tudd, hol akad el a felhasználó."
+          },
+          {
+            "title": "„Melyik fejlesztésbe érdemes befektetni?”",
+            "description": "A kutatási eredmények alapján priorizálható, mi hoz valódi értéket a felhasználóknak és az üzletnek."
+          },
+          {
+            "title": "„Kik a valódi felhasználóink és mit akarnak?”",
+            "description": "Adatokra épülő perszónákkal és interjúkkal pontos képet adunk a célcsoportjaidról."
+          },
+          {
+            "title": "„Miért alacsony a konverzió?”",
+            "description": "Használhatósági teszteléssel azonosítjuk azokat a pontokat, ahol a felhasználók elakadnak vagy kilépnek."
+          }
+        ]
+      },
+      "helpSection": {
+        "intro": {
+          "kicker": "Szakértelem",
+          "heading": "Miben tudunk segíteni?",
+          "description": "A felhasználói kutatás teljes eszköztárával dolgozunk — a tervezéstől az akcióképes javaslatokig."
+        },
+        "cards": [
+          {
+            "title": "Felhasználói interjúk",
+            "description": "Strukturált interjúk készítése célcsoportokkal, hogy megértsük a valós motivációkat és akadályokat.",
+            "icon": "/strapi/uploads/target_5e3cc03ea2.svg"
+          },
+          {
+            "title": "Használhatósági tesztelés",
+            "description": "Meglévő vagy tervezett felületek tesztelése valós felhasználókkal, hogy feltárjuk a problémás pontokat.",
+            "icon": "/strapi/uploads/zap_b1d6bfdfda.svg"
+          },
+          {
+            "title": "Perszóna készítés",
+            "description": "Adatokra épülő felhasználói perszónák létrehozása, amelyek a teljes csapat számára használhatók.",
+            "icon": "/strapi/uploads/users_7f703f05a6.svg"
+          },
+          {
+            "title": "Versenytárs elemzés",
+            "description": "A piaci környezet és a versenytársak digitális megoldásainak áttekintése.",
+            "icon": "/strapi/uploads/search_c258190a69.svg"
+          },
+          {
+            "title": "Felhasználói út térképezés",
+            "description": "User journey map-ek készítése, amelyek vizualizálják a felhasználói élmény egészét.",
+            "icon": "/strapi/uploads/bar_chart_3_55704ad420.svg"
+          },
+          {
+            "title": "Adatelemzés",
+            "description": "Meglévő analitikai adatok értelmezése és összevetése a kvalitatív eredményekkel.",
+            "icon": "/strapi/uploads/file_check_af75094b92.svg"
+          }
+        ],
+        "ctaText": "Nem tudod, melyik módszer illik a helyzetedhez? Segítünk kiválasztani.",
+        "ctaButtonText": "Kérj konzultációt",
+        "ctaButtonLink": "/kapcsolat"
+      },
+      "processSection": {
+        "intro": {
+          "kicker": "A folyamat",
+          "heading": "Hogyan dolgozunk?",
+          "description": "Átlátható, lépésről lépésre haladó kutatási folyamat, amelynek minden fázisában látod, hol tartunk."
+        },
+        "steps": [
+          {
+            "title": "Megismerés",
+            "description": "Megismerjük az üzleti célokat, a meglévő adatokat és a kutatás céljait. Közösen meghatározzuk a kutatási kérdéseket."
+          },
+          {
+            "title": "Kutatástervezés",
+            "description": "Kiválasztjuk a megfelelő módszertant, elkészítjük a kutatási tervet és a toborzási kritériumokat."
+          },
+          {
+            "title": "Terepmunka",
+            "description": "Elvégezzük az interjúkat, teszteket és megfigyeléseket a meghatározott módszertan szerint."
+          },
+          {
+            "title": "Elemzés és szintézis",
+            "description": "Az összegyűjtött adatokat elemezzük, mintákat azonosítunk és akcióképes insightokat fogalmazunk meg."
+          },
+          {
+            "title": "Átadás és javaslatok",
+            "description": "Prezentáljuk az eredményeket és konkrét, prioritizált javaslatokkal segítjük a továbblépést."
+          }
+        ]
+      },
+      "deliverablesSection": {
+        "intro": {
+          "kicker": "Kézzelfogható eredmény",
+          "heading": "Amit a projektből kapsz",
+          "description": "A kutatás végén nem csak elemzést kapsz, hanem konkrét, azonnal használható anyagokat."
+        },
+        "variant": "smallCards",
+        "smallCards": [
+          {
+            "title": "Kutatási riport",
+            "description": "Részletes, mégis áttekinthető összefoglaló a legfontosabb megállapításokkal.",
+            "icon": "/strapi/uploads/file_check_ce9c06385d.svg"
+          },
+          {
+            "title": "Perszónák",
+            "description": "Adatokra épülő felhasználói profilok, amelyeket a teljes csapat használhat.",
+            "icon": "/strapi/uploads/users_4ee181775d.svg"
+          },
+          {
+            "title": "Priorizált javaslatlista",
+            "description": "Konkrét, hatás szerint rangsorolt fejlesztési javaslatok.",
+            "icon": "/strapi/uploads/target_db2bc44631.svg"
+          },
+          {
+            "title": "Adatelemzési összefoglaló",
+            "description": "A kvantitatív adatok értelmezése és összevetése a kvalitatív eredményekkel.",
+            "icon": "/strapi/uploads/bar_chart_3_40c4ce616a.svg"
+          },
+          {
+            "title": "Használhatósági jegyzőkönyv",
+            "description": "A tesztek dokumentált eredményei, videórészletekkel és idézetekkel.",
+            "icon": "/strapi/uploads/eye_23111d9de1.svg"
+          },
+          {
+            "title": "Vezetői összefoglaló",
+            "description": "Döntéshozóknak szánt tömör kivonat a legfontosabb tanulságokkal.",
+            "icon": "/strapi/uploads/zap_e09c69bed4.svg"
+          }
+        ],
+        "largeCards": [
+          {
+            "title": "Kutatási eredmények",
+            "description": "Minden, amit a felhasználóidról megtudtunk, rendszerezve.",
+            "icon": "/strapi/uploads/search_61dfab6885.svg",
+            "bullets": [
+              "Kutatási riport",
+              "Interjú-összefoglalók",
+              "Videórészletek"
+            ]
+          },
+          {
+            "title": "Felhasználói modellek",
+            "description": "A célcsoport megértését segítő eszközök.",
+            "icon": "/strapi/uploads/users_4ee181775d.svg",
+            "bullets": [
+              "Perszónák",
+              "Felhasználói út térképek",
+              "Fájdalompont-lista"
+            ]
+          },
+          {
+            "title": "Akcióterv",
+            "description": "Konkrét lépések a továbblépéshez.",
+            "icon": "/strapi/uploads/target_db2bc44631.svg",
+            "bullets": [
+              "Priorizált javaslatok",
+              "Quick win lista",
+              "Vezetői összefoglaló"
+            ]
+          }
+        ]
+      },
+      "projectExamplesIntro": {
+        "kicker": "Referenciák",
+        "heading": "Kiemelt projektek",
+        "description": "Néhány projekt, ahol a kutatás kézzelfogható üzleti eredményt hozott."
+      },
+      "faqSection": {
+        "intro": {
+          "kicker": "Gyakori kérdések",
+          "heading": "Amit érdemes tisztázni a kutatás előtt",
+          "description": "Összegyűjtöttük a leggyakrabban felmerülő kérdéseket — ha másra is kíváncsi vagy, keress minket bátran."
+        },
+        "items": [
+          {
+            "question": "Mikor érdemes UX kutatást végezni?",
+            "answer": "Ideális esetben még a fejlesztés előtt, de meglévő termék esetén is bármikor értékes — például átalakítás, bővítés vagy alacsony konverzió esetén."
+          },
+          {
+            "question": "Mennyi ideig tart egy kutatási projekt?",
+            "answer": "A terjedelemtől függően jellemzően 3–8 hét. Egy fókuszált használhatósági teszt gyorsabb, egy átfogó feltáró kutatás hosszabb."
+          },
+          {
+            "question": "Hány felhasználóra van szükség?",
+            "answer": "Kvalitatív kutatásnál már 5–8 résztvevő is feltárja a problémák többségét. A pontos számot a kutatási célok határozzák meg."
+          },
+          {
+            "question": "Mennyi ideig tart egy UX kutatási projekt?",
+            "answer": "A legtöbb projekt 3–8 hét alatt lezajlik, a módszertantól és a résztvevők számától függően."
+          },
+          {
+            "question": "Online is működik a kutatás?",
+            "answer": "Igen — az interjúk és tesztek többsége távolról is elvégezhető, ami gyorsabb és költséghatékonyabb is lehet."
+          },
+          {
+            "question": "Mit kezdjünk az eredményekkel?",
+            "answer": "Minden kutatást priorizált, akcióképes javaslatokkal zárunk, és igény esetén a megvalósításban is támogatunk."
+          }
+        ]
+      },
+      "relatedServicesIntro": {
+        "kicker": "További szolgáltatások",
+        "heading": "Kapcsolódó szolgáltatások",
+        "description": "A kutatás önmagában is értékes, de más szolgáltatásainkkal együtt fejti ki a legnagyobb hatást."
+      },
+      "relatedServices": [
+        {
+          "slug": "ui-design",
+          "title": "UI Design",
+          "description": "Olyan felhasználói felületeket tervezünk, amelyek nem csak szépek, hanem érthetőek, használhatók és üzleti eredményeket hoznak.",
+          "icon": "/strapi/uploads/monitor_147cb28f4e.svg"
+        },
+        {
+          "slug": "akadalymentesites",
+          "title": "Akadálymentesítés",
+          "description": "Segítünk, hogy digitális termékeid mindenki számára elérhetőek és használhatóak legyenek — a jogszabályi megfeleléstől a valódi inkluzivitásig.",
+          "icon": "/strapi/uploads/eye_3615829ec8.svg"
+        }
+      ]
+    },
+    {
+      "slug": "ui-design",
+      "title": "UI Design",
+      "subtitle": "Felületek, amelyek működnek és hatnak",
+      "kicker": "UI Design",
+      "heroDescription": "Olyan felhasználói felületeket tervezünk, amelyek nem csak szépek, hanem érthetőek, használhatók és üzleti eredményeket hoznak.",
+      "valueQuestion": "Szükséged van egy szakértőre, aki érti az üzleted céljait és a felhasználók elvárásait is?",
+      "valueAnswer": "Megértjük a felhasználóid elvárásait, szokásait és céljait. Erre építjük a felületeket.",
+      "heroImage": "",
+      "icon": "/strapi/uploads/monitor_147cb28f4e.svg",
+      "activities": [
+        {
+          "title": "Vizuális tervezés",
+          "description": "Pixel-pontos UI tervek készítése, amelyek tükrözik a márka identitását és a felhasználói elvárásokat.",
+          "icon": "/strapi/uploads/palette_58dd069c14.svg"
+        },
+        {
+          "title": "Design rendszer építés",
+          "description": "Skálázható, konzisztens komponenskönyvtárak létrehozása, amelyek gyorsítják a fejlesztést.",
+          "icon": "/strapi/uploads/book_open_5b932cbc1f.svg"
+        },
+        {
+          "title": "Prototípus készítés",
+          "description": "Interaktív prototípusok, amelyekkel már a fejlesztés előtt tesztelhető a felhasználói élmény.",
+          "icon": "/strapi/uploads/monitor_1c73ee9576.svg"
+        },
+        {
+          "title": "Reszponzív design",
+          "description": "Minden képernyőméretre optimalizált felületek, mobilon és desktopon egyaránt.",
+          "icon": "/strapi/uploads/eye_cab7196f1e.svg"
+        },
+        {
+          "title": "Motion design",
+          "description": "Célzott mikro-animációk és átmenetek, amelyek javítják a felhasználói élményt.",
+          "icon": "/strapi/uploads/zap_b1d6bfdfda.svg"
+        },
+        {
+          "title": "Fejlesztői átadás",
+          "description": "Részletes specifikáció és asset-készítés a zökkenőmentes implementációért.",
+          "icon": "/strapi/uploads/file_check_af75094b92.svg"
+        }
+      ],
+      "benefits": [
+        {
+          "title": "Erősebb márkaélmény",
+          "description": "A konzisztens, átgondolt vizuális rendszer erősíti a márkaészlelést és a bizalmat.",
+          "icon": "/strapi/uploads/shield_99ea3c55de.svg"
+        },
+        {
+          "title": "Magasabb konverzió",
+          "description": "A jól megtervezett felhasználói útvonalak több látogatót alakítanak ügyféllé.",
+          "icon": "/strapi/uploads/rocket_bdac62a8cd.svg"
+        },
+        {
+          "title": "Hatékonyabb fejlesztés",
+          "description": "A design rendszer csökkenti a fejlesztési időt és a kommunikációs súrlódásokat.",
+          "icon": "/strapi/uploads/heart_5fff84213c.svg"
+        }
+      ],
+      "tools": [
+        {
+          "name": "Figma"
+        },
+        {
+          "name": "Adobe Creative Suite"
+        },
+        {
+          "name": "Framer"
+        },
+        {
+          "name": "Principle"
+        },
+        {
+          "name": "Storybook"
+        },
+        {
+          "name": "Zeplin"
+        },
+        {
+          "name": "Abstract"
+        },
+        {
+          "name": "InVision"
+        }
+      ],
+      "howWeWork": "<h3>01. Vizuális irány</h3>\n<p>Moodboard-ok és stílus-explorációk készítése, amelyek segítenek megtalálni a megfelelő vizuális hangot.</p>\n\n<h3>02. Wireframe és struktúra</h3>\n<p>Az oldal struktúrájának és információs architektúrájának kialakítása alacsony-fidelitású tervekkel.</p>\n\n<h3>03. UI tervezés</h3>\n<p>A végleges, magas fidelitású felületi tervek elkészítése minden breakpointra.</p>\n\n<h3>04. Prototípus és teszt</h3>\n<p>Kattintható prototípus készítése és tesztelése felhasználókkal a végső finomhangolás előtt.</p>\n\n<h3>05. Design rendszer és átadás</h3>\n<p>A végleges design rendszer dokumentálása és átadása a fejlesztő csapatnak.</p>",
+      "relatedProjectSlugs": [
+        "banki-applikacio",
+        "logisztikai-szoftver"
+      ],
+      "questionsSection": {
+        "intro": {
+          "kicker": "A kihívásaid",
+          "heading": "Milyen kérdésekre segítünk választ találni?",
+          "description": "Ha ezek a kérdések foglalkoztatnak, a tudatos felülettervezés a megoldás."
+        },
+        "cards": [
+          {
+            "title": "„Miért tűnik elavultnak a felületünk?”",
+            "description": "Friss, a márkádhoz illő vizuális rendszert alakítunk ki, amely bizalmat épít."
+          },
+          {
+            "title": "„Miért nem konzisztens a termékünk kinézete?”",
+            "description": "Design rendszerrel biztosítjuk, hogy minden képernyő egységes és karbantartható legyen."
+          },
+          {
+            "title": "„Hogyan lehetne magasabb a konverziónk?”",
+            "description": "A felhasználói útvonalak áttervezésével több látogatóból lesz ügyfél."
+          },
+          {
+            "title": "„Hogyan gyorsítható a fejlesztés?”",
+            "description": "A komponensalapú tervezés csökkenti a fejlesztési időt és a félreértéseket."
+          }
+        ]
+      },
+      "helpSection": {
+        "intro": {
+          "kicker": "Szakértelem",
+          "heading": "Miben tudunk segíteni?",
+          "description": "A vizuális iránytól a fejlesztői átadásig a felülettervezés minden fázisát lefedjük."
+        },
+        "cards": [
+          {
+            "title": "Vizuális tervezés",
+            "description": "Pixel-pontos UI tervek készítése, amelyek tükrözik a márka identitását és a felhasználói elvárásokat.",
+            "icon": "/strapi/uploads/palette_58dd069c14.svg"
+          },
+          {
+            "title": "Design rendszer építés",
+            "description": "Skálázható, konzisztens komponenskönyvtárak létrehozása, amelyek gyorsítják a fejlesztést.",
+            "icon": "/strapi/uploads/book_open_5b932cbc1f.svg"
+          },
+          {
+            "title": "Prototípus készítés",
+            "description": "Interaktív prototípusok, amelyekkel már a fejlesztés előtt tesztelhető a felhasználói élmény.",
+            "icon": "/strapi/uploads/monitor_1c73ee9576.svg"
+          },
+          {
+            "title": "Reszponzív design",
+            "description": "Minden képernyőméretre optimalizált felületek, mobilon és desktopon egyaránt.",
+            "icon": "/strapi/uploads/eye_cab7196f1e.svg"
+          },
+          {
+            "title": "Motion design",
+            "description": "Célzott mikro-animációk és átmenetek, amelyek javítják a felhasználói élményt.",
+            "icon": "/strapi/uploads/zap_b1d6bfdfda.svg"
+          },
+          {
+            "title": "Fejlesztői átadás",
+            "description": "Részletes specifikáció és asset-készítés a zökkenőmentes implementációért.",
+            "icon": "/strapi/uploads/file_check_af75094b92.svg"
+          }
+        ],
+        "ctaText": "Csak egy részterületen kell segítség? Rugalmasan alkalmazkodunk.",
+        "ctaButtonText": "Beszéljük meg",
+        "ctaButtonLink": "/kapcsolat"
+      },
+      "processSection": {
+        "intro": {
+          "kicker": "A folyamat",
+          "heading": "Hogyan dolgozunk?",
+          "description": "Iteratív tervezési folyamat, ahol minden lépésnél véleményezheted és alakíthatod az irányt."
+        },
+        "steps": [
+          {
+            "title": "Vizuális irány",
+            "description": "Moodboard-ok és stílus-explorációk készítése, amelyek segítenek megtalálni a megfelelő vizuális hangot."
+          },
+          {
+            "title": "Wireframe és struktúra",
+            "description": "Az oldal struktúrájának és információs architektúrájának kialakítása alacsony-fidelitású tervekkel."
+          },
+          {
+            "title": "UI tervezés",
+            "description": "A végleges, magas fidelitású felületi tervek elkészítése minden breakpointra."
+          },
+          {
+            "title": "Prototípus és teszt",
+            "description": "Kattintható prototípus készítése és tesztelése felhasználókkal a végső finomhangolás előtt."
+          },
+          {
+            "title": "Design rendszer és átadás",
+            "description": "A végleges design rendszer dokumentálása és átadása a fejlesztő csapatnak."
+          }
+        ]
+      },
+      "deliverablesSection": {
+        "intro": {
+          "kicker": "Kézzelfogható eredmény",
+          "heading": "Amit a projektből kapsz",
+          "description": "A projekt végén minden anyagot átadunk, rendezetten és fejlesztésre készen."
+        },
+        "variant": "largeCards",
+        "smallCards": [
+          {
+            "title": "UI tervek",
+            "description": "Pixel-pontos, minden képernyőméretre optimalizált felületi tervek.",
+            "icon": "/strapi/uploads/palette_91a5c2b6b6.svg"
+          },
+          {
+            "title": "Design rendszer",
+            "description": "Dokumentált komponenskönyvtár, amely gyorsítja a fejlesztést.",
+            "icon": "/strapi/uploads/book_open_90dd84a5cb.svg"
+          },
+          {
+            "title": "Interaktív prototípus",
+            "description": "Kattintható prototípus, amellyel a fejlesztés előtt tesztelhető az élmény.",
+            "icon": "/strapi/uploads/monitor_694e88d695.svg"
+          },
+          {
+            "title": "Mikro-animációk",
+            "description": "Motion design specifikáció az átmenetekhez és visszajelzésekhez.",
+            "icon": "/strapi/uploads/zap_e09c69bed4.svg"
+          },
+          {
+            "title": "Fejlesztői specifikáció",
+            "description": "Részletes átadási dokumentáció a zökkenőmentes implementációhoz.",
+            "icon": "/strapi/uploads/file_check_ce9c06385d.svg"
+          },
+          {
+            "title": "Asset csomag",
+            "description": "Exportált ikonok, képek és grafikai elemek, fejlesztésre készen.",
+            "icon": "/strapi/uploads/target_db2bc44631.svg"
+          }
+        ],
+        "largeCards": [
+          {
+            "title": "Kész UI tervek",
+            "description": "A teljes termék végleges vizuális terve.",
+            "icon": "/strapi/uploads/palette_91a5c2b6b6.svg",
+            "bullets": [
+              "Minden képernyő terve",
+              "Reszponzív változatok",
+              "Sötét/világos mód (igény szerint)"
+            ]
+          },
+          {
+            "title": "Design rendszer",
+            "description": "Skálázható alap a további fejlesztéshez.",
+            "icon": "/strapi/uploads/book_open_90dd84a5cb.svg",
+            "bullets": [
+              "Komponenskönyvtár",
+              "Stílus-útmutató",
+              "Használati dokumentáció"
+            ]
+          },
+          {
+            "title": "Prototípus és átadás",
+            "description": "Minden, ami a megvalósításhoz kell.",
+            "icon": "/strapi/uploads/monitor_694e88d695.svg",
+            "bullets": [
+              "Interaktív prototípus",
+              "Fejlesztői specifikáció",
+              "Exportált assetek"
+            ]
+          }
+        ]
+      },
+      "projectExamplesIntro": {
+        "kicker": "Portfólió",
+        "heading": "Projektpéldák",
+        "description": "Néhány felület, amelyet mi terveztünk."
+      },
+      "faqSection": {
+        "intro": {
+          "kicker": "Gyakori kérdések",
+          "heading": "Amit érdemes tisztázni a tervezés előtt",
+          "description": "A leggyakrabban felmerülő kérdések — ha más is érdekel, keress minket bátran."
+        },
+        "items": [
+          {
+            "question": "Kell kész arculat a UI tervezéshez?",
+            "answer": "Nem feltétlenül — meglévő arculatra is építünk, de a vizuális irány kialakításában is tudunk segíteni."
+          },
+          {
+            "question": "Mennyi ideig tart egy UI design projekt?",
+            "answer": "Egy kisebb termék 4–6 hét, egy összetettebb alkalmazás 2–4 hónap — a pontos ütemtervet az elején rögzítjük."
+          },
+          {
+            "question": "Figma-ban dolgoztok?",
+            "answer": "Igen, elsősorban Figma-t használunk, így a tervek könnyen megoszthatók és a fejlesztők számára is jól használhatók."
+          },
+          {
+            "question": "A fejlesztést is vállaljátok?",
+            "answer": "A tervek implementálásában partnereinkkel együttműködve tudunk támogatni, és a fejlesztés alatt is elérhetők maradunk."
+          },
+          {
+            "question": "Mi történik, ha később új képernyők kellenek?",
+            "answer": "A design rendszer pontosan ezt szolgálja: az új felületek gyorsan, konzisztensen bővíthetők."
+          }
+        ]
+      },
+      "relatedServicesIntro": {
+        "kicker": "További szolgáltatások",
+        "heading": "Kapcsolódó szolgáltatások",
+        "description": "A UI design más szolgáltatásainkkal kombinálva hozza a legjobb eredményt."
+      },
+      "relatedServices": [
+        {
+          "slug": "ux-kutatas",
+          "title": "UX Kutatás",
+          "description": "Feltárjuk a felhasználói igényeket, viselkedési mintákat és fájdalompontokat, hogy a termékfejlesztés valós adatokon alapuljon — ne feltételezéseken.",
+          "icon": "/strapi/uploads/search_f7153fb932.svg"
+        },
+        {
+          "slug": "akadalymentesites",
+          "title": "Akadálymentesítés",
+          "description": "Segítünk, hogy digitális termékeid mindenki számára elérhetőek és használhatóak legyenek — a jogszabályi megfeleléstől a valódi inkluzivitásig.",
+          "icon": "/strapi/uploads/eye_3615829ec8.svg"
+        }
+      ]
+    },
+    {
+      "slug": "akadalymentesites",
+      "title": "Akadálymentesítés",
+      "subtitle": "Digitális termékek mindenki számára",
+      "kicker": "Akadálymentesítés",
+      "heroDescription": "Segítünk, hogy digitális termékeid mindenki számára elérhetőek és használhatóak legyenek — a jogszabályi megfeleléstől a valódi inkluzivitásig.",
+      "valueQuestion": "A felhasználóid jelentős része akadályokba ütközik a terméked használata során — tudsz róla?",
+      "valueAnswer": "Az akadálymentesítés nem csak kötelezettség. Jobb terméket jelent mindenkinek.",
+      "heroImage": "",
+      "icon": "/strapi/uploads/eye_3615829ec8.svg",
+      "activities": [
+        {
+          "title": "Akadálymentesítési audit",
+          "description": "Meglévő weboldalak és alkalmazások átfogó WCAG 2.1 szabálynak megfelelő értékelése.",
+          "icon": "/strapi/uploads/target_5e3cc03ea2.svg"
+        },
+        {
+          "title": "Javítási terv készítés",
+          "description": "Prioritizált, lépésről lépésre követhető javítási terv összeállítása a feltárt problémák alapján.",
+          "icon": "/strapi/uploads/file_check_af75094b92.svg"
+        },
+        {
+          "title": "Asszisztív technológiás tesztelés",
+          "description": "Tesztelés képernyőolvasókkal, billentyűzetes navigációval és egyéb segédeszközökkel.",
+          "icon": "/strapi/uploads/monitor_1c73ee9576.svg"
+        },
+        {
+          "title": "Akadálymentes design review",
+          "description": "Design fázisban végzett ellenőrzés, mielőtt a fejlesztés megkezdődne.",
+          "icon": "/strapi/uploads/eye_cab7196f1e.svg"
+        },
+        {
+          "title": "Csapat képzés",
+          "description": "Fejlesztők, tervezők és tartalomkészítők képzése az akadálymentes gyakorlatokról.",
+          "icon": "/strapi/uploads/users_7f703f05a6.svg"
+        },
+        {
+          "title": "Folyamatos monitoring",
+          "description": "Rendszeres ellenőrzés és jelentéskészítés, hogy a megfelelés hosszú távon is megmaradjon.",
+          "icon": "/strapi/uploads/bar_chart_3_55704ad420.svg"
+        }
+      ],
+      "benefits": [
+        {
+          "title": "Jogszabályi megfelelés",
+          "description": "Az EU Akadálymentesítési irányelv és a WCAG 2.1 szabványoknak való megfelelés biztosítása.",
+          "icon": "/strapi/uploads/shield_99ea3c55de.svg"
+        },
+        {
+          "title": "Szélesebb elérhetőség",
+          "description": "A populáció mintegy 15%-a él valamilyen fogyatékossággal — az akadálymentes termék őket is eléri.",
+          "icon": "/strapi/uploads/rocket_bdac62a8cd.svg"
+        },
+        {
+          "title": "Jobb felhasználói élmény mindenkinek",
+          "description": "Az akadálymentesítés javítja a használhatóságot minden felhasználó számára, nem csak a fogyatékossággal élőkét.",
+          "icon": "/strapi/uploads/heart_5fff84213c.svg"
+        }
+      ],
+      "tools": [
+        {
+          "name": "axe DevTools"
+        },
+        {
+          "name": "WAVE"
+        },
+        {
+          "name": "Lighthouse"
+        },
+        {
+          "name": "NVDA"
+        },
+        {
+          "name": "VoiceOver"
+        },
+        {
+          "name": "JAWS"
+        },
+        {
+          "name": "Pa11y"
+        },
+        {
+          "name": "Contrast Checker"
+        },
+        {
+          "name": "Accessibility Insights"
+        }
+      ],
+      "howWeWork": "<h3>01. Helyzetértékelés</h3>\n<p>A jelenlegi állapot felmérése automatizált és manuális eszközökkel, WCAG 2.1 szabvány szerint.</p>\n\n<h3>02. Részletes audit</h3>\n<p>Oldalról oldalra haladó, komponensszintű vizsgálat dokumentált eredményekkel.</p>\n\n<h3>03. Javítási ütemterv</h3>\n<p>Prioritizált feladatlista a kritikus, közepes és alacsony súlyosságú problémákra bontva.</p>\n\n<h3>04. Implementációs támogatás</h3>\n<p>A fejlesztő csapat támogatása a javítások során, kód review-kkal és konzultációval.</p>\n\n<h3>05. Végső validáció</h3>\n<p>A javítások utáni újratesztelés és a megfelelési nyilatkozat elkészítése.</p>",
+      "relatedProjectSlugs": [
+        "e-kereskedelmi-akadalymentesites"
+      ],
+      "questionsSection": {
+        "intro": {
+          "kicker": "A kihívásaid",
+          "heading": "Milyen kérdésekre segítünk választ találni?",
+          "description": "Ha ezek a kérdések felmerültek nálatok, az akadálymentesítés nem várhat tovább."
+        },
+        "cards": [
+          {
+            "title": "„Megfelel a weboldalunk a jogszabályoknak?”",
+            "description": "Auditunk pontos képet ad arról, hol álltok az EU-s akadálymentesítési előírásokhoz képest."
+          },
+          {
+            "title": "„Kiket veszítünk el a jelenlegi felülettel?”",
+            "description": "Feltárjuk, mely felhasználói csoportok ütköznek akadályokba, és mekkora ez a kör."
+          },
+          {
+            "title": "„Mennyi munka lenne a megfelelés?”",
+            "description": "Priorizált javítási tervvel megmutatjuk, mit érdemes először és mit később javítani."
+          },
+          {
+            "title": "„Hogyan előzhetők meg az újabb hibák?”",
+            "description": "Képzéssel és folyamatba épített ellenőrzéssel a csapat hosszú távon is akadálymentes terméket készít."
+          }
+        ]
+      },
+      "helpSection": {
+        "intro": {
+          "kicker": "Szakértelem",
+          "heading": "Miben tudunk segíteni?",
+          "description": "Az auditálástól a csapatképzésig az akadálymentesítés teljes folyamatát lefedjük."
+        },
+        "cards": [
+          {
+            "title": "Akadálymentesítési audit",
+            "description": "Meglévő weboldalak és alkalmazások átfogó WCAG 2.1 szabálynak megfelelő értékelése.",
+            "icon": "/strapi/uploads/target_5e3cc03ea2.svg"
+          },
+          {
+            "title": "Javítási terv készítés",
+            "description": "Prioritizált, lépésről lépésre követhető javítási terv összeállítása a feltárt problémák alapján.",
+            "icon": "/strapi/uploads/file_check_af75094b92.svg"
+          },
+          {
+            "title": "Asszisztív technológiás tesztelés",
+            "description": "Tesztelés képernyőolvasókkal, billentyűzetes navigációval és egyéb segédeszközökkel.",
+            "icon": "/strapi/uploads/monitor_1c73ee9576.svg"
+          },
+          {
+            "title": "Akadálymentes design review",
+            "description": "Design fázisban végzett ellenőrzés, mielőtt a fejlesztés megkezdődne.",
+            "icon": "/strapi/uploads/eye_cab7196f1e.svg"
+          },
+          {
+            "title": "Csapat képzés",
+            "description": "Fejlesztők, tervezők és tartalomkészítők képzése az akadálymentes gyakorlatokról.",
+            "icon": "/strapi/uploads/users_7f703f05a6.svg"
+          },
+          {
+            "title": "Folyamatos monitoring",
+            "description": "Rendszeres ellenőrzés és jelentéskészítés, hogy a megfelelés hosszú távon is megmaradjon.",
+            "icon": "/strapi/uploads/bar_chart_3_55704ad420.svg"
+          }
+        ],
+        "ctaText": "Nem tudod, hol kezdjétek? Egy gyors állapotfelméréssel segítünk tisztán látni.",
+        "ctaButtonText": "Kérj állapotfelmérést",
+        "ctaButtonLink": "/kapcsolat"
+      },
+      "processSection": {
+        "intro": {
+          "kicker": "A folyamat",
+          "heading": "Hogyan dolgozunk?",
+          "description": "Szabványokra épülő, dokumentált folyamat — az első felméréstől a megfelelési nyilatkozatig."
+        },
+        "steps": [
+          {
+            "title": "Helyzetértékelés",
+            "description": "A jelenlegi állapot felmérése automatizált és manuális eszközökkel, WCAG 2.1 szabvány szerint."
+          },
+          {
+            "title": "Részletes audit",
+            "description": "Oldalról oldalra haladó, komponensszintű vizsgálat dokumentált eredményekkel."
+          },
+          {
+            "title": "Javítási ütemterv",
+            "description": "Prioritizált feladatlista a kritikus, közepes és alacsony súlyosságú problémákra bontva."
+          },
+          {
+            "title": "Implementációs támogatás",
+            "description": "A fejlesztő csapat támogatása a javítások során, kód review-kkal és konzultációval."
+          },
+          {
+            "title": "Végső validáció",
+            "description": "A javítások utáni újratesztelés és a megfelelési nyilatkozat elkészítése."
+          }
+        ]
+      },
+      "deliverablesSection": {
+        "intro": {
+          "kicker": "Kézzelfogható eredmény",
+          "heading": "Amit a projektből kapsz",
+          "description": "Minden szakaszban dokumentált, ellenőrizhető eredményeket adunk át."
+        },
+        "variant": "smallCards",
+        "smallCards": [
+          {
+            "title": "Audit riport",
+            "description": "Részletes, WCAG 2.1 szerinti hibalista súlyosság szerint rendezve.",
+            "icon": "/strapi/uploads/file_check_ce9c06385d.svg"
+          },
+          {
+            "title": "Javítási ütemterv",
+            "description": "Priorizált feladatlista, amely mentén a csapat haladni tud.",
+            "icon": "/strapi/uploads/target_db2bc44631.svg"
+          },
+          {
+            "title": "Megfelelési nyilatkozat",
+            "description": "A javítások utáni validáció és a hivatalos nyilatkozat elkészítése.",
+            "icon": "/strapi/uploads/shield_00c95f2902.svg"
+          },
+          {
+            "title": "Csapatképzési anyagok",
+            "description": "Gyakorlati útmutatók fejlesztőknek, tervezőknek és tartalomkészítőknek.",
+            "icon": "/strapi/uploads/users_4ee181775d.svg"
+          },
+          {
+            "title": "Tesztelési jegyzőkönyv",
+            "description": "Képernyőolvasós és billentyűzetes tesztek dokumentált eredményei.",
+            "icon": "/strapi/uploads/eye_23111d9de1.svg"
+          },
+          {
+            "title": "Monitoring riportok",
+            "description": "Rendszeres ellenőrzési jelentések a tartós megfelelésért.",
+            "icon": "/strapi/uploads/bar_chart_3_40c4ce616a.svg"
+          }
+        ],
+        "largeCards": [
+          {
+            "title": "Audit csomag",
+            "description": "A teljes állapotfelmérés eredményei.",
+            "icon": "/strapi/uploads/file_check_ce9c06385d.svg",
+            "bullets": [
+              "WCAG 2.1 hibalista",
+              "Súlyossági besorolás",
+              "Képernyőképes dokumentáció"
+            ]
+          },
+          {
+            "title": "Javítási terv",
+            "description": "Világos útiterv a megfeleléshez.",
+            "icon": "/strapi/uploads/target_db2bc44631.svg",
+            "bullets": [
+              "Priorizált feladatlista",
+              "Becsült ráfordítások",
+              "Quick win javaslatok"
+            ]
+          },
+          {
+            "title": "Megfelelés és fenntartás",
+            "description": "Hosszú távú biztonság.",
+            "icon": "/strapi/uploads/shield_00c95f2902.svg",
+            "bullets": [
+              "Megfelelési nyilatkozat",
+              "Csapatképzés",
+              "Monitoring terv"
+            ]
+          }
+        ]
+      },
+      "projectExamplesIntro": {
+        "kicker": "Referenciák",
+        "heading": "Projektpéldák",
+        "description": "Projektek, ahol az akadálymentesítés valódi üzleti értéket hozott."
+      },
+      "faqSection": {
+        "intro": {
+          "kicker": "Gyakori kérdések",
+          "heading": "Amit érdemes tisztázni az audit előtt",
+          "description": "A leggyakoribb kérdések az akadálymentesítésről — ha más is érdekel, keress minket."
+        },
+        "items": [
+          {
+            "question": "Kötelező az akadálymentesítés?",
+            "answer": "Az EU Akadálymentesítési irányelve alapján egyre több szervezet számára igen — 2025-től a legtöbb online szolgáltatásra is vonatkozik."
+          },
+          {
+            "question": "Mennyi ideig tart egy audit?",
+            "answer": "Egy átlagos weboldal auditja 2–4 hét, az oldal méretétől és összetettségétől függően."
+          },
+          {
+            "question": "A javításokat is elvégzitek?",
+            "answer": "A javítási terv alapján a fejlesztőcsapatot támogatjuk kód review-kkal és konzultációval, illetve partnereinkkel a kivitelezésben is segítünk."
+          },
+          {
+            "question": "Elég egy automatikus ellenőrzés?",
+            "answer": "Nem — az automatizált eszközök a problémák kb. 30–40%-át találják meg. A teljes képhez manuális és asszisztív technológiás tesztelés is szükséges."
+          },
+          {
+            "question": "Mi történik az audit után?",
+            "answer": "Priorizált javítási tervet adunk át, majd a javítások után újratesztelünk és megfelelési nyilatkozatot készítünk."
+          }
+        ]
+      },
+      "relatedServicesIntro": {
+        "kicker": "További szolgáltatások",
+        "heading": "Kapcsolódó szolgáltatások",
+        "description": "Az akadálymentesítés a tervezéssel és kutatással együtt a leghatékonyabb."
+      },
+      "relatedServices": [
+        {
+          "slug": "ux-kutatas",
+          "title": "UX Kutatás",
+          "description": "Feltárjuk a felhasználói igényeket, viselkedési mintákat és fájdalompontokat, hogy a termékfejlesztés valós adatokon alapuljon — ne feltételezéseken.",
+          "icon": "/strapi/uploads/search_f7153fb932.svg"
+        },
+        {
+          "slug": "ui-design",
+          "title": "UI Design",
+          "description": "Olyan felhasználói felületeket tervezünk, amelyek nem csak szépek, hanem érthetőek, használhatók és üzleti eredményeket hoznak.",
+          "icon": "/strapi/uploads/monitor_147cb28f4e.svg"
+        }
+      ]
     }
   ],
   "teamMembers": [
