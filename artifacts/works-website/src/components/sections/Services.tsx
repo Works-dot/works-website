@@ -18,6 +18,7 @@ export function Services() {
         iconSrc: s.icon,
         title: s.title,
         desc: s.heroDescription,
+        slug: s.slug,
       }))
     : [];
 
@@ -47,6 +48,7 @@ export function Services() {
               title={s.title} 
               description={s.desc} 
               index={i} 
+              href={s.slug ? `/szolgaltatasok/${s.slug}` : undefined}
             />
           ))}
           

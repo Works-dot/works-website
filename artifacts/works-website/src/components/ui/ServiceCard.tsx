@@ -1,15 +1,17 @@
 import { Search } from "lucide-react";
 import { motion } from "framer-motion";
+import { Link } from "wouter";
 
 interface ServiceCardProps {
   iconSrc?: string;
   title: string;
   description: string;
   index: number;
+  href?: string;
 }
 
-export function ServiceCard({ iconSrc, title, description, index }: ServiceCardProps) {
-  return (
+export function ServiceCard({ iconSrc, title, description, index, href }: ServiceCardProps) {
+  const card = (
     <motion.div 
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
@@ -30,4 +32,14 @@ export function ServiceCard({ iconSrc, title, description, index }: ServiceCardP
       <p className="text-works-dark/60 leading-relaxed flex-grow">{description}</p>
     </motion.div>
   );
+
+  if (href) {
+    return (
+      <Link href={href} className="block h-full">
+        {card}
+      </Link>
+    );
+  }
+
+  return card;
 }
