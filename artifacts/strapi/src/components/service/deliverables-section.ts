@@ -1,9 +1,9 @@
 export default {
   "collectionName": "components_service_deliverables_sections",
   "info": {
-    "displayName": "Amit a projektből kapsz szekció",
+    "displayName": "5. „Amit a projektből kapsz” szekció",
     "icon": "gift",
-    "description": "Két megjelenítési változat: kis kártyák vagy nagy kártyák felsorolással"
+    "description": "Két megjelenítési változat: kis kártyák (A) vagy nagy kártyák felsorolással (B)"
   },
   "options": {},
   "attributes": {

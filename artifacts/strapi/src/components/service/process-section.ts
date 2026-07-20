@@ -1,9 +1,9 @@
 export default {
   "collectionName": "components_service_process_sections",
   "info": {
-    "displayName": "Hogyan dolgozunk szekció",
+    "displayName": "4. „Hogyan dolgozunk?” szekció",
     "icon": "arrow-right",
-    "description": "Számozott folyamatlépések"
+    "description": "Számozott folyamatlépések idővonalon"
   },
   "options": {},
   "attributes": {

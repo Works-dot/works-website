@@ -1,9 +1,9 @@
 export default {
   "collectionName": "components_service_questions_sections",
   "info": {
-    "displayName": "Kérdések szekció",
+    "displayName": "2. „Milyen kérdésekre segítünk választ találni?” szekció",
     "icon": "question",
-    "description": "Milyen kérdésekre segítünk választ találni?"
+    "description": "A fejléc alatti kérdéskártyás szekció"
   },
   "options": {},
   "attributes": {

@@ -15,7 +15,7 @@ export function useStrapiQuery<T>(
     if (cached && Date.now() - cached.timestamp < CACHE_TTL) {
       return cached.data as T;
     }
-    return null;
+    return fallbackData ?? null;
   });
   const [loading, setLoading] = useState(STRAPI_ENABLED && data === null);
   const [error, setError] = useState<string | null>(null);

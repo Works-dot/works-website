@@ -99,22 +99,6 @@ interface StrapiBlogPost {
   contentBlocks: StrapiContentBlock[];
 }
 
-interface StrapiActivity {
-  title: string;
-  description: string;
-  icon: StrapiMedia | null;
-}
-
-interface StrapiBenefit {
-  title: string;
-  description: string;
-  icon: StrapiMedia | null;
-}
-
-interface StrapiTool {
-  name: string;
-}
-
 interface StrapiServiceGeneral {
   slug: string;
   title: string;
@@ -122,11 +106,6 @@ interface StrapiServiceGeneral {
   heroDescription: string;
   icon: StrapiMedia | null;
   heroImage: StrapiMedia | null;
-}
-
-interface StrapiValueProposition {
-  question: string;
-  answer: string;
 }
 
 interface StrapiSectionIntro {
@@ -173,11 +152,6 @@ interface StrapiService {
   id: number;
   documentId: string;
   general: (StrapiServiceGeneral & { kicker?: string | null }) | null;
-  valueProposition: StrapiValueProposition | null;
-  activities: StrapiActivity[];
-  benefits: StrapiBenefit[];
-  tools: StrapiTool[];
-  howWeWork: string;
   relatedProjects: StrapiProject[];
   order: number;
   questionsSection: { intro: StrapiSectionIntro | null; cards: StrapiQuestionCard[] } | null;
@@ -320,14 +294,8 @@ export interface Service {
   subtitle: string;
   kicker: string;
   heroDescription: string;
-  valueQuestion: string;
-  valueAnswer: string;
   heroImage: string;
   icon: string;
-  activities: { title: string; description: string; icon: string }[];
-  benefits: { title: string; description: string; icon: string }[];
-  tools: { name: string }[];
-  howWeWork: string;
   relatedProjectSlugs: string[];
   questionsSection: ServiceQuestionsSection | null;
   helpSection: ServiceHelpSection | null;
@@ -477,13 +445,13 @@ export async function getGalleryImages(): Promise<GalleryImage[]> {
 }
 
 const SERVICE_POPULATE =
-  "populate[0]=general&populate[1]=general.icon&populate[2]=general.heroImage&populate[3]=valueProposition&populate[4]=activities.icon&populate[5]=benefits.icon&populate[6]=tools&populate[7]=relatedProjects&populate[8]=seo" +
-  "&populate[9]=questionsSection.intro&populate[10]=questionsSection.cards" +
-  "&populate[11]=helpSection.intro&populate[12]=helpSection.cards.icon" +
-  "&populate[13]=processSection.intro&populate[14]=processSection.steps" +
-  "&populate[15]=deliverablesSection.intro&populate[16]=deliverablesSection.smallCards.icon&populate[17]=deliverablesSection.largeCards.icon&populate[18]=deliverablesSection.largeCards.bullets" +
-  "&populate[19]=projectExamplesIntro&populate[20]=faqSection.intro&populate[21]=faqSection.items" +
-  "&populate[22]=relatedServicesIntro&populate[23]=relatedServices.general.icon";
+  "populate[0]=general&populate[1]=general.icon&populate[2]=general.heroImage&populate[3]=relatedProjects&populate[4]=seo" +
+  "&populate[5]=questionsSection.intro&populate[6]=questionsSection.cards" +
+  "&populate[7]=helpSection.intro&populate[8]=helpSection.cards.icon" +
+  "&populate[9]=processSection.intro&populate[10]=processSection.steps" +
+  "&populate[11]=deliverablesSection.intro&populate[12]=deliverablesSection.smallCards.icon&populate[13]=deliverablesSection.largeCards.icon&populate[14]=deliverablesSection.largeCards.bullets" +
+  "&populate[15]=projectExamplesIntro&populate[16]=faqSection.intro&populate[17]=faqSection.items" +
+  "&populate[18]=relatedServicesIntro&populate[19]=relatedServices.general.icon";
 
 function mapSectionIntro(i: StrapiSectionIntro | null | undefined): SectionIntro | null {
   if (!i) return null;
@@ -501,22 +469,8 @@ function mapService(s: StrapiService): Service {
     subtitle: s.general?.subtitle || "",
     kicker: s.general?.kicker || "",
     heroDescription: s.general?.heroDescription || "",
-    valueQuestion: s.valueProposition?.question || "",
-    valueAnswer: s.valueProposition?.answer || "",
     heroImage: strapiImageUrl(s.general?.heroImage?.url),
     icon: strapiImageUrl(s.general?.icon?.url),
-    activities: (s.activities || []).map((a) => ({
-      title: a.title,
-      description: a.description,
-      icon: strapiImageUrl(a.icon?.url),
-    })),
-    benefits: (s.benefits || []).map((b) => ({
-      title: b.title,
-      description: b.description,
-      icon: strapiImageUrl(b.icon?.url),
-    })),
-    tools: (s.tools || []).map((t) => ({ name: t.name })),
-    howWeWork: s.howWeWork || "",
     relatedProjectSlugs: (s.relatedProjects || []).map((p) => p.slug),
     questionsSection: s.questionsSection
       ? {

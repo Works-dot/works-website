@@ -306,27 +306,7 @@ async function seed() {
       title: 'UX Kutatás',
       subtitle: 'Felhasználók megértése, adatalappal',
       heroDescription: 'Feltárjuk a felhasználói igényeket, viselkedési mintákat és fájdalompontokat, hogy a termékfejlesztés valós adatokon alapuljon — ne feltételezéseken.',
-      valueQuestion: 'Tudod pontosan, mit akarnak a felhasználóid? Vagy csak azt, amit gondolsz, hogy akarnak?',
-      valueAnswer: 'A legjobb digitális termékek mögött mindig mély felhasználói megértés áll. Mi segítünk eljutni oda.',
       order: 1,
-      activities: [
-        { title: 'Felhasználói interjúk', description: 'Strukturált interjúk készítése célcsoportokkal, hogy megértsük a valós motivációkat és akadályokat.' },
-        { title: 'Használhatósági tesztelés', description: 'Meglévő vagy tervezett felületek tesztelése valós felhasználókkal, hogy feltárjuk a problémás pontokat.' },
-        { title: 'Perszóna készítés', description: 'Adatokra épülő felhasználói perszónák létrehozása, amelyek a teljes csapat számára használhatók.' },
-        { title: 'Versenytárs elemzés', description: 'A piaci környezet és a versenytársak digitális megoldásainak áttekintése.' },
-        { title: 'Felhasználói út térképezés', description: 'User journey map-ek készítése, amelyek vizualizálják a felhasználói élmény egészét.' },
-        { title: 'Adatelemzés', description: 'Meglévő analitikai adatok értelmezése és összevetése a kvalitatív eredményekkel.' },
-      ],
-      benefits: [
-        { title: 'Kisebb fejlesztési kockázat', description: 'A kutatás csökkenti annak esélyét, hogy olyan funkciókat fejlesszünk, amelyeket senki sem használ.' },
-        { title: 'Gyorsabb piacra kerülés', description: 'A célzott fejlesztés kevésbé pazarolja az erőforrásokat és gyorsabban jut el az értékes megoldásig.' },
-        { title: 'Magasabb felhasználói elégedettség', description: 'Az adatokra építő tervezés eredményeképpen a felhasználók elégedettebbek lesznek a végtermékkel.' },
-      ],
-      tools: [
-        { name: 'Hotjar' }, { name: 'Google Analytics' }, { name: 'Maze' },
-        { name: 'Lookback' }, { name: 'Miro' }, { name: 'Optimal Workshop' },
-        { name: 'UserTesting' }, { name: 'Dovetail' }, { name: 'FigJam' },
-      ],
       processSteps: [
         { stepNumber: '01', title: 'Megismerés', description: 'Megismerjük az üzleti célokat, a meglévő adatokat és a kutatás céljait. Közösen meghatározzuk a kutatási kérdéseket.' },
         { stepNumber: '02', title: 'Kutatástervezés', description: 'Kiválasztjuk a megfelelő módszertant, elkészítjük a kutatási tervet és a toborzási kritériumokat.' },
@@ -341,27 +321,7 @@ async function seed() {
       title: 'UI Design',
       subtitle: 'Felületek, amelyek működnek és hatnak',
       heroDescription: 'Olyan felhasználói felületeket tervezünk, amelyek nem csak szépek, hanem érthetőek, használhatóak és üzleti eredményeket hoznak.',
-      valueQuestion: 'Szükséged van egy szakértőre, aki érti az üzleted céljait és a felhasználók elvárásait is?',
-      valueAnswer: 'Megértjük a felhasználóid elvárásait, szokásait és céljait. Erre építjük a felületeket.',
       order: 2,
-      activities: [
-        { title: 'Vizuális tervezés', description: 'Pixel-pontos UI tervek készítése, amelyek tükrözik a márka identitását és a felhasználói elvárásokat.' },
-        { title: 'Design rendszer építés', description: 'Skálázható, konzisztens komponenskönyvtárak létrehozása, amelyek gyorsítják a fejlesztést.' },
-        { title: 'Prototípus készítés', description: 'Interaktív prototípusok, amelyekkel már a fejlesztés előtt tesztelhető a felhasználói élmény.' },
-        { title: 'Reszponzív design', description: 'Minden képernyőméretre optimalizált felületek, mobilon és desktopon egyaránt.' },
-        { title: 'Motion design', description: 'Célzott mikro-animációk és átmenetek, amelyek javítják a felhasználói élményt.' },
-        { title: 'Fejlesztői átadás', description: 'Részletes specifikáció és asset-készítés a zökkenőmentes implementációért.' },
-      ],
-      benefits: [
-        { title: 'Erősebb márkaélmény', description: 'A konzisztens, átgondolt vizuális rendszer erősíti a márkaészlelést és a bizalmat.' },
-        { title: 'Magasabb konverzió', description: 'A jól megtervezett felhasználói útvonalak több látogatót alakítanak ügyféllé.' },
-        { title: 'Hatékonyabb fejlesztés', description: 'A design rendszer csökkenti a fejlesztési időt és a kommunikációs súrlódásokat.' },
-      ],
-      tools: [
-        { name: 'Figma' }, { name: 'Adobe Creative Suite' }, { name: 'Framer' },
-        { name: 'Principle' }, { name: 'Storybook' }, { name: 'Zeplin' },
-        { name: 'Abstract' }, { name: 'InVision' },
-      ],
       processSteps: [
         { stepNumber: '01', title: 'Vizuális irány', description: 'Moodboard-ok és stílus-explorációk készítése, amelyek segítenek megtalálni a megfelelő vizuális hangot.' },
         { stepNumber: '02', title: 'Wireframe és struktúra', description: 'Az oldal struktúrájának és információs architektúrájának kialakítása alacsony-fidelitású tervekkel.' },
@@ -376,27 +336,7 @@ async function seed() {
       title: 'Akadálymentesítés',
       subtitle: 'Digitális termékek mindenki számára',
       heroDescription: 'Segítünk, hogy digitális termékeid mindenki számára elérhetőek és használhatóak legyenek — a jogszabályi megfeleléstől a valódi inkluzivitásig.',
-      valueQuestion: 'A felhasználóid jelentős része akadályokba ütközik a terméked használata során — tudsz róla?',
-      valueAnswer: 'Az akadálymentesítés nem csak kötelezettség. Jobb terméket jelent mindenkinek.',
       order: 3,
-      activities: [
-        { title: 'Akadálymentesítési audit', description: 'Meglévő weboldalak és alkalmazások átfogó WCAG 2.1 szabálynak megfelelő értékelése.' },
-        { title: 'Javítási terv készítés', description: 'Prioritizált, lépésről lépésre követhető javítási terv összeállítása a feltárt problémák alapján.' },
-        { title: 'Asszisztív technológiás tesztelés', description: 'Tesztelés képernyőolvasókkal, billentyűzetes navigációval és egyéb segédeszközökkel.' },
-        { title: 'Akadálymentes design review', description: 'Design fázisban végzett ellenőrzés, mielőtt a fejlesztés megkezdődne.' },
-        { title: 'Csapat képzés', description: 'Fejlesztők, tervezők és tartalomkészítők képzése az akadálymentes gyakorlatokról.' },
-        { title: 'Folyamatos monitoring', description: 'Rendszeres ellenőrzés és jelentéskészítés, hogy a megfelelés hosszú távon is megmaradjon.' },
-      ],
-      benefits: [
-        { title: 'Jogszabályi megfelelés', description: 'Az EU Akadálymentesítési irányelv és a WCAG 2.1 szabványoknak való megfelelés biztosítása.' },
-        { title: 'Szélesebb elérhetőség', description: 'A populáció mintegy 15%-a él valamilyen fogyatékossággal — az akadálymentes termék őket is eléri.' },
-        { title: 'Jobb felhasználói élmény mindenkinek', description: 'Az akadálymentesítés javítja a használhatóságot minden felhasználó számára, nem csak a fogyatékossággal élőkét.' },
-      ],
-      tools: [
-        { name: 'axe DevTools' }, { name: 'WAVE' }, { name: 'Lighthouse' },
-        { name: 'NVDA' }, { name: 'VoiceOver' }, { name: 'JAWS' },
-        { name: 'Pa11y' }, { name: 'Contrast Checker' }, { name: 'Accessibility Insights' },
-      ],
       processSteps: [
         { stepNumber: '01', title: 'Helyzetértékelés', description: 'A jelenlegi állapot felmérése automatizált és manuális eszközökkel, WCAG 2.1 szabvány szerint.' },
         { stepNumber: '02', title: 'Részletes audit', description: 'Oldalról oldalra haladó, komponensszintű vizsgálat dokumentált eredményekkel.' },
@@ -410,7 +350,7 @@ async function seed() {
 
   const serviceMap = {};
   for (const s of servicesData) {
-    const { slug, subtitle, heroDescription, valueQuestion, valueAnswer, processSteps, ...rest } = s;
+    const { slug, subtitle, heroDescription, processSteps, ...rest } = s;
     const data = {
       ...rest,
       general: {
@@ -418,10 +358,6 @@ async function seed() {
         title: s.title,
         subtitle,
         heroDescription,
-      },
-      valueProposition: {
-        question: valueQuestion,
-        answer: valueAnswer,
       },
     };
     const service = await create('services', data);

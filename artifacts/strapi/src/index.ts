@@ -74,6 +74,38 @@ function applyLabels(metadatas: Record<string, any>) {
   }
 }
 
+const SERVICE_FIELD_LABELS: Record<string, { label: string; description?: string }> = {
+  title: { label: "Cím (admin lista)", description: "A szolgáltatás neve az admin listában — a weboldalon a hero cím jelenik meg" },
+  order: { label: "Sorrend", description: "A szolgáltatások sorrendje a listákban" },
+  general: { label: "1. Általános adatok + fejléc (hero)", description: "Webcím (slug), cím, alcím, hero leírás és ikonok" },
+  questionsSection: { label: "2. „Milyen kérdésekre segítünk választ találni?”", description: "Kérdéskártyás szekció a fejléc alatt" },
+  helpSection: { label: "3. „Miben tudunk segíteni?”", description: "Ikonos kártyarács a szolgáltatás területeiről" },
+  processSection: { label: "4. „Hogyan dolgozunk?”", description: "Számozott folyamatlépések" },
+  deliverablesSection: { label: "5. „Amit a projektből kapsz”", description: "Kis vagy nagy kártyás átadandók" },
+  projectExamplesIntro: { label: "6. Projektpéldák — bevezető", description: "A Projektpéldák szekció címe és leírása" },
+  relatedProjects: { label: "6. Projektpéldák — kapcsolt projektek", description: "Az itt kiválasztott projektek jelennek meg a Projektpéldák szekcióban" },
+  faqSection: { label: "7. GYIK szekció", description: "Gyakran ismételt kérdések" },
+  relatedServicesIntro: { label: "8. Kapcsolódó szolgáltatások — bevezető", description: "A Kapcsolódó szolgáltatások szekció címe és leírása" },
+  relatedServices: { label: "8. Kapcsolódó szolgáltatások — lista", description: "Az itt kiválasztott szolgáltatások jelennek meg az oldal alján" },
+  seo: { label: "9. SEO beállítások", description: "Kereső- és megosztási beállítások (meta cím, leírás, kép)" },
+};
+
+const SERVICE_EDIT_ORDER = [
+  "title",
+  "order",
+  "general",
+  "questionsSection",
+  "helpSection",
+  "processSection",
+  "deliverablesSection",
+  "projectExamplesIntro",
+  "relatedProjects",
+  "faqSection",
+  "relatedServicesIntro",
+  "relatedServices",
+  "seo",
+];
+
 const singleTypeUids = [
   "api::homepage.homepage",
   "api::about-page.about-page",
@@ -108,10 +140,6 @@ const componentUids = [
   "homepage.services-section",
   "project.case-study",
   "service.general",
-  "service.value-proposition",
-  "service.activity",
-  "service.benefit",
-  "service.tool",
   "service.section-intro",
   "service.question-card",
   "service.questions-section",
@@ -162,6 +190,23 @@ async function updateAllLabels(strapi: any) {
 
     if (config.metadatas) {
       applyLabels(config.metadatas);
+
+      if (uid === "api::service.service") {
+        for (const removed of ["valueProposition", "activities", "benefits", "tools", "howWeWork"]) {
+          delete config.metadatas[removed];
+        }
+        for (const [field, meta] of Object.entries(SERVICE_FIELD_LABELS)) {
+          if (config.metadatas[field]?.edit) {
+            config.metadatas[field].edit.label = meta.label;
+            if (meta.description) {
+              config.metadatas[field].edit.description = meta.description;
+            }
+          }
+          if (config.metadatas[field]?.list) {
+            config.metadatas[field].list.label = meta.label;
+          }
+        }
+      }
     }
 
     if (config.layouts?.edit) {
@@ -175,6 +220,13 @@ async function updateAllLabels(strapi: any) {
       }
 
       if (uid === "api::service.service") {
+        const removedFields = ["valueProposition", "activities", "benefits", "tools", "howWeWork"];
+        config.layouts.edit = config.layouts.edit
+          .map((row: { name: string }[]) =>
+            row.filter((col: { name: string }) => !removedFields.includes(col.name))
+          )
+          .filter((row: { name: string }[]) => row.length > 0);
+
         const hasTitle = config.layouts.edit.some(
           (row: { name: string }[]) => row.some((col: { name: string }) => col.name === "title")
         );
@@ -182,9 +234,8 @@ async function updateAllLabels(strapi: any) {
           config.layouts.edit.unshift([{ name: "title", size: 6 }, { name: "order", size: 4 }]);
         }
 
-        const preferredOrder = ["title", "general", "valueProposition"];
         const reordered: any[] = [];
-        for (const name of preferredOrder) {
+        for (const name of SERVICE_EDIT_ORDER) {
           const idx = config.layouts.edit.findIndex(
             (row: { name: string }[]) =>
               row.some((col: { name: string }) => col.name === name)
@@ -259,11 +310,8 @@ const SERVICE_SEED_DATA = [
     title: "UX Kutatás",
     subtitle: "Felhasználók megértése, adatalappal",
     heroDescription: "Feltárjuk a felhasználói igényeket, viselkedési mintákat és fájdalompontokat, hogy a termékfejlesztés valós adatokon alapuljon — ne feltételezéseken.",
-    valueQuestion: "Tudod pontosan, mit akarnak a felhasználóid? Vagy csak azt, amit gondolsz, hogy akarnak?",
-    valueAnswer: "A legjobb digitális termékek mögött mindig mély felhasználói megértés áll. Mi segítünk eljutni oda.",
     serviceIcon: "search",
     activityIcons: ["target", "zap", "users", "search", "bar-chart-3", "file-check"],
-    benefitIcons: ["shield", "rocket", "heart"],
     activities: [
       { title: "Felhasználói interjúk", description: "Strukturált interjúk készítése célcsoportokkal, hogy megértsük a valós motivációkat és akadályokat." },
       { title: "Használhatósági tesztelés", description: "Meglévő vagy tervezett felületek tesztelése valós felhasználókkal, hogy feltárjuk a problémás pontokat." },
@@ -272,12 +320,6 @@ const SERVICE_SEED_DATA = [
       { title: "Felhasználói út térképezés", description: "User journey map-ek készítése, amelyek vizualizálják a felhasználói élmény egészét." },
       { title: "Adatelemzés", description: "Meglévő analitikai adatok értelmezése és összevetése a kvalitatív eredményekkel." },
     ],
-    benefits: [
-      { title: "Kisebb fejlesztési kockázat", description: "A kutatás csökkenti annak esélyét, hogy olyan funkciókat fejlesszünk, amelyeket senki sem használ." },
-      { title: "Gyorsabb piacra kerülés", description: "A célzott fejlesztés kevésbé pazarolja az erőforrásokat és gyorsabban jut el az értékes megoldásig." },
-      { title: "Magasabb felhasználói elégedettség", description: "Az adatokra építő tervezés eredményeképpen a felhasználók elégedettebbek lesznek a végtermékkel." },
-    ],
-    tools: ["Hotjar", "Google Analytics", "Maze", "Lookback", "Miro", "Optimal Workshop", "UserTesting", "Dovetail", "FigJam"],
     processSteps: [
       { step: "01", title: "Megismerés", description: "Megismerjük az üzleti célokat, a meglévő adatokat és a kutatás céljait. Közösen meghatározzuk a kutatási kérdéseket." },
       { step: "02", title: "Kutatástervezés", description: "Kiválasztjuk a megfelelő módszertant, elkészítjük a kutatási tervet és a toborzási kritériumokat." },
@@ -291,11 +333,8 @@ const SERVICE_SEED_DATA = [
     title: "UI Design",
     subtitle: "Felületek, amelyek működnek és hatnak",
     heroDescription: "Olyan felhasználói felületeket tervezünk, amelyek nem csak szépek, hanem érthetőek, használhatók és üzleti eredményeket hoznak.",
-    valueQuestion: "Szükséged van egy szakértőre, aki érti az üzleted céljait és a felhasználók elvárásait is?",
-    valueAnswer: "Megértjük a felhasználóid elvárásait, szokásait és céljait. Erre építjük a felületeket.",
     serviceIcon: "monitor",
     activityIcons: ["palette", "book-open", "monitor", "eye", "zap", "file-check"],
-    benefitIcons: ["shield", "rocket", "heart"],
     activities: [
       { title: "Vizuális tervezés", description: "Pixel-pontos UI tervek készítése, amelyek tükrözik a márka identitását és a felhasználói elvárásokat." },
       { title: "Design rendszer építés", description: "Skálázható, konzisztens komponenskönyvtárak létrehozása, amelyek gyorsítják a fejlesztést." },
@@ -304,12 +343,6 @@ const SERVICE_SEED_DATA = [
       { title: "Motion design", description: "Célzott mikro-animációk és átmenetek, amelyek javítják a felhasználói élményt." },
       { title: "Fejlesztői átadás", description: "Részletes specifikáció és asset-készítés a zökkenőmentes implementációért." },
     ],
-    benefits: [
-      { title: "Erősebb márkaélmény", description: "A konzisztens, átgondolt vizuális rendszer erősíti a márkaészlelést és a bizalmat." },
-      { title: "Magasabb konverzió", description: "A jól megtervezett felhasználói útvonalak több látogatót alakítanak ügyféllé." },
-      { title: "Hatékonyabb fejlesztés", description: "A design rendszer csökkenti a fejlesztési időt és a kommunikációs súrlódásokat." },
-    ],
-    tools: ["Figma", "Adobe Creative Suite", "Framer", "Principle", "Storybook", "Zeplin", "Abstract", "InVision"],
     processSteps: [
       { step: "01", title: "Vizuális irány", description: "Moodboard-ok és stílus-explorációk készítése, amelyek segítenek megtalálni a megfelelő vizuális hangot." },
       { step: "02", title: "Wireframe és struktúra", description: "Az oldal struktúrájának és információs architektúrájának kialakítása alacsony-fidelitású tervekkel." },
@@ -323,11 +356,8 @@ const SERVICE_SEED_DATA = [
     title: "Akadálymentesítés",
     subtitle: "Digitális termékek mindenki számára",
     heroDescription: "Segítünk, hogy digitális termékeid mindenki számára elérhetőek és használhatóak legyenek — a jogszabályi megfeleléstől a valódi inkluzivitásig.",
-    valueQuestion: "A felhasználóid jelentős része akadályokba ütközik a terméked használata során — tudsz róla?",
-    valueAnswer: "Az akadálymentesítés nem csak kötelezettség. Jobb terméket jelent mindenkinek.",
     serviceIcon: "eye",
     activityIcons: ["target", "file-check", "monitor", "eye", "users", "bar-chart-3"],
-    benefitIcons: ["shield", "rocket", "heart"],
     activities: [
       { title: "Akadálymentesítési audit", description: "Meglévő weboldalak és alkalmazások átfogó WCAG 2.1 szabálynak megfelelő értékelése." },
       { title: "Javítási terv készítés", description: "Prioritizált, lépésről lépésre követhető javítási terv összeállítása a feltárt problémák alapján." },
@@ -336,12 +366,6 @@ const SERVICE_SEED_DATA = [
       { title: "Csapat képzés", description: "Fejlesztők, tervezők és tartalomkészítők képzése az akadálymentes gyakorlatokról." },
       { title: "Folyamatos monitoring", description: "Rendszeres ellenőrzés és jelentéskészítés, hogy a megfelelés hosszú távon is megmaradjon." },
     ],
-    benefits: [
-      { title: "Jogszabályi megfelelés", description: "Az EU Akadálymentesítési irányelv és a WCAG 2.1 szabványoknak való megfelelés biztosítása." },
-      { title: "Szélesebb elérhetőség", description: "A populáció mintegy 15%-a él valamilyen fogyatékossággal — az akadálymentes termék őket is eléri." },
-      { title: "Jobb felhasználói élmény mindenkinek", description: "Az akadálymentesítés javítja a használhatóságot minden felhasználó számára, nem csak a fogyatékossággal élőkét." },
-    ],
-    tools: ["axe DevTools", "WAVE", "Lighthouse", "NVDA", "VoiceOver", "JAWS", "Pa11y", "Contrast Checker", "Accessibility Insights"],
     processSteps: [
       { step: "01", title: "Helyzetértékelés", description: "A jelenlegi állapot felmérése automatizált és manuális eszközökkel, WCAG 2.1 szabvány szerint." },
       { step: "02", title: "Részletes audit", description: "Oldalról oldalra haladó, komponensszintű vizsgálat dokumentált eredményekkel." },
@@ -438,141 +462,6 @@ async function migrateSlugToGeneral(strapi: any) {
   strapi.log.info("Slug migration: completed successfully");
 }
 
-async function migrateServicesToSections(strapi: any) {
-  const knex = strapi.db.connection;
-  const path = require("path");
-
-  const store = strapi.store({ type: "plugin", name: "migrations" });
-  const migrationDone = await store.get({ key: "service_sections_v1" });
-  if (migrationDone) {
-    strapi.log.info("Service migration: already completed (flag set) — skipping");
-    return;
-  }
-
-
-  strapi.log.info("Service migration: starting service restructure (via document service)...");
-
-  const strapiRoot = path.resolve(__dirname, "..", "..");
-  const iconsDir = path.join(strapiRoot, "src", "seed-icons");
-
-  const iconCache: Record<string, number> = {};
-  async function getIconId(name: string): Promise<number | null> {
-    if (iconCache[name] !== undefined) return iconCache[name];
-    const filePath = path.join(iconsDir, `${name}.svg`);
-    const id = await uploadSvgIcon(strapi, filePath, name);
-    if (id) iconCache[name] = id;
-    return id;
-  }
-
-  const services = await strapi.documents("api::service.service").findMany({
-    populate: ["activities", "benefits", "tools", "general", "general.heroImage", "general.icon", "valueProposition"],
-  });
-
-  if (services.length === 0) {
-    strapi.log.info("Service migration: no services found — skipping");
-    return;
-  }
-
-  let slugByDocId: Record<string, string> = {};
-  try {
-    const hasSlugCol = await knex.raw(
-      `SELECT column_name FROM information_schema.columns WHERE table_schema = 'strapi' AND table_name = 'services' AND column_name = 'slug'`
-    );
-    if (hasSlugCol.rows.length > 0) {
-      const slugRows = await knex.select("document_id", "slug").from("strapi.services");
-      for (const row of slugRows) {
-        if (row.slug) slugByDocId[row.document_id] = row.slug;
-      }
-    }
-  } catch {
-    strapi.log.info("Service migration: legacy slug column not available");
-  }
-
-  for (const svc of services) {
-    const svcSlug = svc.general?.slug || slugByDocId[svc.documentId] || "";
-    const seed = SERVICE_SEED_DATA.find((s) => s.slug === svcSlug);
-    if (!seed) {
-      strapi.log.info(`Service migration: no seed data for "${svcSlug}" — skipping`);
-      continue;
-    }
-
-    strapi.log.info(`Service migration: processing "${svcSlug}"...`);
-
-    const serviceIconId = await getIconId(seed.serviceIcon);
-    const howWeWorkHtml = seed.processSteps
-      .map((ps) => `<h3>${ps.step}. ${ps.title}</h3>\n<p>${ps.description}</p>`)
-      .join("\n\n");
-
-    const svcDbRows = await knex
-      .select("id")
-      .from("strapi.services")
-      .where("document_id", svc.documentId);
-    const svcDbIds = svcDbRows.map((r: any) => r.id);
-
-    const existingHeroImage = await knex
-      .select("fr.file_id")
-      .from("strapi.files_related_mph as fr")
-      .where("fr.related_type", "api::service.service")
-      .whereIn("fr.related_id", svcDbIds)
-      .where("fr.field", "heroImage")
-      .first()
-      .catch(() => null);
-    const heroImageId = existingHeroImage?.file_id || null;
-
-    const activityIcons: (number | null)[] = [];
-    for (let i = 0; i < (svc.activities || []).length; i++) {
-      const iconName = seed.activityIcons[i % seed.activityIcons.length];
-      activityIcons.push(await getIconId(iconName));
-    }
-
-    const benefitIcons: (number | null)[] = [];
-    for (let i = 0; i < (svc.benefits || []).length; i++) {
-      const iconName = seed.benefitIcons[i % seed.benefitIcons.length];
-      benefitIcons.push(await getIconId(iconName));
-    }
-
-    const existingGeneral = svc.general || {};
-    const existingVP = svc.valueProposition || {};
-
-    const resolvedTitle = existingGeneral.title || seed.title;
-    await strapi.documents("api::service.service").update({
-      documentId: svc.documentId,
-      data: {
-        title: resolvedTitle,
-        general: {
-          slug: existingGeneral.slug || svcSlug,
-          title: resolvedTitle,
-          subtitle: existingGeneral.subtitle || seed.subtitle,
-          heroDescription: existingGeneral.heroDescription || seed.heroDescription,
-          icon: existingGeneral.icon?.id || serviceIconId || undefined,
-          heroImage: existingGeneral.heroImage?.id || heroImageId || undefined,
-        },
-        valueProposition: {
-          question: existingVP.question || seed.valueQuestion,
-          answer: existingVP.answer || seed.valueAnswer,
-        },
-        howWeWork: svc.howWeWork || howWeWorkHtml,
-        activities: (svc.activities || []).map((a: any, i: number) => ({
-          title: a.title,
-          description: a.description,
-          icon: a.icon?.id || activityIcons[i] || undefined,
-        })),
-        benefits: (svc.benefits || []).map((b: any, i: number) => ({
-          title: b.title,
-          description: b.description,
-          icon: b.icon?.id || benefitIcons[i] || undefined,
-        })),
-      },
-      status: "published",
-    });
-
-    strapi.log.info(`Service migration: "${svcSlug}" done`);
-  }
-
-  await store.set({ key: "service_sections_v1", value: true });
-  strapi.log.info("Service migration: completed successfully");
-}
-
 async function syncServiceTitles(strapi: any) {
   const knex = strapi.db.connection;
   const services = await strapi.documents("api::service.service").findMany({
@@ -591,123 +480,6 @@ async function syncServiceTitles(strapi: any) {
   if (synced > 0) {
     strapi.log.info(`Service title sync: updated ${synced} service(s)`);
   }
-}
-
-async function backfillServiceSections(strapi: any) {
-  const path = require("path");
-  const store = strapi.store({ type: "plugin", name: "migrations" });
-  const done = await store.get({ key: "service_sections_backfill_v1" });
-  if (done) {
-    strapi.log.info("Service sections backfill: already completed (flag set) — skipping");
-    return;
-  }
-
-  const strapiRoot = path.resolve(__dirname, "..", "..");
-  const iconsDir = path.join(strapiRoot, "src", "seed-icons");
-  const iconCache: Record<string, number> = {};
-  async function getIconId(name: string): Promise<number | null> {
-    if (iconCache[name] !== undefined) return iconCache[name];
-    const filePath = path.join(iconsDir, `${name}.svg`);
-    const id = await uploadSvgIcon(strapi, filePath, name);
-    if (id) iconCache[name] = id;
-    return id;
-  }
-
-  const services = await strapi.documents("api::service.service").findMany({
-    populate: ["activities", "benefits", "tools", "general"],
-  });
-
-  if (services.length === 0) {
-    strapi.log.info("Service sections backfill: no services found — will retry on next restart");
-    return;
-  }
-
-  let filled = 0;
-  for (const svc of services) {
-    const svcSlug = svc.general?.slug || "";
-    const seed = SERVICE_SEED_DATA.find((s) => s.slug === svcSlug);
-    if (!seed) {
-      strapi.log.info(`Service sections backfill: no seed data for "${svcSlug}" — skipping`);
-      continue;
-    }
-
-    const hasActivities = (svc.activities || []).length > 0;
-    const hasBenefits = (svc.benefits || []).length > 0;
-    const hasTools = (svc.tools || []).length > 0;
-    if (hasActivities && hasBenefits && hasTools) {
-      strapi.log.info(`Service sections backfill: "${svcSlug}" already has content — skipping`);
-      continue;
-    }
-
-    const data: Record<string, any> = {};
-
-    if (!hasActivities && Array.isArray((seed as any).activities)) {
-      const acts: any[] = [];
-      for (let i = 0; i < (seed as any).activities.length; i++) {
-        const iconName = seed.activityIcons[i % seed.activityIcons.length];
-        acts.push({
-          title: (seed as any).activities[i].title,
-          description: (seed as any).activities[i].description,
-          icon: (await getIconId(iconName)) || undefined,
-        });
-      }
-      data.activities = acts;
-    }
-
-    if (!hasBenefits && Array.isArray((seed as any).benefits)) {
-      const bens: any[] = [];
-      for (let i = 0; i < (seed as any).benefits.length; i++) {
-        const iconName = seed.benefitIcons[i % seed.benefitIcons.length];
-        bens.push({
-          title: (seed as any).benefits[i].title,
-          description: (seed as any).benefits[i].description,
-          icon: (await getIconId(iconName)) || undefined,
-        });
-      }
-      data.benefits = bens;
-    }
-
-    if (!hasTools && Array.isArray((seed as any).tools)) {
-      data.tools = (seed as any).tools.map((name: string) => ({ name }));
-    }
-
-    if (Object.keys(data).length === 0) continue;
-
-    await strapi.documents("api::service.service").update({
-      documentId: svc.documentId,
-      data,
-    });
-    await strapi.documents("api::service.service").publish({
-      documentId: svc.documentId,
-    });
-    filled++;
-    strapi.log.info(`Service sections backfill: filled empty sections for "${svcSlug}"`);
-  }
-
-  const targetSlugs = SERVICE_SEED_DATA.map((s) => s.slug);
-  const postCheck = await strapi.documents("api::service.service").findMany({
-    populate: ["activities", "benefits", "tools", "general"],
-  });
-  const incomplete = targetSlugs.filter((slug) => {
-    const matches = postCheck.filter((s: any) => s.general?.slug === slug);
-    if (matches.length === 0) return true;
-    return matches.some(
-      (s: any) =>
-        (s.activities || []).length === 0 ||
-        (s.benefits || []).length === 0 ||
-        (s.tools || []).length === 0,
-    );
-  });
-
-  if (incomplete.length > 0) {
-    strapi.log.warn(
-      `Service sections backfill: still incomplete for [${incomplete.join(", ")}] — flag not set, will retry on next restart`,
-    );
-    return;
-  }
-
-  await store.set({ key: "service_sections_backfill_v1", value: true });
-  strapi.log.info(`Service sections backfill: completed (${filled} service(s) updated)`);
 }
 
 const SERVICE_RESTRUCTURE_SEED: Record<string, any> = {
@@ -952,8 +724,6 @@ async function backfillServiceRestructure(strapi: any) {
       "general",
       "general.icon",
       "general.heroImage",
-      "activities",
-      "activities.icon",
       "questionsSection",
       "helpSection",
       "processSection",
@@ -1007,24 +777,17 @@ async function backfillServiceRestructure(strapi: any) {
     }
 
     if (!svc.helpSection) {
-      const sourceCards =
-        (svc.activities || []).length > 0
-          ? (svc.activities || []).map((a: any) => ({
-              title: a.title,
-              description: a.description,
-              icon: a.icon?.id || undefined,
-            }))
-          : await Promise.all(
-              (oldSeed?.activities || []).map(async (a: any, i: number) => ({
-                title: a.title,
-                description: a.description,
-                icon:
-                  (await getIconId(
-                    (oldSeed?.activityIcons || [])[i % (oldSeed?.activityIcons?.length || 1)] ||
-                      "check-circle-2",
-                  )) || undefined,
-              })),
-            );
+      const sourceCards = await Promise.all(
+        (oldSeed?.activities || []).map(async (a: any, i: number) => ({
+          title: a.title,
+          description: a.description,
+          icon:
+            (await getIconId(
+              (oldSeed?.activityIcons || [])[i % (oldSeed?.activityIcons?.length || 1)] ||
+                "check-circle-2",
+            )) || undefined,
+        })),
+      );
       data.helpSection = {
         intro: seed.helpIntro,
         cards: sourceCards,
@@ -1318,6 +1081,49 @@ async function resetAdminFromEnv(strapi: any) {
   }
 }
 
+async function dropRemovedServiceFields(strapi: any) {
+  const knex = strapi.db.connection;
+  const store = strapi.store({ type: "plugin", name: "migrations" });
+  const done = await store.get({ key: "service_unused_fields_drop_v1" });
+  if (done) {
+    strapi.log.info("Unused service fields drop: already completed (flag set) — skipping");
+    return;
+  }
+
+  const removedComponentTypes = [
+    "service.value-proposition",
+    "service.activity",
+    "service.benefit",
+    "service.tool",
+  ];
+  const removedTables = [
+    "components_service_value_propositions",
+    "components_service_activities",
+    "components_service_benefits",
+    "components_service_tools",
+  ];
+
+  try {
+    const deleted = await knex("strapi.services_cmps")
+      .whereIn("component_type", removedComponentTypes)
+      .del();
+    strapi.log.info(`Unused service fields drop: removed ${deleted} component link row(s)`);
+
+    for (const table of removedTables) {
+      await knex.raw(`DROP TABLE IF EXISTS strapi."${table}" CASCADE`);
+    }
+    strapi.log.info("Unused service fields drop: orphan component tables dropped");
+
+    await knex.raw(`ALTER TABLE strapi.services DROP COLUMN IF EXISTS how_we_work`);
+    strapi.log.info("Unused service fields drop: how_we_work column dropped");
+
+    await store.set({ key: "service_unused_fields_drop_v1", value: true });
+    strapi.log.info("Unused service fields drop: completed successfully");
+  } catch (err: any) {
+    strapi.log.error(`Unused service fields drop: failed — will retry on next restart: ${err.message}`);
+  }
+}
+
 export default {
   register({ strapi }) {
     registerWebsiteRebuildAdminRoutes(strapi);
@@ -1331,12 +1137,11 @@ export default {
     const httpServer = strapi.server?.httpServer;
     if (httpServer) {
       httpServer.once("listening", () => {
-        migrateServicesToSections(strapi)
-          .then(() => migrateSlugToGeneral(strapi))
+        migrateSlugToGeneral(strapi)
           .then(() => syncServiceTitles(strapi))
-          .then(() => backfillServiceSections(strapi))
           .then(() => backfillServiceRestructure(strapi))
           .then(() => backfillFeaturedProjects(strapi))
+          .then(() => dropRemovedServiceFields(strapi))
           .then(() => strapi.log.info("Bootstrap tasks completed successfully"))
           .catch((err: any) => {
             strapi.log.error(`Bootstrap task failed: ${err.message}`);
@@ -1345,12 +1150,11 @@ export default {
           .finally(() => markWebsiteAutoRebuildReady());
       });
     } else {
-      await migrateServicesToSections(strapi);
       await migrateSlugToGeneral(strapi);
       await syncServiceTitles(strapi);
-      await backfillServiceSections(strapi);
       await backfillServiceRestructure(strapi);
       await backfillFeaturedProjects(strapi);
+      await dropRemovedServiceFields(strapi);
       strapi.log.info("Bootstrap tasks completed successfully");
       markWebsiteAutoRebuildReady();
     }

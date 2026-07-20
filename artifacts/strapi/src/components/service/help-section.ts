@@ -1,9 +1,9 @@
 export default {
   "collectionName": "components_service_help_sections",
   "info": {
-    "displayName": "Miben tudunk segíteni szekció",
+    "displayName": "3. „Miben tudunk segíteni?” szekció",
     "icon": "grid",
-    "description": "Kártyarács kiemelt CTA kártyával"
+    "description": "Ikonos kártyarács a szolgáltatás területeiről"
   },
   "options": {},
   "attributes": {

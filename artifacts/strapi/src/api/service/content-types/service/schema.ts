@@ -24,29 +24,6 @@ export default {
       "repeatable": false,
       "component": "service.general"
     },
-    "valueProposition": {
-      "type": "component",
-      "repeatable": false,
-      "component": "service.value-proposition"
-    },
-    "activities": {
-      "type": "component",
-      "repeatable": true,
-      "component": "service.activity"
-    },
-    "benefits": {
-      "type": "component",
-      "repeatable": true,
-      "component": "service.benefit"
-    },
-    "tools": {
-      "type": "component",
-      "repeatable": true,
-      "component": "service.tool"
-    },
-    "howWeWork": {
-      "type": "richtext"
-    },
     "questionsSection": {
       "type": "component",
       "repeatable": false,
@@ -72,6 +49,12 @@ export default {
       "repeatable": false,
       "component": "service.section-intro"
     },
+    "relatedProjects": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::project.project",
+      "inversedBy": "services"
+    },
     "faqSection": {
       "type": "component",
       "repeatable": false,
@@ -86,12 +69,6 @@ export default {
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::service.service"
-    },
-    "relatedProjects": {
-      "type": "relation",
-      "relation": "manyToMany",
-      "target": "api::project.project",
-      "inversedBy": "services"
     },
     "seo": {
       "type": "component",

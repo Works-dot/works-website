@@ -197,34 +197,6 @@ export interface ProjectCaseStudy extends Struct.ComponentSchema {
   };
 }
 
-export interface ServiceActivity extends Struct.ComponentSchema {
-  collectionName: 'components_service_activities';
-  info: {
-    description: 'Szolg\u00E1ltat\u00E1si tev\u00E9kenys\u00E9g';
-    displayName: 'Activity';
-    icon: 'check-circle';
-  };
-  attributes: {
-    description: Schema.Attribute.Text;
-    icon: Schema.Attribute.Media<'images'>;
-    title: Schema.Attribute.String & Schema.Attribute.Required;
-  };
-}
-
-export interface ServiceBenefit extends Struct.ComponentSchema {
-  collectionName: 'components_service_benefits';
-  info: {
-    description: 'Szolg\u00E1ltat\u00E1s el\u0151nye';
-    displayName: 'Benefit';
-    icon: 'thumbs-up';
-  };
-  attributes: {
-    description: Schema.Attribute.Text;
-    icon: Schema.Attribute.Media<'images'>;
-    title: Schema.Attribute.String & Schema.Attribute.Required;
-  };
-}
-
 export interface ServiceBulletPoint extends Struct.ComponentSchema {
   collectionName: 'components_service_bullet_points';
   info: {
@@ -269,8 +241,8 @@ export interface ServiceDeliverableGroup extends Struct.ComponentSchema {
 export interface ServiceDeliverablesSection extends Struct.ComponentSchema {
   collectionName: 'components_service_deliverables_sections';
   info: {
-    description: 'K\u00E9t megjelen\u00EDt\u00E9si v\u00E1ltozat: kis k\u00E1rty\u00E1k vagy nagy k\u00E1rty\u00E1k felsorol\u00E1ssal';
-    displayName: 'Amit a projektb\u0151l kapsz szekci\u00F3';
+    description: 'K\u00E9t megjelen\u00EDt\u00E9si v\u00E1ltozat: kis k\u00E1rty\u00E1k (A) vagy nagy k\u00E1rty\u00E1k felsorol\u00E1ssal (B)';
+    displayName: '5. \u201EAmit a projektb\u0151l kapsz\u201D szekci\u00F3';
     icon: 'gift';
   };
   attributes: {
@@ -299,8 +271,8 @@ export interface ServiceFaqItem extends Struct.ComponentSchema {
 export interface ServiceFaqSection extends Struct.ComponentSchema {
   collectionName: 'components_service_faq_sections';
   info: {
-    description: 'Gyakran ism\u00E9telt k\u00E9rd\u00E9sek';
-    displayName: 'GYIK szekci\u00F3';
+    description: 'Gyakran ism\u00E9telt k\u00E9rd\u00E9sek leny\u00EDl\u00F3 list\u00E1ja';
+    displayName: '7. GYIK szekci\u00F3';
     icon: 'question';
   };
   attributes: {
@@ -312,8 +284,8 @@ export interface ServiceFaqSection extends Struct.ComponentSchema {
 export interface ServiceGeneral extends Struct.ComponentSchema {
   collectionName: 'components_service_generals';
   info: {
-    description: '\u00C1ltal\u00E1nos szolg\u00E1ltat\u00E1si adatok';
-    displayName: 'General (listing + hero)';
+    description: 'Az oldal tetej\u00E9n megjelen\u0151 c\u00EDm, alc\u00EDm, le\u00EDr\u00E1s \u00E9s ikon, valamint a szolg\u00E1ltat\u00E1s webc\u00EDme (slug)';
+    displayName: '1. \u00C1ltal\u00E1nos adatok + fejl\u00E9c (hero)';
     icon: 'layout';
   };
   attributes: {
@@ -346,8 +318,8 @@ export interface ServiceHelpCard extends Struct.ComponentSchema {
 export interface ServiceHelpSection extends Struct.ComponentSchema {
   collectionName: 'components_service_help_sections';
   info: {
-    description: 'K\u00E1rtyar\u00E1cs kiemelt CTA k\u00E1rty\u00E1val';
-    displayName: 'Miben tudunk seg\u00EDteni szekci\u00F3';
+    description: 'Ikonos k\u00E1rtyar\u00E1cs a szolg\u00E1ltat\u00E1s ter\u00FCleteir\u0151l';
+    displayName: '3. \u201EMiben tudunk seg\u00EDteni?\u201D szekci\u00F3';
     icon: 'grid';
   };
   attributes: {
@@ -362,8 +334,8 @@ export interface ServiceHelpSection extends Struct.ComponentSchema {
 export interface ServiceProcessSection extends Struct.ComponentSchema {
   collectionName: 'components_service_process_sections';
   info: {
-    description: 'Sz\u00E1mozott folyamatl\u00E9p\u00E9sek';
-    displayName: 'Hogyan dolgozunk szekci\u00F3';
+    description: 'Sz\u00E1mozott folyamatl\u00E9p\u00E9sek id\u0151vonalon';
+    displayName: '4. \u201EHogyan dolgozunk?\u201D szekci\u00F3';
     icon: 'arrow-right';
   };
   attributes: {
@@ -401,8 +373,8 @@ export interface ServiceQuestionCard extends Struct.ComponentSchema {
 export interface ServiceQuestionsSection extends Struct.ComponentSchema {
   collectionName: 'components_service_questions_sections';
   info: {
-    description: 'Milyen k\u00E9rd\u00E9sekre seg\u00EDt\u00FCnk v\u00E1laszt tal\u00E1lni?';
-    displayName: 'K\u00E9rd\u00E9sek szekci\u00F3';
+    description: 'A fejl\u00E9c alatti k\u00E9rd\u00E9sk\u00E1rty\u00E1s szekci\u00F3';
+    displayName: '2. \u201EMilyen k\u00E9rd\u00E9sekre seg\u00EDt\u00FCnk v\u00E1laszt tal\u00E1lni?\u201D szekci\u00F3';
     icon: 'question';
   };
   attributes: {
@@ -415,38 +387,13 @@ export interface ServiceSectionIntro extends Struct.ComponentSchema {
   collectionName: 'components_service_section_intros';
   info: {
     description: 'Szekci\u00F3 fels\u0151 c\u00EDmke, c\u00EDm \u00E9s le\u00EDr\u00E1s';
-    displayName: 'Szekci\u00F3 bevezet\u0151';
+    displayName: 'Szekci\u00F3 bevezet\u0151 (c\u00EDmke + c\u00EDm + le\u00EDr\u00E1s)';
     icon: 'layout';
   };
   attributes: {
     description: Schema.Attribute.Text;
     heading: Schema.Attribute.String;
     kicker: Schema.Attribute.String;
-  };
-}
-
-export interface ServiceTool extends Struct.ComponentSchema {
-  collectionName: 'components_service_tools';
-  info: {
-    description: 'Haszn\u00E1lt eszk\u00F6z';
-    displayName: 'Tool';
-    icon: 'wrench';
-  };
-  attributes: {
-    name: Schema.Attribute.String & Schema.Attribute.Required;
-  };
-}
-
-export interface ServiceValueProposition extends Struct.ComponentSchema {
-  collectionName: 'components_service_value_propositions';
-  info: {
-    description: '\u00C9rt\u00E9kaj\u00E1nlat szekci\u00F3';
-    displayName: '\u00C9rt\u00E9kaj\u00E1nlat';
-    icon: 'quote';
-  };
-  attributes: {
-    answer: Schema.Attribute.Text;
-    question: Schema.Attribute.String;
   };
 }
 
@@ -535,8 +482,6 @@ declare module '@strapi/strapi' {
       'homepage.projects-section': HomepageProjectsSection;
       'homepage.services-section': HomepageServicesSection;
       'project.case-study': ProjectCaseStudy;
-      'service.activity': ServiceActivity;
-      'service.benefit': ServiceBenefit;
       'service.bullet-point': ServiceBulletPoint;
       'service.deliverable-card': ServiceDeliverableCard;
       'service.deliverable-group': ServiceDeliverableGroup;
@@ -551,8 +496,6 @@ declare module '@strapi/strapi' {
       'service.question-card': ServiceQuestionCard;
       'service.questions-section': ServiceQuestionsSection;
       'service.section-intro': ServiceSectionIntro;
-      'service.tool': ServiceTool;
-      'service.value-proposition': ServiceValueProposition;
       'shared.hero': SharedHero;
       'shared.legal-link': SharedLegalLink;
       'shared.opening-hours': SharedOpeningHours;

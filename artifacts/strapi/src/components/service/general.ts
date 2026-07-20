@@ -1,9 +1,9 @@
 export default {
   "collectionName": "components_service_generals",
   "info": {
-    "displayName": "General (listing + hero)",
+    "displayName": "1. Általános adatok + fejléc (hero)",
     "icon": "layout",
-    "description": "Általános szolgáltatási adatok"
+    "description": "Az oldal tetején megjelenő cím, alcím, leírás és ikon, valamint a szolgáltatás webcíme (slug)"
   },
   "options": {},
   "attributes": {

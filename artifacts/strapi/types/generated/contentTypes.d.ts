@@ -854,8 +854,6 @@ export interface ApiServiceService extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
-    activities: Schema.Attribute.Component<'service.activity', true>;
-    benefits: Schema.Attribute.Component<'service.benefit', true>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -866,7 +864,6 @@ export interface ApiServiceService extends Struct.CollectionTypeSchema {
     faqSection: Schema.Attribute.Component<'service.faq-section', false>;
     general: Schema.Attribute.Component<'service.general', false>;
     helpSection: Schema.Attribute.Component<'service.help-section', false>;
-    howWeWork: Schema.Attribute.RichText;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -901,14 +898,9 @@ export interface ApiServiceService extends Struct.CollectionTypeSchema {
     >;
     seo: Schema.Attribute.Component<'shared.seo', false>;
     title: Schema.Attribute.String;
-    tools: Schema.Attribute.Component<'service.tool', true>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    valueProposition: Schema.Attribute.Component<
-      'service.value-proposition',
-      false
-    >;
   };
 }
 
