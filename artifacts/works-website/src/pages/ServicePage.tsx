@@ -1,11 +1,10 @@
 import { useParams } from "wouter";
 import { Link } from "wouter";
 import { motion } from "framer-motion";
-import { ArrowRight, Search } from "lucide-react";
+import { ArrowRight, Search, HelpCircle } from "lucide-react";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import SEOHead from "@/components/SEOHead";
-import { ProjectCard } from "@/components/ui/ProjectCard";
 import {
   Accordion,
   AccordionContent,
@@ -188,8 +187,9 @@ export default function ServicePage() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: "-50px" }}
                     transition={{ duration: 0.5, delay: i * 0.1 }}
-                    className="bg-white p-6 border border-works-muted/30 hover:border-works-primary/30 hover:shadow-lg transition-all duration-300"
+                    className="bg-white p-6 border border-works-muted/30 border-b-2 border-b-works-primary hover:shadow-lg transition-all duration-300"
                   >
+                    <HelpCircle className="w-6 h-6 text-works-primary mb-4" strokeWidth={1.5} aria-hidden="true" />
                     <h3 className="text-lg font-bold text-works-dark mb-3 leading-snug">
                       {card.title}
                     </h3>
@@ -237,30 +237,6 @@ export default function ServicePage() {
                     </p>
                   </motion.div>
                 ))}
-
-                {(help.ctaText || help.ctaButtonText) && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, margin: "-50px" }}
-                    transition={{ duration: 0.5, delay: (help.cards.length % 3) * 0.1 }}
-                    className="bg-works-primary p-6 flex flex-col justify-between text-white relative overflow-hidden"
-                  >
-                    <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent pointer-events-none" />
-                    <p className="text-lg font-bold leading-snug relative z-10 mb-6">
-                      {help.ctaText}
-                    </p>
-                    {help.ctaButtonText && (
-                      <Link
-                        href={help.ctaButtonLink || "/kapcsolat"}
-                        className="inline-flex items-center gap-2 px-5 py-2.5 border border-white text-white font-semibold hover:bg-white hover:text-works-primary transition-colors relative z-10 self-start"
-                      >
-                        {help.ctaButtonText}
-                        <ArrowRight className="w-4 h-4" strokeWidth={2} />
-                      </Link>
-                    )}
-                  </motion.div>
-                )}
               </div>
             </div>
           </section>
@@ -278,8 +254,8 @@ export default function ServicePage() {
               />
             )}
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-              <SectionHeading intro={process.intro} fallbackHeading="Hogyan dolgozunk?" />
-              <div className="max-w-3xl">
+              <div className="max-w-3xl mx-auto">
+                <SectionHeading intro={process.intro} fallbackHeading="Hogyan dolgozunk?" />
                 <ol className="relative">
                   {process.steps.map((step, i) => (
                     <motion.li
@@ -293,10 +269,10 @@ export default function ServicePage() {
                       {i < process.steps.length - 1 && (
                         <span
                           aria-hidden="true"
-                          className="absolute left-[19px] top-10 bottom-0 w-px bg-works-muted"
+                          className="absolute left-[19px] top-12 bottom-2 w-px bg-works-muted"
                         />
                       )}
-                      <span className="absolute left-0 top-0 w-10 h-10 bg-works-primary text-white font-bold flex items-center justify-center text-sm">
+                      <span className="absolute left-0 top-0 w-10 h-10 rounded-full border-2 border-works-primary text-works-primary bg-transparent font-bold flex items-center justify-center text-sm">
                         {String(i + 1).padStart(2, "0")}
                       </span>
                       <h3 className="text-xl font-bold text-works-dark mb-2">
@@ -386,17 +362,50 @@ export default function ServicePage() {
           <section className="py-20 lg:py-28 bg-works-bg border-t border-works-muted/50">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <SectionHeading intro={service.projectExamplesIntro} fallbackHeading="Projektpéldák" />
-              <div className="flex flex-col gap-20">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
                 {relatedProjects.map((p, i) => (
-                  <ProjectCard
+                  <motion.article
                     key={p.slug}
-                    slug={p.slug}
-                    title={p.title}
-                    tags={p.tags}
-                    description={p.description}
-                    image={p.image}
-                    reverse={i % 2 !== 0}
-                  />
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-50px" }}
+                    transition={{ duration: 0.5, delay: i * 0.15 }}
+                    className="flex flex-col group bg-white overflow-hidden border border-works-muted/30 hover:border-works-primary/30 hover:shadow-lg transition-all duration-300"
+                  >
+                    <Link href={`/projektek/${p.slug}`} className="flex flex-col flex-grow">
+                      <div className="w-full aspect-[4/3] relative overflow-hidden bg-works-light">
+                        <img
+                          src={p.image}
+                          alt={p.title}
+                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        />
+                      </div>
+                      <div className="p-6 sm:p-8 flex flex-col flex-grow">
+                        {p.tags.length > 0 && (
+                          <div className="flex flex-wrap gap-2 mb-4">
+                            {p.tags.map((tag) => (
+                              <span
+                                key={tag}
+                                className="px-2.5 py-0.5 text-xs font-semibold text-works-primary border border-works-primary bg-transparent"
+                              >
+                                {tag}
+                              </span>
+                            ))}
+                          </div>
+                        )}
+                        <h3 className="text-xl sm:text-2xl font-bold text-works-dark mb-3 line-clamp-2 group-hover:text-works-primary transition-colors">
+                          {p.title}
+                        </h3>
+                        <p className="text-works-dark/60 mb-6 line-clamp-3 leading-relaxed">
+                          {p.description}
+                        </p>
+                        <span className="inline-flex items-center text-works-dark font-semibold text-sm group-hover:text-works-primary mt-auto">
+                          Megnézem az esettanulmányt
+                          <ArrowRight className="ml-1 w-4 h-4 transition-transform group-hover:translate-x-1" />
+                        </span>
+                      </div>
+                    </Link>
+                  </motion.article>
                 ))}
               </div>
             </div>
