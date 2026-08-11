@@ -13,8 +13,21 @@ const STRAPI_API = `${STRAPI_BASE}/strapi/api`;
 async function fetchApi(endpoint) {
   const url = `${STRAPI_API}${endpoint}`;
   const res = await fetch(url);
-  if (!res.ok) throw new Error(`${res.status} ${res.statusText} — ${url}`);
+  if (!res.ok) {
+    const err = new Error(`${res.status} ${res.statusText} — ${url}`);
+    err.status = res.status;
+    throw err;
+  }
   return res.json();
+}
+
+// In strict (production) mode only a genuine 404 (content simply not created)
+// may be swallowed for optional endpoints; any other error (network, 400 from
+// an old-schema Strapi, 5xx) must propagate so the build retries/fails instead
+// of silently shipping pages with erased CMS content.
+function allowOptionalSkip(err) {
+  if (!STRICT) return true;
+  return err?.status === 404;
 }
 
 function mapSeo(seo) {
@@ -234,7 +247,8 @@ async function fetchAll() {
       alt: img.alternativeText || "",
     }));
     console.log(`  ✓ ${cache.galleryImages.length} gallery image(s)`);
-  } catch {
+  } catch (err) {
+    if (!allowOptionalSkip(err)) throw err;
     cache.galleryImages = null;
     console.log("  ⚠ gallery images skipped (about-page not found)");
   }
@@ -265,7 +279,8 @@ async function fetchAll() {
       socialLinks: (gd.socialLinks || []).map((s) => ({ platform: s.platform, url: s.url })),
     };
     console.log("  ✓ global settings");
-  } catch {
+  } catch (err) {
+    if (!allowOptionalSkip(err)) throw err;
     cache.globalSettings = null;
     console.log("  ⚠ global settings skipped (not found)");
   }
@@ -289,7 +304,8 @@ async function fetchAll() {
       seo: mapSeo(cd.seo),
     };
     console.log("  ✓ contact page");
-  } catch {
+  } catch (err) {
+    if (!allowOptionalSkip(err)) throw err;
     cache.contactPage = null;
     console.log("  ⚠ contact page skipped (not found)");
   }
@@ -324,7 +340,8 @@ async function fetchAll() {
       seo: mapSeo(hd.seo),
     };
     console.log("  ✓ homepage");
-  } catch {
+  } catch (err) {
+    if (!allowOptionalSkip(err)) throw err;
     cache.homepage = null;
     console.log("  ⚠ homepage skipped (not found)");
   }
@@ -344,7 +361,8 @@ async function fetchAll() {
       seo: mapSeo(aboutRes.data?.seo),
     };
     console.log("  ✓ about page");
-  } catch {
+  } catch (err) {
+    if (!allowOptionalSkip(err)) throw err;
     cache.aboutPage = null;
     console.log("  ⚠ about page skipped (not found)");
   }
@@ -373,7 +391,8 @@ async function fetchAll() {
       seo: mapSeo(cd2?.seo),
     };
     console.log("  ✓ career page");
-  } catch {
+  } catch (err) {
+    if (!allowOptionalSkip(err)) throw err;
     cache.careerPage = null;
     console.log("  ⚠ career page skipped (not found)");
   }
