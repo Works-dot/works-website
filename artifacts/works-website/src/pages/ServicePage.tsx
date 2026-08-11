@@ -162,7 +162,7 @@ export default function ServicePage() {
               className="max-w-3xl"
             >
               <span className="text-works-primary font-bold text-sm tracking-widest uppercase mb-4 block">
-                {service.kicker || service.subtitle}
+                {service.subtitle}
               </span>
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-works-dark mb-6 leading-tight">
                 {service.title}.

@@ -140,7 +140,7 @@ const hardcodedServices: Service[] = rawServices.map((s) => ({
   slug: s.slug,
   title: s.title,
   subtitle: s.subtitle,
-  kicker: s.subtitle,
+  kicker: "",
   heroDescription: s.heroDescription,
   heroImage: serviceBgFallbackImg,
   icon: "",

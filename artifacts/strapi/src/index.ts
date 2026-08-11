@@ -1167,6 +1167,27 @@ async function dropUnusedAdminFields(strapi: any) {
   }
 }
 
+async function clearServiceGeneralKicker(strapi: any) {
+  const knex = strapi.db.connection;
+  const store = strapi.store({ type: "plugin", name: "migrations" });
+  const done = await store.get({ key: "service_general_kicker_clear_v1" });
+  if (done) {
+    strapi.log.info("Service general kicker clear: already completed (flag set) — skipping");
+    return;
+  }
+
+  try {
+    const updated = await knex("strapi.components_service_generals")
+      .whereRaw("kicker IS NOT NULL AND lower(trim(kicker)) = lower(trim(title))")
+      .update({ kicker: null });
+    strapi.log.info(`Service general kicker clear: cleared kicker on ${updated} row(s) where it duplicated the title`);
+    await store.set({ key: "service_general_kicker_clear_v1", value: true });
+    strapi.log.info("Service general kicker clear: completed successfully");
+  } catch (err: any) {
+    strapi.log.error(`Service general kicker clear: failed — will retry on next restart: ${err.message}`);
+  }
+}
+
 export default {
   register({ strapi }) {
     registerWebsiteRebuildAdminRoutes(strapi);
@@ -1186,6 +1207,7 @@ export default {
           .then(() => backfillFeaturedProjects(strapi))
           .then(() => dropRemovedServiceFields(strapi))
           .then(() => dropUnusedAdminFields(strapi))
+          .then(() => clearServiceGeneralKicker(strapi))
           .then(() => strapi.log.info("Bootstrap tasks completed successfully"))
           .catch((err: any) => {
             strapi.log.error(`Bootstrap task failed: ${err.message}`);
@@ -1200,6 +1222,7 @@ export default {
       await backfillFeaturedProjects(strapi);
       await dropRemovedServiceFields(strapi);
       await dropUnusedAdminFields(strapi);
+      await clearServiceGeneralKicker(strapi);
       strapi.log.info("Bootstrap tasks completed successfully");
       markWebsiteAutoRebuildReady();
     }
