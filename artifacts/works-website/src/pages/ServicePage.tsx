@@ -24,14 +24,11 @@ const fadeUp = {
   transition: { duration: 0.6 }
 };
 
-const ICON_FILTER =
-  "[filter:brightness(0)_saturate(100%)_invert(23%)_sepia(93%)_saturate(2568%)_hue-rotate(337deg)_brightness(91%)_contrast(92%)]";
-
 function IconBox({ icon, className = "" }: { icon?: string; className?: string }) {
   return (
-    <div className={`w-9 h-9 bg-works-bg text-works-primary flex items-center justify-center shrink-0 group-hover:bg-works-primary group-hover:text-white transition-all duration-300 ${className}`}>
+    <div className={`w-9 h-9 bg-works-bg text-works-primary flex items-center justify-center shrink-0 ${className}`}>
       {icon ? (
-        <img src={icon} alt="" className={`w-5 h-5 ${ICON_FILTER} group-hover:[filter:brightness(0)_invert(1)]`} />
+        <img src={icon} alt="" className="w-5 h-5 object-contain" />
       ) : (
         <ArrowRight className="w-5 h-5" strokeWidth={1.5} />
       )}
@@ -225,11 +222,11 @@ export default function ServicePage() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: "-50px" }}
                     transition={{ duration: 0.5, delay: (i % 3) * 0.1 }}
-                    className="bg-white p-6 border border-works-muted/30 hover:border-works-primary/30 hover:shadow-lg transition-all duration-300 group"
+                    className="bg-white p-6 border border-works-muted/30"
                   >
                     <div className="flex items-center gap-3 mb-3">
                       <IconBox icon={card.icon} />
-                      <h3 className="text-lg font-bold text-works-dark group-hover:text-works-primary transition-colors">
+                      <h3 className="text-lg font-bold text-works-dark">
                         {card.title}
                       </h3>
                     </div>
@@ -304,7 +301,7 @@ export default function ServicePage() {
                       whileInView={{ opacity: 1, y: 0 }}
                       viewport={{ once: true, margin: "-50px" }}
                       transition={{ duration: 0.5, delay: i * 0.15 }}
-                      className="bg-white p-6 md:p-8 border border-works-muted/30 hover:border-works-primary/30 hover:shadow-lg transition-all duration-300 group flex flex-col"
+                      className="bg-white p-6 md:p-8 border border-works-muted/30 flex flex-col"
                     >
                       <div className="flex items-center gap-3 mb-3">
                         <IconBox icon={card.icon} />
@@ -339,11 +336,11 @@ export default function ServicePage() {
                       whileInView={{ opacity: 1, y: 0 }}
                       viewport={{ once: true, margin: "-50px" }}
                       transition={{ duration: 0.5, delay: (i % 3) * 0.1 }}
-                      className="bg-white p-6 border border-works-muted/30 hover:border-works-primary/30 hover:shadow-lg transition-all duration-300 group"
+                      className="bg-white p-6 border border-works-muted/30"
                     >
                       <div className="flex items-center gap-3 mb-3">
                         <IconBox icon={card.icon} />
-                        <h3 className="text-lg font-bold text-works-dark group-hover:text-works-primary transition-colors">
+                        <h3 className="text-lg font-bold text-works-dark">
                           {card.title}
                         </h3>
                       </div>
@@ -468,7 +465,7 @@ export default function ServicePage() {
                         <div className="flex items-center gap-3 mb-4">
                           <div className="w-10 h-10 bg-works-bg text-works-primary flex items-center justify-center shrink-0 group-hover:bg-works-primary group-hover:text-white transition-all duration-300">
                             {rel.icon ? (
-                              <img src={rel.icon} alt="" className={`w-5 h-5 ${ICON_FILTER} group-hover:[filter:brightness(0)_invert(1)]`} />
+                              <img src={rel.icon} alt="" className="w-5 h-5 object-contain group-hover:[filter:brightness(0)_invert(1)]" />
                             ) : (
                               <Search className="w-5 h-5" strokeWidth={1.5} />
                             )}
