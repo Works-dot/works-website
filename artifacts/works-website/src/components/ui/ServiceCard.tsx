@@ -1,4 +1,4 @@
-import { Search } from "lucide-react";
+import { Search, ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
 import { Link } from "wouter";
 
@@ -30,6 +30,15 @@ export function ServiceCard({ iconSrc, title, description, index, href }: Servic
         <h3 className="text-xl font-bold text-works-dark group-hover:text-works-primary transition-colors">{title}</h3>
       </div>
       <p className="text-works-dark/60 leading-relaxed flex-grow">{description}</p>
+      {href && (
+        <div className="flex justify-end mt-4">
+          <ArrowRight
+            className="w-5 h-5 text-works-dark/40 group-hover:text-works-primary group-hover:translate-x-1 transition-all duration-300"
+            strokeWidth={1.5}
+            aria-hidden="true"
+          />
+        </div>
+      )}
     </motion.div>
   );
 
