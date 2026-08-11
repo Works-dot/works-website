@@ -381,16 +381,58 @@ async function fetchAll() {
   return cache;
 }
 
+// Strict mode: on production builds (Railway) the committed cache must NEVER be
+// served as content — either the fetch succeeds or the build fails loudly.
+// Railway injects RAILWAY_ENVIRONMENT_ID into every deployment; it can also be
+// forced/disabled explicitly via STRAPI_FETCH_STRICT=1/0.
+const STRICT =
+  process.env.STRAPI_FETCH_STRICT === "1" ||
+  (process.env.STRAPI_FETCH_STRICT !== "0" && !!process.env.RAILWAY_ENVIRONMENT_ID);
+
+// In strict mode retry for a while: on Railway the website build can start
+// before the freshly deployed Strapi (with the new schema) is up, and the old
+// Strapi may reject queries that reference new fields.
+const RETRY_ATTEMPTS = STRICT ? Number(process.env.STRAPI_FETCH_RETRIES || 10) : 1;
+const RETRY_DELAY_MS = Number(process.env.STRAPI_FETCH_RETRY_DELAY_MS || 30000);
+
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+
+async function fetchAllWithRetry() {
+  let lastErr;
+  for (let attempt = 1; attempt <= RETRY_ATTEMPTS; attempt++) {
+    try {
+      if (attempt > 1) console.log(`\nRetry ${attempt}/${RETRY_ATTEMPTS}...`);
+      return await fetchAll();
+    } catch (err) {
+      lastErr = err;
+      console.warn(`  ✗ attempt ${attempt}/${RETRY_ATTEMPTS} failed: ${err.message}`);
+      if (attempt < RETRY_ATTEMPTS) {
+        console.warn(`  waiting ${Math.round(RETRY_DELAY_MS / 1000)}s before retrying (Strapi may still be deploying)...`);
+        await sleep(RETRY_DELAY_MS);
+      }
+    }
+  }
+  throw lastErr;
+}
+
 async function main() {
   console.log("Fetching content from Strapi...");
   console.log(`  API: ${STRAPI_API}`);
+  console.log(`  Mode: ${STRICT ? "strict (production — fresh fetch required)" : "lenient (dev)"}`);
 
   try {
-    const data = await fetchAll();
+    const data = await fetchAllWithRetry();
     fs.writeFileSync(outPath, JSON.stringify(data, null, 2), "utf-8");
     console.log(`\nStrapi data cached to ${path.relative(root, outPath)}`);
   } catch (err) {
     console.warn(`\n⚠ Could not fetch Strapi data: ${err.message}`);
+    if (STRICT) {
+      console.error(
+        "  STRICT mode: refusing to build with stale/committed cache — failing the build.\n" +
+        "  (The committed cache may contain non-production content; a silent fallback would overwrite live content.)\n"
+      );
+      process.exit(1);
+    }
     if (fs.existsSync(outPath)) {
       console.warn("  Keeping the existing cached data — build will use the previously fetched content.\n");
     } else {
