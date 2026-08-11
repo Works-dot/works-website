@@ -19,9 +19,6 @@ export default {
     "subtitle": {
       "type": "string"
     },
-    "kicker": {
-      "type": "string"
-    },
     "heroDescription": {
       "type": "text"
     },

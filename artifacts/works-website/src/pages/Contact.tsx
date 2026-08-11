@@ -4,10 +4,11 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
-import { MapPin, Mail, Phone, ArrowRight } from "lucide-react";
+import { useRef } from "react";
+import { MapPin, Mail, Phone, ArrowRight, Upload, X, FileText } from "lucide-react";
 import SEOHead from "@/components/SEOHead";
 import { useStrapiQuery } from "@/hooks/useStrapiQuery";
-import { getContactPage, getGlobalSettings } from "@/lib/strapi";
+import { getContactPage, getGlobalSettings, uploadCv, CV_MAX_SIZE_BYTES, CV_ACCEPT, CV_ALLOWED_EXTENSIONS } from "@/lib/strapi";
 import type { ContactPageData, GlobalSettings } from "@/lib/strapi";
 import { fallbackContactPage, fallbackGlobalSettings, contactGraphicFallbackImg } from "@/data/fallback";
 
@@ -116,6 +117,10 @@ export default function Contact() {
   });
   const [submitted, setSubmitted] = useState(false);
   const [consentChecked, setConsentChecked] = useState({ first: false, second: false });
+  const [cvFile, setCvFile] = useState<File | null>(null);
+  const [cvError, setCvError] = useState<string | null>(null);
+  const [submitting, setSubmitting] = useState(false);
+  const cvInputRef = useRef<HTMLInputElement>(null);
 
   // Karrier tárgy esetén megjelenő hozzájárulás-checkboxok (CMS-ből).
   const selectedSubject = (contactPage?.formSubjects || []).find((s) => s.value === formData.subject);
@@ -128,10 +133,52 @@ export default function Contact() {
       ].filter((c) => c.text)
     : [];
   const consentsSatisfied = consentItems.every((c) => consentChecked[c.key]);
+  const cvSatisfied = !isCareerSubject || cvFile !== null;
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const validateCvFile = (file: File): string | null => {
+    const name = file.name.toLowerCase();
+    if (!CV_ALLOWED_EXTENSIONS.some((ext) => name.endsWith(ext))) {
+      return "Csak PDF, DOC vagy DOCX formátumú önéletrajz tölthető fel.";
+    }
+    if (file.size > CV_MAX_SIZE_BYTES) {
+      return "A fájl mérete legfeljebb 10 MB lehet.";
+    }
+    return null;
+  };
+
+  const handleCvSelect = (file: File | null) => {
+    if (!file) return;
+    const error = validateCvFile(file);
+    if (error) {
+      setCvFile(null);
+      setCvError(error);
+    } else {
+      setCvFile(file);
+      setCvError(null);
+    }
+  };
+
+  const clearCv = () => {
+    setCvFile(null);
+    setCvError(null);
+    if (cvInputRef.current) cvInputRef.current.value = "";
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!consentsSatisfied) return;
+    if (!consentsSatisfied || !cvSatisfied || submitting) return;
+    if (isCareerSubject && cvFile) {
+      setSubmitting(true);
+      setCvError(null);
+      try {
+        await uploadCv(cvFile);
+      } catch (err) {
+        setCvError(err instanceof Error ? err.message : "A feltöltés nem sikerült, kérjük próbáld újra később.");
+        setSubmitting(false);
+        return;
+      }
+      setSubmitting(false);
+    }
     setSubmitted(true);
   };
 
@@ -141,6 +188,7 @@ export default function Contact() {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
     if (e.target.name === "subject") {
       setConsentChecked({ first: false, second: false });
+      clearCv();
     }
   };
 
@@ -318,6 +366,60 @@ export default function Contact() {
                       />
                     </div>
 
+                    {isCareerSubject && (
+                      <div>
+                        <label className="block text-sm font-semibold text-works-dark mb-2">
+                          Önéletrajz feltöltése
+                        </label>
+                        <input
+                          ref={cvInputRef}
+                          type="file"
+                          accept={CV_ACCEPT}
+                          className="sr-only"
+                          id="cv-upload"
+                          onChange={(e) => handleCvSelect(e.target.files?.[0] || null)}
+                        />
+                        {cvFile ? (
+                          <div className="flex items-center justify-between gap-3 px-5 py-4 border border-works-primary/40 bg-works-primary/5">
+                            <div className="flex items-center gap-3 min-w-0">
+                              <FileText className="w-5 h-5 text-works-primary flex-shrink-0" />
+                              <span className="text-sm text-works-dark truncate">{cvFile.name}</span>
+                              <span className="text-xs text-works-dark/50 flex-shrink-0">
+                                {(cvFile.size / (1024 * 1024)).toFixed(1)} MB
+                              </span>
+                            </div>
+                            <button
+                              type="button"
+                              onClick={clearCv}
+                              aria-label="Fájl eltávolítása"
+                              className="text-works-dark/40 hover:text-works-dark transition-colors flex-shrink-0"
+                            >
+                              <X className="w-5 h-5" />
+                            </button>
+                          </div>
+                        ) : (
+                          <label
+                            htmlFor="cv-upload"
+                            onDragOver={(e) => e.preventDefault()}
+                            onDrop={(e) => {
+                              e.preventDefault();
+                              handleCvSelect(e.dataTransfer.files?.[0] || null);
+                            }}
+                            className="flex flex-col items-center justify-center gap-2 px-5 py-8 border border-dashed border-works-dark/20 bg-white cursor-pointer hover:border-works-primary/50 transition-colors text-center"
+                          >
+                            <Upload className="w-6 h-6 text-works-primary" />
+                            <span className="text-sm text-works-dark/70">
+                              Húzd ide az önéletrajzod, vagy <span className="text-works-primary font-semibold">tallózz</span>
+                            </span>
+                            <span className="text-xs text-works-dark/40">PDF, DOC vagy DOCX, legfeljebb 10 MB</span>
+                          </label>
+                        )}
+                        {cvError && (
+                          <p className="mt-2 text-sm text-red-600">{cvError}</p>
+                        )}
+                      </div>
+                    )}
+
                     {consentItems.length > 0 && (
                       <div className="space-y-3">
                         {consentItems.map((item) => (
@@ -355,10 +457,10 @@ export default function Contact() {
 
                     <button
                       type="submit"
-                      disabled={!consentsSatisfied}
+                      disabled={!consentsSatisfied || !cvSatisfied || submitting}
                       className="group inline-flex items-center gap-2 bg-works-primary text-white font-semibold px-8 py-4 hover:bg-works-primary/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                     >
-                      Üzenet küldése
+                      {submitting ? "Küldés..." : "Üzenet küldése"}
                       <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
                     </button>
                   </form>

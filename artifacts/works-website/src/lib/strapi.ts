@@ -174,7 +174,7 @@ interface StrapiFaqItem {
 interface StrapiService {
   id: number;
   documentId: string;
-  general: (StrapiServiceGeneral & { kicker?: string | null }) | null;
+  general: StrapiServiceGeneral | null;
   relatedProjects: StrapiProject[];
   order: number;
   questionsSection: { intro: StrapiSectionIntro | null; cards: StrapiQuestionCard[] } | null;
@@ -193,7 +193,7 @@ interface StrapiService {
   projectExamplesIntro: StrapiSectionIntro | null;
   faqSection: { intro: StrapiSectionIntro | null; items: StrapiFaqItem[] } | null;
   relatedServicesIntro: StrapiSectionIntro | null;
-  relatedServices: { general: (StrapiServiceGeneral & { kicker?: string | null }) | null }[];
+  relatedServices: { general: StrapiServiceGeneral | null }[];
   seo?: StrapiSeo | null;
 }
 
@@ -314,7 +314,6 @@ export interface Service {
   slug: string;
   title: string;
   subtitle: string;
-  kicker: string;
   heroDescription: string;
   heroImage: string;
   icon: string;
@@ -494,7 +493,6 @@ function mapService(s: StrapiService): Service {
     slug: s.general?.slug || "",
     title: s.general?.title || "",
     subtitle: s.general?.subtitle || "",
-    kicker: s.general?.kicker || "",
     heroDescription: s.general?.heroDescription || "",
     heroImage: strapiImageUrl(s.general?.heroImage?.url),
     icon: strapiImageUrl(s.general?.icon?.url),
@@ -842,6 +840,34 @@ export async function getAboutPage(): Promise<AboutPageData> {
     },
     seo: mapSeo(d.seo),
   };
+}
+
+// CV-feltöltés a kapcsolat űrlapról. A statikus (éles) buildben a Strapi másik
+// domainen fut, ezért az origin build-időben konfigurálható.
+const STRAPI_PUBLIC_ORIGIN = (import.meta.env.VITE_STRAPI_PUBLIC_URL || "").replace(/\/+$/, "");
+
+export const CV_MAX_SIZE_BYTES = 10 * 1024 * 1024; // 10 MB
+export const CV_ACCEPT = ".pdf,.doc,.docx";
+export const CV_ALLOWED_EXTENSIONS = [".pdf", ".doc", ".docx"];
+
+export async function uploadCv(file: File): Promise<void> {
+  const formData = new FormData();
+  formData.append("file", file);
+  const base = STRAPI_PUBLIC_ORIGIN || window.location.origin;
+  const res = await fetch(`${base}${STRAPI_API}/cv-upload`, {
+    method: "POST",
+    body: formData,
+  });
+  if (!res.ok) {
+    let message = "A feltöltés nem sikerült, kérjük próbáld újra később.";
+    try {
+      const data = await res.json();
+      if (data?.message) message = data.message;
+    } catch {
+      // nem JSON válasz — marad az általános üzenet
+    }
+    throw new Error(message);
+  }
 }
 
 export interface PrivacyPageData {

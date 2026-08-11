@@ -293,7 +293,6 @@ export interface ServiceGeneral extends Struct.ComponentSchema {
     heroDescription: Schema.Attribute.Text;
     heroImage: Schema.Attribute.Media<'images'>;
     icon: Schema.Attribute.Media<'images'>;
-    kicker: Schema.Attribute.String;
     slug: Schema.Attribute.String &
       Schema.Attribute.Required &
       Schema.Attribute.Unique;

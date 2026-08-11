@@ -88,7 +88,6 @@ function mapService(s) {
     slug: s.general?.slug || "",
     title: s.general?.title || "",
     subtitle: s.general?.subtitle || "",
-    kicker: s.general?.kicker || "",
     heroDescription: s.general?.heroDescription || "",
     heroImage: strapiImageUrl(s.general?.heroImage?.url),
     icon: strapiImageUrl(s.general?.icon?.url),

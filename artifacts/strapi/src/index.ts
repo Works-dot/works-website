@@ -4,6 +4,7 @@ import {
   getWebsiteRebuildStatus,
   triggerWebsiteRebuildNow,
 } from "./website-rebuild";
+import { registerCvUploadRoutes } from "./cv-upload";
 
 function registerWebsiteRebuildAdminRoutes(strapi: any) {
   strapi.server.routes({
@@ -364,6 +365,10 @@ async function updateAllLabels(strapi: any) {
     if (config.metadatas) {
       applyLabels(config.metadatas);
 
+      if (uid === "service.general") {
+        delete config.metadatas.kicker;
+      }
+
       if (uid === "service.help-section") {
         for (const removed of ["ctaText", "ctaButtonText", "ctaButtonLink"]) {
           delete config.metadatas[removed];
@@ -383,6 +388,14 @@ async function updateAllLabels(strapi: any) {
           }
         }
       }
+    }
+
+    if (uid === "service.general" && config.layouts?.edit) {
+      config.layouts.edit = config.layouts.edit
+        .map((row: { name: string }[]) =>
+          row.filter((col: { name: string }) => col.name !== "kicker")
+        )
+        .filter((row: { name: string }[]) => row.length > 0);
     }
 
     if (uid === "service.help-section" && config.layouts?.edit) {
@@ -616,7 +629,6 @@ async function syncServiceTitles(strapi: any) {
 
 const SERVICE_RESTRUCTURE_SEED: Record<string, any> = {
   "ux-kutatas": {
-    kicker: "UX kutatás",
     questionsIntro: {
       kicker: "A kihívásaid",
       heading: "Milyen kérdésekre segítünk választ találni?",
@@ -688,7 +700,6 @@ const SERVICE_RESTRUCTURE_SEED: Record<string, any> = {
     relatedProjectSlugs: ["banki-applikacio", "logisztikai-szoftver"],
   },
   "ui-design": {
-    kicker: "UI Design",
     questionsIntro: {
       kicker: "A kihívásaid",
       heading: "Milyen kérdésekre segítünk választ találni?",
@@ -759,7 +770,6 @@ const SERVICE_RESTRUCTURE_SEED: Record<string, any> = {
     relatedProjectSlugs: ["banki-applikacio", "logisztikai-szoftver"],
   },
   "akadalymentesites": {
-    kicker: "Akadálymentesítés",
     questionsIntro: {
       kicker: "A kihívásaid",
       heading: "Milyen kérdésekre segítünk választ találni?",
@@ -892,12 +902,11 @@ async function backfillServiceRestructure(strapi: any) {
     const generalIconId =
       svc.general?.icon?.id ||
       (oldSeed?.serviceIcon ? await getIconId(oldSeed.serviceIcon) : null);
-    if (svc.general && (!svc.general.kicker || (!svc.general.icon && generalIconId))) {
+    if (svc.general && !svc.general.icon && generalIconId) {
       data.general = {
         ...svc.general,
         icon: generalIconId || undefined,
         heroImage: svc.general.heroImage?.id || undefined,
-        kicker: svc.general.kicker || seed.kicker,
       };
     }
 
@@ -1036,8 +1045,7 @@ async function backfillServiceRestructure(strapi: any) {
   const stillMissing = postCheck.filter(
     (s: any) =>
       SERVICE_RESTRUCTURE_SEED[s.general?.slug || ""] &&
-      (!s.general?.kicker ||
-        !s.questionsSection ||
+      (!s.questionsSection ||
         !s.helpSection ||
         !s.processSection ||
         !s.deliverablesSection ||
@@ -1302,24 +1310,22 @@ async function dropUnusedAdminFields(strapi: any) {
   }
 }
 
-async function clearServiceGeneralKicker(strapi: any) {
+async function dropServiceGeneralKicker(strapi: any) {
   const knex = strapi.db.connection;
   const store = strapi.store({ type: "plugin", name: "migrations" });
-  const done = await store.get({ key: "service_general_kicker_clear_v1" });
+  const done = await store.get({ key: "service_general_kicker_drop_v1" });
   if (done) {
-    strapi.log.info("Service general kicker clear: already completed (flag set) — skipping");
+    strapi.log.info("Service general kicker drop: already completed (flag set) — skipping");
     return;
   }
 
   try {
-    const updated = await knex("strapi.components_service_generals")
-      .whereRaw("kicker IS NOT NULL AND lower(trim(kicker)) = lower(trim(title))")
-      .update({ kicker: null });
-    strapi.log.info(`Service general kicker clear: cleared kicker on ${updated} row(s) where it duplicated the title`);
-    await store.set({ key: "service_general_kicker_clear_v1", value: true });
-    strapi.log.info("Service general kicker clear: completed successfully");
+    await knex.raw(`ALTER TABLE strapi.components_service_generals DROP COLUMN IF EXISTS kicker`);
+    strapi.log.info("Service general kicker drop: kicker column dropped");
+    await store.set({ key: "service_general_kicker_drop_v1", value: true });
+    strapi.log.info("Service general kicker drop: completed successfully");
   } catch (err: any) {
-    strapi.log.error(`Service general kicker clear: failed — will retry on next restart: ${err.message}`);
+    strapi.log.error(`Service general kicker drop: failed — will retry on next restart: ${err.message}`);
   }
 }
 
@@ -1471,6 +1477,7 @@ async function seedServiceCtaBanners(strapi: any) {
 export default {
   register({ strapi }) {
     registerWebsiteRebuildAdminRoutes(strapi);
+    registerCvUploadRoutes(strapi);
   },
   async bootstrap({ strapi }) {
     await resetAdminFromEnv(strapi);
@@ -1487,7 +1494,7 @@ export default {
           .then(() => backfillFeaturedProjects(strapi))
           .then(() => dropRemovedServiceFields(strapi))
           .then(() => dropUnusedAdminFields(strapi))
-          .then(() => clearServiceGeneralKicker(strapi))
+          .then(() => dropServiceGeneralKicker(strapi))
           .then(() => dropHelpSectionCtaFields(strapi))
           .then(() => seedServiceCtaBanners(strapi))
           .then(() => markCareerFormSubject(strapi))
@@ -1506,7 +1513,7 @@ export default {
       await backfillFeaturedProjects(strapi);
       await dropRemovedServiceFields(strapi);
       await dropUnusedAdminFields(strapi);
-      await clearServiceGeneralKicker(strapi);
+      await dropServiceGeneralKicker(strapi);
       await dropHelpSectionCtaFields(strapi);
       await seedServiceCtaBanners(strapi);
       await markCareerFormSubject(strapi);
