@@ -1404,17 +1404,22 @@ async function seedPrivacyPage(strapi: any) {
   }
 
   try {
-    const existing = await strapi.documents("api::privacy-page.privacy-page").findFirst({});
+    const docs = strapi.documents("api::privacy-page.privacy-page");
+    let existing = await docs.findFirst({});
     if (!existing) {
-      const created = await strapi.documents("api::privacy-page.privacy-page").create({
+      existing = await docs.create({
         data: { heading: PRIVACY_SEED_HEADING, body: PRIVACY_SEED_BODY },
       });
-      await strapi.documents("api::privacy-page.privacy-page").publish({
-        documentId: created.documentId,
-      });
-      strapi.log.info("Privacy page seed: default content created and published");
+      strapi.log.info("Privacy page seed: default content created");
     } else {
       strapi.log.info("Privacy page seed: content already exists — not overwriting");
+    }
+    // Publish separately and re-entrantly: if a previous run created the draft
+    // but crashed before publishing, this retry still publishes it.
+    const published = await docs.findFirst({ status: "published" });
+    if (!published) {
+      await docs.publish({ documentId: existing.documentId });
+      strapi.log.info("Privacy page seed: content published");
     }
     await store.set({ key: "privacy_page_seed_v1", value: true });
     strapi.log.info("Privacy page seed: completed successfully");
