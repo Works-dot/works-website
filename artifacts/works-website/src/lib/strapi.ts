@@ -853,8 +853,13 @@ export const CV_ALLOWED_EXTENSIONS = [".pdf", ".doc", ".docx"];
 export async function uploadCv(file: File): Promise<void> {
   const formData = new FormData();
   formData.append("file", file);
-  const base = STRAPI_PUBLIC_ORIGIN || window.location.origin;
-  const res = await fetch(`${base}${STRAPI_API}/cv-upload`, {
+  // Alapértelmezés: azonos origin, a /strapi proxy-útvonalon keresztül.
+  // Ha VITE_STRAPI_PUBLIC_URL be van állítva (közvetlen Strapi origin),
+  // ott az API előtag nélkül, /api alatt érhető el.
+  const endpoint = STRAPI_PUBLIC_ORIGIN
+    ? `${STRAPI_PUBLIC_ORIGIN}/api/cv-upload`
+    : `${window.location.origin}${STRAPI_API}/cv-upload`;
+  const res = await fetch(endpoint, {
     method: "POST",
     body: formData,
   });
