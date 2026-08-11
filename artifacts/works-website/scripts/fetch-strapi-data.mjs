@@ -97,9 +97,6 @@ function mapService(s) {
             description: c.description || "",
             icon: strapiImageUrl(c.icon?.url),
           })),
-          ctaText: s.helpSection.ctaText || "",
-          ctaButtonText: s.helpSection.ctaButtonText || "",
-          ctaButtonLink: s.helpSection.ctaButtonLink || "",
         }
       : null,
     processSection: s.processSection
@@ -126,6 +123,13 @@ function mapService(s) {
             icon: strapiImageUrl(c.icon?.url),
             bullets: (c.bullets || []).map((b) => b.text),
           })),
+        }
+      : null,
+    ctaBanner: s.ctaBanner
+      ? {
+          heading: s.ctaBanner.heading || "",
+          ctaText: s.ctaBanner.ctaText || "",
+          ctaLink: s.ctaBanner.ctaLink || "",
         }
       : null,
     projectExamplesIntro: mapSectionIntro(s.projectExamplesIntro),
@@ -177,7 +181,7 @@ async function fetchAll() {
     "&populate[9]=processSection.intro&populate[10]=processSection.steps" +
     "&populate[11]=deliverablesSection.intro&populate[12]=deliverablesSection.smallCards.icon&populate[13]=deliverablesSection.largeCards.icon&populate[14]=deliverablesSection.largeCards.bullets" +
     "&populate[15]=projectExamplesIntro&populate[16]=faqSection.intro&populate[17]=faqSection.items" +
-    "&populate[18]=relatedServicesIntro&populate[19]=relatedServices.general.icon";
+    "&populate[18]=relatedServicesIntro&populate[19]=relatedServices.general.icon&populate[20]=ctaBanner";
   const servicesRes = await fetchApi(
     `/services?${SERVICE_POPULATE}&pagination[pageSize]=100&sort=order:asc`
   );

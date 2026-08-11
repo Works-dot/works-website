@@ -16,15 +16,6 @@ export default {
       "type": "component",
       "repeatable": true,
       "component": "service.help-card"
-    },
-    "ctaText": {
-      "type": "text"
-    },
-    "ctaButtonText": {
-      "type": "string"
-    },
-    "ctaButtonLink": {
-      "type": "string"
     }
   }
 };

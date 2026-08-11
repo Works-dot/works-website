@@ -788,6 +788,7 @@ export interface ApiServiceService extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    ctaBanner: Schema.Attribute.Component<'homepage.cta-banner', false>;
     deliverablesSection: Schema.Attribute.Component<
       'service.deliverables-section',
       false

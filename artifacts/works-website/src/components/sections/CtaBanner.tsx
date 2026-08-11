@@ -11,14 +11,15 @@ const DEFAULT_HEADING =
 const DEFAULT_CTA_TEXT = "Segíthetünk?";
 const DEFAULT_CTA_LINK = "/kapcsolat";
 
-export function CtaBanner() {
-  const { data: homepage } = useStrapiQuery<HomepageData>("homepage", getHomepage, fallbackHomepage);
-  const banner = homepage?.ctaBanner;
-
-  const heading = banner?.heading || DEFAULT_HEADING;
-  const ctaText = banner?.ctaText || DEFAULT_CTA_TEXT;
-  const ctaLink = banner?.ctaLink || DEFAULT_CTA_LINK;
-
+export function CtaBannerView({
+  heading,
+  ctaText,
+  ctaLink,
+}: {
+  heading: string;
+  ctaText: string;
+  ctaLink: string;
+}) {
   const buttonClassName =
     "group inline-flex items-center justify-center px-8 py-4 border border-white text-white font-semibold text-lg hover:bg-white hover:text-works-dark transition-colors duration-300 whitespace-nowrap shrink-0 gap-2";
 
@@ -56,5 +57,18 @@ export function CtaBanner() {
         </motion.div>
       </div>
     </section>
+  );
+}
+
+export function CtaBanner() {
+  const { data: homepage } = useStrapiQuery<HomepageData>("homepage", getHomepage, fallbackHomepage);
+  const banner = homepage?.ctaBanner;
+
+  return (
+    <CtaBannerView
+      heading={banner?.heading || DEFAULT_HEADING}
+      ctaText={banner?.ctaText || DEFAULT_CTA_TEXT}
+      ctaLink={banner?.ctaLink || DEFAULT_CTA_LINK}
+    />
   );
 }

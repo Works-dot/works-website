@@ -311,9 +311,6 @@ export interface ServiceHelpSection extends Struct.ComponentSchema {
   };
   attributes: {
     cards: Schema.Attribute.Component<'service.help-card', true>;
-    ctaButtonLink: Schema.Attribute.String;
-    ctaButtonText: Schema.Attribute.String;
-    ctaText: Schema.Attribute.Text;
     intro: Schema.Attribute.Component<'service.section-intro', false>;
   };
 }

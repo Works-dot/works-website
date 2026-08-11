@@ -681,10 +681,7 @@
             "description": "Meglévő analitikai adatok értelmezése és összevetése a kvalitatív eredményekkel.",
             "icon": "/strapi/uploads/file_check_af75094b92.svg"
           }
-        ],
-        "ctaText": "Nem tudod, melyik módszer illik a helyzetedhez? Segítünk kiválasztani.",
-        "ctaButtonText": "Kérj konzultációt",
-        "ctaButtonLink": "/kapcsolat"
+        ]
       },
       "processSection": {
         "intro": {
@@ -786,6 +783,11 @@
             ]
           }
         ]
+      },
+      "ctaBanner": {
+        "heading": "Beszéljük meg, hogyan segíthetünk a projektedben.",
+        "ctaText": "Kérj konzultációt",
+        "ctaLink": "/kapcsolat"
       },
       "projectExamplesIntro": {
         "kicker": "Referenciák",
@@ -920,10 +922,7 @@
             "description": "Részletes specifikáció és asset-készítés a zökkenőmentes implementációért.",
             "icon": "/strapi/uploads/file_check_af75094b92.svg"
           }
-        ],
-        "ctaText": "Csak egy részterületen kell segítség? Rugalmasan alkalmazkodunk.",
-        "ctaButtonText": "Beszéljük meg",
-        "ctaButtonLink": "/kapcsolat"
+        ]
       },
       "processSection": {
         "intro": {
@@ -1025,6 +1024,11 @@
             ]
           }
         ]
+      },
+      "ctaBanner": {
+        "heading": "Beszéljük meg, hogyan segíthetünk a projektedben.",
+        "ctaText": "Kérj konzultációt",
+        "ctaLink": "/kapcsolat"
       },
       "projectExamplesIntro": {
         "kicker": "Portfólió",
@@ -1154,10 +1158,7 @@
             "description": "Rendszeres ellenőrzés és jelentéskészítés, hogy a megfelelés hosszú távon is megmaradjon.",
             "icon": "/strapi/uploads/bar_chart_3_55704ad420.svg"
           }
-        ],
-        "ctaText": "Nem tudod, hol kezdjétek? Egy gyors állapotfelméréssel segítünk tisztán látni.",
-        "ctaButtonText": "Kérj állapotfelmérést",
-        "ctaButtonLink": "/kapcsolat"
+        ]
       },
       "processSection": {
         "intro": {
@@ -1259,6 +1260,11 @@
             ]
           }
         ]
+      },
+      "ctaBanner": {
+        "heading": "Beszéljük meg, hogyan segíthetünk a projektedben.",
+        "ctaText": "Kérj konzultációt",
+        "ctaLink": "/kapcsolat"
       },
       "projectExamplesIntro": {
         "kicker": "Referenciák",

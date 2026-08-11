@@ -5,6 +5,7 @@ import { ArrowRight, Search, HelpCircle } from "lucide-react";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import SEOHead from "@/components/SEOHead";
+import { CtaBannerView } from "@/components/sections/CtaBanner";
 import {
   Accordion,
   AccordionContent,
@@ -357,7 +358,16 @@ export default function ServicePage() {
           </section>
         )}
 
-        {/* 6. Projektpéldák */}
+        {/* 6. CTA banner */}
+        {service.ctaBanner?.heading && (
+          <CtaBannerView
+            heading={service.ctaBanner.heading}
+            ctaText={service.ctaBanner.ctaText || "Segíthetünk?"}
+            ctaLink={service.ctaBanner.ctaLink || "/kapcsolat"}
+          />
+        )}
+
+        {/* 7. Projektpéldák */}
         {relatedProjects.length > 0 && (
           <section className="py-20 lg:py-28 bg-works-bg border-t border-works-muted/50">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

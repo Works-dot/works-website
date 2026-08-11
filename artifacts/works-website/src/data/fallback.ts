@@ -149,15 +149,13 @@ const hardcodedServices: Service[] = rawServices.map((s) => ({
   helpSection: {
     intro: { kicker: "Szakértelem", heading: "Miben tudunk segíteni?", description: "" },
     cards: s.activities.map((a) => ({ title: a.title, description: a.description, icon: "" })),
-    ctaText: "Beszéljük meg, hogyan segíthetünk a projektedben.",
-    ctaButtonText: "Kérj konzultációt",
-    ctaButtonLink: "/kapcsolat",
   },
   processSection: {
     intro: { kicker: "A folyamat", heading: "Hogyan dolgozunk?", description: "" },
     steps: parseHowWeWorkSteps(s.howWeWork),
   },
   deliverablesSection: null,
+  ctaBanner: null,
   projectExamplesIntro: { kicker: "Referenciák", heading: "Projektpéldák", description: "" },
   faqSection: null,
   relatedServicesIntro: null,

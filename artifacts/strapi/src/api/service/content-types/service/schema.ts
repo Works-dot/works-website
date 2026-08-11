@@ -44,6 +44,11 @@ export default {
       "repeatable": false,
       "component": "service.deliverables-section"
     },
+    "ctaBanner": {
+      "type": "component",
+      "repeatable": false,
+      "component": "homepage.cta-banner"
+    },
     "projectExamplesIntro": {
       "type": "component",
       "repeatable": false,

@@ -82,12 +82,13 @@ const SERVICE_FIELD_LABELS: Record<string, { label: string; description?: string
   helpSection: { label: "3. „Miben tudunk segíteni?”", description: "Ikonos kártyarács a szolgáltatás területeiről" },
   processSection: { label: "4. „Hogyan dolgozunk?”", description: "Számozott folyamatlépések" },
   deliverablesSection: { label: "5. „Amit a projektből kapsz”", description: "Kis vagy nagy kártyás átadandók" },
-  projectExamplesIntro: { label: "6. Projektpéldák — bevezető", description: "A Projektpéldák szekció címe és leírása" },
-  relatedProjects: { label: "6. Projektpéldák — kapcsolt projektek", description: "Az itt kiválasztott projektek jelennek meg a Projektpéldák szekcióban" },
-  faqSection: { label: "7. GYIK szekció", description: "Gyakran ismételt kérdések" },
-  relatedServicesIntro: { label: "8. Kapcsolódó szolgáltatások — bevezető", description: "A Kapcsolódó szolgáltatások szekció címe és leírása" },
-  relatedServices: { label: "8. Kapcsolódó szolgáltatások — lista", description: "Az itt kiválasztott szolgáltatások jelennek meg az oldal alján" },
-  seo: { label: "9. SEO beállítások", description: "Kereső- és megosztási beállítások (meta cím, leírás, kép)" },
+  ctaBanner: { label: "6. CTA banner", description: "Sötét hátterű felhívás szekció (cím + gomb) a Projektpéldák előtt — ugyanolyan, mint a főoldalon" },
+  projectExamplesIntro: { label: "7. Projektpéldák — bevezető", description: "A Projektpéldák szekció címe és leírása" },
+  relatedProjects: { label: "7. Projektpéldák — kapcsolt projektek", description: "Az itt kiválasztott projektek jelennek meg a Projektpéldák szekcióban" },
+  faqSection: { label: "8. GYIK szekció", description: "Gyakran ismételt kérdések" },
+  relatedServicesIntro: { label: "9. Kapcsolódó szolgáltatások — bevezető", description: "A Kapcsolódó szolgáltatások szekció címe és leírása" },
+  relatedServices: { label: "9. Kapcsolódó szolgáltatások — lista", description: "Az itt kiválasztott szolgáltatások jelennek meg az oldal alján" },
+  seo: { label: "10. SEO beállítások", description: "Kereső- és megosztási beállítások (meta cím, leírás, kép)" },
 };
 
 const SERVICE_EDIT_ORDER = [
@@ -98,6 +99,7 @@ const SERVICE_EDIT_ORDER = [
   "helpSection",
   "processSection",
   "deliverablesSection",
+  "ctaBanner",
   "projectExamplesIntro",
   "relatedProjects",
   "faqSection",
@@ -257,6 +259,21 @@ async function updateAllLabels(strapi: any) {
 
     if (config.metadatas) {
       applyLabels(config.metadatas);
+
+      if (uid === "service.help-section") {
+        for (const removed of ["ctaText", "ctaButtonText", "ctaButtonLink"]) {
+          delete config.metadatas[removed];
+        }
+      }
+    }
+
+    if (uid === "service.help-section" && config.layouts?.edit) {
+      const removedFields = ["ctaText", "ctaButtonText", "ctaButtonLink"];
+      config.layouts.edit = config.layouts.edit
+        .map((row: { name: string }[]) =>
+          row.filter((col: { name: string }) => !removedFields.includes(col.name))
+        )
+        .filter((row: { name: string }[]) => row.length > 0);
     }
 
     await store.set({ key: storeKey, value: config });
@@ -1188,6 +1205,67 @@ async function clearServiceGeneralKicker(strapi: any) {
   }
 }
 
+async function dropHelpSectionCtaFields(strapi: any) {
+  const knex = strapi.db.connection;
+  const store = strapi.store({ type: "plugin", name: "migrations" });
+  const done = await store.get({ key: "help_section_cta_drop_v1" });
+  if (done) {
+    strapi.log.info("Help section CTA drop: already completed (flag set) — skipping");
+    return;
+  }
+
+  try {
+    await knex.raw(`ALTER TABLE strapi.components_service_help_sections DROP COLUMN IF EXISTS cta_text`);
+    await knex.raw(`ALTER TABLE strapi.components_service_help_sections DROP COLUMN IF EXISTS cta_button_text`);
+    await knex.raw(`ALTER TABLE strapi.components_service_help_sections DROP COLUMN IF EXISTS cta_button_link`);
+    strapi.log.info("Help section CTA drop: unused CTA columns dropped");
+    await store.set({ key: "help_section_cta_drop_v1", value: true });
+    strapi.log.info("Help section CTA drop: completed successfully");
+  } catch (err: any) {
+    strapi.log.error(`Help section CTA drop: failed — will retry on next restart: ${err.message}`);
+  }
+}
+
+async function seedServiceCtaBanners(strapi: any) {
+  const knex = strapi.db.connection;
+  const store = strapi.store({ type: "plugin", name: "migrations" });
+  const done = await store.get({ key: "service_cta_banner_seed_v1" });
+  if (done) {
+    strapi.log.info("Service CTA banner seed: already completed (flag set) — skipping");
+    return;
+  }
+
+  try {
+    const services = await knex("strapi.services").select("id");
+    const linked = await knex("strapi.services_cmps")
+      .where({ field: "ctaBanner" })
+      .pluck("entity_id");
+    const missing = services.filter((s: any) => !linked.includes(s.id));
+
+    for (const svc of missing) {
+      const [banner] = await knex("strapi.components_homepage_cta_banners")
+        .insert({
+          heading: "Beszéljük meg, hogyan segíthetünk a projektedben.",
+          cta_text: "Kérj konzultációt",
+          cta_link: "/kapcsolat",
+        })
+        .returning("id");
+      await knex("strapi.services_cmps").insert({
+        entity_id: svc.id,
+        cmp_id: banner.id ?? banner,
+        component_type: "homepage.cta-banner",
+        field: "ctaBanner",
+        order: 1,
+      });
+    }
+    strapi.log.info(`Service CTA banner seed: seeded ${missing.length} service(s)`);
+    await store.set({ key: "service_cta_banner_seed_v1", value: true });
+    strapi.log.info("Service CTA banner seed: completed successfully");
+  } catch (err: any) {
+    strapi.log.error(`Service CTA banner seed: failed — will retry on next restart: ${err.message}`);
+  }
+}
+
 export default {
   register({ strapi }) {
     registerWebsiteRebuildAdminRoutes(strapi);
@@ -1208,6 +1286,8 @@ export default {
           .then(() => dropRemovedServiceFields(strapi))
           .then(() => dropUnusedAdminFields(strapi))
           .then(() => clearServiceGeneralKicker(strapi))
+          .then(() => dropHelpSectionCtaFields(strapi))
+          .then(() => seedServiceCtaBanners(strapi))
           .then(() => strapi.log.info("Bootstrap tasks completed successfully"))
           .catch((err: any) => {
             strapi.log.error(`Bootstrap task failed: ${err.message}`);
@@ -1223,6 +1303,8 @@ export default {
       await dropRemovedServiceFields(strapi);
       await dropUnusedAdminFields(strapi);
       await clearServiceGeneralKicker(strapi);
+      await dropHelpSectionCtaFields(strapi);
+      await seedServiceCtaBanners(strapi);
       strapi.log.info("Bootstrap tasks completed successfully");
       markWebsiteAutoRebuildReady();
     }

@@ -181,9 +181,6 @@ interface StrapiService {
   helpSection: {
     intro: StrapiSectionIntro | null;
     cards: StrapiHelpCard[];
-    ctaText: string | null;
-    ctaButtonText: string | null;
-    ctaButtonLink: string | null;
   } | null;
   processSection: { intro: StrapiSectionIntro | null; steps: StrapiProcessStep[] } | null;
   deliverablesSection: {
@@ -192,6 +189,7 @@ interface StrapiService {
     smallCards: StrapiDeliverableCard[];
     largeCards: StrapiDeliverableGroup[];
   } | null;
+  ctaBanner: { heading: string | null; ctaText: string | null; ctaLink: string | null } | null;
   projectExamplesIntro: StrapiSectionIntro | null;
   faqSection: { intro: StrapiSectionIntro | null; items: StrapiFaqItem[] } | null;
   relatedServicesIntro: StrapiSectionIntro | null;
@@ -286,9 +284,6 @@ export interface ServiceQuestionsSection {
 export interface ServiceHelpSection {
   intro: SectionIntro | null;
   cards: { title: string; description: string; icon: string }[];
-  ctaText: string;
-  ctaButtonText: string;
-  ctaButtonLink: string;
 }
 
 export interface ServiceProcessSection {
@@ -328,6 +323,7 @@ export interface Service {
   helpSection: ServiceHelpSection | null;
   processSection: ServiceProcessSection | null;
   deliverablesSection: ServiceDeliverablesSection | null;
+  ctaBanner: { heading: string; ctaText: string; ctaLink: string } | null;
   projectExamplesIntro: SectionIntro | null;
   faqSection: ServiceFaqSection | null;
   relatedServicesIntro: SectionIntro | null;
@@ -482,7 +478,7 @@ const SERVICE_POPULATE =
   "&populate[9]=processSection.intro&populate[10]=processSection.steps" +
   "&populate[11]=deliverablesSection.intro&populate[12]=deliverablesSection.smallCards.icon&populate[13]=deliverablesSection.largeCards.icon&populate[14]=deliverablesSection.largeCards.bullets" +
   "&populate[15]=projectExamplesIntro&populate[16]=faqSection.intro&populate[17]=faqSection.items" +
-  "&populate[18]=relatedServicesIntro&populate[19]=relatedServices.general.icon";
+  "&populate[18]=relatedServicesIntro&populate[19]=relatedServices.general.icon&populate[20]=ctaBanner";
 
 function mapSectionIntro(i: StrapiSectionIntro | null | undefined): SectionIntro | null {
   if (!i) return null;
@@ -520,9 +516,6 @@ function mapService(s: StrapiService): Service {
             description: c.description || "",
             icon: strapiImageUrl(c.icon?.url),
           })),
-          ctaText: s.helpSection.ctaText || "",
-          ctaButtonText: s.helpSection.ctaButtonText || "",
-          ctaButtonLink: s.helpSection.ctaButtonLink || "",
         }
       : null,
     processSection: s.processSection
@@ -549,6 +542,13 @@ function mapService(s: StrapiService): Service {
             icon: strapiImageUrl(c.icon?.url),
             bullets: (c.bullets || []).map((b) => b.text),
           })),
+        }
+      : null,
+    ctaBanner: s.ctaBanner
+      ? {
+          heading: s.ctaBanner.heading || "",
+          ctaText: s.ctaBanner.ctaText || "",
+          ctaLink: s.ctaBanner.ctaLink || "",
         }
       : null,
     projectExamplesIntro: mapSectionIntro(s.projectExamplesIntro),
