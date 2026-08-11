@@ -207,6 +207,7 @@ const hardcodedContactPage: ContactPageData = {
     { label: "Akadálymentesítés", value: "akadalymentesites" },
     { label: "Egyéb", value: "egyeb" },
   ],
+  careerConsent: null,
 };
 
 const hardcodedHomepage: HomepageData = {

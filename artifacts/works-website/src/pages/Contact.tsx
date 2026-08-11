@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { MapPin, Mail, Phone, ArrowRight } from "lucide-react";
@@ -113,9 +115,23 @@ export default function Contact() {
     message: "",
   });
   const [submitted, setSubmitted] = useState(false);
+  const [consentChecked, setConsentChecked] = useState({ first: false, second: false });
+
+  // Karrier tárgy esetén megjelenő hozzájárulás-checkboxok (CMS-ből).
+  const selectedSubject = (contactPage?.formSubjects || []).find((s) => s.value === formData.subject);
+  const isCareerSubject = !!selectedSubject?.isCareer;
+  const careerConsent = contactPage?.careerConsent || null;
+  const consentItems = isCareerSubject && careerConsent
+    ? [
+        { key: "first" as const, text: (careerConsent.checkbox1Text || "").trim() },
+        { key: "second" as const, text: (careerConsent.checkbox2Text || "").trim() },
+      ].filter((c) => c.text)
+    : [];
+  const consentsSatisfied = consentItems.every((c) => consentChecked[c.key]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    if (!consentsSatisfied) return;
     setSubmitted(true);
   };
 
@@ -123,6 +139,9 @@ export default function Contact() {
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
   ) => {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+    if (e.target.name === "subject") {
+      setConsentChecked({ first: false, second: false });
+    }
   };
 
   const contactGraphic = contactGraphicFallbackImg;
@@ -299,9 +318,45 @@ export default function Contact() {
                       />
                     </div>
 
+                    {consentItems.length > 0 && (
+                      <div className="space-y-3">
+                        {consentItems.map((item) => (
+                          <label
+                            key={item.key}
+                            className="flex items-start gap-3 cursor-pointer text-sm text-works-dark/80 leading-relaxed"
+                          >
+                            <input
+                              type="checkbox"
+                              required
+                              checked={consentChecked[item.key]}
+                              onChange={(e) =>
+                                setConsentChecked((prev) => ({ ...prev, [item.key]: e.target.checked }))
+                              }
+                              className="mt-1 w-4 h-4 flex-shrink-0 accent-works-primary"
+                            />
+                            <span className="[&_p]:inline [&_a]:text-works-primary [&_a]:font-semibold [&_a]:underline hover:[&_a]:no-underline">
+                              <ReactMarkdown
+                                remarkPlugins={[remarkGfm]}
+                                components={{
+                                  a: ({ href, children }) => (
+                                    <a href={href} target="_blank" rel="noopener noreferrer">
+                                      {children}
+                                    </a>
+                                  ),
+                                }}
+                              >
+                                {item.text}
+                              </ReactMarkdown>
+                            </span>
+                          </label>
+                        ))}
+                      </div>
+                    )}
+
                     <button
                       type="submit"
-                      className="group inline-flex items-center gap-2 bg-works-primary text-white font-semibold px-8 py-4 hover:bg-works-primary/90 transition-colors"
+                      disabled={!consentsSatisfied}
+                      className="group inline-flex items-center gap-2 bg-works-primary text-white font-semibold px-8 py-4 hover:bg-works-primary/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                       Üzenet küldése
                       <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />

@@ -715,7 +715,8 @@ export interface ContactPageData {
   successMessage: string;
   mapHeading: string;
   mapEmbedUrl: string;
-  formSubjects: { label: string; value: string }[];
+  formSubjects: { label: string; value: string; isCareer?: boolean }[];
+  careerConsent: { checkbox1Text: string; checkbox2Text: string } | null;
   backgroundImage: string;
   seo?: SeoOverride | null;
 }
@@ -728,10 +729,11 @@ export async function getContactPage(): Promise<ContactPageData> {
     successMessage: string;
     mapHeading: string;
     mapEmbedUrl: string;
-    formSubjects: { id: number; label: string; value: string }[];
+    formSubjects: { id: number; label: string; value: string; isCareer?: boolean }[];
+    careerConsent: { checkbox1Text: string | null; checkbox2Text: string | null } | null;
     backgroundImage: StrapiMedia | null;
     seo?: StrapiSeo | null;
-  }>>("/contact-page?populate[0]=hero&populate[1]=formSubjects&populate[2]=hero.backgroundImage&populate[3]=backgroundImage&populate[4]=seo.ogImage");
+  }>>("/contact-page?populate[0]=hero&populate[1]=formSubjects&populate[2]=hero.backgroundImage&populate[3]=backgroundImage&populate[4]=seo.ogImage&populate[5]=careerConsent");
   const d = res.data;
   return {
     hero: {
@@ -744,7 +746,13 @@ export async function getContactPage(): Promise<ContactPageData> {
     successMessage: d.successMessage || "",
     mapHeading: d.mapHeading || "",
     mapEmbedUrl: d.mapEmbedUrl || "",
-    formSubjects: (d.formSubjects || []).map((s) => ({ label: s.label, value: s.value })),
+    formSubjects: (d.formSubjects || []).map((s) => ({ label: s.label, value: s.value, isCareer: !!s.isCareer })),
+    careerConsent: d.careerConsent
+      ? {
+          checkbox1Text: d.careerConsent.checkbox1Text || "",
+          checkbox2Text: d.careerConsent.checkbox2Text || "",
+        }
+      : null,
     backgroundImage: strapiImageUrl(d.backgroundImage?.url),
     seo: mapSeo(d.seo),
   };

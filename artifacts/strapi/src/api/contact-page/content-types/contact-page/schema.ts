@@ -30,6 +30,11 @@ export default {
       "repeatable": true,
       "component": "contact.form-subject"
     },
+    "careerConsent": {
+      "type": "component",
+      "repeatable": false,
+      "component": "contact.career-consent"
+    },
     "successTitle": {
       "type": "string"
     },

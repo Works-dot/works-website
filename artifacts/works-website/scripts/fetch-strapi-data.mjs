@@ -286,7 +286,7 @@ async function fetchAll() {
   }
 
   try {
-    const contactRes = await fetchApi("/contact-page?populate[0]=hero&populate[1]=formSubjects&populate[2]=hero.backgroundImage&populate[3]=backgroundImage&populate[4]=seo.ogImage");
+    const contactRes = await fetchApi("/contact-page?populate[0]=hero&populate[1]=formSubjects&populate[2]=hero.backgroundImage&populate[3]=backgroundImage&populate[4]=seo.ogImage&populate[5]=careerConsent");
     const cd = contactRes.data;
     cache.contactPage = {
       hero: {
@@ -299,7 +299,13 @@ async function fetchAll() {
       successMessage: cd.successMessage || "",
       mapHeading: cd.mapHeading || "",
       mapEmbedUrl: cd.mapEmbedUrl || "",
-      formSubjects: (cd.formSubjects || []).map((s) => ({ label: s.label, value: s.value })),
+      formSubjects: (cd.formSubjects || []).map((s) => ({ label: s.label, value: s.value, isCareer: !!s.isCareer })),
+      careerConsent: cd.careerConsent
+        ? {
+            checkbox1Text: cd.careerConsent.checkbox1Text || "",
+            checkbox2Text: cd.careerConsent.checkbox2Text || "",
+          }
+        : null,
       backgroundImage: strapiImageUrl(cd.backgroundImage?.url),
       seo: mapSeo(cd.seo),
     };

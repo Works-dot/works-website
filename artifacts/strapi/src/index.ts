@@ -108,6 +108,44 @@ const SERVICE_EDIT_ORDER = [
   "seo",
 ];
 
+const CONTACT_FIELD_LABELS: Record<string, { label: string; description?: string }> = {
+  hero: { label: "1. Fejléc (hero)", description: "A kapcsolat oldal címe, leírása és háttérképe" },
+  formHeading: { label: "2. Űrlap — címsor", description: "Az üzenetküldő űrlap címe" },
+  formSubjects: { label: "3. Űrlap — tárgy opciók", description: "A Tárgy legördülő menü elemei. A „Karrier tárgy?” kapcsolóval jelölhető, melyik tárgynál jelenjenek meg a hozzájárulás-jelölőnégyzetek." },
+  careerConsent: { label: "4. Űrlap — karrier hozzájárulás-jelölőnégyzetek", description: "Csak a karrierként megjelölt tárgy kiválasztásakor jelennek meg. A szövegben link is elhelyezhető: [adatkezelési tájékoztató](/adatkezeles)" },
+  successTitle: { label: "5. Sikeres küldés — cím" },
+  successMessage: { label: "5. Sikeres küldés — üzenet" },
+  mapHeading: { label: "6. Térkép — címsor" },
+  mapEmbedUrl: { label: "6. Térkép — beágyazási URL" },
+  backgroundImage: { label: "7. Oldal háttérképe" },
+  seo: { label: "8. SEO beállítások", description: "Kereső- és megosztási beállítások (meta cím, leírás, kép)" },
+};
+
+const CONTACT_EDIT_ORDER = [
+  "hero",
+  "formHeading",
+  "formSubjects",
+  "careerConsent",
+  "successTitle",
+  "successMessage",
+  "mapHeading",
+  "mapEmbedUrl",
+  "backgroundImage",
+  "seo",
+];
+
+const COMPONENT_FIELD_LABELS: Record<string, Record<string, { label: string; description?: string }>> = {
+  "contact.form-subject": {
+    label: { label: "Megnevezés", description: "Ez látszik a legördülő menüben" },
+    value: { label: "Érték", description: "Technikai azonosító (pl. karrier)" },
+    isCareer: { label: "Karrier tárgy?", description: "Ha be van kapcsolva, ennél a tárgynál jelennek meg a hozzájárulás-jelölőnégyzetek" },
+  },
+  "contact.career-consent": {
+    checkbox1Text: { label: "1. jelölőnégyzet szövege", description: "Link beszúrása: [adatkezelési tájékoztató](/adatkezeles) — üresen hagyva a jelölőnégyzet nem jelenik meg" },
+    checkbox2Text: { label: "2. jelölőnégyzet szövege", description: "Link beszúrása: [link szövege](/cel-oldal) — üresen hagyva a jelölőnégyzet nem jelenik meg" },
+  },
+};
+
 const singleTypeUids = [
   "api::homepage.homepage",
   "api::about-page.about-page",
@@ -129,6 +167,7 @@ const collectionTypeUids = [
 const componentUids = [
   "about.intro",
   "contact.form-subject",
+  "contact.career-consent",
   "content.highlight-block",
   "content.image-block",
   "content.text-block",
@@ -206,6 +245,20 @@ async function updateAllLabels(strapi: any) {
           }
         }
       }
+
+      if (uid === "api::contact-page.contact-page") {
+        for (const [field, meta] of Object.entries(CONTACT_FIELD_LABELS)) {
+          if (config.metadatas[field]?.edit) {
+            config.metadatas[field].edit.label = meta.label;
+            if (meta.description) {
+              config.metadatas[field].edit.description = meta.description;
+            }
+          }
+          if (config.metadatas[field]?.list) {
+            config.metadatas[field].list.label = meta.label;
+          }
+        }
+      }
     }
 
     if (config.layouts?.edit) {
@@ -245,6 +298,20 @@ async function updateAllLabels(strapi: any) {
         }
         config.layouts.edit = [...reordered, ...config.layouts.edit];
       }
+
+      if (uid === "api::contact-page.contact-page") {
+        const reordered: any[] = [];
+        for (const name of CONTACT_EDIT_ORDER) {
+          const idx = config.layouts.edit.findIndex(
+            (row: { name: string }[]) =>
+              row.some((col: { name: string }) => col.name === name)
+          );
+          if (idx !== -1) {
+            reordered.push(...config.layouts.edit.splice(idx, 1));
+          }
+        }
+        config.layouts.edit = [...reordered, ...config.layouts.edit];
+      }
     }
 
     await store.set({ key: storeKey, value: config });
@@ -263,6 +330,20 @@ async function updateAllLabels(strapi: any) {
       if (uid === "service.help-section") {
         for (const removed of ["ctaText", "ctaButtonText", "ctaButtonLink"]) {
           delete config.metadatas[removed];
+        }
+      }
+
+      if (COMPONENT_FIELD_LABELS[uid]) {
+        for (const [field, meta] of Object.entries(COMPONENT_FIELD_LABELS[uid])) {
+          if (config.metadatas[field]?.edit) {
+            config.metadatas[field].edit.label = meta.label;
+            if (meta.description) {
+              config.metadatas[field].edit.description = meta.description;
+            }
+          }
+          if (config.metadatas[field]?.list) {
+            config.metadatas[field].list.label = meta.label;
+          }
         }
       }
     }
@@ -1226,6 +1307,30 @@ async function dropHelpSectionCtaFields(strapi: any) {
   }
 }
 
+async function markCareerFormSubject(strapi: any) {
+  const knex = strapi.db.connection;
+  const store = strapi.store({ type: "plugin", name: "migrations" });
+  const done = await store.get({ key: "career_form_subject_flag_v1" });
+  if (done) {
+    strapi.log.info("Career form subject flag: already completed (flag set) — skipping");
+    return;
+  }
+
+  try {
+    await knex.raw(`
+      UPDATE strapi.components_contact_form_subjects
+      SET is_career = true
+      WHERE is_career IS DISTINCT FROM true
+        AND (LOWER(value) IN ('career', 'karrier') OR LOWER(label) = 'karrier')
+    `);
+    strapi.log.info("Career form subject flag: existing career subject(s) marked");
+    await store.set({ key: "career_form_subject_flag_v1", value: true });
+    strapi.log.info("Career form subject flag: completed successfully");
+  } catch (err: any) {
+    strapi.log.error(`Career form subject flag: failed — will retry on next restart: ${err.message}`);
+  }
+}
+
 async function seedServiceCtaBanners(strapi: any) {
   const knex = strapi.db.connection;
   const store = strapi.store({ type: "plugin", name: "migrations" });
@@ -1288,6 +1393,7 @@ export default {
           .then(() => clearServiceGeneralKicker(strapi))
           .then(() => dropHelpSectionCtaFields(strapi))
           .then(() => seedServiceCtaBanners(strapi))
+          .then(() => markCareerFormSubject(strapi))
           .then(() => strapi.log.info("Bootstrap tasks completed successfully"))
           .catch((err: any) => {
             strapi.log.error(`Bootstrap task failed: ${err.message}`);
@@ -1305,6 +1411,7 @@ export default {
       await clearServiceGeneralKicker(strapi);
       await dropHelpSectionCtaFields(strapi);
       await seedServiceCtaBanners(strapi);
+      await markCareerFormSubject(strapi);
       strapi.log.info("Bootstrap tasks completed successfully");
       markWebsiteAutoRebuildReady();
     }

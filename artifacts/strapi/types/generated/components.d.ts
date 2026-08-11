@@ -50,6 +50,19 @@ export interface CareerWorkWithUs extends Struct.ComponentSchema {
   };
 }
 
+export interface ContactCareerConsent extends Struct.ComponentSchema {
+  collectionName: 'components_contact_career_consents';
+  info: {
+    description: 'Karrier t\u00E1rgy eset\u00E9n megjelen\u0151 hozz\u00E1j\u00E1rul\u00E1s-checkboxok';
+    displayName: 'Career Consent Checkboxes';
+    icon: 'check';
+  };
+  attributes: {
+    checkbox1Text: Schema.Attribute.Text;
+    checkbox2Text: Schema.Attribute.Text;
+  };
+}
+
 export interface ContactFormSubject extends Struct.ComponentSchema {
   collectionName: 'components_contact_form_subjects';
   info: {
@@ -58,6 +71,7 @@ export interface ContactFormSubject extends Struct.ComponentSchema {
     icon: 'list';
   };
   attributes: {
+    isCareer: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     label: Schema.Attribute.String & Schema.Attribute.Required;
     value: Schema.Attribute.String & Schema.Attribute.Required;
   };
@@ -455,6 +469,7 @@ declare module '@strapi/strapi' {
       'career.why-us-item': CareerWhyUsItem;
       'career.why-us-section': CareerWhyUsSection;
       'career.work-with-us': CareerWorkWithUs;
+      'contact.career-consent': ContactCareerConsent;
       'contact.form-subject': ContactFormSubject;
       'content.highlight-block': ContentHighlightBlock;
       'content.image-block': ContentImageBlock;

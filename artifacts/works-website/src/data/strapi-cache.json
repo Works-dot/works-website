@@ -1677,25 +1677,34 @@
     "formSubjects": [
       {
         "label": "Új projekt",
-        "value": "new-project"
+        "value": "new-project",
+        "isCareer": false
       },
       {
         "label": "Árajánlat kérés",
-        "value": "quote"
+        "value": "quote",
+        "isCareer": false
       },
       {
         "label": "Partnerség",
-        "value": "partnership"
+        "value": "partnership",
+        "isCareer": false
       },
       {
         "label": "Karrier",
-        "value": "career"
+        "value": "career",
+        "isCareer": true
       },
       {
         "label": "Egyéb",
-        "value": "other"
+        "value": "other",
+        "isCareer": false
       }
     ],
+    "careerConsent": {
+      "checkbox1Text": "Elfogadom az [adatkezelési tájékoztatót](/adatkezeles).",
+      "checkbox2Text": "Hozzájárulok, hogy önéletrajzomat 1 évig megőrizzék."
+    },
     "backgroundImage": "/strapi/uploads/contact_bg_1774518452836_75c2598f4c.png",
     "seo": {
       "metaTitle": "Kapcsolat | Works.",

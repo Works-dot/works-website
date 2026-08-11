@@ -622,6 +622,7 @@ export interface ApiContactPageContactPage extends Struct.SingleTypeSchema {
   };
   attributes: {
     backgroundImage: Schema.Attribute.Media<'images'>;
+    careerConsent: Schema.Attribute.Component<'contact.career-consent', false>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;

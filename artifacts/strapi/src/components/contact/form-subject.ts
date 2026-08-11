@@ -14,6 +14,10 @@ export default {
     "value": {
       "type": "string",
       "required": true
+    },
+    "isCareer": {
+      "type": "boolean",
+      "default": false
     }
   }
 };
