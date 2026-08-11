@@ -7,6 +7,7 @@ import {
   fallbackAboutPage,
   fallbackContactPage,
   fallbackCareerPage,
+  fallbackPrivacyPage,
 } from "./data/fallback";
 import type { SeoOverride } from "./lib/strapi";
 
@@ -64,6 +65,11 @@ const staticMeta: Record<string, PageMeta> = {
     description:
       "Csatlakozz a Works. csapatához! Nyitott pozícióink UX kutatás, UI design, fejlesztés és service design területeken.",
   },
+  "/adatkezeles": {
+    title: formatTitle("Adatkezelési tájékoztató"),
+    description:
+      "A Works. adatkezelési tájékoztatója — hogyan kezeljük a weboldal látogatóinak és a velünk kapcsolatba lépőknek a személyes adatait.",
+  },
 };
 
 const pageSeoOverrides: Record<string, SeoOverride | null | undefined> = {
@@ -71,6 +77,7 @@ const pageSeoOverrides: Record<string, SeoOverride | null | undefined> = {
   "/rolunk": fallbackAboutPage?.seo,
   "/kapcsolat": fallbackContactPage?.seo,
   "/karrier": fallbackCareerPage?.seo,
+  "/adatkezeles": fallbackPrivacyPage?.seo,
 };
 
 export function getPageMeta(route: string): PageMeta {

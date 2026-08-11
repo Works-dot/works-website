@@ -146,11 +146,20 @@ const COMPONENT_FIELD_LABELS: Record<string, Record<string, { label: string; des
   },
 };
 
+const PRIVACY_FIELD_LABELS: Record<string, { label: string; description?: string }> = {
+  heading: { label: "1. Címsor", description: "Az oldal főcíme (pl. Adatkezelési tájékoztató)" },
+  body: { label: "2. Szöveg", description: "Az oldal teljes szövege. Formázható: ## alcím, **félkövér**, - lista, [link szövege](https://cel-oldal)" },
+  seo: { label: "3. SEO beállítások", description: "Kereső- és megosztási beállítások (meta cím, leírás, kép)" },
+};
+
+const PRIVACY_EDIT_ORDER = ["heading", "body", "seo"];
+
 const singleTypeUids = [
   "api::homepage.homepage",
   "api::about-page.about-page",
   "api::career-page.career-page",
   "api::contact-page.contact-page",
+  "api::privacy-page.privacy-page",
   "api::global-setting.global-setting",
 ];
 
@@ -246,6 +255,20 @@ async function updateAllLabels(strapi: any) {
         }
       }
 
+      if (uid === "api::privacy-page.privacy-page") {
+        for (const [field, meta] of Object.entries(PRIVACY_FIELD_LABELS)) {
+          if (config.metadatas[field]?.edit) {
+            config.metadatas[field].edit.label = meta.label;
+            if (meta.description) {
+              config.metadatas[field].edit.description = meta.description;
+            }
+          }
+          if (config.metadatas[field]?.list) {
+            config.metadatas[field].list.label = meta.label;
+          }
+        }
+      }
+
       if (uid === "api::contact-page.contact-page") {
         for (const [field, meta] of Object.entries(CONTACT_FIELD_LABELS)) {
           if (config.metadatas[field]?.edit) {
@@ -288,6 +311,20 @@ async function updateAllLabels(strapi: any) {
 
         const reordered: any[] = [];
         for (const name of SERVICE_EDIT_ORDER) {
+          const idx = config.layouts.edit.findIndex(
+            (row: { name: string }[]) =>
+              row.some((col: { name: string }) => col.name === name)
+          );
+          if (idx !== -1) {
+            reordered.push(...config.layouts.edit.splice(idx, 1));
+          }
+        }
+        config.layouts.edit = [...reordered, ...config.layouts.edit];
+      }
+
+      if (uid === "api::privacy-page.privacy-page") {
+        const reordered: any[] = [];
+        for (const name of PRIVACY_EDIT_ORDER) {
           const idx = config.layouts.edit.findIndex(
             (row: { name: string }[]) =>
               row.some((col: { name: string }) => col.name === name)
@@ -1331,6 +1368,61 @@ async function markCareerFormSubject(strapi: any) {
   }
 }
 
+const PRIVACY_SEED_HEADING = "Adatkezelési tájékoztató";
+const PRIVACY_SEED_BODY = `Ez az adatkezelési tájékoztató ismerteti, hogy a Works. (a továbbiakban: Adatkezelő) hogyan kezeli a weboldal látogatóinak és a velünk kapcsolatba lépő személyeknek a személyes adatait.
+
+## 1. Az adatkezelő adatai
+
+- **Név:** Works.
+- **Székhely:** 1054 Budapest, Szabadság tér 7.
+- **E-mail:** hello@works.hu
+
+## 2. A kezelt adatok köre
+
+A kapcsolatfelvételi űrlap kitöltésekor a következő adatokat kezeljük: név, e-mail cím, az üzenet tárgya és tartalma. Álláspályázat esetén a pályázathoz csatolt önéletrajz és a benne szereplő adatok is ide tartoznak.
+
+## 3. Az adatkezelés célja és jogalapja
+
+Az adatkezelés célja a megkeresések megválaszolása, illetve álláspályázat esetén a kiválasztási folyamat lebonyolítása. Az adatkezelés jogalapja az érintett hozzájárulása (GDPR 6. cikk (1) bekezdés a) pont).
+
+## 4. Az adatkezelés időtartama
+
+A megkeresésekhez kapcsolódó adatokat a cél megvalósulásáig, álláspályázatok esetén — külön hozzájárulás alapján — legfeljebb 1 évig őrizzük meg.
+
+## 5. Az érintettek jogai
+
+Bármikor kérhet tájékoztatást személyes adatai kezeléséről, kérheti azok helyesbítését, törlését vagy kezelésének korlátozását, valamint visszavonhatja hozzájárulását a hello@works.hu címen. Panasszal a Nemzeti Adatvédelmi és Információszabadság Hatósághoz (NAIH) fordulhat.
+
+*Ez a tájékoztató sablon jellegű kiinduló szöveg — kérjük, a végleges, jogilag ellenőrzött tartalommal frissítse.*`;
+
+async function seedPrivacyPage(strapi: any) {
+  const store = strapi.store({ type: "plugin", name: "migrations" });
+  const done = await store.get({ key: "privacy_page_seed_v1" });
+  if (done) {
+    strapi.log.info("Privacy page seed: already completed (flag set) — skipping");
+    return;
+  }
+
+  try {
+    const existing = await strapi.documents("api::privacy-page.privacy-page").findFirst({});
+    if (!existing) {
+      const created = await strapi.documents("api::privacy-page.privacy-page").create({
+        data: { heading: PRIVACY_SEED_HEADING, body: PRIVACY_SEED_BODY },
+      });
+      await strapi.documents("api::privacy-page.privacy-page").publish({
+        documentId: created.documentId,
+      });
+      strapi.log.info("Privacy page seed: default content created and published");
+    } else {
+      strapi.log.info("Privacy page seed: content already exists — not overwriting");
+    }
+    await store.set({ key: "privacy_page_seed_v1", value: true });
+    strapi.log.info("Privacy page seed: completed successfully");
+  } catch (err: any) {
+    strapi.log.error(`Privacy page seed: failed — will retry on next restart: ${err.message}`);
+  }
+}
+
 async function seedServiceCtaBanners(strapi: any) {
   const knex = strapi.db.connection;
   const store = strapi.store({ type: "plugin", name: "migrations" });
@@ -1394,6 +1486,7 @@ export default {
           .then(() => dropHelpSectionCtaFields(strapi))
           .then(() => seedServiceCtaBanners(strapi))
           .then(() => markCareerFormSubject(strapi))
+          .then(() => seedPrivacyPage(strapi))
           .then(() => strapi.log.info("Bootstrap tasks completed successfully"))
           .catch((err: any) => {
             strapi.log.error(`Bootstrap task failed: ${err.message}`);
@@ -1412,6 +1505,7 @@ export default {
       await dropHelpSectionCtaFields(strapi);
       await seedServiceCtaBanners(strapi);
       await markCareerFormSubject(strapi);
+      await seedPrivacyPage(strapi);
       strapi.log.info("Bootstrap tasks completed successfully");
       markWebsiteAutoRebuildReady();
     }

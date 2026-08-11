@@ -167,7 +167,7 @@ export function Footer() {
         <div className="max-w-6xl mx-auto pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-works-muted/60">
           <p>&copy; {copyrightText}</p>
           <div className="flex gap-6">
-            <a href="#" className="hover:text-white transition-colors">Adatvédelmi tájékoztató</a>
+            <a href="/adatkezeles" className="hover:text-white transition-colors">Adatvédelmi tájékoztató</a>
             <a href="#" className="hover:text-white transition-colors">Impresszum</a>
           </div>
         </div>

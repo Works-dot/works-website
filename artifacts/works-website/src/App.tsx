@@ -12,6 +12,7 @@ import ServicePage from "@/pages/ServicePage";
 import About from "@/pages/About";
 import Contact from "@/pages/Contact";
 import Karrier from "@/pages/Karrier";
+import Adatkezeles from "@/pages/Adatkezeles";
 import CareerDetail from "@/pages/CareerDetail";
 import { ScrollToTop } from "@/components/ScrollToTop";
 
@@ -36,6 +37,7 @@ function Router() {
       <Route path="/rolunk" component={About} />
       <Route path="/kapcsolat" component={Contact} />
       <Route path="/karrier" component={Karrier} />
+      <Route path="/adatkezeles" component={Adatkezeles} />
       <Route path="/karrier/:slug" component={CareerDetail} />
       <Route component={NotFound} />
     </Switch>

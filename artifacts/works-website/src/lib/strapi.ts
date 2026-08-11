@@ -844,6 +844,26 @@ export async function getAboutPage(): Promise<AboutPageData> {
   };
 }
 
+export interface PrivacyPageData {
+  heading: string;
+  body: string;
+  seo?: SeoOverride | null;
+}
+
+export async function getPrivacyPage(): Promise<PrivacyPageData> {
+  const res = await fetchApi<StrapiSingleResponse<{
+    heading: string | null;
+    body: string | null;
+    seo?: StrapiSeo | null;
+  }>>("/privacy-page?populate[0]=seo.ogImage");
+  const d = res.data;
+  return {
+    heading: d.heading || "",
+    body: d.body || "",
+    seo: mapSeo(d.seo),
+  };
+}
+
 export interface CareerPageData {
   hero: { heading: string; description: string; backgroundImage: string };
   workWithUs: CareerWorkWithUs;

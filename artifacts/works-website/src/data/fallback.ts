@@ -19,6 +19,7 @@ import type {
   Client,
   AboutPageData,
   CareerPageData,
+  PrivacyPageData,
 } from "@/lib/strapi";
 
 import rawCache from "./strapi-cache.json";
@@ -210,6 +211,11 @@ const hardcodedContactPage: ContactPageData = {
   careerConsent: null,
 };
 
+const hardcodedPrivacyPage: PrivacyPageData = {
+  heading: "Adatkezelési tájékoztató",
+  body: "Az adatkezelési tájékoztató tartalma hamarosan elérhető. Kérdés esetén írj nekünk a hello@works.hu címre.",
+};
+
 const hardcodedHomepage: HomepageData = {
   hero: {
     heading: "Digitális élményeket tervezünk",
@@ -296,6 +302,10 @@ export const fallbackGlobalSettings: GlobalSettings = hasData("globalSettings")
 export const fallbackContactPage: ContactPageData = hasData("contactPage")
   ? (strapiCache.contactPage as ContactPageData)
   : hardcodedContactPage;
+
+export const fallbackPrivacyPage: PrivacyPageData = hasData("privacyPage")
+  ? (strapiCache.privacyPage as PrivacyPageData)
+  : hardcodedPrivacyPage;
 
 export const fallbackHomepage: HomepageData = hasData("homepage")
   ? (strapiCache.homepage as HomepageData)

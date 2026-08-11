@@ -374,6 +374,21 @@ async function fetchAll() {
   }
 
   try {
+    const privacyRes = await fetchApi("/privacy-page?populate[0]=seo.ogImage");
+    const pd = privacyRes.data;
+    cache.privacyPage = {
+      heading: pd?.heading || "",
+      body: pd?.body || "",
+      seo: mapSeo(pd?.seo),
+    };
+    console.log("  ✓ privacy page");
+  } catch (err) {
+    if (!allowOptionalSkip(err)) throw err;
+    cache.privacyPage = null;
+    console.log("  ⚠ privacy page skipped (not found)");
+  }
+
+  try {
     const careerRes = await fetchApi("/career-page?populate[0]=hero&populate[1]=hero.backgroundImage&populate[2]=workWithUs&populate[3]=whyUs&populate[4]=whyUs.items&populate[5]=whyUs.items.image&populate[6]=seo.ogImage");
     const cd2 = careerRes.data;
     cache.careerPage = {

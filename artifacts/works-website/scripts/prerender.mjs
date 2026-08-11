@@ -26,6 +26,7 @@ async function prerender() {
     "/rolunk",
     "/kapcsolat",
     "/karrier",
+    "/adatkezeles",
   ];
 
   const dynamicRoutes = [
