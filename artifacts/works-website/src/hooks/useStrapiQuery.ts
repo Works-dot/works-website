@@ -21,9 +21,19 @@ export function useStrapiQuery<T>(
   const [error, setError] = useState<string | null>(null);
   const fetcherRef = useRef(fetcher);
   fetcherRef.current = fetcher;
+  const fallbackRef = useRef(fallbackData);
+  fallbackRef.current = fallbackData;
 
   useEffect(() => {
-    if (!STRAPI_ENABLED) return;
+    if (!STRAPI_ENABLED) {
+      // Strapi is disabled at runtime (production SSG build). The component
+      // instance is reused across client-side navigations (e.g. service ->
+      // service), so we must sync state to the new key's fallback data here.
+      setData(fallbackRef.current ?? null);
+      setLoading(false);
+      setError(null);
+      return;
+    }
 
     const cached = cache.get(key);
     if (cached && Date.now() - cached.timestamp < CACHE_TTL) {
