@@ -5,6 +5,7 @@ import { ArrowRight, Search, HelpCircle } from "lucide-react";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import SEOHead from "@/components/SEOHead";
+import { MaskIcon } from "@/components/ui/MaskIcon";
 import { CtaBannerView } from "@/components/sections/CtaBanner";
 import {
   Accordion,
@@ -28,7 +29,7 @@ function IconBox({ icon, className = "" }: { icon?: string; className?: string }
   return (
     <div className={`w-9 h-9 bg-works-bg text-works-primary flex items-center justify-center shrink-0 ${className}`}>
       {icon ? (
-        <img src={icon} alt="" className="w-5 h-5 object-contain" />
+        <MaskIcon src={icon} className="w-5 h-5 bg-works-primary" />
       ) : (
         <ArrowRight className="w-5 h-5" strokeWidth={1.5} />
       )}
@@ -465,7 +466,7 @@ export default function ServicePage() {
                         <div className="flex items-center gap-3 mb-4">
                           <div className="w-10 h-10 bg-works-bg text-works-primary flex items-center justify-center shrink-0 group-hover:bg-works-primary group-hover:text-white transition-all duration-300">
                             {rel.icon ? (
-                              <img src={rel.icon} alt="" className="w-5 h-5 object-contain group-hover:[filter:brightness(0)_invert(1)]" />
+                              <MaskIcon src={rel.icon} className="w-5 h-5 bg-works-primary group-hover:bg-white transition-colors duration-300" />
                             ) : (
                               <Search className="w-5 h-5" strokeWidth={1.5} />
                             )}
