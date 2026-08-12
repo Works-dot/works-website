@@ -175,10 +175,17 @@ export default function About() {
                 ))}
               </div>
             ) : (
-              <Carousel opts={{ align: "start" }} setApi={setGalleryApi} className="w-full">
-                <CarouselContent containerClassName="overflow-visible" className="-ml-4">
+              <Carousel
+                opts={{ align: "center", loop: true, startIndex: 1 }}
+                setApi={setGalleryApi}
+                className="relative left-1/2 w-screen -translate-x-1/2"
+              >
+                <CarouselContent className="-ml-4">
                   {(galleryImages || []).filter((img) => img.src).map((img, i) => (
-                    <CarouselItem key={i} className="pl-4 basis-full sm:basis-1/2 lg:basis-1/3">
+                    <CarouselItem
+                      key={i}
+                      className="pl-4 basis-[calc(100vw-1rem)] sm:basis-[calc((100vw-2rem)/2)] lg:basis-[calc((min(100vw,80rem)-3rem)/3)]"
+                    >
                       <div className="overflow-hidden">
                         <img
                           src={img.src}
@@ -189,8 +196,10 @@ export default function About() {
                     </CarouselItem>
                   ))}
                 </CarouselContent>
-                <CarouselPrevious className="hidden lg:inline-flex left-4 -translate-y-1/2 h-12 w-12 rounded-full border-0 bg-white/70 backdrop-blur-md text-works-dark shadow-lg hover:bg-works-primary hover:text-white disabled:opacity-40 z-10" />
-                <CarouselNext className="hidden lg:inline-flex right-4 -translate-y-1/2 h-12 w-12 rounded-full border-0 bg-white/70 backdrop-blur-md text-works-dark shadow-lg hover:bg-works-primary hover:text-white disabled:opacity-40 z-10" />
+                <div className="pointer-events-none absolute inset-y-0 left-1/2 w-full max-w-7xl -translate-x-1/2">
+                  <CarouselPrevious className="pointer-events-auto hidden lg:inline-flex left-8 -translate-y-1/2 h-12 w-12 rounded-full border-0 bg-white/70 backdrop-blur-md text-works-dark shadow-lg hover:bg-works-primary hover:text-white z-10" />
+                  <CarouselNext className="pointer-events-auto hidden lg:inline-flex right-8 -translate-y-1/2 h-12 w-12 rounded-full border-0 bg-white/70 backdrop-blur-md text-works-dark shadow-lg hover:bg-works-primary hover:text-white z-10" />
+                </div>
               </Carousel>
             )}
 
