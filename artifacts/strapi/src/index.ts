@@ -1741,6 +1741,12 @@ async function migrateSquarespaceDrafts(strapi: any) {
           post.title,
           "Squarespace migration",
         );
+        if (!heroId) {
+          strapi.log.warn(
+            `Squarespace migration: "${post.slug}" skipped — hero image failed to download, will retry on next restart`,
+          );
+          continue; // don't create an incomplete draft; slug check allows retry
+        }
       }
 
       // Content blocks
@@ -1792,6 +1798,7 @@ async function migrateSquarespaceDrafts(strapi: any) {
           image: heroId,
           contentBlocks,
         },
+        status: "draft",
       });
       strapi.log.info(`Squarespace migration: created DRAFT "${post.slug}" (${contentBlocks.length} block(s))`);
     } catch (err: any) {
