@@ -1474,6 +1474,115 @@ async function seedServiceCtaBanners(strapi: any) {
   }
 }
 
+const GALLERY_SEED_IMAGES = [
+  { url: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1200&h=900&fit=crop", name: "works-moment-teamwork", alt: "Csapatmunka az irodában" },
+  { url: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=1200&h=900&fit=crop", name: "works-moment-workshop", alt: "Workshop megbeszélés" },
+  { url: "https://images.unsplash.com/photo-1517048676732-d65bc937f952?w=1200&h=900&fit=crop", name: "works-moment-meeting", alt: "Csapatmegbeszélés a tárgyalóban" },
+  { url: "https://images.unsplash.com/photo-1531482615713-2afd69097998?w=1200&h=900&fit=crop", name: "works-moment-collaboration", alt: "Közös munka a projekten" },
+  { url: "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=1200&h=900&fit=crop", name: "works-moment-planning", alt: "Tervezés és egyeztetés" },
+  { url: "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=1200&h=900&fit=crop", name: "works-moment-presentation", alt: "Prezentáció a csapatnak" },
+  { url: "https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=1200&h=900&fit=crop", name: "works-moment-brainstorm", alt: "Ötletelés a csapattal" },
+  { url: "https://images.unsplash.com/photo-1556761175-b413da4baf72?w=1200&h=900&fit=crop", name: "works-moment-office", alt: "Irodai pillanat" },
+];
+
+async function uploadGalleryImage(
+  strapi: any,
+  image: { url: string; name: string; alt: string },
+): Promise<number | null> {
+  const fs = require("fs");
+  const os = require("os");
+  const path = require("path");
+
+  const fileName = `${image.name}.jpg`;
+  const existing = await strapi.db
+    .query("plugin::upload.file")
+    .findOne({ where: { name: fileName } });
+  if (existing) return existing.id;
+
+  const res = await fetch(image.url);
+  if (!res.ok) {
+    strapi.log.warn(`Gallery seed: download failed for ${image.name} (${res.status})`);
+    return null;
+  }
+  const buffer = Buffer.from(await res.arrayBuffer());
+  const tmpPath = path.join(os.tmpdir(), fileName);
+  fs.writeFileSync(tmpPath, buffer);
+
+  try {
+    const uploaded = await strapi
+      .plugin("upload")
+      .service("upload")
+      .upload({
+        data: {
+          fileInfo: { name: fileName, alternativeText: image.alt, caption: image.alt },
+        },
+        files: {
+          filepath: tmpPath,
+          originalFilename: fileName,
+          mimetype: "image/jpeg",
+          size: buffer.length,
+        },
+      });
+    return uploaded?.[0]?.id || null;
+  } catch (err: any) {
+    strapi.log.error(`Gallery seed: upload failed for ${image.name}: ${err.stack || err.message}`);
+    return null;
+  } finally {
+    try { fs.unlinkSync(tmpPath); } catch { /* ignore */ }
+  }
+}
+
+async function seedAboutGalleryImages(strapi: any) {
+  const store = strapi.store({ type: "plugin", name: "migrations" });
+  const done = await store.get({ key: "about_gallery_images_seed_v1" });
+  if (done) {
+    strapi.log.info("Gallery seed: already completed (flag set) — skipping");
+    return;
+  }
+
+  try {
+    const docs = strapi.documents("api::about-page.about-page");
+    const existing = await docs.findFirst({ populate: ["galleryImages"] });
+
+    if (!existing) {
+      strapi.log.info("Gallery seed: no about-page entry found — skipping");
+      return;
+    }
+
+    // Strict guard: never touch a gallery that already has images
+    // (e.g. production, where real photos were uploaded by editors).
+    if (Array.isArray(existing.galleryImages) && existing.galleryImages.length > 0) {
+      strapi.log.info(
+        `Gallery seed: gallery already has ${existing.galleryImages.length} image(s) — not overwriting`,
+      );
+      await store.set({ key: "about_gallery_images_seed_v1", value: true });
+      return;
+    }
+
+    const ids: number[] = [];
+    for (const image of GALLERY_SEED_IMAGES) {
+      const id = await uploadGalleryImage(strapi, image);
+      if (id) ids.push(id);
+    }
+
+    if (ids.length === 0) {
+      strapi.log.warn("Gallery seed: no images could be uploaded — will retry on next restart");
+      return;
+    }
+
+    await docs.update({
+      documentId: existing.documentId,
+      data: { galleryImages: ids },
+      status: "published",
+    });
+
+    await store.set({ key: "about_gallery_images_seed_v1", value: true });
+    strapi.log.info(`Gallery seed: completed successfully with ${ids.length} image(s)`);
+  } catch (err: any) {
+    strapi.log.error(`Gallery seed: failed — will retry on next restart: ${err.message}`);
+  }
+}
+
 export default {
   register({ strapi }) {
     registerWebsiteRebuildAdminRoutes(strapi);
@@ -1499,6 +1608,7 @@ export default {
           .then(() => seedServiceCtaBanners(strapi))
           .then(() => markCareerFormSubject(strapi))
           .then(() => seedPrivacyPage(strapi))
+          .then(() => seedAboutGalleryImages(strapi))
           .then(() => strapi.log.info("Bootstrap tasks completed successfully"))
           .catch((err: any) => {
             strapi.log.error(`Bootstrap task failed: ${err.message}`);
@@ -1518,6 +1628,7 @@ export default {
       await seedServiceCtaBanners(strapi);
       await markCareerFormSubject(strapi);
       await seedPrivacyPage(strapi);
+      await seedAboutGalleryImages(strapi);
       strapi.log.info("Bootstrap tasks completed successfully");
       markWebsiteAutoRebuildReady();
     }
