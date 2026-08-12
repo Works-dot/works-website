@@ -1,3 +1,6 @@
+// NOTE: Railway only redeploys this service when files under
+// artifacts/works-website change — content-only Strapi commits do not
+// trigger a website build (the Strapi-side auto-rebuild handles those).
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
