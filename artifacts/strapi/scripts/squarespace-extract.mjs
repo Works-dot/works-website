@@ -181,6 +181,9 @@ for (let i = 0; i < items.length; i++) {
   const link = field(it, 'link');
   const slug = link.split('/').filter(Boolean).pop();
   const rawTitle = decodeEntities(field(it, 'title')).replace(/\s+/g, ' ').trim();
+
+  // Skip Squarespace template placeholder posts ("Blog Post Title One" etc.)
+  if (/^Blog Post Title/i.test(rawTitle) || /\s/.test(slug)) continue;
   const date = field(it, 'wp:post_date').slice(0, 10);
   const excerpt = stripTags(field(it, 'excerpt:encoded'));
   const content = field(it, 'content:encoded');

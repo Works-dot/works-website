@@ -123,7 +123,7 @@ async function seed() {
   console.log('Seeding Strapi...\n');
 
   console.log('Cleaning existing data...');
-  for (const plural of ['blog-posts', 'career-positions', 'projects', 'services', 'clients', 'team-members', 'tags']) {
+  for (const plural of ['career-positions', 'projects', 'services', 'clients', 'team-members', 'tags']) {
     await deleteAll(plural);
   }
   console.log('  Done.\n');
@@ -507,156 +507,9 @@ async function seed() {
   }
   console.log(`  Projects created: ${Object.keys(projectMap).length}\n`);
 
-  console.log('Creating 6 blog posts...');
-  const blogData = [
-    {
-      slug: 'akadalymentes-tervezes-jovoje',
-      title: 'Az akadálymentes tervezés jövője a modern felületeken',
-      excerpt: 'Miért elengedhetetlen a digitális termékeknél az a11y szabványok követése, és hogyan kezdjünk hozzá a gyakorlatban?',
-      date: '2024-03-15',
-      authorName: 'Kovács Anna',
-      readingTime: '8 perc',
-      tags: ['Akadálymentesítés', 'UX'],
-      contentBlocks: [
-        { __component: 'content.text-block', body: 'Az akadálymentes tervezés ma már nem csupán egy nice-to-have funkció, hanem alapvető elvárás minden digitális termékkel szemben. Az Európai Unió akadálymentességi irányelvei 2025-től kötelezővé teszik a WCAG 2.1 AA szabvány betartását minden közszolgáltatási és e-kereskedelmi felületnél.' },
-        { __component: 'content.highlight-block', quote: 'A világ népességének mintegy 15%-a él valamilyen fogyatékossággal. Ez több mint 1 milliárd embert jelent, akik potenciális felhasználói a digitális szolgáltatásoknak.' },
-        { __component: 'content.text-block', body: 'A gyakorlatban az akadálymentes tervezés nem bonyolult, de tudatos megközelítést igényel. Az első és legfontosabb lépés a szemantikus HTML használata: a fejlécek hierarchikus struktúrája, a megfelelő ARIA attribútumok és a billentyűzetes navigáció biztosítása.' },
-        { __component: 'content.text-block', body: 'A színkontrasztok megfelelő beállítása szintén kritikus: a WCAG 2.1 AA szint legalább 4.5:1 arányt követel meg a szöveg és a háttér között. Érdemes már a design system építése során figyelni erre, így a fejlesztés során automatikusan biztosított lesz a megfelelés.' },
-        { __component: 'content.text-block', body: 'A képernyőolvasókkal való kompatibilitás tesztelése szintén alapvető. A leggyakoribb hibák közül kiemelkedik a képek alt szövegeinek hiánya, a nem megjelölt űrlapmezők és az interaktív elemek rossz szerepének definiálása.' },
-        { __component: 'content.highlight-block', quote: 'Az akadálymentes tervezés nem korlátoz, hanem jobb megoldásokra késztet. Ami egy látássérült felhasználónak segít, az mindenki számára jobb élményt nyújt.' },
-        { __component: 'content.text-block', body: 'A Works. csapatánál minden projektet akadálymentességi audittal zárunk. Tapasztalataink szerint a legtöbb probléma már a tervezési fázisban megelőzhető, ha az akadálymentesség nem utólagos gondolat, hanem a folyamat szerves része.' },
-      ],
-      seo: { metaTitle: 'Az akadálymentes tervezés jövője | Works. Blog', metaDescription: 'Miért elengedhetetlen a digitális termékeknél az a11y szabványok követése, és hogyan kezdjünk hozzá a gyakorlatban?' },
-    },
-    {
-      slug: 'mikro-interakciok-ux-titka',
-      title: 'Mikro-interakciók: A kiváló UX titkos fegyvere',
-      excerpt: 'Hogyan tehetik emlékezetessé a legapróbb animációk is az alkalmazásodat, és milyen buktatókra érdemes figyelni.',
-      date: '2024-02-28',
-      authorName: 'Nagy Bence',
-      readingTime: '6 perc',
-      tags: ['UX', 'UI Design'],
-      contentBlocks: [
-        { __component: 'content.text-block', body: 'A mikro-interakciók azok az apró, gyakran észrevétlen animációk és vizuális visszajelzések, amelyek élettel töltik meg a digitális felületet. Egy gomb színváltozása kattintáskor, egy értesítés finoman beúszó animációja, vagy egy form mező validációs visszajelzése mind-mind mikro-interakciók.' },
-        { __component: 'content.highlight-block', quote: 'A felhasználók 68%-a mondja, hogy a finoman animált felületeket professzionálisabbnak és megbízhatóbbnak érzi, mint a statikus alternatívákat.' },
-        { __component: 'content.text-block', body: 'A jó mikro-interakció négy alapelvre épül: trigger (mi indítja el), szabályok (mi történik), visszajelzés (mit lát a felhasználó) és ciklusok (ismétlődik-e). Ha bármely elem hiányzik, az animáció zavaros vagy felesleges lesz.' },
-        { __component: 'content.text-block', body: 'A leggyakoribb hiba a túlzás. Ha minden elem mozog, vibrál és pulzál, a felhasználó hamar elfárad és az animációk inkább zavaróakká, mint segítővé válnak. Az arany közép az, ha csak a fontos állapotváltozásokat jelöljük vizuálisan.' },
-        { __component: 'content.text-block', body: 'A teljesítmény szintén kritikus szempont. A CSS-alapú animációk általában hatékonyabbak, mint a JavaScript-alapúak, és a transform/opacity tulajdonságok hardveres gyorsítást kapnak a legtöbb böngészőben. Mindig teszteljünk alacsonyabb teljesítményű eszközökön is.' },
-        { __component: 'content.highlight-block', quote: 'A legjobb mikro-interakció az, amelyik annyira természetes, hogy a felhasználó észre sem veszi. Ha feltűnően látszik, valószínűleg túlzás.' },
-        { __component: 'content.text-block', body: 'A Works. csapatánál a Framer Motion és a Lottie könyvtárakat használjuk leggyakrabban React projektekben. Ezek lehetővé teszik a komplex animációk deklaratív leírását, és kiválóan optimalizáltak a teljesítményre.' },
-      ],
-      seo: { metaTitle: 'Mikro-interakciók: A kiváló UX titka | Works. Blog', metaDescription: 'Hogyan tehetik emlékezetessé a legapróbb animációk is az alkalmazásodat.' },
-    },
-    {
-      slug: 'design-system-epites',
-      title: 'Design System építés nulláról',
-      excerpt: 'Lépésről lépésre bemutatjuk, hogyan hoztunk létre egy skálázható és fenntartható design rendszert egy nagyvállalati ügyfelünknek.',
-      date: '2024-02-10',
-      authorName: 'Szabó Márk',
-      readingTime: '10 perc',
-      tags: ['Design System', 'UI Design'],
-      contentBlocks: [
-        { __component: 'content.text-block', body: 'Egy design system létrehozása nem egyszerű feladat, de hosszú távon a legjobb befektetés, amit egy szoftvercsapat tehet. A mi megközelítésünk egy nagyvállalati ügyféllel: a teljes vizuális nyelvet egységesítettük 6 hónap alatt.' },
-        { __component: 'content.highlight-block', quote: 'A design system bevezetése után a fejlesztési idő átlagosan 40%-kal csökkent, mert a csapat készre tervezett komponensekből építkezett a nulla helyett.' },
-        { __component: 'content.text-block', body: 'Az első lépés az audit volt: feltérképeztük az összes létező felületet, összegyűjtöttük a színeket, tipográfiát, komponenseket. A végeredmény megdöbbentő volt: 47 különböző színt, 12 betűtípust és több mint 200 egyedi gombot találtunk.' },
-        { __component: 'content.text-block', body: 'A design tokenek jelentették az alapot: színek, méretezések, távolságok és tipográfia egységes változókban rögzítve. Ezeket mind Figma-ban, mind a kódban szinkronban tartottuk a Style Dictionary segítségével.' },
-        { __component: 'content.text-block', body: 'A komponens-könyvtár építése során az atomic design elveket követtük: atomoktól (gomb, input) a molekulák (kereső mező, kártya) és organizmusok (navigáció, footer) felé haladtunk. Minden komponenshez dokumentációt, használati példát és akadálymentességi specifikációt írtunk.' },
-        { __component: 'content.highlight-block', quote: 'A legfontosabb tanulság: a design system soha nem kész. Egy élő rendszer, amelyet folyamatosan karbantartani, bővíteni és frissíteni kell a termék fejlődésével párhuzamosan.' },
-        { __component: 'content.text-block', body: 'A sikerhez kulcsfontosságú a csapat bevonása: rendszeres design critique sessionok, fejlesztői feedback és közös döntéshozás. A design system csak akkor működik, ha mindenki használja és hisz benne.' },
-      ],
-      seo: { metaTitle: 'Design System építés nulláról | Works. Blog', metaDescription: 'Hogyan hoztunk létre egy skálázható design rendszert egy nagyvállalati ügyfelünknek.' },
-    },
-    {
-      slug: 'ai-a-ux-tervezesben',
-      title: 'Mesterséges intelligencia a UX tervezésben: lehetőségek és korlátok',
-      excerpt: 'Hogyan használhatjuk az AI eszközeit a felhasználói élmény tervezésénél, és hol vannak a technológia jelenlegi határai?',
-      date: '2024-01-22',
-      authorName: 'Tóth Eszter',
-      readingTime: '7 perc',
-      tags: ['AI', 'UX', 'Stratégia'],
-      contentBlocks: [
-        { __component: 'content.text-block', body: 'A mesterséges intelligencia rohamos fejlődése a UX tervezés területén is új lehetőségeket nyitott. A generatív AI eszközök képesek wireframe-eket, layoutokat és akár teljes designokat generálni másodpercek alatt. De vajon ez jelenti-e a designer szakma végét?' },
-        { __component: 'content.highlight-block', quote: 'Az AI nem helyettesíti a designereket, hanem erősíti őket. A kreatív döntések, az empátia és a stratégiai gondolkodás továbbra is emberi kompetencia marad.' },
-        { __component: 'content.text-block', body: 'A gyakorlatban az AI-t leghatékonyabban a kutatás és az elemzés fázisában lehet alkalmazni. Nagymennyiségű felhasználói adatból képes mintázatokat felfedezni, heatmap-eket elemezni és prediktív modelleket építeni a felhasználói viselkedésről.' },
-        { __component: 'content.text-block', body: 'A design variációk generálásában is hatalmas segítséget nyújt az AI. Egy alap wireframe-ből pillanatok alatt 10-20 elrendezési változatot generálhatunk, amelyeket aztán emberi szemmel értékelünk és finomítunk. Ez nem a kreativitás kiszorítása, hanem annak felgyorsítása.' },
-        { __component: 'content.text-block', body: 'A korlátok azonban valósak. Az AI modellek a meglévő adatokból tanulnak, így hajlamosak a megszokott mintákat ismételni. Igazán innovatív, határfeszgető megoldásokhoz továbbra is emberi kreativitás szükséges. Ráadásul az AI nem érti a kulturális kontextust és a finomabb felhasználói igényeket.' },
-        { __component: 'content.highlight-block', quote: 'A legjobb eredményt a hibrid megközelítés hozza: az AI generálja a kiindulási alapot, a designer finomítja, az ügyféllel közösen iterálunk.' },
-        { __component: 'content.text-block', body: 'A Works. csapatánál tudatosan integrálunk AI eszközöket a munkafolyamatainkba. Használjuk őket kutatáshoz, ötletgeneráláshoz és prototípus-készítéshez, de a végső designdöntéseket mindig tapasztalt designerek hozzák meg.' },
-      ],
-      seo: { metaTitle: 'AI a UX tervezésben | Works. Blog', metaDescription: 'Hogyan használhatjuk az AI eszközeit a felhasználói élmény tervezésénél?' },
-    },
-    {
-      slug: 'ux-kutatasi-modszerek',
-      title: '5 UX kutatási módszer, amit minden termékcsapatnak ismernie kell',
-      excerpt: 'A felhasználói kutatás nem luxus, hanem szükségesség. Bemutatjuk a leghatékonyabb módszereket, amelyekkel valós felhasználói igényeket tárhatunk fel.',
-      date: '2024-01-08',
-      authorName: 'Kovács Anna',
-      readingTime: '9 perc',
-      tags: ['UX Research', 'Stratégia'],
-      contentBlocks: [
-        { __component: 'content.text-block', body: 'A UX kutatás a termékfejlesztés legfontosabb, mégis leggyakrabban elhanyagolt lépése. Sok csapat feltételezések alapján tervez, nem valós felhasználói adatok alapján. Az eredmény: olyan termékek, amelyeket senki sem akar használni. Ebben a cikkben 5 bevált módszert mutatunk be, amelyek segítenek elkerülni ezt a csapdát.' },
-        { __component: 'content.highlight-block', quote: 'A termékek 42%-a azért bukik meg, mert nincs valódi piaci igény rájuk. A felhasználói kutatás a legjobb biztosíték, amit egy csapat a sikerre köthet.' },
-        { __component: 'content.text-block', body: '1. Mélyinterjú: A legértékesebb kutatási módszer, amellyel a felhasználók motivációit, félelmeit és céljait tárhatjuk fel. Általában 45-60 perces beszélgetések, strukturált kérdéssorral, de nyitott kérdésekkel. 5-8 interjú már elegendő mintázatok felismeréséhez.' },
-        { __component: 'content.text-block', body: '2. Használhatósági teszt: A felhasználók valós feladatokat végeznek el a terméken, miközben hangosan gondolkodnak. Ez a módszer felszínre hozza a navigációs problémákat, a félreérthető funkciókat és az intuícióellenes megoldásokat.' },
-        { __component: 'content.text-block', body: '3. Kártya rendezés (Card Sorting): A felhasználók csoportosítják a tartalmakat a saját logikájuk szerint. Ez a módszer különösen hasznos információs architektúra és navigáció tervezésénél. Online eszközökkel távolról is elvégezhető.' },
-        { __component: 'content.text-block', body: '4. A/B tesztelés: Két vagy több változatot mutatunk a felhasználóknak, és mérjük, melyik teljesít jobban. Nem a véleményt kérdezzük, hanem a tényleges viselkedést mérjük. Statisztikailag szignifikáns eredményekhez legalább 100-200 résztvevő szükséges változatonként.' },
-        { __component: 'content.highlight-block', quote: 'A legjobb kutatási terv többféle módszert kombinál: a kvalitatív módszerek (interjú, tesztelés) megmutatják a miértet, a kvantitatív módszerek (A/B teszt, analytics) a mennyit.' },
-        { __component: 'content.text-block', body: '5. Napló-tanulmány (Diary Study): A felhasználók 1-4 héten keresztül dokumentálják a tapasztalataikat. Ez a módszer a hosszú távú használati mintázatokat és az időszakos frusztrációkat tárja fel, amelyeket egyszeri tesztekkel lehetetlen felismerni.' },
-      ],
-      seo: { metaTitle: '5 UX kutatási módszer | Works. Blog', metaDescription: 'Bemutatjuk a leghatékonyabb módszereket, amelyekkel valós felhasználói igényeket tárhatunk fel.' },
-    },
-    {
-      slug: 'mobile-first-tervezes',
-      title: 'Mobile-first tervezés: Stratégia, nem trend',
-      excerpt: 'A mobil forgalom ma már meghaladja a 60%-ot. Hogyan tervezzük úgy a felületeinket, hogy mobilon és desktopon is tökéletes élményt nyújtisanak?',
-      date: '2023-12-20',
-      authorName: 'Nagy Bence',
-      readingTime: '7 perc',
-      tags: ['Mobile', 'UX', 'Stratégia'],
-      contentBlocks: [
-        { __component: 'content.text-block', body: 'A mobile-first megközelítés nem egyszerűen azt jelenti, hogy először mobilra tervezünk. Ez egy teljes gondolkodásmódi váltás: a tartalom priorizálása, a teljesítmény-orientált fejlesztés és a felhasználói kontextus megértése.' },
-        { __component: 'content.highlight-block', quote: 'Magyarországon a webforgalom 63%-a mobil eszközökről érkezik. Ha nem mobilra optimalizálunk elsősorban, a felhasználóink többségét veszítjük el.' },
-        { __component: 'content.text-block', body: 'Az első lépés a tartalom priorizálása. Mobilon limitált a képernyő, ezért döntést kell hozni: mi a legfontosabb információ, amit a felhasználó keres? A desktop verzióban megjelenő minden szöveg, kép és funkció nem férhet el mobilon, és nem is kell.' },
-        { __component: 'content.text-block', body: 'A navigáció tervezése az egyik legnehezebb feladat mobilon. A hamburger menü ugyan helyet spórol, de a felhasználók 45%-a sosem nyitja meg. Az alternatívák: tab bar az alsó részen, prioritásos navigáció (a legfontosabb elemek láthatóak, a többi egy Továbbiak menüpont alatt), vagy kontextuális navigáció.' },
-        { __component: 'content.text-block', body: 'A teljesítmény mobilon különösen kritikus. A 3 másodpercnél lassabban betöltő oldalakról a felhasználók 53%-a elugrik. A képek optimalizálása (WebP formátum, responsive images), a kódfelosztás (code splitting) és a lazy loading alapvető technikák.' },
-        { __component: 'content.highlight-block', quote: 'A mobile-first nem azt jelenti, hogy a desktopos élmény másodrendű. Azt jelenti, hogy a mobil korlátaiból kiindulva jobb megoldásokat találunk, amelyek mindenhol működnek.' },
-        { __component: 'content.text-block', body: 'A Works. csapatánál minden projektet mobilról indítunk. A wireframe-ek első verziói mindig 375px széles képernyőre készülnek, és csak ezt követően bővítjük ki tablet és desktop méretekre. Ez a megközelítés biztosítja, hogy a végeredmény minden eszközön kiválóan működjön.' },
-      ],
-      seo: { metaTitle: 'Mobile-first tervezés | Works. Blog', metaDescription: 'A mobil forgalom meghaladja a 60%-ot. Hogyan tervezzük a felületeinket mobilra és desktopra egyaránt?' },
-    },
-  ];
-
-  const blogContentBlockImages = {
-    'akadalymentes-tervezes-jovoje': 'blog-accessibility.png',
-    'mikro-interakciok-ux-titka': 'blog-microinteractions.png',
-    'design-system-epites': 'blog-designsystem.png',
-    'ai-a-ux-tervezesben': 'blog-ai-ux.png',
-    'ux-kutatasi-modszerek': 'blog-ux-research.png',
-    'mobile-first-tervezes': 'blog-mobile-first.png',
-  };
-
-  let blogIdx = 0;
-  for (const b of blogData) {
-    const { authorName, ...rest } = b;
-    // The first 3 seed entries are the newest posts — feature them on the homepage.
-    rest.featured = blogIdx < 3;
-    rest.order = blogIdx < 3 ? blogIdx + 1 : undefined;
-    blogIdx++;
-    const blocks = [...(rest.contentBlocks || [])];
-    const cbImgFile = blogContentBlockImages[b.slug];
-    if (cbImgFile && imageMap[cbImgFile]) {
-      blocks.splice(2, 0, { __component: 'content.image-block', image: imageMap[cbImgFile], caption: `${b.title} — illusztráció` });
-    }
-    const data = {
-      ...rest,
-      contentBlocks: blocks,
-      tags: b.tags.map(t => tagMap[t]).filter(Boolean).map(id => ({ documentId: id })),
-      author: memberMap[authorName] ? { documentId: memberMap[authorName] } : undefined,
-    };
-    if (!data.author) delete data.author;
-    await create('blog-posts', data);
-  }
-  console.log('  Done.\n');
+  // Blog posts are NOT seeded: real articles are migrated from the old
+  // Squarespace site (scripts/squarespace-extract.mjs + migrateSquarespacePosts
+  // in src/index.ts) and must never be recreated or deleted by the seed.
 
   console.log('Creating 4 career positions...');
   const positionsData = [
