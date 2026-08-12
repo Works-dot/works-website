@@ -1542,19 +1542,21 @@ async function seedAboutGalleryImages(strapi: any) {
 
   try {
     const docs = strapi.documents("api::about-page.about-page");
-    const existing = await docs.findFirst({ populate: ["galleryImages"] });
+    const draft = await docs.findFirst({ populate: ["galleryImages"] });
+    const published = await docs.findFirst({ status: "published", populate: ["galleryImages"] });
 
-    if (!existing) {
+    if (!draft && !published) {
       strapi.log.info("Gallery seed: no about-page entry found — skipping");
       return;
     }
 
-    // Strict guard: never touch a gallery that already has images
-    // (e.g. production, where real photos were uploaded by editors).
-    if (Array.isArray(existing.galleryImages) && existing.galleryImages.length > 0) {
-      strapi.log.info(
-        `Gallery seed: gallery already has ${existing.galleryImages.length} image(s) — not overwriting`,
-      );
+    // Strict guard: never touch a gallery that already has images in EITHER
+    // the draft or the published version (e.g. production, where real photos
+    // were uploaded by editors).
+    const hasImages = (doc: any) =>
+      Array.isArray(doc?.galleryImages) && doc.galleryImages.length > 0;
+    if (hasImages(draft) || hasImages(published)) {
+      strapi.log.info("Gallery seed: gallery already has images — not overwriting");
       await store.set({ key: "about_gallery_images_seed_v1", value: true });
       return;
     }
@@ -1565,10 +1567,14 @@ async function seedAboutGalleryImages(strapi: any) {
       if (id) ids.push(id);
     }
 
-    if (ids.length === 0) {
-      strapi.log.warn("Gallery seed: no images could be uploaded — will retry on next restart");
+    if (ids.length < GALLERY_SEED_IMAGES.length) {
+      strapi.log.warn(
+        `Gallery seed: only ${ids.length}/${GALLERY_SEED_IMAGES.length} image(s) available — will retry on next restart`,
+      );
       return;
     }
+
+    const existing = published || draft;
 
     await docs.update({
       documentId: existing.documentId,
