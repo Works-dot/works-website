@@ -296,7 +296,15 @@ export const fallbackGalleryImages: GalleryImage[] = hasData("galleryImages")
   : hardcodedGalleryImages;
 
 export const fallbackServices: Service[] = hasData("services")
-  ? (strapiCache.services as Service[])
+  ? (strapiCache.services as Service[]).map((s) => ({
+      ...s,
+      // Older cached snapshots may predate the definition block — fill from
+      // the hardcoded data so pre-rendered pages never silently drop it.
+      definitionSection:
+        s.definitionSection ??
+        hardcodedServices.find((h) => h.slug === s.slug)?.definitionSection ??
+        null,
+    }))
   : hardcodedServices;
 
 export const fallbackGlobalSettings: GlobalSettings = hasData("globalSettings")

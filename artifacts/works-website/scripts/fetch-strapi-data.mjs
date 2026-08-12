@@ -92,6 +92,7 @@ function mapService(s) {
     heroImage: strapiImageUrl(s.general?.heroImage?.url),
     icon: strapiImageUrl(s.general?.icon?.url),
     relatedProjectSlugs: (s.relatedProjects || []).map((p) => p.slug),
+    definitionSection: mapSectionIntro(s.definitionSection),
     questionsSection: s.questionsSection
       ? {
           intro: mapSectionIntro(s.questionsSection.intro),
@@ -193,7 +194,7 @@ async function fetchAll() {
     "&populate[9]=processSection.intro&populate[10]=processSection.steps" +
     "&populate[11]=deliverablesSection.intro&populate[12]=deliverablesSection.smallCards.icon&populate[13]=deliverablesSection.largeCards.icon&populate[14]=deliverablesSection.largeCards.bullets" +
     "&populate[15]=projectExamplesIntro&populate[16]=faqSection.intro&populate[17]=faqSection.items" +
-    "&populate[18]=relatedServicesIntro&populate[19]=relatedServices.general.icon&populate[20]=ctaBanner";
+    "&populate[18]=relatedServicesIntro&populate[19]=relatedServices.general.icon&populate[20]=ctaBanner&populate[21]=definitionSection";
   const servicesRes = await fetchApi(
     `/services?${SERVICE_POPULATE}&pagination[pageSize]=100&sort=order:asc`
   );

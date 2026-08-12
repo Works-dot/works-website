@@ -611,7 +611,6 @@
       "slug": "ux-kutatas",
       "title": "UX Kutatás",
       "subtitle": "Felhasználók megértése, adatalappal",
-      "kicker": "",
       "heroDescription": "Feltárjuk a felhasználói igényeket, viselkedési mintákat és fájdalompontokat, hogy a termékfejlesztés valós adatokon alapuljon — ne feltételezéseken.",
       "heroImage": "",
       "icon": "/strapi/uploads/search_f7153fb932.svg",
@@ -619,6 +618,11 @@
         "banki-applikacio",
         "logisztikai-szoftver"
       ],
+      "definitionSection": {
+        "kicker": "Definíció",
+        "heading": "Mi az a UX kutatás?",
+        "description": "A UX kutatás (felhasználói élmény kutatás) egy módszertan, amellyel feltárjuk, hogyan gondolkodnak, éreznek és viselkednek a felhasználók egy digitális termék használata közben. Interjúk, tesztek és adatelemzés segítségével valós bizonyítékokat gyűjtünk, hogy a termékfejlesztési döntések ne megérzéseken, hanem tényeken alapuljanak. Az eredmény: kevesebb felesleges fejlesztés, jobb felhasználói élmény és mérhető üzleti eredmények."
+      },
       "questionsSection": {
         "intro": {
           "kicker": "A kihívásaid",
@@ -852,7 +856,6 @@
       "slug": "ui-design",
       "title": "UI Design",
       "subtitle": "Felületek, amelyek működnek és hatnak",
-      "kicker": "",
       "heroDescription": "Olyan felhasználói felületeket tervezünk, amelyek nem csak szépek, hanem érthetőek, használhatók és üzleti eredményeket hoznak.",
       "heroImage": "",
       "icon": "/strapi/uploads/monitor_147cb28f4e.svg",
@@ -860,6 +863,11 @@
         "banki-applikacio",
         "logisztikai-szoftver"
       ],
+      "definitionSection": {
+        "kicker": "Definíció",
+        "heading": "Mi az a UI design?",
+        "description": "A UI design (felhasználói felület tervezés) az a szakterület, amely a digitális termékek vizuális megjelenését és interakcióit alakítja ki — a színektől és tipográfiától a gombokon át a teljes képernyőtervekig. A jó UI nem csupán esztétika: érthetővé, használhatóvá és következetessé teszi a terméket, erősíti a márkát, és közvetlenül hozzájárul a konverzióhoz és a felhasználói elégedettséghez."
+      },
       "questionsSection": {
         "intro": {
           "kicker": "A kihívásaid",
@@ -1089,13 +1097,17 @@
       "slug": "akadalymentesites",
       "title": "Akadálymentesítés",
       "subtitle": "Digitális termékek mindenki számára",
-      "kicker": "",
       "heroDescription": "Segítünk, hogy digitális termékeid mindenki számára elérhetőek és használhatóak legyenek — a jogszabályi megfeleléstől a valódi inkluzivitásig.",
       "heroImage": "",
       "icon": "/strapi/uploads/eye_3615829ec8.svg",
       "relatedProjectSlugs": [
         "e-kereskedelmi-akadalymentesites"
       ],
+      "definitionSection": {
+        "kicker": "Definíció",
+        "heading": "Mi az a digitális akadálymentesítés?",
+        "description": "A digitális akadálymentesítés azt jelenti, hogy egy weboldal vagy alkalmazás mindenki számára használható — a látás-, hallás- vagy mozgássérült felhasználóknak, az idősebb korosztálynak és az átmeneti korlátozottsággal élőknek is. A nemzetközi WCAG szabvány alapján auditáljuk és javítjuk a felületeket, így a termék nemcsak a jogszabályi elvárásoknak felel meg, hanem szélesebb közönséget is elér."
+      },
       "questionsSection": {
         "intro": {
           "kicker": "A kihívásaid",
@@ -1618,7 +1630,40 @@
       }
     }
   ],
-  "galleryImages": [],
+  "galleryImages": [
+    {
+      "src": "/strapi/uploads/works_moment_teamwork_2d43683d9f.jpg",
+      "alt": "Csapatmunka az irodában"
+    },
+    {
+      "src": "/strapi/uploads/works_moment_workshop_6ea5a52eb7.jpg",
+      "alt": "Workshop megbeszélés"
+    },
+    {
+      "src": "/strapi/uploads/works_moment_meeting_9ca966e475.jpg",
+      "alt": "Csapatmegbeszélés a tárgyalóban"
+    },
+    {
+      "src": "/strapi/uploads/works_moment_collaboration_9526b0a255.jpg",
+      "alt": "Közös munka a projekten"
+    },
+    {
+      "src": "/strapi/uploads/works_moment_planning_8027ec4b4c.jpg",
+      "alt": "Tervezés és egyeztetés"
+    },
+    {
+      "src": "/strapi/uploads/works_moment_presentation_4c88aa90fa.jpg",
+      "alt": "Prezentáció a csapatnak"
+    },
+    {
+      "src": "/strapi/uploads/works_moment_brainstorm_eca9163c65.jpg",
+      "alt": "Ötletelés a csapattal"
+    },
+    {
+      "src": "/strapi/uploads/works_moment_office_97c54649b0.jpg",
+      "alt": "Irodai pillanat"
+    }
+  ],
   "globalSettings": {
     "siteName": "Works.",
     "contactEmail": "hello@works.hu",
