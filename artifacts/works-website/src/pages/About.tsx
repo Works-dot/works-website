@@ -1,9 +1,10 @@
+import { useState, useEffect, useCallback } from "react";
 import { motion } from "framer-motion";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import SEOHead from "@/components/SEOHead";
 import { useStrapiQuery } from "@/hooks/useStrapiQuery";
-import { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext } from "@/components/ui/carousel";
+import { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext, type CarouselApi } from "@/components/ui/carousel";
 import { getTeamMembers, getGalleryImages, getAboutPage } from "@/lib/strapi";
 import type { TeamMember, GalleryImage, AboutPageData } from "@/lib/strapi";
 import { fallbackTeamMembers, fallbackGalleryImages, fallbackAboutPage, aboutGraphicFallbackImg, heroBackgroundFallbackImg } from "@/data/fallback";
@@ -22,6 +23,31 @@ export default function About() {
 
   const aboutGraphic = aboutGraphicFallbackImg;
   const heroGraphic = heroBackgroundFallbackImg;
+
+  const [galleryApi, setGalleryApi] = useState<CarouselApi>();
+  const [gallerySnaps, setGallerySnaps] = useState<number[]>([]);
+  const [gallerySelected, setGallerySelected] = useState(0);
+
+  useEffect(() => {
+    if (!galleryApi) return;
+    const onSelect = () => setGallerySelected(galleryApi.selectedScrollSnap());
+    const onReInit = () => {
+      setGallerySnaps(galleryApi.scrollSnapList());
+      onSelect();
+    };
+    onReInit();
+    galleryApi.on("select", onSelect);
+    galleryApi.on("reInit", onReInit);
+    return () => {
+      galleryApi.off("select", onSelect);
+      galleryApi.off("reInit", onReInit);
+    };
+  }, [galleryApi]);
+
+  const scrollGalleryTo = useCallback(
+    (index: number) => galleryApi?.scrollTo(index),
+    [galleryApi],
+  );
 
   return (
     <div className="min-h-screen bg-works-bg flex flex-col selection:bg-works-primary selection:text-white">
@@ -132,7 +158,7 @@ export default function About() {
           </div>
         </section>
 
-        <section className="py-20 lg:py-28 bg-works-bg">
+        <section className="py-20 lg:py-28 bg-works-bg overflow-hidden">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <motion.div {...fadeUp}>
               <h2 className="text-3xl md:text-4xl font-bold text-works-dark mb-16">
@@ -149,8 +175,8 @@ export default function About() {
                 ))}
               </div>
             ) : (
-              <Carousel opts={{ align: "start" }} className="w-full">
-                <CarouselContent className="-ml-4">
+              <Carousel opts={{ align: "start" }} setApi={setGalleryApi} className="w-full">
+                <CarouselContent containerClassName="overflow-visible" className="-ml-4">
                   {(galleryImages || []).filter((img) => img.src).map((img, i) => (
                     <CarouselItem key={i} className="pl-4 basis-full sm:basis-1/2 lg:basis-1/3">
                       <div className="overflow-hidden">
@@ -163,11 +189,28 @@ export default function About() {
                     </CarouselItem>
                   ))}
                 </CarouselContent>
-                <div className="flex justify-end gap-3 mt-8">
-                  <CarouselPrevious className="static translate-y-0 h-11 w-11 rounded-full border-works-dark/20 text-works-dark hover:bg-works-primary hover:text-white hover:border-works-primary disabled:opacity-30" />
-                  <CarouselNext className="static translate-y-0 h-11 w-11 rounded-full border-works-dark/20 text-works-dark hover:bg-works-primary hover:text-white hover:border-works-primary disabled:opacity-30" />
-                </div>
+                <CarouselPrevious className="hidden lg:inline-flex left-4 -translate-y-1/2 h-12 w-12 rounded-full border-0 bg-white/70 backdrop-blur-md text-works-dark shadow-lg hover:bg-works-primary hover:text-white disabled:opacity-40 z-10" />
+                <CarouselNext className="hidden lg:inline-flex right-4 -translate-y-1/2 h-12 w-12 rounded-full border-0 bg-white/70 backdrop-blur-md text-works-dark shadow-lg hover:bg-works-primary hover:text-white disabled:opacity-40 z-10" />
               </Carousel>
+            )}
+
+            {!galleryLoading && gallerySnaps.length > 1 && (
+              <div className="flex justify-center gap-2 mt-8">
+                {gallerySnaps.map((_, i) => (
+                  <button
+                    key={i}
+                    type="button"
+                    aria-label={`Ugrás a(z) ${i + 1}. képre`}
+                    aria-current={i === gallerySelected ? "true" : undefined}
+                    onClick={() => scrollGalleryTo(i)}
+                    className={`h-2 rounded-full transition-all duration-300 ${
+                      i === gallerySelected
+                        ? "w-8 bg-works-primary"
+                        : "w-2 bg-works-dark/20 hover:bg-works-dark/40"
+                    }`}
+                  />
+                ))}
+              </div>
             )}
           </div>
         </section>
