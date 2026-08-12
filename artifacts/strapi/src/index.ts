@@ -1225,17 +1225,31 @@ async function backfillFeaturedBlogPosts(strapi: any) {
     return;
   }
 
-  if (posts.some((p: any) => p.featured === true)) {
+  const newest = posts.slice(0, 3);
+  const newestIds = new Set(newest.map((p: any) => p.documentId));
+  const featuredOutsideNewest = posts.some(
+    (p: any) => p.featured === true && !newestIds.has(p.documentId),
+  );
+  if (featuredOutsideNewest) {
+    // An admin already made their own featured selection — respect it.
     strapi.log.info("Featured blog posts backfill: featured posts already exist — nothing to do");
+    await store.set({ key: "featured_blog_posts_backfill_v1", value: true });
+    return;
+  }
+  if (newest.every((p: any) => p.featured === true)) {
+    strapi.log.info("Featured blog posts backfill: newest posts already featured — nothing to do");
     await store.set({ key: "featured_blog_posts_backfill_v1", value: true });
     return;
   }
 
   let updated = 0;
   let errors = 0;
-  const newest = posts.slice(0, 3);
   for (let i = 0; i < newest.length; i++) {
     const post = newest[i];
+    if (post.featured === true) {
+      // Already handled by a previous (partially failed) run — skip, keep resume idempotent.
+      continue;
+    }
     try {
       await strapi.documents("api::blog-post.blog-post").update({
         documentId: post.documentId,
