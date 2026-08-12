@@ -5,7 +5,6 @@ import { ArrowRight, Search, HelpCircle } from "lucide-react";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import SEOHead from "@/components/SEOHead";
-import { MaskIcon } from "@/components/ui/MaskIcon";
 import { CtaBannerView } from "@/components/sections/CtaBanner";
 import { MobileCarousel } from "@/components/ui/MobileCarousel";
 import {
@@ -30,7 +29,7 @@ function IconBox({ icon, className = "" }: { icon?: string; className?: string }
   return (
     <div className={`w-9 h-9 bg-works-bg text-works-primary flex items-center justify-center shrink-0 ${className}`}>
       {icon ? (
-        <MaskIcon src={icon} className="w-5 h-5 bg-works-primary" />
+        <img src={icon} alt="" aria-hidden="true" className="w-5 h-5 object-contain" />
       ) : (
         <ArrowRight className="w-5 h-5" strokeWidth={1.5} />
       )}
@@ -429,9 +428,9 @@ export default function ServicePage() {
                     <Link href={`/szolgaltatasok/${rel.slug}`} className="block h-full">
                       <div className="bg-white/60 backdrop-blur-sm p-6 border border-works-muted/30 hover:bg-white hover:border-works-primary/30 hover:shadow-lg transition-all duration-300 group cursor-pointer h-full flex flex-col">
                         <div className="flex items-center gap-3 mb-4">
-                          <div className="w-10 h-10 bg-works-bg text-works-primary flex items-center justify-center shrink-0 group-hover:bg-works-primary group-hover:text-white transition-all duration-300">
+                          <div className="w-10 h-10 bg-works-bg text-works-primary flex items-center justify-center shrink-0">
                             {rel.icon ? (
-                              <MaskIcon src={rel.icon} className="w-5 h-5 bg-works-primary group-hover:bg-white transition-colors duration-300" />
+                              <img src={rel.icon} alt="" aria-hidden="true" className="w-5 h-5 object-contain" />
                             ) : (
                               <Search className="w-5 h-5" strokeWidth={1.5} />
                             )}

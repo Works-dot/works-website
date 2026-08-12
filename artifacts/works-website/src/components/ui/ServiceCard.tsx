@@ -1,5 +1,4 @@
 import { Search, ArrowRight } from "lucide-react";
-import { MaskIcon } from "@/components/ui/MaskIcon";
 import { motion } from "framer-motion";
 import { Link } from "wouter";
 
@@ -21,9 +20,9 @@ export function ServiceCard({ iconSrc, title, description, index, href }: Servic
       className="bg-white/60 backdrop-blur-sm p-6 border border-works-muted/30 hover:bg-white hover:border-works-primary/30 hover:shadow-lg transition-all duration-300 group cursor-pointer h-full flex flex-col"
     >
       <div className="flex items-center gap-3 mb-4">
-        <div className="w-10 h-10 bg-works-bg text-works-primary flex items-center justify-center shrink-0 group-hover:bg-works-primary group-hover:text-white transition-all duration-300">
+        <div className="w-10 h-10 bg-works-bg text-works-primary flex items-center justify-center shrink-0">
           {iconSrc ? (
-            <MaskIcon src={iconSrc} className="w-5 h-5 bg-works-primary group-hover:bg-white transition-colors duration-300" />
+            <img src={iconSrc} alt="" aria-hidden="true" className="w-5 h-5 object-contain" />
           ) : (
             <Search className="w-5 h-5" strokeWidth={1.5} />
           )}
