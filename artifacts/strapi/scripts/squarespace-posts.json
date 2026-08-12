@@ -1,0 +1,155 @@
+[
+  {
+    "slug": "bizzuk-az-ai-ra-a-felhasznaloi-visszajelzesek-elemzeset",
+    "title": "Bízzuk az AI-ra a felhasználói visszajelzések elemzését?",
+    "date": "2026-03-10",
+    "excerpt": "Négy AI-modell és három emberi elemző eredményeit hasonlítottuk össze 100 felhasználói visszajelzés címkézése során.",
+    "heroUrl": "https://images.squarespace-cdn.com/content/v1/63ee29e63a616629fb54ecea/1773144535468-LFIOS7ARVJG8EUMK1A6R/ai-human-3.png",
+    "readingTime": "6 perc",
+    "blocks": [
+      {
+        "type": "text",
+        "markdown": "### Négy nyelvi modell eredményeit vetettük össze emberektől származó elemzésekkel"
+      },
+      {
+        "type": "image",
+        "url": "https://images.squarespace-cdn.com/content/v1/63ee29e63a616629fb54ecea/2cafc0fe-6f40-478d-9757-9f59c01929c5/ai-human-3.png?format=original",
+        "caption": ""
+      },
+      {
+        "type": "text",
+        "markdown": "A felhasználók folyamatosan mesélnek szolgáltatásokról, appokról, termékekről: Google-értékelésekben, app-áruházakban, fórumokon, közösségi médiában vagy épp ügyfélszolgálati felületeken. Ezek nem kérdőívekre adott válaszok, hanem önkéntes, spontán vélemények. Éppen ezért nagyon értékes adatok lehetnek, ugyanakkor zajosak is. Ahhoz, hogy termék- vagy szolgáltatásfejlesztési döntésekhez is használhatók legyenek, érdemes ezeket az organikus visszajelzéseket valamilyen módon strukturálni.\n\n**A kihívást tehát nem az adatok hiánya, hanem azok értelmezése jelenti.**\n\nMiről is beszélnek valójában az emberek? Milyen témák, panaszok, fejlesztési igények rajzolódnak ki a szövegekből? Erre akkor kapunk igazán áttekinthető választ, ha a visszajelzésekben megjelenő mintázatokat feltárjuk, majd a szövegeket ennek megfelelően címkézzük és kategorizáljuk. Kevés adatot emberi munkával is hatékonyan fel lehet dolgozni, de nagy mennyiségnél és rendszeres elemzésnél felmerül a csábító lehetőség: rábízhatjuk-e a munkát egy nyelvi modellre? És ha igen: melyikre, milyen módon, és milyen buktatókkal számoljunk? Ezekre kerestük a választ egy banki mobilapp felhasználói értékelésein keresztül.\n\n### Módszer\n\nElőre megadott kategóriák szerint címkéztettünk 100 db felhasználói visszajelzést négy nyelvi modellel (GPT/ChatGPT, Sonnet/Claude, RoBERTa, LLaMA) és három emberrel. A nyelvi modellekkel három alkalommal is elvégeztettük ugyanazt a feladatot. Így nem csak azt tudtuk megvizsgálni, hogy az AI megoldása mennyire hasonlít az emberi logikára, hanem a modellek konzisztenciáját is leteszteltük (vagyis, hogy az egyes modellek meg tudják-e ismételni a saját megoldásukat).\n\nA ChatGPT és a Claude prompt alapján végezte el a címkézési feladatot, a RoBERTa és a LLaMA modelleket az [NLP Cloud](https://nlpcloud.com) kategorizációs platformján keresztül használtuk, az emberek pedig írásos instrukciót kaptak."
+      },
+      {
+        "type": "highlight",
+        "markdown": "**NLP Cloud**\n\nAz NLP Cloud egy online platform, amely különböző mesterséges intelligencia modelleket tesz hozzáférhetővé mind weboldalon, mind API-n keresztül. Többféle feladatra kínál eszközt, ezek egyike a szövegek kategorizálására szolgáló modul. Ezen keresztül a RoBERTa és LLaMA modelleket (a Claude-dal és a ChatGPT-vel ellentétben) nem szöveges utasítással, hanem API-n keresztül programkóddal irányítottuk."
+      },
+      {
+        "type": "text",
+        "markdown": "A ChatGPT és a Claude promptján egy körben iteráltunk, így ezek a modellek két körben, tehát 2*3 alkalommal végezték el a címkézést (lásd: 1. táblázat)."
+      },
+      {
+        "type": "image",
+        "url": "https://images.squarespace-cdn.com/content/v1/63ee29e63a616629fb54ecea/8541932a-6258-44b4-a8e1-cf0dede0a7a9/table1.png?format=original",
+        "caption": "1. táblázat: Használt modellek és instrukciók típusa"
+      },
+      {
+        "type": "text",
+        "markdown": "### 1. tanulság, avagy az instrukciók megfogalmazásának jelentősége\n\nAz első körben a ChatGPT 100%-os konzisztenciát produkált, vagyis mindhárom futtatásban pontosan ugyanazt a megoldást adta. Ez első pillantásra nagyon jó eredménynek tűnt, de valójában rossz okból volt ennyire stabil: a modell belefutott a lehorgonyzási torzításba, gyakorlatilag mindent ugyanabba az egyetlen kategóriába sorolt, a szövegek tartalmától függetlenül.\n\nA Claude ugyanezzel a prompttal az elvárásaink szerint működött. Több kategóriát is használt, és az eredményei 83%-ban voltak egyezők a három futtatás között."
+      },
+      {
+        "type": "highlight",
+        "markdown": "**Lehorgonyzási torzítás (anchoring bias)**\n\nAz a jelenség, amikor az elsőként kapott információ (a “horgony”) aránytalanul erősen befolyásolja a későbbi ítéleteket és döntéseket, még akkor is, ha a horgony részben vagy teljesen irreleváns. (További példa és kutatás az AI lehorgonyzási torzítása kapcsán [ezen a linken](https://www.sciencedirect.com/science/article/pii/S2214635024000868).)"
+      },
+      {
+        "type": "text",
+        "markdown": "Ezután finomítottuk a promptot, és ezt is háromszor lefuttattuk mindkét modellel. Ebben a második körben a ChatGPT már csak egy futtatásban ragadt bele a lehorgonyzásba, a másik két futtatás változatosabb címkézést adott. Emiatt viszont a három futtatás eredménye erősen eltért egymástól, így a ChatGPT konzisztenciája ebben a körben 10% lett. Ez strukturált, ismételhető elemzési feladatoknál nem elfogadható.\n\nA Claude-nál a finomított prompt rontott a stabilitáson: a konzisztencia 83%-ról 63%-ra csökkent (lásd: 2. táblázat). Ez is mutatja, hogy ugyanarra a promptra és ugyanarra a módosításra a különböző modellek eltérően reagálhatnak.\n\nA LLaMA és a RoBERTa modelleket nem szöveges prompttal futtattuk, hanem egy kifejezetten szövegkategorizációra kialakított megoldással, Python kódon keresztül. Itt a LLaMA 95%-os, a RoBERTa pedig 100%-os konzisztenciát mutatott."
+      },
+      {
+        "type": "image",
+        "url": "https://images.squarespace-cdn.com/content/v1/63ee29e63a616629fb54ecea/ed3533c8-e4ed-4ce0-9290-8c4a8ccbd658/table2.png?format=original",
+        "caption": "2.táblázat: Modellek konzisztenciája három futtatás alapján"
+      },
+      {
+        "type": "text",
+        "markdown": "Az eredmények konzisztenciáját nagyban befolyásolja, hogyan futtatjuk és milyen keretek közé szorítjuk a feladatot. A chat-alapú generatív modellek (ChatGPT, Claude) érzékenyebbek az apró megfogalmazásbeli különbségekre, ezért ugyanaz a feladat több futtatásban eltérő címkézést adhat. A LLaMA, bár a ChatGPT és a Claude modelljeihez hasonlóan generatív modell, nálunk strukturált módban (kategorizációs API-n keresztül, kóddal, kötött címkekészlettel) futott, ezért sokkal stabilabb eredményt kaptunk. A RoBERTa a másik három modellhez képest más elven működik, ez kifejezetten osztályozásra optimalizált. És mint ilyen, a 100%-os konzisztencia elvárható ettől a modelltől.\n\n### 2. tanulság, avagy konzisztencia ≠ minőség\n\nA ChatGPT-nél a tökéletes konzisztencia fals eredményeket takart. Ezzel szemben a RoBERTa úgy volt 100%-ban stabil, hogy az elvárásunknak megfelelően, többféle címkét használt. Ugyanakkor, a RoBERTa megoldását összevetettük az emberi címkézés eredményeivel (ehhez a három személy konszenzusos címkézését használtuk), és a kettő csupán 25%-ban egyezett.\n\n**Tehát a RoBERTa modell stabil volt, de az emberi gondolkodástól nagyban eltért a megoldása.**\n\n### 3. tanulság, avagy az emberek sem mindig értenek egyet egymással\n\nMielőtt az AI-modellektől elvárjuk a konzisztens és számunkra is értelmes megoldást, érdemes megnézni, hogyan teljesítenek ugyanezen a címkézési feladaton az emberek. Három értékelő dolgozott egymástól függetlenül ugyanazon a 100 felhasználói visszajelzésen, ugyanazzal a 10 db, előre meghatározott címkével.\n\nA három személy megoldását páronként összehasonlítottuk, és azt találtuk, hogy ezek 44%, 46%, illetve 58%-ban voltak azonosak egymással (lásd: 1. ábra). Teljes egyetértés (ahol mindhárom személy ugyanazt a címkét választotta) a szövegek egyharmadánál volt, teljes eltérés (ahova három különböző címke kerülte került) pedig az esetek 20%-ában."
+      },
+      {
+        "type": "image",
+        "url": "https://images.squarespace-cdn.com/content/v1/63ee29e63a616629fb54ecea/5c11f85f-1e07-4f83-86a9-285873af2fff/venn-diagram-raleway.png?format=original",
+        "caption": "1. ábra: A három értékelő személy megoldása közötti átfedések"
+      },
+      {
+        "type": "text",
+        "markdown": "Ez nem a figyelmetlenség jele, hanem a címkék pontosságának, egyértelműségének kérdése. Nemcsak a címkék elnevezése számít, hanem az is, hogy hány címke illik egy adott szövegre. Ha egyes szövegekre több címke is illik, de csak egy választható közülük, az nem kedvez az egyértelmű döntésnek. A kategóriarendszer pontossága és egyértelműsége mind az emberek, mind az AI esetében kulcskérdés.\n\n**Ahol az emberek döntése eltérő, ott az AI-tól sem várható egységes válasz.**\n\n### Eredmények összegzése"
+      },
+      {
+        "type": "image",
+        "url": "https://images.squarespace-cdn.com/content/v1/63ee29e63a616629fb54ecea/508bfa96-12d3-4666-8763-518d598fbe9d/konzisztencia-minoseg.png?format=original",
+        "caption": "2. ábra: A vizsgált modellek megoldásainak konzisztenciája és minősége (az emberi megoldáshoz viszonyítva)"
+      },
+      {
+        "type": "text",
+        "markdown": "A négy modell közül a LLaMA nyújtotta a legjobb egyensúlyt konzisztencia és minőség szempontjából: 95%-ban volt konzisztens és a megoldása 63%-ban egyezett az emberi címkézéssel (lásd: 2. ábra). A Claude megoldása szintén 63%-ban egyezett az emberekével, de ez a modell kevésbé volt konzisztens (63%).\n\nTalán kevésnek tűnhet, hogy az AI megoldások maximum 63%-ban egyeztek az emberekével. Ugyanakkor az emberek sem gondolkodtak egyformán, maximum 58%-ban jutottak azonos döntésre a címkézés során.\n\n**Ennek fényében a 60% körüli AI–ember megfelelés nem gyenge teljesítmény, hanem a különböző emberi gondolkodásmódok közötti egyezés szintjének megközelítése.**\n\n### Mit jelent ez a gyakorlatban?\n\nNem azt, hogy az AI megbízhatatlan, és nem is azt, hogy az embereket kiváltja. Inkább azt, hogy a kérdést másképp kell feltenni: nem \"Melyik AI a legjobb?\", hanem \"Melyik feladatra, milyen feltételek mellett, melyik modell alkalmas?\".\n\n1. Ha nagy mennyiséget kell automatizáltan feldolgozni, a LLaMA strukturált módban a legkiegyensúlyozottabb választás.\n2. Ha gyors, exploratív elemzést szeretnénk, és az eredményt emberi szem nézi át, a Claude vagy a ChatGPT is elvégezheti a munkát. Ebben az esetben a prompt gondos kidolgozása és tesztelése elengedhetetlen.\n3. Ha a kategóriarendszer jól definiált, a RoBERTa finomhangolás után akár a legjobb megoldás is lehet.\n\nA tartalomcímkézés nem pusztán technológiai kérdés, hanem értelmezési feladat is. A modellek teljesítménye mindig a kategóriarendszer minősége, a feladatmegfogalmazás és az emberi kontextus tükrében értelmezhető igazán.\n\n**Az AI a legjobb esetben sem az abszolút igazságot mondja, hanem az emberi konszenzust közelíti meg.**"
+      },
+      {
+        "type": "text",
+        "markdown": "Szerző: Székely Zsuzsa, a Works Experience Designer kollégája"
+      }
+    ],
+    "sourceUrl": "https://worksdot.hu/blog/bizzuk-az-ai-ra-a-felhasznaloi-visszajelzesek-elemzeset"
+  },
+  {
+    "slug": "amikor-a-kivitelezes-mar-nem-kulonboztet-meg",
+    "title": "Merre tart a design szakma, az ügyfélközpontú gondolkozás egy AI-val gyorsított világban? – 2. rész",
+    "date": "2026-02-13",
+    "excerpt": "A digitális termékfejlesztésben a profi kivitelezés többé már nem számít különleges megkülönböztető erőnek, hiszen az AI korában a minőségi megvalósítás bárki számára könnyen elérhetővé vált. Ez a változás olyan alapvető dilemmákat hozott a felszínre a szakmai szerepekkel kapcsolatban, ahol már nem a kivitelezés sebessége, hanem a stratégiai értelmezés képessége és a jelek összekapcsolása válik a valódi kitörési ponttá.",
+    "heroUrl": "https://images.squarespace-cdn.com/content/v1/63ee29e63a616629fb54ecea/1770987480316-H22N1JZ11UBGE6UZC5R5/1ea62a61-7118-4530-8b6b-1185a50f7fd7.png",
+    "readingTime": "2 perc",
+    "blocks": [
+      {
+        "type": "text",
+        "markdown": "### Amikor a kivitelezés már nem különböztet meg\n\nDemokratizálódás, szerepfeszültségek és a valódi kitörési pont"
+      },
+      {
+        "type": "image",
+        "url": "https://images.squarespace-cdn.com/content/v1/63ee29e63a616629fb54ecea/5786d008-1094-4fe7-9f49-023189c09a94/1ea62a61-7118-4530-8b6b-1185a50f7fd7.png?format=original",
+        "caption": "Látni a kivitelezés mögé: A papírhajók a bárki által elérhető tucatmegoldások. A mélybe hatoló fénysugár a stratégiai értelmezés, amely a technikai megvalósításon túl a rendszer valódi összefüggéseit tárja fel."
+      },
+      {
+        "type": "text",
+        "markdown": "### 4. AI és a design demokratizálódása\n\nAz AI egyik legkézzelfoghatóbb hatása a design területén a kivitelezés demokratizálódása. Olyan feladatok váltak gyorsan és alacsony belépési küszöbbel megoldhatóvá, amelyek korábban kifejezetten szakértői tudást igényeltek. Layoutok, UI-struktúrák, microcopyk vagy egyszerű flow-k ma már „elég jó” szinten előállíthatók.\n\nEz önmagában nem probléma. A feszültség ott jelenik meg, hogy a kivitelezéssel **nem demokratizálódik együtt a következmények megértése**. Egy „elég jó” megoldás technikailag működhet, miközben rendszer-szinten rossz irányba visz.\n\n### 5. Medior–senior feszültség: nem generációs, hanem szerepkérdés\n\nA demokratizálódás láthatóvá teszi, mit jelent ma valójában seniornak lenni. Hosszú ideig a kivitelezési fölény volt a megkülönböztető érték. Ez az előny azonban eltűnik, amikor a kivitelezés technikai része már nem szűk keresztmetszet.\n\nA feszültség nem a mediorok és seniorok között keletkezik, hanem a „senior” kategórián belül. Azok maradnak relevánsak, akik képesek keretezni, súlyozni és előre látni a döntések következményeit. A demokratizálódás itt nem rombol, hanem szelekciót hoz létre."
+      },
+      {
+        "type": "image",
+        "url": "https://images.squarespace-cdn.com/content/v1/63ee29e63a616629fb54ecea/5328d611-3367-492d-b170-193472a66975/medior-senior.png?format=original",
+        "caption": ""
+      },
+      {
+        "type": "text",
+        "markdown": "### 6. Nem adat-, hanem értelmezési hiány\n\nMa ritkán az adat hiányzik. Sokkal inkább az a képesség, hogy a rendelkezésre álló jelek összeálljanak értelmes egésszé. Az insightok különböző csatornákból érkeznek, eltérő időtávokra vonatkoznak, és gyakran egymásnak is ellentmondanak.\n\nEz nem döntéshiányt, hanem **értelmezési túlterhelést** okoz. Egyre több döntés hat túl egyetlen csapat vagy projekt határain, miközben ezt nem mindig látjuk előre. A legnagyobb kockázat sokszor nem egy rossz megoldás, hanem a rossz fókusz.\n\n### 7. A kitörési pont: értelmezés, nem kivitelezés\n\nEbben a környezetben a design valódi kitörési pontja nem a kivitelezésben van. Az érték ott keletkezik, ahol valaki képes összekapcsolni a jeleket, súlyozni a problémákat, és kontextusba helyezni a döntéseket.\n\nEz nem klasszikus UX-feladat, és nem új módszertan. Inkább szemléletváltás: annak felvállalása, hogy nem minden adat egyenértékű, nem minden insight igényel azonnali reakciót, és nem minden „elég jó” megoldás visz jó irányba.\n\nA design előtt ma egyre világosabban kirajzolódik egy választási lehetőség. Megmaradhat támogató funkciónak egy összetettebb rendszerben – vagy felvállalhatja azt a szerepet, hogy segítsen értelmezni, mi történik valójában. Számomra 2026 felé ez nem technológiai kérdés, hanem szakmai döntés."
+      },
+      {
+        "type": "text",
+        "markdown": "[Első rész: Amikor a design újra keresi a helyét](/blog/amikor-a-design-ujra-keresi-a-helyet)"
+      },
+      {
+        "type": "text",
+        "markdown": "A szerző Maczinkó Ákos, a Works. ügyvezetője."
+      }
+    ],
+    "sourceUrl": "https://worksdot.hu/blog/amikor-a-kivitelezes-mar-nem-kulonboztet-meg"
+  },
+  {
+    "slug": "amikor-a-design-ujra-keresi-a-helyet",
+    "title": "Merre tart a design szakma, az ügyfélközpontú gondolkozás egy AI-val gyorsított világban? – 1. rész",
+    "date": "2026-02-11",
+    "excerpt": "A digitális termékek világa mára alaposan megváltozott, és a jól megszokott design-módszerek önmagukban már nem mindig adnak választ a mai, összetettebb problémákra. Az AI érkezése olyan kérdéseket hozott a felszínre a cégek működésével kapcsolatban, amikkel eddig nem nagyon kellett foglalkozni.",
+    "heroUrl": "https://images.squarespace-cdn.com/content/v1/63ee29e63a616629fb54ecea/1770829230204-IM8UGU86SZNZLOZWA9GQ/Gemini_Generated_Image_hfv7wxhfv7wxhfv7.png",
+    "readingTime": "3 perc",
+    "blocks": [
+      {
+        "type": "text",
+        "markdown": "### Amikor a design újra keresi a helyét\n\nGondolatok a design szerepekről, az AI-ról és az ügyfélközpontú működésről 2026 elején"
+      },
+      {
+        "type": "image",
+        "url": "https://images.squarespace-cdn.com/content/v1/63ee29e63a616629fb54ecea/e923a75c-2885-4768-a643-cb04c973ba76/Gemini_Generated_Image_hfv7wxhfv7wxhfv7.png?format=original",
+        "caption": "Rend a káoszban : A köd a rengeteg infót, véleményt és bizonytalanságot mutatja, amiben sokszor elveszünk. A középen ragyogó kristály maga a design: az a pillanat, amikor a sok zavaros ötletből végre összeáll egy szilárd döntés, amire lehet építeni."
+      },
+      {
+        "type": "text",
+        "markdown": "### Bevezetés\n\nTöbb mint tizenöt éve dolgozom az ügyfélközpontú tervezés környékén. Megéltem, ahogy a UX és a CX egy szűk, sokáig marginális megközelítésből a digitális működés alapelvévé vált. Kutatás, tesztelés, workshopok, journeyk – mára mindennapi eszközökké lettek, és ritkán kell már elmagyarázni, miért fontos az ügyfél szempontja.\n\nMégis, az utóbbi időben egyre gyakrabban érzem azt, hogy megtorpantunk.\n\nNem azért, mert a UX ne működne. Épp ellenkezőleg: a módszerek kiforrottabbak, gyorsabbak és könnyeben hozzáférhetőek, mint valaha. A kérdés az, hogy **a mai, összetettebb működési problémákra elegendőek-e ugyanazok az válaszok**, amelyeket egy egyszerűbb környezetben tanultunk meg.\n\nEz az írás nem trendlista. Inkább egy elemző gondolatmenet arról, hogyan változik a design szerepe egy összetettebb, bizonytalanabb környezetben – és miért vált ez most újra releváns kérdéssé.\n\n### 1. A design szerepkeresése egy érettebb környezetben\n\nA design ma szinte mindenhol jelen van. Része a termékfejlesztésnek, megjelenik a szervezeti nyelvben, és ritkán kell már megindokolni a létjogosultságát. Ugyanakkor a szerepe sok szervezetben még mindig nehezen körülhatárolható.\n\nHa valaki sales-szel, IT-val vagy marketinggel foglalkozik, általában világos, mit jelent ez: milyen döntésekben van szava, milyen felelősséggel. A design esetében ez jóval kevésbé egyértelmű. Ugyanaz a cím különböző helyeken egészen eltérő szerepeket takarhat.\n\nEz részben a design természetéből fakad: határterületi szakma, amely üzleti, technológiai és ügyféloldali szempontokat köt össze. A probléma akkor jelenik meg, amikor ez a határhelyzet **nem tudatos döntés, hanem kialakult gyakorlat**: a design „ott van”, bevonódik, de nem világos, mikor és milyen kérdésekben van valódi súlya. Ilyenkor a design könnyen megmarad támogató funkcióban: segít érvelni, érthetőbbé tenni a döntéseket, csökkenteni a súrlódást – de ritkán válik iránymeghatározóvá. Sokáig ez nem volt kritikus. Korábban a digitális termékek egyszerűbbek voltak, kevesebb csatornán jelentek meg, és a döntések hatása gyakran egy-egy csapat vagy funkció határain belül maradt. \nMa a digitális élmény több csatornán, több csapat és rendszer együttműködésén keresztül áll össze, miközben az ügyfelek elvárásai és érzékenysége is nőtt. \nRáadásul egyre több döntés hat túl egyetlen projekten vagy szervezeti egységen. Ebben a környezetben a pusztán támogató design szerep már nem elég. Nem azért, mert a design többet akar, hanem mert **a környezet nagyobb súlyt ad azoknak a kérdéseknek**, amelyekkel hagyományosan foglalkozik: összefüggéseknek, következményeknek és az ügyfél szempontjából értelmezett működésnek.\n\n### 2. Az AI nem eszköz, hanem működési katalizátor\n\nAz AI-ról gyakran úgy beszélünk, mint egy új eszközről vagy funkcióról. Valójában azonban ritkán marad meg egyetlen csapat vagy rendszer határain belül. Amint megjelenik, olyan kérdéseket hoz felszínre, amelyek eddig sokszor fel sem merültek: ki használhatja, milyen döntéseket hozhat, ki viseli a felelősséget, és hogyan illeszkedik a teljes működésbe.\n\nEzek a kérdések egyszerre érintik az üzletet, az IT-t, a jogot, az ügyfélszolgálatot és az ügyfélélményért felelős csapatokat. Az AI ezért nem technológiai, hanem **működési kérdés**. Katalizátor: felerősíti azokat a szervezeti feszültségeket, amelyek eddig kevésbé voltak láthatók.\n\nItt válik különösen relevánssá a **service design** szemlélet. Nem módszertanként, hanem gondolkodási keretként: arra, hogy összekapcsolja a különböző nézőpontokat, és explicitté tegye a döntések következményeit.\n\n### 3. Kísérletezés, mint felelős bevezetési modell\n\nEgy AI-bevezetés drága, bizonytalan és nehezen visszafordítható – technológiai és szervezeti értelemben is. A „nagy dobás” szemlélet ezért kifejezetten kockázatos. Helyette egyre inkább a **kísérletezés**, azon belül is a **POC (Proof of Concept), mint tanulási módszertan** kerül előtérbe.\n\nA POC itt nem technológiai demó, hanem hipotézis validáció arra vonatkozóan, hogy egy konkrét működési problémára az AI valóban értelmes választ ad-e. A validálás nemcsak technikai, hanem szervezeti, jogi és ügyféloldali is. A cél nem a gyors bevezetés, hanem a tanulás és a buy-in megteremtése.\n\nEz a megközelítés jól mutatja, hogy a design – különösen service design értelemben – nem gyorsít, hanem keretez. Segít abban, hogy a kísérletezés ne ad hoc próbálkozás legyen, hanem tudatos bevezetési út."
+      },
+      {
+        "type": "text",
+        "markdown": "[Második rész: Amikor a kivitelezés már nem különböztet meg](/blog/amikor-a-kivitelezes-mar-nem-kulonboztet-meg)"
+      },
+      {
+        "type": "text",
+        "markdown": "A szerző Maczinkó Ákos, a Works. ügyvezetője."
+      }
+    ],
+    "sourceUrl": "https://worksdot.hu/blog/amikor-a-design-ujra-keresi-a-helyet"
+  }
+]
