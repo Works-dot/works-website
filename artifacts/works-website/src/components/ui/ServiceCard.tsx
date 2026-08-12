@@ -19,7 +19,7 @@ export function ServiceCard({ iconSrc, title, description, index, href }: Servic
       transition={{ duration: 0.5, delay: index * 0.1 }}
       className="bg-white/60 backdrop-blur-sm p-6 border border-works-muted/30 hover:bg-white hover:border-works-primary/30 hover:shadow-lg transition-all duration-300 group cursor-pointer h-full flex flex-col"
     >
-      <div className="flex items-center gap-3 mb-4">
+      <div className="flex items-start gap-3 mb-4">
         <div className="w-7 h-7 text-works-primary flex items-center justify-center shrink-0">
           {iconSrc ? (
             <img src={iconSrc} alt="" aria-hidden="true" className="w-6 h-6 object-contain" />

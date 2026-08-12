@@ -225,7 +225,7 @@ export default function ServicePage() {
                     transition={{ duration: 0.5, delay: (i % 3) * 0.1 }}
                     className="bg-white p-6 border border-works-muted/30"
                   >
-                    <div className="flex items-center gap-3 mb-3">
+                    <div className="flex items-start gap-3 mb-3">
                       <IconBox icon={card.icon} />
                       <h3 className="text-lg font-bold text-works-dark">
                         {card.title}
@@ -304,7 +304,7 @@ export default function ServicePage() {
                       transition={{ duration: 0.5, delay: i * 0.15 }}
                       className="bg-white p-6 md:p-8 border border-works-muted/30 flex flex-col"
                     >
-                      <div className="flex items-center gap-3 mb-3">
+                      <div className="flex items-start gap-3 mb-3">
                         <IconBox icon={card.icon} />
                         <h3 className="text-xl font-bold text-works-dark">
                           {card.title}
@@ -339,7 +339,7 @@ export default function ServicePage() {
                       transition={{ duration: 0.5, delay: (i % 3) * 0.1 }}
                       className="bg-white p-6 border border-works-muted/30"
                     >
-                      <div className="flex items-center gap-3 mb-3">
+                      <div className="flex items-start gap-3 mb-3">
                         <IconBox icon={card.icon} />
                         <h3 className="text-lg font-bold text-works-dark">
                           {card.title}
@@ -427,7 +427,7 @@ export default function ServicePage() {
                   >
                     <Link href={`/szolgaltatasok/${rel.slug}`} className="block h-full">
                       <div className="bg-white/60 backdrop-blur-sm p-6 border border-works-muted/30 hover:bg-white hover:border-works-primary/30 hover:shadow-lg transition-all duration-300 group cursor-pointer h-full flex flex-col">
-                        <div className="flex items-center gap-3 mb-4">
+                        <div className="flex items-start gap-3 mb-4">
                           <div className="w-7 h-7 text-works-primary flex items-center justify-center shrink-0">
                             {rel.icon ? (
                               <img src={rel.icon} alt="" aria-hidden="true" className="w-6 h-6 object-contain" />
