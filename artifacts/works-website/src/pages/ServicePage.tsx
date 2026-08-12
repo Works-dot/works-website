@@ -7,6 +7,7 @@ import { Footer } from "@/components/layout/Footer";
 import SEOHead from "@/components/SEOHead";
 import { MaskIcon } from "@/components/ui/MaskIcon";
 import { CtaBannerView } from "@/components/sections/CtaBanner";
+import { MobileCarousel } from "@/components/ui/MobileCarousel";
 import {
   Accordion,
   AccordionContent,
@@ -370,52 +371,16 @@ export default function ServicePage() {
           <section className="py-20 lg:py-28 bg-works-bg border-t border-works-muted/50">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <SectionHeading intro={service.projectExamplesIntro} fallbackHeading="Projektpéldák" />
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+              <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
                 {relatedProjects.map((p, i) => (
-                  <motion.article
-                    key={p.slug}
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, margin: "-50px" }}
-                    transition={{ duration: 0.5, delay: i * 0.15 }}
-                    className="flex flex-col group bg-white overflow-hidden border border-works-muted/30 hover:border-works-primary/30 hover:shadow-lg transition-all duration-300"
-                  >
-                    <Link href={`/projektek/${p.slug}`} className="flex flex-col flex-grow">
-                      <div className="w-full aspect-[4/3] relative overflow-hidden bg-works-light">
-                        <img
-                          src={p.image}
-                          alt={p.title}
-                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                        />
-                      </div>
-                      <div className="p-6 sm:p-8 flex flex-col flex-grow">
-                        {p.tags.length > 0 && (
-                          <div className="flex flex-wrap gap-2 mb-4">
-                            {p.tags.map((tag) => (
-                              <span
-                                key={tag}
-                                className="px-2.5 py-0.5 text-xs font-semibold text-works-primary border border-works-primary bg-transparent"
-                              >
-                                {tag}
-                              </span>
-                            ))}
-                          </div>
-                        )}
-                        <h3 className="text-xl sm:text-2xl font-bold text-works-dark mb-3 line-clamp-2 group-hover:text-works-primary transition-colors">
-                          {p.title}
-                        </h3>
-                        <p className="text-works-dark/60 mb-6 line-clamp-3 leading-relaxed">
-                          {p.description}
-                        </p>
-                        <span className="inline-flex items-center text-works-dark font-semibold text-sm group-hover:text-works-primary mt-auto">
-                          Megnézem az esettanulmányt
-                          <ArrowRight className="ml-1 w-4 h-4 transition-transform group-hover:translate-x-1" />
-                        </span>
-                      </div>
-                    </Link>
-                  </motion.article>
+                  <RelatedProjectCard key={p.slug} p={p} i={i} />
                 ))}
               </div>
+              <MobileCarousel className="md:hidden" ariaLabel="Projektpéldák">
+                {relatedProjects.map((p, i) => (
+                  <RelatedProjectCard key={p.slug} p={p} i={i} />
+                ))}
+              </MobileCarousel>
             </div>
           </section>
         )}
@@ -490,5 +455,51 @@ export default function ServicePage() {
 
       <Footer />
     </div>
+  );
+}
+
+function RelatedProjectCard({ p, i }: { p: Project; i: number }) {
+  return (
+    <motion.article
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-50px" }}
+      transition={{ duration: 0.5, delay: i * 0.15 }}
+      className="h-full flex flex-col group bg-white overflow-hidden border border-works-muted/30 hover:border-works-primary/30 hover:shadow-lg transition-all duration-300"
+    >
+      <Link href={`/projektek/${p.slug}`} className="flex flex-col flex-grow">
+        <div className="w-full aspect-[4/3] relative overflow-hidden bg-works-light">
+          <img
+            src={p.image}
+            alt={p.title}
+            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+          />
+        </div>
+        <div className="p-6 sm:p-8 flex flex-col flex-grow">
+          {p.tags.length > 0 && (
+            <div className="flex flex-wrap gap-2 mb-4">
+              {p.tags.map((tag) => (
+                <span
+                  key={tag}
+                  className="px-2.5 py-0.5 text-xs font-semibold text-works-primary border border-works-primary bg-transparent"
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
+          )}
+          <h3 className="text-xl sm:text-2xl font-bold text-works-dark mb-3 line-clamp-2 group-hover:text-works-primary transition-colors">
+            {p.title}
+          </h3>
+          <p className="text-works-dark/60 mb-6 line-clamp-3 leading-relaxed">
+            {p.description}
+          </p>
+          <span className="inline-flex items-center text-works-dark font-semibold text-sm group-hover:text-works-primary mt-auto">
+            Megnézem az esettanulmányt
+            <ArrowRight className="ml-1 w-4 h-4 transition-transform group-hover:translate-x-1" />
+          </span>
+        </div>
+      </Link>
+    </motion.article>
   );
 }

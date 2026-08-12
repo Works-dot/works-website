@@ -1,5 +1,6 @@
 import { Link } from "wouter";
 import { ProjectCard } from "@/components/ui/ProjectCard";
+import { MobileCarousel } from "@/components/ui/MobileCarousel";
 import { useStrapiQuery } from "@/hooks/useStrapiQuery";
 import { getProjects, getHomepage } from "@/lib/strapi";
 import type { Project, HomepageData } from "@/lib/strapi";
@@ -34,7 +35,7 @@ export function Projects() {
         />
       )}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="mb-20 flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-works-muted/50 pb-8">
+        <div className="mb-10 md:mb-20 flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-works-muted/50 pb-6 md:pb-8">
           <div>
             <h2 className="text-4xl md:text-5xl font-bold text-works-dark tracking-tight">
               {homepage?.projectsSection?.heading || "Kiemelt projektjeink"}
@@ -60,19 +61,33 @@ export function Projects() {
             ))}
           </div>
         ) : (
-          <div className="flex flex-col gap-24 lg:gap-32">
-            {featuredProjects.map((p, i) => (
-              <ProjectCard 
-                key={p.slug}
-                slug={p.slug}
-                title={p.title}
-                tags={p.tags}
-                description={p.description}
-                image={p.homepageImage || p.image}
-                reverse={i % 2 !== 0}
-              />
-            ))}
-          </div>
+          <>
+            <div className="hidden md:flex flex-col gap-24 lg:gap-32">
+              {featuredProjects.map((p, i) => (
+                <ProjectCard 
+                  key={p.slug}
+                  slug={p.slug}
+                  title={p.title}
+                  tags={p.tags}
+                  description={p.description}
+                  image={p.homepageImage || p.image}
+                  reverse={i % 2 !== 0}
+                />
+              ))}
+            </div>
+            <MobileCarousel className="md:hidden" ariaLabel="Kiemelt projektjeink">
+              {featuredProjects.map((p) => (
+                <ProjectCard 
+                  key={p.slug}
+                  slug={p.slug}
+                  title={p.title}
+                  tags={p.tags}
+                  description={p.description}
+                  image={p.homepageImage || p.image}
+                />
+              ))}
+            </MobileCarousel>
+          </>
         )}
       </div>
     </section>

@@ -1,5 +1,6 @@
 import { Link } from "wouter";
 import { BlogCard } from "@/components/ui/BlogCard";
+import { MobileCarousel } from "@/components/ui/MobileCarousel";
 import { useStrapiQuery } from "@/hooks/useStrapiQuery";
 import { getBlogPosts, getHomepage } from "@/lib/strapi";
 import type { BlogPost, HomepageData } from "@/lib/strapi";
@@ -15,7 +16,7 @@ export function BlogPreview() {
     <section id="blog" className="py-24 lg:py-32 bg-works-bg">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        <div className="mb-16 flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-works-muted/50 pb-8">
+        <div className="mb-10 md:mb-16 flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-works-muted/50 pb-6 md:pb-8">
           <div>
             <h2 className="text-4xl md:text-5xl font-bold text-works-dark tracking-tight">
               {homepage?.blogSection?.heading || "Legfrissebb írásaink"}
@@ -39,19 +40,34 @@ export function BlogPreview() {
             ))}
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {previewPosts.map((post, i) => (
-              <BlogCard 
-                key={post.slug}
-                slug={post.slug}
-                index={i}
-                title={post.title}
-                excerpt={post.excerpt}
-                date={post.date}
-                image={post.image}
-              />
-            ))}
-          </div>
+          <>
+            <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {previewPosts.map((post, i) => (
+                <BlogCard 
+                  key={post.slug}
+                  slug={post.slug}
+                  index={i}
+                  title={post.title}
+                  excerpt={post.excerpt}
+                  date={post.date}
+                  image={post.image}
+                />
+              ))}
+            </div>
+            <MobileCarousel className="md:hidden" ariaLabel="Legfrissebb írásaink">
+              {previewPosts.map((post, i) => (
+                <BlogCard 
+                  key={post.slug}
+                  slug={post.slug}
+                  index={i}
+                  title={post.title}
+                  excerpt={post.excerpt}
+                  date={post.date}
+                  image={post.image}
+                />
+              ))}
+            </MobileCarousel>
+          </>
         )}
         
       </div>
