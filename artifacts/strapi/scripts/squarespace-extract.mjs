@@ -1,11 +1,12 @@
 // Parses the Squarespace (WordPress-format) export XML and produces
 // scripts/squarespace-posts.json — a normalized payload the Strapi bootstrap
-// migration (migrateSquarespaceDrafts in src/index.ts) turns into DRAFT blog posts.
+// migration (migrateSquarespacePosts in src/index.ts) creates and publishes as blog posts.
 //
 // Usage:
-//   node scripts/squarespace-extract.mjs [--limit 3] [--xml path/to/export.xml]
+//   node scripts/squarespace-extract.mjs [--limit N] [--xml path/to/export.xml]
+// Default: all posts. Pass --limit only for testing.
 //
-// Re-runnable: it only regenerates the JSON; creating drafts (idempotent by slug)
+// Re-runnable: it only regenerates the JSON; the migration (idempotent by slug)
 // happens on the next Strapi restart.
 
 import fs from 'fs';
@@ -19,7 +20,7 @@ function argValue(flag, fallback) {
   const i = args.indexOf(flag);
   return i >= 0 && args[i + 1] ? args[i + 1] : fallback;
 }
-const LIMIT = parseInt(argValue('--limit', '3'), 10);
+const LIMIT = parseInt(argValue('--limit', '100000'), 10);
 const XML_PATH = argValue(
   '--xml',
   path.resolve(__dirname, '..', '..', '..', 'attached_assets', 'Squarespace-Wordpress-Export-08-12-2026_1786537551947.xml'),
