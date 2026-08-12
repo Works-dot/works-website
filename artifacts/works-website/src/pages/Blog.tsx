@@ -99,12 +99,16 @@ function BlogGridCard({ slug, title, excerpt, date, image, imageAlt, author, rea
             </span>
             <span>{readingTime}</span>
           </div>
-          <h3 className="text-lg lg:text-xl font-bold text-works-dark mb-2 leading-tight group-hover:text-works-primary transition-colors line-clamp-2 min-h-[3.5rem]">
-            {title}
-          </h3>
-          <p className="text-sm text-works-dark/60 leading-relaxed mb-4 line-clamp-3 min-h-[4.5rem]">
-            {excerpt}
-          </p>
+          <div className="mb-2 min-h-[3.5rem]">
+            <h3 className="text-lg lg:text-xl font-bold text-works-dark leading-tight group-hover:text-works-primary transition-colors line-clamp-2">
+              {title}
+            </h3>
+          </div>
+          <div className="mb-4 min-h-[4.5rem]">
+            <p className="text-sm text-works-dark/60 leading-relaxed line-clamp-3">
+              {excerpt}
+            </p>
+          </div>
           <div className="flex items-center justify-between mt-auto">
             <span className="text-sm text-works-dark/50">{author}</span>
             <span className="inline-flex items-center gap-1 text-works-primary font-semibold text-sm">

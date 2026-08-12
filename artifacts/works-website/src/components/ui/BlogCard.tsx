@@ -42,13 +42,17 @@ export function BlogCard({ slug, title, excerpt, date, image, imageAlt, index, a
             {date}
           </div>
           
-          <h3 className="text-xl sm:text-2xl font-bold text-works-dark mb-3 line-clamp-2 min-h-[3.5rem] sm:min-h-[4rem] group-hover:text-works-primary transition-colors">
-            {title}
-          </h3>
-          
-          <p className="text-works-dark/60 mb-6 line-clamp-3 min-h-[4.5rem] sm:min-h-[5rem] leading-relaxed">
-            {excerpt}
-          </p>
+          <div className="mb-3 min-h-[3.5rem] sm:min-h-[4rem]">
+            <h3 className="text-xl sm:text-2xl font-bold text-works-dark line-clamp-2 group-hover:text-works-primary transition-colors">
+              {title}
+            </h3>
+          </div>
+
+          <div className="mb-6 min-h-[4.5rem] sm:min-h-[5rem]">
+            <p className="text-works-dark/60 line-clamp-3 leading-relaxed">
+              {excerpt}
+            </p>
+          </div>
           
           <span className="inline-flex items-center text-works-dark font-semibold text-sm group-hover:text-works-primary mt-auto">
             Elolvasom
