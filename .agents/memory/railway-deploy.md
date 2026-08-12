@@ -24,3 +24,6 @@ description: How the Works. monorepo is hosted on Railway and how Strapi trigger
 - **Why the `ready` gate:** bootstrap migrations write content via the documents API, which fires lifecycles. A `ready` flag stays false until migrations finish (`markWebsiteAutoRebuildReady`), so a restart doesn't trigger a rebuild storm.
 - **Why `.finally()` (not `.then()`) sets ready:** keep auto-rebuild alive even if a one-time migration fails — otherwise a transient migration error would silently disable the feature forever for a non-technical user. Partial-migration risk is low (rebuild only fetches published content).
 - knex raw writes (e.g. `syncServiceTitles`) do NOT fire lifecycles; only documents API / entity writes do.
+
+## Watch paths gotcha
+- The website Railway service only redeploys when files under `artifacts/works-website` change; commits touching only `artifacts/strapi` never trigger a website build — to force a website rebuild via git, the commit must touch the website dir. Bootstrap migrations run before the auto-rebuild ready gate opens, so content they change must explicitly request a post-bootstrap rebuild.

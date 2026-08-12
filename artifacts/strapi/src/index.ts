@@ -611,6 +611,7 @@ async function backfillServiceDefinition(strapi: any) {
 
   await store.set({ key: "service_definition_v1", value: true });
   strapi.log.info("Service definition backfill: completed successfully");
+  noteBootstrapContentChange("definition backfill");
 }
 
 async function migrateSlugToGeneral(strapi: any) {
@@ -1157,6 +1158,7 @@ async function backfillServiceRestructure(strapi: any) {
 
   await store.set({ key: "service_restructure_v2", value: true });
   strapi.log.info("Service restructure backfill: completed successfully");
+  noteBootstrapContentChange("restructure backfill");
 }
 
 const FEATURED_PROJECT_SLUGS = [
@@ -1206,6 +1208,7 @@ async function backfillFeaturedProjects(strapi: any) {
 
   await store.set({ key: "featured_projects_backfill_v1", value: true });
   strapi.log.info(`Featured projects backfill: completed (${updated} project(s) updated)`);
+  noteBootstrapContentChange("featured projects backfill");
 }
 
 async function backfillFeaturedBlogPosts(strapi: any) {
@@ -1278,6 +1281,7 @@ async function backfillFeaturedBlogPosts(strapi: any) {
 
   await store.set({ key: "featured_blog_posts_backfill_v1", value: true });
   strapi.log.info(`Featured blog posts backfill: completed (${updated} post(s) updated)`);
+  noteBootstrapContentChange("featured posts backfill");
 }
 
 const PUBLIC_WRITE_SUFFIXES = ["-submission"];
@@ -1593,6 +1597,7 @@ async function seedPrivacyPage(strapi: any) {
     }
     await store.set({ key: "privacy_page_seed_v1", value: true });
     strapi.log.info("Privacy page seed: completed successfully");
+  noteBootstrapContentChange("privacy page seed");
   } catch (err: any) {
     strapi.log.error(`Privacy page seed: failed — will retry on next restart: ${err.message}`);
   }
@@ -1633,6 +1638,7 @@ async function seedServiceCtaBanners(strapi: any) {
     strapi.log.info(`Service CTA banner seed: seeded ${missing.length} service(s)`);
     await store.set({ key: "service_cta_banner_seed_v1", value: true });
     strapi.log.info("Service CTA banner seed: completed successfully");
+  noteBootstrapContentChange("CTA banner seed");
   } catch (err: any) {
     strapi.log.error(`Service CTA banner seed: failed — will retry on next restart: ${err.message}`);
   }
@@ -1961,6 +1967,7 @@ async function seedAboutGalleryImages(strapi: any) {
 
     await store.set({ key: "about_gallery_images_seed_v1", value: true });
     strapi.log.info(`Gallery seed: completed successfully with ${ids.length} image(s)`);
+  noteBootstrapContentChange("gallery seed");
   } catch (err: any) {
     strapi.log.error(`Gallery seed: failed — will retry on next restart: ${err.message}`);
   }
