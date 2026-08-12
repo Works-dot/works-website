@@ -1215,13 +1215,15 @@ async function backfillFeaturedBlogPosts(strapi: any) {
     return;
   }
 
+  // Only consider PUBLISHED posts — the backfill must never surface or promote draft content.
   const posts = await strapi.documents("api::blog-post.blog-post").findMany({
+    status: "published",
     pagination: { pageSize: 200 },
     sort: { date: "desc" },
   });
 
   if (!posts || posts.length === 0) {
-    strapi.log.info("Featured blog posts backfill: no blog posts found — will retry on next restart");
+    strapi.log.info("Featured blog posts backfill: no published blog posts found — will retry on next restart");
     return;
   }
 
@@ -1251,12 +1253,12 @@ async function backfillFeaturedBlogPosts(strapi: any) {
       continue;
     }
     try {
-      await strapi.documents("api::blog-post.blog-post").update({
-        documentId: post.documentId,
+      // Set the flags at the DB layer on both the draft and published rows of this document.
+      // This avoids documents().update()+publish(), which would promote any pending draft
+      // edits (or an unpublished draft) to the live site.
+      await strapi.db.query("api::blog-post.blog-post").updateMany({
+        where: { documentId: post.documentId },
         data: { featured: true, order: i + 1 },
-      });
-      await strapi.documents("api::blog-post.blog-post").publish({
-        documentId: post.documentId,
       });
       updated++;
       strapi.log.info(`Featured blog posts backfill: marked "${post.slug}" as featured (order ${i + 1})`);
