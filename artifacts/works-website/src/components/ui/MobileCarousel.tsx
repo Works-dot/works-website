@@ -65,7 +65,7 @@ export function MobileCarousel({ children, className = "", ariaLabel }: MobileCa
     <div className={className} role="region" aria-label={ariaLabel}>
       <div
         ref={trackRef}
-        className="flex gap-4 overflow-x-auto snap-x snap-mandatory -mx-4 px-4 sm:-mx-6 sm:px-6 scroll-px-4 sm:scroll-px-6 scrollbar-hide"
+        className="flex gap-4 overflow-x-auto snap-x snap-mandatory -mx-4 pl-4 pr-10 sm:-mx-6 sm:pl-6 sm:pr-8 scroll-px-4 sm:scroll-px-6 scrollbar-hide"
         style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
       >
         {Children.map(children, (child) => (
@@ -75,7 +75,7 @@ export function MobileCarousel({ children, className = "", ariaLabel }: MobileCa
         ))}
       </div>
       {count > 1 && (
-        <div className="flex justify-center gap-2 mt-8">
+        <div className="flex justify-center mt-6">
           {Array.from({ length: count }).map((_, i) => (
             <button
               key={i}
@@ -83,12 +83,16 @@ export function MobileCarousel({ children, className = "", ariaLabel }: MobileCa
               aria-label={`Ugrás a(z) ${i + 1}. elemre`}
               aria-current={i === selected ? "true" : undefined}
               onClick={() => scrollTo(i)}
-              className={`h-2 rounded-full transition-all duration-300 ${
-                i === selected
-                  ? "w-8 bg-works-primary"
-                  : "w-2 bg-works-dark/20 hover:bg-works-dark/40"
-              }`}
-            />
+              className="p-2 flex items-center focus-visible:outline focus-visible:outline-2 focus-visible:outline-works-primary"
+            >
+              <span
+                className={`h-2 rounded-full transition-all duration-300 ${
+                  i === selected
+                    ? "w-8 bg-works-primary"
+                    : "w-2 bg-works-dark/20 hover:bg-works-dark/40"
+                }`}
+              />
+            </button>
           ))}
         </div>
       )}
