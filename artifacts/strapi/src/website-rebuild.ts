@@ -228,8 +228,27 @@ export function setupWebsiteAutoRebuild(strapi: StrapiLike) {
   );
 }
 
-export function markWebsiteAutoRebuildReady() {
+let bootstrapContentChanged = false;
+let bootstrapChangeReason = "";
+
+// Bootstrap migrations run BEFORE the ready gate opens, so their publishes and
+// deletes never reach scheduleRebuild. Migrations that actually changed live
+// content call this so a single rebuild fires once bootstrap completes.
+export function noteBootstrapContentChange(reason: string) {
+  bootstrapContentChanged = true;
+  bootstrapChangeReason = bootstrapChangeReason
+    ? `${bootstrapChangeReason}; ${reason}`
+    : reason;
+}
+
+export function markWebsiteAutoRebuildReady(strapi?: StrapiLike) {
   ready = true;
+  if (bootstrapContentChanged && strapi) {
+    const reason = `bootstrap migration: ${bootstrapChangeReason}`;
+    bootstrapContentChanged = false;
+    bootstrapChangeReason = "";
+    scheduleRebuild(strapi, reason);
+  }
 }
 
 async function fetchLatestDeployment(

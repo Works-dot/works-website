@@ -6,3 +6,4 @@
 - [Strapi dev port-conflict recovery](strapi-port-conflicts.md) — stale strapi process can hold 8099 after restart; no `fuser` here — use ps+kill, then restart workflow.
 - [Icon recoloring on the Works. site](icon-recoloring.md) — CMS icons tinted brand-red via CSS mask (MaskIcon), never filter chains (WebKit color drift); hover only on linking cards.
 - [Railway Strapi admin login & DB origin](railway-strapi-admin.md) — dev & prod DBs are separate but prod was pg_dump-seeded from dev (creds drift); reset/create prod admin via env-gated resetAdminFromEnv (ADMIN_RESET_EMAIL/PASSWORD); ADMIN_JWT_SECRET is not the password.
+- [Squarespace blog migration](squarespace-migration.md) — 25 real posts (8 placeholders excluded); captions capped at 255 chars; publish-idempotent migration, seed hands off blog posts.

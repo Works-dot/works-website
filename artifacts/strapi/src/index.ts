@@ -1,6 +1,7 @@
 import {
   setupWebsiteAutoRebuild,
   markWebsiteAutoRebuildReady,
+  noteBootstrapContentChange,
   getWebsiteRebuildStatus,
   triggerWebsiteRebuildNow,
 } from "./website-rebuild";
@@ -1727,6 +1728,7 @@ async function deleteSeedSampleBlogPosts(strapi: any) {
       }
       if (documentIds.length > 0) {
         strapi.log.info(`Sample blog cleanup: deleted "${slug}"`);
+        noteBootstrapContentChange(`deleted sample post ${slug}`);
       }
     } catch (err: any) {
       strapi.log.error(`Sample blog cleanup: failed for "${slug}": ${err.message}`);
@@ -1776,6 +1778,7 @@ async function migrateSquarespacePosts(strapi: any) {
         const documentId = existingRows[0].documentId;
         await strapi.documents("api::blog-post.blog-post").publish({ documentId });
         strapi.log.info(`Squarespace migration: published existing draft "${post.slug}"`);
+        noteBootstrapContentChange(`published ${post.slug}`);
         continue;
       }
 
@@ -1852,6 +1855,7 @@ async function migrateSquarespacePosts(strapi: any) {
       });
       await strapi.documents("api::blog-post.blog-post").publish({ documentId: created.documentId });
       strapi.log.info(`Squarespace migration: published "${post.slug}" (${contentBlocks.length} block(s))`);
+      noteBootstrapContentChange(`published ${post.slug}`);
     } catch (err: any) {
       strapi.log.error(`Squarespace migration: failed for "${post.slug}": ${err.message}`);
     }
@@ -1997,7 +2001,7 @@ export default {
             strapi.log.error(`Bootstrap task failed: ${err.message}`);
             strapi.log.error(`Stack: ${err.stack}`);
           })
-          .finally(() => markWebsiteAutoRebuildReady());
+          .finally(() => markWebsiteAutoRebuildReady(strapi));
       });
     } else {
       await migrateSlugToGeneral(strapi);
@@ -2017,7 +2021,7 @@ export default {
       await deleteSeedSampleBlogPosts(strapi);
       await migrateSquarespacePosts(strapi);
       strapi.log.info("Bootstrap tasks completed successfully");
-      markWebsiteAutoRebuildReady();
+      markWebsiteAutoRebuildReady(strapi);
     }
   },
   destroy(/* { strapi } */) {},
