@@ -177,6 +177,7 @@ interface StrapiService {
   general: StrapiServiceGeneral | null;
   relatedProjects: StrapiProject[];
   order: number;
+  definitionSection: StrapiSectionIntro | null;
   questionsSection: { intro: StrapiSectionIntro | null; cards: StrapiQuestionCard[] } | null;
   helpSection: {
     intro: StrapiSectionIntro | null;
@@ -318,6 +319,7 @@ export interface Service {
   heroImage: string;
   icon: string;
   relatedProjectSlugs: string[];
+  definitionSection: SectionIntro | null;
   questionsSection: ServiceQuestionsSection | null;
   helpSection: ServiceHelpSection | null;
   processSection: ServiceProcessSection | null;
@@ -477,7 +479,7 @@ const SERVICE_POPULATE =
   "&populate[9]=processSection.intro&populate[10]=processSection.steps" +
   "&populate[11]=deliverablesSection.intro&populate[12]=deliverablesSection.smallCards.icon&populate[13]=deliverablesSection.largeCards.icon&populate[14]=deliverablesSection.largeCards.bullets" +
   "&populate[15]=projectExamplesIntro&populate[16]=faqSection.intro&populate[17]=faqSection.items" +
-  "&populate[18]=relatedServicesIntro&populate[19]=relatedServices.general.icon&populate[20]=ctaBanner";
+  "&populate[18]=relatedServicesIntro&populate[19]=relatedServices.general.icon&populate[20]=ctaBanner&populate[21]=definitionSection";
 
 function mapSectionIntro(i: StrapiSectionIntro | null | undefined): SectionIntro | null {
   if (!i) return null;
@@ -497,6 +499,7 @@ function mapService(s: StrapiService): Service {
     heroImage: strapiImageUrl(s.general?.heroImage?.url),
     icon: strapiImageUrl(s.general?.icon?.url),
     relatedProjectSlugs: (s.relatedProjects || []).map((p) => p.slug),
+    definitionSection: mapSectionIntro(s.definitionSection),
     questionsSection: s.questionsSection
       ? {
           intro: mapSectionIntro(s.questionsSection.intro),

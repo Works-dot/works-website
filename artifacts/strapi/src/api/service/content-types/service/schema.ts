@@ -24,6 +24,11 @@ export default {
       "repeatable": false,
       "component": "service.general"
     },
+    "definitionSection": {
+      "type": "component",
+      "repeatable": false,
+      "component": "service.section-intro"
+    },
     "questionsSection": {
       "type": "component",
       "repeatable": false,

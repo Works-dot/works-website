@@ -306,6 +306,11 @@ async function seed() {
       title: 'UX Kutatás',
       subtitle: 'Felhasználók megértése, adatalappal',
       heroDescription: 'Feltárjuk a felhasználói igényeket, viselkedési mintákat és fájdalompontokat, hogy a termékfejlesztés valós adatokon alapuljon — ne feltételezéseken.',
+      definitionSection: {
+        kicker: 'Definíció',
+        heading: 'Mi az a UX kutatás?',
+        description: 'A UX kutatás (felhasználói élmény kutatás) egy módszertan, amellyel feltárjuk, hogyan gondolkodnak, éreznek és viselkednek a felhasználók egy digitális termék használata közben. Interjúk, tesztek és adatelemzés segítségével valós bizonyítékokat gyűjtünk, hogy a termékfejlesztési döntések ne megérzéseken, hanem tényeken alapuljanak. Az eredmény: kevesebb felesleges fejlesztés, jobb felhasználói élmény és mérhető üzleti eredmények.',
+      },
       order: 1,
       processSteps: [
         { stepNumber: '01', title: 'Megismerés', description: 'Megismerjük az üzleti célokat, a meglévő adatokat és a kutatás céljait. Közösen meghatározzuk a kutatási kérdéseket.' },
@@ -321,6 +326,11 @@ async function seed() {
       title: 'UI Design',
       subtitle: 'Felületek, amelyek működnek és hatnak',
       heroDescription: 'Olyan felhasználói felületeket tervezünk, amelyek nem csak szépek, hanem érthetőek, használhatóak és üzleti eredményeket hoznak.',
+      definitionSection: {
+        kicker: 'Definíció',
+        heading: 'Mi az a UI design?',
+        description: 'A UI design (felhasználói felület tervezés) az a szakterület, amely a digitális termékek vizuális megjelenését és interakcióit alakítja ki — a színektől és tipográfiától a gombokon át a teljes képernyőtervekig. A jó UI nem csupán esztétika: érthetővé, használhatóvá és következetessé teszi a terméket, erősíti a márkát, és közvetlenül hozzájárul a konverzióhoz és a felhasználói elégedettséghez.',
+      },
       order: 2,
       processSteps: [
         { stepNumber: '01', title: 'Vizuális irány', description: 'Moodboard-ok és stílus-explorációk készítése, amelyek segítenek megtalálni a megfelelő vizuális hangot.' },
@@ -336,6 +346,11 @@ async function seed() {
       title: 'Akadálymentesítés',
       subtitle: 'Digitális termékek mindenki számára',
       heroDescription: 'Segítünk, hogy digitális termékeid mindenki számára elérhetőek és használhatóak legyenek — a jogszabályi megfeleléstől a valódi inkluzivitásig.',
+      definitionSection: {
+        kicker: 'Definíció',
+        heading: 'Mi az a digitális akadálymentesítés?',
+        description: 'A digitális akadálymentesítés azt jelenti, hogy egy weboldal vagy alkalmazás mindenki számára használható — a látás-, hallás- vagy mozgássérült felhasználóknak, az idősebb korosztálynak és az átmeneti korlátozottsággal élőknek is. A nemzetközi WCAG szabvány alapján auditáljuk és javítjuk a felületeket, így a termék nemcsak a jogszabályi elvárásoknak felel meg, hanem szélesebb közönséget is elér.',
+      },
       order: 3,
       processSteps: [
         { stepNumber: '01', title: 'Helyzetértékelés', description: 'A jelenlegi állapot felmérése automatizált és manuális eszközökkel, WCAG 2.1 szabvány szerint.' },

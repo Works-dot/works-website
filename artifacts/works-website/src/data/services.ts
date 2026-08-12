@@ -3,6 +3,8 @@ export interface Service {
   title: string;
   subtitle: string;
   heroDescription: string;
+  definitionHeading: string;
+  definitionText: string;
   valueQuestion: string;
   valueAnswer: string;
   activities: { title: string; description: string }[];
@@ -18,6 +20,8 @@ export const services: Service[] = [
     title: "UX Kutatás",
     subtitle: "Felhasználók megértése, adatalappal",
     heroDescription: "Feltárjuk a felhasználói igényeket, viselkedési mintákat és fájdalompontokat, hogy a termékfejlesztés valós adatokon alapuljon — ne feltételezéseken.",
+    definitionHeading: "Mi az a UX kutatás?",
+    definitionText: "A UX kutatás (felhasználói élmény kutatás) egy módszertan, amellyel feltárjuk, hogyan gondolkodnak, éreznek és viselkednek a felhasználók egy digitális termék használata közben. Interjúk, tesztek és adatelemzés segítségével valós bizonyítékokat gyűjtünk, hogy a termékfejlesztési döntések ne megérzéseken, hanem tényeken alapuljanak. Az eredmény: kevesebb felesleges fejlesztés, jobb felhasználói élmény és mérhető üzleti eredmények.",
     valueQuestion: "Tudod pontosan, mit akarnak a felhasználóid? Vagy csak azt, amit gondolsz, hogy akarnak?",
     valueAnswer: "A legjobb digitális termékek mögött mindig mély felhasználói megértés áll. Mi segítünk eljutni oda.",
     activities: [
@@ -42,6 +46,8 @@ export const services: Service[] = [
     title: "UI Design",
     subtitle: "Felületek, amelyek működnek és hatnak",
     heroDescription: "Olyan felhasználói felületeket tervezünk, amelyek nem csak szépek, hanem érthetőek, használhatók és üzleti eredményeket hoznak.",
+    definitionHeading: "Mi az a UI design?",
+    definitionText: "A UI design (felhasználói felület tervezés) az a szakterület, amely a digitális termékek vizuális megjelenését és interakcióit alakítja ki — a színektől és tipográfiától a gombokon át a teljes képernyőtervekig. A jó UI nem csupán esztétika: érthetővé, használhatóvá és következetessé teszi a terméket, erősíti a márkát, és közvetlenül hozzájárul a konverzióhoz és a felhasználói elégedettséghez.",
     valueQuestion: "Szükséged van egy szakértőre, aki érti az üzleted céljait és a felhasználók elvárásait is?",
     valueAnswer: "Megértjük a felhasználóid elvárásait, szokásait és céljait. Erre építjük a felületeket.",
     activities: [
@@ -66,6 +72,8 @@ export const services: Service[] = [
     title: "Akadálymentesítés",
     subtitle: "Digitális termékek mindenki számára",
     heroDescription: "Segítünk, hogy digitális termékeid mindenki számára elérhetőek és használhatóak legyenek — a jogszabályi megfeleléstől a valódi inkluzivitásig.",
+    definitionHeading: "Mi az a digitális akadálymentesítés?",
+    definitionText: "A digitális akadálymentesítés azt jelenti, hogy egy weboldal vagy alkalmazás mindenki számára használható — a látás-, hallás- vagy mozgássérült felhasználóknak, az idősebb korosztálynak és az átmeneti korlátozottsággal élőknek is. A nemzetközi WCAG szabvány alapján auditáljuk és javítjuk a felületeket, így a termék nemcsak a jogszabályi elvárásoknak felel meg, hanem szélesebb közönséget is elér.",
     valueQuestion: "A felhasználóid jelentős része akadályokba ütközik a terméked használata során — tudsz róla?",
     valueAnswer: "Az akadálymentesítés nem csak kötelezettség. Jobb terméket jelent mindenkinek.",
     activities: [

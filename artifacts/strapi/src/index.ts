@@ -79,23 +79,25 @@ const SERVICE_FIELD_LABELS: Record<string, { label: string; description?: string
   title: { label: "Cím (admin lista)", description: "A szolgáltatás neve az admin listában — a weboldalon a hero cím jelenik meg" },
   order: { label: "Sorrend", description: "A szolgáltatások sorrendje a listákban" },
   general: { label: "1. Általános adatok + fejléc (hero)", description: "Webcím (slug), cím, alcím, hero leírás és ikonok" },
-  questionsSection: { label: "2. „Milyen kérdésekre segítünk választ találni?”", description: "Kérdéskártyás szekció a fejléc alatt" },
-  helpSection: { label: "3. „Miben tudunk segíteni?”", description: "Ikonos kártyarács a szolgáltatás területeiről" },
-  processSection: { label: "4. „Hogyan dolgozunk?”", description: "Számozott folyamatlépések" },
-  deliverablesSection: { label: "5. „Amit a projektből kapsz”", description: "Kis vagy nagy kártyás átadandók" },
-  ctaBanner: { label: "6. CTA banner", description: "Sötét hátterű felhívás szekció (cím + gomb) a Projektpéldák előtt — ugyanolyan, mint a főoldalon" },
-  projectExamplesIntro: { label: "7. Projektpéldák — bevezető", description: "A Projektpéldák szekció címe és leírása" },
-  relatedProjects: { label: "7. Projektpéldák — kapcsolt projektek", description: "Az itt kiválasztott projektek jelennek meg a Projektpéldák szekcióban" },
-  faqSection: { label: "8. GYIK szekció", description: "Gyakran ismételt kérdések" },
-  relatedServicesIntro: { label: "9. Kapcsolódó szolgáltatások — bevezető", description: "A Kapcsolódó szolgáltatások szekció címe és leírása" },
-  relatedServices: { label: "9. Kapcsolódó szolgáltatások — lista", description: "Az itt kiválasztott szolgáltatások jelennek meg az oldal alján" },
-  seo: { label: "10. SEO beállítások", description: "Kereső- és megosztási beállítások (meta cím, leírás, kép)" },
+  definitionSection: { label: "2. Definíció („Mi az a …?”)", description: "A hero utáni szöveges blokk: címsor és leírás arról, mit jelent a szolgáltatás. Üresen hagyva nem jelenik meg." },
+  questionsSection: { label: "3. „Milyen kérdésekre segítünk választ találni?”", description: "Kérdéskártyás szekció a definíció alatt" },
+  helpSection: { label: "4. „Miben tudunk segíteni?”", description: "Ikonos kártyarács a szolgáltatás területeiről" },
+  processSection: { label: "5. „Hogyan dolgozunk?”", description: "Számozott folyamatlépések" },
+  deliverablesSection: { label: "6. „Amit a projektből kapsz”", description: "Kis vagy nagy kártyás átadandók" },
+  ctaBanner: { label: "7. CTA banner", description: "Sötét hátterű felhívás szekció (cím + gomb) a Projektpéldák előtt — ugyanolyan, mint a főoldalon" },
+  projectExamplesIntro: { label: "8. Projektpéldák — bevezető", description: "A Projektpéldák szekció címe és leírása" },
+  relatedProjects: { label: "8. Projektpéldák — kapcsolt projektek", description: "Az itt kiválasztott projektek jelennek meg a Projektpéldák szekcióban" },
+  faqSection: { label: "9. GYIK szekció", description: "Gyakran ismételt kérdések" },
+  relatedServicesIntro: { label: "10. Kapcsolódó szolgáltatások — bevezető", description: "A Kapcsolódó szolgáltatások szekció címe és leírása" },
+  relatedServices: { label: "10. Kapcsolódó szolgáltatások — lista", description: "Az itt kiválasztott szolgáltatások jelennek meg az oldal alján" },
+  seo: { label: "11. SEO beállítások", description: "Kereső- és megosztási beállítások (meta cím, leírás, kép)" },
 };
 
 const SERVICE_EDIT_ORDER = [
   "title",
   "order",
   "general",
+  "definitionSection",
   "questionsSection",
   "helpSection",
   "processSection",
@@ -520,6 +522,95 @@ const SERVICE_SEED_DATA = [
     ],
   },
 ];
+
+const SERVICE_DEFINITION_SEED: Record<string, { heading: string; description: string }> = {
+  "ux-kutatas": {
+    heading: "Mi az a UX kutatás?",
+    description:
+      "A UX kutatás (felhasználói élmény kutatás) egy módszertan, amellyel feltárjuk, hogyan gondolkodnak, éreznek és viselkednek a felhasználók egy digitális termék használata közben. Interjúk, tesztek és adatelemzés segítségével valós bizonyítékokat gyűjtünk, hogy a termékfejlesztési döntések ne megérzéseken, hanem tényeken alapuljanak. Az eredmény: kevesebb felesleges fejlesztés, jobb felhasználói élmény és mérhető üzleti eredmények.",
+  },
+  "ui-design": {
+    heading: "Mi az a UI design?",
+    description:
+      "A UI design (felhasználói felület tervezés) az a szakterület, amely a digitális termékek vizuális megjelenését és interakcióit alakítja ki — a színektől és tipográfiától a gombokon át a teljes képernyőtervekig. A jó UI nem csupán esztétika: érthetővé, használhatóvá és következetessé teszi a terméket, erősíti a márkát, és közvetlenül hozzájárul a konverzióhoz és a felhasználói elégedettséghez.",
+  },
+  "akadalymentesites": {
+    heading: "Mi az a digitális akadálymentesítés?",
+    description:
+      "A digitális akadálymentesítés azt jelenti, hogy egy weboldal vagy alkalmazás mindenki számára használható — a látás-, hallás- vagy mozgássérült felhasználóknak, az idősebb korosztálynak és az átmeneti korlátozottsággal élőknek is. A nemzetközi WCAG szabvány alapján auditáljuk és javítjuk a felületeket, így a termék nemcsak a jogszabályi elvárásoknak felel meg, hanem szélesebb közönséget is elér.",
+  },
+};
+
+async function backfillServiceDefinition(strapi: any) {
+  const store = strapi.store({ type: "plugin", name: "migrations" });
+  const done = await store.get({ key: "service_definition_v1" });
+  if (done) {
+    strapi.log.info("Service definition backfill: already completed (flag set) — skipping");
+    return;
+  }
+
+  const services = await strapi.documents("api::service.service").findMany({
+    populate: ["general", "definitionSection"],
+  });
+
+  if (services.length === 0) {
+    strapi.log.info("Service definition backfill: no services found — will retry on next restart");
+    return;
+  }
+
+  let errors = 0;
+  for (const svc of services) {
+    const slug = svc.general?.slug || "";
+    const seed = SERVICE_DEFINITION_SEED[slug];
+    if (!seed) {
+      strapi.log.info(`Service definition backfill: no seed data for "${slug}" — skipping`);
+      continue;
+    }
+    if (svc.definitionSection?.heading || svc.definitionSection?.description) {
+      strapi.log.info(`Service definition backfill: "${slug}" already has definition — skipping`);
+      continue;
+    }
+    try {
+      await strapi.documents("api::service.service").update({
+        documentId: svc.documentId,
+        data: {
+          definitionSection: {
+            kicker: "Definíció",
+            heading: seed.heading,
+            description: seed.description,
+          },
+        },
+      });
+      await strapi.documents("api::service.service").publish({
+        documentId: svc.documentId,
+      });
+      strapi.log.info(`Service definition backfill: filled definition for "${slug}"`);
+    } catch (err: any) {
+      errors++;
+      strapi.log.error(`Service definition backfill: failed for "${slug}": ${err.message}`);
+    }
+  }
+
+  const postCheck = await strapi.documents("api::service.service").findMany({
+    populate: ["general", "definitionSection"],
+  });
+  const stillMissing = postCheck.filter(
+    (s: any) =>
+      SERVICE_DEFINITION_SEED[s.general?.slug || ""] &&
+      !s.definitionSection?.heading &&
+      !s.definitionSection?.description,
+  );
+
+  if (errors > 0 || stillMissing.length > 0) {
+    strapi.log.warn(
+      `Service definition backfill: incomplete (${errors} error(s), ${stillMissing.length} missing) — flag not set, will retry on next restart`,
+    );
+    return;
+  }
+
+  await store.set({ key: "service_definition_v1", value: true });
+  strapi.log.info("Service definition backfill: completed successfully");
+}
 
 async function migrateSlugToGeneral(strapi: any) {
   const knex = strapi.db.connection;
@@ -1606,6 +1697,7 @@ export default {
         migrateSlugToGeneral(strapi)
           .then(() => syncServiceTitles(strapi))
           .then(() => backfillServiceRestructure(strapi))
+          .then(() => backfillServiceDefinition(strapi))
           .then(() => backfillFeaturedProjects(strapi))
           .then(() => dropRemovedServiceFields(strapi))
           .then(() => dropUnusedAdminFields(strapi))
@@ -1626,6 +1718,7 @@ export default {
       await migrateSlugToGeneral(strapi);
       await syncServiceTitles(strapi);
       await backfillServiceRestructure(strapi);
+      await backfillServiceDefinition(strapi);
       await backfillFeaturedProjects(strapi);
       await dropRemovedServiceFields(strapi);
       await dropUnusedAdminFields(strapi);

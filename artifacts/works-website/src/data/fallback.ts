@@ -145,6 +145,11 @@ const hardcodedServices: Service[] = rawServices.map((s) => ({
   heroImage: serviceBgFallbackImg,
   icon: "",
   relatedProjectSlugs: s.relatedProjectSlugs,
+  definitionSection: {
+    kicker: "Definíció",
+    heading: s.definitionHeading,
+    description: s.definitionText,
+  },
   questionsSection: null,
   helpSection: {
     intro: { kicker: "Szakértelem", heading: "Miben tudunk segíteni?", description: "" },

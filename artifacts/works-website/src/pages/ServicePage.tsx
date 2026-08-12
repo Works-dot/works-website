@@ -123,6 +123,8 @@ export default function ServicePage() {
     .map(s => (projects || []).find(p => p.slug === s))
     .filter(Boolean) as Project[];
 
+  const definition = service.definitionSection;
+  const showDefinition = !!definition && !!(definition.heading || definition.description);
   const questions = service.questionsSection;
   const help = service.helpSection;
   const process = service.processSection;
@@ -173,7 +175,32 @@ export default function ServicePage() {
           </div>
         </section>
 
-        {/* 2. Milyen kérdésekre segítünk választ találni? */}
+        {/* 2. Definíció */}
+        {showDefinition && definition && (
+          <section className="py-16 lg:py-20 bg-white border-t border-works-muted/30">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <motion.div {...fadeUp} className="max-w-3xl">
+                {definition.kicker && (
+                  <span className="text-works-primary font-bold text-sm tracking-widest uppercase mb-3 block">
+                    {definition.kicker}
+                  </span>
+                )}
+                {definition.heading && (
+                  <h2 className="text-3xl md:text-4xl font-bold text-works-dark">
+                    {definition.heading}
+                  </h2>
+                )}
+                {definition.description && (
+                  <p className="text-lg text-works-dark/60 leading-relaxed mt-4">
+                    {definition.description}
+                  </p>
+                )}
+              </motion.div>
+            </div>
+          </section>
+        )}
+
+        {/* 3. Milyen kérdésekre segítünk választ találni? */}
         {questions && questions.cards.length > 0 && (
           <section className="py-20 lg:py-28 bg-works-bg">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
