@@ -64,6 +64,7 @@ export function BlogPreview() {
                   excerpt={post.excerpt}
                   date={post.date}
                   image={post.image}
+                  animated={false}
                 />
               ))}
             </MobileCarousel>

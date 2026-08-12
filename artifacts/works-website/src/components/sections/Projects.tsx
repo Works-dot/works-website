@@ -84,6 +84,8 @@ export function Projects() {
                   tags={p.tags}
                   description={p.description}
                   image={p.homepageImage || p.image}
+                  animated={false}
+                  clampDescription
                 />
               ))}
             </MobileCarousel>

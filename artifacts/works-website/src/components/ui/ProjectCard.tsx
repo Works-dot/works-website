@@ -9,15 +9,23 @@ interface ProjectCardProps {
   description: string;
   image: string;
   reverse?: boolean;
+  /** Disable the scroll-into-view entry animation (needed inside horizontal carousels, where the peeking card would stay invisible). */
+  animated?: boolean;
+  /** Clamp the description to 3 lines with an ellipsis (mobile carousel). */
+  clampDescription?: boolean;
 }
 
-export function ProjectCard({ slug, title, tags, description, image, reverse = false }: ProjectCardProps) {
+export function ProjectCard({ slug, title, tags, description, image, reverse = false, animated = true, clampDescription = false }: ProjectCardProps) {
   return (
     <motion.div 
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-100px" }}
-      transition={{ duration: 0.7 }}
+      {...(animated
+        ? {
+            initial: { opacity: 0, y: 30 },
+            whileInView: { opacity: 1, y: 0 },
+            viewport: { once: true, margin: "-100px" },
+            transition: { duration: 0.7 },
+          }
+        : {})}
       className={`flex flex-col ${reverse ? 'lg:flex-row-reverse' : 'lg:flex-row'} gap-8 lg:gap-16 items-center`}
     >
       <div className="w-full lg:w-1/2 overflow-hidden">
@@ -42,7 +50,7 @@ export function ProjectCard({ slug, title, tags, description, image, reverse = f
             </span>
           ))}
         </div>
-        <p className="text-lg text-works-dark/60 mb-8 leading-relaxed">
+        <p className={`text-lg text-works-dark/60 mb-8 leading-relaxed${clampDescription ? " line-clamp-3" : ""}`}>
           {description}
         </p>
         <Link 

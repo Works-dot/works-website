@@ -9,15 +9,21 @@ interface BlogCardProps {
   date: string;
   image: string;
   index: number;
+  /** Disable the scroll-into-view entry animation (needed inside horizontal carousels, where the peeking card would stay invisible). */
+  animated?: boolean;
 }
 
-export function BlogCard({ slug, title, excerpt, date, image, index }: BlogCardProps) {
+export function BlogCard({ slug, title, excerpt, date, image, index, animated = true }: BlogCardProps) {
   return (
     <motion.article 
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-50px" }}
-      transition={{ duration: 0.5, delay: index * 0.15 }}
+      {...(animated
+        ? {
+            initial: { opacity: 0, y: 20 },
+            whileInView: { opacity: 1, y: 0 },
+            viewport: { once: true, margin: "-50px" },
+            transition: { duration: 0.5, delay: index * 0.15 },
+          }
+        : {})}
       className="flex flex-col group bg-white overflow-hidden border border-works-muted/30 hover:border-works-primary/30 hover:shadow-lg transition-all duration-300"
     >
       <Link href={`/blog/${slug}`} className="flex flex-col flex-grow">

@@ -378,7 +378,7 @@ export default function ServicePage() {
               </div>
               <MobileCarousel className="md:hidden" ariaLabel="Projektpéldák">
                 {relatedProjects.map((p, i) => (
-                  <RelatedProjectCard key={p.slug} p={p} i={i} />
+                  <RelatedProjectCard key={p.slug} p={p} i={i} animated={false} />
                 ))}
               </MobileCarousel>
             </div>
@@ -458,13 +458,17 @@ export default function ServicePage() {
   );
 }
 
-function RelatedProjectCard({ p, i }: { p: Project; i: number }) {
+function RelatedProjectCard({ p, i, animated = true }: { p: Project; i: number; animated?: boolean }) {
   return (
     <motion.article
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-50px" }}
-      transition={{ duration: 0.5, delay: i * 0.15 }}
+      {...(animated
+        ? {
+            initial: { opacity: 0, y: 20 },
+            whileInView: { opacity: 1, y: 0 },
+            viewport: { once: true, margin: "-50px" },
+            transition: { duration: 0.5, delay: i * 0.15 },
+          }
+        : {})}
       className="h-full flex flex-col group bg-white overflow-hidden border border-works-muted/30 hover:border-works-primary/30 hover:shadow-lg transition-all duration-300"
     >
       <Link href={`/projektek/${p.slug}`} className="flex flex-col flex-grow">
