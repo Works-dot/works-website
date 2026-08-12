@@ -4,4 +4,5 @@
 - [Strapi service seed sources](strapi-service-seed-sources.md) — service section TEXT lived only in seed.mjs; migrations only icon-decorated existing items; backfill migration added to fill empty activities/benefits/tools.
 - [Strapi component updates replace whole component](strapi-component-updates.md) — migrations must populate & re-pass component media by id or icons get wiped; keep store flag get/set keys identical.
 - [Strapi dev port-conflict recovery](strapi-port-conflicts.md) — stale strapi process can hold 8099 after restart; no `fuser` here — use ps+kill, then restart workflow.
+- [Icon recoloring on the Works. site](icon-recoloring.md) — CMS icons tinted brand-red via CSS mask (MaskIcon), never filter chains (WebKit color drift); hover only on linking cards.
 - [Railway Strapi admin login & DB origin](railway-strapi-admin.md) — dev & prod DBs are separate but prod was pg_dump-seeded from dev (creds drift); reset/create prod admin via env-gated resetAdminFromEnv (ADMIN_RESET_EMAIL/PASSWORD); ADMIN_JWT_SECRET is not the password.

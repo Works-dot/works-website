@@ -3,6 +3,7 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import SEOHead from "@/components/SEOHead";
 import { useStrapiQuery } from "@/hooks/useStrapiQuery";
+import { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext } from "@/components/ui/carousel";
 import { getTeamMembers, getGalleryImages, getAboutPage } from "@/lib/strapi";
 import type { TeamMember, GalleryImage, AboutPageData } from "@/lib/strapi";
 import { fallbackTeamMembers, fallbackGalleryImages, fallbackAboutPage, aboutGraphicFallbackImg, heroBackgroundFallbackImg } from "@/data/fallback";
@@ -140,32 +141,33 @@ export default function About() {
             </motion.div>
 
             {galleryLoading ? (
-              <div className="columns-1 sm:columns-2 lg:columns-3 gap-4 space-y-4">
-                {[0, 1, 2, 3, 4, 5].map((i) => (
-                  <div key={i} className="break-inside-avoid animate-pulse">
-                    <div className="bg-works-muted/30 h-48" />
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                {[0, 1, 2].map((i) => (
+                  <div key={i} className="animate-pulse">
+                    <div className="bg-works-muted/30 aspect-[4/3]" />
                   </div>
                 ))}
               </div>
             ) : (
-              <div className="columns-1 sm:columns-2 lg:columns-3 gap-4 space-y-4">
-                {(galleryImages || []).filter((img) => img.src).map((img, i) => (
-                  <motion.div
-                    key={i}
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, margin: "-50px" }}
-                    transition={{ duration: 0.5, delay: i * 0.1 }}
-                    className="break-inside-avoid overflow-hidden"
-                  >
-                    <img
-                      src={img.src}
-                      alt={img.alt}
-                      className="w-full h-auto object-cover hover:scale-105 transition-transform duration-500"
-                    />
-                  </motion.div>
-                ))}
-              </div>
+              <Carousel opts={{ align: "start" }} className="w-full">
+                <CarouselContent className="-ml-4">
+                  {(galleryImages || []).filter((img) => img.src).map((img, i) => (
+                    <CarouselItem key={i} className="pl-4 basis-full sm:basis-1/2 lg:basis-1/3">
+                      <div className="overflow-hidden">
+                        <img
+                          src={img.src}
+                          alt={img.alt}
+                          className="w-full aspect-[4/3] object-cover hover:scale-105 transition-transform duration-500"
+                        />
+                      </div>
+                    </CarouselItem>
+                  ))}
+                </CarouselContent>
+                <div className="flex justify-end gap-3 mt-8">
+                  <CarouselPrevious className="static translate-y-0 h-11 w-11 rounded-full border-works-dark/20 text-works-dark hover:bg-works-primary hover:text-white hover:border-works-primary disabled:opacity-30" />
+                  <CarouselNext className="static translate-y-0 h-11 w-11 rounded-full border-works-dark/20 text-works-dark hover:bg-works-primary hover:text-white hover:border-works-primary disabled:opacity-30" />
+                </div>
+              </Carousel>
             )}
           </div>
         </section>
