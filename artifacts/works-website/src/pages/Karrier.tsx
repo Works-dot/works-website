@@ -183,7 +183,7 @@ export default function Karrier() {
                       {card.image ? (
                         <img
                           src={card.image}
-                          alt={card.title}
+                          alt={card.imageAlt || card.title}
                           className="w-full h-full object-cover"
                         />
                       ) : (

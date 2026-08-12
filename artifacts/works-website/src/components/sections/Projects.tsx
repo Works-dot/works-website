@@ -71,6 +71,7 @@ export function Projects() {
                   tags={p.tags}
                   description={p.description}
                   image={p.homepageImage || p.image}
+                  imageAlt={p.homepageImage ? (p.homepageImageAlt || p.imageAlt) : p.imageAlt}
                   reverse={i % 2 !== 0}
                 />
               ))}
@@ -84,6 +85,7 @@ export function Projects() {
                   tags={p.tags}
                   description={p.description}
                   image={p.homepageImage || p.image}
+                  imageAlt={p.homepageImage ? (p.homepageImageAlt || p.imageAlt) : p.imageAlt}
                   animated={false}
                   clampDescription
                 />

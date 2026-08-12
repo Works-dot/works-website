@@ -11,12 +11,13 @@ import { getBlogPosts } from "@/lib/strapi";
 import type { BlogPost } from "@/lib/strapi";
 import { fallbackBlogPosts } from "@/data/fallback";
 
-function FeaturedBlogCard({ slug, title, excerpt, date, image, author, readingTime }: {
+function FeaturedBlogCard({ slug, title, excerpt, date, image, imageAlt, author, readingTime }: {
   slug: string;
   title: string;
   excerpt: string;
   date: string;
   image: string;
+  imageAlt?: string;
   author: string;
   readingTime: string;
 }) {
@@ -33,7 +34,7 @@ function FeaturedBlogCard({ slug, title, excerpt, date, image, author, readingTi
         <div className="w-full lg:w-1/2 overflow-hidden bg-works-light aspect-[4/3]">
           <img
             src={image}
-            alt={title}
+            alt={imageAlt || title}
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
           />
         </div>
@@ -62,12 +63,13 @@ function FeaturedBlogCard({ slug, title, excerpt, date, image, author, readingTi
   );
 }
 
-function BlogGridCard({ slug, title, excerpt, date, image, author, readingTime, index }: {
+function BlogGridCard({ slug, title, excerpt, date, image, imageAlt, author, readingTime, index }: {
   slug: string;
   title: string;
   excerpt: string;
   date: string;
   image: string;
+  imageAlt?: string;
   author: string;
   readingTime: string;
   index: number;
@@ -85,7 +87,7 @@ function BlogGridCard({ slug, title, excerpt, date, image, author, readingTime, 
         <div className="w-full aspect-[4/3] overflow-hidden">
           <img
             src={image}
-            alt={title}
+            alt={imageAlt || title}
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
           />
         </div>
@@ -196,6 +198,7 @@ export default function Blog() {
                         excerpt={post.excerpt}
                         date={post.date}
                         image={post.image}
+                        imageAlt={post.imageAlt}
                         author={post.author}
                         readingTime={post.readingTime}
                       />
@@ -207,6 +210,7 @@ export default function Blog() {
                         excerpt={post.excerpt}
                         date={post.date}
                         image={post.image}
+                        imageAlt={post.imageAlt}
                         author={post.author}
                         readingTime={post.readingTime}
                         index={i}

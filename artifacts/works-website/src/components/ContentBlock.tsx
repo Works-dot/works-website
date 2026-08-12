@@ -49,7 +49,7 @@ export function ContentBlock({ block }: { block: ContentBlockType }) {
         <div className="overflow-hidden bg-works-light">
           <img
             src={block.content}
-            alt={block.caption || ""}
+            alt={block.alt || block.caption || ""}
             className="w-full h-auto object-cover"
           />
         </div>

@@ -8,12 +8,13 @@ interface BlogCardProps {
   excerpt: string;
   date: string;
   image: string;
+  imageAlt?: string;
   index: number;
   /** Disable the scroll-into-view entry animation (needed inside horizontal carousels, where the peeking card would stay invisible). */
   animated?: boolean;
 }
 
-export function BlogCard({ slug, title, excerpt, date, image, index, animated = true }: BlogCardProps) {
+export function BlogCard({ slug, title, excerpt, date, image, imageAlt, index, animated = true }: BlogCardProps) {
   return (
     <motion.article 
       {...(animated
@@ -30,7 +31,7 @@ export function BlogCard({ slug, title, excerpt, date, image, index, animated = 
         <div className="w-full aspect-[4/3] relative overflow-hidden">
           <img
             src={image}
-            alt={title}
+            alt={imageAlt || title}
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
           />
         </div>

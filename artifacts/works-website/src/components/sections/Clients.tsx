@@ -42,7 +42,7 @@ export function Clients() {
               {client.logo ? (
                 <img
                   src={client.logo}
-                  alt={client.name}
+                  alt={client.logoAlt || client.name}
                   loading="lazy"
                   className="h-10 max-w-[70%] w-auto object-contain"
                 />

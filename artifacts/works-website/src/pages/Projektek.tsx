@@ -11,12 +11,13 @@ import { getProjects } from "@/lib/strapi";
 import type { Project } from "@/lib/strapi";
 import { fallbackProjects } from "@/data/fallback";
 
-function FeaturedProjectCard({ slug, title, tags, description, image }: {
+function FeaturedProjectCard({ slug, title, tags, description, image, imageAlt }: {
   slug: string;
   title: string;
   tags: string[];
   description: string;
   image: string;
+  imageAlt?: string;
 }) {
   return (
     <motion.div
@@ -31,7 +32,7 @@ function FeaturedProjectCard({ slug, title, tags, description, image }: {
         <div className="w-full lg:w-1/2 overflow-hidden bg-works-light aspect-[4/3]">
           <img
             src={image}
-            alt={title}
+            alt={imageAlt || title}
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
           />
         </div>
@@ -62,12 +63,13 @@ function FeaturedProjectCard({ slug, title, tags, description, image }: {
   );
 }
 
-function ProjectGridCard({ slug, title, tags, description, image }: {
+function ProjectGridCard({ slug, title, tags, description, image, imageAlt }: {
   slug: string;
   title: string;
   tags: string[];
   description: string;
   image: string;
+  imageAlt?: string;
 }) {
   return (
     <motion.div
@@ -82,7 +84,7 @@ function ProjectGridCard({ slug, title, tags, description, image }: {
         <div className="overflow-hidden bg-works-light aspect-[4/3]">
           <img
             src={image}
-            alt={title}
+            alt={imageAlt || title}
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
           />
         </div>
@@ -189,6 +191,7 @@ export default function Projektek() {
                         tags={p.tags}
                         description={p.description}
                         image={p.image}
+                        imageAlt={p.imageAlt}
                       />
                     ) : (
                       <ProjectGridCard
@@ -198,6 +201,7 @@ export default function Projektek() {
                         tags={p.tags}
                         description={p.description}
                         image={p.image}
+                        imageAlt={p.imageAlt}
                       />
                     )
                   ))}

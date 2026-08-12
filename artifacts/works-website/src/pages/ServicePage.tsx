@@ -501,7 +501,7 @@ function RelatedProjectCard({ p, i, animated = true }: { p: Project; i: number; 
         <div className="w-full aspect-[4/3] relative overflow-hidden bg-works-light">
           <img
             src={p.image}
-            alt={p.title}
+            alt={p.imageAlt || p.title}
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
           />
         </div>

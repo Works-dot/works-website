@@ -8,6 +8,7 @@ interface ProjectCardProps {
   tags: string[];
   description: string;
   image: string;
+  imageAlt?: string;
   reverse?: boolean;
   /** Disable the scroll-into-view entry animation (needed inside horizontal carousels, where the peeking card would stay invisible). */
   animated?: boolean;
@@ -15,7 +16,7 @@ interface ProjectCardProps {
   clampDescription?: boolean;
 }
 
-export function ProjectCard({ slug, title, tags, description, image, reverse = false, animated = true, clampDescription = false }: ProjectCardProps) {
+export function ProjectCard({ slug, title, tags, description, image, imageAlt, reverse = false, animated = true, clampDescription = false }: ProjectCardProps) {
   return (
     <motion.div 
       {...(animated
@@ -32,7 +33,7 @@ export function ProjectCard({ slug, title, tags, description, image, reverse = f
         <div className="w-full aspect-[4/3] relative overflow-hidden flex items-center justify-center">
           <img
             src={image}
-            alt={title}
+            alt={imageAlt || title}
             className="relative z-10 w-full h-full object-contain"
           />
         </div>

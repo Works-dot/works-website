@@ -10,7 +10,9 @@
       ],
       "description": "Teljeskörű felhasználói kutatás és felülettervezés egy vezető hazai bank számára. A projekt során az onboarding folyamatot egyszerűsítettük, amivel 40%-kal növeltük a sikeres regisztrációk számát az első hónapban.",
       "image": "/strapi/uploads/project_banking_mockup_ed94acc41b.png",
+      "imageAlt": "Banking app mockup",
       "homepageImage": "/strapi/uploads/project_banking_clean_9bca314d3f.png",
+      "homepageImageAlt": "Banking app homepage image",
       "featured": true,
       "caseStudy": {
         "heroSubtitle": "Hogyan növeltük 40%-kal a sikeres regisztrációkat egy vezető hazai bank mobil applikációjában.",
@@ -29,7 +31,8 @@
           {
             "type": "image",
             "content": "/strapi/uploads/project_banking_mockup_ed94acc41b.png",
-            "caption": "Banki applikáció újratervezése a jobb konverzióért — projekt képernyőkép"
+            "caption": "Banki applikáció újratervezése a jobb konverzióért — projekt képernyőkép",
+            "alt": "Banking app mockup"
           },
           {
             "type": "text",
@@ -57,7 +60,9 @@
       ],
       "description": "Belső használatú vállalatirányítási rendszer modernizálása. A munkatársak napi folyamatait feltérképezve egy olyan UI-t alkottunk, ami napi átlagosan 2 órát takarít meg felhasználónként.",
       "image": "/strapi/uploads/project_logistics_mockup_0425102430.png",
+      "imageAlt": "Logistics software mockup",
       "homepageImage": "/strapi/uploads/project_logistics_clean_0ae7f0d86a.png",
+      "homepageImageAlt": "Logistics software homepage image",
       "featured": true,
       "caseStudy": {
         "heroSubtitle": "Egy vállalatirányítási rendszer modernizálása, ami napi 2 órát takarít meg felhasználónként.",
@@ -76,7 +81,8 @@
           {
             "type": "image",
             "content": "/strapi/uploads/project_logistics_mockup_0425102430.png",
-            "caption": "Komplex logisztikai szoftver ergonómia — projekt képernyőkép"
+            "caption": "Komplex logisztikai szoftver ergonómia — projekt képernyőkép",
+            "alt": "Logistics software mockup"
           },
           {
             "type": "text",
@@ -104,7 +110,9 @@
       ],
       "description": "Egy nemzetközi webáruház teljes átvilágítása és javítása WCAG 2.1 AA szintnek megfelelően. A látássérült és mozgásukban korlátozott felhasználók számára is zökkenőmentessé tettük a vásárlást.",
       "image": "/strapi/uploads/project_accessibility_mockup_c51aa80b06.png",
+      "imageAlt": "E-commerce accessibility mockup",
       "homepageImage": "/strapi/uploads/project_accessibility_clean_b9c4ae55b2.png",
+      "homepageImageAlt": "E-commerce accessibility homepage image",
       "featured": true,
       "caseStudy": {
         "heroSubtitle": "Teljes WCAG 2.1 AA megfelelés elérése egy nemzetközi webáruház számára.",
@@ -123,7 +131,8 @@
           {
             "type": "image",
             "content": "/strapi/uploads/project_accessibility_mockup_c51aa80b06.png",
-            "caption": "E-kereskedelmi platform akadálymentesítése — projekt képernyőkép"
+            "caption": "E-kereskedelmi platform akadálymentesítése — projekt képernyőkép",
+            "alt": "E-commerce accessibility mockup"
           },
           {
             "type": "text",
@@ -151,6 +160,8 @@
       ],
       "description": "Egy fintech startup számára terveztünk befektetési mobilalkalmazást. A komplex pénzügyi adatokat közérthető, vizuálisan vonzó formában jelenítettük meg, ami 3x-os felhasználói növekedést eredményezett.",
       "image": "/strapi/uploads/project_fintech_mockup_ffef75832e.png",
+      "imageAlt": "Fintech mobile app mockup",
+      "homepageImageAlt": "",
       "featured": false,
       "caseStudy": {
         "heroSubtitle": "Komplex pénzügyi adatok egyszerű megjelenítése egy befektetési alkalmazásban.",
@@ -169,7 +180,8 @@
           {
             "type": "image",
             "content": "/strapi/uploads/project_fintech_mockup_ffef75832e.png",
-            "caption": "Fintech mobilalkalmazás UX stratégia — projekt képernyőkép"
+            "caption": "Fintech mobilalkalmazás UX stratégia — projekt képernyőkép",
+            "alt": "Fintech mobile app mockup"
           },
           {
             "type": "text",
@@ -197,6 +209,8 @@
       ],
       "description": "Egy országos egészségügyi portál teljes újratervezése, ahol a páciensek időpontot foglalhatnak, receptet kérhetnek és hozzáférhetnek leleteikhez. Az új felület 60%-kal csökkentette a telefonos megkereséseket.",
       "image": "/strapi/uploads/project_healthcare_mockup_93db4a51aa.png",
+      "imageAlt": "Healthcare portal mockup",
+      "homepageImageAlt": "",
       "featured": false,
       "caseStudy": {
         "heroSubtitle": "Egy országos egészségügyi portál, amely 60%-kal csökkentette a telefonos megkereséseket.",
@@ -215,7 +229,8 @@
           {
             "type": "image",
             "content": "/strapi/uploads/project_healthcare_mockup_93db4a51aa.png",
-            "caption": "Egészségügyi portál újragondolása — projekt képernyőkép"
+            "caption": "Egészségügyi portál újragondolása — projekt képernyőkép",
+            "alt": "Healthcare portal mockup"
           },
           {
             "type": "text",
@@ -242,7 +257,9 @@
       ],
       "description": "Az egyik jelentős hazai fejlesztő cég az alapításának 20. évfordulójára időzítette a márka megújulását, melyet iroda költöztetéssel párosított. Komplex szolgáltatás portfóliót kellett bemutatnunk lazább, kreatív stílusban. A weboldal átalakításán kívül az egyéb digitális felületek és az új iroda falfelületeinek illusztrációit és kreatívját is mi alakítottuk ki.",
       "image": "/strapi/uploads/Rolunk_1366_182287b9ed.png",
+      "imageAlt": "",
       "homepageImage": "/strapi/uploads/Szolgaltatasaink_360_2d02cabef4.png",
+      "homepageImageAlt": "",
       "featured": false,
       "caseStudy": {
         "heroSubtitle": "Kreatív történetmesélés egy komplex szolgáltatásportfólióhoz — online és offline",
@@ -261,7 +278,8 @@
           {
             "type": "image",
             "content": "/strapi/uploads/project_ai_design_mockup_b8301ecb0c.png",
-            "caption": "AI-alapú design platform prototípus — projekt képernyőkép"
+            "caption": "AI-alapú design platform prototípus — projekt képernyőkép",
+            "alt": "AI design platform mockup"
           },
           {
             "type": "text",
@@ -288,6 +306,7 @@
       "date": "2024-03-15",
       "author": "Kovács Anna",
       "image": "/strapi/uploads/blog_accessibility_1f965d53f9.png",
+      "imageAlt": "Accessibility",
       "tags": [
         "Akadálymentesítés",
         "UX"
@@ -305,7 +324,8 @@
         {
           "type": "image",
           "content": "/strapi/uploads/blog_accessibility_1f965d53f9.png",
-          "caption": "Az akadálymentes tervezés jövője a modern felületeken — illusztráció"
+          "caption": "Az akadálymentes tervezés jövője a modern felületeken — illusztráció",
+          "alt": "Accessibility"
         },
         {
           "type": "text",
@@ -341,6 +361,7 @@
       "date": "2024-02-28",
       "author": "Nagy Bence",
       "image": "/strapi/uploads/blog_microinteractions_a7b9bb2b1a.png",
+      "imageAlt": "Micro-interactions",
       "tags": [
         "UX",
         "UI Design"
@@ -358,7 +379,8 @@
         {
           "type": "image",
           "content": "/strapi/uploads/blog_microinteractions_a7b9bb2b1a.png",
-          "caption": "Mikro-interakciók: A kiváló UX titkos fegyvere — illusztráció"
+          "caption": "Mikro-interakciók: A kiváló UX titkos fegyvere — illusztráció",
+          "alt": "Micro-interactions"
         },
         {
           "type": "text",
@@ -394,6 +416,7 @@
       "date": "2024-02-10",
       "author": "Szabó Márk",
       "image": "/strapi/uploads/blog_designsystem_53f1ecfd9e.png",
+      "imageAlt": "Design system",
       "tags": [
         "Design System",
         "UI Design"
@@ -411,7 +434,8 @@
         {
           "type": "image",
           "content": "/strapi/uploads/blog_designsystem_53f1ecfd9e.png",
-          "caption": "Design System építés nulláról — illusztráció"
+          "caption": "Design System építés nulláról — illusztráció",
+          "alt": "Design system"
         },
         {
           "type": "text",
@@ -447,6 +471,7 @@
       "date": "2024-01-22",
       "author": "Tóth Eszter",
       "image": "/strapi/uploads/blog_ai_ux_b721563dc2.png",
+      "imageAlt": "AI in UX design",
       "tags": [
         "AI",
         "UX",
@@ -465,7 +490,8 @@
         {
           "type": "image",
           "content": "/strapi/uploads/blog_ai_ux_b721563dc2.png",
-          "caption": "Mesterséges intelligencia a UX tervezésben: lehetőségek és korlátok — illusztráció"
+          "caption": "Mesterséges intelligencia a UX tervezésben: lehetőségek és korlátok — illusztráció",
+          "alt": "AI in UX design"
         },
         {
           "type": "text",
@@ -501,6 +527,7 @@
       "date": "2024-01-08",
       "author": "Kovács Anna",
       "image": "/strapi/uploads/blog_ux_research_fb033f1d4a.png",
+      "imageAlt": "UX research methods",
       "tags": [
         "UX Research",
         "Stratégia"
@@ -518,7 +545,8 @@
         {
           "type": "image",
           "content": "/strapi/uploads/blog_ux_research_fb033f1d4a.png",
-          "caption": "5 UX kutatási módszer, amit minden termékcsapatnak ismernie kell — illusztráció"
+          "caption": "5 UX kutatási módszer, amit minden termékcsapatnak ismernie kell — illusztráció",
+          "alt": "UX research methods"
         },
         {
           "type": "text",
@@ -558,6 +586,7 @@
       "date": "2023-12-20",
       "author": "Nagy Bence",
       "image": "/strapi/uploads/blog_mobile_first_c46d1086e0.png",
+      "imageAlt": "Mobile-first design",
       "tags": [
         "Mobile",
         "UX",
@@ -576,7 +605,8 @@
         {
           "type": "image",
           "content": "/strapi/uploads/blog_mobile_first_c46d1086e0.png",
-          "caption": "Mobile-first tervezés: Stratégia, nem trend — illusztráció"
+          "caption": "Mobile-first tervezés: Stratégia, nem trend — illusztráció",
+          "alt": "Mobile-first design"
         },
         {
           "type": "text",
@@ -1338,112 +1368,132 @@
     {
       "name": "Kovács Anna",
       "title": "UX Research Lead",
-      "image": "/strapi/uploads/team_member_0_4ea62c014d.jpg"
+      "image": "/strapi/uploads/team_member_0_4ea62c014d.jpg",
+      "imageAlt": "Kovács Anna"
     },
     {
       "name": "Szabó Márk",
       "title": "Design Director",
-      "image": "/strapi/uploads/team_member_1_803dcec0fb.jpg"
+      "image": "/strapi/uploads/team_member_1_803dcec0fb.jpg",
+      "imageAlt": "Szabó Márk"
     },
     {
       "name": "Tóth Eszter",
       "title": "UI Designer",
-      "image": "/strapi/uploads/team_member_2_101458420a.jpg"
+      "image": "/strapi/uploads/team_member_2_101458420a.jpg",
+      "imageAlt": "Tóth Eszter"
     },
     {
       "name": "Nagy Bence",
       "title": "Frontend Developer",
-      "image": "/strapi/uploads/team_member_3_4f392565bf.jpg"
+      "image": "/strapi/uploads/team_member_3_4f392565bf.jpg",
+      "imageAlt": "Nagy Bence"
     },
     {
       "name": "Kiss Réka",
       "title": "Service Designer",
-      "image": "/strapi/uploads/team_member_4_8c243aa35b.jpg"
+      "image": "/strapi/uploads/team_member_4_8c243aa35b.jpg",
+      "imageAlt": "Kiss Réka"
     },
     {
       "name": "Horváth Dániel",
       "title": "Full-Stack Developer",
-      "image": "/strapi/uploads/team_member_5_f5f79afff6.jpg"
+      "image": "/strapi/uploads/team_member_5_f5f79afff6.jpg",
+      "imageAlt": "Horváth Dániel"
     },
     {
       "name": "Varga Lili",
       "title": "UX Writer",
-      "image": "/strapi/uploads/team_member_6_313a5d76fc.jpg"
+      "image": "/strapi/uploads/team_member_6_313a5d76fc.jpg",
+      "imageAlt": "Varga Lili"
     },
     {
       "name": "Molnár Ádám",
       "title": "Accessibility Specialist",
-      "image": "/strapi/uploads/team_member_7_14716fbbed.jpg"
+      "image": "/strapi/uploads/team_member_7_14716fbbed.jpg",
+      "imageAlt": "Molnár Ádám"
     },
     {
       "name": "Fehér Nóra",
       "title": "Project Manager",
-      "image": "/strapi/uploads/team_member_8_92848e70a6.jpg"
+      "image": "/strapi/uploads/team_member_8_92848e70a6.jpg",
+      "imageAlt": "Fehér Nóra"
     },
     {
       "name": "Lakatos Péter",
       "title": "Creative Technologist",
-      "image": "/strapi/uploads/team_member_9_c4c0a74ed2.jpg"
+      "image": "/strapi/uploads/team_member_9_c4c0a74ed2.jpg",
+      "imageAlt": "Lakatos Péter"
     }
   ],
   "clients": [
     {
       "name": "Bizalmas (Bank)",
       "initials": "BB",
+      "logoAlt": "",
       "order": 1,
       "featured": true
     },
     {
       "name": "LogisticsPro Kft.",
       "initials": "LP",
+      "logoAlt": "",
       "order": 2,
       "featured": true
     },
     {
       "name": "RetailGiant International",
       "initials": "RG",
+      "logoAlt": "",
       "order": 3,
       "featured": true
     },
     {
       "name": "Fintech Innovator Zrt.",
       "initials": "FI",
+      "logoAlt": "",
       "order": 4,
       "featured": true
     },
     {
       "name": "Bizalmas (Egészségügy)",
       "initials": "BE",
+      "logoAlt": "",
       "order": 5,
       "featured": true
     },
     {
       "name": "AI Creative Labs",
       "initials": "AC",
+      "logoAlt": "",
       "order": 6,
       "featured": true
     },
     {
       "name": "MediCorp Hungary",
       "initials": "MC",
+      "logoAlt": "",
       "order": 7,
       "featured": false
     },
     {
       "name": "Budapest Digital",
       "initials": "BD",
+      "logoAlt": "",
       "order": 8,
       "featured": false
     },
     {
       "name": "GreenTech Solutions",
       "initials": "GT",
+      "logoAlt": "",
       "order": 9,
       "featured": false
     },
     {
       "name": "EduPlatform Kft.",
       "initials": "EP",
+      "logoAlt": "",
       "order": 10,
       "featured": false
     }
@@ -1469,7 +1519,8 @@
         {
           "type": "image",
           "content": "/strapi/uploads/UI_Design_1773998868111_e68995782c.png",
-          "caption": "Senior UX Researcher — munkakörnyezet"
+          "caption": "Senior UX Researcher — munkakörnyezet",
+          "alt": "UI Design"
         },
         {
           "type": "highlight",
@@ -1514,7 +1565,8 @@
         {
           "type": "image",
           "content": "/strapi/uploads/UI_Design_1773998868111_e68995782c.png",
-          "caption": "UI Designer — munkakörnyezet"
+          "caption": "UI Designer — munkakörnyezet",
+          "alt": "UI Design"
         },
         {
           "type": "highlight",
@@ -1559,7 +1611,8 @@
         {
           "type": "image",
           "content": "/strapi/uploads/UI_Design_1773998868111_e68995782c.png",
-          "caption": "Frontend Fejlesztő — munkakörnyezet"
+          "caption": "Frontend Fejlesztő — munkakörnyezet",
+          "alt": "UI Design"
         },
         {
           "type": "highlight",
@@ -1604,7 +1657,8 @@
         {
           "type": "image",
           "content": "/strapi/uploads/UI_Design_1773998868111_e68995782c.png",
-          "caption": "Service Designer — munkakörnyezet"
+          "caption": "Service Designer — munkakörnyezet",
+          "alt": "UI Design"
         },
         {
           "type": "highlight",
@@ -1828,27 +1882,32 @@
         {
           "title": "Valódi hatás",
           "description": "Nem csak pixeleket mozgatunk — olyan digitális termékeket építünk, amelyek emberek százezreinek életét teszik jobbá.",
-          "image": ""
+          "image": "",
+          "imageAlt": ""
         },
         {
           "title": "Folyamatos tanulás",
           "description": "Konferenciák, workshopok, belső tudásmegosztás és éves képzési keret. Nálunk a szakmai fejlődés nem szlogen, hanem a mindennapok része.",
-          "image": ""
+          "image": "",
+          "imageAlt": ""
         },
         {
           "title": "Rugalmas munkavégzés",
           "description": "Hibrid munkavégzés, rugalmas munkaidő és modern budapesti iroda. Te döntöd el, honnan és mikor dolgozol a legjobban.",
-          "image": ""
+          "image": "",
+          "imageAlt": ""
         },
         {
           "title": "Erős csapat",
           "description": "Tapasztalt szakemberek, akik szívesen segítenek és osztják meg tudásukat. Nálunk a mentorálás természetes.",
-          "image": ""
+          "image": "",
+          "imageAlt": ""
         },
         {
           "title": "Változatos projektek",
           "description": "Startupoktól a nagyvállalatokig, fintechttől az egészségügyig. Garantáljuk, hogy nem fogsz unatkozni.",
-          "image": ""
+          "image": "",
+          "imageAlt": ""
         }
       ]
     },

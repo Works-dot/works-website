@@ -18,6 +18,7 @@ export function mapContentBlocks(blocks) {
         type: "image",
         content: strapiImageUrl(b.image?.url),
         caption: b.caption,
+        alt: b.image?.alternativeText || "",
       };
     }
     return { type: "text", content: "" };

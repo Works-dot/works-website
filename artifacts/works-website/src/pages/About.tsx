@@ -140,7 +140,7 @@ export default function About() {
                       {member.image ? (
                         <img
                           src={member.image}
-                          alt={member.name}
+                          alt={member.imageAlt || member.name}
                           className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500"
                         />
                       ) : (

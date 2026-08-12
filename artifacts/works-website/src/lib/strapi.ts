@@ -226,6 +226,7 @@ export interface ContentBlock {
   type: "text" | "image" | "highlight";
   content: string;
   caption?: string;
+  alt?: string;
 }
 
 export interface Project {
@@ -234,7 +235,9 @@ export interface Project {
   tags: string[];
   description: string;
   image: string;
+  imageAlt?: string;
   homepageImage?: string;
+  homepageImageAlt?: string;
   featured?: boolean;
   order?: number | null;
   caseStudy: {
@@ -254,6 +257,7 @@ export interface BlogPost {
   date: string;
   author: string;
   image: string;
+  imageAlt?: string;
   tags: string[];
   readingTime: string;
   content: ContentBlock[];
@@ -264,6 +268,7 @@ export interface TeamMember {
   name: string;
   title: string;
   image: string;
+  imageAlt?: string;
 }
 
 export interface GalleryImage {
@@ -336,12 +341,14 @@ export interface Client {
   name: string;
   initials: string;
   logo?: string;
+  logoAlt?: string;
   order: number;
   featured: boolean;
 }
 
 export interface WhyUsCard {
   image: string;
+  imageAlt?: string;
   title: string;
   description: string;
 }
@@ -378,7 +385,9 @@ function mapProject(p: StrapiProject): Project {
     tags: p.tags?.map((t) => t.name) || [],
     description: p.description || "",
     image: strapiImageUrl(p.image?.url),
+    imageAlt: p.image?.alternativeText || "",
     homepageImage: p.homepageImage ? strapiImageUrl(p.homepageImage.url) : undefined,
+    homepageImageAlt: p.homepageImage?.alternativeText || "",
     featured: p.featured,
     order: p.order ?? null,
     caseStudy: {
@@ -400,6 +409,7 @@ function mapBlogPost(p: StrapiBlogPost): BlogPost {
     date: p.date || "",
     author: p.author?.name || "",
     image: strapiImageUrl(p.image?.url),
+    imageAlt: p.image?.alternativeText || "",
     tags: p.tags?.map((t) => t.name) || [],
     readingTime: p.readingTime || "",
     content: mapContentBlocks(p.contentBlocks),
@@ -459,6 +469,7 @@ export async function getTeamMembers(): Promise<TeamMember[]> {
     name: m.name,
     title: m.title,
     image: strapiImageUrl(m.image?.url),
+    imageAlt: m.image?.alternativeText || "",
   }));
 }
 
@@ -597,6 +608,7 @@ export async function getClients(): Promise<Client[]> {
     name: c.name,
     initials: c.initials || "",
     logo: c.logo ? strapiImageUrl(c.logo.url) : undefined,
+    logoAlt: c.logo?.alternativeText || "",
     order: c.order,
     featured: c.featured,
   }));
@@ -932,6 +944,7 @@ export async function getCareerPage(): Promise<CareerPageData> {
         title: item.title,
         description: item.description,
         image: strapiImageUrl(item.image?.url),
+        imageAlt: item.image?.alternativeText || "",
       })),
     },
     seo: mapSeo(d.seo),

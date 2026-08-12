@@ -46,7 +46,9 @@ function mapProject(p) {
     tags: p.tags?.map((t) => t.name) || [],
     description: p.description || "",
     image: strapiImageUrl(p.image?.url),
+    imageAlt: p.image?.alternativeText || "",
     homepageImage: p.homepageImage ? strapiImageUrl(p.homepageImage.url) : undefined,
+    homepageImageAlt: p.homepageImage?.alternativeText || "",
     featured: p.featured,
     caseStudy: {
       heroSubtitle: p.caseStudy?.heroSubtitle || "",
@@ -67,6 +69,7 @@ function mapBlogPost(p) {
     date: p.date || "",
     author: p.author?.name || "",
     image: strapiImageUrl(p.image?.url),
+    imageAlt: p.image?.alternativeText || "",
     tags: p.tags?.map((t) => t.name) || [],
     readingTime: p.readingTime || "",
     content: mapContentBlocks(p.contentBlocks),
@@ -208,6 +211,7 @@ async function fetchAll() {
     name: m.name,
     title: m.title,
     image: strapiImageUrl(m.image?.url),
+    imageAlt: m.image?.alternativeText || "",
   }));
   console.log(`  ✓ ${cache.teamMembers.length} team member(s)`);
 
@@ -218,6 +222,7 @@ async function fetchAll() {
     name: c.name,
     initials: c.initials || "",
     logo: c.logo ? strapiImageUrl(c.logo.url) : undefined,
+    logoAlt: c.logo?.alternativeText || "",
     order: c.order,
     featured: c.featured,
   }));
@@ -407,6 +412,7 @@ async function fetchAll() {
           title: item.title,
           description: item.description,
           image: strapiImageUrl(item.image?.url),
+          imageAlt: item.image?.alternativeText || "",
         })),
       },
       seo: mapSeo(cd2?.seo),

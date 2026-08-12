@@ -51,6 +51,7 @@ export function BlogPreview() {
                   excerpt={post.excerpt}
                   date={post.date}
                   image={post.image}
+                  imageAlt={post.imageAlt}
                 />
               ))}
             </div>
@@ -64,6 +65,7 @@ export function BlogPreview() {
                   excerpt={post.excerpt}
                   date={post.date}
                   image={post.image}
+                  imageAlt={post.imageAlt}
                   animated={false}
                 />
               ))}
