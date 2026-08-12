@@ -486,6 +486,7 @@ export interface ApiBlogPostBlogPost extends Struct.CollectionTypeSchema {
       Schema.Attribute.Private;
     date: Schema.Attribute.Date;
     excerpt: Schema.Attribute.Text;
+    featured: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     image: Schema.Attribute.Media<'images'>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
@@ -493,6 +494,7 @@ export interface ApiBlogPostBlogPost extends Struct.CollectionTypeSchema {
       'api::blog-post.blog-post'
     > &
       Schema.Attribute.Private;
+    order: Schema.Attribute.Integer;
     publishedAt: Schema.Attribute.DateTime;
     readingTime: Schema.Attribute.String;
     seo: Schema.Attribute.Component<'shared.seo', false>;

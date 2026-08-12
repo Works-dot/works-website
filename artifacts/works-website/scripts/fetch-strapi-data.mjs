@@ -72,6 +72,8 @@ function mapBlogPost(p) {
     imageAlt: p.image?.alternativeText || "",
     tags: p.tags?.map((t) => t.name) || [],
     readingTime: p.readingTime || "",
+    featured: p.featured ?? false,
+    order: p.order ?? null,
     content: mapContentBlocks(p.contentBlocks),
     seo: mapSeo(p.seo),
   };

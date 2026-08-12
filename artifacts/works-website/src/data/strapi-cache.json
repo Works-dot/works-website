@@ -312,6 +312,8 @@
         "UX"
       ],
       "readingTime": "8 perc",
+      "featured": true,
+      "order": 1,
       "content": [
         {
           "type": "text",
@@ -367,6 +369,8 @@
         "UI Design"
       ],
       "readingTime": "6 perc",
+      "featured": true,
+      "order": 2,
       "content": [
         {
           "type": "text",
@@ -422,6 +426,8 @@
         "UI Design"
       ],
       "readingTime": "10 perc",
+      "featured": true,
+      "order": 3,
       "content": [
         {
           "type": "text",
@@ -478,6 +484,8 @@
         "Stratégia"
       ],
       "readingTime": "7 perc",
+      "featured": false,
+      "order": null,
       "content": [
         {
           "type": "text",
@@ -533,6 +541,8 @@
         "Stratégia"
       ],
       "readingTime": "9 perc",
+      "featured": false,
+      "order": null,
       "content": [
         {
           "type": "text",
@@ -593,6 +603,8 @@
         "Stratégia"
       ],
       "readingTime": "7 perc",
+      "featured": false,
+      "order": null,
       "content": [
         {
           "type": "text",

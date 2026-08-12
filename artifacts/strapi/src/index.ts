@@ -1207,6 +1207,62 @@ async function backfillFeaturedProjects(strapi: any) {
   strapi.log.info(`Featured projects backfill: completed (${updated} project(s) updated)`);
 }
 
+async function backfillFeaturedBlogPosts(strapi: any) {
+  const store = strapi.store({ type: "plugin", name: "migrations" });
+  const done = await store.get({ key: "featured_blog_posts_backfill_v1" });
+  if (done) {
+    strapi.log.info("Featured blog posts backfill: already completed (flag set) — skipping");
+    return;
+  }
+
+  const posts = await strapi.documents("api::blog-post.blog-post").findMany({
+    pagination: { pageSize: 200 },
+    sort: { date: "desc" },
+  });
+
+  if (!posts || posts.length === 0) {
+    strapi.log.info("Featured blog posts backfill: no blog posts found — will retry on next restart");
+    return;
+  }
+
+  if (posts.some((p: any) => p.featured === true)) {
+    strapi.log.info("Featured blog posts backfill: featured posts already exist — nothing to do");
+    await store.set({ key: "featured_blog_posts_backfill_v1", value: true });
+    return;
+  }
+
+  let updated = 0;
+  let errors = 0;
+  const newest = posts.slice(0, 3);
+  for (let i = 0; i < newest.length; i++) {
+    const post = newest[i];
+    try {
+      await strapi.documents("api::blog-post.blog-post").update({
+        documentId: post.documentId,
+        data: { featured: true, order: i + 1 },
+      });
+      await strapi.documents("api::blog-post.blog-post").publish({
+        documentId: post.documentId,
+      });
+      updated++;
+      strapi.log.info(`Featured blog posts backfill: marked "${post.slug}" as featured (order ${i + 1})`);
+    } catch (err: any) {
+      errors++;
+      strapi.log.error(`Featured blog posts backfill: failed for "${post.slug}": ${err.message}`);
+    }
+  }
+
+  if (errors > 0) {
+    strapi.log.warn(
+      `Featured blog posts backfill: incomplete (${errors} error(s)) — flag not set, will retry on next restart`,
+    );
+    return;
+  }
+
+  await store.set({ key: "featured_blog_posts_backfill_v1", value: true });
+  strapi.log.info(`Featured blog posts backfill: completed (${updated} post(s) updated)`);
+}
+
 const PUBLIC_WRITE_SUFFIXES = ["-submission"];
 
 function isPublicWriteType(uid: string): boolean {
@@ -1699,6 +1755,7 @@ export default {
           .then(() => backfillServiceRestructure(strapi))
           .then(() => backfillServiceDefinition(strapi))
           .then(() => backfillFeaturedProjects(strapi))
+          .then(() => backfillFeaturedBlogPosts(strapi))
           .then(() => dropRemovedServiceFields(strapi))
           .then(() => dropUnusedAdminFields(strapi))
           .then(() => dropServiceGeneralKicker(strapi))
@@ -1720,6 +1777,7 @@ export default {
       await backfillServiceRestructure(strapi);
       await backfillServiceDefinition(strapi);
       await backfillFeaturedProjects(strapi);
+      await backfillFeaturedBlogPosts(strapi);
       await dropRemovedServiceFields(strapi);
       await dropUnusedAdminFields(strapi);
       await dropServiceGeneralKicker(strapi);

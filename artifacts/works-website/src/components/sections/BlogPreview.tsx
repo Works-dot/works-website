@@ -10,7 +10,19 @@ export function BlogPreview() {
   const { data: blogPosts, loading } = useStrapiQuery<BlogPost[]>("blogPosts", getBlogPosts, fallbackBlogPosts);
   const { data: homepage } = useStrapiQuery<HomepageData>("homepage", getHomepage, fallbackHomepage);
 
-  const previewPosts = (blogPosts || []).slice(0, 3);
+  const allPosts = blogPosts || [];
+  const flagged = allPosts.filter((p) => p.featured);
+  const sortByOrder = (list: BlogPost[]) =>
+    [...list].sort((a, b) => {
+      const ao = a.order ?? null;
+      const bo = b.order ?? null;
+      if (ao === null && bo === null) return 0;
+      if (ao === null) return 1;
+      if (bo === null) return -1;
+      return ao - bo;
+    });
+  // Featured posts (sorted by admin-set order) win; otherwise the 3 newest (API order is date desc).
+  const previewPosts = (flagged.length > 0 ? sortByOrder(flagged) : allPosts).slice(0, 3);
 
   return (
     <section id="blog" className="py-24 lg:py-32 bg-works-bg">

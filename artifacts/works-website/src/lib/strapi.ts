@@ -118,6 +118,8 @@ interface StrapiBlogPost {
   image: StrapiMedia | null;
   tags: StrapiTag[];
   readingTime: string;
+  featured: boolean;
+  order: number | null;
   contentBlocks: StrapiContentBlock[];
   seo?: StrapiSeo | null;
 }
@@ -260,6 +262,8 @@ export interface BlogPost {
   imageAlt?: string;
   tags: string[];
   readingTime: string;
+  featured?: boolean;
+  order?: number | null;
   content: ContentBlock[];
   seo?: SeoOverride | null;
 }
@@ -412,6 +416,8 @@ function mapBlogPost(p: StrapiBlogPost): BlogPost {
     imageAlt: p.image?.alternativeText || "",
     tags: p.tags?.map((t) => t.name) || [],
     readingTime: p.readingTime || "",
+    featured: p.featured ?? false,
+    order: p.order ?? null,
     content: mapContentBlocks(p.contentBlocks),
     seo: mapSeo(p.seo),
   };

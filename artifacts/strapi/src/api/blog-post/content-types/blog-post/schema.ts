@@ -46,6 +46,13 @@ export default {
     "readingTime": {
       "type": "string"
     },
+    "featured": {
+      "type": "boolean",
+      "default": false
+    },
+    "order": {
+      "type": "integer"
+    },
     "seo": {
       "type": "component",
       "repeatable": false,

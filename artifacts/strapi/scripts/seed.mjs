@@ -635,8 +635,13 @@ async function seed() {
     'mobile-first-tervezes': 'blog-mobile-first.png',
   };
 
+  let blogIdx = 0;
   for (const b of blogData) {
     const { authorName, ...rest } = b;
+    // The first 3 seed entries are the newest posts — feature them on the homepage.
+    rest.featured = blogIdx < 3;
+    rest.order = blogIdx < 3 ? blogIdx + 1 : undefined;
+    blogIdx++;
     const blocks = [...(rest.contentBlocks || [])];
     const cbImgFile = blogContentBlockImages[b.slug];
     if (cbImgFile && imageMap[cbImgFile]) {
