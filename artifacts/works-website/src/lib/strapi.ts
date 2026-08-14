@@ -916,6 +916,23 @@ export async function getPrivacyPage(): Promise<PrivacyPageData> {
   };
 }
 
+export interface LegalDocuments {
+  privacyPdfUrl: string;
+  imprintPdfUrl: string;
+}
+
+export async function getLegalDocuments(): Promise<LegalDocuments> {
+  const res = await fetchApi<StrapiSingleResponse<{
+    privacyPdf: StrapiMedia | null;
+    imprintPdf: StrapiMedia | null;
+  }>>("/legal-document?populate[0]=privacyPdf&populate[1]=imprintPdf");
+  const d = res.data;
+  return {
+    privacyPdfUrl: d.privacyPdf?.url ? strapiImageUrl(d.privacyPdf.url) : "",
+    imprintPdfUrl: d.imprintPdf?.url ? strapiImageUrl(d.imprintPdf.url) : "",
+  };
+}
+
 export interface CareerPageData {
   hero: { heading: string; description: string; backgroundImage: string };
   workWithUs: CareerWorkWithUs;

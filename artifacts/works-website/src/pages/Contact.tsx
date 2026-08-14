@@ -8,9 +8,9 @@ import { useRef } from "react";
 import { MapPin, Mail, Phone, ArrowRight, Upload, X, FileText } from "lucide-react";
 import SEOHead from "@/components/SEOHead";
 import { useStrapiQuery } from "@/hooks/useStrapiQuery";
-import { getContactPage, getGlobalSettings, uploadCv, CV_MAX_SIZE_BYTES, CV_ACCEPT, CV_ALLOWED_EXTENSIONS } from "@/lib/strapi";
-import type { ContactPageData, GlobalSettings } from "@/lib/strapi";
-import { fallbackContactPage, fallbackGlobalSettings, contactGraphicFallbackImg } from "@/data/fallback";
+import { getContactPage, getGlobalSettings, getLegalDocuments, uploadCv, CV_MAX_SIZE_BYTES, CV_ACCEPT, CV_ALLOWED_EXTENSIONS } from "@/lib/strapi";
+import type { ContactPageData, GlobalSettings, LegalDocuments } from "@/lib/strapi";
+import { fallbackContactPage, fallbackGlobalSettings, fallbackLegalDocuments, contactGraphicFallbackImg } from "@/data/fallback";
 
 const fadeUp = {
   initial: { opacity: 0, y: 20 },
@@ -108,6 +108,8 @@ function toMapEmbedUrl(raw: string): string {
 export default function Contact() {
   const { data: contactPage } = useStrapiQuery<ContactPageData>("contactPage", getContactPage, fallbackContactPage);
   const { data: globalSettings } = useStrapiQuery<GlobalSettings>("globalSettings", getGlobalSettings, fallbackGlobalSettings);
+  const { data: legalDocs } = useStrapiQuery<LegalDocuments>("legalDocuments", getLegalDocuments, fallbackLegalDocuments);
+  const privacyPdfUrl = legalDocs?.privacyPdfUrl || "/adatkezeles";
 
   const [formData, setFormData] = useState({
     name: "",
@@ -116,6 +118,7 @@ export default function Contact() {
     message: "",
   });
   const [submitted, setSubmitted] = useState(false);
+  const [privacyAccepted, setPrivacyAccepted] = useState(false);
   const [consentChecked, setConsentChecked] = useState({ first: false, second: false });
   const [cvFile, setCvFile] = useState<File | null>(null);
   const [cvError, setCvError] = useState<string | null>(null);
@@ -132,7 +135,7 @@ export default function Contact() {
         { key: "second" as const, text: (careerConsent.checkbox2Text || "").trim() },
       ].filter((c) => c.text)
     : [];
-  const consentsSatisfied = consentItems.every((c) => consentChecked[c.key]);
+  const consentsSatisfied = privacyAccepted && consentItems.every((c) => consentChecked[c.key]);
   const cvSatisfied = !isCareerSubject || cvFile !== null;
 
   const validateCvFile = (file: File): string | null => {
@@ -454,6 +457,28 @@ export default function Contact() {
                         ))}
                       </div>
                     )}
+
+                    <label className="flex items-start gap-3 cursor-pointer text-sm text-works-dark/80 leading-relaxed">
+                      <input
+                        type="checkbox"
+                        required
+                        checked={privacyAccepted}
+                        onChange={(e) => setPrivacyAccepted(e.target.checked)}
+                        className="mt-1 w-4 h-4 flex-shrink-0 accent-works-primary"
+                      />
+                      <span>
+                        Elolvastam és elfogadom az{" "}
+                        <a
+                          href={privacyPdfUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-works-primary font-semibold underline hover:no-underline"
+                        >
+                          adatkezelési tájékoztatót
+                        </a>
+                        .
+                      </span>
+                    </label>
 
                     <button
                       type="submit"

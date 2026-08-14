@@ -20,6 +20,7 @@ import type {
   AboutPageData,
   CareerPageData,
   PrivacyPageData,
+  LegalDocuments,
 } from "@/lib/strapi";
 
 import rawCache from "./strapi-cache.json";
@@ -318,6 +319,10 @@ export const fallbackContactPage: ContactPageData = hasData("contactPage")
 export const fallbackPrivacyPage: PrivacyPageData = hasData("privacyPage")
   ? (strapiCache.privacyPage as PrivacyPageData)
   : hardcodedPrivacyPage;
+
+export const fallbackLegalDocuments: LegalDocuments = hasData("legalDocuments")
+  ? (strapiCache.legalDocuments as LegalDocuments)
+  : { privacyPdfUrl: "", imprintPdfUrl: "" };
 
 export const fallbackHomepage: HomepageData = hasData("homepage")
   ? (strapiCache.homepage as HomepageData)

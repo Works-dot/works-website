@@ -399,6 +399,20 @@ async function fetchAll() {
   }
 
   try {
+    const legalRes = await fetchApi("/legal-document?populate[0]=privacyPdf&populate[1]=imprintPdf");
+    const ld = legalRes.data;
+    cache.legalDocuments = {
+      privacyPdfUrl: ld?.privacyPdf?.url ? strapiImageUrl(ld.privacyPdf.url) : "",
+      imprintPdfUrl: ld?.imprintPdf?.url ? strapiImageUrl(ld.imprintPdf.url) : "",
+    };
+    console.log("  ✓ legal documents");
+  } catch (err) {
+    if (!allowOptionalSkip(err)) throw err;
+    cache.legalDocuments = null;
+    console.log("  ⚠ legal documents skipped (not found)");
+  }
+
+  try {
     const careerRes = await fetchApi("/career-page?populate[0]=hero&populate[1]=hero.backgroundImage&populate[2]=workWithUs&populate[3]=whyUs&populate[4]=whyUs.items&populate[5]=whyUs.items.image&populate[6]=seo.ogImage");
     const cd2 = careerRes.data;
     cache.careerPage = {

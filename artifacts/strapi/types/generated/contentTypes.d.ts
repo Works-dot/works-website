@@ -734,6 +734,36 @@ export interface ApiHomepageHomepage extends Struct.SingleTypeSchema {
   };
 }
 
+export interface ApiLegalDocumentLegalDocument extends Struct.SingleTypeSchema {
+  collectionName: 'legal_documents';
+  info: {
+    description: 'Adatkezel\u00E9si t\u00E1j\u00E9koztat\u00F3 \u00E9s impresszum PDF-ek';
+    displayName: 'Jogi dokumentumok';
+    pluralName: 'legal-documents';
+    singularName: 'legal-document';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    imprintPdf: Schema.Attribute.Media<'files'>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::legal-document.legal-document'
+    > &
+      Schema.Attribute.Private;
+    privacyPdf: Schema.Attribute.Media<'files'>;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiPrivacyPagePrivacyPage extends Struct.SingleTypeSchema {
   collectionName: 'privacy_pages';
   info: {
@@ -1463,6 +1493,7 @@ declare module '@strapi/strapi' {
       'api::contact-page.contact-page': ApiContactPageContactPage;
       'api::global-setting.global-setting': ApiGlobalSettingGlobalSetting;
       'api::homepage.homepage': ApiHomepageHomepage;
+      'api::legal-document.legal-document': ApiLegalDocumentLegalDocument;
       'api::privacy-page.privacy-page': ApiPrivacyPagePrivacyPage;
       'api::project.project': ApiProjectProject;
       'api::service.service': ApiServiceService;

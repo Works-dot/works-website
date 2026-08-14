@@ -164,6 +164,7 @@ const singleTypeUids = [
   "api::career-page.career-page",
   "api::contact-page.contact-page",
   "api::privacy-page.privacy-page",
+  "api::legal-document.legal-document",
   "api::global-setting.global-setting",
 ];
 
@@ -1603,6 +1604,99 @@ async function seedPrivacyPage(strapi: any) {
   }
 }
 
+// A jogi PDF-ek (adatkezelési tájékoztató, impresszum) feltöltése a médiatárba
+// és bekötése a "Jogi dokumentumok" single type-ba. Flag-gated és re-entráns:
+// részleges siker (pl. feltöltés kész, de publikálás nem) után újrafuttatható.
+async function uploadSeedPdf(strapi: any, filePath: string, name: string): Promise<number | null> {
+  const fs = require("fs");
+
+  const existing = await strapi.db
+    .query("plugin::upload.file")
+    .findOne({ where: { name } });
+  if (existing) return existing.id;
+
+  if (!fs.existsSync(filePath)) {
+    strapi.log.warn(`Seed PDF not found: ${filePath}`);
+    return null;
+  }
+
+  const stats = fs.statSync(filePath);
+  const uploaded = await strapi
+    .plugin("upload")
+    .service("upload")
+    .upload({
+      data: {},
+      files: {
+        filepath: filePath,
+        originalFilename: `${name}.pdf`,
+        mimetype: "application/pdf",
+        size: stats.size,
+      },
+    });
+  return uploaded?.[0]?.id || null;
+}
+
+async function seedLegalDocuments(strapi: any) {
+  const path = require("path");
+  const store = strapi.store({ type: "plugin", name: "migrations" });
+  const done = await store.get({ key: "legal_documents_seed_v1" });
+  if (done) {
+    strapi.log.info("Legal documents seed: already completed (flag set) — skipping");
+    return;
+  }
+
+  try {
+    const strapiRoot = path.resolve(__dirname, "..", "..");
+    const docsDir = path.join(strapiRoot, "src", "seed-documents");
+
+    const privacyId = await uploadSeedPdf(
+      strapi,
+      path.join(docsDir, "adatkezelesi-tajekoztato.pdf"),
+      "adatkezelesi-tajekoztato"
+    );
+    const imprintId = await uploadSeedPdf(
+      strapi,
+      path.join(docsDir, "impresszum.pdf"),
+      "impresszum"
+    );
+
+    if (!privacyId || !imprintId) {
+      strapi.log.warn("Legal documents seed: missing PDF upload — will retry on next restart");
+      return;
+    }
+
+    const docs = strapi.documents("api::legal-document.legal-document");
+    let existing = await docs.findFirst({ populate: ["privacyPdf", "imprintPdf"] });
+    if (!existing) {
+      existing = await docs.create({
+        data: { privacyPdf: privacyId, imprintPdf: imprintId },
+      });
+      strapi.log.info("Legal documents seed: entry created");
+    } else {
+      // Csak a hiányzó mezőket pótoljuk — az adminban kicserélt PDF-et nem írjuk felül.
+      const data: Record<string, number> = {};
+      if (!existing.privacyPdf) data.privacyPdf = privacyId;
+      if (!existing.imprintPdf) data.imprintPdf = imprintId;
+      if (Object.keys(data).length > 0) {
+        await docs.update({ documentId: existing.documentId, data });
+        strapi.log.info("Legal documents seed: missing PDF field(s) backfilled");
+      }
+    }
+
+    const published = await docs.findFirst({ status: "published" });
+    if (!published) {
+      await docs.publish({ documentId: existing.documentId });
+      strapi.log.info("Legal documents seed: entry published");
+    }
+
+    await store.set({ key: "legal_documents_seed_v1", value: true });
+    strapi.log.info("Legal documents seed: completed successfully");
+    noteBootstrapContentChange("legal documents seed");
+  } catch (err: any) {
+    strapi.log.error(`Legal documents seed: failed — will retry on next restart: ${err.message}`);
+  }
+}
+
 async function seedServiceCtaBanners(strapi: any) {
   const knex = strapi.db.connection;
   const store = strapi.store({ type: "plugin", name: "migrations" });
@@ -2000,6 +2094,7 @@ export default {
           .then(() => seedServiceCtaBanners(strapi))
           .then(() => markCareerFormSubject(strapi))
           .then(() => seedPrivacyPage(strapi))
+          .then(() => seedLegalDocuments(strapi))
           .then(() => seedAboutGalleryImages(strapi))
           .then(() => deleteSeedSampleBlogPosts(strapi))
           .then(() => migrateSquarespacePosts(strapi))
@@ -2024,6 +2119,7 @@ export default {
       await seedServiceCtaBanners(strapi);
       await markCareerFormSubject(strapi);
       await seedPrivacyPage(strapi);
+      await seedLegalDocuments(strapi);
       await seedAboutGalleryImages(strapi);
       await deleteSeedSampleBlogPosts(strapi);
       await migrateSquarespacePosts(strapi);

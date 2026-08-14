@@ -3,9 +3,9 @@ import { Link } from "wouter";
 import { Linkedin, Instagram, Dribbble, ArrowRight } from "lucide-react";
 import { useSubscribeNewsletter } from "@/hooks/use-newsletter";
 import { useStrapiQuery } from "@/hooks/useStrapiQuery";
-import { getGlobalSettings, getServices } from "@/lib/strapi";
-import type { GlobalSettings, Service } from "@/lib/strapi";
-import { fallbackGlobalSettings, fallbackServices } from "@/data/fallback";
+import { getGlobalSettings, getServices, getLegalDocuments } from "@/lib/strapi";
+import type { GlobalSettings, Service, LegalDocuments } from "@/lib/strapi";
+import { fallbackGlobalSettings, fallbackServices, fallbackLegalDocuments } from "@/data/fallback";
 
 const SOCIAL_ICONS: Record<string, React.ReactNode> = {
   linkedin: <Linkedin className="w-5 h-5" />,
@@ -21,6 +21,9 @@ export function Footer() {
   const { mutate, isPending } = useSubscribeNewsletter();
   const { data: settings } = useStrapiQuery<GlobalSettings>("globalSettings", getGlobalSettings, fallbackGlobalSettings);
   const { data: services } = useStrapiQuery<Service[]>("footerServices", getServices, fallbackServices);
+  const { data: legalDocs } = useStrapiQuery<LegalDocuments>("legalDocuments", getLegalDocuments, fallbackLegalDocuments);
+  const privacyPdfUrl = legalDocs?.privacyPdfUrl || "";
+  const imprintPdfUrl = legalDocs?.imprintPdfUrl || "";
   const logoImg = settings?.logoUrl;
 
   const handleSubscribe = (e: React.FormEvent) => {
@@ -167,8 +170,23 @@ export function Footer() {
         <div className="max-w-6xl mx-auto pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-works-muted/60">
           <p>&copy; {copyrightText}</p>
           <div className="flex gap-6">
-            <a href="/adatkezeles" className="hover:text-white transition-colors">Adatvédelmi tájékoztató</a>
-            <a href="#" className="hover:text-white transition-colors">Impresszum</a>
+            <a
+              href={privacyPdfUrl || "/adatkezeles"}
+              {...(privacyPdfUrl ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+              className="hover:text-white transition-colors"
+            >
+              Adatvédelmi tájékoztató
+            </a>
+            {imprintPdfUrl && (
+              <a
+                href={imprintPdfUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-white transition-colors"
+              >
+                Impresszum
+              </a>
+            )}
           </div>
         </div>
       </div>
