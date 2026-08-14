@@ -1610,9 +1610,10 @@ async function seedPrivacyPage(strapi: any) {
 async function uploadSeedPdf(strapi: any, filePath: string, name: string): Promise<number | null> {
   const fs = require("fs");
 
+  // Az upload plugin a fájlt az eredeti fájlnévvel (kiterjesztéssel) tárolja.
   const existing = await strapi.db
     .query("plugin::upload.file")
-    .findOne({ where: { name } });
+    .findOne({ where: { name: `${name}.pdf` } });
   if (existing) return existing.id;
 
   if (!fs.existsSync(filePath)) {
@@ -1667,10 +1668,12 @@ async function seedLegalDocuments(strapi: any) {
 
     const docs = strapi.documents("api::legal-document.legal-document");
     let existing = await docs.findFirst({ populate: ["privacyPdf", "imprintPdf"] });
+    let changed = false;
     if (!existing) {
       existing = await docs.create({
         data: { privacyPdf: privacyId, imprintPdf: imprintId },
       });
+      changed = true;
       strapi.log.info("Legal documents seed: entry created");
     } else {
       // Csak a hiányzó mezőket pótoljuk — az adminban kicserélt PDF-et nem írjuk felül.
@@ -1679,14 +1682,30 @@ async function seedLegalDocuments(strapi: any) {
       if (!existing.imprintPdf) data.imprintPdf = imprintId;
       if (Object.keys(data).length > 0) {
         await docs.update({ documentId: existing.documentId, data });
+        changed = true;
         strapi.log.info("Legal documents seed: missing PDF field(s) backfilled");
       }
     }
 
-    const published = await docs.findFirst({ status: "published" });
-    if (!published) {
+    // Publikálás: új/pótolt tartalomnál mindig, különben csak ha még nincs
+    // publikált verzió (a régi publikált verzió elrejtené a friss draftot).
+    const published = await docs.findFirst({
+      status: "published",
+      populate: ["privacyPdf", "imprintPdf"],
+    });
+    if (changed || !published) {
       await docs.publish({ documentId: existing.documentId });
       strapi.log.info("Legal documents seed: entry published");
+    }
+
+    // A flag csak akkor kerül be, ha a publikált verzióban tényleg megvan mindkét PDF.
+    const verify = await docs.findFirst({
+      status: "published",
+      populate: ["privacyPdf", "imprintPdf"],
+    });
+    if (!verify?.privacyPdf || !verify?.imprintPdf) {
+      strapi.log.warn("Legal documents seed: published entry missing PDF field(s) — will retry on next restart");
+      return;
     }
 
     await store.set({ key: "legal_documents_seed_v1", value: true });
