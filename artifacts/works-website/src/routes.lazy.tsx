@@ -15,6 +15,7 @@ export const routes: AppRoutes = {
   Contact: lazy(() => import("@/pages/Contact")),
   Karrier: lazy(() => import("@/pages/Karrier")),
   Adatkezeles: lazy(() => import("@/pages/Adatkezeles")),
+  Sutik: lazy(() => import("@/pages/Sutik")),
   CareerDetail: lazy(() => import("@/pages/CareerDetail")),
   NotFound: lazy(() => import("@/pages/not-found")),
 };

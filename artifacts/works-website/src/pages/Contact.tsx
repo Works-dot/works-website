@@ -11,6 +11,7 @@ import { useStrapiQuery } from "@/hooks/useStrapiQuery";
 import { getContactPage, getGlobalSettings, getLegalDocuments, uploadCv, CV_MAX_SIZE_BYTES, CV_ACCEPT, CV_ALLOWED_EXTENSIONS } from "@/lib/strapi";
 import type { ContactPageData, GlobalSettings, LegalDocuments } from "@/lib/strapi";
 import { fallbackContactPage, fallbackGlobalSettings, fallbackLegalDocuments, contactGraphicFallbackImg } from "@/data/fallback";
+import { useCookieConsent } from "@/lib/cookie-consent";
 
 const fadeUp = {
   initial: { opacity: 0, y: 20 },
@@ -106,6 +107,7 @@ function toMapEmbedUrl(raw: string): string {
 }
 
 export default function Contact() {
+  const { consent, accept } = useCookieConsent();
   const { data: contactPage } = useStrapiQuery<ContactPageData>("contactPage", getContactPage, fallbackContactPage);
   const { data: globalSettings } = useStrapiQuery<GlobalSettings>("globalSettings", getGlobalSettings, fallbackGlobalSettings);
   const { data: legalDocs } = useStrapiQuery<LegalDocuments>("legalDocuments", getLegalDocuments, fallbackLegalDocuments);
@@ -559,16 +561,36 @@ export default function Contact() {
               {...fadeUp}
               className="overflow-hidden"
             >
-              <iframe
-                src={mapEmbedUrl}
-                width="100%"
-                height="450"
-                style={{ border: 0 }}
-                allowFullScreen
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                title={`Works. iroda - ${address}`}
-              />
+              {consent === "accepted" ? (
+                <iframe
+                  src={mapEmbedUrl}
+                  width="100%"
+                  height="450"
+                  style={{ border: 0 }}
+                  allowFullScreen
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  title={`Works. iroda - ${address}`}
+                />
+              ) : (
+                // Kétkattintásos megoldás: a Google Térkép csak kifejezett
+                // hozzájárulás után töltődik be; addig tájékoztató felület látszik.
+                <div className="h-[450px] bg-works-dark/5 border border-works-dark/10 flex flex-col items-center justify-center text-center px-6 gap-4">
+                  <p className="text-works-dark/60 max-w-md leading-relaxed">
+                    A térkép betöltésével a Google Térkép szolgáltatása sütiket
+                    használhat, és adatokat kezelhet a Google adatvédelmi
+                    irányelvei szerint.
+                  </p>
+                  <button
+                    type="button"
+                    onClick={accept}
+                    className="px-6 py-3 text-sm font-semibold bg-works-primary text-white hover:bg-works-primary/90 transition-colors"
+                    data-testid="button-load-map"
+                  >
+                    Térkép betöltése (Google sütiket használ)
+                  </button>
+                </div>
+              )}
             </motion.div>
           </div>
         </section>

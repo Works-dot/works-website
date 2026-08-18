@@ -92,6 +92,11 @@ const staticMeta: Record<string, PageMeta> = {
     description:
       "A Works. adatkezelési tájékoztatója — hogyan kezeljük a weboldal látogatóinak és a velünk kapcsolatba lépőknek a személyes adatait.",
   },
+  "/sutik": {
+    title: formatTitle("Süti tájékoztató"),
+    description:
+      "Tájékoztató a Works. weboldalán használt sütikről és a Google Térkép beágyazásról — mihez kérünk hozzájárulást és hogyan módosíthatod.",
+  },
 };
 
 const pageSeoOverrides: Record<string, SeoOverride | null | undefined> = {

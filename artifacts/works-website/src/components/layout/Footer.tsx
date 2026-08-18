@@ -6,6 +6,7 @@ import { useStrapiQuery } from "@/hooks/useStrapiQuery";
 import { getGlobalSettings, getServices, getLegalDocuments } from "@/lib/strapi";
 import type { GlobalSettings, Service, LegalDocuments } from "@/lib/strapi";
 import { fallbackGlobalSettings, fallbackServices, fallbackLegalDocuments } from "@/data/fallback";
+import { useCookieConsent } from "@/lib/cookie-consent";
 
 const SOCIAL_ICONS: Record<string, React.ReactNode> = {
   linkedin: <Linkedin className="w-5 h-5" />,
@@ -18,6 +19,7 @@ const SOCIAL_ICONS: Record<string, React.ReactNode> = {
 
 export function Footer() {
   const [email, setEmail] = useState("");
+  const { openSettings } = useCookieConsent();
   const { mutate, isPending } = useSubscribeNewsletter();
   const { data: settings } = useStrapiQuery<GlobalSettings>("globalSettings", getGlobalSettings, fallbackGlobalSettings);
   const { data: services } = useStrapiQuery<Service[]>("footerServices", getServices, fallbackServices);
@@ -177,6 +179,17 @@ export function Footer() {
             >
               Adatvédelmi tájékoztató
             </a>
+            <Link href="/sutik" className="hover:text-white transition-colors">
+              Süti tájékoztató
+            </Link>
+            <button
+              type="button"
+              onClick={openSettings}
+              className="hover:text-white transition-colors"
+              data-testid="button-cookie-settings"
+            >
+              Süti beállítások
+            </button>
             {imprintPdfUrl && (
               <a
                 href={imprintPdfUrl}

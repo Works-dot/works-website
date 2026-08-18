@@ -10,6 +10,7 @@ import About from "@/pages/About";
 import Contact from "@/pages/Contact";
 import Karrier from "@/pages/Karrier";
 import Adatkezeles from "@/pages/Adatkezeles";
+import Sutik from "@/pages/Sutik";
 import CareerDetail from "@/pages/CareerDetail";
 import NotFound from "@/pages/not-found";
 import type { AppRoutes } from "./routes.types";
@@ -25,6 +26,7 @@ export const routes: AppRoutes = {
   Contact,
   Karrier,
   Adatkezeles,
+  Sutik,
   CareerDetail,
   NotFound,
 };

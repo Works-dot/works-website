@@ -13,6 +13,7 @@ export interface AppRoutes {
   Contact: RouteComponent;
   Karrier: RouteComponent;
   Adatkezeles: RouteComponent;
+  Sutik: RouteComponent;
   CareerDetail: RouteComponent;
   NotFound: RouteComponent;
 }

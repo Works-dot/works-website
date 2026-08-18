@@ -4,6 +4,8 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { ScrollToTop } from "@/components/ScrollToTop";
+import { CookieConsentProvider } from "@/lib/cookie-consent";
+import { CookieBanner } from "@/components/CookieBanner";
 import type { AppRoutes } from "./routes.types";
 
 const queryClient = new QueryClient({
@@ -28,6 +30,7 @@ function Router({ routes }: { routes: AppRoutes }) {
       <Route path="/kapcsolat" component={routes.Contact} />
       <Route path="/karrier" component={routes.Karrier} />
       <Route path="/adatkezeles" component={routes.Adatkezeles} />
+      <Route path="/sutik" component={routes.Sutik} />
       <Route path="/karrier/:slug" component={routes.CareerDetail} />
       <Route component={routes.NotFound} />
     </Switch>
@@ -38,16 +41,19 @@ function App({ ssrPath, routes }: { ssrPath?: string; routes: AppRoutes }) {
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider delayDuration={300}>
-        <WouterRouter
-          base={import.meta.env.BASE_URL.replace(/\/$/, "")}
-          ssrPath={ssrPath}
-        >
-          <ScrollToTop />
-          <Suspense fallback={null}>
-            <Router routes={routes} />
-          </Suspense>
-        </WouterRouter>
-        <Toaster />
+        <CookieConsentProvider>
+          <WouterRouter
+            base={import.meta.env.BASE_URL.replace(/\/$/, "")}
+            ssrPath={ssrPath}
+          >
+            <ScrollToTop />
+            <Suspense fallback={null}>
+              <Router routes={routes} />
+            </Suspense>
+            <CookieBanner />
+          </WouterRouter>
+          <Toaster />
+        </CookieConsentProvider>
       </TooltipProvider>
     </QueryClientProvider>
   );

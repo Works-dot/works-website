@@ -28,6 +28,7 @@ async function prerender() {
     "/kapcsolat",
     "/karrier",
     "/adatkezeles",
+    "/sutik",
   ];
 
   const dynamicRoutes = [

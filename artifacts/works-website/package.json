@@ -64,6 +64,7 @@
     "zod": "catalog:"
   },
   "dependencies": {
+    "@fontsource/mulish": "^5.3.0",
     "express": "^5",
     "http-proxy-middleware": "^3",
     "react-helmet-async": "^3.0.0",
