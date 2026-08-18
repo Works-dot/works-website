@@ -3121,11 +3121,6 @@
       "ogImage": ""
     }
   },
-  "privacyPage": {
-    "heading": "Adatkezelési tájékoztató",
-    "body": "Ez az adatkezelési tájékoztató ismerteti, hogy a Works. (a továbbiakban: Adatkezelő) hogyan kezeli a weboldal látogatóinak és a velünk kapcsolatba lépő személyeknek a személyes adatait.\n\n## 1. Az adatkezelő adatai\n\n- **Név:** Works.\n- **Székhely:** 1054 Budapest, Szabadság tér 7.\n- **E-mail:** hello@works.hu\n\n## 2. A kezelt adatok köre\n\nA kapcsolatfelvételi űrlap kitöltésekor a következő adatokat kezeljük: név, e-mail cím, az üzenet tárgya és tartalma. Álláspályázat esetén a pályázathoz csatolt önéletrajz és a benne szereplő adatok is ide tartoznak.\n\n## 3. Az adatkezelés célja és jogalapja\n\nAz adatkezelés célja a megkeresések megválaszolása, illetve álláspályázat esetén a kiválasztási folyamat lebonyolítása. Az adatkezelés jogalapja az érintett hozzájárulása (GDPR 6. cikk (1) bekezdés a) pont).\n\n## 4. Az adatkezelés időtartama\n\nA megkeresésekhez kapcsolódó adatokat a cél megvalósulásáig, álláspályázatok esetén — külön hozzájárulás alapján — legfeljebb 1 évig őrizzük meg.\n\n## 5. Az érintettek jogai\n\nBármikor kérhet tájékoztatást személyes adatai kezeléséről, kérheti azok helyesbítését, törlését vagy kezelésének korlátozását, valamint visszavonhatja hozzájárulását a hello@works.hu címen. Panasszal a Nemzeti Adatvédelmi és Információszabadság Hatósághoz (NAIH) fordulhat.\n\n*Ez a tájékoztató sablon jellegű kiinduló szöveg — kérjük, a végleges, jogilag ellenőrzött tartalommal frissítse.*",
-    "seo": null
-  },
   "legalDocuments": {
     "privacyPdfUrl": "/strapi/uploads/adatkezelesi_tajekoztato_eeb7f9fe30.pdf",
     "imprintPdfUrl": "/strapi/uploads/impresszum_ff0eb3c811.pdf"

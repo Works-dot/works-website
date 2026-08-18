@@ -384,21 +384,6 @@ async function fetchAll() {
   }
 
   try {
-    const privacyRes = await fetchApi("/privacy-page?populate[0]=seo.ogImage");
-    const pd = privacyRes.data;
-    cache.privacyPage = {
-      heading: pd?.heading || "",
-      body: pd?.body || "",
-      seo: mapSeo(pd?.seo),
-    };
-    console.log("  ✓ privacy page");
-  } catch (err) {
-    if (!allowOptionalSkip(err)) throw err;
-    cache.privacyPage = null;
-    console.log("  ⚠ privacy page skipped (not found)");
-  }
-
-  try {
     const legalRes = await fetchApi("/legal-document?populate[0]=privacyPdf&populate[1]=imprintPdf");
     const ld = legalRes.data;
     cache.legalDocuments = {

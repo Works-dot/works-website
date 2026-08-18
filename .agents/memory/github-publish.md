@@ -20,3 +20,15 @@ Railway auto-deploys from GitHub `Works-dot/works-website` `main`. Getting repl 
 **Why:** a single new commit parented on GitHub's real HEAD references only the fresh tree + fetched commit, never the broken local history graph.
 
 **How to apply:** when the user wants repl changes live on Railway and the Git panel/auto-sync isn't an option. After push, Railway redeploys automatically.
+
+## UPDATE (Aug 2026): raw token no longer available — push via GitHub Git Data API
+
+`listConnections('github')[0].settings` is now **empty** (tokens redacted at the sandbox boundary), so the authed-remote `git push` method fails with "Invalid username or token". Working replacement (proven):
+
+1. In `"use impure"`, get `gh = (await listConnections("github"))[0]` and call `gh.proxyFetch('/repos/Works-dot/works-website/...')` — credentials injected server-side.
+2. `GET /git/ref/heads/main` → remote sha; `GET /git/commits/<sha>` → remote tree sha.
+3. **Diff base = the local commit whose `%T` tree equals the remote tree** (scan `git log --format="%H %T"`). Do NOT assume `HEAD^` — Replit auto-checkpoint commits pollute local history between your commits.
+4. `git diff --name-status -z <base> HEAD`; for each added/modified file `POST /git/blobs` (base64); deletions get `sha:null` tree entries.
+5. `POST /git/trees` with `base_tree` = remote tree + flat path entries (no recursive tree building needed).
+6. `POST /git/commits` (tree, parents:[remoteSha]) → `PATCH /git/refs/heads/main`.
+7. Verify: returned tree sha must equal `git rev-parse HEAD^{tree}`.

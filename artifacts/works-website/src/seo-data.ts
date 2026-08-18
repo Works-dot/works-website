@@ -7,7 +7,6 @@ import {
   fallbackAboutPage,
   fallbackContactPage,
   fallbackCareerPage,
-  fallbackPrivacyPage,
 } from "./data/fallback";
 import type { SeoOverride } from "./lib/strapi";
 
@@ -77,7 +76,6 @@ const pageSeoOverrides: Record<string, SeoOverride | null | undefined> = {
   "/rolunk": fallbackAboutPage?.seo,
   "/kapcsolat": fallbackContactPage?.seo,
   "/karrier": fallbackCareerPage?.seo,
-  "/adatkezeles": fallbackPrivacyPage?.seo,
 };
 
 export function getPageMeta(route: string): PageMeta {

@@ -764,37 +764,6 @@ export interface ApiLegalDocumentLegalDocument extends Struct.SingleTypeSchema {
   };
 }
 
-export interface ApiPrivacyPagePrivacyPage extends Struct.SingleTypeSchema {
-  collectionName: 'privacy_pages';
-  info: {
-    description: 'Adatkezel\u00E9si t\u00E1j\u00E9koztat\u00F3 oldal';
-    displayName: 'Privacy page';
-    pluralName: 'privacy-pages';
-    singularName: 'privacy-page';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    body: Schema.Attribute.RichText;
-    createdAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    heading: Schema.Attribute.String;
-    locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::privacy-page.privacy-page'
-    > &
-      Schema.Attribute.Private;
-    publishedAt: Schema.Attribute.DateTime;
-    seo: Schema.Attribute.Component<'shared.seo', false>;
-    updatedAt: Schema.Attribute.DateTime;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-  };
-}
-
 export interface ApiProjectProject extends Struct.CollectionTypeSchema {
   collectionName: 'projects';
   info: {
@@ -1494,7 +1463,6 @@ declare module '@strapi/strapi' {
       'api::global-setting.global-setting': ApiGlobalSettingGlobalSetting;
       'api::homepage.homepage': ApiHomepageHomepage;
       'api::legal-document.legal-document': ApiLegalDocumentLegalDocument;
-      'api::privacy-page.privacy-page': ApiPrivacyPagePrivacyPage;
       'api::project.project': ApiProjectProject;
       'api::service.service': ApiServiceService;
       'api::tag.tag': ApiTagTag;
