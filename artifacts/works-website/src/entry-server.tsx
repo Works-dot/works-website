@@ -15,4 +15,4 @@ export { fallbackProjects as projects } from "./data/fallback";
 export { fallbackBlogPosts as blogPosts } from "./data/fallback";
 export { fallbackServices as services } from "./data/fallback";
 export { fallbackPositions as positions } from "./data/fallback";
-export { getPageMeta, buildMetaTags } from "./seo-data";
+export { getPageMeta, buildMetaTags, SITE_URL } from "./seo-data";

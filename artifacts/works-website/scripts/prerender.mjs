@@ -15,6 +15,7 @@ async function prerender() {
     positions,
     getPageMeta,
     buildMetaTags,
+    SITE_URL,
   } = await import(path.resolve(root, "dist/server/entry-server.js"));
 
   const template = fs.readFileSync(path.resolve(outDir, "index.html"), "utf-8");
@@ -79,11 +80,44 @@ async function prerender() {
     page = page.replace(/<title>.*?<\/title>/, "");
     page = page.replace(
       "<!--ssr-head-->",
-      "<title>Az oldal nem található | Works.</title>\n<meta name=\"robots\" content=\"noindex\">"
+      [
+        "<title>Az oldal nem található | Works.</title>",
+        '<meta name="description" content="A keresett oldal nem található. Nézz körül a Works. főoldalán, projektjeink vagy blogunk között.">',
+        '<meta name="robots" content="noindex">',
+      ].join("\n")
     );
     page = page.replace("<!--ssr-outlet-->", html);
     fs.writeFileSync(path.resolve(outDir, "404.html"), page);
     console.log("  ✓ /404.html");
+  }
+
+  // sitemap.xml — minden prerenderelt oldal; blogcikkeknél lastmod a publikálás dátuma.
+  {
+    const lastmodByRoute = new Map(
+      blogPosts.map((p) => [`/blog/${p.slug}`, p.date])
+    );
+    const urls = allRoutes
+      .map((route) => {
+        const loc = route === "/" ? `${SITE_URL}/` : `${SITE_URL}${route}`;
+        const lastmod = lastmodByRoute.get(route);
+        return [
+          "  <url>",
+          `    <loc>${loc}</loc>`,
+          ...(lastmod ? [`    <lastmod>${lastmod}</lastmod>`] : []),
+          "  </url>",
+        ].join("\n");
+      })
+      .join("\n");
+    const sitemap = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls}\n</urlset>\n`;
+    fs.writeFileSync(path.resolve(outDir, "sitemap.xml"), sitemap);
+    console.log("  ✓ /sitemap.xml");
+  }
+
+  // robots.txt — mindent enged, sitemap-hivatkozással.
+  {
+    const robots = `User-agent: *\nAllow: /\nDisallow: /strapi/\n\nSitemap: ${SITE_URL}/sitemap.xml\n`;
+    fs.writeFileSync(path.resolve(outDir, "robots.txt"), robots);
+    console.log("  ✓ /robots.txt");
   }
 
   console.log(`\nPre-rendered ${generated + 1} pages successfully.`);

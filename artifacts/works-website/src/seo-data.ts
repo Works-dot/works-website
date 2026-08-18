@@ -14,6 +14,23 @@ export interface PageMeta {
   title: string;
   description: string;
   ogImage?: string;
+  /** Route path, e.g. "/blog/cikk-slug" — used for canonical / og:url. */
+  path?: string;
+  /** og:type — "article" for blog posts & case studies, otherwise "website". */
+  type?: "website" | "article";
+  /** Extra data for BlogPosting JSON-LD on blog articles. */
+  article?: { publishedTime?: string; author?: string };
+  /** Breadcrumb trail for BreadcrumbList JSON-LD (home is added automatically). */
+  breadcrumbs?: { name: string; path: string }[];
+}
+
+export const SITE_URL =
+  (typeof process !== "undefined" && process.env?.SITE_URL) ||
+  "https://workspaceworks-website-production.up.railway.app";
+
+function absoluteUrl(pathOrUrl: string): string {
+  if (/^https?:\/\//.test(pathOrUrl)) return pathOrUrl;
+  return `${SITE_URL}${pathOrUrl.startsWith("/") ? "" : "/"}${pathOrUrl}`;
 }
 
 function withOverride(base: PageMeta, seo?: SeoOverride | null): PageMeta {
@@ -80,14 +97,15 @@ const pageSeoOverrides: Record<string, SeoOverride | null | undefined> = {
 
 export function getPageMeta(route: string): PageMeta {
   if (staticMeta[route]) {
-    return withOverride(staticMeta[route], pageSeoOverrides[route]);
+    const base = withOverride(staticMeta[route], pageSeoOverrides[route]);
+    return { ...base, path: route, type: "website" };
   }
 
   const projectMatch = route.match(/^\/projektek\/(.+)$/);
   if (projectMatch) {
     const project = fallbackProjects.find((p) => p.slug === projectMatch[1]);
     if (project) {
-      return withOverride(
+      const base = withOverride(
         {
           title: formatTitle(project.title),
           description: project.caseStudy.heroSubtitle,
@@ -95,6 +113,15 @@ export function getPageMeta(route: string): PageMeta {
         },
         project.seo
       );
+      return {
+        ...base,
+        path: route,
+        type: "article",
+        breadcrumbs: [
+          { name: "Projektek", path: "/projektek" },
+          { name: project.title, path: route },
+        ],
+      };
     }
   }
 
@@ -102,7 +129,7 @@ export function getPageMeta(route: string): PageMeta {
   if (blogMatch) {
     const post = fallbackBlogPosts.find((p) => p.slug === blogMatch[1]);
     if (post) {
-      return withOverride(
+      const base = withOverride(
         {
           title: formatTitle(post.title),
           description: post.excerpt,
@@ -110,6 +137,16 @@ export function getPageMeta(route: string): PageMeta {
         },
         post.seo
       );
+      return {
+        ...base,
+        path: route,
+        type: "article",
+        article: { publishedTime: post.date, author: post.author || undefined },
+        breadcrumbs: [
+          { name: "Blog", path: "/blog" },
+          { name: post.title, path: route },
+        ],
+      };
     }
   }
 
@@ -117,13 +154,19 @@ export function getPageMeta(route: string): PageMeta {
   if (serviceMatch) {
     const service = fallbackServices.find((s) => s.slug === serviceMatch[1]);
     if (service) {
-      return withOverride(
+      const base = withOverride(
         {
           title: formatTitle(service.title),
           description: service.heroDescription,
         },
         service.seo
       );
+      return {
+        ...base,
+        path: route,
+        type: "website",
+        breadcrumbs: [{ name: service.title, path: route }],
+      };
     }
   }
 
@@ -131,35 +174,127 @@ export function getPageMeta(route: string): PageMeta {
   if (careerMatch) {
     const position = fallbackPositions.find((p) => p.slug === careerMatch[1]);
     if (position) {
-      return withOverride(
+      const base = withOverride(
         {
           title: formatTitle(`${position.title} — Karrier`),
           description: position.excerpt,
         },
         position.seo
       );
+      return {
+        ...base,
+        path: route,
+        type: "website",
+        breadcrumbs: [
+          { name: "Karrier", path: "/karrier" },
+          { name: position.title, path: route },
+        ],
+      };
     }
   }
 
-  return { title: DEFAULT_TITLE, description: DEFAULT_DESCRIPTION };
+  return { title: DEFAULT_TITLE, description: DEFAULT_DESCRIPTION, type: "website" };
 }
 
-export function buildMetaTags(meta: PageMeta, assetMap?: Map<string, string>): string {
+function jsonLdScript(data: object): string {
+  // "<" escape-elve, hogy a JSON ne tudjon kitörni a <script> tagből.
+  const json = JSON.stringify(data).replace(/</g, "\\u003c");
+  return `<script type="application/ld+json">${json}</script>`;
+}
+
+export function buildJsonLd(meta: PageMeta): string[] {
+  const scripts: string[] = [];
+
+  scripts.push(
+    jsonLdScript({
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      name: "Works.",
+      url: SITE_URL,
+      logo: absoluteUrl("/favicon.svg"),
+      description: DEFAULT_DESCRIPTION,
+    })
+  );
+
+  scripts.push(
+    jsonLdScript({
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      name: "Works.",
+      url: SITE_URL,
+      inLanguage: "hu",
+    })
+  );
+
+  if (meta.breadcrumbs && meta.breadcrumbs.length > 0) {
+    scripts.push(
+      jsonLdScript({
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "Főoldal", item: SITE_URL },
+          ...meta.breadcrumbs.map((crumb, i) => ({
+            "@type": "ListItem",
+            position: i + 2,
+            name: crumb.name,
+            item: absoluteUrl(crumb.path),
+          })),
+        ],
+      })
+    );
+  }
+
+  if (meta.article) {
+    const posting: Record<string, unknown> = {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      headline: meta.title.replace(/ \| Works\.$/, ""),
+      description: meta.description,
+      inLanguage: "hu",
+      image: absoluteUrl(meta.ogImage || DEFAULT_OG_IMAGE),
+      publisher: { "@type": "Organization", name: "Works.", url: SITE_URL },
+      mainEntityOfPage: meta.path ? absoluteUrl(meta.path) : SITE_URL,
+    };
+    if (meta.article.publishedTime) posting.datePublished = meta.article.publishedTime;
+    if (meta.article.author) posting.author = { "@type": "Person", name: meta.article.author };
+    scripts.push(jsonLdScript(posting));
+  }
+
+  return scripts;
+}
+
+export function buildMetaTags(meta: PageMeta): string {
   const escaped = (s: string) =>
     s.replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;");
+
+  const ogImage = absoluteUrl(meta.ogImage || DEFAULT_OG_IMAGE);
+  const ogType = meta.type === "article" ? "article" : "website";
+  const canonical = meta.path ? absoluteUrl(meta.path) : undefined;
 
   const tags = [
     `<title>${escaped(meta.title)}</title>`,
     `<meta name="description" content="${escaped(meta.description)}" />`,
+    ...(canonical ? [`<link rel="canonical" href="${escaped(canonical)}" />`] : []),
     `<meta property="og:title" content="${escaped(meta.title)}" />`,
     `<meta property="og:description" content="${escaped(meta.description)}" />`,
-    `<meta property="og:type" content="website" />`,
+    `<meta property="og:type" content="${ogType}" />`,
+    ...(canonical ? [`<meta property="og:url" content="${escaped(canonical)}" />`] : []),
     `<meta property="og:locale" content="hu_HU" />`,
     `<meta property="og:site_name" content="Works." />`,
+    `<meta property="og:image" content="${escaped(ogImage)}" />`,
+    `<meta name="twitter:card" content="summary_large_image" />`,
+    `<meta name="twitter:title" content="${escaped(meta.title)}" />`,
+    `<meta name="twitter:description" content="${escaped(meta.description)}" />`,
+    `<meta name="twitter:image" content="${escaped(ogImage)}" />`,
   ];
 
-  const ogImage = meta.ogImage || DEFAULT_OG_IMAGE;
-  tags.push(`<meta property="og:image" content="${escaped(ogImage)}" />`);
+  if (meta.article?.publishedTime) {
+    tags.push(
+      `<meta property="article:published_time" content="${escaped(meta.article.publishedTime)}" />`
+    );
+  }
+
+  tags.push(...buildJsonLd(meta));
 
   return tags.join("\n    ");
 }
