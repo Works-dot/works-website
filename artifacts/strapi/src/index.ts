@@ -1175,6 +1175,108 @@ async function backfillFeaturedProjects(strapi: any) {
   noteBootstrapContentChange("featured projects backfill");
 }
 
+/**
+ * Kitölti a blogcikkek üres szerző mezőjét a cikk végi
+ * „A szerző <Név>, …" zárómondat alapján (a mondat maradhat a helyén).
+ * Konzervatív: csak pontos csapattag-egyezésnél (vagy explicit aliasnál) tölt ki,
+ * meglévő szerzőt sosem ír felül. Flag-gated, újrafuttatható.
+ */
+async function backfillBlogAuthors(strapi: any) {
+  const store = strapi.store({ type: "plugin", name: "migrations" });
+  const FLAG = "blog_author_backfill_v1";
+  const done = await store.get({ key: FLAG });
+  if (done) {
+    strapi.log.info("Blog author backfill: already completed (flag set) — skipping");
+    return;
+  }
+
+  // A cikkben szereplő név → csapattag neve (névváltozás miatti alias)
+  const NAME_ALIASES: Record<string, string> = {
+    "Kemper-Ángyán Eszter": "Ángyán Eszter",
+  };
+
+  // „A szerző Maczinkó Ákos, …" vagy „A szerző **Maczinkó Ákos**, …"
+  const AUTHOR_RE = /A szerz[őo]\s+\*{0,2}([^,*\n]{2,60}?)\*{0,2}\s*,/;
+
+  const posts = await strapi.documents("api::blog-post.blog-post").findMany({
+    status: "published",
+    populate: { contentBlocks: true, author: true },
+    pagination: { pageSize: 200 },
+  });
+
+  if (!posts || posts.length === 0) {
+    strapi.log.info("Blog author backfill: no published blog posts found — will retry on next restart");
+    return;
+  }
+
+  const memberRows = await strapi.db
+    .query("api::team-member.team-member")
+    .findMany({ select: ["id", "name", "publishedAt"] });
+
+  const findMemberRow = (name: string, published: boolean) => {
+    const rows = memberRows.filter((m: any) => m.name === name);
+    if (rows.length === 0) return null;
+    return (
+      rows.find((m: any) => (published ? m.publishedAt : !m.publishedAt)) || rows[0]
+    );
+  };
+
+  let updated = 0;
+  let errors = 0;
+
+  for (const post of posts) {
+    if (post.author) continue; // meglévő szerzőt nem írunk felül
+
+    let extracted: string | null = null;
+    for (const block of post.contentBlocks || []) {
+      const body = typeof block?.body === "string" ? block.body : "";
+      const m = body.match(AUTHOR_RE);
+      if (m) extracted = m[1].trim();
+    }
+    if (!extracted) continue;
+
+    const memberName = NAME_ALIASES[extracted] || extracted;
+    if (!findMemberRow(memberName, true) && !findMemberRow(memberName, false)) {
+      strapi.log.warn(
+        `Blog author backfill: "${post.slug}" — no team member named "${memberName}" (from "${extracted}") — leaving empty`,
+      );
+      continue;
+    }
+
+    try {
+      // DB-rétegben, soronként: a draft sor a draft taghoz, a publikált a publikálthoz.
+      // Így nem kell documents().update()+publish(), ami függő piszkozatokat élesítene.
+      const postRows = await strapi.db
+        .query("api::blog-post.blog-post")
+        .findMany({ where: { documentId: post.documentId }, select: ["id", "publishedAt"] });
+      for (const row of postRows) {
+        const member = findMemberRow(memberName, Boolean(row.publishedAt));
+        await strapi.db
+          .query("api::blog-post.blog-post")
+          .update({ where: { id: row.id }, data: { author: member.id } });
+      }
+      updated++;
+      strapi.log.info(`Blog author backfill: "${post.slug}" → ${memberName}`);
+    } catch (err: any) {
+      errors++;
+      strapi.log.error(`Blog author backfill: failed for "${post.slug}": ${err.message}`);
+    }
+  }
+
+  if (errors > 0) {
+    strapi.log.warn(
+      `Blog author backfill: incomplete (${errors} error(s)) — flag not set, will retry on next restart`,
+    );
+    return;
+  }
+
+  await store.set({ key: FLAG, value: true });
+  strapi.log.info(`Blog author backfill: completed (${updated} post(s) updated)`);
+  if (updated > 0) {
+    noteBootstrapContentChange("blog author backfill");
+  }
+}
+
 async function backfillFeaturedBlogPosts(strapi: any) {
   const store = strapi.store({ type: "plugin", name: "migrations" });
   const done = await store.get({ key: "featured_blog_posts_backfill_v1" });
@@ -2018,6 +2120,7 @@ export default {
           .then(() => seedAboutGalleryImages(strapi))
           .then(() => deleteSeedSampleBlogPosts(strapi))
           .then(() => migrateSquarespacePosts(strapi))
+          .then(() => backfillBlogAuthors(strapi))
           .then(() => strapi.log.info("Bootstrap tasks completed successfully"))
           .catch((err: any) => {
             strapi.log.error(`Bootstrap task failed: ${err.message}`);
@@ -2042,6 +2145,7 @@ export default {
       await seedAboutGalleryImages(strapi);
       await deleteSeedSampleBlogPosts(strapi);
       await migrateSquarespacePosts(strapi);
+      await backfillBlogAuthors(strapi);
       strapi.log.info("Bootstrap tasks completed successfully");
       markWebsiteAutoRebuildReady(strapi);
     }

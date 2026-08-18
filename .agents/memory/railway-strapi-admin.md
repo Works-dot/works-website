@@ -19,3 +19,6 @@ description: How the Railway (prod) Strapi admin relates to the Replit (dev) one
 
 ## ADMIN_JWT_SECRET is NOT the password
 - It's the key Strapi uses to sign admin session tokens. Changing it logs sessions out but never causes "invalid credentials" on login (that's the bcrypt password check). Unrelated to login passwords.
+
+## Dev vs prod CONTENT is different (Aug 2026)
+The dev Strapi DB holds sample/demo content (e.g. 6 fake projects like `banki-applikacio`, service slug `ui-design`); prod holds the real content (21 real projects, 6 services like `ux-ui-design`). Never judge a prod bug by checking a dev slug on the prod site — a prod "missing page" may simply be a dev-only slug. Audit prod using slugs fetched from the prod Strapi API.

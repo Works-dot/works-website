@@ -120,10 +120,12 @@ export default function BlogPost() {
             </motion.div>
 
             <div className="mt-10 flex flex-wrap gap-8 text-white/60 text-sm">
-              <div className="flex items-center gap-2">
-                <User className="w-4 h-4" />
-                <span>{post.author}</span>
-              </div>
+              {post.author && (
+                <div className="flex items-center gap-2">
+                  <User className="w-4 h-4" />
+                  <span>{post.author}</span>
+                </div>
+              )}
               <div className="flex items-center gap-2">
                 <Calendar className="w-4 h-4" />
                 <span>{post.date}</span>
