@@ -36,6 +36,12 @@ async function prerender() {
     ...positions.map((p) => `/karrier/${p.slug}`),
   ];
 
+  if (projects.length === 0 || blogPosts.length === 0 || services.length === 0) {
+    throw new Error(
+      "Prerender safety check failed: projects, blog posts, or services list is empty — refusing to build a site with missing content."
+    );
+  }
+
   const allRoutes = [...staticRoutes, ...dynamicRoutes];
   let generated = 0;
 
@@ -65,7 +71,22 @@ async function prerender() {
     console.log(`  ✓ ${route}`);
   }
 
-  console.log(`\nPre-rendered ${generated} pages successfully.`);
+  // Külön 404-es oldal: a szerver ezt adja vissza 404-es státusszal
+  // az ismeretlen címekre a főoldal (soft-404) helyett.
+  {
+    const { html } = render("/__not_found__");
+    let page = template;
+    page = page.replace(/<title>.*?<\/title>/, "");
+    page = page.replace(
+      "<!--ssr-head-->",
+      "<title>Az oldal nem található | Works.</title>\n<meta name=\"robots\" content=\"noindex\">"
+    );
+    page = page.replace("<!--ssr-outlet-->", html);
+    fs.writeFileSync(path.resolve(outDir, "404.html"), page);
+    console.log("  ✓ /404.html");
+  }
+
+  console.log(`\nPre-rendered ${generated + 1} pages successfully.`);
 }
 
 prerender().catch((err) => {

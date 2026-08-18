@@ -42,11 +42,18 @@ app.use(
   }),
 );
 
+const notFoundPage = path.join(distDir, "404.html");
+
 app.get(/.*/, (req, res) => {
   const candidate = path.join(distDir, req.path, "index.html");
   res.sendFile(candidate, (err) => {
     if (err) {
-      res.sendFile(path.join(distDir, "index.html"));
+      // Ismeretlen cím: 404-es státusz + 404-es oldal (ne a főoldal 200-zal).
+      if (fs.existsSync(notFoundPage)) {
+        res.status(404).sendFile(notFoundPage);
+      } else {
+        res.status(404).sendFile(path.join(distDir, "index.html"));
+      }
     }
   });
 });
