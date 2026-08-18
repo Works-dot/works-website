@@ -1277,6 +1277,109 @@ async function backfillBlogAuthors(strapi: any) {
   }
 }
 
+async function backfillBlogAuthorsV2(strapi: any) {
+  // Második kör: a v1 csak az „A szerző Név, …" formátumot ismerte fel.
+  // Itt a további záró aláírás-formátumokat dolgozzuk fel:
+  //   „Szerző: Név, …"  és  „A cikket Név, … írta"
+  // A csak keresztneves aláírás („Ákos") szándékosan kimarad — nem egyértelmű.
+  const store = strapi.store({ type: "plugin", name: "migrations" });
+  const FLAG = "blog_author_backfill_v2";
+  const done = await store.get({ key: FLAG });
+  if (done) {
+    strapi.log.info("Blog author backfill v2: already completed (flag set) — skipping");
+    return;
+  }
+
+  const NAME_ALIASES: Record<string, string> = {
+    "Kemper-Ángyán Eszter": "Ángyán Eszter",
+  };
+
+  const AUTHOR_RES = [
+    // „Szerző: Székely Zsuzsa, a Works Experience Designer kollégája"
+    /Szerz[őo]:\s*\*{0,2}([^,*\n]{2,60}?)\*{0,2}\s*,/,
+    // „A cikket Bartha Gizella, a Works. Senior Experience Designer kollégája írta."
+    /A cikket\s+\*{0,2}([^,*\n]{2,60}?)\*{0,2}\s*,[^\n]{0,120}?írta/,
+  ];
+
+  const posts = await strapi.documents("api::blog-post.blog-post").findMany({
+    status: "published",
+    populate: { contentBlocks: true, author: true },
+    pagination: { pageSize: 200 },
+  });
+
+  if (!posts || posts.length === 0) {
+    strapi.log.info("Blog author backfill v2: no published blog posts found — will retry on next restart");
+    return;
+  }
+
+  const memberRows = await strapi.db
+    .query("api::team-member.team-member")
+    .findMany({ select: ["id", "name", "publishedAt"] });
+
+  const findMemberRow = (name: string, published: boolean) => {
+    const rows = memberRows.filter((m: any) => m.name === name);
+    if (rows.length === 0) return null;
+    return (
+      rows.find((m: any) => (published ? m.publishedAt : !m.publishedAt)) || rows[0]
+    );
+  };
+
+  let updated = 0;
+  let errors = 0;
+
+  for (const post of posts) {
+    if (post.author) continue; // meglévő szerzőt nem írunk felül
+
+    let extracted: string | null = null;
+    for (const block of post.contentBlocks || []) {
+      const body = typeof block?.body === "string" ? block.body : "";
+      for (const re of AUTHOR_RES) {
+        const m = body.match(re);
+        if (m) extracted = m[1].trim();
+      }
+    }
+    if (!extracted) continue;
+
+    const memberName = NAME_ALIASES[extracted] || extracted;
+    if (!findMemberRow(memberName, true) && !findMemberRow(memberName, false)) {
+      strapi.log.warn(
+        `Blog author backfill v2: "${post.slug}" — no team member named "${memberName}" (from "${extracted}") — leaving empty`,
+      );
+      continue;
+    }
+
+    try {
+      const postRows = await strapi.db
+        .query("api::blog-post.blog-post")
+        .findMany({ where: { documentId: post.documentId }, select: ["id", "publishedAt"] });
+      for (const row of postRows) {
+        const member = findMemberRow(memberName, Boolean(row.publishedAt));
+        await strapi.db
+          .query("api::blog-post.blog-post")
+          .update({ where: { id: row.id }, data: { author: member.id } });
+      }
+      updated++;
+      strapi.log.info(`Blog author backfill v2: "${post.slug}" → ${memberName}`);
+    } catch (err: any) {
+      errors++;
+      strapi.log.error(`Blog author backfill v2: failed for "${post.slug}": ${err.message}`);
+    }
+  }
+
+  if (errors > 0) {
+    strapi.log.warn(
+      `Blog author backfill v2: incomplete (${errors} error(s)) — flag not set, will retry on next restart`,
+    );
+    return;
+  }
+
+  await store.set({ key: FLAG, value: true });
+  strapi.log.info(`Blog author backfill v2: completed (${updated} post(s) updated)`);
+  if (updated > 0) {
+    noteBootstrapContentChange("blog author backfill v2");
+  }
+}
+
 async function backfillFeaturedBlogPosts(strapi: any) {
   const store = strapi.store({ type: "plugin", name: "migrations" });
   const done = await store.get({ key: "featured_blog_posts_backfill_v1" });
@@ -2121,6 +2224,7 @@ export default {
           .then(() => deleteSeedSampleBlogPosts(strapi))
           .then(() => migrateSquarespacePosts(strapi))
           .then(() => backfillBlogAuthors(strapi))
+          .then(() => backfillBlogAuthorsV2(strapi))
           .then(() => strapi.log.info("Bootstrap tasks completed successfully"))
           .catch((err: any) => {
             strapi.log.error(`Bootstrap task failed: ${err.message}`);
@@ -2146,6 +2250,7 @@ export default {
       await deleteSeedSampleBlogPosts(strapi);
       await migrateSquarespacePosts(strapi);
       await backfillBlogAuthors(strapi);
+      await backfillBlogAuthorsV2(strapi);
       strapi.log.info("Bootstrap tasks completed successfully");
       markWebsiteAutoRebuildReady(strapi);
     }
