@@ -93,6 +93,12 @@ async function prerender() {
 
   // sitemap.xml — minden prerenderelt oldal; blogcikkeknél lastmod a publikálás dátuma.
   {
+    const escapeXml = (s) =>
+      String(s)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;");
     const lastmodByRoute = new Map(
       blogPosts.map((p) => [`/blog/${p.slug}`, p.date])
     );
@@ -102,8 +108,8 @@ async function prerender() {
         const lastmod = lastmodByRoute.get(route);
         return [
           "  <url>",
-          `    <loc>${loc}</loc>`,
-          ...(lastmod ? [`    <lastmod>${lastmod}</lastmod>`] : []),
+          `    <loc>${escapeXml(loc)}</loc>`,
+          ...(lastmod ? [`    <lastmod>${escapeXml(lastmod)}</lastmod>`] : []),
           "  </url>",
         ].join("\n");
       })

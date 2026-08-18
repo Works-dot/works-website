@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import { useLocation } from "wouter";
 import { getPageMeta, SITE_URL } from "../seo-data";
@@ -15,6 +16,12 @@ function absoluteUrl(pathOrUrl: string): string {
 
 export default function SEOHead() {
   const [location] = useLocation();
+
+  // A prerenderelt (data-ssr jelölésű) title/meta/link tagek eltávolítása,
+  // hogy a Helmet által kezeltekkel ne duplikálódjanak hidratálás után.
+  useEffect(() => {
+    document.querySelectorAll("head [data-ssr]").forEach((el) => el.remove());
+  }, []);
   const { data: settings } = useStrapiQuery<GlobalSettings>("globalSettings", getGlobalSettings, fallbackGlobalSettings);
 
   if (isSSR) return null;

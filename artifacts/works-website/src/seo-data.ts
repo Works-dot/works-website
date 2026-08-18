@@ -24,9 +24,15 @@ export interface PageMeta {
   breadcrumbs?: { name: string; path: string }[];
 }
 
-export const SITE_URL =
+const configuredSiteUrl =
+  (typeof import.meta !== "undefined" &&
+    (import.meta as { env?: Record<string, string> }).env?.VITE_SITE_URL) ||
   (typeof process !== "undefined" && process.env?.SITE_URL) ||
-  "https://workspaceworks-website-production.up.railway.app";
+  "";
+
+export const SITE_URL = (
+  configuredSiteUrl || "https://workspaceworks-website-production.up.railway.app"
+).replace(/\/+$/, "");
 
 function absoluteUrl(pathOrUrl: string): string {
   if (/^https?:\/\//.test(pathOrUrl)) return pathOrUrl;
@@ -271,26 +277,28 @@ export function buildMetaTags(meta: PageMeta): string {
   const ogType = meta.type === "article" ? "article" : "website";
   const canonical = meta.path ? absoluteUrl(meta.path) : undefined;
 
+  // data-ssr jelölés: a kliensoldali SEOHead hidratáláskor eltávolítja ezeket,
+  // hogy a Helmet által kezelt tagekkel ne duplikálódjanak.
   const tags = [
-    `<title>${escaped(meta.title)}</title>`,
-    `<meta name="description" content="${escaped(meta.description)}" />`,
-    ...(canonical ? [`<link rel="canonical" href="${escaped(canonical)}" />`] : []),
-    `<meta property="og:title" content="${escaped(meta.title)}" />`,
-    `<meta property="og:description" content="${escaped(meta.description)}" />`,
-    `<meta property="og:type" content="${ogType}" />`,
-    ...(canonical ? [`<meta property="og:url" content="${escaped(canonical)}" />`] : []),
-    `<meta property="og:locale" content="hu_HU" />`,
-    `<meta property="og:site_name" content="Works." />`,
-    `<meta property="og:image" content="${escaped(ogImage)}" />`,
-    `<meta name="twitter:card" content="summary_large_image" />`,
-    `<meta name="twitter:title" content="${escaped(meta.title)}" />`,
-    `<meta name="twitter:description" content="${escaped(meta.description)}" />`,
-    `<meta name="twitter:image" content="${escaped(ogImage)}" />`,
+    `<title data-ssr>${escaped(meta.title)}</title>`,
+    `<meta data-ssr name="description" content="${escaped(meta.description)}" />`,
+    ...(canonical ? [`<link data-ssr rel="canonical" href="${escaped(canonical)}" />`] : []),
+    `<meta data-ssr property="og:title" content="${escaped(meta.title)}" />`,
+    `<meta data-ssr property="og:description" content="${escaped(meta.description)}" />`,
+    `<meta data-ssr property="og:type" content="${ogType}" />`,
+    ...(canonical ? [`<meta data-ssr property="og:url" content="${escaped(canonical)}" />`] : []),
+    `<meta data-ssr property="og:locale" content="hu_HU" />`,
+    `<meta data-ssr property="og:site_name" content="Works." />`,
+    `<meta data-ssr property="og:image" content="${escaped(ogImage)}" />`,
+    `<meta data-ssr name="twitter:card" content="summary_large_image" />`,
+    `<meta data-ssr name="twitter:title" content="${escaped(meta.title)}" />`,
+    `<meta data-ssr name="twitter:description" content="${escaped(meta.description)}" />`,
+    `<meta data-ssr name="twitter:image" content="${escaped(ogImage)}" />`,
   ];
 
   if (meta.article?.publishedTime) {
     tags.push(
-      `<meta property="article:published_time" content="${escaped(meta.article.publishedTime)}" />`
+      `<meta data-ssr property="article:published_time" content="${escaped(meta.article.publishedTime)}" />`
     );
   }
 
