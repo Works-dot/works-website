@@ -86,6 +86,7 @@ function BlogGridCard({ slug, title, excerpt, date, image, imageAlt, author, rea
       <Link href={`/blog/${slug}`} className="group flex flex-col bg-white overflow-hidden border border-works-muted/30 hover:border-works-primary/30 hover:shadow-lg transition-all duration-300">
         <div className="w-full aspect-[4/3] overflow-hidden">
           <img
+            loading="lazy"
             src={image}
             alt={imageAlt || title}
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"

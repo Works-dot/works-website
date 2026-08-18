@@ -39,12 +39,28 @@ app.use(
   express.static(distDir, {
     extensions: ["html"],
     index: "index.html",
+    setHeaders: (res, filePath) => {
+      // A Vite hash-elt assetjei (dist/public/assets/*) örökre cache-elhetők;
+      // a HTML és a generált sitemap/robots mindig revalidálódjon.
+      if (filePath.includes(`${path.sep}assets${path.sep}`)) {
+        res.setHeader("Cache-Control", "public, max-age=31536000, immutable");
+      } else if (
+        filePath.endsWith(".html") ||
+        filePath.endsWith("sitemap.xml") ||
+        filePath.endsWith("robots.txt")
+      ) {
+        res.setHeader("Cache-Control", "no-cache");
+      } else {
+        res.setHeader("Cache-Control", "public, max-age=3600");
+      }
+    },
   }),
 );
 
 const notFoundPage = path.join(distDir, "404.html");
 
 app.get(/.*/, (req, res) => {
+  res.setHeader("Cache-Control", "no-cache");
   const candidate = path.join(distDir, req.path, "index.html");
   res.sendFile(candidate, (err) => {
     if (err) {

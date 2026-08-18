@@ -1,11 +1,12 @@
 import { renderToString } from "react-dom/server";
 import { HelmetProvider } from "react-helmet-async";
 import App from "./App";
+import { routes } from "./routes.static";
 
 export function render(url: string) {
   const html = renderToString(
     <HelmetProvider>
-      <App ssrPath={url} />
+      <App ssrPath={url} routes={routes} />
     </HelmetProvider>
   );
   return { html };

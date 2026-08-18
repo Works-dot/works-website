@@ -182,6 +182,7 @@ export default function Karrier() {
                     <div className="aspect-[16/10] overflow-hidden bg-works-muted/20">
                       {card.image ? (
                         <img
+                          loading="lazy"
                           src={card.image}
                           alt={card.imageAlt || card.title}
                           className="w-full h-full object-cover"

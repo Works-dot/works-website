@@ -24,21 +24,26 @@ const highlightMarkdownClasses = [
   "prose-a:text-works-primary prose-a:font-semibold prose-a:no-underline hover:prose-a:underline",
 ].join(" ");
 
+const remarkPlugins = [remarkGfm];
+
+/** Egységes markdown-megjelenítő — egy helyen konfigurálva. */
+export function Markdown({ className, children }: { className: string; children: string }) {
+  return (
+    <div className={className}>
+      <ReactMarkdown remarkPlugins={remarkPlugins}>{children}</ReactMarkdown>
+    </div>
+  );
+}
+
 export function ContentBlock({ block }: { block: ContentBlockType }) {
   if (block.type === "text") {
-    return (
-      <div className={markdownClasses}>
-        <ReactMarkdown remarkPlugins={[remarkGfm]}>{block.content}</ReactMarkdown>
-      </div>
-    );
+    return <Markdown className={markdownClasses}>{block.content}</Markdown>;
   }
 
   if (block.type === "highlight") {
     return (
       <blockquote className="border-l-4 border-works-primary bg-works-light px-8 py-6 my-10">
-        <div className={highlightMarkdownClasses}>
-          <ReactMarkdown remarkPlugins={[remarkGfm]}>{block.content}</ReactMarkdown>
-        </div>
+        <Markdown className={highlightMarkdownClasses}>{block.content}</Markdown>
       </blockquote>
     );
   }
@@ -50,6 +55,7 @@ export function ContentBlock({ block }: { block: ContentBlockType }) {
           <img
             src={block.content}
             alt={block.alt || block.caption || ""}
+            loading="lazy"
             className="w-full h-auto object-cover"
           />
         </div>

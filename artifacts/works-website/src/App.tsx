@@ -1,20 +1,10 @@
+import { Suspense } from "react";
 import { Switch, Route, Router as WouterRouter } from "wouter";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import NotFound from "@/pages/not-found";
-import Home from "@/pages/Home";
-import Projektek from "@/pages/Projektek";
-import CaseStudy from "@/pages/CaseStudy";
-import Blog from "@/pages/Blog";
-import BlogPost from "@/pages/BlogPost";
-import ServicePage from "@/pages/ServicePage";
-import About from "@/pages/About";
-import Contact from "@/pages/Contact";
-import Karrier from "@/pages/Karrier";
-import Adatkezeles from "@/pages/Adatkezeles";
-import CareerDetail from "@/pages/CareerDetail";
 import { ScrollToTop } from "@/components/ScrollToTop";
+import type { AppRoutes } from "./routes.types";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -25,26 +15,26 @@ const queryClient = new QueryClient({
   },
 });
 
-function Router() {
+function Router({ routes }: { routes: AppRoutes }) {
   return (
     <Switch>
-      <Route path="/" component={Home} />
-      <Route path="/projektek" component={Projektek} />
-      <Route path="/projektek/:slug" component={CaseStudy} />
-      <Route path="/blog" component={Blog} />
-      <Route path="/blog/:slug" component={BlogPost} />
-      <Route path="/szolgaltatasok/:slug" component={ServicePage} />
-      <Route path="/rolunk" component={About} />
-      <Route path="/kapcsolat" component={Contact} />
-      <Route path="/karrier" component={Karrier} />
-      <Route path="/adatkezeles" component={Adatkezeles} />
-      <Route path="/karrier/:slug" component={CareerDetail} />
-      <Route component={NotFound} />
+      <Route path="/" component={routes.Home} />
+      <Route path="/projektek" component={routes.Projektek} />
+      <Route path="/projektek/:slug" component={routes.CaseStudy} />
+      <Route path="/blog" component={routes.Blog} />
+      <Route path="/blog/:slug" component={routes.BlogPost} />
+      <Route path="/szolgaltatasok/:slug" component={routes.ServicePage} />
+      <Route path="/rolunk" component={routes.About} />
+      <Route path="/kapcsolat" component={routes.Contact} />
+      <Route path="/karrier" component={routes.Karrier} />
+      <Route path="/adatkezeles" component={routes.Adatkezeles} />
+      <Route path="/karrier/:slug" component={routes.CareerDetail} />
+      <Route component={routes.NotFound} />
     </Switch>
   );
 }
 
-function App({ ssrPath }: { ssrPath?: string }) {
+function App({ ssrPath, routes }: { ssrPath?: string; routes: AppRoutes }) {
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider delayDuration={300}>
@@ -53,7 +43,9 @@ function App({ ssrPath }: { ssrPath?: string }) {
           ssrPath={ssrPath}
         >
           <ScrollToTop />
-          <Router />
+          <Suspense fallback={null}>
+            <Router routes={routes} />
+          </Suspense>
         </WouterRouter>
         <Toaster />
       </TooltipProvider>

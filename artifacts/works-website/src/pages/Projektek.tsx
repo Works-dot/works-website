@@ -83,6 +83,7 @@ function ProjectGridCard({ slug, title, tags, description, image, imageAlt }: {
       <Link href={`/projektek/${slug}`} className="group block">
         <div className="overflow-hidden bg-works-light aspect-[4/3]">
           <img
+            loading="lazy"
             src={image}
             alt={imageAlt || title}
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"

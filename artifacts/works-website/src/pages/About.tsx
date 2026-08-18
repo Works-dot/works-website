@@ -188,6 +188,7 @@ export default function About() {
                     >
                       <div className="overflow-hidden">
                         <img
+                          loading="lazy"
                           src={img.src}
                           alt={img.alt}
                           className="w-full aspect-[4/3] object-cover hover:scale-105 transition-transform duration-500"
