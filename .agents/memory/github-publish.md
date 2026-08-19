@@ -32,3 +32,13 @@ Railway auto-deploys from GitHub `Works-dot/works-website` `main`. Getting repl 
 5. `POST /git/trees` with `base_tree` = remote tree + flat path entries (no recursive tree building needed).
 6. `POST /git/commits` (tree, parents:[remoteSha]) → `PATCH /git/refs/heads/main`.
 7. Verify: returned tree sha must equal `git rev-parse HEAD^{tree}`.
+
+## Connector runtime quirk
+
+Keep each mutating GitHub `proxyFetch` call in a separate `CodeExecution` block. Multiple sequential GitHub calls inside one impure function can fail after execution with `Error replaying durable ptc: null does not match type Pattern`, leaving the result ambiguous.
+
+For a small set of text files, `POST /git/trees` accepts flat entries with inline `content`, so one request can create every blob and the tree. Then create the commit in a second block and fast-forward the ref in a third.
+
+**Why:** the connector replay failure occurred repeatedly with multi-request blocks, while one-request blocks were deterministic and allowed every intermediate SHA to be verified.
+
+**How to apply:** verify the remote base tree matches a local tree first, then use separate create-tree, create-commit, and update-ref blocks. Never force-update the branch.
