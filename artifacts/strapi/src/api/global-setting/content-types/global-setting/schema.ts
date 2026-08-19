@@ -81,6 +81,11 @@ export default {
       "type": "media",
       "multiple": false,
       "allowedTypes": ["images"]
+    },
+    "englishSiteEnabled": {
+      "type": "boolean",
+      "default": false,
+      "required": false
     }
   }
 };

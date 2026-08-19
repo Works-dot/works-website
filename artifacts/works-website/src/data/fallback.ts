@@ -169,6 +169,7 @@ const hardcodedServices: Service[] = rawServices.map((s) => ({
 
 const hardcodedGlobalSettings: GlobalSettings = {
   siteName: "Works.",
+  englishSiteEnabled: false,
   contactEmail: "hello@works.hu",
   contactPhone: "+36 1 234 5678",
   address: "1054 Budapest, Szabadság tér 7.",
@@ -303,7 +304,13 @@ export const fallbackServices: Service[] = hasData("services")
   : hardcodedServices;
 
 export const fallbackGlobalSettings: GlobalSettings = hasData("globalSettings")
-  ? (strapiCache.globalSettings as GlobalSettings)
+  ? {
+      ...hardcodedGlobalSettings,
+      ...(strapiCache.globalSettings as Partial<GlobalSettings>),
+      // Old snapshots predate the publication gate; EN must fail closed.
+      englishSiteEnabled:
+        (strapiCache.globalSettings as Partial<GlobalSettings>).englishSiteEnabled === true,
+    }
   : hardcodedGlobalSettings;
 
 export const fallbackContactPage: ContactPageData = hasData("contactPage")

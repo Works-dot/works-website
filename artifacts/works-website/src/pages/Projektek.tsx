@@ -10,6 +10,7 @@ import { useStrapiQuery } from "@/hooks/useStrapiQuery";
 import { getProjects } from "@/lib/strapi";
 import type { Project } from "@/lib/strapi";
 import { fallbackProjects } from "@/data/fallback";
+import { useI18n } from "@/i18n";
 
 function FeaturedProjectCard({ slug, title, tags, description, image, imageAlt }: {
   slug: string;
@@ -19,6 +20,7 @@ function FeaturedProjectCard({ slug, title, tags, description, image, imageAlt }
   image: string;
   imageAlt?: string;
 }) {
+  const { t } = useI18n();
   return (
     <motion.div
       layout
@@ -54,7 +56,7 @@ function FeaturedProjectCard({ slug, title, tags, description, image, imageAlt }
             {description}
           </p>
           <span className="inline-flex items-center gap-2 text-works-primary font-semibold text-sm">
-            Megnézem az esettanulmányt
+            {t("cta.viewCaseStudy")}
             <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
           </span>
         </div>
@@ -71,6 +73,7 @@ function ProjectGridCard({ slug, title, tags, description, image, imageAlt }: {
   image: string;
   imageAlt?: string;
 }) {
+  const { t } = useI18n();
   return (
     <motion.div
       layout
@@ -107,7 +110,7 @@ function ProjectGridCard({ slug, title, tags, description, image, imageAlt }: {
             {description}
           </p>
           <span className="inline-flex items-center gap-2 text-works-primary font-semibold text-sm">
-            Részletek
+            {t("cta.viewDetails")}
             <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
           </span>
         </div>
@@ -117,6 +120,7 @@ function ProjectGridCard({ slug, title, tags, description, image, imageAlt }: {
 }
 
 export default function Projektek() {
+  const { t } = useI18n();
   const [activeTag, setActiveTag] = useState<string | null>(null);
   const { data: projects, loading, error } = useStrapiQuery<Project[]>("projects", getProjects, fallbackProjects);
 
@@ -143,10 +147,10 @@ export default function Projektek() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="mb-12 lg:mb-16">
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-works-dark tracking-tight mb-4">
-                Projektjeink
+                {t("pages.projectsHeading")}
               </h1>
               <p className="text-lg lg:text-xl text-works-dark/60 max-w-2xl">
-                Válogatás legfrissebb munkáinkból — UX kutatástól a komplex rendszertervezésig.
+                {t("pages.projectsSubheading")}
               </p>
             </div>
 
@@ -156,15 +160,15 @@ export default function Projektek() {
                   options={usedTags}
                   value={activeTag}
                   onChange={setActiveTag}
-                  allLabel="Összes projekt"
+                  allLabel={t("sections.allProjects")}
                 />
               </div>
             )}
 
             {error ? (
               <div className="text-center py-16">
-                <p className="text-xl font-semibold text-works-dark mb-2">Hiba történt</p>
-                <p className="text-works-dark/60">A projektek betöltése sikertelen. Kérjük, próbáld újra később.</p>
+                <p className="text-xl font-semibold text-works-dark mb-2">{t("states.errorHeading")}</p>
+                <p className="text-works-dark/60">{t("states.errorBody")}</p>
               </div>
             ) : loading ? (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
@@ -213,13 +217,14 @@ export default function Projektek() {
             {!loading && filtered.length === 0 && (
               <div className="text-center py-20">
                 <p className="text-works-dark/60 text-lg">
-                  Nincs találat a kiválasztott szűrőre.
+                  {t("states.noResults")}
                 </p>
                 <button
                   onClick={() => setActiveTag(null)}
                   className="mt-4 text-works-primary font-semibold hover:underline"
+                  data-testid="projektek-show-all"
                 >
-                  Összes projekt mutatása
+                  {t("sections.allProjects")}
                 </button>
               </div>
             )}

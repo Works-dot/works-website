@@ -17,6 +17,7 @@ import { useStrapiQuery } from "@/hooks/useStrapiQuery";
 import { getServiceBySlug as fetchServiceBySlug, getProjects } from "@/lib/strapi";
 import type { Service, Project, SectionIntro } from "@/lib/strapi";
 import { fallbackProjects, fallbackServices, bgGraphic1FallbackImg, bgGraphic2FallbackImg, heroBackgroundFallbackImg } from "@/data/fallback";
+import { useI18n } from "@/i18n";
 
 const fadeUp = {
   initial: { opacity: 0, y: 20 },
@@ -58,6 +59,7 @@ function SectionHeading({ intro, fallbackHeading }: { intro: SectionIntro | null
 }
 
 export default function ServicePage() {
+  const { t } = useI18n();
   const { slug } = useParams<{ slug: string }>();
   const fallbackService = fallbackServices.find((s) => s.slug === slug) || null;
   const { data: service, loading: svcLoading, error: svcError } = useStrapiQuery<Service | null>(
@@ -75,7 +77,7 @@ export default function ServicePage() {
       <div className="min-h-screen bg-works-bg flex flex-col selection:bg-works-primary selection:text-white">
         <Header />
         <main className="flex-grow pt-28 lg:pt-32 flex items-center justify-center">
-          <div className="animate-pulse text-works-dark/30 text-lg">Betöltés...</div>
+          <div className="animate-pulse text-works-dark/30 text-lg">{t("states.loading")}</div>
         </main>
         <Footer />
       </div>
@@ -88,9 +90,9 @@ export default function ServicePage() {
         <Header />
         <main className="flex-grow pt-28 lg:pt-32 flex items-center justify-center">
           <div className="text-center">
-            <h1 className="text-3xl font-bold text-works-dark mb-4">Hiba történt</h1>
-            <p className="text-works-dark/60 mb-6">A tartalom betöltése sikertelen. Kérjük, próbáld újra később.</p>
-            <Link href="/" className="text-works-primary font-semibold hover:underline">Vissza a főoldalra</Link>
+            <h1 className="text-3xl font-bold text-works-dark mb-4">{t("states.errorHeading")}</h1>
+            <p className="text-works-dark/60 mb-6">{t("states.errorBody")}</p>
+            <Link href="/" className="text-works-primary font-semibold hover:underline">{t("cta.backToHome")}</Link>
           </div>
         </main>
         <Footer />
@@ -105,10 +107,10 @@ export default function ServicePage() {
         <main className="flex-grow pt-28 lg:pt-32 flex items-center justify-center">
           <div className="text-center">
             <h1 className="text-3xl font-bold text-works-dark mb-4">
-              Szolgáltatás nem található
+              {t("states.notFoundService")}
             </h1>
             <Link href="/" className="text-works-primary font-semibold hover:underline">
-              Vissza a főoldalra
+              {t("cta.backToHome")}
             </Link>
           </div>
         </main>
@@ -485,6 +487,7 @@ export default function ServicePage() {
 }
 
 function RelatedProjectCard({ p, i, animated = true }: { p: Project; i: number; animated?: boolean }) {
+  const { t } = useI18n();
   return (
     <motion.article
       {...(animated
@@ -525,7 +528,7 @@ function RelatedProjectCard({ p, i, animated = true }: { p: Project; i: number; 
             {p.description}
           </p>
           <span className="inline-flex items-center text-works-dark font-semibold text-sm group-hover:text-works-primary mt-auto">
-            Megnézem az esettanulmányt
+            {t("cta.viewCaseStudy")}
             <ArrowRight className="ml-1 w-4 h-4 transition-transform group-hover:translate-x-1" />
           </span>
         </div>

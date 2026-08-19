@@ -20,6 +20,33 @@ async function fetchApi<T>(path: string, params?: Record<string, string>): Promi
   return res.json();
 }
 
+/**
+ * Appends a Strapi locale query param to a URL string only when `locale` is
+ * explicitly provided. This keeps existing no-arg call sites unchanged while
+ * allowing future EN callers to pass `"en"`.
+ *
+ * @internal — used by the parameterized loader functions below.
+ */
+function appendLocale(url: string, locale?: string): string {
+  if (!locale) return url;
+  const sep = url.includes("?") ? "&" : "?";
+  return `${url}${sep}locale=${encodeURIComponent(locale)}`;
+}
+
+/**
+ * Builds a stable TanStack Query / useStrapiQuery cache key that includes
+ * the locale when provided. Suitable for future multi-locale callers.
+ *
+ * @example
+ *   strapiQueryKey("projects")              // => "projects"
+ *   strapiQueryKey("projects", "hu")        // => "projects:hu"
+ *   strapiQueryKey("project", "en", "slug") // => "project:en:slug"
+ */
+export function strapiQueryKey(base: string, locale?: string, ...extra: string[]): string {
+  const parts = [base, ...(locale ? [locale] : []), ...extra];
+  return parts.join(":");
+}
+
 interface StrapiListResponse<T> {
   data: T[];
   meta: { pagination: { page: number; pageSize: number; pageCount: number; total: number } };
@@ -426,16 +453,22 @@ function mapBlogPost(p: StrapiBlogPost): BlogPost {
 const PROJECT_POPULATE =
   "populate[0]=image&populate[1]=homepageImage&populate[2]=tags&populate[3]=caseStudy&populate[4]=contentBlocks.image&populate[5]=seo.ogImage";
 
-export async function getProjects(): Promise<Project[]> {
+export async function getProjects(locale?: string): Promise<Project[]> {
   const res = await fetchApi<StrapiListResponse<StrapiProject>>(
-    `/projects?${PROJECT_POPULATE}&pagination[pageSize]=100&sort[0]=order:asc&sort[1]=createdAt:asc`
+    appendLocale(
+      `/projects?${PROJECT_POPULATE}&pagination[pageSize]=100&sort[0]=order:asc&sort[1]=createdAt:asc`,
+      locale
+    )
   );
   return res.data.map(mapProject);
 }
 
-export async function getProjectBySlug(slug: string): Promise<Project | null> {
+export async function getProjectBySlug(slug: string, locale?: string): Promise<Project | null> {
   const res = await fetchApi<StrapiListResponse<StrapiProject>>(
-    `/projects?${PROJECT_POPULATE}&filters[slug][$eq]=${encodeURIComponent(slug)}`
+    appendLocale(
+      `/projects?${PROJECT_POPULATE}&filters[slug][$eq]=${encodeURIComponent(slug)}`,
+      locale
+    )
   );
   return res.data[0] ? mapProject(res.data[0]) : null;
 }
@@ -448,16 +481,22 @@ export function getNextProject(projects: Project[], currentSlug: string): Projec
 const BLOG_POPULATE =
   "populate[0]=image&populate[1]=tags&populate[2]=contentBlocks.image&populate[3]=author&populate[4]=seo.ogImage";
 
-export async function getBlogPosts(): Promise<BlogPost[]> {
+export async function getBlogPosts(locale?: string): Promise<BlogPost[]> {
   const res = await fetchApi<StrapiListResponse<StrapiBlogPost>>(
-    `/blog-posts?${BLOG_POPULATE}&pagination[pageSize]=100&sort=date:desc`
+    appendLocale(
+      `/blog-posts?${BLOG_POPULATE}&pagination[pageSize]=100&sort=date:desc`,
+      locale
+    )
   );
   return res.data.map(mapBlogPost);
 }
 
-export async function getBlogPostBySlug(slug: string): Promise<BlogPost | null> {
+export async function getBlogPostBySlug(slug: string, locale?: string): Promise<BlogPost | null> {
   const res = await fetchApi<StrapiListResponse<StrapiBlogPost>>(
-    `/blog-posts?${BLOG_POPULATE}&filters[slug][$eq]=${encodeURIComponent(slug)}`
+    appendLocale(
+      `/blog-posts?${BLOG_POPULATE}&filters[slug][$eq]=${encodeURIComponent(slug)}`,
+      locale
+    )
   );
   return res.data[0] ? mapBlogPost(res.data[0]) : null;
 }
@@ -467,9 +506,12 @@ export function getNextBlogPost(posts: BlogPost[], currentSlug: string): BlogPos
   return posts[(idx + 1) % posts.length];
 }
 
-export async function getTeamMembers(): Promise<TeamMember[]> {
+export async function getTeamMembers(locale?: string): Promise<TeamMember[]> {
   const res = await fetchApi<StrapiListResponse<StrapiTeamMember>>(
-    "/team-members?populate[0]=image&pagination[pageSize]=100&sort=order:asc"
+    appendLocale(
+      "/team-members?populate[0]=image&pagination[pageSize]=100&sort=order:asc",
+      locale
+    )
   );
   return res.data.map((m) => ({
     name: m.name,
@@ -479,9 +521,9 @@ export async function getTeamMembers(): Promise<TeamMember[]> {
   }));
 }
 
-export async function getGalleryImages(): Promise<GalleryImage[]> {
+export async function getGalleryImages(locale?: string): Promise<GalleryImage[]> {
   const res = await fetchApi<StrapiSingleResponse<{ galleryImages: StrapiMedia[] }>>(
-    "/about-page?populate[0]=galleryImages"
+    appendLocale("/about-page?populate[0]=galleryImages", locale)
   );
   return (res.data?.galleryImages || []).map((img) => ({
     src: strapiImageUrl(img.url),
@@ -592,23 +634,32 @@ function mapService(s: StrapiService): Service {
   };
 }
 
-export async function getServices(): Promise<Service[]> {
+export async function getServices(locale?: string): Promise<Service[]> {
   const res = await fetchApi<StrapiListResponse<StrapiService>>(
-    `/services?${SERVICE_POPULATE}&pagination[pageSize]=100&sort=order:asc`
+    appendLocale(
+      `/services?${SERVICE_POPULATE}&pagination[pageSize]=100&sort=order:asc`,
+      locale
+    )
   );
   return res.data.map(mapService);
 }
 
-export async function getServiceBySlug(slug: string): Promise<Service | null> {
+export async function getServiceBySlug(slug: string, locale?: string): Promise<Service | null> {
   const res = await fetchApi<StrapiListResponse<StrapiService>>(
-    `/services?${SERVICE_POPULATE}&filters[general][slug][$eq]=${encodeURIComponent(slug)}`
+    appendLocale(
+      `/services?${SERVICE_POPULATE}&filters[general][slug][$eq]=${encodeURIComponent(slug)}`,
+      locale
+    )
   );
   return res.data[0] ? mapService(res.data[0]) : null;
 }
 
-export async function getClients(): Promise<Client[]> {
+export async function getClients(locale?: string): Promise<Client[]> {
   const res = await fetchApi<StrapiListResponse<StrapiClient>>(
-    "/clients?populate[0]=logo&pagination[pageSize]=100&sort=order:asc"
+    appendLocale(
+      "/clients?populate[0]=logo&pagination[pageSize]=100&sort=order:asc",
+      locale
+    )
   );
   return res.data.map((c) => ({
     name: c.name,
@@ -623,9 +674,12 @@ export async function getClients(): Promise<Client[]> {
 
 const CAREER_POPULATE = "populate[0]=tags&populate[1]=contentBlocks&populate[2]=contentBlocks.image&populate[3]=seo.ogImage";
 
-export async function getCareerPositions(): Promise<CareerPosition[]> {
+export async function getCareerPositions(locale?: string): Promise<CareerPosition[]> {
   const res = await fetchApi<StrapiListResponse<StrapiCareerPosition>>(
-    `/career-positions?${CAREER_POPULATE}&pagination[pageSize]=100&filters[isActive][$eq]=true`
+    appendLocale(
+      `/career-positions?${CAREER_POPULATE}&pagination[pageSize]=100&filters[isActive][$eq]=true`,
+      locale
+    )
   );
   return res.data.map((c) => ({
     slug: c.slug,
@@ -640,9 +694,12 @@ export async function getCareerPositions(): Promise<CareerPosition[]> {
   }));
 }
 
-export async function getCareerPositionBySlug(slug: string): Promise<CareerPosition | null> {
+export async function getCareerPositionBySlug(slug: string, locale?: string): Promise<CareerPosition | null> {
   const res = await fetchApi<StrapiListResponse<StrapiCareerPosition>>(
-    `/career-positions?${CAREER_POPULATE}&filters[slug][$eq]=${encodeURIComponent(slug)}`
+    appendLocale(
+      `/career-positions?${CAREER_POPULATE}&filters[slug][$eq]=${encodeURIComponent(slug)}`,
+      locale
+    )
   );
   return res.data[0]
     ? {
@@ -682,7 +739,7 @@ export interface HomepageData {
   seo?: SeoOverride | null;
 }
 
-export async function getHomepage(): Promise<HomepageData> {
+export async function getHomepage(locale?: string): Promise<HomepageData> {
   const res = await fetchApi<StrapiSingleResponse<{
     hero: {
       heading: string;
@@ -699,7 +756,7 @@ export async function getHomepage(): Promise<HomepageData> {
     blogSection: HomepageData["blogSection"];
     ctaBanner: HomepageData["ctaBanner"] | null;
     seo?: StrapiSeo | null;
-  }>>("/homepage?populate[0]=hero&populate[1]=servicesSection&populate[2]=projectsSection&populate[3]=blogSection&populate[4]=hero.backgroundImage&populate[5]=ctaBanner&populate[6]=seo.ogImage");
+  }>>(appendLocale("/homepage?populate[0]=hero&populate[1]=servicesSection&populate[2]=projectsSection&populate[3]=blogSection&populate[4]=hero.backgroundImage&populate[5]=ctaBanner&populate[6]=seo.ogImage", locale));
   const d = res.data;
   const h = d.hero;
   return {
@@ -740,7 +797,7 @@ export interface ContactPageData {
   seo?: SeoOverride | null;
 }
 
-export async function getContactPage(): Promise<ContactPageData> {
+export async function getContactPage(locale?: string): Promise<ContactPageData> {
   const res = await fetchApi<StrapiSingleResponse<{
     hero: { heading: string; description: string; backgroundImage: StrapiMedia | null };
     formHeading: string;
@@ -752,7 +809,7 @@ export async function getContactPage(): Promise<ContactPageData> {
     careerConsent: { checkbox1Text: string | null; checkbox2Text: string | null } | null;
     backgroundImage: StrapiMedia | null;
     seo?: StrapiSeo | null;
-  }>>("/contact-page?populate[0]=hero&populate[1]=formSubjects&populate[2]=hero.backgroundImage&populate[3]=backgroundImage&populate[4]=seo.ogImage&populate[5]=careerConsent");
+  }>>(appendLocale("/contact-page?populate[0]=hero&populate[1]=formSubjects&populate[2]=hero.backgroundImage&populate[3]=backgroundImage&populate[4]=seo.ogImage&populate[5]=careerConsent", locale));
   const d = res.data;
   return {
     hero: {
@@ -779,6 +836,11 @@ export async function getContactPage(): Promise<ContactPageData> {
 
 export interface GlobalSettings {
   siteName: string;
+  /**
+   * Final publication gate for the future English site.
+   * The router and language switch must stay disabled unless this is true.
+   */
+  englishSiteEnabled: boolean;
   contactEmail: string;
   contactPhone: string;
   address: string;
@@ -796,9 +858,10 @@ export interface GlobalSettings {
   openingHours: { day: string; hours: string }[];
 }
 
-export async function getGlobalSettings(): Promise<GlobalSettings> {
+export async function getGlobalSettings(locale?: string): Promise<GlobalSettings> {
   const res = await fetchApi<StrapiSingleResponse<{
     siteName: string;
+    englishSiteEnabled?: boolean;
     contactEmail: string;
     contactPhone: string;
     address: string;
@@ -814,10 +877,11 @@ export async function getGlobalSettings(): Promise<GlobalSettings> {
     ogImage: { url: string } | null;
     socialLinks: { id: number; platform: string; url: string }[];
     openingHours: { id: number; day: string; hours: string }[];
-  }>>("/global-setting?populate[0]=socialLinks&populate[1]=openingHours&populate[2]=heroBackgroundPattern&populate[3]=logo&populate[4]=bgGraphic1&populate[5]=bgGraphic2&populate[6]=favicon&populate[7]=ogImage");
+  }>>(appendLocale("/global-setting?populate[0]=socialLinks&populate[1]=openingHours&populate[2]=heroBackgroundPattern&populate[3]=logo&populate[4]=bgGraphic1&populate[5]=bgGraphic2&populate[6]=favicon&populate[7]=ogImage", locale));
   const d = res.data;
   return {
     siteName: d.siteName || "",
+    englishSiteEnabled: d.englishSiteEnabled === true,
     contactEmail: d.contactEmail || "",
     contactPhone: d.contactPhone || "",
     address: d.address || "",
@@ -842,12 +906,12 @@ export interface AboutPageData {
   seo?: SeoOverride | null;
 }
 
-export async function getAboutPage(): Promise<AboutPageData> {
+export async function getAboutPage(locale?: string): Promise<AboutPageData> {
   const res = await fetchApi<StrapiSingleResponse<{
     hero: { heading: string; description: string; backgroundImage: StrapiMedia | null };
     intro: { heading: string; body: string } | null;
     seo?: StrapiSeo | null;
-  }>>("/about-page?populate[0]=hero&populate[1]=hero.backgroundImage&populate[2]=intro&populate[3]=seo.ogImage");
+  }>>(appendLocale("/about-page?populate[0]=hero&populate[1]=hero.backgroundImage&populate[2]=intro&populate[3]=seo.ogImage", locale));
   const d = res.data;
   return {
     hero: {
@@ -901,11 +965,11 @@ export interface LegalDocuments {
   imprintPdfUrl: string;
 }
 
-export async function getLegalDocuments(): Promise<LegalDocuments> {
+export async function getLegalDocuments(locale?: string): Promise<LegalDocuments> {
   const res = await fetchApi<StrapiSingleResponse<{
     privacyPdf: StrapiMedia | null;
     imprintPdf: StrapiMedia | null;
-  }>>("/legal-document?populate[0]=privacyPdf&populate[1]=imprintPdf");
+  }>>(appendLocale("/legal-document?populate[0]=privacyPdf&populate[1]=imprintPdf", locale));
   const d = res.data;
   return {
     privacyPdfUrl: d.privacyPdf?.url ? strapiImageUrl(d.privacyPdf.url) : "",
@@ -920,7 +984,7 @@ export interface CareerPageData {
   seo?: SeoOverride | null;
 }
 
-export async function getCareerPage(): Promise<CareerPageData> {
+export async function getCareerPage(locale?: string): Promise<CareerPageData> {
   const res = await fetchApi<StrapiSingleResponse<{
     hero: { heading: string; description: string; backgroundImage: StrapiMedia | null };
     workWithUs: { heading: string; description: string } | null;
@@ -929,7 +993,7 @@ export async function getCareerPage(): Promise<CareerPageData> {
       items: { title: string; description: string; image: StrapiMedia | null }[];
     } | null;
     seo?: StrapiSeo | null;
-  }>>("/career-page?populate[0]=hero&populate[1]=hero.backgroundImage&populate[2]=workWithUs&populate[3]=whyUs&populate[4]=whyUs.items&populate[5]=whyUs.items.image&populate[6]=seo.ogImage");
+  }>>(appendLocale("/career-page?populate[0]=hero&populate[1]=hero.backgroundImage&populate[2]=workWithUs&populate[3]=whyUs&populate[4]=whyUs.items&populate[5]=whyUs.items.image&populate[6]=seo.ogImage", locale));
   const d = res.data;
   return {
     hero: {

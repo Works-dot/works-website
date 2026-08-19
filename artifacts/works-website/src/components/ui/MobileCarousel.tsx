@@ -1,4 +1,5 @@
 import { Children, ReactNode, useCallback, useEffect, useRef, useState } from "react";
+import { useI18n } from "@/i18n";
 
 interface MobileCarouselProps {
   children: ReactNode;
@@ -17,6 +18,7 @@ interface MobileCarouselProps {
  * desktop via className="md:hidden" (or similar).
  */
 export function MobileCarousel({ children, className = "", ariaLabel }: MobileCarouselProps) {
+  const { t } = useI18n();
   const trackRef = useRef<HTMLDivElement>(null);
   const [selected, setSelected] = useState(0);
   const count = Children.count(children);
@@ -80,7 +82,7 @@ export function MobileCarousel({ children, className = "", ariaLabel }: MobileCa
             <button
               key={i}
               type="button"
-              aria-label={`Ugrás a(z) ${i + 1}. elemre`}
+              aria-label={t("carousel.goToSlide", { index: String(i + 1) })}
               aria-current={i === selected ? "true" : undefined}
               onClick={() => scrollTo(i)}
               className="p-2 flex items-center focus-visible:outline focus-visible:outline-2 focus-visible:outline-works-primary"

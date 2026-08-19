@@ -1,11 +1,12 @@
 import { useState, useEffect, useRef } from "react";
 import { Link } from "wouter";
-import { Menu, X, Globe, ChevronDown } from "lucide-react";
+import { Menu, X, ChevronDown } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useStrapiQuery } from "@/hooks/useStrapiQuery";
 import { getServices, getGlobalSettings } from "@/lib/strapi";
 import type { Service, GlobalSettings } from "@/lib/strapi";
 import { fallbackServices, fallbackGlobalSettings } from "@/data/fallback";
+import { useI18n } from "@/i18n";
 
 const FALLBACK_SERVICE_LINKS = [
   { label: "UX Kutatás", href: "/szolgaltatasok/ux-kutatas" },
@@ -14,11 +15,11 @@ const FALLBACK_SERVICE_LINKS = [
 ];
 
 export function Header() {
+  const { t } = useI18n();
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
   const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
-  const [lang, setLang] = useState<"HU" | "EN">("HU");
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const { data: strapiServices } = useStrapiQuery<Service[]>("headerServices", getServices, fallbackServices);
   const { data: settings } = useStrapiQuery<GlobalSettings>("globalSettings", getGlobalSettings, fallbackGlobalSettings);
@@ -54,15 +55,15 @@ export function Header() {
   };
 
   const navLinks = [
-    { label: "Projektek", href: "/projektek", isRoute: true },
-    { label: "Blog", href: "/blog", isRoute: true },
-    { label: "Karrier", href: "/karrier", isRoute: true },
-    { label: "R\u00f3lunk", href: "/rolunk", isRoute: true },
-    { label: "Kapcsolat", href: "/kapcsolat", isRoute: true },
+    { label: t("nav.projects"), href: "/projektek", isRoute: true },
+    { label: t("nav.blog"), href: "/blog", isRoute: true },
+    { label: t("nav.careers"), href: "/karrier", isRoute: true },
+    { label: t("nav.about"), href: "/rolunk", isRoute: true },
+    { label: t("nav.contact"), href: "/kapcsolat", isRoute: true },
   ];
 
   return (
-    <header 
+    <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled ? "bg-white backdrop-blur-md shadow-sm py-3" : "bg-white py-5"
       }`}
@@ -70,13 +71,13 @@ export function Header() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-2 z-50">
           {logoImg ? (
-            <img src={logoImg} alt="Works. Logo" className="h-8 w-auto object-contain" />
+            <img src={logoImg} alt={t("footer.logoAlt")} className="h-8 w-auto object-contain" />
           ) : (
             <span className="text-xl font-bold text-works-dark">Works.</span>
           )}
         </Link>
 
-        <nav className="hidden md:flex items-center gap-8" aria-label="F\u0151 navig\u00e1ci\u00f3">
+        <nav className="hidden md:flex items-center gap-8" aria-label={t("nav.mainLabel")}>
           <ul className="flex items-center gap-6">
             <li
               className="relative"
@@ -87,8 +88,9 @@ export function Header() {
                 className="text-works-dark font-semibold hover:text-works-primary transition-colors text-sm tracking-wide inline-flex items-center gap-1"
                 aria-expanded={servicesOpen}
                 aria-haspopup="true"
+                data-testid="nav-services-trigger"
               >
-                {"Szolg\u00e1ltat\u00e1sok"}
+                {t("nav.services")}
                 <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${servicesOpen ? "rotate-180" : ""}`} />
               </button>
 
@@ -117,7 +119,7 @@ export function Header() {
             </li>
 
             {navLinks.map((link) => (
-              <li key={link.label}>
+              <li key={link.href}>
                 {link.isRoute ? (
                   <Link href={link.href} className="text-works-dark font-semibold hover:text-works-primary transition-colors text-sm tracking-wide">
                     {link.label}
@@ -130,25 +132,15 @@ export function Header() {
               </li>
             ))}
           </ul>
-          
-          <div className="flex items-center gap-4 pl-6 border-l border-works-muted">
-            <button 
-              onClick={() => setLang(lang === "HU" ? "EN" : "HU")}
-              className="flex items-center gap-1.5 text-sm font-bold text-works-dark hover:text-works-primary transition-colors"
-              aria-label={`Nyelv v\u00e1lt\u00e1s: ${lang === "HU" ? "English" : "Magyar"}`}
-            >
-              <Globe className="w-4 h-4" />
-              <span>{lang}</span>
-            </button>
-          </div>
         </nav>
 
-        <button 
+        <button
           className="md:hidden relative z-50 p-2 text-works-dark"
           onClick={() => { setMobileMenuOpen(!mobileMenuOpen); if (mobileMenuOpen) setMobileServicesOpen(false); }}
-          aria-label={mobileMenuOpen ? "Men\u00fc bez\u00e1r\u00e1sa" : "Men\u00fc megnyit\u00e1sa"}
+          aria-label={mobileMenuOpen ? t("nav.closeMenu") : t("nav.openMenu")}
           aria-expanded={mobileMenuOpen}
           aria-controls="mobile-menu"
+          data-testid="nav-mobile-toggle"
         >
           {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
         </button>
@@ -159,7 +151,7 @@ export function Header() {
           <motion.div
             id="mobile-menu"
             role="navigation"
-            aria-label="Mobil navig\u00e1ci\u00f3"
+            aria-label={t("nav.mobileLabel")}
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: "100vh", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
@@ -175,8 +167,9 @@ export function Header() {
                 <button
                   onClick={() => setMobileServicesOpen(!mobileServicesOpen)}
                   className="text-works-dark hover:text-works-primary flex items-center gap-2 w-full"
+                  data-testid="nav-mobile-services-trigger"
                 >
-                  {"Szolg\u00e1ltat\u00e1sok"}
+                  {t("nav.services")}
                   <ChevronDown className={`w-5 h-5 transition-transform duration-200 ${mobileServicesOpen ? "rotate-180" : ""}`} />
                 </button>
                 <AnimatePresence>
@@ -205,8 +198,8 @@ export function Header() {
               </motion.li>
 
               {navLinks.map((link) => (
-                <motion.li 
-                  key={link.label}
+                <motion.li
+                  key={link.href}
                   initial={{ x: -20, opacity: 0 }}
                   animate={{ x: 0, opacity: 1 }}
                   transition={{ delay: 0.1 }}
@@ -223,16 +216,6 @@ export function Header() {
                 </motion.li>
               ))}
             </ul>
-            <div className="mt-8 pt-8 border-t border-works-muted flex items-center gap-4">
-              <button 
-                onClick={() => setLang(lang === "HU" ? "EN" : "HU")}
-                className="flex items-center gap-2 text-lg font-bold text-works-dark"
-                aria-label={`Nyelv v\u00e1lt\u00e1s: ${lang === "HU" ? "English" : "Magyar"}`}
-              >
-                <Globe className="w-5 h-5" />
-                <span>Nyelv: {lang}</span>
-              </button>
-            </div>
           </motion.div>
         )}
       </AnimatePresence>

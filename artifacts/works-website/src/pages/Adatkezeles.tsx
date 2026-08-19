@@ -6,10 +6,12 @@ import { useStrapiQuery } from "@/hooks/useStrapiQuery";
 import { getLegalDocuments } from "@/lib/strapi";
 import type { LegalDocuments } from "@/lib/strapi";
 import { fallbackLegalDocuments } from "@/data/fallback";
+import { useI18n } from "@/i18n";
 
 // A régi /adatkezeles cím megmarad (footerben, régi hivatkozásokban élhet),
 // de a tartalom már a hivatalos PDF: automatikusan átirányítunk rá.
 export default function Adatkezeles() {
+  const { t } = useI18n();
   const { data: legalDocs } = useStrapiQuery<LegalDocuments>(
     "legalDocuments",
     getLegalDocuments,
@@ -32,22 +34,22 @@ export default function Adatkezeles() {
         <section className="pt-28 lg:pt-36 pb-20 lg:pb-28 bg-white">
           <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h1 className="text-3xl md:text-4xl font-bold text-works-dark mb-6 leading-tight">
-              Adatkezelési tájékoztató
+              {t("privacyPage.pageHeading")}
             </h1>
             {pdfUrl ? (
               <p className="text-works-dark/60 leading-relaxed">
-                Átirányítunk a dokumentumhoz… Ha nem történik meg automatikusan,{" "}
+                {t("privacyPage.redirectingText")}{" "}
                 <a
                   href={pdfUrl}
                   className="text-works-primary font-semibold underline hover:no-underline"
                 >
-                  kattints ide a megnyitáshoz
+                  {t("privacyPage.openLinkLabel")}
                 </a>
                 .
               </p>
             ) : (
               <p className="text-works-dark/60 leading-relaxed">
-                A dokumentum betöltése folyamatban…
+                {t("privacyPage.loadingText")}
               </p>
             )}
           </div>

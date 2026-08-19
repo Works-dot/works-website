@@ -9,6 +9,7 @@ import { useStrapiQuery } from "@/hooks/useStrapiQuery";
 import { getCareerPositions, getCareerPage } from "@/lib/strapi";
 import type { CareerPosition, CareerPageData } from "@/lib/strapi";
 import { fallbackPositions, fallbackCareerPage, careerGraphicFallbackImg } from "@/data/fallback";
+import { useI18n } from "@/i18n";
 
 const fadeUp = {
   initial: { opacity: 0, y: 20 },
@@ -18,6 +19,7 @@ const fadeUp = {
 };
 
 export default function Karrier() {
+  const { t } = useI18n();
   const scrollRef = useRef<HTMLDivElement>(null);
   const { data: positions, loading: posLoading, error: posError } = useStrapiQuery<CareerPosition[]>("careerPositions", getCareerPositions, fallbackPositions);
   const { data: careerPage } = useStrapiQuery<CareerPageData>("careerPage", getCareerPage, fallbackCareerPage);
@@ -66,7 +68,7 @@ export default function Karrier() {
               className="max-w-xl lg:max-w-lg"
             >
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-works-dark mb-6 leading-tight">
-                Karrier.
+                {t("pages.karrierHeading")}
               </h1>
               <p className="text-lg lg:text-xl text-works-dark/60 leading-relaxed">
                 Csatlakozz egy csapathoz, ahol a design kutatáson alapul, a technológia az embereket szolgálja, és minden nap tanulhatsz valami újat.
@@ -94,14 +96,14 @@ export default function Karrier() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <motion.div {...fadeUp}>
               <h2 className="text-4xl md:text-5xl font-bold text-works-dark tracking-tight mb-16">
-                Nyitott pozíciók
+                {t("pages.openPositionsHeading")}
               </h2>
             </motion.div>
 
             {posError ? (
               <div className="text-center py-16">
-                <p className="text-xl font-semibold text-works-dark mb-2">Hiba történt</p>
-                <p className="text-works-dark/60">A pozíciók betöltése sikertelen. Kérjük, próbáld újra később.</p>
+                <p className="text-xl font-semibold text-works-dark mb-2">{t("states.errorHeading")}</p>
+                <p className="text-works-dark/60">{t("states.errorBody")}</p>
               </div>
             ) : posLoading ? (
               <div className="divide-y divide-works-dark/10">
@@ -147,14 +149,16 @@ export default function Karrier() {
                 <button
                   onClick={() => scroll("left")}
                   className="w-12 h-12 flex items-center justify-center border border-works-dark/10 hover:border-works-primary hover:text-works-primary transition-colors"
-                  aria-label="Előző"
+                  aria-label={t("karrier.prevSlide")}
+                  data-testid="karrier-prev-slide"
                 >
                   <ChevronLeft className="w-5 h-5" />
                 </button>
                 <button
                   onClick={() => scroll("right")}
                   className="w-12 h-12 flex items-center justify-center border border-works-dark/10 hover:border-works-primary hover:text-works-primary transition-colors"
-                  aria-label="Következő"
+                  aria-label={t("karrier.nextSlide")}
+                  data-testid="karrier-next-slide"
                 >
                   <ChevronRight className="w-5 h-5" />
                 </button>

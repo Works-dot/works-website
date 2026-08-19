@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect, useCallback, useId } from "react";
 import { ChevronDown } from "lucide-react";
+import { useI18n } from "@/i18n";
 
 interface FilterDropdownProps {
   options: string[];
@@ -14,6 +15,7 @@ export function FilterDropdown({
   onChange,
   allLabel = "Mind",
 }: FilterDropdownProps) {
+  const { t } = useI18n();
   const [open, setOpen] = useState(false);
   const [focusedIndex, setFocusedIndex] = useState(-1);
   const ref = useRef<HTMLDivElement>(null);
@@ -97,7 +99,7 @@ export function FilterDropdown({
         aria-haspopup="listbox"
         aria-expanded={open}
         aria-controls={open ? listboxId : undefined}
-        aria-label={`Szűrés: ${displayLabel}`}
+        aria-label={t("filter.ariaLabel", { label: displayLabel })}
         className="flex items-center gap-2 px-4 py-2.5 text-sm font-semibold border border-works-muted bg-white text-works-dark hover:border-works-primary transition-colors w-full justify-between"
       >
         <span className="truncate">{displayLabel}</span>

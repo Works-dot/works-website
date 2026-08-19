@@ -1,7 +1,8 @@
 import { useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import { useLocation } from "wouter";
-import { getPageMeta, SITE_URL } from "../seo-data";
+import { getPageMeta, SITE_URL, localeToOgLocale, pageLocale } from "../seo-data";
+import { getLocaleFromPath } from "@/lib/i18n-routes";
 import { useStrapiQuery } from "@/hooks/useStrapiQuery";
 import { getGlobalSettings } from "@/lib/strapi";
 import type { GlobalSettings } from "@/lib/strapi";
@@ -26,7 +27,9 @@ export default function SEOHead() {
 
   if (isSSR) return null;
 
-  const meta = getPageMeta(location);
+  const meta = getPageMeta(location, getLocaleFromPath(location));
+  const lang = pageLocale(meta);
+  const ogLocale = localeToOgLocale(lang);
   const ogImage = absoluteUrl(meta.ogImage || settings?.ogImageUrl || "/opengraph.jpg");
   const favicon = settings?.faviconUrl || "/favicon.ico";
   const canonical = absoluteUrl(meta.path || location);
@@ -41,7 +44,7 @@ export default function SEOHead() {
       <meta property="og:description" content={meta.description} />
       <meta property="og:type" content={ogType} />
       <meta property="og:url" content={canonical} />
-      <meta property="og:locale" content="hu_HU" />
+      <meta property="og:locale" content={ogLocale} />
       <meta property="og:site_name" content={settings?.siteName || "Works."} />
       <meta property="og:image" content={ogImage} />
       <meta name="twitter:card" content="summary_large_image" />

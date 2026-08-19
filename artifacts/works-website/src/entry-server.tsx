@@ -17,3 +17,17 @@ export { fallbackBlogPosts as blogPosts } from "./data/fallback";
 export { fallbackServices as services } from "./data/fallback";
 export { fallbackPositions as positions } from "./data/fallback";
 export { getPageMeta, buildMetaTags, SITE_URL } from "./seo-data";
+
+// Locale-aware route helpers for prerender scripts.
+export {
+  PUBLIC_LOCALES,
+  DEFAULT_LOCALE,
+  getStaticPathsForLocale,
+  buildLocalePath,
+  getLocaleFromPath,
+  matchLocalePath,
+  extractSearch,
+  stripSearch,
+  localeQueryKey,
+} from "./lib/i18n-routes";
+export type { Locale, RouteKey } from "./lib/i18n-routes";

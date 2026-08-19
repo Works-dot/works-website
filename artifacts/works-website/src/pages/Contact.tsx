@@ -12,6 +12,7 @@ import { getContactPage, getGlobalSettings, getLegalDocuments, uploadCv, CV_MAX_
 import type { ContactPageData, GlobalSettings, LegalDocuments } from "@/lib/strapi";
 import { fallbackContactPage, fallbackGlobalSettings, fallbackLegalDocuments, contactGraphicFallbackImg } from "@/data/fallback";
 import { useCookieConsent } from "@/lib/cookie-consent";
+import { useI18n } from "@/i18n";
 
 const fadeUp = {
   initial: { opacity: 0, y: 20 },
@@ -107,6 +108,7 @@ function toMapEmbedUrl(raw: string): string {
 }
 
 export default function Contact() {
+  const { t } = useI18n();
   const { consent, accept } = useCookieConsent();
   const { data: contactPage } = useStrapiQuery<ContactPageData>("contactPage", getContactPage, fallbackContactPage);
   const { data: globalSettings } = useStrapiQuery<GlobalSettings>("globalSettings", getGlobalSettings, fallbackGlobalSettings);
@@ -143,10 +145,10 @@ export default function Contact() {
   const validateCvFile = (file: File): string | null => {
     const name = file.name.toLowerCase();
     if (!CV_ALLOWED_EXTENSIONS.some((ext) => name.endsWith(ext))) {
-      return "Csak PDF, DOC vagy DOCX formátumú önéletrajz tölthető fel.";
+      return t("validation.cvInvalidType");
     }
     if (file.size > CV_MAX_SIZE_BYTES) {
-      return "A fájl mérete legfeljebb 10 MB lehet.";
+      return t("validation.cvTooLarge");
     }
     return null;
   };
@@ -178,7 +180,7 @@ export default function Contact() {
       try {
         await uploadCv(cvFile);
       } catch (err) {
-        setCvError(err instanceof Error ? err.message : "A feltöltés nem sikerült, kérjük próbáld újra később.");
+        setCvError(err instanceof Error ? err.message : t("validation.cvUploadFailed"));
         setSubmitting(false);
         return;
       }
@@ -286,7 +288,7 @@ export default function Contact() {
                           htmlFor="name"
                           className="block text-sm font-semibold text-works-dark mb-2"
                         >
-                          Név
+                          {t("contact.formNameLabel")}
                         </label>
                         <input
                           type="text"
@@ -296,7 +298,8 @@ export default function Contact() {
                           value={formData.name}
                           onChange={handleChange}
                           className={inputClass}
-                          placeholder="Teljes neved"
+                          placeholder={t("contact.formNamePlaceholder")}
+                          data-testid="contact-field-name"
                         />
                       </div>
                       <div>
@@ -304,7 +307,7 @@ export default function Contact() {
                           htmlFor="email"
                           className="block text-sm font-semibold text-works-dark mb-2"
                         >
-                          Email
+                          {t("contact.formEmailLabel")}
                         </label>
                         <input
                           type="email"
@@ -314,7 +317,8 @@ export default function Contact() {
                           value={formData.email}
                           onChange={handleChange}
                           className={inputClass}
-                          placeholder="email@cimed.hu"
+                          placeholder={t("contact.formEmailPlaceholder")}
+                          data-testid="contact-field-email"
                         />
                       </div>
                     </div>
@@ -324,7 +328,7 @@ export default function Contact() {
                         htmlFor="subject"
                         className="block text-sm font-semibold text-works-dark mb-2"
                       >
-                        Tárgy
+                        {t("contact.formSubjectLabel")}
                       </label>
                       <select
                         id="subject"
@@ -333,8 +337,9 @@ export default function Contact() {
                         value={formData.subject}
                         onChange={handleChange}
                         className={inputClass}
+                        data-testid="contact-field-subject"
                       >
-                        <option value="">Válassz témát...</option>
+                        <option value="">{t("contact.formSubjectPlaceholder")}</option>
                         {formSubjects.length > 0
                           ? formSubjects.map((s) => (
                               <option key={s.value} value={s.value}>{s.label}</option>
@@ -357,7 +362,7 @@ export default function Contact() {
                         htmlFor="message"
                         className="block text-sm font-semibold text-works-dark mb-2"
                       >
-                        Üzenet
+                        {t("contact.formMessageLabel")}
                       </label>
                       <textarea
                         id="message"
@@ -367,14 +372,15 @@ export default function Contact() {
                         value={formData.message}
                         onChange={handleChange}
                         className={`${inputClass} resize-none`}
-                        placeholder="Mesélj a projektedről..."
+                        placeholder={t("contact.formMessagePlaceholder")}
+                        data-testid="contact-field-message"
                       />
                     </div>
 
                     {isCareerSubject && (
                       <div>
                         <label className="block text-sm font-semibold text-works-dark mb-2">
-                          Önéletrajz feltöltése
+                          {t("contact.cvUploadLabel")}
                         </label>
                         <input
                           ref={cvInputRef}
@@ -396,7 +402,7 @@ export default function Contact() {
                             <button
                               type="button"
                               onClick={clearCv}
-                              aria-label="Fájl eltávolítása"
+                              aria-label={t("contact.cvRemoveLabel")}
                               className="text-works-dark/40 hover:text-works-dark transition-colors flex-shrink-0"
                             >
                               <X className="w-5 h-5" />
@@ -414,9 +420,10 @@ export default function Contact() {
                           >
                             <Upload className="w-6 h-6 text-works-primary" />
                             <span className="text-sm text-works-dark/70">
-                              Húzd ide az önéletrajzod, vagy <span className="text-works-primary font-semibold">tallózz</span>
+                              {t("contact.cvUploadDragText")}{" "}
+                              <span className="text-works-primary font-semibold">{t("contact.cvUploadBrowse")}</span>
                             </span>
-                            <span className="text-xs text-works-dark/40">PDF, DOC vagy DOCX, legfeljebb 10 MB</span>
+                            <span className="text-xs text-works-dark/40">{t("contact.cvUploadHint")}</span>
                           </label>
                         )}
                         {cvError && (
@@ -469,14 +476,14 @@ export default function Contact() {
                         className="mt-1 w-4 h-4 flex-shrink-0 accent-works-primary"
                       />
                       <span>
-                        Elolvastam és elfogadom az{" "}
+                        {t("contact.privacyConsentText")}{" "}
                         <a
                           href={privacyPdfUrl}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="text-works-primary font-semibold underline hover:no-underline"
                         >
-                          adatkezelési tájékoztatót
+                          {t("contact.privacyConsentLinkLabel")}
                         </a>
                         .
                       </span>
@@ -486,8 +493,9 @@ export default function Contact() {
                       type="submit"
                       disabled={!consentsSatisfied || !cvSatisfied || submitting}
                       className="group inline-flex items-center gap-2 bg-works-primary text-white font-semibold px-8 py-4 hover:bg-works-primary/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                      data-testid="contact-submit"
                     >
-                      {submitting ? "Küldés..." : "Üzenet küldése"}
+                      {submitting ? t("contact.submitting") : t("contact.submitButton")}
                       <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
                     </button>
                   </form>
@@ -499,7 +507,7 @@ export default function Contact() {
                 className="lg:col-span-2"
               >
                 <h2 className="text-3xl md:text-4xl font-bold text-works-dark mb-10">
-                  Elérhetőségeink
+                  {t("contact.sectionContacts")}
                 </h2>
 
                 <div className="space-y-8">
@@ -538,7 +546,7 @@ export default function Contact() {
                 </div>
 
                 <div className="mt-12 p-6 bg-works-light">
-                  <h3 className="font-semibold text-works-dark mb-2">Nyitvatartás</h3>
+                  <h3 className="font-semibold text-works-dark mb-2">{t("contact.openingHoursHeading")}</h3>
                   <div className="text-works-dark/60 text-sm leading-relaxed">
                     {openingHours.map((oh, i) => (
                       <p key={i}>{oh.day}: {oh.hours}</p>
@@ -577,9 +585,7 @@ export default function Contact() {
                 // hozzájárulás után töltődik be; addig tájékoztató felület látszik.
                 <div className="h-[450px] bg-works-dark/5 border border-works-dark/10 flex flex-col items-center justify-center text-center px-6 gap-4">
                   <p className="text-works-dark/60 max-w-md leading-relaxed">
-                    A térkép betöltésével a Google Térkép szolgáltatása sütiket
-                    használhat, és adatokat kezelhet a Google adatvédelmi
-                    irányelvei szerint.
+                    {t("contact.mapConsentText")}
                   </p>
                   <button
                     type="button"
@@ -587,7 +593,7 @@ export default function Contact() {
                     className="px-6 py-3 text-sm font-semibold bg-works-primary text-white hover:bg-works-primary/90 transition-colors"
                     data-testid="button-load-map"
                   >
-                    Térkép betöltése (Google sütiket használ)
+                    {t("contact.mapLoadButton")}
                   </button>
                 </div>
               )}

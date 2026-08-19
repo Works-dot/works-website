@@ -10,8 +10,10 @@ import { getBlogPosts, getNextBlogPost } from "@/lib/strapi";
 import type { BlogPost as BlogPostType } from "@/lib/strapi";
 import { ContentBlock } from "@/components/ContentBlock";
 import { fallbackBlogPosts, heroBackgroundFallbackImg } from "@/data/fallback";
+import { useI18n } from "@/i18n";
 
 export default function BlogPost() {
+  const { t } = useI18n();
   const { slug } = useParams<{ slug: string }>();
   const { data: posts, loading, error } = useStrapiQuery<BlogPostType[]>("blogPosts", getBlogPosts, fallbackBlogPosts);
   const heroBgPattern = heroBackgroundFallbackImg;
@@ -28,7 +30,7 @@ export default function BlogPost() {
       <div className="min-h-screen bg-works-bg flex flex-col selection:bg-works-primary selection:text-white">
         <Header />
         <main className="flex-grow pt-28 lg:pt-32 flex items-center justify-center">
-          <div className="animate-pulse text-works-dark/30 text-lg">Betöltés...</div>
+          <div className="animate-pulse text-works-dark/30 text-lg">{t("states.loading")}</div>
         </main>
         <Footer />
       </div>
@@ -41,9 +43,9 @@ export default function BlogPost() {
         <Header />
         <main className="flex-grow pt-28 lg:pt-32 flex items-center justify-center">
           <div className="text-center">
-            <h1 className="text-3xl font-bold text-works-dark mb-4">Hiba történt</h1>
-            <p className="text-works-dark/60 mb-6">A tartalom betöltése sikertelen. Kérjük, próbáld újra később.</p>
-            <Link href="/blog" className="text-works-primary font-semibold hover:underline">Vissza a bloghoz</Link>
+            <h1 className="text-3xl font-bold text-works-dark mb-4">{t("states.errorHeading")}</h1>
+            <p className="text-works-dark/60 mb-6">{t("states.errorBody")}</p>
+            <Link href="/blog" className="text-works-primary font-semibold hover:underline">{t("cta.backToBlog")}</Link>
           </div>
         </main>
         <Footer />
@@ -57,9 +59,9 @@ export default function BlogPost() {
         <Header />
         <main className="flex-grow pt-28 lg:pt-32 flex items-center justify-center">
           <div className="text-center">
-            <h1 className="text-3xl font-bold text-works-dark mb-4">Bejegyzés nem található</h1>
+            <h1 className="text-3xl font-bold text-works-dark mb-4">{t("states.notFoundPost")}</h1>
             <Link href="/blog" className="text-works-primary font-semibold hover:underline">
-              Vissza a blogra
+              {t("cta.backToBlog")}
             </Link>
           </div>
         </main>
@@ -93,7 +95,7 @@ export default function BlogPost() {
               className="inline-flex items-center gap-2 text-white/70 hover:text-white font-semibold mb-8 transition-colors"
             >
               <ArrowLeft className="w-4 h-4" />
-              Vissza a blogra
+              {t("cta.backToBlog")}
             </Link>
 
             <motion.div
@@ -158,7 +160,7 @@ export default function BlogPost() {
               <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
                 <div>
                   <span className="text-works-dark/50 text-sm font-semibold uppercase tracking-widest mb-2 block">
-                    Következő bejegyzés
+                    {t("cta.nextPost")}
                   </span>
                   <h3 className="text-2xl lg:text-3xl font-bold text-works-dark">
                     {nextPost.title}
@@ -168,7 +170,7 @@ export default function BlogPost() {
                   href={`/blog/${nextPost.slug}`}
                   className="group inline-flex items-center gap-2 px-6 py-3 bg-works-primary text-white font-semibold hover:bg-works-dark transition-colors"
                 >
-                  Elolvasom
+                  {t("cta.readMore")}
                   <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
                 </Link>
               </div>

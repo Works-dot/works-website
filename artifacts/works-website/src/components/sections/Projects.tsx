@@ -5,8 +5,10 @@ import { useStrapiQuery } from "@/hooks/useStrapiQuery";
 import { getProjects, getHomepage } from "@/lib/strapi";
 import type { Project, HomepageData } from "@/lib/strapi";
 import { fallbackProjects, fallbackHomepage, bgGraphic2FallbackImg } from "@/data/fallback";
+import { useI18n } from "@/i18n";
 
 export function Projects() {
+  const { t } = useI18n();
   const { data: projects, loading } = useStrapiQuery<Project[]>("projects", getProjects, fallbackProjects);
   const { data: homepage } = useStrapiQuery<HomepageData>("homepage", getHomepage, fallbackHomepage);
 
@@ -42,11 +44,11 @@ export function Projects() {
             </h2>
           </div>
           <Link href="/projektek" className="group text-works-dark font-semibold hover:text-works-primary transition-colors inline-flex items-center w-fit">
-            Minden projekt megtekintése
+            {t("sections.allProjects")}
             <span className="ml-2 inline-block transition-transform duration-300 group-hover:translate-x-1">&rarr;</span>
           </Link>
         </div>
-        
+
         {loading ? (
           <div className="flex flex-col gap-24 lg:gap-32">
             {[0, 1, 2].map((i) => (
@@ -64,7 +66,7 @@ export function Projects() {
           <>
             <div className="hidden md:flex flex-col gap-24 lg:gap-32">
               {featuredProjects.map((p, i) => (
-                <ProjectCard 
+                <ProjectCard
                   key={p.slug}
                   slug={p.slug}
                   title={p.title}
@@ -76,9 +78,9 @@ export function Projects() {
                 />
               ))}
             </div>
-            <MobileCarousel className="md:hidden" ariaLabel="Kiemelt projektjeink">
+            <MobileCarousel className="md:hidden" ariaLabel={t("sections.featuredProjectsAriaLabel")}>
               {featuredProjects.map((p) => (
-                <ProjectCard 
+                <ProjectCard
                   key={p.slug}
                   slug={p.slug}
                   title={p.title}

@@ -16,27 +16,53 @@ async function prerender() {
     getPageMeta,
     buildMetaTags,
     SITE_URL,
+    PUBLIC_LOCALES,
+    getStaticPathsForLocale,
   } = await import(path.resolve(root, "dist/server/entry-server.js"));
+
+  // Safety: assert no /en routes can be emitted as long as EN is not public.
+  for (const locale of PUBLIC_LOCALES) {
+    if (locale === "en") {
+      throw new Error(
+        "Prerender safety check failed: 'en' locale is in PUBLIC_LOCALES. " +
+          "EN content pipeline must be complete before adding it to PUBLIC_LOCALES."
+      );
+    }
+  }
 
   const template = fs.readFileSync(path.resolve(outDir, "index.html"), "utf-8");
 
-  const staticRoutes = [
-    "/",
-    "/projektek",
-    "/blog",
-    "/rolunk",
-    "/kapcsolat",
-    "/karrier",
-    "/adatkezeles",
-    "/sutik",
-  ];
+  // Build routes from PUBLIC_LOCALES only.
+  // Currently only "hu" is public, so this mirrors the previous static list.
+  const allRoutes = [];
 
-  const dynamicRoutes = [
-    ...projects.map((p) => `/projektek/${p.slug}`),
-    ...blogPosts.map((p) => `/blog/${p.slug}`),
-    ...services.map((s) => `/szolgaltatasok/${s.slug}`),
-    ...positions.map((p) => `/karrier/${p.slug}`),
-  ];
+  for (const locale of PUBLIC_LOCALES) {
+    const staticRoutes = getStaticPathsForLocale(locale);
+
+    const dynamicRoutes =
+      locale === "hu"
+        ? [
+            ...projects.map((p) => `/projektek/${p.slug}`),
+            ...blogPosts.map((p) => `/blog/${p.slug}`),
+            ...services.map((s) => `/szolgaltatasok/${s.slug}`),
+            ...positions.map((p) => `/karrier/${p.slug}`),
+          ]
+        : [
+            // Future EN dynamic routes would be built here.
+            // e.g. ...projects.map((p) => `/en/projects/${p.slug}`),
+          ];
+
+    // Assert: no /en route slips through while EN is not public
+    for (const r of [...staticRoutes, ...dynamicRoutes]) {
+      if (r.startsWith("/en") || r.startsWith("/en/")) {
+        throw new Error(
+          `Prerender safety check failed: route "${r}" has /en prefix but EN is not a public locale.`
+        );
+      }
+    }
+
+    allRoutes.push(...staticRoutes, ...dynamicRoutes);
+  }
 
   if (projects.length === 0 || blogPosts.length === 0 || services.length === 0) {
     throw new Error(
@@ -44,12 +70,13 @@ async function prerender() {
     );
   }
 
-  const allRoutes = [...staticRoutes, ...dynamicRoutes];
   let generated = 0;
 
   for (const route of allRoutes) {
+    // Derive locale for this route: /en prefix = "en", everything else = "hu"
+    const locale = route.startsWith("/en") ? "en" : "hu";
     const { html } = render(route);
-    const meta = getPageMeta(route);
+    const meta = getPageMeta(route, locale);
     const headTags = buildMetaTags(meta);
 
     let page = template;

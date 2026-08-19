@@ -1,6 +1,7 @@
 import { Link } from "wouter";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
+import { useI18n } from "@/i18n";
 
 interface ProjectCardProps {
   slug: string;
@@ -17,8 +18,9 @@ interface ProjectCardProps {
 }
 
 export function ProjectCard({ slug, title, tags, description, image, imageAlt, reverse = false, animated = true, clampDescription = false }: ProjectCardProps) {
+  const { t } = useI18n();
   return (
-    <motion.div 
+    <motion.div
       {...(animated
         ? {
             initial: { opacity: 0, y: 30 },
@@ -38,7 +40,7 @@ export function ProjectCard({ slug, title, tags, description, image, imageAlt, r
           />
         </div>
       </div>
-      
+
       <div className="w-full lg:w-1/2 flex flex-col items-start py-4">
         <h3 className="text-3xl lg:text-4xl font-bold text-works-dark mb-4 leading-tight">{title}</h3>
         <div className="flex flex-wrap gap-2 mb-6">
@@ -54,11 +56,11 @@ export function ProjectCard({ slug, title, tags, description, image, imageAlt, r
         <p className={`text-lg text-works-dark/60 mb-8 leading-relaxed${clampDescription ? " line-clamp-3" : ""}`}>
           {description}
         </p>
-        <Link 
+        <Link
           href={`/projektek/${slug}`}
           className="inline-flex items-center text-works-primary font-semibold text-lg group hover:text-works-dark transition-colors"
         >
-          Megnézem az esettanulmányt
+          {t("cta.viewCaseStudy")}
           <ArrowRight className="ml-2 w-5 h-5 transition-transform group-hover:translate-x-1" />
         </Link>
       </div>

@@ -2,10 +2,12 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import SEOHead from "@/components/SEOHead";
 import { useCookieConsent } from "@/lib/cookie-consent";
+import { useI18n } from "@/i18n";
 
 // Rövid magyar nyelvű süti tájékoztató. A sütisáv és a lábléc hivatkozik rá.
 export default function Sutik() {
   const { openSettings } = useCookieConsent();
+  const { t } = useI18n();
 
   return (
     <div className="min-h-screen bg-works-bg flex flex-col selection:bg-works-primary selection:text-white">
@@ -16,10 +18,11 @@ export default function Sutik() {
         <section className="pt-28 lg:pt-36 pb-20 lg:pb-28 bg-white">
           <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
             <h1 className="text-3xl md:text-4xl font-bold text-works-dark mb-8 leading-tight">
-              Süti (cookie) tájékoztató
+              {t("cookiePage.pageHeading")}
             </h1>
 
             <div className="space-y-6 text-works-dark/70 leading-relaxed">
+              {/* Legal explanatory paragraphs remain as content — not UI chrome */}
               <p>
                 A sütik (cookie-k) kis szöveges fájlok, amelyeket a
                 meglátogatott weboldalak helyeznek el a böngésződben. A Works.
@@ -28,7 +31,7 @@ export default function Sutik() {
               </p>
 
               <h2 className="text-xl font-bold text-works-dark pt-4">
-                Feltétlenül szükséges tárolás
+                {t("cookiePage.sectionEssential")}
               </h2>
               <p>
                 A süti-hozzájárulásoddal kapcsolatos döntésedet a böngésződ
@@ -39,7 +42,7 @@ export default function Sutik() {
               </p>
 
               <h2 className="text-xl font-bold text-works-dark pt-4">
-                Harmadik féltől származó tartalom: Google Térkép
+                {t("cookiePage.sectionThirdParty")}
               </h2>
               <p>
                 A Kapcsolat oldalon irodánk elhelyezkedését beágyazott Google
@@ -55,13 +58,13 @@ export default function Sutik() {
                   rel="noopener noreferrer"
                   className="text-works-primary font-semibold underline hover:no-underline"
                 >
-                  Google adatvédelmi irányelvek
+                  {t("cookiePage.googlePolicyLinkLabel")}
                 </a>
                 .
               </p>
 
               <h2 className="text-xl font-bold text-works-dark pt-4">
-                Betűtípusok
+                {t("cookiePage.sectionFonts")}
               </h2>
               <p>
                 A weboldal betűtípusait saját szerverünkről szolgáljuk ki, így a
@@ -70,11 +73,11 @@ export default function Sutik() {
               </p>
 
               <h2 className="text-xl font-bold text-works-dark pt-4">
-                A hozzájárulás módosítása
+                {t("cookiePage.sectionModify")}
               </h2>
               <p>
                 Döntésedet bármikor megváltoztathatod a lábléc „Süti
-                beállítások” hivatkozásával, vagy az alábbi gombbal:
+                beállítások" hivatkozásával, vagy az alábbi gombbal:
               </p>
               <button
                 type="button"
@@ -82,7 +85,7 @@ export default function Sutik() {
                 className="px-6 py-3 text-sm font-semibold bg-works-primary text-white hover:bg-works-primary/90 transition-colors"
                 data-testid="button-open-cookie-settings"
               >
-                Süti beállítások megnyitása
+                {t("cookiePage.openSettingsButton")}
               </button>
 
               <p className="pt-4">
@@ -91,7 +94,7 @@ export default function Sutik() {
                   href="/adatkezeles"
                   className="text-works-primary font-semibold underline hover:no-underline"
                 >
-                  adatkezelési tájékoztatóban
+                  {t("cookiePage.privacyPageLinkLabel")}
                 </a>{" "}
                 olvashatsz.
               </p>

@@ -7,6 +7,7 @@ import { getGlobalSettings, getServices, getLegalDocuments } from "@/lib/strapi"
 import type { GlobalSettings, Service, LegalDocuments } from "@/lib/strapi";
 import { fallbackGlobalSettings, fallbackServices, fallbackLegalDocuments } from "@/data/fallback";
 import { useCookieConsent } from "@/lib/cookie-consent";
+import { useI18n } from "@/i18n";
 
 const SOCIAL_ICONS: Record<string, React.ReactNode> = {
   linkedin: <Linkedin className="w-5 h-5" />,
@@ -18,6 +19,7 @@ const SOCIAL_ICONS: Record<string, React.ReactNode> = {
 };
 
 export function Footer() {
+  const { t } = useI18n();
   const [email, setEmail] = useState("");
   const { openSettings } = useCookieConsent();
   const { mutate, isPending } = useSubscribeNewsletter();
@@ -56,22 +58,24 @@ export function Footer() {
             </p>
           </div>
           <form onSubmit={handleSubscribe} className="flex flex-col sm:flex-row gap-3 max-w-lg lg:max-w-none lg:flex-1">
-            <label htmlFor="newsletter-email" className="sr-only">E-mail címed</label>
+            <label htmlFor="newsletter-email" className="sr-only">{t("footer.newsletterEmailLabel")}</label>
             <input
               id="newsletter-email"
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="E-mail címed"
+              placeholder={t("footer.newsletterEmailPlaceholder")}
               className="flex-1 px-5 py-4 bg-white/10 border border-white/20 text-white placeholder:text-white/50 focus:outline-none focus:ring-2 focus:ring-works-primary focus:border-transparent transition-all"
               required
+              data-testid="footer-newsletter-email"
             />
             <button
               type="submit"
               disabled={isPending}
               className="group px-8 py-4 border border-white text-white font-semibold hover:bg-white hover:text-works-dark transition-colors flex items-center justify-center gap-2 disabled:opacity-70"
+              data-testid="footer-newsletter-submit"
             >
-              {isPending ? "Küldés..." : "Feliratkozás"}
+              {isPending ? t("footer.newsletterSubmitting") : t("footer.newsletterSubscribe")}
               {!isPending && <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />}
             </button>
           </form>
@@ -82,7 +86,7 @@ export function Footer() {
         <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
           <div className="lg:col-span-1">
             {logoImg ? (
-              <img src={logoImg} alt="Works. Logo" className="h-8 w-auto object-contain brightness-0 invert mb-6" />
+              <img src={logoImg} alt={t("footer.logoAlt")} className="h-8 w-auto object-contain brightness-0 invert mb-6" />
             ) : (
               <span className="text-xl font-bold text-white mb-6 block">Works.</span>
             )}
@@ -123,7 +127,7 @@ export function Footer() {
           </div>
 
           <div>
-            <h4 className="text-white font-bold mb-6 uppercase tracking-wider text-sm">Szolgáltatások</h4>
+            <h4 className="text-white font-bold mb-6 uppercase tracking-wider text-sm">{t("footer.servicesHeading")}</h4>
             <ul className="space-y-4">
               {footerServices.length > 0 ? (
                 footerServices.map((svc) => (
@@ -145,24 +149,24 @@ export function Footer() {
           </div>
 
           <div>
-            <h4 className="text-white font-bold mb-6 uppercase tracking-wider text-sm">Cég</h4>
+            <h4 className="text-white font-bold mb-6 uppercase tracking-wider text-sm">{t("footer.companyHeading")}</h4>
             <ul className="space-y-4">
-              <li><Link href="/rolunk" className="hover:text-works-primary transition-colors">Rólunk</Link></li>
-              <li><Link href="/karrier" className="hover:text-works-primary transition-colors">Karrier</Link></li>
-              <li><Link href="/blog" className="hover:text-works-primary transition-colors">Blog</Link></li>
-              <li><Link href="/projektek" className="hover:text-works-primary transition-colors">Esettanulmányok</Link></li>
+              <li><Link href="/rolunk" className="hover:text-works-primary transition-colors">{t("nav.about")}</Link></li>
+              <li><Link href="/karrier" className="hover:text-works-primary transition-colors">{t("nav.careers")}</Link></li>
+              <li><Link href="/blog" className="hover:text-works-primary transition-colors">{t("nav.blog")}</Link></li>
+              <li><Link href="/projektek" className="hover:text-works-primary transition-colors">{t("footer.caseStudies")}</Link></li>
             </ul>
           </div>
 
           <div>
-            <h4 className="text-white font-bold mb-6 uppercase tracking-wider text-sm">Kapcsolat</h4>
+            <h4 className="text-white font-bold mb-6 uppercase tracking-wider text-sm">{t("footer.contactHeading")}</h4>
             <ul className="space-y-4">
               <li className="flex flex-col">
-                <span className="text-sm text-works-muted/60 mb-1">Cím</span>
+                <span className="text-sm text-works-muted/60 mb-1">{t("footer.addressLabel")}</span>
                 <span className="text-works-muted">{address}</span>
               </li>
               <li className="flex flex-col">
-                <span className="text-sm text-works-muted/60 mb-1">Email</span>
+                <span className="text-sm text-works-muted/60 mb-1">{t("footer.emailLabel")}</span>
                 <a href={`mailto:${contactEmail}`} className="text-works-primary font-semibold hover:underline">{contactEmail}</a>
               </li>
             </ul>
@@ -177,10 +181,10 @@ export function Footer() {
               {...(privacyPdfUrl ? { target: "_blank", rel: "noopener noreferrer" } : {})}
               className="hover:text-white transition-colors"
             >
-              Adatvédelmi tájékoztató
+              {t("footer.privacy")}
             </a>
             <Link href="/sutik" className="hover:text-white transition-colors">
-              Süti tájékoztató
+              {t("footer.cookies")}
             </Link>
             <button
               type="button"
@@ -188,7 +192,7 @@ export function Footer() {
               className="hover:text-white transition-colors"
               data-testid="button-cookie-settings"
             >
-              Süti beállítások
+              {t("footer.cookieSettings")}
             </button>
             {imprintPdfUrl && (
               <a
@@ -197,7 +201,7 @@ export function Footer() {
                 rel="noopener noreferrer"
                 className="hover:text-white transition-colors"
               >
-                Impresszum
+                {t("footer.imprint")}
               </a>
             )}
           </div>

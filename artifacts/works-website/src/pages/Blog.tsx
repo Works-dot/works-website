@@ -10,6 +10,7 @@ import { useStrapiQuery } from "@/hooks/useStrapiQuery";
 import { getBlogPosts } from "@/lib/strapi";
 import type { BlogPost } from "@/lib/strapi";
 import { fallbackBlogPosts } from "@/data/fallback";
+import { useI18n } from "@/i18n";
 
 function FeaturedBlogCard({ slug, title, excerpt, date, image, imageAlt, author, readingTime }: {
   slug: string;
@@ -21,6 +22,7 @@ function FeaturedBlogCard({ slug, title, excerpt, date, image, imageAlt, author,
   author: string;
   readingTime: string;
 }) {
+  const { t } = useI18n();
   return (
     <motion.div
       layout
@@ -54,7 +56,7 @@ function FeaturedBlogCard({ slug, title, excerpt, date, image, imageAlt, author,
           </p>
           <p className="text-sm text-works-dark/50 mb-6">{author}</p>
           <span className="inline-flex items-center gap-2 text-works-primary font-semibold text-sm">
-            Elolvasom
+            {t("cta.readMore")}
             <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
           </span>
         </div>
@@ -74,6 +76,7 @@ function BlogGridCard({ slug, title, excerpt, date, image, imageAlt, author, rea
   readingTime: string;
   index: number;
 }) {
+  const { t } = useI18n();
   return (
     <motion.article
       layout
@@ -113,7 +116,7 @@ function BlogGridCard({ slug, title, excerpt, date, image, imageAlt, author, rea
           <div className="flex items-center justify-between mt-auto">
             <span className="text-sm text-works-dark/50">{author}</span>
             <span className="inline-flex items-center gap-1 text-works-primary font-semibold text-sm">
-              Elolvasom
+              {t("cta.readMore")}
               <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
             </span>
           </div>
@@ -124,6 +127,7 @@ function BlogGridCard({ slug, title, excerpt, date, image, imageAlt, author, rea
 }
 
 export default function Blog() {
+  const { t } = useI18n();
   const [activeTag, setActiveTag] = useState<string | null>(null);
   const { data: blogPosts, loading, error } = useStrapiQuery<BlogPost[]>("blogPosts", getBlogPosts, fallbackBlogPosts);
 
@@ -154,10 +158,10 @@ export default function Blog() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="mb-12 lg:mb-16">
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-works-dark tracking-tight mb-4">
-                Szakmai tartalom
+                {t("pages.blogHeading")}
               </h1>
               <p className="text-lg lg:text-xl text-works-dark/60 max-w-2xl">
-                UX trendek, design gondolkodás és gyakorlati tanácsok digitális termékekhez.
+                {t("pages.blogSubheading")}
               </p>
             </div>
 
@@ -167,15 +171,15 @@ export default function Blog() {
                   options={usedTags}
                   value={activeTag}
                   onChange={setActiveTag}
-                  allLabel="Összes cikk"
+                  allLabel={t("sections.allBlogs")}
                 />
               </div>
             )}
 
             {error ? (
               <div className="text-center py-16">
-                <p className="text-xl font-semibold text-works-dark mb-2">Hiba történt</p>
-                <p className="text-works-dark/60">A cikkek betöltése sikertelen. Kérjük, próbáld újra később.</p>
+                <p className="text-xl font-semibold text-works-dark mb-2">{t("states.errorHeading")}</p>
+                <p className="text-works-dark/60">{t("states.errorBody")}</p>
               </div>
             ) : loading ? (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
@@ -229,13 +233,14 @@ export default function Blog() {
             {!loading && filtered.length === 0 && (
               <div className="text-center py-20">
                 <p className="text-works-dark/60 text-lg">
-                  Nincs találat a kiválasztott szűrőre.
+                  {t("states.noResults")}
                 </p>
                 <button
                   onClick={() => setActiveTag(null)}
                   className="mt-4 text-works-primary font-semibold hover:underline"
+                  data-testid="blog-show-all"
                 >
-                  Összes cikk mutatása
+                  {t("sections.allBlogs")}
                 </button>
               </div>
             )}

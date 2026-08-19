@@ -9,6 +9,13 @@ import {
   fallbackCareerPage,
 } from "./data/fallback";
 import type { SeoOverride } from "./lib/strapi";
+import {
+  buildLocalePath,
+  getLocaleFromPath,
+  matchLocalePath,
+  stripSearch,
+  type Locale,
+} from "./lib/i18n-routes";
 
 export interface PageMeta {
   title: string;
@@ -22,6 +29,11 @@ export interface PageMeta {
   article?: { publishedTime?: string; author?: string };
   /** Breadcrumb trail for BreadcrumbList JSON-LD (home is added automatically). */
   breadcrumbs?: { name: string; path: string }[];
+  /**
+   * BCP-47 language tag for this page, e.g. "hu" or "en".
+   * Defaults to "hu" when absent.
+   */
+  locale?: Locale;
 }
 
 const configuredSiteUrl =
@@ -42,15 +54,23 @@ function absoluteUrl(pathOrUrl: string): string {
 function withOverride(base: PageMeta, seo?: SeoOverride | null): PageMeta {
   if (!seo) return base;
   return {
+    ...base,
     title: seo.metaTitle?.trim() || base.title,
     description: seo.metaDescription?.trim() || base.description,
     ogImage: seo.ogImage || base.ogImage,
   };
 }
 
+// ---------------------------------------------------------------------------
+// HU defaults (current public content)
+// ---------------------------------------------------------------------------
+
 const DEFAULT_TITLE = "Works. | Digitális Ügynökség";
 const DEFAULT_DESCRIPTION =
   "Magyar digitális ügynökség — UX kutatás, service design, UI design, akadálymentesítés, AI-alapú tervezés, webfejlesztés.";
+const EN_DEFAULT_TITLE = "Works. | Digital Agency";
+const EN_DEFAULT_DESCRIPTION =
+  "A digital agency for UX research, service design, UI design, accessibility, AI-assisted design and web development.";
 const DEFAULT_OG_IMAGE = "/opengraph.jpg";
 
 function formatTitle(pageTitle: string): string {
@@ -106,13 +126,69 @@ const pageSeoOverrides: Record<string, SeoOverride | null | undefined> = {
   "/karrier": fallbackCareerPage?.seo,
 };
 
-export function getPageMeta(route: string): PageMeta {
-  if (staticMeta[route]) {
-    const base = withOverride(staticMeta[route], pageSeoOverrides[route]);
-    return { ...base, path: route, type: "website" };
+// ---------------------------------------------------------------------------
+// Locale helpers
+// ---------------------------------------------------------------------------
+
+/**
+ * Maps a BCP-47 locale tag to an og:locale string.
+ *  "hu" → "hu_HU"
+ *  "en" → "en_US"
+ *  anything else → "hu_HU" (safe fallback)
+ */
+export function localeToOgLocale(locale: string): string {
+  if (locale === "hu") return "hu_HU";
+  if (locale === "en") return "en_US";
+  return "hu_HU";
+}
+
+/**
+ * Returns the BCP-47 language tag to use in JSON-LD inLanguage.
+ * Defaults to "hu".
+ */
+export function pageLocale(meta: PageMeta): Locale {
+  return meta.locale === "en" ? "en" : "hu";
+}
+
+// ---------------------------------------------------------------------------
+// getPageMeta — locale-aware
+// ---------------------------------------------------------------------------
+
+/**
+ * Returns PageMeta for a given route path.
+ *
+ * @param route - The pathname, e.g. "/projektek/my-project"
+ * @param locale - Optional BCP-47 locale; defaults to "hu".
+ *   The EN locale is accepted by the type system for forward-compat, but
+ *   EN routes are NOT public and must not be passed by prerender scripts.
+ */
+export function getPageMeta(route: string, locale?: Locale): PageMeta {
+  const pathname = stripSearch(route);
+  const routeMatch = matchLocalePath(pathname);
+  const lang = locale || routeMatch?.locale || getLocaleFromPath(pathname);
+
+  // EN content is intentionally not populated yet. Reserved EN routes still
+  // receive language-correct generic metadata and their own canonical path,
+  // without making those routes public.
+  if (lang === "en") {
+    const isReservedEnglishRoute = routeMatch?.locale === "en";
+    const isArticle =
+      routeMatch?.routeKey === "blogPost" || routeMatch?.routeKey === "projectDetail";
+    return {
+      title: EN_DEFAULT_TITLE,
+      description: EN_DEFAULT_DESCRIPTION,
+      path: isReservedEnglishRoute ? pathname : undefined,
+      type: isArticle ? "article" : "website",
+      locale: "en",
+    };
   }
 
-  const projectMatch = route.match(/^\/projektek\/(.+)$/);
+  if (staticMeta[pathname]) {
+    const base = withOverride(staticMeta[pathname], pageSeoOverrides[pathname]);
+    return { ...base, path: pathname, type: "website", locale: lang };
+  }
+
+  const projectMatch = pathname.match(/^\/projektek\/(.+)$/);
   if (projectMatch) {
     const project = fallbackProjects.find((p) => p.slug === projectMatch[1]);
     if (project) {
@@ -126,17 +202,18 @@ export function getPageMeta(route: string): PageMeta {
       );
       return {
         ...base,
-        path: route,
+        path: pathname,
         type: "article",
+        locale: lang,
         breadcrumbs: [
           { name: "Projektek", path: "/projektek" },
-          { name: project.title, path: route },
+          { name: project.title, path: pathname },
         ],
       };
     }
   }
 
-  const blogMatch = route.match(/^\/blog\/(.+)$/);
+  const blogMatch = pathname.match(/^\/blog\/(.+)$/);
   if (blogMatch) {
     const post = fallbackBlogPosts.find((p) => p.slug === blogMatch[1]);
     if (post) {
@@ -150,18 +227,19 @@ export function getPageMeta(route: string): PageMeta {
       );
       return {
         ...base,
-        path: route,
+        path: pathname,
         type: "article",
+        locale: lang,
         article: { publishedTime: post.date, author: post.author || undefined },
         breadcrumbs: [
           { name: "Blog", path: "/blog" },
-          { name: post.title, path: route },
+          { name: post.title, path: pathname },
         ],
       };
     }
   }
 
-  const serviceMatch = route.match(/^\/szolgaltatasok\/(.+)$/);
+  const serviceMatch = pathname.match(/^\/szolgaltatasok\/(.+)$/);
   if (serviceMatch) {
     const service = fallbackServices.find((s) => s.slug === serviceMatch[1]);
     if (service) {
@@ -174,14 +252,15 @@ export function getPageMeta(route: string): PageMeta {
       );
       return {
         ...base,
-        path: route,
+        path: pathname,
         type: "website",
-        breadcrumbs: [{ name: service.title, path: route }],
+        locale: lang,
+        breadcrumbs: [{ name: service.title, path: pathname }],
       };
     }
   }
 
-  const careerMatch = route.match(/^\/karrier\/(.+)$/);
+  const careerMatch = pathname.match(/^\/karrier\/(.+)$/);
   if (careerMatch) {
     const position = fallbackPositions.find((p) => p.slug === careerMatch[1]);
     if (position) {
@@ -194,17 +273,18 @@ export function getPageMeta(route: string): PageMeta {
       );
       return {
         ...base,
-        path: route,
+        path: pathname,
         type: "website",
+        locale: lang,
         breadcrumbs: [
           { name: "Karrier", path: "/karrier" },
-          { name: position.title, path: route },
+          { name: position.title, path: pathname },
         ],
       };
     }
   }
 
-  return { title: DEFAULT_TITLE, description: DEFAULT_DESCRIPTION, type: "website" };
+  return { title: DEFAULT_TITLE, description: DEFAULT_DESCRIPTION, type: "website", locale: lang };
 }
 
 function jsonLdScript(data: object): string {
@@ -215,6 +295,9 @@ function jsonLdScript(data: object): string {
 
 export function buildJsonLd(meta: PageMeta): string[] {
   const scripts: string[] = [];
+  const lang = pageLocale(meta);
+  const localizedHome = absoluteUrl(buildLocalePath(lang, "home"));
+  const localizedDescription = lang === "en" ? EN_DEFAULT_DESCRIPTION : DEFAULT_DESCRIPTION;
 
   scripts.push(
     jsonLdScript({
@@ -223,7 +306,7 @@ export function buildJsonLd(meta: PageMeta): string[] {
       name: "Works.",
       url: SITE_URL,
       logo: absoluteUrl("/favicon.svg"),
-      description: DEFAULT_DESCRIPTION,
+      description: localizedDescription,
     })
   );
 
@@ -232,8 +315,8 @@ export function buildJsonLd(meta: PageMeta): string[] {
       "@context": "https://schema.org",
       "@type": "WebSite",
       name: "Works.",
-      url: SITE_URL,
-      inLanguage: "hu",
+      url: localizedHome,
+      inLanguage: lang,
     })
   );
 
@@ -243,7 +326,12 @@ export function buildJsonLd(meta: PageMeta): string[] {
         "@context": "https://schema.org",
         "@type": "BreadcrumbList",
         itemListElement: [
-          { "@type": "ListItem", position: 1, name: "Főoldal", item: SITE_URL },
+          {
+            "@type": "ListItem",
+            position: 1,
+            name: lang === "en" ? "Home" : "Főoldal",
+            item: localizedHome,
+          },
           ...meta.breadcrumbs.map((crumb, i) => ({
             "@type": "ListItem",
             position: i + 2,
@@ -261,7 +349,7 @@ export function buildJsonLd(meta: PageMeta): string[] {
       "@type": "BlogPosting",
       headline: meta.title.replace(/ \| Works\.$/, ""),
       description: meta.description,
-      inLanguage: "hu",
+      inLanguage: lang,
       image: absoluteUrl(meta.ogImage || DEFAULT_OG_IMAGE),
       publisher: { "@type": "Organization", name: "Works.", url: SITE_URL },
       mainEntityOfPage: meta.path ? absoluteUrl(meta.path) : SITE_URL,
@@ -281,6 +369,7 @@ export function buildMetaTags(meta: PageMeta): string {
   const ogImage = absoluteUrl(meta.ogImage || DEFAULT_OG_IMAGE);
   const ogType = meta.type === "article" ? "article" : "website";
   const canonical = meta.path ? absoluteUrl(meta.path) : undefined;
+  const ogLocale = localeToOgLocale(pageLocale(meta));
 
   // data-ssr jelölés: a kliensoldali SEOHead hidratáláskor eltávolítja ezeket,
   // hogy a Helmet által kezelt tagekkel ne duplikálódjanak.
@@ -292,7 +381,7 @@ export function buildMetaTags(meta: PageMeta): string {
     `<meta data-ssr property="og:description" content="${escaped(meta.description)}" />`,
     `<meta data-ssr property="og:type" content="${ogType}" />`,
     ...(canonical ? [`<meta data-ssr property="og:url" content="${escaped(canonical)}" />`] : []),
-    `<meta data-ssr property="og:locale" content="hu_HU" />`,
+    `<meta data-ssr property="og:locale" content="${ogLocale}" />`,
     `<meta data-ssr property="og:site_name" content="Works." />`,
     `<meta data-ssr property="og:image" content="${escaped(ogImage)}" />`,
     `<meta data-ssr name="twitter:card" content="summary_large_image" />`,
