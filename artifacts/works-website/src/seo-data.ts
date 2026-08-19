@@ -163,7 +163,9 @@ export function pageLocale(meta: PageMeta): Locale {
  *   EN routes are NOT public and must not be passed by prerender scripts.
  */
 export function getPageMeta(route: string, locale?: Locale): PageMeta {
-  const pathname = stripSearch(route);
+  const strippedPath = stripSearch(route);
+  const pathname =
+    strippedPath.length > 1 ? strippedPath.replace(/\/+$/, "") : strippedPath;
   const routeMatch = matchLocalePath(pathname);
   const lang = locale || routeMatch?.locale || getLocaleFromPath(pathname);
 
@@ -290,7 +292,7 @@ export function getPageMeta(route: string, locale?: Locale): PageMeta {
 function jsonLdScript(data: object): string {
   // "<" escape-elve, hogy a JSON ne tudjon kitörni a <script> tagből.
   const json = JSON.stringify(data).replace(/</g, "\\u003c");
-  return `<script type="application/ld+json">${json}</script>`;
+  return `<script data-ssr type="application/ld+json">${json}</script>`;
 }
 
 export function buildJsonLd(meta: PageMeta): string[] {
@@ -371,8 +373,8 @@ export function buildMetaTags(meta: PageMeta): string {
   const canonical = meta.path ? absoluteUrl(meta.path) : undefined;
   const ogLocale = localeToOgLocale(pageLocale(meta));
 
-  // data-ssr jelölés: a kliensoldali SEOHead hidratáláskor eltávolítja ezeket,
-  // hogy a Helmet által kezelt tagekkel ne duplikálódjanak.
+  // data-ssr jelölés: a kliensoldali SEOHead ezeket helyben frissíti vagy
+  // lecseréli, így route-váltás után sem marad duplikált vagy elavult tag.
   const tags = [
     `<title data-ssr>${escaped(meta.title)}</title>`,
     `<meta data-ssr name="description" content="${escaped(meta.description)}" />`,

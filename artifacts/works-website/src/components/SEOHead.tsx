@@ -1,31 +1,100 @@
 import { useEffect } from "react";
-import { Helmet } from "react-helmet-async";
 import { useLocation } from "wouter";
-import { getPageMeta, SITE_URL, localeToOgLocale, pageLocale } from "../seo-data";
+import {
+  buildJsonLd,
+  getPageMeta,
+  SITE_URL,
+  localeToOgLocale,
+  pageLocale,
+} from "../seo-data";
 import { getLocaleFromPath } from "@/lib/i18n-routes";
 import { useStrapiQuery } from "@/hooks/useStrapiQuery";
 import { getGlobalSettings } from "@/lib/strapi";
 import type { GlobalSettings } from "@/lib/strapi";
 import { fallbackGlobalSettings } from "@/data/fallback";
 
-const isSSR = typeof document === "undefined";
+const CLIENT_SEO_ATTRIBUTE = "data-client-seo";
+const CLIENT_JSON_LD_ATTRIBUTE = "data-client-json-ld";
 
 function absoluteUrl(pathOrUrl: string): string {
   if (/^https?:\/\//.test(pathOrUrl)) return pathOrUrl;
   return `${SITE_URL}${pathOrUrl.startsWith("/") ? "" : "/"}${pathOrUrl}`;
 }
 
+function upsertMeta(
+  attribute: "name" | "property",
+  key: string,
+  content: string,
+) {
+  const selector = `meta[${attribute}="${key}"]`;
+  let element = document.head.querySelector<HTMLMetaElement>(selector);
+
+  if (!element) {
+    element = document.createElement("meta");
+    element.setAttribute(attribute, key);
+    document.head.appendChild(element);
+  }
+
+  element.content = content;
+  element.setAttribute(CLIENT_SEO_ATTRIBUTE, "");
+  element.removeAttribute("data-ssr");
+}
+
+function removeMeta(attribute: "name" | "property", key: string) {
+  document.head
+    .querySelectorAll(`meta[${attribute}="${key}"]`)
+    .forEach((element) => element.remove());
+}
+
+function upsertLink(rel: "canonical" | "icon", href: string) {
+  let element = document.head.querySelector<HTMLLinkElement>(`link[rel="${rel}"]`);
+
+  if (!element) {
+    element = document.createElement("link");
+    element.rel = rel;
+    document.head.appendChild(element);
+  }
+
+  element.href = href;
+  element.setAttribute(CLIENT_SEO_ATTRIBUTE, "");
+  element.removeAttribute("data-ssr");
+}
+
+function upsertTitle(title: string) {
+  let element = document.head.querySelector<HTMLTitleElement>("title");
+
+  if (!element) {
+    element = document.createElement("title");
+    document.head.appendChild(element);
+  }
+
+  element.textContent = title;
+  element.setAttribute(CLIENT_SEO_ATTRIBUTE, "");
+  element.removeAttribute("data-ssr");
+}
+
+function syncJsonLd(scriptMarkup: string[]) {
+  document.head
+    .querySelectorAll(
+      `script[type="application/ld+json"][data-ssr], script[${CLIENT_JSON_LD_ATTRIBUTE}]`,
+    )
+    .forEach((element) => element.remove());
+
+  for (const markup of scriptMarkup) {
+    const content = markup.match(/<script[^>]*>([\s\S]*)<\/script>/)?.[1];
+    if (!content) continue;
+
+    const script = document.createElement("script");
+    script.type = "application/ld+json";
+    script.textContent = content;
+    script.setAttribute(CLIENT_JSON_LD_ATTRIBUTE, "");
+    document.head.appendChild(script);
+  }
+}
+
 export default function SEOHead() {
   const [location] = useLocation();
-
-  // A prerenderelt (data-ssr jelölésű) title/meta/link tagek eltávolítása,
-  // hogy a Helmet által kezeltekkel ne duplikálódjanak hidratálás után.
-  useEffect(() => {
-    document.querySelectorAll("head [data-ssr]").forEach((el) => el.remove());
-  }, []);
   const { data: settings } = useStrapiQuery<GlobalSettings>("globalSettings", getGlobalSettings, fallbackGlobalSettings);
-
-  if (isSSR) return null;
 
   const meta = getPageMeta(location, getLocaleFromPath(location));
   const lang = pageLocale(meta);
@@ -35,23 +104,50 @@ export default function SEOHead() {
   const canonical = absoluteUrl(meta.path || location);
   const ogType = meta.type === "article" ? "article" : "website";
 
-  return (
-    <Helmet>
-      <title>{meta.title}</title>
-      <meta name="description" content={meta.description} />
-      <link rel="canonical" href={canonical} />
-      <meta property="og:title" content={meta.title} />
-      <meta property="og:description" content={meta.description} />
-      <meta property="og:type" content={ogType} />
-      <meta property="og:url" content={canonical} />
-      <meta property="og:locale" content={ogLocale} />
-      <meta property="og:site_name" content={settings?.siteName || "Works."} />
-      <meta property="og:image" content={ogImage} />
-      <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:title" content={meta.title} />
-      <meta name="twitter:description" content={meta.description} />
-      <meta name="twitter:image" content={ogImage} />
-      <link rel="icon" href={favicon} />
-    </Helmet>
-  );
+  useEffect(() => {
+    upsertTitle(meta.title);
+    upsertMeta("name", "description", meta.description);
+    upsertLink("canonical", canonical);
+    upsertMeta("property", "og:title", meta.title);
+    upsertMeta("property", "og:description", meta.description);
+    upsertMeta("property", "og:type", ogType);
+    upsertMeta("property", "og:url", canonical);
+    upsertMeta("property", "og:locale", ogLocale);
+    upsertMeta("property", "og:site_name", settings?.siteName || "Works.");
+    upsertMeta("property", "og:image", ogImage);
+    upsertMeta("name", "twitter:card", "summary_large_image");
+    upsertMeta("name", "twitter:title", meta.title);
+    upsertMeta("name", "twitter:description", meta.description);
+    upsertMeta("name", "twitter:image", ogImage);
+    upsertLink("icon", favicon);
+
+    if (meta.article?.publishedTime) {
+      upsertMeta(
+        "property",
+        "article:published_time",
+        meta.article.publishedTime,
+      );
+    } else {
+      removeMeta("property", "article:published_time");
+    }
+
+    syncJsonLd(buildJsonLd(meta));
+
+    document
+      .querySelectorAll(`head [data-ssr]:not([${CLIENT_SEO_ATTRIBUTE}])`)
+      .forEach((element) => element.remove());
+  }, [
+    canonical,
+    favicon,
+    meta.description,
+    meta.title,
+    meta.article?.publishedTime,
+    location,
+    ogImage,
+    ogLocale,
+    ogType,
+    settings?.siteName,
+  ]);
+
+  return null;
 }

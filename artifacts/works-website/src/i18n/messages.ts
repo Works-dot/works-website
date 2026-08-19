@@ -138,6 +138,9 @@ export interface Messages {
     loading: string;
     errorHeading: string;
     errorBody: string;
+    navigationErrorHeading: string;
+    navigationErrorBody: string;
+    reloadPage: string;
     notFoundPost: string;
     notFoundProject: string;
     notFoundService: string;
@@ -305,6 +308,9 @@ const hu: Messages = {
     loading: "Betöltés...",
     errorHeading: "Hiba történt",
     errorBody: "A tartalom betöltése sikertelen. Kérjük, próbáld újra később.",
+    navigationErrorHeading: "Az oldal betöltése megszakadt",
+    navigationErrorBody: "Kérjük, töltsd újra az oldalt, vagy térj vissza a főoldalra.",
+    reloadPage: "Oldal újratöltése",
     notFoundPost: "Bejegyzés nem található",
     notFoundProject: "Projekt nem található",
     notFoundService: "Szolgáltatás nem található",
@@ -467,6 +473,9 @@ const en: Messages = {
     loading: "Loading...",
     errorHeading: "An error occurred",
     errorBody: "Failed to load content. Please try again later.",
+    navigationErrorHeading: "The page stopped loading",
+    navigationErrorBody: "Please reload the page or return to the homepage.",
+    reloadPage: "Reload page",
     notFoundPost: "Post not found",
     notFoundProject: "Project not found",
     notFoundService: "Service not found",

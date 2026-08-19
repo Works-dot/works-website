@@ -39,6 +39,7 @@ app.use(
   express.static(distDir, {
     extensions: ["html"],
     index: "index.html",
+    redirect: false,
     setHeaders: (res, filePath) => {
       // A Vite hash-elt assetjei (dist/public/assets/*) örökre cache-elhetők;
       // a HTML és a generált sitemap/robots mindig revalidálódjon.
