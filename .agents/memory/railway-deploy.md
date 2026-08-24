@@ -27,3 +27,10 @@ description: How the Works. monorepo is hosted on Railway and how Strapi trigger
 
 ## Watch paths gotcha
 - The website Railway service only redeploys when files under `artifacts/works-website` change; commits touching only `artifacts/strapi` never trigger a website build — to force a website rebuild via git, the commit must touch the website dir. Bootstrap migrations run before the auto-rebuild ready gate opens, so content they change must explicitly request a post-bootstrap rebuild.
+
+## Browser tests outside the deploy critical path
+Keep Railway's website build path to the strict production Strapi fetch followed by the normal Vite/SSG build. Run the Playwright production regression suite locally or in a dedicated CI environment, not as a Railway Nixpacks build gate.
+
+**Why:** Nixpacks can fail while installing or launching Chromium even when the same strict production-data build and Playwright suite pass locally. Coupling browser runtime dependencies to deploy blocked a valid website release.
+
+**How to apply:** validate with the Playwright suite before publishing, but do not replace Railway's normal build command with `test:production`.
