@@ -9,6 +9,7 @@
     "serve": "vite preview --config vite.config.ts --host 0.0.0.0",
     "start": "node server.mjs",
     "test:production": "playwright install chromium && VITE_STRAPI_ENABLED=false pnpm run build && node scripts/test-production.mjs",
+    "verify:service-heroes": "node scripts/verify-service-hero-graphics.mjs",
     "typecheck": "tsc -p tsconfig.json --noEmit"
   },
   "devDependencies": {

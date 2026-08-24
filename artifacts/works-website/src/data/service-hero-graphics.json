@@ -1,0 +1,20 @@
+{
+  "graphics": {
+    "uxResearch": "UX_kutatas_1787571512457.png",
+    "uxUiDesign": "UXUI_design_1787571512458.png",
+    "serviceDesign": "Service_design_1787571512457.png",
+    "aiProductDevelopment": "ai_termekfejlesztes_1787571512455.png",
+    "accessibleServices": "akadalymentes_szolgaltatasok_1787571512456.png",
+    "digitalSkills": "digitalis_kepessegfejlesztes_1787571512456.png"
+  },
+  "slugs": {
+    "ux-kutatas": "uxResearch",
+    "ux-ui-design": "uxUiDesign",
+    "ui-design": "uxUiDesign",
+    "service-design": "serviceDesign",
+    "ai-alapu-digitalis-termekfejlesztes": "aiProductDevelopment",
+    "ai-termekfejlesztes": "aiProductDevelopment",
+    "akadalymentesites": "accessibleServices",
+    "digitalis-kepessegfejlesztes": "digitalSkills"
+  }
+}
