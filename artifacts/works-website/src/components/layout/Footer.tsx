@@ -27,6 +27,7 @@ export function Footer() {
   const { data: services } = useStrapiQuery<Service[]>("footerServices", getServices, fallbackServices);
   const { data: legalDocs } = useStrapiQuery<LegalDocuments>("legalDocuments", getLegalDocuments, fallbackLegalDocuments);
   const privacyPdfUrl = legalDocs?.privacyPdfUrl || "";
+  const cookiePdfUrl = legalDocs?.cookiePdfUrl || "";
   const imprintPdfUrl = legalDocs?.imprintPdfUrl || "";
   const logoImg = settings?.logoUrl;
 
@@ -183,9 +184,13 @@ export function Footer() {
             >
               {t("footer.privacy")}
             </a>
-            <Link href="/sutik" className="hover:text-white transition-colors">
+            <a
+              href={cookiePdfUrl || "/sutik"}
+              {...(cookiePdfUrl ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+              className="hover:text-white transition-colors"
+            >
               {t("footer.cookies")}
-            </Link>
+            </a>
             <button
               type="button"
               onClick={openSettings}

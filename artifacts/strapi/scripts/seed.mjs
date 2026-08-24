@@ -161,7 +161,6 @@ async function seed() {
     { file: 'Purposeful_1774354143676.png', alt: 'About page hero graphic' },
     { file: 'contact-bg_1774518452836.png', alt: 'Contact page background' },
     { file: 'Frame_26081029_1774516588825.png', alt: 'Career page hero graphic' },
-    { file: 'service-bg_1774270906434.png', alt: 'Service page mockup graphic' },
     { file: 'works-background_1774441334981.png', alt: 'Works background pattern' },
     { file: 'project-banking-mockup.png', alt: 'Banking app mockup' },
     { file: 'project-logistics-mockup.png', alt: 'Logistics software mockup' },
@@ -299,7 +298,7 @@ async function seed() {
   }
   console.log('  Done.\n');
 
-  console.log('Creating 3 services...');
+  console.log('Creating 6 services...');
   const servicesData = [
     {
       slug: 'ux-kutatas',
@@ -323,7 +322,7 @@ async function seed() {
     },
     {
       slug: 'ui-design',
-      title: 'UI Design',
+      title: 'UX/UI Design',
       subtitle: 'Felületek, amelyek működnek és hatnak',
       heroDescription: 'Olyan felhasználói felületeket tervezünk, amelyek nem csak szépek, hanem érthetőek, használhatóak és üzleti eredményeket hoznak.',
       definitionSection: {
@@ -339,11 +338,11 @@ async function seed() {
         { stepNumber: '04', title: 'Prototípus és teszt', description: 'Kattintható prototípus készítése és tesztelése felhasználókkal a végső finomhangolás előtt.' },
         { stepNumber: '05', title: 'Design rendszer és átadás', description: 'A végleges design rendszer dokumentálása és átadása a fejlesztő csapatnak.' },
       ],
-      seo: { metaTitle: 'UI Design | Works.', metaDescription: 'Olyan felhasználói felületeket tervezünk, amelyek nem csak szépek, hanem érthetőek, használhatóak és üzleti eredményeket hoznak.' },
+      seo: { metaTitle: 'UX/UI Design | Works.', metaDescription: 'Olyan felhasználói felületeket tervezünk, amelyek nem csak szépek, hanem érthetőek, használhatóak és üzleti eredményeket hoznak.' },
     },
     {
       slug: 'akadalymentesites',
-      title: 'Akadálymentesítés',
+      title: 'Akadálymentes digitális szolgáltatások',
       subtitle: 'Digitális termékek mindenki számára',
       heroDescription: 'Segítünk, hogy digitális termékeid mindenki számára elérhetőek és használhatóak legyenek — a jogszabályi megfeleléstől a valódi inkluzivitásig.',
       definitionSection: {
@@ -351,7 +350,7 @@ async function seed() {
         heading: 'Mi az a digitális akadálymentesítés?',
         description: 'A digitális akadálymentesítés azt jelenti, hogy egy weboldal vagy alkalmazás mindenki számára használható — a látás-, hallás- vagy mozgássérült felhasználóknak, az idősebb korosztálynak és az átmeneti korlátozottsággal élőknek is. A nemzetközi WCAG szabvány alapján auditáljuk és javítjuk a felületeket, így a termék nemcsak a jogszabályi elvárásoknak felel meg, hanem szélesebb közönséget is elér.',
       },
-      order: 3,
+      order: 5,
       processSteps: [
         { stepNumber: '01', title: 'Helyzetértékelés', description: 'A jelenlegi állapot felmérése automatizált és manuális eszközökkel, WCAG 2.1 szabvány szerint.' },
         { stepNumber: '02', title: 'Részletes audit', description: 'Oldalról oldalra haladó, komponensszintű vizsgálat dokumentált eredményekkel.' },
@@ -359,7 +358,46 @@ async function seed() {
         { stepNumber: '04', title: 'Implementációs támogatás', description: 'A fejlesztő csapat támogatása a javítások során, kód review-kkal és konzultációval.' },
         { stepNumber: '05', title: 'Végső validáció', description: 'A javítások utáni újratesztelés és a megfelelési nyilatkozat elkészítése.' },
       ],
-      seo: { metaTitle: 'Akadálymentesítés | Works.', metaDescription: 'Segítünk, hogy digitális termékeid mindenki számára elérhetőek és használhatóak legyenek.' },
+      seo: { metaTitle: 'Akadálymentes digitális szolgáltatások | Works.', metaDescription: 'Segítünk, hogy digitális termékeid mindenki számára elérhetőek és használhatóak legyenek.' },
+    },
+    {
+      slug: 'service-design',
+      title: 'Service design',
+      subtitle: 'Összehangolt szolgáltatások, jobb ügyfélélmény',
+      heroDescription: 'A teljes szolgáltatási élményt feltérképezzük és újratervezzük, hogy az ügyfelek és a háttérben dolgozó csapatok számára is egyszerűbben és hatékonyabban működjön.',
+      definitionSection: {
+        kicker: 'Definíció',
+        heading: 'Mi az a service design?',
+        description: 'A service design egy szolgáltatás teljes működését vizsgálja az ügyfélkapcsolati pontoktól a háttérfolyamatokig. Segítségével összehangoljuk az embereket, folyamatokat és digitális felületeket, hogy a szolgáltatás következetesebb, érthetőbb és fenntarthatóbban működtethető legyen.',
+      },
+      order: 3,
+      seo: { metaTitle: 'Service design | Works.', metaDescription: 'A teljes szolgáltatási élményt feltérképezzük és újratervezzük az ügyfelek és a háttérben dolgozó csapatok számára.' },
+    },
+    {
+      slug: 'ai-termekfejlesztes',
+      title: 'AI-alapú digitális termékfejlesztés',
+      subtitle: 'Hasznos AI-megoldások valódi igényekre',
+      heroDescription: 'Az AI lehetőségeit valós felhasználói és üzleti problémákhoz kapcsoljuk, majd kutatással, tervezéssel és gyors prototípusokkal működő digitális termékké formáljuk.',
+      definitionSection: {
+        kicker: 'Definíció',
+        heading: 'Mi az az AI termékfejlesztés?',
+        description: 'Az AI termékfejlesztés során a mesterséges intelligenciát nem önmagáért, hanem konkrét felhasználói és üzleti érték létrehozására alkalmazzuk. Segítünk megtalálni a megfelelő felhasználási területeket, megtervezni az ember és az AI együttműködését, majd gyorsan tesztelhető megoldásokat készíteni.',
+      },
+      order: 4,
+      seo: { metaTitle: 'AI-alapú digitális termékfejlesztés | Works.', metaDescription: 'Az AI lehetőségeit valós felhasználói és üzleti problémákhoz kapcsoljuk, majd működő digitális termékké formáljuk.' },
+    },
+    {
+      slug: 'digitalis-kepessegfejlesztes',
+      title: 'Digitális képességfejlesztés',
+      subtitle: 'Tudás és módszertan a szervezeten belül',
+      heroDescription: 'Gyakorlati képzésekkel, workshopokkal és közös munkával fejlesztjük a csapatok digitális, kutatási és tervezési képességeit.',
+      definitionSection: {
+        kicker: 'Definíció',
+        heading: 'Mi az a digitális képességfejlesztés?',
+        description: 'A digitális képességfejlesztés célja, hogy a szervezet saját csapatai magabiztosabban használják az ügyfélközpontú kutatás, tervezés és termékfejlesztés módszereit. A tudást konkrét helyzeteken, közös gyakorláson és a mindennapi munkába beépíthető eszközökön keresztül adjuk át.',
+      },
+      order: 6,
+      seo: { metaTitle: 'Digitális képességfejlesztés | Works.', metaDescription: 'Gyakorlati képzésekkel és workshopokkal fejlesztjük a csapatok digitális, kutatási és tervezési képességeit.' },
     },
   ];
 
@@ -761,20 +799,6 @@ async function seed() {
       console.log('  Career page: hero.backgroundImage');
     }
   }
-
-  if (imageMap['service-bg_1774270906434.png']) {
-    const svcRes = await api('/services?populate=general&pagination[pageSize]=100');
-    if (svcRes?.data) {
-      for (const svc of svcRes.data) {
-        const existingGeneral = svc.general || {};
-        await api(`/services/${svc.documentId}`, 'PUT', {
-          data: { general: { ...existingGeneral, heroImage: imageMap['service-bg_1774270906434.png'] } }
-        });
-      }
-      console.log(`  Services: heroImage (${svcRes.data.length} services)`);
-    }
-  }
-
 
   const projectImageMapping = {
     'banki-applikacio': { image: 'project-banking-mockup.png', homepageImage: 'project-banking-clean.png' },

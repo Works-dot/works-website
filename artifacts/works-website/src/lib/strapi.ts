@@ -157,7 +157,6 @@ interface StrapiServiceGeneral {
   subtitle: string;
   heroDescription: string;
   icon: StrapiMedia | null;
-  heroImage: StrapiMedia | null;
 }
 
 interface StrapiSectionIntro {
@@ -352,7 +351,6 @@ export interface Service {
   title: string;
   subtitle: string;
   heroDescription: string;
-  heroImage: string;
   icon: string;
   relatedProjectSlugs: string[];
   definitionSection: SectionIntro | null;
@@ -532,13 +530,13 @@ export async function getGalleryImages(locale?: string): Promise<GalleryImage[]>
 }
 
 const SERVICE_POPULATE =
-  "populate[0]=general&populate[1]=general.icon&populate[2]=general.heroImage&populate[3]=relatedProjects&populate[4]=seo.ogImage" +
-  "&populate[5]=questionsSection.intro&populate[6]=questionsSection.cards" +
-  "&populate[7]=helpSection.intro&populate[8]=helpSection.cards.icon" +
-  "&populate[9]=processSection.intro&populate[10]=processSection.steps" +
-  "&populate[11]=deliverablesSection.intro&populate[12]=deliverablesSection.smallCards.icon&populate[13]=deliverablesSection.largeCards.icon&populate[14]=deliverablesSection.largeCards.bullets" +
-  "&populate[15]=projectExamplesIntro&populate[16]=faqSection.intro&populate[17]=faqSection.items" +
-  "&populate[18]=relatedServicesIntro&populate[19]=relatedServices.general.icon&populate[20]=ctaBanner&populate[21]=definitionSection";
+  "populate[0]=general&populate[1]=general.icon&populate[2]=relatedProjects&populate[3]=seo.ogImage" +
+  "&populate[4]=questionsSection.intro&populate[5]=questionsSection.cards" +
+  "&populate[6]=helpSection.intro&populate[7]=helpSection.cards.icon" +
+  "&populate[8]=processSection.intro&populate[9]=processSection.steps" +
+  "&populate[10]=deliverablesSection.intro&populate[11]=deliverablesSection.smallCards.icon&populate[12]=deliverablesSection.largeCards.icon&populate[13]=deliverablesSection.largeCards.bullets" +
+  "&populate[14]=projectExamplesIntro&populate[15]=faqSection.intro&populate[16]=faqSection.items" +
+  "&populate[17]=relatedServicesIntro&populate[18]=relatedServices.general.icon&populate[19]=ctaBanner&populate[20]=definitionSection";
 
 function mapSectionIntro(i: StrapiSectionIntro | null | undefined): SectionIntro | null {
   if (!i) return null;
@@ -555,7 +553,6 @@ function mapService(s: StrapiService): Service {
     title: s.general?.title || "",
     subtitle: s.general?.subtitle || "",
     heroDescription: s.general?.heroDescription || "",
-    heroImage: strapiImageUrl(s.general?.heroImage?.url),
     icon: strapiImageUrl(s.general?.icon?.url),
     relatedProjectSlugs: (s.relatedProjects || []).map((p) => p.slug),
     definitionSection: mapSectionIntro(s.definitionSection),
@@ -962,17 +959,25 @@ export async function uploadCv(file: File): Promise<void> {
 
 export interface LegalDocuments {
   privacyPdfUrl: string;
+  cookiePdfUrl: string;
   imprintPdfUrl: string;
 }
+
+export const DEFAULT_COOKIE_PDF_URL =
+  `${import.meta.env.BASE_URL}legal/sutikezelesi-tajekoztato.pdf`;
 
 export async function getLegalDocuments(locale?: string): Promise<LegalDocuments> {
   const res = await fetchApi<StrapiSingleResponse<{
     privacyPdf: StrapiMedia | null;
+    cookiePdf: StrapiMedia | null;
     imprintPdf: StrapiMedia | null;
-  }>>(appendLocale("/legal-document?populate[0]=privacyPdf&populate[1]=imprintPdf", locale));
+  }>>(appendLocale("/legal-document?populate=*", locale));
   const d = res.data;
   return {
     privacyPdfUrl: d.privacyPdf?.url ? strapiImageUrl(d.privacyPdf.url) : "",
+    cookiePdfUrl: d.cookiePdf?.url
+      ? strapiImageUrl(d.cookiePdf.url)
+      : DEFAULT_COOKIE_PDF_URL,
     imprintPdfUrl: d.imprintPdf?.url ? strapiImageUrl(d.imprintPdf.url) : "",
   };
 }

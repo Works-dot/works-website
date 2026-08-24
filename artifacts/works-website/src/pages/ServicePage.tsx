@@ -16,7 +16,8 @@ import {
 import { useStrapiQuery } from "@/hooks/useStrapiQuery";
 import { getServiceBySlug as fetchServiceBySlug, getProjects } from "@/lib/strapi";
 import type { Service, Project, SectionIntro } from "@/lib/strapi";
-import { fallbackProjects, fallbackServices, bgGraphic1FallbackImg, bgGraphic2FallbackImg, heroBackgroundFallbackImg } from "@/data/fallback";
+import { fallbackProjects, fallbackServices, bgGraphic1FallbackImg, bgGraphic2FallbackImg } from "@/data/fallback";
+import { getServiceHeroGraphic } from "@/data/service-hero-graphics";
 import { useI18n } from "@/i18n";
 
 const fadeUp = {
@@ -119,7 +120,7 @@ export default function ServicePage() {
     );
   }
 
-  const heroGraphic = heroBackgroundFallbackImg;
+  const heroGraphic = getServiceHeroGraphic(service.slug);
 
   const relatedProjects = service.relatedProjectSlugs
     .map(s => (projects || []).find(p => p.slug === s))
@@ -147,22 +148,22 @@ export default function ServicePage() {
 
       <main className="flex-grow">
         {/* 1. Hero */}
-        <section className="relative pt-28 lg:pt-36 pb-16 lg:pb-24 bg-white overflow-hidden">
+        <section className="relative mt-20 md:mt-[72px] min-h-[460px] lg:h-[870px] pt-10 lg:pt-[120px] pb-12 lg:pb-16 bg-white overflow-hidden flex items-start">
           {heroGraphic && (
             <img
               src={heroGraphic}
               alt=""
               aria-hidden="true"
-              className="absolute top-[70px] -right-[15%] w-[70vw] lg:-top-[100px] lg:-right-40 lg:w-[800px] opacity-10 lg:opacity-100 pointer-events-none select-none lg:rotate-12"
+              className="absolute inset-0 h-full w-full object-cover object-center pointer-events-none select-none"
             />
           )}
 
-          <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="max-w-3xl"
+              className="max-w-[750px] bg-white/25 backdrop-blur-xl backdrop-saturate-150 border border-white/50 p-5 sm:p-6 lg:p-[25px]"
             >
               <span className="text-works-primary font-bold text-sm tracking-widest uppercase mb-4 block">
                 {service.subtitle}
@@ -170,7 +171,7 @@ export default function ServicePage() {
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-works-dark mb-6 leading-tight">
                 {service.title}.
               </h1>
-              <p className="text-lg lg:text-xl text-works-dark/60 leading-relaxed">
+              <p className="text-lg lg:text-xl text-works-dark/85 leading-relaxed">
                 {service.heroDescription}
               </p>
             </motion.div>

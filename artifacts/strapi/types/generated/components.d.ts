@@ -285,13 +285,12 @@ export interface ServiceFaqSection extends Struct.ComponentSchema {
 export interface ServiceGeneral extends Struct.ComponentSchema {
   collectionName: 'components_service_generals';
   info: {
-    description: 'Az oldal tetej\u00E9n megjelen\u0151 c\u00EDm, alc\u00EDm, le\u00EDr\u00E1s \u00E9s ikon, valamint a szolg\u00E1ltat\u00E1s webc\u00EDme (slug)';
+    description: 'Az oldal tetej\u00E9n megjelen\u0151 c\u00EDm, alc\u00EDm, le\u00EDr\u00E1s \u00E9s szolg\u00E1ltat\u00E1sikon, valamint a szolg\u00E1ltat\u00E1s webc\u00EDme (slug)';
     displayName: '1. \u00C1ltal\u00E1nos adatok + fejl\u00E9c (hero)';
     icon: 'layout';
   };
   attributes: {
     heroDescription: Schema.Attribute.Text;
-    heroImage: Schema.Attribute.Media<'images'>;
     icon: Schema.Attribute.Media<'images'>;
     slug: Schema.Attribute.String &
       Schema.Attribute.Required &

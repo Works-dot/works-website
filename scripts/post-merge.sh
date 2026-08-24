@@ -1,7 +1,9 @@
 #!/bin/bash
 set -e
 
-pnpm install --frozen-lockfile || pnpm install
+export CI=true
+
+pnpm install --frozen-lockfile || pnpm install --no-frozen-lockfile
 pnpm --filter db push
 
 echo "--- Ensuring all dev servers are running ---"

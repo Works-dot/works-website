@@ -2,7 +2,7 @@
   "$schema": "https://railway.com/railway.schema.json",
   "build": {
     "builder": "NIXPACKS",
-    "buildCommand": "pnpm install --frozen-lockfile --prod=false && node artifacts/works-website/scripts/fetch-strapi-data.mjs && pnpm --filter @workspace/works-website run build"
+    "buildCommand": "pnpm install --frozen-lockfile --prod=false && node artifacts/works-website/scripts/fetch-strapi-data.mjs && VITE_STRAPI_ENABLED=false pnpm --filter @workspace/works-website run test:production"
   },
   "deploy": {
     "startCommand": "pnpm --filter @workspace/works-website run start",

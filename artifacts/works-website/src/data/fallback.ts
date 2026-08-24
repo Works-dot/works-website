@@ -5,21 +5,22 @@ import { whyUsCards as rawWhyUsCards } from "./careers";
 import { teamMembers as rawTeamMembers } from "./team";
 import { galleryImages as rawGalleryImages } from "./team";
 import { services as rawServices } from "./services";
-import type {
-  Project,
-  BlogPost,
-  CareerPosition,
-  WhyUsCard,
-  TeamMember,
-  GalleryImage,
-  Service,
-  GlobalSettings,
-  ContactPageData,
-  HomepageData,
-  Client,
-  AboutPageData,
-  CareerPageData,
-  LegalDocuments,
+import {
+  DEFAULT_COOKIE_PDF_URL,
+  type Project,
+  type BlogPost,
+  type CareerPosition,
+  type WhyUsCard,
+  type TeamMember,
+  type GalleryImage,
+  type Service,
+  type GlobalSettings,
+  type ContactPageData,
+  type HomepageData,
+  type Client,
+  type AboutPageData,
+  type CareerPageData,
+  type LegalDocuments,
 } from "@/lib/strapi";
 
 import rawCache from "./strapi-cache.json";
@@ -31,7 +32,6 @@ import bgGraphic2FallbackImg from "@assets/bg_graphic2_1774011568340.png";
 import aboutGraphicFallbackImg from "@assets/Purposeful_1774354143676.png";
 import contactGraphicFallbackImg from "@assets/contact-bg_1774518452836.png";
 import careerGraphicFallbackImg from "@assets/Frame_26081029_1774516588825.png";
-import serviceBgFallbackImg from "@assets/service-bg_1774270906434.png";
 import homepageGraphicFallbackImg from "@assets/homepage_graphic_1773999340930.png";
 
 export {
@@ -42,7 +42,6 @@ export {
   aboutGraphicFallbackImg,
   contactGraphicFallbackImg,
   careerGraphicFallbackImg,
-  serviceBgFallbackImg,
   homepageGraphicFallbackImg,
 };
 
@@ -142,7 +141,6 @@ const hardcodedServices: Service[] = rawServices.map((s) => ({
   title: s.title,
   subtitle: s.subtitle,
   heroDescription: s.heroDescription,
-  heroImage: serviceBgFallbackImg,
   icon: "",
   relatedProjectSlugs: s.relatedProjectSlugs,
   definitionSection: {
@@ -317,9 +315,15 @@ export const fallbackContactPage: ContactPageData = hasData("contactPage")
   ? (strapiCache.contactPage as ContactPageData)
   : hardcodedContactPage;
 
-export const fallbackLegalDocuments: LegalDocuments = hasData("legalDocuments")
-  ? (strapiCache.legalDocuments as LegalDocuments)
-  : { privacyPdfUrl: "", imprintPdfUrl: "" };
+const cachedLegalDocuments = hasData("legalDocuments")
+  ? (strapiCache.legalDocuments as Partial<LegalDocuments>)
+  : {};
+
+export const fallbackLegalDocuments: LegalDocuments = {
+  privacyPdfUrl: cachedLegalDocuments.privacyPdfUrl || "",
+  cookiePdfUrl: cachedLegalDocuments.cookiePdfUrl || DEFAULT_COOKIE_PDF_URL,
+  imprintPdfUrl: cachedLegalDocuments.imprintPdfUrl || "",
+};
 
 export const fallbackHomepage: HomepageData = hasData("homepage")
   ? (strapiCache.homepage as HomepageData)

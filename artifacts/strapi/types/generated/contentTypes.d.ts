@@ -739,7 +739,7 @@ export interface ApiHomepageHomepage extends Struct.SingleTypeSchema {
 export interface ApiLegalDocumentLegalDocument extends Struct.SingleTypeSchema {
   collectionName: 'legal_documents';
   info: {
-    description: 'Adatkezel\u00E9si t\u00E1j\u00E9koztat\u00F3 \u00E9s impresszum PDF-ek';
+    description: 'Adatkezel\u00E9si, s\u00FCtikezel\u00E9si \u00E9s impresszum PDF-ek';
     displayName: 'Jogi dokumentumok';
     pluralName: 'legal-documents';
     singularName: 'legal-document';
@@ -748,6 +748,7 @@ export interface ApiLegalDocumentLegalDocument extends Struct.SingleTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
+    cookiePdf: Schema.Attribute.Media<'files'>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;

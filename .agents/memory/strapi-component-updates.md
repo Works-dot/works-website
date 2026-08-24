@@ -7,4 +7,4 @@ Updating a component field via `strapi.documents(...).update({ data: { general: 
 
 **Why:** a migration adding `general.kicker` spread `svc.general` fetched with `populate: ["general"]` (media not populated), which wiped `general.icon` on all services; the homepage listing lost its icons.
 
-**How to apply:** in any migration touching a component, populate its media/nested fields (`"general.icon"`, `"general.heroImage"`) and pass them back by id in the update payload. Also double-check migration store flag keys match between `get` and `set` (a v1/v2 drift made a migration rerun on every boot).
+**How to apply:** in any migration touching a component, populate its media/nested fields (`"general.icon"`, `"general.heroImage"`) and pass them back by media id in the update payload. Do not include the component row's own `id`: Strapi v5 can reject it as “not related to the entity.” Publishing creates new technical row/component IDs and timestamps, so compare semantic content with the same populate shape and ignore those system fields. Also double-check migration store flag keys match between `get` and `set` (a v1/v2 drift made a migration rerun on every boot).

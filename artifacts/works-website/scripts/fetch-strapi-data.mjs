@@ -97,7 +97,6 @@ function mapService(s) {
     title: s.general?.title || "",
     subtitle: s.general?.subtitle || "",
     heroDescription: s.general?.heroDescription || "",
-    heroImage: strapiImageUrl(s.general?.heroImage?.url),
     icon: strapiImageUrl(s.general?.icon?.url),
     relatedProjectSlugs: (s.relatedProjects || []).map((p) => p.slug),
     definitionSection: mapSectionIntro(s.definitionSection),
@@ -196,13 +195,13 @@ async function fetchAll() {
   console.log(`  ✓ ${cache.blogPosts.length} blog post(s)`);
 
   const SERVICE_POPULATE =
-    "populate[0]=general&populate[1]=general.icon&populate[2]=general.heroImage&populate[3]=relatedProjects&populate[4]=seo.ogImage" +
-    "&populate[5]=questionsSection.intro&populate[6]=questionsSection.cards" +
-    "&populate[7]=helpSection.intro&populate[8]=helpSection.cards.icon" +
-    "&populate[9]=processSection.intro&populate[10]=processSection.steps" +
-    "&populate[11]=deliverablesSection.intro&populate[12]=deliverablesSection.smallCards.icon&populate[13]=deliverablesSection.largeCards.icon&populate[14]=deliverablesSection.largeCards.bullets" +
-    "&populate[15]=projectExamplesIntro&populate[16]=faqSection.intro&populate[17]=faqSection.items" +
-    "&populate[18]=relatedServicesIntro&populate[19]=relatedServices.general.icon&populate[20]=ctaBanner&populate[21]=definitionSection";
+    "populate[0]=general&populate[1]=general.icon&populate[2]=relatedProjects&populate[3]=seo.ogImage" +
+    "&populate[4]=questionsSection.intro&populate[5]=questionsSection.cards" +
+    "&populate[6]=helpSection.intro&populate[7]=helpSection.cards.icon" +
+    "&populate[8]=processSection.intro&populate[9]=processSection.steps" +
+    "&populate[10]=deliverablesSection.intro&populate[11]=deliverablesSection.smallCards.icon&populate[12]=deliverablesSection.largeCards.icon&populate[13]=deliverablesSection.largeCards.bullets" +
+    "&populate[14]=projectExamplesIntro&populate[15]=faqSection.intro&populate[16]=faqSection.items" +
+    "&populate[17]=relatedServicesIntro&populate[18]=relatedServices.general.icon&populate[19]=ctaBanner&populate[20]=definitionSection";
   const servicesRes = await fetchApi(
     `/services?${SERVICE_POPULATE}&pagination[pageSize]=100&sort=order:asc`
   );
@@ -384,10 +383,11 @@ async function fetchAll() {
   }
 
   try {
-    const legalRes = await fetchApi("/legal-document?populate[0]=privacyPdf&populate[1]=imprintPdf");
+    const legalRes = await fetchApi("/legal-document?populate=*");
     const ld = legalRes.data;
     cache.legalDocuments = {
       privacyPdfUrl: ld?.privacyPdf?.url ? strapiImageUrl(ld.privacyPdf.url) : "",
+      cookiePdfUrl: ld?.cookiePdf?.url ? strapiImageUrl(ld.cookiePdf.url) : "",
       imprintPdfUrl: ld?.imprintPdf?.url ? strapiImageUrl(ld.imprintPdf.url) : "",
     };
     console.log("  ✓ legal documents");

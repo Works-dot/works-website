@@ -14,6 +14,15 @@ export interface Service {
   relatedProjectSlugs: string[];
 }
 
+const SERVICE_ORDER = [
+  "ux-kutatas",
+  "ui-design",
+  "service-design",
+  "ai-termekfejlesztes",
+  "akadalymentesites",
+  "digitalis-kepessegfejlesztes",
+];
+
 export const services: Service[] = [
   {
     slug: "ux-kutatas",
@@ -43,7 +52,7 @@ export const services: Service[] = [
   },
   {
     slug: "ui-design",
-    title: "UI Design",
+    title: "UX/UI Design",
     subtitle: "Felületek, amelyek működnek és hatnak",
     heroDescription: "Olyan felhasználói felületeket tervezünk, amelyek nem csak szépek, hanem érthetőek, használhatók és üzleti eredményeket hoznak.",
     definitionHeading: "Mi az a UI design?",
@@ -69,7 +78,7 @@ export const services: Service[] = [
   },
   {
     slug: "akadalymentesites",
-    title: "Akadálymentesítés",
+    title: "Akadálymentes digitális szolgáltatások",
     subtitle: "Digitális termékek mindenki számára",
     heroDescription: "Segítünk, hogy digitális termékeid mindenki számára elérhetőek és használhatóak legyenek — a jogszabályi megfeleléstől a valódi inkluzivitásig.",
     definitionHeading: "Mi az a digitális akadálymentesítés?",
@@ -93,7 +102,54 @@ export const services: Service[] = [
     howWeWork: "<h3>01. Helyzetértékelés</h3>\n<p>A jelenlegi állapot felmérése automatizált és manuális eszközökkel, WCAG 2.1 szabvány szerint.</p>\n\n<h3>02. Részletes audit</h3>\n<p>Oldalról oldalra haladó, komponensszintű vizsgálat dokumentált eredményekkel.</p>\n\n<h3>03. Javítási ütemterv</h3>\n<p>Prioritizált feladatlista a kritikus, közepes és alacsony súlyosságú problémákra bontva.</p>\n\n<h3>04. Implementációs támogatás</h3>\n<p>A fejlesztő csapat támogatása a javítások során, kód review-kkal és konzultációval.</p>\n\n<h3>05. Végső validáció</h3>\n<p>A javítások utáni újratesztelés és a megfelelési nyilatkozat elkészítése.</p>",
     relatedProjectSlugs: ["e-kereskedelmi-akadalymentesites", "egeszsegugyi-portal"],
   },
-];
+  {
+    slug: "service-design",
+    title: "Service design",
+    subtitle: "Összehangolt szolgáltatások, jobb ügyfélélmény",
+    heroDescription: "A teljes szolgáltatási élményt feltérképezzük és újratervezzük, hogy az ügyfelek és a háttérben dolgozó csapatok számára is egyszerűbben és hatékonyabban működjön.",
+    definitionHeading: "Mi az a service design?",
+    definitionText: "A service design egy szolgáltatás teljes működését vizsgálja az ügyfélkapcsolati pontoktól a háttérfolyamatokig. Segítségével összehangoljuk az embereket, folyamatokat és digitális felületeket, hogy a szolgáltatás következetesebb, érthetőbb és fenntarthatóbban működtethető legyen.",
+    valueQuestion: "",
+    valueAnswer: "",
+    activities: [],
+    benefits: [],
+    tools: [],
+    howWeWork: "",
+    relatedProjectSlugs: [],
+  },
+  {
+    slug: "ai-termekfejlesztes",
+    title: "AI-alapú digitális termékfejlesztés",
+    subtitle: "Hasznos AI-megoldások valódi igényekre",
+    heroDescription: "Az AI lehetőségeit valós felhasználói és üzleti problémákhoz kapcsoljuk, majd kutatással, tervezéssel és gyors prototípusokkal működő digitális termékké formáljuk.",
+    definitionHeading: "Mi az az AI termékfejlesztés?",
+    definitionText: "Az AI termékfejlesztés során a mesterséges intelligenciát nem önmagáért, hanem konkrét felhasználói és üzleti érték létrehozására alkalmazzuk. Segítünk megtalálni a megfelelő felhasználási területeket, megtervezni az ember és az AI együttműködését, majd gyorsan tesztelhető megoldásokat készíteni.",
+    valueQuestion: "",
+    valueAnswer: "",
+    activities: [],
+    benefits: [],
+    tools: [],
+    howWeWork: "",
+    relatedProjectSlugs: [],
+  },
+  {
+    slug: "digitalis-kepessegfejlesztes",
+    title: "Digitális képességfejlesztés",
+    subtitle: "Tudás és módszertan a szervezeten belül",
+    heroDescription: "Gyakorlati képzésekkel, workshopokkal és közös munkával fejlesztjük a csapatok digitális, kutatási és tervezési képességeit.",
+    definitionHeading: "Mi az a digitális képességfejlesztés?",
+    definitionText: "A digitális képességfejlesztés célja, hogy a szervezet saját csapatai magabiztosabban használják az ügyfélközpontú kutatás, tervezés és termékfejlesztés módszereit. A tudást konkrét helyzeteken, közös gyakorláson és a mindennapi munkába beépíthető eszközökön keresztül adjuk át.",
+    valueQuestion: "",
+    valueAnswer: "",
+    activities: [],
+    benefits: [],
+    tools: [],
+    howWeWork: "",
+    relatedProjectSlugs: [],
+  },
+].sort(
+  (a, b) => SERVICE_ORDER.indexOf(a.slug) - SERVICE_ORDER.indexOf(b.slug)
+);
 
 export function getServiceBySlug(slug: string): Service | undefined {
   return services.find(s => s.slug === slug);

@@ -18,7 +18,7 @@ integrations = ["github:1.0.0"]
 
 [postMerge]
 path = "scripts/post-merge.sh"
-timeoutMs = 20000
+timeoutMs = 180000
 
 [[ports]]
 localPort = 8080
@@ -46,6 +46,7 @@ externalPort = 3000
 
 [nix]
 channel = "stable-25_05"
+packages = ["glib", "nss", "nspr", "dbus", "atk", "at-spi2-atk", "cups", "libdrm", "expat", "libxkbcommon", "xorg.libX11", "xorg.libXcomposite", "xorg.libXdamage", "xorg.libXext", "xorg.libXfixes", "xorg.libXrandr", "xorg.libxcb", "mesa", "cairo", "pango", "alsa-lib", "gtk3", "libgbm"]
 
 [userenv]
 

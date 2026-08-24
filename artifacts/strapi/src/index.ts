@@ -79,7 +79,7 @@ function applyLabels(metadatas: Record<string, any>) {
 const SERVICE_FIELD_LABELS: Record<string, { label: string; description?: string }> = {
   title: { label: "Cím (admin lista)", description: "A szolgáltatás neve az admin listában — a weboldalon a hero cím jelenik meg" },
   order: { label: "Sorrend", description: "A szolgáltatások sorrendje a listákban" },
-  general: { label: "1. Általános adatok + fejléc (hero)", description: "Webcím (slug), cím, alcím, hero leírás és ikonok" },
+  general: { label: "1. Általános adatok + fejléc (hero)", description: "Webcím (slug), cím, alcím, hero leírás és szolgáltatásikon" },
   definitionSection: { label: "2. Definíció („Mi az a …?”)", description: "A hero utáni szöveges blokk: címsor és leírás arról, mit jelent a szolgáltatás. Üresen hagyva nem jelenik meg." },
   questionsSection: { label: "3. „Milyen kérdésekre segítünk választ találni?”", description: "Kérdéskártyás szekció a definíció alatt" },
   helpSection: { label: "4. „Miben tudunk segíteni?”", description: "Ikonos kártyarács a szolgáltatás területeiről" },
@@ -137,6 +137,23 @@ const CONTACT_EDIT_ORDER = [
   "backgroundImage",
   "seo",
 ];
+
+const LEGAL_DOCUMENT_FIELD_LABELS: Record<string, { label: string; description?: string }> = {
+  privacyPdf: {
+    label: "Adatkezelési tájékoztató (PDF)",
+    description: "A weboldalon megnyíló aktuális adatkezelési tájékoztató",
+  },
+  cookiePdf: {
+    label: "Sütikezelési tájékoztató (PDF)",
+    description: "A weboldalon megnyíló aktuális sütikezelési tájékoztató",
+  },
+  imprintPdf: {
+    label: "Impresszum (PDF)",
+    description: "A weboldalon megnyíló aktuális impresszum",
+  },
+};
+
+const LEGAL_DOCUMENT_EDIT_ORDER = ["privacyPdf", "cookiePdf", "imprintPdf"];
 
 const COMPONENT_FIELD_LABELS: Record<string, Record<string, { label: string; description?: string }>> = {
   "contact.form-subject": {
@@ -264,6 +281,20 @@ async function updateAllLabels(strapi: any) {
           }
         }
       }
+
+      if (uid === "api::legal-document.legal-document") {
+        for (const [field, meta] of Object.entries(LEGAL_DOCUMENT_FIELD_LABELS)) {
+          if (config.metadatas[field]?.edit) {
+            config.metadatas[field].edit.label = meta.label;
+            if (meta.description) {
+              config.metadatas[field].edit.description = meta.description;
+            }
+          }
+          if (config.metadatas[field]?.list) {
+            config.metadatas[field].list.label = meta.label;
+          }
+        }
+      }
     }
 
     if (config.layouts?.edit) {
@@ -317,6 +348,20 @@ async function updateAllLabels(strapi: any) {
         }
         config.layouts.edit = [...reordered, ...config.layouts.edit];
       }
+
+      if (uid === "api::legal-document.legal-document") {
+        const reordered: any[] = [];
+        for (const name of LEGAL_DOCUMENT_EDIT_ORDER) {
+          const idx = config.layouts.edit.findIndex(
+            (row: { name: string }[]) =>
+              row.some((col: { name: string }) => col.name === name)
+          );
+          if (idx !== -1) {
+            reordered.push(...config.layouts.edit.splice(idx, 1));
+          }
+        }
+        config.layouts.edit = [...reordered, ...config.layouts.edit];
+      }
     }
 
     await store.set({ key: storeKey, value: config });
@@ -334,6 +379,7 @@ async function updateAllLabels(strapi: any) {
 
       if (uid === "service.general") {
         delete config.metadatas.kicker;
+        delete config.metadatas.heroImage;
       }
 
       if (uid === "service.help-section") {
@@ -360,7 +406,7 @@ async function updateAllLabels(strapi: any) {
     if (uid === "service.general" && config.layouts?.edit) {
       config.layouts.edit = config.layouts.edit
         .map((row: { name: string }[]) =>
-          row.filter((col: { name: string }) => col.name !== "kicker")
+          row.filter((col: { name: string }) => !["kicker", "heroImage"].includes(col.name))
         )
         .filter((row: { name: string }[]) => row.length > 0);
     }
@@ -442,7 +488,7 @@ const SERVICE_SEED_DATA = [
   },
   {
     slug: "ui-design",
-    title: "UI Design",
+    title: "UX/UI Design",
     subtitle: "Felületek, amelyek működnek és hatnak",
     heroDescription: "Olyan felhasználói felületeket tervezünk, amelyek nem csak szépek, hanem érthetőek, használhatók és üzleti eredményeket hoznak.",
     serviceIcon: "monitor",
@@ -465,7 +511,7 @@ const SERVICE_SEED_DATA = [
   },
   {
     slug: "akadalymentesites",
-    title: "Akadálymentesítés",
+    title: "Akadálymentes digitális szolgáltatások",
     subtitle: "Digitális termékek mindenki számára",
     heroDescription: "Segítünk, hogy digitális termékeid mindenki számára elérhetőek és használhatóak legyenek — a jogszabályi megfeleléstől a valódi inkluzivitásig.",
     serviceIcon: "eye",
@@ -505,6 +551,320 @@ const SERVICE_DEFINITION_SEED: Record<string, { heading: string; description: st
       "A digitális akadálymentesítés azt jelenti, hogy egy weboldal vagy alkalmazás mindenki számára használható — a látás-, hallás- vagy mozgássérült felhasználóknak, az idősebb korosztálynak és az átmeneti korlátozottsággal élőknek is. A nemzetközi WCAG szabvány alapján auditáljuk és javítjuk a felületeket, így a termék nemcsak a jogszabályi elvárásoknak felel meg, hanem szélesebb közönséget is elér.",
   },
 };
+
+const SERVICE_CATALOG_SEED = [
+  {
+    slug: "ux-kutatas",
+    title: "UX Kutatás",
+    order: 1,
+    subtitle: "Felhasználók megértése, adatalappal",
+    heroDescription:
+      "Feltárjuk a felhasználói igényeket, viselkedési mintákat és fájdalompontokat, hogy a termékfejlesztés valós adatokon alapuljon — ne feltételezéseken.",
+    definitionSection: {
+      kicker: "Definíció",
+      heading: "Mi az a UX kutatás?",
+      description:
+        "A UX kutatás (felhasználói élmény kutatás) egy módszertan, amellyel feltárjuk, hogyan gondolkodnak, éreznek és viselkednek a felhasználók egy digitális termék használata közben. Interjúk, tesztek és adatelemzés segítségével valós bizonyítékokat gyűjtünk, hogy a termékfejlesztési döntések ne megérzéseken, hanem tényeken alapuljanak. Az eredmény: kevesebb felesleges fejlesztés, jobb felhasználói élmény és mérhető üzleti eredmények.",
+    },
+  },
+  {
+    slug: "ui-design",
+    title: "UX/UI Design",
+    order: 2,
+    subtitle: "Felületek, amelyek működnek és hatnak",
+    heroDescription:
+      "Olyan felhasználói felületeket tervezünk, amelyek nem csak szépek, hanem érthetőek, használhatók és üzleti eredményeket hoznak.",
+    definitionSection: {
+      kicker: "Definíció",
+      heading: "Mi az a UI design?",
+      description:
+        "A UI design (felhasználói felület tervezés) az a szakterület, amely a digitális termékek vizuális megjelenését és interakcióit alakítja ki — a színektől és tipográfiától a gombokon át a teljes képernyőtervekig. A jó UI nem csupán esztétika: érthetővé, használhatóvá és következetessé teszi a terméket, erősíti a márkát, és közvetlenül hozzájárul a konverzióhoz és a felhasználói elégedettséghez.",
+    },
+  },
+  {
+    slug: "service-design",
+    title: "Service design",
+    order: 3,
+    subtitle: "Összehangolt szolgáltatások, jobb ügyfélélmény",
+    heroDescription:
+      "A teljes szolgáltatási élményt feltérképezzük és újratervezzük, hogy az ügyfelek és a háttérben dolgozó csapatok számára is egyszerűbben és hatékonyabban működjön.",
+    definitionSection: {
+      kicker: "Definíció",
+      heading: "Mi az a service design?",
+      description:
+        "A service design egy szolgáltatás teljes működését vizsgálja az ügyfélkapcsolati pontoktól a háttérfolyamatokig. Segítségével összehangoljuk az embereket, folyamatokat és digitális felületeket, hogy a szolgáltatás következetesebb, érthetőbb és fenntarthatóbban működtethető legyen.",
+    },
+  },
+  {
+    slug: "ai-termekfejlesztes",
+    title: "AI-alapú digitális termékfejlesztés",
+    order: 4,
+    subtitle: "Hasznos AI-megoldások valódi igényekre",
+    heroDescription:
+      "Az AI lehetőségeit valós felhasználói és üzleti problémákhoz kapcsoljuk, majd kutatással, tervezéssel és gyors prototípusokkal működő digitális termékké formáljuk.",
+    definitionSection: {
+      kicker: "Definíció",
+      heading: "Mi az az AI termékfejlesztés?",
+      description:
+        "Az AI termékfejlesztés során a mesterséges intelligenciát nem önmagáért, hanem konkrét felhasználói és üzleti érték létrehozására alkalmazzuk. Segítünk megtalálni a megfelelő felhasználási területeket, megtervezni az ember és az AI együttműködését, majd gyorsan tesztelhető megoldásokat készíteni.",
+    },
+  },
+  {
+    slug: "akadalymentesites",
+    title: "Akadálymentes digitális szolgáltatások",
+    order: 5,
+    subtitle: "Digitális termékek mindenki számára",
+    heroDescription:
+      "Segítünk, hogy digitális termékeid mindenki számára elérhetőek és használhatóak legyenek — a jogszabályi megfeleléstől a valódi inkluzivitásig.",
+    definitionSection: {
+      kicker: "Definíció",
+      heading: "Mi az a digitális akadálymentesítés?",
+      description:
+        "A digitális akadálymentesítés azt jelenti, hogy egy weboldal vagy alkalmazás mindenki számára használható — a látás-, hallás- vagy mozgássérült felhasználóknak, az idősebb korosztálynak és az átmeneti korlátozottsággal élőknek is. A nemzetközi WCAG szabvány alapján auditáljuk és javítjuk a felületeket, így a termék nemcsak a jogszabályi elvárásoknak felel meg, hanem szélesebb közönséget is elér.",
+    },
+  },
+  {
+    slug: "digitalis-kepessegfejlesztes",
+    title: "Digitális képességfejlesztés",
+    order: 6,
+    subtitle: "Tudás és módszertan a szervezeten belül",
+    heroDescription:
+      "Gyakorlati képzésekkel, workshopokkal és közös munkával fejlesztjük a csapatok digitális, kutatási és tervezési képességeit.",
+    definitionSection: {
+      kicker: "Definíció",
+      heading: "Mi az a digitális képességfejlesztés?",
+      description:
+        "A digitális képességfejlesztés célja, hogy a szervezet saját csapatai magabiztosabban használják az ügyfélközpontú kutatás, tervezés és termékfejlesztés módszereit. A tudást konkrét helyzeteken, közös gyakorláson és a mindennapi munkába beépíthető eszközökön keresztül adjuk át.",
+    },
+  },
+] as const;
+
+function serviceCatalogData(seed: (typeof SERVICE_CATALOG_SEED)[number]) {
+  return {
+    title: seed.title,
+    order: seed.order,
+    general: {
+      slug: seed.slug,
+      title: seed.title,
+      subtitle: seed.subtitle,
+      heroDescription: seed.heroDescription,
+    },
+    definitionSection: seed.definitionSection,
+    seo: {
+      metaTitle: `${seed.title} | Works.`,
+      metaDescription: seed.heroDescription,
+    },
+  };
+}
+
+async function ensureServiceCatalog(strapi: any) {
+  const store = strapi.store({ type: "plugin", name: "migrations" });
+  const done = await store.get({ key: "service_catalog_seed_v1" });
+  if (done) {
+    strapi.log.info("Service catalog seed: already completed (flag set) — skipping");
+    return;
+  }
+
+  const docs = strapi.documents("api::service.service");
+  const draftServices = await docs.findMany({
+    status: "draft",
+    populate: ["general", "general.icon"],
+    pagination: { pageSize: 100 },
+  });
+  const bySlug = new Map(
+    draftServices
+      .filter((service: any) => service.general?.slug)
+      .map((service: any) => [service.general.slug, service]),
+  );
+  let changed = false;
+  let errors = 0;
+
+  for (const seed of SERVICE_CATALOG_SEED) {
+    const existing = bySlug.get(seed.slug) as any;
+    try {
+      if (!existing) {
+        const created = await docs.create({ data: serviceCatalogData(seed) });
+        await docs.publish({ documentId: created.documentId });
+        strapi.log.info(`Service catalog seed: created "${seed.slug}"`);
+        changed = true;
+        continue;
+      }
+
+      const needsGeneralTitle = existing.general?.title !== seed.title;
+      const needsAdminTitle = existing.title !== seed.title;
+      const needsOrder = existing.order !== seed.order;
+      if (!needsGeneralTitle && !needsAdminTitle && !needsOrder) {
+        continue;
+      }
+
+      for (const status of ["draft", "published"] as const) {
+        const version = await docs.findOne({
+          documentId: existing.documentId,
+          status,
+          populate: ["general", "general.icon"],
+        });
+        if (!version) continue;
+
+        const data: Record<string, any> = {};
+        if (version.title !== seed.title) data.title = seed.title;
+        if (version.order !== seed.order) data.order = seed.order;
+        if (version.general && version.general.title !== seed.title) {
+          data.general = {
+            slug: version.general.slug,
+            title: seed.title,
+            subtitle: version.general.subtitle || "",
+            heroDescription: version.general.heroDescription || "",
+            icon: version.general.icon?.id || undefined,
+          };
+        }
+        if (Object.keys(data).length > 0) {
+          await docs.update({
+            documentId: existing.documentId,
+            status,
+            data,
+          });
+        }
+      }
+
+      strapi.log.info(`Service catalog seed: updated title/order for "${seed.slug}"`);
+      changed = true;
+    } catch (err: any) {
+      errors++;
+      strapi.log.error(`Service catalog seed: failed for "${seed.slug}": ${err.message}`);
+    }
+  }
+
+  const publishedServices = await docs.findMany({
+    status: "published",
+    populate: ["general"],
+    pagination: { pageSize: 100 },
+  });
+  const stillMissing = SERVICE_CATALOG_SEED.filter((seed) => {
+    const service = publishedServices.find((item: any) => item.general?.slug === seed.slug);
+    return !service || service.general?.title !== seed.title || service.order !== seed.order;
+  });
+
+  if (errors > 0 || stillMissing.length > 0) {
+    strapi.log.warn(
+      `Service catalog seed: incomplete (${errors} error(s), ${stillMissing.length} missing/incorrect) — flag not set, will retry on next restart`,
+    );
+    return;
+  }
+
+  await store.set({ key: "service_catalog_seed_v1", value: true });
+  strapi.log.info("Service catalog seed: completed successfully");
+  if (changed) noteBootstrapContentChange("service catalog seed");
+}
+
+async function syncServiceCatalogNamesAndOrder(strapi: any) {
+  const store = strapi.store({ type: "plugin", name: "migrations" });
+  const migrationKey = "service_catalog_names_order_v1";
+  const done = await store.get({ key: migrationKey });
+  if (done) {
+    strapi.log.info("Service catalog names/order: already completed (flag set) — skipping");
+    return;
+  }
+
+  const docs = strapi.documents("api::service.service");
+  const draftServices = await docs.findMany({
+    status: "draft",
+    populate: ["general", "general.icon"],
+    pagination: { pageSize: 100 },
+  });
+  const bySlug = new Map(
+    draftServices
+      .filter((service: any) => service.general?.slug)
+      .map((service: any) => [service.general.slug, service]),
+  );
+  let changed = false;
+  let errors = 0;
+
+  for (const seed of SERVICE_CATALOG_SEED) {
+    const existing = bySlug.get(seed.slug) as any;
+    if (!existing) {
+      errors++;
+      strapi.log.error(
+        `Service catalog names/order: "${seed.slug}" is missing — not creating it automatically`,
+      );
+      continue;
+    }
+
+    try {
+      for (const status of ["draft", "published"] as const) {
+        const version = await docs.findOne({
+          documentId: existing.documentId,
+          status,
+          populate: ["general", "general.icon"],
+        });
+        if (!version) {
+          errors++;
+          strapi.log.error(
+            `Service catalog names/order: "${seed.slug}" has no ${status} version`,
+          );
+          continue;
+        }
+
+        const data: Record<string, any> = {};
+        if (version.title !== seed.title) data.title = seed.title;
+        if (version.order !== seed.order) data.order = seed.order;
+        if (version.general?.title !== seed.title) {
+          data.general = {
+            slug: version.general.slug,
+            title: seed.title,
+            subtitle: version.general.subtitle,
+            heroDescription: version.general.heroDescription,
+            icon: version.general.icon?.id ?? null,
+          };
+        }
+
+        if (Object.keys(data).length > 0) {
+          await docs.update({
+            documentId: existing.documentId,
+            status,
+            data,
+          });
+          changed = true;
+        }
+      }
+    } catch (err: any) {
+      errors++;
+      strapi.log.error(
+        `Service catalog names/order: failed for "${seed.slug}": ${err.message}`,
+      );
+    }
+  }
+
+  const incorrect: string[] = [];
+  for (const status of ["draft", "published"] as const) {
+    const versions = await docs.findMany({
+      status,
+      populate: ["general"],
+      pagination: { pageSize: 100 },
+    });
+    for (const seed of SERVICE_CATALOG_SEED) {
+      const service = versions.find((item: any) => item.general?.slug === seed.slug);
+      if (
+        !service
+        || service.title !== seed.title
+        || service.general?.title !== seed.title
+        || service.order !== seed.order
+      ) {
+        incorrect.push(`${seed.slug}:${status}`);
+      }
+    }
+  }
+
+  if (errors > 0 || incorrect.length > 0) {
+    strapi.log.warn(
+      `Service catalog names/order: incomplete (${errors} error(s), ${incorrect.length} incorrect version(s)) — flag not set, will retry on next restart`,
+    );
+    return;
+  }
+
+  await store.set({ key: migrationKey, value: true });
+  strapi.log.info("Service catalog names/order: completed successfully");
+  if (changed) noteBootstrapContentChange("service catalog names/order");
+}
 
 async function backfillServiceDefinition(strapi: any) {
   const store = strapi.store({ type: "plugin", name: "migrations" });
@@ -922,7 +1282,6 @@ async function backfillServiceRestructure(strapi: any) {
     populate: [
       "general",
       "general.icon",
-      "general.heroImage",
       "questionsSection",
       "helpSection",
       "processSection",
@@ -963,7 +1322,6 @@ async function backfillServiceRestructure(strapi: any) {
       data.general = {
         ...svc.general,
         icon: generalIconId || undefined,
-        heroImage: svc.general.heroImage?.id || undefined,
       };
     }
 
@@ -1711,7 +2069,8 @@ async function markCareerFormSubject(strapi: any) {
   }
 }
 
-// A jogi PDF-ek (adatkezelési tájékoztató, impresszum) feltöltése a médiatárba
+// A jogi PDF-ek (adatkezelési tájékoztató, sütikezelési tájékoztató, impresszum)
+// feltöltése a médiatárba
 // és bekötése a "Jogi dokumentumok" single type-ba. Flag-gated és re-entráns:
 // részleges siker (pl. feltöltés kész, de publikálás nem) után újrafuttatható.
 async function uploadSeedPdf(strapi: any, filePath: string, name: string): Promise<number | null> {
@@ -1747,7 +2106,7 @@ async function uploadSeedPdf(strapi: any, filePath: string, name: string): Promi
 async function seedLegalDocuments(strapi: any) {
   const path = require("path");
   const store = strapi.store({ type: "plugin", name: "migrations" });
-  const done = await store.get({ key: "legal_documents_seed_v1" });
+  const done = await store.get({ key: "legal_documents_seed_v2" });
   if (done) {
     strapi.log.info("Legal documents seed: already completed (flag set) — skipping");
     return;
@@ -1762,23 +2121,28 @@ async function seedLegalDocuments(strapi: any) {
       path.join(docsDir, "adatkezelesi-tajekoztato.pdf"),
       "adatkezelesi-tajekoztato"
     );
+    const cookieId = await uploadSeedPdf(
+      strapi,
+      path.join(docsDir, "sutikezelesi-tajekoztato.pdf"),
+      "sutikezelesi-tajekoztato"
+    );
     const imprintId = await uploadSeedPdf(
       strapi,
       path.join(docsDir, "impresszum.pdf"),
       "impresszum"
     );
 
-    if (!privacyId || !imprintId) {
+    if (!privacyId || !cookieId || !imprintId) {
       strapi.log.warn("Legal documents seed: missing PDF upload — will retry on next restart");
       return;
     }
 
     const docs = strapi.documents("api::legal-document.legal-document");
-    let existing = await docs.findFirst({ populate: ["privacyPdf", "imprintPdf"] });
+    let existing = await docs.findFirst({ populate: ["privacyPdf", "cookiePdf", "imprintPdf"] });
     let changed = false;
     if (!existing) {
       existing = await docs.create({
-        data: { privacyPdf: privacyId, imprintPdf: imprintId },
+        data: { privacyPdf: privacyId, cookiePdf: cookieId, imprintPdf: imprintId },
       });
       changed = true;
       strapi.log.info("Legal documents seed: entry created");
@@ -1786,6 +2150,7 @@ async function seedLegalDocuments(strapi: any) {
       // Csak a hiányzó mezőket pótoljuk — az adminban kicserélt PDF-et nem írjuk felül.
       const data: Record<string, number> = {};
       if (!existing.privacyPdf) data.privacyPdf = privacyId;
+      if (!existing.cookiePdf) data.cookiePdf = cookieId;
       if (!existing.imprintPdf) data.imprintPdf = imprintId;
       if (Object.keys(data).length > 0) {
         await docs.update({ documentId: existing.documentId, data });
@@ -1798,24 +2163,24 @@ async function seedLegalDocuments(strapi: any) {
     // publikált verzió (a régi publikált verzió elrejtené a friss draftot).
     const published = await docs.findFirst({
       status: "published",
-      populate: ["privacyPdf", "imprintPdf"],
+      populate: ["privacyPdf", "cookiePdf", "imprintPdf"],
     });
     if (changed || !published) {
       await docs.publish({ documentId: existing.documentId });
       strapi.log.info("Legal documents seed: entry published");
     }
 
-    // A flag csak akkor kerül be, ha a publikált verzióban tényleg megvan mindkét PDF.
+    // A flag csak akkor kerül be, ha a publikált verzióban tényleg megvan mindhárom PDF.
     const verify = await docs.findFirst({
       status: "published",
-      populate: ["privacyPdf", "imprintPdf"],
+      populate: ["privacyPdf", "cookiePdf", "imprintPdf"],
     });
-    if (!verify?.privacyPdf || !verify?.imprintPdf) {
+    if (!verify?.privacyPdf || !verify?.cookiePdf || !verify?.imprintPdf) {
       strapi.log.warn("Legal documents seed: published entry missing PDF field(s) — will retry on next restart");
       return;
     }
 
-    await store.set({ key: "legal_documents_seed_v1", value: true });
+    await store.set({ key: "legal_documents_seed_v2", value: true });
     strapi.log.info("Legal documents seed: completed successfully");
     noteBootstrapContentChange("legal documents seed");
   } catch (err: any) {
@@ -2193,6 +2558,34 @@ async function seedAboutGalleryImages(strapi: any) {
   }
 }
 
+function shouldRunBootstrapContentMigrations(): boolean {
+  if (process.env.NODE_ENV !== "production") return true;
+  return process.env.STRAPI_RUN_CONTENT_MIGRATIONS === "true";
+}
+
+async function runBootstrapContentMigrations(strapi: any) {
+  await migrateSlugToGeneral(strapi);
+  await syncServiceTitles(strapi);
+  await backfillServiceRestructure(strapi);
+  await backfillServiceDefinition(strapi);
+  await ensureServiceCatalog(strapi);
+  await syncServiceCatalogNamesAndOrder(strapi);
+  await backfillFeaturedProjects(strapi);
+  await backfillFeaturedBlogPosts(strapi);
+  await dropRemovedServiceFields(strapi);
+  await dropUnusedAdminFields(strapi);
+  await dropServiceGeneralKicker(strapi);
+  await dropHelpSectionCtaFields(strapi);
+  await seedServiceCtaBanners(strapi);
+  await markCareerFormSubject(strapi);
+  await seedLegalDocuments(strapi);
+  await seedAboutGalleryImages(strapi);
+  await deleteSeedSampleBlogPosts(strapi);
+  await migrateSquarespacePosts(strapi);
+  await backfillBlogAuthors(strapi);
+  await backfillBlogAuthorsV2(strapi);
+}
+
 export default {
   register({ strapi }) {
     registerWebsiteRebuildAdminRoutes(strapi);
@@ -2203,28 +2596,23 @@ export default {
     await updateAllLabels(strapi);
     await ensurePublicPermissions(strapi);
     setupWebsiteAutoRebuild(strapi);
+    const runContentMigrations = shouldRunBootstrapContentMigrations();
+
+    if (!runContentMigrations) {
+      strapi.log.info(
+        "Bootstrap content migrations: disabled in production to preserve editor-managed content. "
+        + "Set STRAPI_RUN_CONTENT_MIGRATIONS=true only for an explicitly reviewed one-time migration.",
+      );
+    }
 
     const httpServer = strapi.server?.httpServer;
     if (httpServer) {
       httpServer.once("listening", () => {
-        migrateSlugToGeneral(strapi)
-          .then(() => syncServiceTitles(strapi))
-          .then(() => backfillServiceRestructure(strapi))
-          .then(() => backfillServiceDefinition(strapi))
-          .then(() => backfillFeaturedProjects(strapi))
-          .then(() => backfillFeaturedBlogPosts(strapi))
-          .then(() => dropRemovedServiceFields(strapi))
-          .then(() => dropUnusedAdminFields(strapi))
-          .then(() => dropServiceGeneralKicker(strapi))
-          .then(() => dropHelpSectionCtaFields(strapi))
-          .then(() => seedServiceCtaBanners(strapi))
-          .then(() => markCareerFormSubject(strapi))
-          .then(() => seedLegalDocuments(strapi))
-          .then(() => seedAboutGalleryImages(strapi))
-          .then(() => deleteSeedSampleBlogPosts(strapi))
-          .then(() => migrateSquarespacePosts(strapi))
-          .then(() => backfillBlogAuthors(strapi))
-          .then(() => backfillBlogAuthorsV2(strapi))
+        const migrations = runContentMigrations
+          ? runBootstrapContentMigrations(strapi)
+          : Promise.resolve();
+
+        migrations
           .then(() => strapi.log.info("Bootstrap tasks completed successfully"))
           .catch((err: any) => {
             strapi.log.error(`Bootstrap task failed: ${err.message}`);
@@ -2233,24 +2621,9 @@ export default {
           .finally(() => markWebsiteAutoRebuildReady(strapi));
       });
     } else {
-      await migrateSlugToGeneral(strapi);
-      await syncServiceTitles(strapi);
-      await backfillServiceRestructure(strapi);
-      await backfillServiceDefinition(strapi);
-      await backfillFeaturedProjects(strapi);
-      await backfillFeaturedBlogPosts(strapi);
-      await dropRemovedServiceFields(strapi);
-      await dropUnusedAdminFields(strapi);
-      await dropServiceGeneralKicker(strapi);
-      await dropHelpSectionCtaFields(strapi);
-      await seedServiceCtaBanners(strapi);
-      await markCareerFormSubject(strapi);
-      await seedLegalDocuments(strapi);
-      await seedAboutGalleryImages(strapi);
-      await deleteSeedSampleBlogPosts(strapi);
-      await migrateSquarespacePosts(strapi);
-      await backfillBlogAuthors(strapi);
-      await backfillBlogAuthorsV2(strapi);
+      if (runContentMigrations) {
+        await runBootstrapContentMigrations(strapi);
+      }
       strapi.log.info("Bootstrap tasks completed successfully");
       markWebsiteAutoRebuildReady(strapi);
     }

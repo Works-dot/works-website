@@ -1,13 +1,32 @@
+import { useEffect } from "react";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import SEOHead from "@/components/SEOHead";
 import { useCookieConsent } from "@/lib/cookie-consent";
+import { useStrapiQuery } from "@/hooks/useStrapiQuery";
+import { getLegalDocuments } from "@/lib/strapi";
+import type { LegalDocuments } from "@/lib/strapi";
+import { fallbackLegalDocuments } from "@/data/fallback";
 import { useI18n } from "@/i18n";
 
-// Rövid magyar nyelvű süti tájékoztató. A sütisáv és a lábléc hivatkozik rá.
+// A régi /sutik cím megmarad a sütisáv és más hivatkozások számára, de ha a
+// hivatalos PDF elérhető, automatikusan arra irányítunk. A korábbi rövid
+// tájékoztató használható tartalékként megmarad, ha az adminban nincs PDF.
 export default function Sutik() {
   const { openSettings } = useCookieConsent();
   const { t } = useI18n();
+  const { data: legalDocs } = useStrapiQuery<LegalDocuments>(
+    "legalDocuments",
+    getLegalDocuments,
+    fallbackLegalDocuments
+  );
+  const pdfUrl = legalDocs?.cookiePdfUrl || "";
+
+  useEffect(() => {
+    if (pdfUrl && typeof window !== "undefined") {
+      window.location.replace(pdfUrl);
+    }
+  }, [pdfUrl]);
 
   return (
     <div className="min-h-screen bg-works-bg flex flex-col selection:bg-works-primary selection:text-white">

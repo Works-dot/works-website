@@ -10,8 +10,11 @@ import { useI18n } from "@/i18n";
 
 const FALLBACK_SERVICE_LINKS = [
   { label: "UX Kutatás", href: "/szolgaltatasok/ux-kutatas" },
-  { label: "UI Design", href: "/szolgaltatasok/ui-design" },
-  { label: "Akadálymentesítés", href: "/szolgaltatasok/akadalymentesites" },
+  { label: "UX/UI Design", href: "/szolgaltatasok/ui-design" },
+  { label: "Service design", href: "/szolgaltatasok/service-design" },
+  { label: "AI-alapú digitális termékfejlesztés", href: "/szolgaltatasok/ai-termekfejlesztes" },
+  { label: "Akadálymentes digitális szolgáltatások", href: "/szolgaltatasok/akadalymentesites" },
+  { label: "Digitális képességfejlesztés", href: "/szolgaltatasok/digitalis-kepessegfejlesztes" },
 ];
 
 export function Header() {

@@ -3,7 +3,7 @@ export default {
   "info": {
     "displayName": "1. Általános adatok + fejléc (hero)",
     "icon": "layout",
-    "description": "Az oldal tetején megjelenő cím, alcím, leírás és ikon, valamint a szolgáltatás webcíme (slug)"
+    "description": "Az oldal tetején megjelenő cím, alcím, leírás és szolgáltatásikon, valamint a szolgáltatás webcíme (slug)"
   },
   "options": {},
   "attributes": {
@@ -23,11 +23,6 @@ export default {
       "type": "text"
     },
     "icon": {
-      "type": "media",
-      "multiple": false,
-      "allowedTypes": ["images"]
-    },
-    "heroImage": {
       "type": "media",
       "multiple": false,
       "allowedTypes": ["images"]

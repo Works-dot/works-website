@@ -54,6 +54,9 @@
   --font-serif: var(--app-font-serif);
   --font-mono: var(--app-font-mono);
 
+  /* 1404px outer width leaves a 1340px content grid with lg:px-8 gutters. */
+  --container-7xl: 87.75rem;
+
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);

@@ -218,7 +218,7 @@ const hu: Messages = {
     addressLabel: "Cím",
     emailLabel: "Email",
     privacy: "Adatvédelmi tájékoztató",
-    cookies: "Süti tájékoztató",
+    cookies: "Sütikezelési tájékoztató",
     cookieSettings: "Süti beállítások",
     imprint: "Impresszum",
     newsletterEmailLabel: "E-mail címed",
