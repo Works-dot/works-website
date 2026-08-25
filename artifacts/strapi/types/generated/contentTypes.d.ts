@@ -462,6 +462,37 @@ export interface ApiAboutPageAboutPage extends Struct.SingleTypeSchema {
   };
 }
 
+export interface ApiBlogPageBlogPage extends Struct.SingleTypeSchema {
+  collectionName: 'blog_page_settings';
+  info: {
+    description: 'A blog gy\u0171jt\u0151oldal\u00E1nak c\u00EDme, le\u00EDr\u00E1sa \u00E9s SEO be\u00E1ll\u00EDt\u00E1sai';
+    displayName: 'Blog page';
+    pluralName: 'blog-pages';
+    singularName: 'blog-page';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    description: Schema.Attribute.Text & Schema.Attribute.Required;
+    heading: Schema.Attribute.String & Schema.Attribute.Required;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::blog-page.blog-page'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    seo: Schema.Attribute.Component<'shared.seo', false>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiBlogPostBlogPost extends Struct.CollectionTypeSchema {
   collectionName: 'blog_posts';
   info: {
@@ -813,7 +844,7 @@ export interface ApiProjectsPageProjectsPage extends Struct.SingleTypeSchema {
   collectionName: 'projects_page_settings';
   info: {
     description: 'A projektek gy\u0171jt\u0151oldal\u00E1nak c\u00EDme, le\u00EDr\u00E1sa \u00E9s SEO be\u00E1ll\u00EDt\u00E1sai';
-    displayName: 'Projektek oldal';
+    displayName: 'Projects page';
     pluralName: 'projects-pages';
     singularName: 'projects-page';
   };
@@ -1489,6 +1520,7 @@ declare module '@strapi/strapi' {
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
       'api::about-page.about-page': ApiAboutPageAboutPage;
+      'api::blog-page.blog-page': ApiBlogPageBlogPage;
       'api::blog-post.blog-post': ApiBlogPostBlogPost;
       'api::career-page.career-page': ApiCareerPageCareerPage;
       'api::career-position.career-position': ApiCareerPositionCareerPosition;

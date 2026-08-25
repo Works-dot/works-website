@@ -1,11 +1,11 @@
 export default {
   "kind": "singleType",
-  "collectionName": "projects_page_settings",
+  "collectionName": "blog_page_settings",
   "info": {
-    "singularName": "projects-page",
-    "pluralName": "projects-pages",
-    "displayName": "Projects page",
-    "description": "A projektek gyűjtőoldalának címe, leírása és SEO beállításai"
+    "singularName": "blog-page",
+    "pluralName": "blog-pages",
+    "displayName": "Blog page",
+    "description": "A blog gyűjtőoldalának címe, leírása és SEO beállításai"
   },
   "options": {
     "draftAndPublish": true

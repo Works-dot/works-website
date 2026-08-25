@@ -8,6 +8,7 @@ import {
   fallbackContactPage,
   fallbackCareerPage,
   fallbackProjectsPage,
+  fallbackBlogPage,
 } from "./data/fallback";
 import type { SeoOverride } from "./lib/strapi";
 import {
@@ -126,6 +127,7 @@ const pageSeoOverrides: Record<string, SeoOverride | null | undefined> = {
   "/kapcsolat": fallbackContactPage?.seo,
   "/karrier": fallbackCareerPage?.seo,
   "/projektek": fallbackProjectsPage?.seo,
+  "/blog": fallbackBlogPage?.seo,
 };
 
 // ---------------------------------------------------------------------------

@@ -21,6 +21,7 @@ import {
   type AboutPageData,
   type CareerPageData,
   type ProjectsPageData,
+  type BlogPageData,
   type LegalDocuments,
 } from "@/lib/strapi";
 
@@ -280,6 +281,16 @@ const hardcodedProjectsPage: ProjectsPageData = {
   },
 };
 
+const hardcodedBlogPage: BlogPageData = {
+  heading: "Szakmai tartalom",
+  description: "UX trendek, design gondolkodás és gyakorlati tanácsok digitális termékekhez.",
+  seo: {
+    metaTitle: "Blog | Works.",
+    metaDescription:
+      "UX, UI design és digitális stratégia cikkek a Works. csapatától — szakmai inspiráció designereknek és termékcsapatoknak.",
+  },
+};
+
 export const fallbackProjects: Project[] = hasData("projects")
   ? (strapiCache.projects as Project[])
   : hardcodedProjects;
@@ -370,5 +381,15 @@ export const fallbackProjectsPage: ProjectsPageData = (() => {
     heading: cached.heading?.trim() || hardcodedProjectsPage.heading,
     description: cached.description?.trim() || hardcodedProjectsPage.description,
     seo: cached.seo ?? hardcodedProjectsPage.seo,
+  };
+})();
+
+export const fallbackBlogPage: BlogPageData = (() => {
+  if (!hasData("blogPage")) return hardcodedBlogPage;
+  const cached = strapiCache.blogPage as Partial<BlogPageData>;
+  return {
+    heading: cached.heading?.trim() || hardcodedBlogPage.heading,
+    description: cached.description?.trim() || hardcodedBlogPage.description,
+    seo: cached.seo ?? hardcodedBlogPage.seo,
   };
 })();

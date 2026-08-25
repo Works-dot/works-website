@@ -9,9 +9,9 @@ import {
 } from "../seo-data";
 import { getLocaleFromPath, matchLocalePath } from "@/lib/i18n-routes";
 import { useStrapiQuery } from "@/hooks/useStrapiQuery";
-import { getGlobalSettings, getProjectsPage } from "@/lib/strapi";
-import type { GlobalSettings, ProjectsPageData } from "@/lib/strapi";
-import { fallbackGlobalSettings, fallbackProjectsPage } from "@/data/fallback";
+import { getBlogPage, getGlobalSettings, getProjectsPage } from "@/lib/strapi";
+import type { BlogPageData, GlobalSettings, ProjectsPageData } from "@/lib/strapi";
+import { fallbackBlogPage, fallbackGlobalSettings, fallbackProjectsPage } from "@/data/fallback";
 
 const CLIENT_SEO_ATTRIBUTE = "data-client-seo";
 const CLIENT_JSON_LD_ATTRIBUTE = "data-client-json-ld";
@@ -100,19 +100,27 @@ export default function SEOHead() {
     getProjectsPage,
     fallbackProjectsPage
   );
+  const { data: blogPage } = useStrapiQuery<BlogPageData>(
+    "blogPage",
+    getBlogPage,
+    fallbackBlogPage
+  );
 
   const baseMeta = getPageMeta(location, getLocaleFromPath(location));
-  const projectsSeo =
-    matchLocalePath(location)?.routeKey === "projects"
+  const routeKey = matchLocalePath(location)?.routeKey;
+  const pageSeo =
+    routeKey === "projects"
       ? projectsPage?.seo
-      : null;
-  const meta = projectsSeo
+      : routeKey === "blog"
+        ? blogPage?.seo
+        : null;
+  const meta = pageSeo
     ? {
         ...baseMeta,
-        title: projectsSeo.metaTitle?.trim() || baseMeta.title,
+        title: pageSeo.metaTitle?.trim() || baseMeta.title,
         description:
-          projectsSeo.metaDescription?.trim() || baseMeta.description,
-        ogImage: projectsSeo.ogImage || baseMeta.ogImage,
+          pageSeo.metaDescription?.trim() || baseMeta.description,
+        ogImage: pageSeo.ogImage || baseMeta.ogImage,
       }
     : baseMeta;
   const lang = pageLocale(meta);

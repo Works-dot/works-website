@@ -398,6 +398,21 @@ async function fetchAll() {
   }
 
   try {
+    const blogPageRes = await fetchApi("/blog-page?populate[0]=seo.ogImage");
+    const blogPage = blogPageRes.data;
+    cache.blogPage = {
+      heading: blogPage?.heading || "",
+      description: blogPage?.description || "",
+      seo: mapSeo(blogPage?.seo),
+    };
+    console.log("  ✓ blog page");
+  } catch (err) {
+    if (!allowOptionalSkip(err)) throw err;
+    cache.blogPage = null;
+    console.log("  ⚠ blog page skipped (not found)");
+  }
+
+  try {
     const legalRes = await fetchApi("/legal-document?populate=*");
     const ld = legalRes.data;
     cache.legalDocuments = {

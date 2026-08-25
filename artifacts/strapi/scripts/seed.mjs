@@ -726,6 +726,16 @@ async function seed() {
   });
   console.log('  Projects page done.');
 
+  await createSingle('blog-page', {
+    heading: 'Szakmai tartalom',
+    description: 'UX trendek, design gondolkodás és gyakorlati tanácsok digitális termékekhez.',
+    seo: {
+      metaTitle: 'Blog | Works.',
+      metaDescription: 'UX, UI design és digitális stratégia cikkek a Works. csapatától — szakmai inspiráció designereknek és termékcsapatoknak.',
+    },
+  });
+  console.log('  Blog page done.');
+
   const whyUsItems = whyUsCards.map((card, i) => {
     const item = { title: card.title, description: card.description };
     if (whyUsImageIds[i]) item.image = whyUsImageIds[i];

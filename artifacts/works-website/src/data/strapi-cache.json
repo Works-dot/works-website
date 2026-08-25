@@ -3208,6 +3208,15 @@
       "ogImage": ""
     }
   },
+  "blogPage": {
+    "heading": "Szakmai tartalom",
+    "description": "UX trendek, design gondolkodás és gyakorlati tanácsok digitális termékekhez.",
+    "seo": {
+      "metaTitle": "Blog | Works.",
+      "metaDescription": "UX, UI design és digitális stratégia cikkek a Works. csapatától — szakmai inspiráció designereknek és termékcsapatoknak.",
+      "ogImage": ""
+    }
+  },
   "legalDocuments": {
     "privacyPdfUrl": "/strapi/uploads/adatkezelesi_tajekoztato_eeb7f9fe30.pdf",
     "cookiePdfUrl": "/strapi/uploads/sutikezelesi_tajekoztato_6e575e8cec.pdf",

@@ -7,9 +7,9 @@ import { Footer } from "@/components/layout/Footer";
 import { ResponsiveFilter } from "@/components/ui/ResponsiveFilter";
 import SEOHead from "@/components/SEOHead";
 import { useStrapiQuery } from "@/hooks/useStrapiQuery";
-import { getBlogPosts } from "@/lib/strapi";
-import type { BlogPost } from "@/lib/strapi";
-import { fallbackBlogPosts } from "@/data/fallback";
+import { getBlogPage, getBlogPosts } from "@/lib/strapi";
+import type { BlogPageData, BlogPost } from "@/lib/strapi";
+import { fallbackBlogPage, fallbackBlogPosts } from "@/data/fallback";
 import { useI18n } from "@/i18n";
 
 function FeaturedBlogCard({ slug, title, excerpt, date, image, imageAlt, author, readingTime }: {
@@ -130,6 +130,7 @@ export default function Blog() {
   const { t } = useI18n();
   const [activeTag, setActiveTag] = useState<string | null>(null);
   const { data: blogPosts, loading, error } = useStrapiQuery<BlogPost[]>("blogPosts", getBlogPosts, fallbackBlogPosts);
+  const { data: blogPage } = useStrapiQuery<BlogPageData>("blogPage", getBlogPage, fallbackBlogPage);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -158,10 +159,10 @@ export default function Blog() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="mb-12 lg:mb-16">
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-works-dark tracking-tight mb-4">
-                {t("pages.blogHeading")}
+                {blogPage?.heading?.trim() || t("pages.blogHeading")}
               </h1>
               <p className="text-lg lg:text-xl text-works-dark/60 max-w-2xl">
-                {t("pages.blogSubheading")}
+                {blogPage?.description?.trim() || t("pages.blogSubheading")}
               </p>
             </div>
 

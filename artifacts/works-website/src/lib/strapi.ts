@@ -995,12 +995,32 @@ export interface ProjectsPageData {
   seo?: SeoOverride | null;
 }
 
+export interface BlogPageData {
+  heading: string;
+  description: string;
+  seo?: SeoOverride | null;
+}
+
 export async function getProjectsPage(locale?: string): Promise<ProjectsPageData> {
   const res = await fetchApi<StrapiSingleResponse<{
     heading: string;
     description: string;
     seo?: StrapiSeo | null;
   }>>(appendLocale("/projects-page?populate[0]=seo.ogImage", locale));
+  const d = res.data;
+  return {
+    heading: d.heading || "",
+    description: d.description || "",
+    seo: mapSeo(d.seo),
+  };
+}
+
+export async function getBlogPage(locale?: string): Promise<BlogPageData> {
+  const res = await fetchApi<StrapiSingleResponse<{
+    heading: string;
+    description: string;
+    seo?: StrapiSeo | null;
+  }>>(appendLocale("/blog-page?populate[0]=seo.ogImage", locale));
   const d = res.data;
   return {
     heading: d.heading || "",

@@ -163,6 +163,14 @@ const PROJECTS_PAGE_FIELD_LABELS: Record<string, { label: string; description?: 
 
 const PROJECTS_PAGE_EDIT_ORDER = ["heading", "description", "seo"];
 
+const BLOG_PAGE_FIELD_LABELS: Record<string, { label: string; description?: string }> = {
+  heading: { label: "Oldal címe", description: "A blog gyűjtőoldalának főcíme" },
+  description: { label: "Bevezető leírás", description: "A főcím alatt megjelenő rövid szöveg" },
+  seo: { label: "SEO beállítások", description: "Kereső- és megosztási beállítások (meta cím, leírás, kép)" },
+};
+
+const BLOG_PAGE_EDIT_ORDER = ["heading", "description", "seo"];
+
 const COMPONENT_FIELD_LABELS: Record<string, Record<string, { label: string; description?: string }>> = {
   "contact.form-subject": {
     label: { label: "Megnevezés", description: "Ez látszik a legördülő menüben" },
@@ -181,6 +189,7 @@ const singleTypeUids = [
   "api::career-page.career-page",
   "api::contact-page.contact-page",
   "api::projects-page.projects-page",
+  "api::blog-page.blog-page",
   "api::legal-document.legal-document",
   "api::global-setting.global-setting",
 ];
@@ -318,6 +327,20 @@ async function updateAllLabels(strapi: any) {
           }
         }
       }
+
+      if (uid === "api::blog-page.blog-page") {
+        for (const [field, meta] of Object.entries(BLOG_PAGE_FIELD_LABELS)) {
+          if (config.metadatas[field]?.edit) {
+            config.metadatas[field].edit.label = meta.label;
+            if (meta.description) {
+              config.metadatas[field].edit.description = meta.description;
+            }
+          }
+          if (config.metadatas[field]?.list) {
+            config.metadatas[field].list.label = meta.label;
+          }
+        }
+      }
     }
 
     if (config.layouts?.edit) {
@@ -389,6 +412,20 @@ async function updateAllLabels(strapi: any) {
       if (uid === "api::projects-page.projects-page") {
         const reordered: any[] = [];
         for (const name of PROJECTS_PAGE_EDIT_ORDER) {
+          const idx = config.layouts.edit.findIndex(
+            (row: { name: string }[]) =>
+              row.some((col: { name: string }) => col.name === name)
+          );
+          if (idx !== -1) {
+            reordered.push(...config.layouts.edit.splice(idx, 1));
+          }
+        }
+        config.layouts.edit = [...reordered, ...config.layouts.edit];
+      }
+
+      if (uid === "api::blog-page.blog-page") {
+        const reordered: any[] = [];
+        for (const name of BLOG_PAGE_EDIT_ORDER) {
           const idx = config.layouts.edit.findIndex(
             (row: { name: string }[]) =>
               row.some((col: { name: string }) => col.name === name)
@@ -2605,6 +2642,16 @@ const PROJECTS_PAGE_DEFAULT_DATA = {
   },
 };
 
+const BLOG_PAGE_DEFAULT_DATA = {
+  heading: "Szakmai tartalom",
+  description: "UX trendek, design gondolkodás és gyakorlati tanácsok digitális termékekhez.",
+  seo: {
+    metaTitle: "Blog | Works.",
+    metaDescription:
+      "UX, UI design és digitális stratégia cikkek a Works. csapatától — szakmai inspiráció designereknek és termékcsapatoknak.",
+  },
+};
+
 async function ensureProjectsPage(strapi: any) {
   const docs = strapi.documents("api::projects-page.projects-page");
 
@@ -2623,6 +2670,28 @@ async function ensureProjectsPage(strapi: any) {
     strapi.log.info("Projects page seed: default document created and published");
   } catch (err: any) {
     strapi.log.error(`Projects page seed: failed — will retry on next restart: ${err.message}`);
+    throw err;
+  }
+}
+
+async function ensureBlogPage(strapi: any) {
+  const docs = strapi.documents("api::blog-page.blog-page");
+
+  try {
+    const draft = await docs.findFirst({ populate: ["seo"] });
+    const published = await docs.findFirst({ status: "published", populate: ["seo"] });
+
+    if (draft || published) {
+      strapi.log.info("Blog page seed: document already exists — not overwriting");
+      return;
+    }
+
+    const created = await docs.create({ data: BLOG_PAGE_DEFAULT_DATA });
+    await docs.publish({ documentId: created.documentId });
+    noteBootstrapContentChange("blog page seed");
+    strapi.log.info("Blog page seed: default document created and published");
+  } catch (err: any) {
+    strapi.log.error(`Blog page seed: failed — will retry on next restart: ${err.message}`);
     throw err;
   }
 }
@@ -2677,7 +2746,10 @@ export default {
     const httpServer = strapi.server?.httpServer;
     if (httpServer) {
       httpServer.once("listening", () => {
-        const migrations = ensureProjectsPage(strapi).then(() =>
+        const migrations = Promise.all([
+          ensureProjectsPage(strapi),
+          ensureBlogPage(strapi),
+        ]).then(() =>
           runContentMigrations
             ? runBootstrapContentMigrations(strapi)
             : undefined
@@ -2693,6 +2765,7 @@ export default {
       });
     } else {
       await ensureProjectsPage(strapi);
+      await ensureBlogPage(strapi);
       if (runContentMigrations) {
         await runBootstrapContentMigrations(strapi);
       }
