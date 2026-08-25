@@ -7,6 +7,7 @@ import "@fontsource/mulish/400-italic.css";
 import "@fontsource/mulish/500.css";
 import "@fontsource/mulish/600.css";
 import "@fontsource/mulish/700.css";
+import "@fontsource/mulish/900.css";
 import "./index.css";
 
 const rootEl = document.getElementById("root")!;

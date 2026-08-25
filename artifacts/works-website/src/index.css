@@ -154,3 +154,14 @@
     @apply hidden;
   }
 }
+
+/* Keep every semantic heading on the real Mulish Black face, even when a
+   legacy utility class still requests a lighter weight. */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 900;
+}

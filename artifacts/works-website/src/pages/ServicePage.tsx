@@ -427,7 +427,7 @@ export default function ServicePage() {
                       value={`faq-${i}`}
                       className="border border-works-muted/30 bg-works-bg px-6 data-[state=open]:border-works-primary/30"
                     >
-                      <AccordionTrigger className="text-left text-base md:text-lg font-bold text-works-dark hover:text-works-primary hover:no-underline py-5">
+                      <AccordionTrigger className="text-left text-base md:text-lg font-black text-works-dark hover:text-works-primary hover:no-underline py-5">
                         {item.question}
                       </AccordionTrigger>
                       <AccordionContent className="text-works-dark/60 leading-relaxed text-base pb-5">
