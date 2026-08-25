@@ -148,7 +148,7 @@ export default function ServicePage() {
 
       <main className="flex-grow">
         {/* 1. Hero */}
-        <section className="relative mt-20 md:mt-[72px] min-h-[460px] lg:h-[870px] pt-10 lg:pt-[120px] pb-12 lg:pb-16 bg-white overflow-hidden flex items-start">
+        <section className="service-hero relative mt-20 md:mt-[72px] pt-10 lg:pt-[120px] pb-12 lg:pb-16 bg-white overflow-hidden flex items-start">
           {heroGraphic && (
             <img
               src={heroGraphic}

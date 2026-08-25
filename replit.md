@@ -50,6 +50,12 @@ Every package extends `tsconfig.base.json` which sets `composite: true`. The roo
 - `pnpm run build` — runs `typecheck` first, then recursively runs `build` in all packages that define it
 - `pnpm run typecheck` — runs `tsc --build --emitDeclarationOnly` using project references
 
+## Works. Website Release Workflow
+
+- For user-approved changes intended for the production Works. website, publishing the verified project state to `Works-dot/works-website` on GitHub `main` is part of task completion unless the user explicitly requests a local-only change.
+- Update GitHub with a non-force fast-forward from its current `main`, then verify that the remote tree matches the tested local tree.
+- Railway deploys the website automatically from GitHub `main`; verify that the resulting website deployment finishes successfully before closing the release task.
+
 ## Packages
 
 ### `artifacts/works-website` (`@workspace/works-website`)

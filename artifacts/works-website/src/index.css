@@ -135,6 +135,20 @@
 
 }
 
+@layer components {
+  .service-hero {
+    min-height: calc(100vh - 5rem);
+    min-height: calc(100dvh - 5rem);
+  }
+
+  @media (min-width: 48rem) {
+    .service-hero {
+      min-height: calc(100vh - 4.5rem);
+      min-height: calc(100dvh - 4.5rem);
+    }
+  }
+}
+
 @layer utilities {
   input[type="search"]::-webkit-search-cancel-button {
     @apply hidden;
