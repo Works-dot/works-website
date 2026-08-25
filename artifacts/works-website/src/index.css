@@ -155,13 +155,9 @@
   }
 }
 
-/* Keep every semantic heading on the real Mulish Black face, even when a
+/* Keep the two primary heading levels on the real Mulish Black face, even when a
    legacy utility class still requests a lighter weight. */
 h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
+h2 {
   font-weight: 900;
 }

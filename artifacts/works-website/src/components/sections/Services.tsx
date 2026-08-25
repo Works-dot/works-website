@@ -1,13 +1,10 @@
-import { Search } from "lucide-react";
 import { ServiceCard } from "@/components/ui/ServiceCard";
 import { useStrapiQuery } from "@/hooks/useStrapiQuery";
 import { getHomepage, getServices } from "@/lib/strapi";
 import type { HomepageData, Service } from "@/lib/strapi";
 import { fallbackServices, fallbackHomepage, bgGraphic1FallbackImg } from "@/data/fallback";
-import { useI18n } from "@/i18n";
 
 export function Services() {
-  const { t } = useI18n();
   const { data: homepage } = useStrapiQuery<HomepageData>("homepage", getHomepage, fallbackHomepage);
   const { data: services } = useStrapiQuery<Service[]>("services", getServices, fallbackServices);
   const section = homepage?.servicesSection;
@@ -53,15 +50,6 @@ export function Services() {
               href={s.slug ? `/szolgaltatasok/${s.slug}` : undefined}
             />
           ))}
-
-          <div className="bg-works-primary p-8 flex flex-col justify-center items-start text-left text-white relative overflow-hidden group hover:scale-[1.02] transition-transform duration-300 cursor-pointer">
-            <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent pointer-events-none" />
-            <h3 className="text-2xl font-bold mb-4 relative z-10">{t("sections.servicesNotFoundHeading")}</h3>
-            <p className="text-white/90 mb-8 relative z-10">{t("sections.servicesNotFoundBody")}</p>
-            <a href="/kapcsolat" className="px-6 py-3 border border-white text-white font-semibold hover:bg-white hover:text-works-primary transition-colors relative z-10">
-              {t("sections.servicesContactCta")}
-            </a>
-          </div>
         </div>
       </div>
     </section>
