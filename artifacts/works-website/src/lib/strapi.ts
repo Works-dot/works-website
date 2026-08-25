@@ -989,6 +989,26 @@ export interface CareerPageData {
   seo?: SeoOverride | null;
 }
 
+export interface ProjectsPageData {
+  heading: string;
+  description: string;
+  seo?: SeoOverride | null;
+}
+
+export async function getProjectsPage(locale?: string): Promise<ProjectsPageData> {
+  const res = await fetchApi<StrapiSingleResponse<{
+    heading: string;
+    description: string;
+    seo?: StrapiSeo | null;
+  }>>(appendLocale("/projects-page?populate[0]=seo.ogImage", locale));
+  const d = res.data;
+  return {
+    heading: d.heading || "",
+    description: d.description || "",
+    seo: mapSeo(d.seo),
+  };
+}
+
 export async function getCareerPage(locale?: string): Promise<CareerPageData> {
   const res = await fetchApi<StrapiSingleResponse<{
     hero: { heading: string; description: string; backgroundImage: StrapiMedia | null };

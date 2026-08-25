@@ -7,11 +7,11 @@ import {
   localeToOgLocale,
   pageLocale,
 } from "../seo-data";
-import { getLocaleFromPath } from "@/lib/i18n-routes";
+import { getLocaleFromPath, matchLocalePath } from "@/lib/i18n-routes";
 import { useStrapiQuery } from "@/hooks/useStrapiQuery";
-import { getGlobalSettings } from "@/lib/strapi";
-import type { GlobalSettings } from "@/lib/strapi";
-import { fallbackGlobalSettings } from "@/data/fallback";
+import { getGlobalSettings, getProjectsPage } from "@/lib/strapi";
+import type { GlobalSettings, ProjectsPageData } from "@/lib/strapi";
+import { fallbackGlobalSettings, fallbackProjectsPage } from "@/data/fallback";
 
 const CLIENT_SEO_ATTRIBUTE = "data-client-seo";
 const CLIENT_JSON_LD_ATTRIBUTE = "data-client-json-ld";
@@ -95,8 +95,26 @@ function syncJsonLd(scriptMarkup: string[]) {
 export default function SEOHead() {
   const [location] = useLocation();
   const { data: settings } = useStrapiQuery<GlobalSettings>("globalSettings", getGlobalSettings, fallbackGlobalSettings);
+  const { data: projectsPage } = useStrapiQuery<ProjectsPageData>(
+    "projectsPage",
+    getProjectsPage,
+    fallbackProjectsPage
+  );
 
-  const meta = getPageMeta(location, getLocaleFromPath(location));
+  const baseMeta = getPageMeta(location, getLocaleFromPath(location));
+  const projectsSeo =
+    matchLocalePath(location)?.routeKey === "projects"
+      ? projectsPage?.seo
+      : null;
+  const meta = projectsSeo
+    ? {
+        ...baseMeta,
+        title: projectsSeo.metaTitle?.trim() || baseMeta.title,
+        description:
+          projectsSeo.metaDescription?.trim() || baseMeta.description,
+        ogImage: projectsSeo.ogImage || baseMeta.ogImage,
+      }
+    : baseMeta;
   const lang = pageLocale(meta);
   const ogLocale = localeToOgLocale(lang);
   const ogImage = absoluteUrl(meta.ogImage || settings?.ogImageUrl || "/opengraph.jpg");

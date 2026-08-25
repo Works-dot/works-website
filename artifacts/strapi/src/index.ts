@@ -155,6 +155,14 @@ const LEGAL_DOCUMENT_FIELD_LABELS: Record<string, { label: string; description?:
 
 const LEGAL_DOCUMENT_EDIT_ORDER = ["privacyPdf", "cookiePdf", "imprintPdf"];
 
+const PROJECTS_PAGE_FIELD_LABELS: Record<string, { label: string; description?: string }> = {
+  heading: { label: "Oldal címe", description: "A projektek gyűjtőoldalának főcíme" },
+  description: { label: "Bevezető leírás", description: "A főcím alatt megjelenő rövid szöveg" },
+  seo: { label: "SEO beállítások", description: "Kereső- és megosztási beállítások (meta cím, leírás, kép)" },
+};
+
+const PROJECTS_PAGE_EDIT_ORDER = ["heading", "description", "seo"];
+
 const COMPONENT_FIELD_LABELS: Record<string, Record<string, { label: string; description?: string }>> = {
   "contact.form-subject": {
     label: { label: "Megnevezés", description: "Ez látszik a legördülő menüben" },
@@ -172,6 +180,7 @@ const singleTypeUids = [
   "api::about-page.about-page",
   "api::career-page.career-page",
   "api::contact-page.contact-page",
+  "api::projects-page.projects-page",
   "api::legal-document.legal-document",
   "api::global-setting.global-setting",
 ];
@@ -295,6 +304,20 @@ async function updateAllLabels(strapi: any) {
           }
         }
       }
+
+      if (uid === "api::projects-page.projects-page") {
+        for (const [field, meta] of Object.entries(PROJECTS_PAGE_FIELD_LABELS)) {
+          if (config.metadatas[field]?.edit) {
+            config.metadatas[field].edit.label = meta.label;
+            if (meta.description) {
+              config.metadatas[field].edit.description = meta.description;
+            }
+          }
+          if (config.metadatas[field]?.list) {
+            config.metadatas[field].list.label = meta.label;
+          }
+        }
+      }
     }
 
     if (config.layouts?.edit) {
@@ -352,6 +375,20 @@ async function updateAllLabels(strapi: any) {
       if (uid === "api::legal-document.legal-document") {
         const reordered: any[] = [];
         for (const name of LEGAL_DOCUMENT_EDIT_ORDER) {
+          const idx = config.layouts.edit.findIndex(
+            (row: { name: string }[]) =>
+              row.some((col: { name: string }) => col.name === name)
+          );
+          if (idx !== -1) {
+            reordered.push(...config.layouts.edit.splice(idx, 1));
+          }
+        }
+        config.layouts.edit = [...reordered, ...config.layouts.edit];
+      }
+
+      if (uid === "api::projects-page.projects-page") {
+        const reordered: any[] = [];
+        for (const name of PROJECTS_PAGE_EDIT_ORDER) {
           const idx = config.layouts.edit.findIndex(
             (row: { name: string }[]) =>
               row.some((col: { name: string }) => col.name === name)
@@ -2558,6 +2595,38 @@ async function seedAboutGalleryImages(strapi: any) {
   }
 }
 
+const PROJECTS_PAGE_DEFAULT_DATA = {
+  heading: "Projektjeink",
+  description: "Válogatás legfrissebb munkáinkból — UX kutatástól a komplex rendszertervezésig.",
+  seo: {
+    metaTitle: "Projektjeink | Works.",
+    metaDescription:
+      "Válogatás a Works. referencia munkáiból — UX kutatás, UI design, akadálymentesítés és webfejlesztési projektek.",
+  },
+};
+
+async function ensureProjectsPage(strapi: any) {
+  const docs = strapi.documents("api::projects-page.projects-page");
+
+  try {
+    const draft = await docs.findFirst({ populate: ["seo"] });
+    const published = await docs.findFirst({ status: "published", populate: ["seo"] });
+
+    if (draft || published) {
+      strapi.log.info("Projects page seed: document already exists — not overwriting");
+      return;
+    }
+
+    const created = await docs.create({ data: PROJECTS_PAGE_DEFAULT_DATA });
+    await docs.publish({ documentId: created.documentId });
+    noteBootstrapContentChange("projects page seed");
+    strapi.log.info("Projects page seed: default document created and published");
+  } catch (err: any) {
+    strapi.log.error(`Projects page seed: failed — will retry on next restart: ${err.message}`);
+    throw err;
+  }
+}
+
 function shouldRunBootstrapContentMigrations(): boolean {
   if (process.env.NODE_ENV !== "production") return true;
   return process.env.STRAPI_RUN_CONTENT_MIGRATIONS === "true";
@@ -2608,9 +2677,11 @@ export default {
     const httpServer = strapi.server?.httpServer;
     if (httpServer) {
       httpServer.once("listening", () => {
-        const migrations = runContentMigrations
-          ? runBootstrapContentMigrations(strapi)
-          : Promise.resolve();
+        const migrations = ensureProjectsPage(strapi).then(() =>
+          runContentMigrations
+            ? runBootstrapContentMigrations(strapi)
+            : undefined
+        );
 
         migrations
           .then(() => strapi.log.info("Bootstrap tasks completed successfully"))
@@ -2621,6 +2692,7 @@ export default {
           .finally(() => markWebsiteAutoRebuildReady(strapi));
       });
     } else {
+      await ensureProjectsPage(strapi);
       if (runContentMigrations) {
         await runBootstrapContentMigrations(strapi);
       }

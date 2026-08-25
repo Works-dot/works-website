@@ -7,9 +7,9 @@ import { Footer } from "@/components/layout/Footer";
 import { ResponsiveFilter } from "@/components/ui/ResponsiveFilter";
 import SEOHead from "@/components/SEOHead";
 import { useStrapiQuery } from "@/hooks/useStrapiQuery";
-import { getProjects } from "@/lib/strapi";
-import type { Project } from "@/lib/strapi";
-import { fallbackProjects } from "@/data/fallback";
+import { getProjects, getProjectsPage } from "@/lib/strapi";
+import type { Project, ProjectsPageData } from "@/lib/strapi";
+import { fallbackProjects, fallbackProjectsPage } from "@/data/fallback";
 import { useI18n } from "@/i18n";
 
 function FeaturedProjectCard({ slug, title, tags, description, image, imageAlt }: {
@@ -56,7 +56,7 @@ function FeaturedProjectCard({ slug, title, tags, description, image, imageAlt }
             {description}
           </p>
           <span className="inline-flex items-center gap-2 text-works-primary font-semibold text-sm">
-            {t("cta.viewCaseStudy")}
+            {t("cta.viewDetails")}
             <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
           </span>
         </div>
@@ -123,6 +123,11 @@ export default function Projektek() {
   const { t } = useI18n();
   const [activeTag, setActiveTag] = useState<string | null>(null);
   const { data: projects, loading, error } = useStrapiQuery<Project[]>("projects", getProjects, fallbackProjects);
+  const { data: projectsPage } = useStrapiQuery<ProjectsPageData>(
+    "projectsPage",
+    getProjectsPage,
+    fallbackProjectsPage
+  );
 
   const allItems = projects || [];
 
@@ -147,10 +152,10 @@ export default function Projektek() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="mb-12 lg:mb-16">
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-works-dark tracking-tight mb-4">
-                {t("pages.projectsHeading")}
+                {projectsPage?.heading?.trim() || t("pages.projectsHeading")}
               </h1>
               <p className="text-lg lg:text-xl text-works-dark/60 max-w-2xl">
-                {t("pages.projectsSubheading")}
+                {projectsPage?.description?.trim() || t("pages.projectsSubheading")}
               </p>
             </div>
 

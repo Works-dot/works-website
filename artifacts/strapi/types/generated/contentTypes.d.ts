@@ -809,6 +809,37 @@ export interface ApiProjectProject extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiProjectsPageProjectsPage extends Struct.SingleTypeSchema {
+  collectionName: 'projects_page_settings';
+  info: {
+    description: 'A projektek gy\u0171jt\u0151oldal\u00E1nak c\u00EDme, le\u00EDr\u00E1sa \u00E9s SEO be\u00E1ll\u00EDt\u00E1sai';
+    displayName: 'Projektek oldal';
+    pluralName: 'projects-pages';
+    singularName: 'projects-page';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    description: Schema.Attribute.Text & Schema.Attribute.Required;
+    heading: Schema.Attribute.String & Schema.Attribute.Required;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::projects-page.projects-page'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    seo: Schema.Attribute.Component<'shared.seo', false>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiServiceService extends Struct.CollectionTypeSchema {
   collectionName: 'services';
   info: {
@@ -1467,6 +1498,7 @@ declare module '@strapi/strapi' {
       'api::homepage.homepage': ApiHomepageHomepage;
       'api::legal-document.legal-document': ApiLegalDocumentLegalDocument;
       'api::project.project': ApiProjectProject;
+      'api::projects-page.projects-page': ApiProjectsPageProjectsPage;
       'api::service.service': ApiServiceService;
       'api::tag.tag': ApiTagTag;
       'api::team-member.team-member': ApiTeamMemberTeamMember;

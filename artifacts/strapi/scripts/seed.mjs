@@ -716,6 +716,16 @@ async function seed() {
   });
   console.log('  Contact page done.');
 
+  await createSingle('projects-page', {
+    heading: 'Projektjeink',
+    description: 'Válogatás legfrissebb munkáinkból — UX kutatástól a komplex rendszertervezésig.',
+    seo: {
+      metaTitle: 'Projektjeink | Works.',
+      metaDescription: 'Válogatás a Works. referencia munkáiból — UX kutatás, UI design, akadálymentesítés és webfejlesztési projektek.',
+    },
+  });
+  console.log('  Projects page done.');
+
   const whyUsItems = whyUsCards.map((card, i) => {
     const item = { title: card.title, description: card.description };
     if (whyUsImageIds[i]) item.image = whyUsImageIds[i];

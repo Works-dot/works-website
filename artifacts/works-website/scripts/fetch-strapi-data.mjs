@@ -383,6 +383,21 @@ async function fetchAll() {
   }
 
   try {
+    const projectsPageRes = await fetchApi("/projects-page?populate[0]=seo.ogImage");
+    const projectsPage = projectsPageRes.data;
+    cache.projectsPage = {
+      heading: projectsPage?.heading || "",
+      description: projectsPage?.description || "",
+      seo: mapSeo(projectsPage?.seo),
+    };
+    console.log("  ✓ projects page");
+  } catch (err) {
+    if (!allowOptionalSkip(err)) throw err;
+    cache.projectsPage = null;
+    console.log("  ⚠ projects page skipped (not found)");
+  }
+
+  try {
     const legalRes = await fetchApi("/legal-document?populate=*");
     const ld = legalRes.data;
     cache.legalDocuments = {

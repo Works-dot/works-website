@@ -20,6 +20,7 @@ import {
   type Client,
   type AboutPageData,
   type CareerPageData,
+  type ProjectsPageData,
   type LegalDocuments,
 } from "@/lib/strapi";
 
@@ -269,6 +270,16 @@ const hardcodedCareerPage: CareerPageData = {
   },
 };
 
+const hardcodedProjectsPage: ProjectsPageData = {
+  heading: "Projektjeink",
+  description: "Válogatás legfrissebb munkáinkból — UX kutatástól a komplex rendszertervezésig.",
+  seo: {
+    metaTitle: "Projektjeink | Works.",
+    metaDescription:
+      "Válogatás a Works. referencia munkáiból — UX kutatás, UI design, akadálymentesítés és webfejlesztési projektek.",
+  },
+};
+
 export const fallbackProjects: Project[] = hasData("projects")
   ? (strapiCache.projects as Project[])
   : hardcodedProjects;
@@ -349,5 +360,15 @@ export const fallbackCareerPage: CareerPageData = (() => {
       ? cached.whyUs as CareerPageData["whyUs"]
       : hardcodedCareerPage.whyUs,
     seo: cached.seo ?? null,
+  };
+})();
+
+export const fallbackProjectsPage: ProjectsPageData = (() => {
+  if (!hasData("projectsPage")) return hardcodedProjectsPage;
+  const cached = strapiCache.projectsPage as Partial<ProjectsPageData>;
+  return {
+    heading: cached.heading?.trim() || hardcodedProjectsPage.heading,
+    description: cached.description?.trim() || hardcodedProjectsPage.description,
+    seo: cached.seo ?? hardcodedProjectsPage.seo,
   };
 })();

@@ -9,6 +9,7 @@ const SINGLE_TYPE_PATHS: Record<string, string> = {
   'api::about-page.about-page': '/rolunk',
   'api::contact-page.contact-page': '/kapcsolat',
   'api::career-page.career-page': '/karrier',
+  'api::projects-page.projects-page': '/projektek',
   'api::blog-page.blog-page': '/blog',
 };
 
