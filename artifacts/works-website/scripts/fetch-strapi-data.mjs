@@ -491,10 +491,20 @@ async function fetchAllWithRetry() {
   for (let attempt = 1; attempt <= RETRY_ATTEMPTS; attempt++) {
     try {
       if (attempt > 1) console.log(`\nRetry ${attempt}/${RETRY_ATTEMPTS}...`);
-        return {
+        const data = {
           hu: await fetchAll("hu"),
           en: await fetchAll("en"),
         };
+        if (
+          STRICT &&
+          (!data.en.legalDocuments?.privacyPdfUrl ||
+            !data.en.legalDocuments?.imprintPdfUrl)
+        ) {
+          throw new Error(
+            "Required English legal fallbacks are missing: privacyPdf and imprintPdf must be assigned",
+          );
+        }
+        return data;
     } catch (err) {
       lastErr = err;
       console.warn(`  ✗ attempt ${attempt}/${RETRY_ATTEMPTS} failed: ${err.message}`);

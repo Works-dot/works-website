@@ -181,8 +181,14 @@ export function Footer() {
           <p>&copy; {copyrightText}</p>
           <div className="flex gap-6">
             <a
-              href={privacyPdfUrl || buildLocalePath(locale, "privacy")}
-              {...(privacyPdfUrl ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+              href={
+                locale === "en"
+                  ? buildLocalePath(locale, "privacy")
+                  : privacyPdfUrl || buildLocalePath(locale, "privacy")
+              }
+              {...(locale === "hu" && privacyPdfUrl
+                ? { target: "_blank", rel: "noopener noreferrer" }
+                : {})}
               className="hover:text-white transition-colors"
             >
               {t("footer.privacy")}

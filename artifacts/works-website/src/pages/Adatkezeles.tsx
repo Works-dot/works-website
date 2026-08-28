@@ -21,10 +21,10 @@ export default function Adatkezeles() {
   const pdfUrl = legalDocs?.privacyPdfUrl || "";
 
   useEffect(() => {
-    if (pdfUrl && typeof window !== "undefined") {
+    if (locale === "hu" && pdfUrl && typeof window !== "undefined") {
       window.location.replace(pdfUrl);
     }
-  }, [pdfUrl]);
+  }, [locale, pdfUrl]);
 
   return (
     <div className="min-h-screen bg-works-bg flex flex-col selection:bg-works-primary selection:text-white">
@@ -39,9 +39,15 @@ export default function Adatkezeles() {
             </h1>
             {pdfUrl ? (
               <p className="text-works-dark/60 leading-relaxed">
-                {t("privacyPage.redirectingText")}{" "}
+                {t(
+                  locale === "en"
+                    ? "privacyPage.documentLanguageNotice"
+                    : "privacyPage.redirectingText",
+                )}{" "}
                 <a
                   href={pdfUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="text-works-primary font-semibold underline hover:no-underline"
                 >
                   {t("privacyPage.openLinkLabel")}
