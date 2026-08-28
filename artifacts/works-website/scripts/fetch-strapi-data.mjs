@@ -1,6 +1,7 @@
 // NOTE: Railway only redeploys this service when files under
 // artifacts/works-website change — content-only Strapi commits do not
 // trigger a website build (the Strapi-side auto-rebuild handles those).
+// A bilingual build requires the localized Strapi schema to be live first.
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
