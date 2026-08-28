@@ -48,6 +48,7 @@ function mapSeo(seo) {
 
 function mapProject(p) {
   return {
+    documentId: p.documentId,
     slug: p.slug,
     title: p.title,
     tags: p.tags?.map((t) => t.name) || [],
@@ -70,6 +71,7 @@ function mapProject(p) {
 
 function mapBlogPost(p) {
   return {
+    documentId: p.documentId,
     slug: p.slug,
     title: p.title,
     excerpt: p.excerpt || "",
@@ -97,6 +99,7 @@ function mapSectionIntro(i) {
 
 function mapService(s) {
   return {
+    documentId: s.documentId,
     slug: s.general?.slug || "",
     title: s.general?.title || "",
     subtitle: s.general?.subtitle || "",
@@ -242,6 +245,7 @@ async function fetchAll(locale) {
     `/career-positions?${CAREER_POPULATE}&pagination[pageSize]=100&filters[isActive][$eq]=true`
   );
   cache.positions = careersRes.data.map((c) => ({
+    documentId: c.documentId,
     slug: c.slug,
     title: c.title,
     team: c.team || "",

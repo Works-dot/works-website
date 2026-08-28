@@ -2,6 +2,7 @@
   "hu": {
     "projects": [
       {
+        "documentId": "wwphjzzrbmie35a84lwzypoe",
         "slug": "ux-kutatassal-megalapozott-biztositasi-ugyfelportal",
         "title": "Alfa Biztosító - ügyfélportál újratervezése",
         "tags": [
@@ -48,6 +49,7 @@
         }
       },
       {
+        "documentId": "tnq1aajv1kbn6k2tljubsp9m",
         "slug": "streaming-platform-tervezes-es-bevezetes",
         "title": "TV2 streaming platform bevezetés",
         "tags": [
@@ -93,6 +95,7 @@
         }
       },
       {
+        "documentId": "xk4nqbnxmm11s7jsosv0bd1u",
         "slug": "digitalis-termektervezes-idomenedzsment-platformhoz",
         "title": "Motibro - Digitális terméktervezés",
         "tags": [
@@ -139,6 +142,7 @@
         }
       },
       {
+        "documentId": "ptbpfittnhfs2457875p11zu",
         "slug": "informacios-architektura-B2B-webshophoz",
         "title": "Profirent UX/UI redesign",
         "tags": [
@@ -184,6 +188,7 @@
         }
       },
       {
+        "documentId": "ooujvyn6blnpyj04lnpliuq4",
         "slug": "icheck-alkalmazas-ux-ui-megujitas",
         "title": "Posta iCsekk applikáció redesign",
         "tags": [
@@ -229,6 +234,7 @@
         }
       },
       {
+        "documentId": "aux51vnpeblqp4b6x3ifiw56",
         "slug": "kreativ-tortenetmeseles-komplex-szolgaltatasportfoliohoz",
         "title": "Alerant Zrt. rebranding",
         "tags": [
@@ -275,6 +281,7 @@
         }
       },
       {
+        "documentId": "d7cs013o1y97hynpky175wpi",
         "slug": "digitalis-elmenystrategia-es-termektervezes",
         "title": "Bookline service design",
         "tags": [
@@ -319,6 +326,7 @@
         }
       },
       {
+        "documentId": "s9fijy9h1n6uutp9z2mwk9v7",
         "slug": "ux-kutatasi-es-service-design-partnerseg",
         "title": "Magyar Telekom stratégiai partnerség",
         "tags": [
@@ -364,6 +372,7 @@
         }
       },
       {
+        "documentId": "v8vxqqgngw7da94dly04d12s",
         "slug": "szakmai-kiadvanyok-es-modszertanok",
         "title": "Szakmai kiadványok",
         "tags": [
@@ -409,6 +418,7 @@
         }
       },
       {
+        "documentId": "ow4uhn5d9g0xcdi7c5s13rmn",
         "slug": "rudas-service-design",
         "title": "Rudas gyógyfürdő service design",
         "tags": [
@@ -455,6 +465,7 @@
         }
       },
       {
+        "documentId": "zt5buarf3yieti3ss42q35n9",
         "slug": "chefparade-service-design",
         "title": "Chefparade service design",
         "tags": [
@@ -501,6 +512,7 @@
         }
       },
       {
+        "documentId": "ucsgig8gytznssrs39gliuy6",
         "slug": "ai-szimulacio-ivr-validaciohoz",
         "title": "Yettel - AI-alapú IVR validáció",
         "tags": [
@@ -546,6 +558,7 @@
         }
       },
       {
+        "documentId": "c8wjk5zf2ytlcqq5aflv4hmh",
         "slug": "digitalis-ugyintezes-felhasznaloi-kutatasa",
         "title": "Uniqa digitális ügyintézés ",
         "tags": [
@@ -590,6 +603,7 @@
         }
       },
       {
+        "documentId": "twoehtp3ljcpczjiucnzgffo",
         "slug": "azonositasi-journey-kutatasa",
         "title": "ONE - Digitális azonosítás ",
         "tags": [
@@ -634,6 +648,7 @@
         }
       },
       {
+        "documentId": "qpa8gyk33o8ier03m5pe9d1f",
         "slug": "google-maps-review-ai-elemzes",
         "title": "Google Maps review-k AI-alapú kategorizálása",
         "tags": [
@@ -679,6 +694,7 @@
         }
       },
       {
+        "documentId": "lmp5s316xe1i88t7he0j105m",
         "slug": "ai-rapid-prototyping",
         "title": "AI-alapú digitális termékfejlesztés",
         "tags": [
@@ -724,6 +740,7 @@
         }
       },
       {
+        "documentId": "l9qds14cr4bxvv1c5jip9k4s",
         "slug": "design-capability-building",
         "title": "Digitális képességfejlesztés – képzések",
         "tags": [
@@ -769,6 +786,7 @@
         }
       },
       {
+        "documentId": "r5tiua5mlq0pwv7rw86vnywm",
         "slug": "ai-kepessegfejlesztes-kutatocsapatoknak",
         "title": "AI-alapú kutatás kialakítása",
         "tags": [
@@ -815,6 +833,7 @@
         }
       },
       {
+        "documentId": "mnd7tf0roiu23md4pggc65f4",
         "slug": "unicredit-akadalymentesitesi-audit",
         "title": "Unicredit akadálymentesítési audit",
         "tags": [
@@ -859,6 +878,7 @@
         }
       },
       {
+        "documentId": "j3zduz6zqp6ujf6nizg1ubmk",
         "slug": "accessibility-by-design-funpass",
         "title": "Funpass Accessibility by Design",
         "tags": [
@@ -897,6 +917,7 @@
         }
       },
       {
+        "documentId": "c9l4m36lfmmarxpcqc3htw2p",
         "slug": "akadalymentesitesi-kepessegfejlesztes",
         "title": "Akadálymentesítés alapozó képzés",
         "tags": [
@@ -944,6 +965,7 @@
     ],
     "blogPosts": [
       {
+        "documentId": "a9wchmjyuj10r2ld0doefzhw",
         "slug": "bizzuk-az-ai-ra-a-felhasznaloi-visszajelzesek-elemzeset",
         "title": "Bízzuk az AI-ra a felhasználói visszajelzések elemzését?",
         "excerpt": "Négy AI-modell és három emberi elemző eredményeit hasonlítottuk össze 100 felhasználói visszajelzés címkézése során.",
@@ -1034,6 +1056,7 @@
         "seo": null
       },
       {
+        "documentId": "uyxmj2t99ucjf8wla63bwvay",
         "slug": "amikor-a-kivitelezes-mar-nem-kulonboztet-meg",
         "title": "Merre tart a design szakma, az ügyfélközpontú gondolkozás egy AI-val gyorsított világban? – 2. rész",
         "excerpt": "A digitális termékfejlesztésben a profi kivitelezés többé már nem számít különleges megkülönböztető erőnek, hiszen az AI korában a minőségi megvalósítás bárki számára könnyen elérhetővé vált. Ez a változás olyan alapvető dilemmákat hozott a felszínre a szakmai szerepekkel kapcsolatban, ahol már nem a kivitelezés sebessége, hanem a stratégiai értelmezés képessége és a jelek összekapcsolása válik a valódi kitörési ponttá.",
@@ -1082,6 +1105,7 @@
         "seo": null
       },
       {
+        "documentId": "dp8d36xzustxsyk51ztc2t89",
         "slug": "amikor-a-design-ujra-keresi-a-helyet",
         "title": "Merre tart a design szakma, az ügyfélközpontú gondolkozás egy AI-val gyorsított világban? – 1. rész",
         "excerpt": "A digitális termékek világa mára alaposan megváltozott, és a jól megszokott design-módszerek önmagukban már nem mindig adnak választ a mai, összetettebb problémákra. Az AI érkezése olyan kérdéseket hozott a felszínre a cégek működésével kapcsolatban, amikkel eddig nem nagyon kellett foglalkozni.",
@@ -1120,6 +1144,7 @@
         "seo": null
       },
       {
+        "documentId": "dg94s8zvcb8e346p1eg76loo",
         "slug": "elveheti-az-ai-a-munkamat",
         "title": "Elveheti az AI a munkámat?",
         "excerpt": "2026 elején a kvalitatív kutatás már nem az unalmas jegyzetelésről és a végtelen keresgélésről szól. Megmutatjuk, hogyan válik az AI a kutató „szupererejévé” a leiratozástól a benchmark elemzésekig, és miért éppen a szakértői kontextusteremtés az a képesség, ami miatt az emberi jelenlét pótolhatatlan marad a folyamatban.",
@@ -1174,6 +1199,7 @@
         "seo": null
       },
       {
+        "documentId": "cv9l3nmlh9dk68rq8zcqlolf",
         "slug": "uj-belepobol-kollega",
         "title": "Új belépőből kolléga",
         "excerpt": "Egy új ember érkezése mindig felkavarja egy kicsit az állóvizet — a legjobb értelemben. Friss gondolatokat, új nézőpontot hoz, ami egy 20-25 fős szervezetben túlzás nélkül a cég egészére hatással van. A szerezet felelőssége, hogy az új energia integrálódjon — úgy, hogy emellett az egyediség, egyéniség is megmarad.",
@@ -1204,6 +1230,7 @@
         "seo": null
       },
       {
+        "documentId": "sw8kfoid7ybxb9l72q0t7g4s",
         "slug": "miert-buknak-el-a-cx-kezdemenyezesek",
         "title": "Miért buknak el a CX-kezdeményezések és hogyan segíthet ebben az AI?",
         "excerpt": "A CX-kezdeményezések gyakran nem a szándék, hanem a lassú tanulás, a széttöredezett adatok és az insightok döntésekbe építésének hiánya miatt akadnak el. Az AI ezeken a pontokon segíthet: gyorsabban tárja fel az összefüggéseket, közös értelmezési teret teremt, és közelebb hozza egymáshoz az ügyfélinsightokat és a fejlesztési döntéseket.",
@@ -1234,6 +1261,7 @@
         "seo": null
       },
       {
+        "documentId": "uzek6h7z1v6mdb6if460yvh4",
         "slug": "milyen-digitalis-akadalymentesitesi-szolgaltatasra-van-szukseged",
         "title": "Milyen digitális akadálymentesítési szolgáltatásra van szükséged? Segítünk választani!",
         "excerpt": "A digitális akadálymentesítéshez nincs minden helyzetre egyetlen jó módszer. A kockázatelemzéstől a részletes auditon és képzésen át az érintettekkel végzett felhasználói tesztig más-más megközelítés segít attól függően, hol tart a szervezet. A cikk segít kiválasztani, melyik szolgáltatás mikor lehet a legjobb választás.",
@@ -1282,6 +1310,7 @@
         "seo": null
       },
       {
+        "documentId": "xh71cirkvold95tr82f3g43m",
         "slug": "elerhetobbe-teszi-az-ai-a-ux-kutatast-vagy-csak-olcso-illuziot-kinal",
         "title": "Elérhetőbbé teszi az AI a UX-kutatást – vagy csak olcsó illúziót kínál?",
         "excerpt": "Az AI forradalmasítja a UX-kutatást — de nem biztos, hogy úgy, ahogy elsőre hinnénk. Bár egyre több eszköz ígér gyors és olcsó megoldást, a valódi megértés továbbra is emberi feladat marad. A kérdés nem az, kiváltja-e az AI a kutatókat, hanem az, hogy képesek vagyunk-e a segítségével mélyebben megérteni az embereket.",
@@ -1354,6 +1383,7 @@
         "seo": null
       },
       {
+        "documentId": "ankc14zptj5oa2eyij3te3wk",
         "slug": "mi-a-kutatas-elokesziteseben",
         "title": "Miből lesz a cserebogár?",
         "excerpt": "Másfél éve még manuálisan, intuitívan kutattunk. Ma már ott van mellettünk egy új társ is, az MI. Mi a hozzáadott értéke, ha már a legelején bevonjuk a munkába? Egy távközlési projekt példáján keresztül kerestük a választ – a brieftől a hipotéziseken át a módszertanig.",
@@ -1414,6 +1444,7 @@
         "seo": null
       },
       {
+        "documentId": "un8rcl6us8cdb8vwok2if87o",
         "slug": "8-gyakori-hiba-amit-egy-digitalis-akadalymentessegi-audit-feltar",
         "title": "8 gyakori hiba, amit egy digitális akadálymentességi audit feltár – és amit könnyen elkerülhetnél",
         "excerpt": "Egy akadálymentességi audit során gyakran apró technikai vagy tervezési hibák okozzák a legnagyobb használati akadályokat. A cikk 8 tipikus problémát mutat be, amelyek megfelelő szemlélettel és néhány tudatos döntéssel már a tervezés és fejlesztés során elkerülhetők.",
@@ -1514,6 +1545,7 @@
         "seo": null
       },
       {
+        "documentId": "vqesc9z30oh1d8j354xujxfv",
         "slug": "miert-fontosak-a-ceges-ertekek",
         "title": "Miért fontosak a céges értékek?",
         "excerpt": "Évek óta keressük, hogyan lehet jól működni csapatként. A közösen megfogalmazott értékek segítenek abban, hogy jobban értsük egymást és tudatosabban haladjunk előre.",
@@ -1550,6 +1582,7 @@
         "seo": null
       },
       {
+        "documentId": "guy0fp19rzw62qz8uelj0pp7",
         "slug": "akadalymentes-audit-funkcionalis-teszt-vagy-ux-kutatas",
         "title": "Akadálymentes audit: funkcionális teszt vagy UX kutatás?",
         "excerpt": "Az akadálymentes auditban a funkcionális tesztelés és a UX kutatás jellemzői keverednek. Egyszerre hasonlít mindkettőre, de mégis nagyon más. Tamás ezzel a cikkével tiszta vizet önt a pohárba.",
@@ -1596,6 +1629,7 @@
         "seo": null
       },
       {
+        "documentId": "kdbwql8z4yvzhgrjb8ak9lht",
         "slug": "digitalis-akadalymentesites",
         "title": "Digitális akadálymentesítés – alapvetések",
         "excerpt": "2025. június 28-tól Magyarországon kötelező a digitális akadálymentesség. A cikk ismerteti a jogszabályokat, az EU-s előírásokat, a WCAG szinteket és a megvalósítás lépéseit.",
@@ -1652,6 +1686,7 @@
         "seo": null
       },
       {
+        "documentId": "xh95zaqlxv37eoigx1nbg9pj",
         "slug": "kutatasi-trendek-2025-ben",
         "title": "Kutatási trendek 2025-ben",
         "excerpt": "Az elmúlt években az ügyfélkutatások iránti igény jelentős növekedése figyelhető meg, ami több tényező együttes hatásának köszönhető. Az elmúlt évek tapasztalatairól és a várható fejleményekről olvashattok Ákos új blogposztjában.",
@@ -1688,6 +1723,7 @@
         "seo": null
       },
       {
+        "documentId": "kvecu7pw35yft2oxa5er1l6z",
         "slug": "akadalymentesseg-jog-nem-jo-cselekedet",
         "title": "Daniss-Bodó Eszter: Az akadálymentesség jog, nem jó cselekedet",
         "excerpt": "Mindig olyan feladatokat kerestem, ahol van hozzádadott értéke a munkámnak, nem állok meg ott, hogy pénzt keresek, és termelek. Kerestem a jó célt, azt a fajta komplexitást és egyensúlyt, amiben jól érzem magam. Mindezt végül két évtized után a UX-ben találtam meg, az akadálymentesség és inkluzív design területén pedig mind a szakmai, mind a saját életemből hozott tapasztalataimat tudom hasznosítani.",
@@ -1744,6 +1780,7 @@
         "seo": null
       },
       {
+        "documentId": "acocago9caxqh1agm4adubda",
         "slug": "nalunk-a-munkatarsak-a-sztarok",
         "title": "„Nálunk a munkatársak a sztárok”",
         "excerpt": "Október 11-én újra összegyűlt a hazai service design szakma, hogy bemutassák egymásnak eredményeiket és az új trendeket. Az esemény kapcsán beszélgettünk a Works. és a szakma jelenéről, jövőjéről a design ügynökség két vezetőjével, Maczinkó Ákossal és Lichter Tamással.",
@@ -1810,6 +1847,7 @@
         "seo": null
       },
       {
+        "documentId": "o3lvxuv4pul8az9yhc5tujeg",
         "slug": "microinteractions-when-how-and-why",
         "title": "Microinteractions — When, how and why?",
         "excerpt": "When most people hear the term, they might think of flashy animations, moving loading screens, headers bumping left and right, and the list could go on endlessly. However, microinteractions are much more than a mere visual element.",
@@ -1900,6 +1938,7 @@
         "seo": null
       },
       {
+        "documentId": "vfttft8q8d6l1g2six84e23w",
         "slug": "issues-with-packages",
         "title": "Issues with packages",
         "excerpt": "Several issues arise concerning the orders during online shopping. This article discusses challenges in online shopping, including payment security, delivery concerns, and the importance of returns.",
@@ -1968,6 +2007,7 @@
         "seo": null
       },
       {
+        "documentId": "cjz20nuq4d3qug249hmlex0r",
         "slug": "messages-during-shipping",
         "title": "Messages during shipping",
         "excerpt": "What are the most important notifications and messages when shopping online? From the moment the order is placed, the status of the products ordered and the communication related to the collection are crucial.",
@@ -2046,6 +2086,7 @@
         "seo": null
       },
       {
+        "documentId": "ajkhd25h7aplaip5v1z4v4gs",
         "slug": "shipping-and-receiving",
         "title": "Shipping and receiving",
         "excerpt": "The surge in online shopping has fundamentally altered our lifestyles, offering unparalleled convenience and a vast array of products. In our new article, we explore the intricacies of online order delivery, unveiling user expectations and experiences, backed by a blend of surveys, interviews, and research. Join us in unraveling the dynamics of shipping and receiving in the evolving landscape of e-commerce.",
@@ -2154,6 +2195,7 @@
         "seo": null
       },
       {
+        "documentId": "ujw1s67r9rio7l9vcc9s2vrx",
         "slug": "the-economic-effects-of-covid-19",
         "title": "The Economic Effects of COVID-19",
         "excerpt": "We discuss the economic impact on online shopping. We look at whether the change in shopping habits during the Covid period has continued, and we outline how the growing inflationary environment may influence users' decisions regarding payment and delivery methods.",
@@ -2252,6 +2294,7 @@
         "seo": null
       },
       {
+        "documentId": "nh6ut44kpi0lqaggf5tirux1",
         "slug": "how-do-we-pay-online",
         "title": "How do we pay online?",
         "excerpt": "What are the preferred payment methods among the Hungarian customers? We explore the criteria they use to make decisions and their attitude towards the increasingly popular virtual card payments.",
@@ -2354,6 +2397,7 @@
         "seo": null
       },
       {
+        "documentId": "e110e4p6k0c4ml9a1wtm56bw",
         "slug": "why-lofi-design-is-important-in-the-design-process",
         "title": "Why lofi design is important in the design process?",
         "excerpt": "How is the floor plan of the apartment related to the clay model known from car manufacturing? These are also prototyping methods. We also use similar tools when designing digital interfaces. Let's see which one should be used and when.",
@@ -2414,6 +2458,7 @@
         "seo": null
       },
       {
+        "documentId": "qya03sr2vay1guwkurkueza6",
         "slug": "is-the-ux-designer-a-dying-breed-mlfg5",
         "title": "Is the UX designer a dying breed?",
         "excerpt": "Do we need more UX experts with very special UX skills? It is a vivid conversation among design professionals. Recent UX trends state: The time of resourceful thinkers may has come over specialized UXers. As a generalist UX designer I strongly sympathize with this myself.",
@@ -2490,6 +2535,7 @@
         "seo": null
       },
       {
+        "documentId": "yg84ksnrfvfppqxzyscf8x74",
         "slug": "how-state-diagram-can-help-designers",
         "title": "How state diagram can help designers?",
         "excerpt": "State diagram (or state-transition diagram or state model) sounds like an engineering buzzword from the 80s, however this is a very powerful tool UX/UI designers could use in their projects.",
@@ -2542,6 +2588,7 @@
     ],
     "services": [
       {
+        "documentId": "bos52fprykoisyrpol4svend",
         "slug": "ux-kutatas",
         "title": "UX Kutatás",
         "subtitle": "MINDEN JÓ DÖNTÉS A MEGÉRTÉSSEL KEZDŐDIK",
@@ -2761,6 +2808,7 @@
         }
       },
       {
+        "documentId": "tlez1zeu5ywdc9kmuqrj6nqr",
         "slug": "ux-ui-design",
         "title": "UX/UI Design",
         "subtitle": "Szép. Érthető. Következetes.",
@@ -2976,6 +3024,7 @@
         }
       },
       {
+        "documentId": "luua2y5scfr89udo9jnr3dz8",
         "slug": "service-design",
         "title": "Service design",
         "subtitle": "A JÓ SZOLGÁLTATÁS BELÜLRŐL ÉPÜL",
@@ -3191,6 +3240,7 @@
         }
       },
       {
+        "documentId": "ewe4gvp56u23j7s8lnch54lc",
         "slug": "ai-alapu-digitalis-termekfejlesztes",
         "title": "AI-alapú digitális termékfejlesztés",
         "subtitle": "AZ AI ESZKÖZ. A MEGOLDÁS ÉRTÉK.",
@@ -3403,6 +3453,7 @@
         }
       },
       {
+        "documentId": "v1reg7rksl0weus1ef1otn87",
         "slug": "akadalymentesites",
         "title": "Akadálymentes digitális szolgáltatások",
         "subtitle": "A jó digitális élmény mindenkié",
@@ -3627,6 +3678,7 @@
         }
       },
       {
+        "documentId": "pf6nx8eyxo5kd0rxfdetxqot",
         "slug": "digitalis-kepessegfejlesztes",
         "title": "Digitális képességfejlesztés",
         "subtitle": "A tudás akkor ér valamit, ha használják",
@@ -4114,6 +4166,7 @@
     ],
     "positions": [
       {
+        "documentId": "jz20qncwhi64lbyml051h19n",
         "slug": "ux-researcher",
         "title": "UX Researcher",
         "team": "Kutatás",
@@ -4407,6 +4460,7 @@
   "en": {
     "projects": [
       {
+        "documentId": "aux51vnpeblqp4b6x3ifiw56",
         "slug": "creative-storytelling-for-complex-service-portfolio",
         "title": "Alerant Zrt. rebranding",
         "tags": [
@@ -4453,6 +4507,7 @@
         }
       },
       {
+        "documentId": "c8wjk5zf2ytlcqq5aflv4hmh",
         "slug": "digital-self-service-user-research",
         "title": "UNIQA digital self-service",
         "tags": [
@@ -4497,6 +4552,7 @@
         }
       },
       {
+        "documentId": "c9l4m36lfmmarxpcqc3htw2p",
         "slug": "accessibility-capability-building",
         "title": "Foundations of accessibility training",
         "tags": [
@@ -4542,6 +4598,7 @@
         }
       },
       {
+        "documentId": "d7cs013o1y97hynpky175wpi",
         "slug": "digital-experience-strategy-and-product-design",
         "title": "Bookline service design",
         "tags": [
@@ -4586,6 +4643,7 @@
         }
       },
       {
+        "documentId": "j3zduz6zqp6ujf6nizg1ubmk",
         "slug": "accessibility-by-design-funpass",
         "title": "Funpass Accessibility by Design",
         "tags": [
@@ -4624,6 +4682,7 @@
         }
       },
       {
+        "documentId": "l9qds14cr4bxvv1c5jip9k4s",
         "slug": "design-capability-building",
         "title": "Digital capability building – training",
         "tags": [
@@ -4669,6 +4728,7 @@
         }
       },
       {
+        "documentId": "lmp5s316xe1i88t7he0j105m",
         "slug": "ai-rapid-prototyping",
         "title": "AI-driven digital product development",
         "tags": [
@@ -4714,6 +4774,7 @@
         }
       },
       {
+        "documentId": "mnd7tf0roiu23md4pggc65f4",
         "slug": "unicredit-accessibility-audit",
         "title": "UniCredit accessibility audit",
         "tags": [
@@ -4758,6 +4819,7 @@
         }
       },
       {
+        "documentId": "ooujvyn6blnpyj04lnpliuq4",
         "slug": "icsekk-app-ux-ui-redesign",
         "title": "Posta iCsekk app redesign",
         "tags": [
@@ -4803,6 +4865,7 @@
         }
       },
       {
+        "documentId": "ow4uhn5d9g0xcdi7c5s13rmn",
         "slug": "rudas-service-design",
         "title": "Rudas Thermal Baths service design",
         "tags": [
@@ -4849,6 +4912,7 @@
         }
       },
       {
+        "documentId": "ptbpfittnhfs2457875p11zu",
         "slug": "information-architecture-for-b2b-webshop",
         "title": "Profirent UX/UI redesign",
         "tags": [
@@ -4894,6 +4958,7 @@
         }
       },
       {
+        "documentId": "qpa8gyk33o8ier03m5pe9d1f",
         "slug": "ai-google-maps-review-analysis",
         "title": "AI-powered categorisation of Google Maps reviews",
         "tags": [
@@ -4939,6 +5004,7 @@
         }
       },
       {
+        "documentId": "r5tiua5mlq0pwv7rw86vnywm",
         "slug": "ai-capability-building-for-research-teams",
         "title": "Establishing AI-based research",
         "tags": [
@@ -4985,6 +5051,7 @@
         }
       },
       {
+        "documentId": "s9fijy9h1n6uutp9z2mwk9v7",
         "slug": "ux-research-and-service-design-partnership",
         "title": "Magyar Telekom strategic partnership",
         "tags": [
@@ -5030,6 +5097,7 @@
         }
       },
       {
+        "documentId": "tnq1aajv1kbn6k2tljubsp9m",
         "slug": "streaming-platform-design-and-launch",
         "title": "TV2 streaming platform launch",
         "tags": [
@@ -5075,6 +5143,7 @@
         }
       },
       {
+        "documentId": "twoehtp3ljcpczjiucnzgffo",
         "slug": "identification-journey-research",
         "title": "ONE - Digital identification",
         "tags": [
@@ -5119,6 +5188,7 @@
         }
       },
       {
+        "documentId": "ucsgig8gytznssrs39gliuy6",
         "slug": "ai-simulation-for-ivr-validation",
         "title": "Yettel - AI-based IVR validation",
         "tags": [
@@ -5164,6 +5234,7 @@
         }
       },
       {
+        "documentId": "v8vxqqgngw7da94dly04d12s",
         "slug": "professional-publications-and-methodologies",
         "title": "Professional publications",
         "tags": [
@@ -5209,6 +5280,7 @@
         }
       },
       {
+        "documentId": "wwphjzzrbmie35a84lwzypoe",
         "slug": "research-led-insurance-customer-portal",
         "title": "Alfa Biztosító - customer portal redesign",
         "tags": [
@@ -5255,6 +5327,7 @@
         }
       },
       {
+        "documentId": "xk4nqbnxmm11s7jsosv0bd1u",
         "slug": "digital-product-design-for-time-management-platform",
         "title": "Motibro - Digital product design",
         "tags": [
@@ -5301,6 +5374,7 @@
         }
       },
       {
+        "documentId": "zt5buarf3yieti3ss42q35n9",
         "slug": "chefparade-service-design",
         "title": "Chefparade service design",
         "tags": [
@@ -5349,6 +5423,7 @@
     ],
     "blogPosts": [
       {
+        "documentId": "a9wchmjyuj10r2ld0doefzhw",
         "slug": "should-we-entrust-ai-with-analysing-user-feedback",
         "title": "Should we entrust AI with analysing user feedback?",
         "excerpt": "We compared the results of four AI models and three human analysts while labelling 100 user feedback entries.",
@@ -5439,6 +5514,7 @@
         "seo": null
       },
       {
+        "documentId": "uyxmj2t99ucjf8wla63bwvay",
         "slug": "when-execution-no-longer-sets-you-apart",
         "title": "Where is the design profession heading? Customer-centred thinking in an AI-accelerated world – Part 2",
         "excerpt": "In digital product development, professional execution is no longer a distinctive competitive advantage: in the age of AI, high-quality implementation has become readily accessible to everyone. This shift has brought fundamental dilemmas around professional roles to the surface, where the real opportunity lies not in the speed of execution but in the ability to interpret strategically and connect the dots.",
@@ -5487,6 +5563,7 @@
         "seo": null
       },
       {
+        "documentId": "dp8d36xzustxsyk51ztc2t89",
         "slug": "when-design-searches-for-its-place-again",
         "title": "Where is the design profession and customer-centred thinking heading in an AI-accelerated world? – Part 1",
         "excerpt": "The world of digital products has changed considerably, and familiar design methods alone no longer always provide answers to today’s more complex challenges. The arrival of AI has brought questions about how companies operate to the surface – questions that previously received little attention.",
@@ -5525,6 +5602,7 @@
         "seo": null
       },
       {
+        "documentId": "dg94s8zvcb8e346p1eg76loo",
         "slug": "can-ai-take-my-job",
         "title": "Can AI take my job?",
         "excerpt": "At the start of 2026, qualitative research is no longer about tedious note-taking and endless searching. We show how AI becomes a researcher’s ‘superpower’, from transcription to benchmark analysis, and why expert context-setting makes human involvement irreplaceable.",
@@ -5579,6 +5657,7 @@
         "seo": null
       },
       {
+        "documentId": "cv9l3nmlh9dk68rq8zcqlolf",
         "slug": "from-new-starter-to-colleague",
         "title": "From new starter to colleague",
         "excerpt": "A new person joining always stirs things up a little — in the best possible way. They bring fresh ideas and new perspectives which, in an organisation of 20–25 people, can have an impact on the whole company without exaggeration. It is the organisation’s responsibility to ensure that this new energy is integrated, while individuality and character are retained.",
@@ -5609,6 +5688,7 @@
         "seo": null
       },
       {
+        "documentId": "sw8kfoid7ybxb9l72q0t7g4s",
         "slug": "why-cx-initiatives-fail-and-how-ai-can-help",
         "title": "Why do CX initiatives fail, and how can AI help?",
         "excerpt": "CX initiatives often stall not because of a lack of intent, but because learning is slow, data is fragmented and insights are not incorporated into decisions. AI can help at these points: it uncovers connections faster, creates a shared interpretive framework, and brings customer insights and development decisions closer together.",
@@ -5639,6 +5719,7 @@
         "seo": null
       },
       {
+        "documentId": "uzek6h7z1v6mdb6if460yvh4",
         "slug": "which-digital-accessibility-service-do-you-need",
         "title": "Which digital accessibility service do you need? We’ll help you choose!",
         "excerpt": "There is no single right approach to digital accessibility for every situation. From risk assessments and detailed audits to training and user testing with people with disabilities, different approaches can help depending on where an organisation is in its journey. This article will help you choose which service is the best fit and when.",
@@ -5687,6 +5768,7 @@
         "seo": null
       },
       {
+        "documentId": "xh71cirkvold95tr82f3g43m",
         "slug": "does-ai-make-ux-research-more-accessible-or-offer-a-cheap-illusion",
         "title": "Does AI make UX research more accessible — or offer a cheap illusion?",
         "excerpt": "AI is revolutionising UX research — but perhaps not in the way we might first expect. While more and more tools promise fast, affordable solutions, genuine understanding remains a human task. The question is not whether AI will replace researchers, but whether it can help us understand people more deeply.",
@@ -5759,6 +5841,7 @@
         "seo": null
       },
       {
+        "documentId": "ankc14zptj5oa2eyij3te3wk",
         "slug": "ai-in-research-preparation",
         "title": "How does it all come together?",
         "excerpt": "A year and a half ago, we were still conducting research manually and intuitively. Today, we have a new companion at our side: AI. What value does it add when involved from the very beginning? Using a telecommunications project as an example, we explored the answer – from the brief and hypotheses to the methodology.",
@@ -5819,6 +5902,7 @@
         "seo": null
       },
       {
+        "documentId": "un8rcl6us8cdb8vwok2if87o",
         "slug": "8-common-issues-revealed-by-a-digital-accessibility-audit",
         "title": "8 common issues a digital accessibility audit reveals – and you could easily avoid",
         "excerpt": "During an accessibility audit, small technical or design issues often create the biggest barriers to use. This article presents eight typical problems that can be avoided during design and development with the right approach and a few considered decisions.",
@@ -5919,6 +6003,7 @@
         "seo": null
       },
       {
+        "documentId": "vqesc9z30oh1d8j354xujxfv",
         "slug": "why-company-values-matter",
         "title": "Why do company values matter?",
         "excerpt": "For years, we have been looking for ways to work well as a team. The values we have defined together help us understand one another better and move forward more consciously.",
@@ -5955,6 +6040,7 @@
         "seo": null
       },
       {
+        "documentId": "guy0fp19rzw62qz8uelj0pp7",
         "slug": "accessibility-audit-functional-testing-or-ux-research",
         "title": "Accessibility audit: functional testing or UX research?",
         "excerpt": "Accessibility audits combine characteristics of functional testing and UX research. They resemble both, yet are very different. In this article, Tamás clears things up.",
@@ -6001,6 +6087,7 @@
         "seo": null
       },
       {
+        "documentId": "kdbwql8z4yvzhgrjb8ak9lht",
         "slug": "digital-accessibility",
         "title": "Digital accessibility – the essentials",
         "excerpt": "From 28 June 2025, digital accessibility is mandatory in Hungary. This article covers the legislation, EU requirements, WCAG levels and implementation steps.",
@@ -6057,6 +6144,7 @@
         "seo": null
       },
       {
+        "documentId": "xh95zaqlxv37eoigx1nbg9pj",
         "slug": "research-trends-in-2025",
         "title": "Research trends in 2025",
         "excerpt": "In recent years, demand for customer research has grown significantly, driven by the combined effect of several factors. Read Ákos’s latest blog post for insights from recent years and the developments ahead.",
@@ -6093,6 +6181,7 @@
         "seo": null
       },
       {
+        "documentId": "kvecu7pw35yft2oxa5er1l6z",
         "slug": "accessibility-is-a-right-not-a-good-deed",
         "title": "Daniss-Bodó Eszter: Accessibility is a right, not a good deed",
         "excerpt": "I have always looked for work where what I do adds value; I do not stop at making money and producing. I was looking for a worthwhile cause, and for the kind of complexity and balance in which I feel at home. After two decades, I finally found all this in UX, while accessibility and inclusive design allow me to draw on both my professional experience and what I have learned from my own life.",
@@ -6149,6 +6238,7 @@
         "seo": null
       },
       {
+        "documentId": "acocago9caxqh1agm4adubda",
         "slug": "our-colleagues-are-the-stars",
         "title": "“Our colleagues are the stars”",
         "excerpt": "On 11 October, Hungary’s service design community came together once again to share their achievements and explore new trends. In connection with the event, we spoke with Maczinkó Ákos and Lichter Tamás, two leaders of the design agency, about the present and future of Works. and the industry.",
@@ -6215,6 +6305,7 @@
         "seo": null
       },
       {
+        "documentId": "o3lvxuv4pul8az9yhc5tujeg",
         "slug": "microinteractions-when-how-and-why",
         "title": "Microinteractions — when, how and why?",
         "excerpt": "When most people hear the term, they may think of flashy animations, moving loading screens, headers bouncing from side to side, and the list could go on. However, microinteractions are far more than a purely visual element.",
@@ -6305,6 +6396,7 @@
         "seo": null
       },
       {
+        "documentId": "vfttft8q8d6l1g2six84e23w",
         "slug": "package-issues",
         "title": "Issues with parcels",
         "excerpt": "A number of issues can arise when shopping online. This article explores the challenges of online shopping, including payment security, delivery concerns and the importance of returns.",
@@ -6373,6 +6465,7 @@
         "seo": null
       },
       {
+        "documentId": "cjz20nuq4d3qug249hmlex0r",
         "slug": "messages-during-shipping",
         "title": "Messages during shipping",
         "excerpt": "What are the most important notifications and messages when shopping online? From the moment an order is placed, the status of the products ordered and collection-related communication are crucial.",
@@ -6451,6 +6544,7 @@
         "seo": null
       },
       {
+        "documentId": "ajkhd25h7aplaip5v1z4v4gs",
         "slug": "shipping-and-receiving",
         "title": "Shipping and receiving",
         "excerpt": "The rise of online shopping has fundamentally changed how we live, offering unprecedented convenience and a vast range of products. In our latest article, we explore the complexities of online order delivery, revealing user expectations and experiences through surveys, interviews and research. Join us as we unpack the changing dynamics of sending and receiving in e-commerce.",
@@ -6559,6 +6653,7 @@
         "seo": null
       },
       {
+        "documentId": "ujw1s67r9rio7l9vcc9s2vrx",
         "slug": "the-economic-effects-of-covid-19",
         "title": "The Economic Effects of COVID-19",
         "excerpt": "We explore the economic impact on online shopping. We look at whether changes in shopping habits during the Covid period have continued, and outline how rising inflation may influence users’ decisions about payment and delivery methods.",
@@ -6657,6 +6752,7 @@
         "seo": null
       },
       {
+        "documentId": "nh6ut44kpi0lqaggf5tirux1",
         "slug": "how-do-we-pay-online",
         "title": "How do we pay online?",
         "excerpt": "What payment methods do Hungarian customers prefer? We explore the criteria they use to make decisions and their attitudes towards increasingly popular virtual card payments.",
@@ -6759,6 +6855,7 @@
         "seo": null
       },
       {
+        "documentId": "e110e4p6k0c4ml9a1wtm56bw",
         "slug": "why-lofi-design-is-important-in-the-design-process",
         "title": "Why is lo-fi design important in the design process?",
         "excerpt": "How does an apartment floor plan relate to the clay models used in car manufacturing? Both are prototyping methods. We use similar tools when designing digital interfaces, too. Let’s look at which to use and when.",
@@ -6819,6 +6916,7 @@
         "seo": null
       },
       {
+        "documentId": "yg84ksnrfvfppqxzyscf8x74",
         "slug": "how-state-diagrams-help-designers",
         "title": "How can state diagrams help designers?",
         "excerpt": "A state diagram (also known as a state-transition diagram or state model) may sound like an engineering buzzword from the 1980s, but it is a powerful tool that UX/UI designers can use in their projects.",
@@ -6869,6 +6967,7 @@
         "seo": null
       },
       {
+        "documentId": "qya03sr2vay1guwkurkueza6",
         "slug": "is-the-ux-designer-a-dying-breed-mlfg5",
         "title": "Is the UX designer a dying breed?",
         "excerpt": "Do we need more UX professionals with highly specialised UX skills? It is a lively topic of conversation among design professionals. Recent UX trends suggest that the time of resourceful thinkers may have arrived, rather than that of specialised UX practitioners. As a generalist UX designer, I strongly relate to this myself.",
@@ -6947,6 +7046,7 @@
     ],
     "services": [
       {
+        "documentId": "bos52fprykoisyrpol4svend",
         "slug": "ux-research",
         "title": "UX Research",
         "subtitle": "EVERY GOOD DECISION STARTS WITH UNDERSTANDING",
@@ -7147,6 +7247,7 @@
         }
       },
       {
+        "documentId": "tlez1zeu5ywdc9kmuqrj6nqr",
         "slug": "ux-ui-design",
         "title": "UX/UI Design",
         "subtitle": "Beautiful. Clear. Consistent.",
@@ -7356,6 +7457,7 @@
         }
       },
       {
+        "documentId": "luua2y5scfr89udo9jnr3dz8",
         "slug": "service-design",
         "title": "Service design",
         "subtitle": "GREAT SERVICES ARE BUILT FROM WITHIN",
@@ -7565,6 +7667,7 @@
         }
       },
       {
+        "documentId": "ewe4gvp56u23j7s8lnch54lc",
         "slug": "ai-digital-product-development",
         "title": "AI digital product development",
         "subtitle": "AI IS A TOOL. THE SOLUTION CREATES VALUE.",
@@ -7765,6 +7868,7 @@
         }
       },
       {
+        "documentId": "v1reg7rksl0weus1ef1otn87",
         "slug": "accessibility",
         "title": "Accessible digital services",
         "subtitle": "A great digital experience belongs to everyone",
@@ -7989,6 +8093,7 @@
         }
       },
       {
+        "documentId": "pf6nx8eyxo5kd0rxfdetxqot",
         "slug": "digital-capability-building",
         "title": "Digital capability building",
         "subtitle": "Knowledge matters when it is used",
@@ -8470,6 +8575,7 @@
     ],
     "positions": [
       {
+        "documentId": "jz20qncwhi64lbyml051h19n",
         "slug": "ux-researcher",
         "title": "UX Researcher",
         "team": "Research",

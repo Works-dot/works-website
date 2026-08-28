@@ -73,6 +73,8 @@ async function runValidation() {
     buildMetaTags,
     SITE_URL,
     getLocaleCacheKey,
+    getLocaleFallback,
+    getLocaleCounterpartSlug,
   } = mod;
 
   // ------------------------------------------------------------------
@@ -110,6 +112,48 @@ async function runValidation() {
   assert(
     "service detail uses localized services dataset",
     getLocaleCacheKey("service:en:ux-research") === "services"
+  );
+  const counterpartCollections = [
+    ["projects", "projectDetail"],
+    ["blogPosts", "blogPost"],
+    ["services", "serviceDetail"],
+  ];
+  for (const [collectionKey, routeKey] of counterpartCollections) {
+    const huRecords = getLocaleFallback(collectionKey, "hu") || [];
+    const enRecords = getLocaleFallback(collectionKey, "en") || [];
+    const enRecordWithDifferentSlug = enRecords.find((enRecord) => {
+      const huRecord = huRecords.find(
+        (huRecord) => huRecord.documentId === enRecord.documentId,
+      );
+      return huRecord && huRecord.slug !== enRecord.slug;
+    });
+    assert(
+      `${routeKey} maps a real differing EN slug to its HU document counterpart`,
+      !!enRecordWithDifferentSlug &&
+        getLocaleCounterpartSlug(
+          "en",
+          "hu",
+          routeKey,
+          enRecordWithDifferentSlug.slug,
+        ) ===
+          huRecords.find(
+            (record) => record.documentId === enRecordWithDifferentSlug.documentId,
+          )?.slug,
+    );
+  }
+  const enCareer = (getLocaleFallback("careerPositions", "en") || [])[0];
+  const huCareer = (getLocaleFallback("careerPositions", "hu") || []).find(
+    (record) => record.documentId === enCareer?.documentId,
+  );
+  assert(
+    "career detail maps by documentId",
+    !!enCareer &&
+      getLocaleCounterpartSlug("en", "hu", "careerDetail", enCareer.slug) ===
+        huCareer?.slug,
+  );
+  assert(
+    "unpaired dynamic record has no unsafe slug fallback",
+    getLocaleCounterpartSlug("en", "hu", "projectDetail", "__unpaired__") === undefined,
   );
 
   // ------------------------------------------------------------------

@@ -7,7 +7,8 @@ import { getServices, getGlobalSettings } from "@/lib/strapi";
 import type { Service, GlobalSettings } from "@/lib/strapi";
 import { fallbackServices, fallbackGlobalSettings } from "@/data/fallback";
 import { useI18n } from "@/i18n";
-import { buildLocalePath, switchLocalePath } from "@/lib/i18n-routes";
+import { buildLocalePath, extractSearch, matchLocalePath, switchLocalePath } from "@/lib/i18n-routes";
+import { getLocaleCounterpartSlug } from "@/data/fallback";
 
 const FALLBACK_SERVICE_LINKS = [
   { label: "UX Kutatás", slug: "ux-kutatas" },
@@ -74,7 +75,25 @@ export function Header() {
   const currentPath = typeof window === "undefined"
     ? location
     : `${location}${window.location.search}${window.location.hash}`;
-  const languageHref = switchLocalePath(currentPath, targetLocale);
+  const routeMatch = matchLocalePath(currentPath);
+  const languageHref =
+    routeMatch?.slug &&
+    (routeMatch.routeKey === "projectDetail" ||
+      routeMatch.routeKey === "blogPost" ||
+      routeMatch.routeKey === "serviceDetail" ||
+      routeMatch.routeKey === "careerDetail")
+      ? (() => {
+          const counterpartSlug = getLocaleCounterpartSlug(
+            locale,
+            targetLocale,
+            routeMatch.routeKey,
+            routeMatch.slug,
+          );
+          return counterpartSlug
+            ? buildLocalePath(targetLocale, routeMatch.routeKey, counterpartSlug, extractSearch(currentPath))
+            : buildLocalePath(targetLocale, "home", undefined, extractSearch(currentPath));
+        })()
+      : switchLocalePath(currentPath, targetLocale);
   const languageLink = (
     <a
       href={languageHref}

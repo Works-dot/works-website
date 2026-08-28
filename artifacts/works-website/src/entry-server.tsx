@@ -13,6 +13,7 @@ export { fallbackServices as services } from "./data/fallback";
 export { fallbackPositions as positions } from "./data/fallback";
 export { getLocaleFallback } from "./data/fallback";
 export { getLocaleCacheKey } from "./data/fallback";
+export { getLocaleCounterpartSlug } from "./data/fallback";
 export { getPageMeta, buildMetaTags, SITE_URL } from "./seo-data";
 
 // Locale-aware route helpers for prerender scripts.

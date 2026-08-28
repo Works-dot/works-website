@@ -473,3 +473,33 @@ export function getLocaleFallback<T>(key: string, locale: Locale): T | undefined
   };
   return values[base] as T | undefined;
 }
+
+type DetailRouteKey = "projectDetail" | "blogPost" | "serviceDetail" | "careerDetail";
+
+const detailCollectionKeys: Record<DetailRouteKey, string> = {
+  projectDetail: "projects",
+  blogPost: "blogPosts",
+  serviceDetail: "services",
+  careerDetail: "careerPositions",
+};
+
+/** Finds a translated detail slug by Strapi's stable localization documentId. */
+export function getLocaleCounterpartSlug(
+  sourceLocale: Locale,
+  targetLocale: Locale,
+  routeKey: DetailRouteKey,
+  sourceSlug: string,
+): string | undefined {
+  const collectionKey = detailCollectionKeys[routeKey];
+  const source = getLocaleFallback<{ slug: string; documentId?: string }[]>(
+    collectionKey,
+    sourceLocale,
+  );
+  const documentId = source?.find((item) => item.slug === sourceSlug)?.documentId;
+  if (!documentId) return undefined;
+  const target = getLocaleFallback<{ slug: string; documentId?: string }[]>(
+    collectionKey,
+    targetLocale,
+  );
+  return target?.find((item) => item.documentId === documentId)?.slug;
+}

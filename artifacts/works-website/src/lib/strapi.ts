@@ -258,6 +258,7 @@ export interface ContentBlock {
 }
 
 export interface Project {
+  documentId?: string;
   slug: string;
   title: string;
   tags: string[];
@@ -279,6 +280,7 @@ export interface Project {
 }
 
 export interface BlogPost {
+  documentId?: string;
   slug: string;
   title: string;
   excerpt: string;
@@ -347,6 +349,7 @@ export interface RelatedServiceSummary {
 }
 
 export interface Service {
+  documentId?: string;
   slug: string;
   title: string;
   subtitle: string;
@@ -393,6 +396,7 @@ export interface CareerWorkWithUs {
 }
 
 export interface CareerPosition {
+  documentId?: string;
   slug: string;
   title: string;
   team: string;
@@ -409,6 +413,7 @@ const CAREER_TYPE = "Teljes munkaidő";
 
 function mapProject(p: StrapiProject): Project {
   return {
+    documentId: p.documentId,
     slug: p.slug,
     title: p.title,
     tags: p.tags?.map((t) => t.name) || [],
@@ -432,6 +437,7 @@ function mapProject(p: StrapiProject): Project {
 
 function mapBlogPost(p: StrapiBlogPost): BlogPost {
   return {
+    documentId: p.documentId,
     slug: p.slug,
     title: p.title,
     excerpt: p.excerpt || "",
@@ -549,6 +555,7 @@ function mapSectionIntro(i: StrapiSectionIntro | null | undefined): SectionIntro
 
 function mapService(s: StrapiService): Service {
   return {
+    documentId: s.documentId,
     slug: s.general?.slug || "",
     title: s.general?.title || "",
     subtitle: s.general?.subtitle || "",
@@ -679,6 +686,7 @@ export async function getCareerPositions(locale?: string): Promise<CareerPositio
     )
   );
   return res.data.map((c) => ({
+    documentId: c.documentId,
     slug: c.slug,
     title: c.title,
     team: c.team || "",
@@ -700,6 +708,7 @@ export async function getCareerPositionBySlug(slug: string, locale?: string): Pr
   );
   return res.data[0]
     ? {
+        documentId: res.data[0].documentId,
         slug: res.data[0].slug,
         title: res.data[0].title,
         team: res.data[0].team || "",
