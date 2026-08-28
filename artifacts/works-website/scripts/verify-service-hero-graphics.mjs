@@ -12,9 +12,20 @@ const manifest = JSON.parse(fs.readFileSync(manifestPath, "utf8"));
 const cache = JSON.parse(fs.readFileSync(cachePath, "utf8"));
 const graphics = manifest.graphics ?? {};
 const slugMap = manifest.slugs ?? {};
-const services = Array.isArray(cache.services) ? cache.services : [];
+const localizedDatasets = cache.hu && cache.en
+  ? [["hu", cache.hu], ["en", cache.en]]
+  : [["hu", cache]];
+const servicesByLocale = localizedDatasets.map(([locale, dataset]) => [
+  locale,
+  Array.isArray(dataset?.services) ? dataset.services : [],
+]);
 
-assert.ok(services.length > 0, "No published services were found in the Strapi cache");
+for (const [locale, services] of servicesByLocale) {
+  assert.ok(
+    services.length > 0,
+    `No published ${locale.toUpperCase()} services were found in the Strapi cache`,
+  );
+}
 
 for (const [key, filename] of Object.entries(graphics)) {
   assert.equal(typeof filename, "string", `Hero graphic "${key}" has no asset filename`);
@@ -24,33 +35,43 @@ for (const [key, filename] of Object.entries(graphics)) {
   );
 }
 
-const assignments = services.map((service) => {
-  const slug = service?.slug;
-  assert.ok(slug, "A published service has no slug");
+const assignmentsByLocale = servicesByLocale.map(([locale, services]) => [
+  locale,
+  services.map((service) => {
+    const slug = service?.slug;
+    assert.ok(slug, `A published ${locale.toUpperCase()} service has no slug`);
 
-  const graphicKey = slugMap[slug];
-  assert.ok(graphicKey, `Published service "${slug}" would use the generic fallback hero`);
-  assert.ok(
-    Object.hasOwn(graphics, graphicKey),
-    `Published service "${slug}" references unknown hero graphic "${graphicKey}"`,
+    const graphicKey = slugMap[slug];
+    assert.ok(
+      graphicKey,
+      `Published ${locale.toUpperCase()} service "${slug}" would use the generic fallback hero`,
+    );
+    assert.ok(
+      Object.hasOwn(graphics, graphicKey),
+      `Published ${locale.toUpperCase()} service "${slug}" references unknown hero graphic "${graphicKey}"`,
+    );
+
+    return { slug, graphicKey, filename: graphics[graphicKey] };
+  }),
+]);
+
+for (const [locale, assignments] of assignmentsByLocale) {
+  const duplicateAssignments = assignments.filter(
+    (assignment, index) =>
+      assignments.findIndex((candidate) => candidate.graphicKey === assignment.graphicKey) !== index,
+  );
+  assert.deepEqual(
+    duplicateAssignments,
+    [],
+    `Published ${locale.toUpperCase()} services must use distinct hero graphics: ${duplicateAssignments
+      .map(({ slug, graphicKey }) => `${slug} → ${graphicKey}`)
+      .join(", ")}`,
   );
 
-  return { slug, graphicKey, filename: graphics[graphicKey] };
-});
-
-const duplicateAssignments = assignments.filter(
-  (assignment, index) =>
-    assignments.findIndex((candidate) => candidate.graphicKey === assignment.graphicKey) !== index,
-);
-assert.deepEqual(
-  duplicateAssignments,
-  [],
-  `Published services must use distinct hero graphics: ${duplicateAssignments
-    .map(({ slug, graphicKey }) => `${slug} → ${graphicKey}`)
-    .join(", ")}`,
-);
-
-console.log(`✓ ${assignments.length} published service hero graphic(s) verified`);
-for (const { slug, filename } of assignments) {
-  console.log(`  ${slug} → ${filename}`);
+  console.log(
+    `✓ ${assignments.length} published ${locale.toUpperCase()} service hero graphic(s) verified`,
+  );
+  for (const { slug, filename } of assignments) {
+    console.log(`  ${slug} → ${filename}`);
+  }
 }

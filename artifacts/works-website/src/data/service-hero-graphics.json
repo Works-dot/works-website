@@ -9,12 +9,16 @@
   },
   "slugs": {
     "ux-kutatas": "uxResearch",
+    "ux-research": "uxResearch",
     "ux-ui-design": "uxUiDesign",
     "ui-design": "uxUiDesign",
     "service-design": "serviceDesign",
     "ai-alapu-digitalis-termekfejlesztes": "aiProductDevelopment",
+    "ai-digital-product-development": "aiProductDevelopment",
     "ai-termekfejlesztes": "aiProductDevelopment",
     "akadalymentesites": "accessibleServices",
+    "accessibility": "accessibleServices",
+    "digital-capability-building": "digitalSkills",
     "digitalis-kepessegfejlesztes": "digitalSkills"
   }
 }
