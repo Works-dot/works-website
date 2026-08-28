@@ -10,17 +10,21 @@ export default {
     "slug": {
       "type": "string",
       "required": true,
-      "unique": true
+      "unique": true,
+      "pluginOptions": { "i18n": { "localized": true } }
     },
     "title": {
       "type": "string",
-      "required": true
+      "required": true,
+      "pluginOptions": { "i18n": { "localized": true } }
     },
     "subtitle": {
-      "type": "string"
+      "type": "string",
+      "pluginOptions": { "i18n": { "localized": true } }
     },
     "heroDescription": {
-      "type": "text"
+      "type": "text",
+      "pluginOptions": { "i18n": { "localized": true } }
     },
     "icon": {
       "type": "media",

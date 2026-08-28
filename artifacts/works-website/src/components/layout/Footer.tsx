@@ -8,6 +8,7 @@ import type { GlobalSettings, Service, LegalDocuments } from "@/lib/strapi";
 import { fallbackGlobalSettings, fallbackServices, fallbackLegalDocuments } from "@/data/fallback";
 import { useCookieConsent } from "@/lib/cookie-consent";
 import { useI18n } from "@/i18n";
+import { buildLocalePath } from "@/lib/i18n-routes";
 
 const SOCIAL_ICONS: Record<string, React.ReactNode> = {
   linkedin: <Linkedin className="w-5 h-5" />,
@@ -19,13 +20,13 @@ const SOCIAL_ICONS: Record<string, React.ReactNode> = {
 };
 
 export function Footer() {
-  const { t } = useI18n();
+  const { locale, messages, t } = useI18n();
   const [email, setEmail] = useState("");
   const { openSettings } = useCookieConsent();
   const { mutate, isPending } = useSubscribeNewsletter();
-  const { data: settings } = useStrapiQuery<GlobalSettings>("globalSettings", getGlobalSettings, fallbackGlobalSettings);
-  const { data: services } = useStrapiQuery<Service[]>("footerServices", getServices, fallbackServices);
-  const { data: legalDocs } = useStrapiQuery<LegalDocuments>("legalDocuments", getLegalDocuments, fallbackLegalDocuments);
+  const { data: settings } = useStrapiQuery<GlobalSettings>("globalSettings", () => getGlobalSettings(locale), fallbackGlobalSettings, locale);
+  const { data: services } = useStrapiQuery<Service[]>("footerServices", () => getServices(locale), fallbackServices, locale);
+  const { data: legalDocs } = useStrapiQuery<LegalDocuments>("legalDocuments", () => getLegalDocuments(locale), fallbackLegalDocuments, locale);
   const privacyPdfUrl = legalDocs?.privacyPdfUrl || "";
   const cookiePdfUrl = legalDocs?.cookiePdfUrl || "";
   const imprintPdfUrl = legalDocs?.imprintPdfUrl || "";
@@ -39,12 +40,12 @@ export function Footer() {
     });
   };
 
-  const newsletterHeading = settings?.newsletterHeading || "Iratkozz fel hírlevelünkre";
-  const newsletterDescription = settings?.newsletterDescription || "Heti inspiráció, UX trendek és szakmai tartalmak egyenesen a postaládádba.";
-  const footerTagline = settings?.footerTagline || "Digitális élményeket tervezünk és építünk modern vállalatok számára.";
+  const newsletterHeading = settings?.newsletterHeading || (locale === "hu" ? "Iratkozz fel hírlevelünkre" : "");
+  const newsletterDescription = settings?.newsletterDescription || (locale === "hu" ? "Heti inspiráció, UX trendek és szakmai tartalmak egyenesen a postaládádba." : "");
+  const footerTagline = settings?.footerTagline || (locale === "hu" ? "Digitális élményeket tervezünk és építünk modern vállalatok számára." : "");
   const contactEmail = settings?.contactEmail || "hello@works.hu";
-  const address = settings?.address || "1054 Budapest, Szabadság tér 7.";
-  const copyrightText = settings?.copyrightText || `${new Date().getFullYear()} Works. Minden jog fenntartva.`;
+  const address = settings?.address || "";
+  const copyrightText = settings?.copyrightText || `${new Date().getFullYear()} Works.`;
   const socialLinks = settings?.socialLinks || [];
   const footerServices = (services || []).slice(0, 4);
 
@@ -111,7 +112,7 @@ export function Footer() {
                     </a>
                   );
                 })
-              ) : (
+              ) : locale === "hu" ? (
                 <>
                   <a href="#" aria-label="LinkedIn" className="w-10 h-10 bg-white/5 flex items-center justify-center hover:bg-works-primary hover:text-white transition-colors duration-300">
                     <Linkedin className="w-5 h-5" />
@@ -123,7 +124,7 @@ export function Footer() {
                     <Dribbble className="w-5 h-5" />
                   </a>
                 </>
-              )}
+              ) : null}
             </div>
           </div>
 
@@ -133,29 +134,31 @@ export function Footer() {
               {footerServices.length > 0 ? (
                 footerServices.map((svc) => (
                   <li key={svc.slug}>
-                    <Link href={`/szolgaltatasok/${svc.slug}`} className="hover:text-works-primary transition-colors">
+                    <Link href={buildLocalePath(locale, "serviceDetail", svc.slug)} className="hover:text-works-primary transition-colors">
                       {svc.title}
                     </Link>
                   </li>
                 ))
-              ) : (
-                <>
-                  <li><a href="#services" className="hover:text-works-primary transition-colors">UX Kutatás</a></li>
-                  <li><a href="#services" className="hover:text-works-primary transition-colors">UI Tervezés</a></li>
-                  <li><a href="#services" className="hover:text-works-primary transition-colors">Service Design</a></li>
-                  <li><a href="#services" className="hover:text-works-primary transition-colors">Webfejlesztés</a></li>
-                </>
-              )}
+              ) : messages.footer.fallbackServices.map((label) => (
+                <li key={label}>
+                  <a
+                    href={buildLocalePath(locale, "home", undefined, "#services")}
+                    className="hover:text-works-primary transition-colors"
+                  >
+                    {label}
+                  </a>
+                </li>
+              ))}
             </ul>
           </div>
 
           <div>
             <h4 className="text-white font-bold mb-6 uppercase tracking-wider text-sm">{t("footer.companyHeading")}</h4>
             <ul className="space-y-4">
-              <li><Link href="/rolunk" className="hover:text-works-primary transition-colors">{t("nav.about")}</Link></li>
-              <li><Link href="/karrier" className="hover:text-works-primary transition-colors">{t("nav.careers")}</Link></li>
-              <li><Link href="/blog" className="hover:text-works-primary transition-colors">{t("nav.blog")}</Link></li>
-              <li><Link href="/projektek" className="hover:text-works-primary transition-colors">{t("footer.caseStudies")}</Link></li>
+              <li><Link href={buildLocalePath(locale, "about")} className="hover:text-works-primary transition-colors">{t("nav.about")}</Link></li>
+              <li><Link href={buildLocalePath(locale, "careers")} className="hover:text-works-primary transition-colors">{t("nav.careers")}</Link></li>
+              <li><Link href={buildLocalePath(locale, "blog")} className="hover:text-works-primary transition-colors">{t("nav.blog")}</Link></li>
+              <li><Link href={buildLocalePath(locale, "projects")} className="hover:text-works-primary transition-colors">{t("footer.caseStudies")}</Link></li>
             </ul>
           </div>
 
@@ -178,14 +181,14 @@ export function Footer() {
           <p>&copy; {copyrightText}</p>
           <div className="flex gap-6">
             <a
-              href={privacyPdfUrl || "/adatkezeles"}
+              href={privacyPdfUrl || buildLocalePath(locale, "privacy")}
               {...(privacyPdfUrl ? { target: "_blank", rel: "noopener noreferrer" } : {})}
               className="hover:text-white transition-colors"
             >
               {t("footer.privacy")}
             </a>
             <a
-              href={cookiePdfUrl || "/sutik"}
+              href={cookiePdfUrl || buildLocalePath(locale, "cookies")}
               {...(cookiePdfUrl ? { target: "_blank", rel: "noopener noreferrer" } : {})}
               className="hover:text-white transition-colors"
             >

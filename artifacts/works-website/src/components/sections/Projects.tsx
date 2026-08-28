@@ -6,11 +6,12 @@ import { getProjects, getHomepage } from "@/lib/strapi";
 import type { Project, HomepageData } from "@/lib/strapi";
 import { fallbackProjects, fallbackHomepage, bgGraphic2FallbackImg } from "@/data/fallback";
 import { useI18n } from "@/i18n";
+import { buildLocalePath } from "@/lib/i18n-routes";
 
 export function Projects() {
-  const { t } = useI18n();
-  const { data: projects, loading } = useStrapiQuery<Project[]>("projects", getProjects, fallbackProjects);
-  const { data: homepage } = useStrapiQuery<HomepageData>("homepage", getHomepage, fallbackHomepage);
+  const { locale, t } = useI18n();
+  const { data: projects, loading } = useStrapiQuery<Project[]>("projects", () => getProjects(locale), fallbackProjects, locale);
+  const { data: homepage } = useStrapiQuery<HomepageData>("homepage", () => getHomepage(locale), fallbackHomepage, locale);
 
   const allProjects = projects || [];
   const flagged = allProjects.filter((p) => p.featured);
@@ -40,10 +41,10 @@ export function Projects() {
         <div className="mb-10 md:mb-20 flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-works-muted/50 pb-6 md:pb-8">
           <div>
             <h2 className="text-4xl md:text-5xl font-bold text-works-dark tracking-tight">
-              {homepage?.projectsSection?.heading || "Kiemelt projektjeink"}
+              {homepage?.projectsSection?.heading || t("sections.featuredProjectsHeading")}
             </h2>
           </div>
-          <Link href="/projektek" className="group text-works-dark font-semibold hover:text-works-primary transition-colors inline-flex items-center w-fit">
+          <Link href={buildLocalePath(locale, "projects")} className="group text-works-dark font-semibold hover:text-works-primary transition-colors inline-flex items-center w-fit">
             {t("sections.allProjects")}
             <span className="ml-2 inline-block transition-transform duration-300 group-hover:translate-x-1">&rarr;</span>
           </Link>

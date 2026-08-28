@@ -23,7 +23,7 @@ async function fetchApi<T>(path: string, params?: Record<string, string>): Promi
 /**
  * Appends a Strapi locale query param to a URL string only when `locale` is
  * explicitly provided. This keeps existing no-arg call sites unchanged while
- * allowing future EN callers to pass `"en"`.
+ * allowing callers to pass `"en"`.
  *
  * @internal — used by the parameterized loader functions below.
  */
@@ -35,7 +35,7 @@ function appendLocale(url: string, locale?: string): string {
 
 /**
  * Builds a stable TanStack Query / useStrapiQuery cache key that includes
- * the locale when provided. Suitable for future multi-locale callers.
+ * the locale when provided.
  *
  * @example
  *   strapiQueryKey("projects")              // => "projects"
@@ -833,10 +833,6 @@ export async function getContactPage(locale?: string): Promise<ContactPageData> 
 
 export interface GlobalSettings {
   siteName: string;
-  /**
-   * Final publication gate for the future English site.
-   * The router and language switch must stay disabled unless this is true.
-   */
   englishSiteEnabled: boolean;
   contactEmail: string;
   contactPhone: string;
@@ -946,14 +942,9 @@ export async function uploadCv(file: File): Promise<void> {
     body: formData,
   });
   if (!res.ok) {
-    let message = "A feltöltés nem sikerült, kérjük próbáld újra később.";
-    try {
-      const data = await res.json();
-      if (data?.message) message = data.message;
-    } catch {
-      // nem JSON válasz — marad az általános üzenet
-    }
-    throw new Error(message);
+    // Transport/backend messages are not visitor copy and may be in a
+    // different locale. The caller maps this stable code to localized UI text.
+    throw new Error("CV_UPLOAD_FAILED");
   }
 }
 
@@ -1063,15 +1054,15 @@ export async function getCareerPage(locale?: string): Promise<CareerPageData> {
   };
 }
 
-export async function getAllProjectTags(): Promise<string[]> {
-  const projects = await getProjects();
+export async function getAllProjectTags(locale?: string): Promise<string[]> {
+  const projects = await getProjects(locale);
   const tags = new Set<string>();
   projects.forEach((p) => p.tags.forEach((t) => tags.add(t)));
   return Array.from(tags);
 }
 
-export async function getAllBlogTags(): Promise<string[]> {
-  const posts = await getBlogPosts();
+export async function getAllBlogTags(locale?: string): Promise<string[]> {
+  const posts = await getBlogPosts(locale);
   const tags = new Set<string>();
   posts.forEach((p) => p.tags.forEach((t) => tags.add(t)));
   return Array.from(tags);

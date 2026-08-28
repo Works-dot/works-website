@@ -17,7 +17,15 @@ import { ScrollToTop } from "@/components/ScrollToTop";
 import { CookieConsentProvider } from "@/lib/cookie-consent";
 import { CookieBanner } from "@/components/CookieBanner";
 import { I18nProvider, useI18n } from "@/i18n";
+import {
+  buildLocalePath,
+  getLocaleFromPath,
+  getRoutePath,
+  ROUTE_LOCALES,
+  type RouteKey,
+} from "@/lib/i18n-routes";
 import type { AppRoutes } from "./routes.types";
+import { useStrapiQuery } from "@/hooks/useStrapiQuery";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -28,21 +36,36 @@ const queryClient = new QueryClient({
   },
 });
 
+const ROUTE_COMPONENTS: readonly [
+  routeKey: RouteKey,
+  componentKey: keyof Omit<AppRoutes, "NotFound">,
+][] = [
+  ["home", "Home"],
+  ["projects", "Projektek"],
+  ["projectDetail", "CaseStudy"],
+  ["blog", "Blog"],
+  ["blogPost", "BlogPost"],
+  ["serviceDetail", "ServicePage"],
+  ["about", "About"],
+  ["contact", "Contact"],
+  ["careers", "Karrier"],
+  ["privacy", "Adatkezeles"],
+  ["cookies", "Sutik"],
+  ["careerDetail", "CareerDetail"],
+];
+
 function Router({ routes }: { routes: AppRoutes }) {
   return (
     <Switch>
-      <Route path="/" component={routes.Home} />
-      <Route path="/projektek" component={routes.Projektek} />
-      <Route path="/projektek/:slug" component={routes.CaseStudy} />
-      <Route path="/blog" component={routes.Blog} />
-      <Route path="/blog/:slug" component={routes.BlogPost} />
-      <Route path="/szolgaltatasok/:slug" component={routes.ServicePage} />
-      <Route path="/rolunk" component={routes.About} />
-      <Route path="/kapcsolat" component={routes.Contact} />
-      <Route path="/karrier" component={routes.Karrier} />
-      <Route path="/adatkezeles" component={routes.Adatkezeles} />
-      <Route path="/sutik" component={routes.Sutik} />
-      <Route path="/karrier/:slug" component={routes.CareerDetail} />
+      {ROUTE_LOCALES.flatMap((locale) =>
+        ROUTE_COMPONENTS.map(([routeKey, componentKey]) => (
+          <Route
+            key={`${locale}:${routeKey}`}
+            path={getRoutePath(locale, routeKey)}
+            component={routes[componentKey]}
+          />
+        ))
+      )}
       <Route component={routes.NotFound} />
     </Switch>
   );
@@ -63,7 +86,7 @@ function RouteLoading() {
 }
 
 function RouteErrorFallback() {
-  const { t } = useI18n();
+  const { locale, t } = useI18n();
 
   return (
     <main
@@ -87,7 +110,7 @@ function RouteErrorFallback() {
             {t("states.reloadPage")}
           </button>
           <a
-            href={import.meta.env.BASE_URL}
+            href={buildLocalePath(locale, "home")}
             className="px-6 py-3 border border-works-dark/20 text-works-dark font-semibold hover:border-works-primary hover:text-works-primary transition-colors"
           >
             {t("cta.backToHome")}
@@ -137,25 +160,34 @@ function RouteContent({ routes }: { routes: AppRoutes }) {
   );
 }
 
-function App({ ssrPath, routes }: { ssrPath?: string; routes: AppRoutes }) {
+function LocaleRuntime({ routes }: { routes: AppRoutes }) {
+  const [location] = useLocation();
+  const locale = getLocaleFromPath(location);
+
   return (
-    <I18nProvider>
+    <I18nProvider locale={locale}>
       <QueryClientProvider client={queryClient}>
         <TooltipProvider delayDuration={300}>
           <CookieConsentProvider>
-            <WouterRouter
-              base={import.meta.env.BASE_URL.replace(/\/$/, "")}
-              ssrPath={ssrPath}
-            >
-              <ScrollToTop />
-              <RouteContent routes={routes} />
-              <CookieBanner />
-            </WouterRouter>
+            <ScrollToTop />
+            <RouteContent routes={routes} />
+            <CookieBanner />
             <Toaster />
           </CookieConsentProvider>
         </TooltipProvider>
       </QueryClientProvider>
     </I18nProvider>
+  );
+}
+
+function App({ ssrPath, routes }: { ssrPath?: string; routes: AppRoutes }) {
+  return (
+    <WouterRouter
+      base={import.meta.env.BASE_URL.replace(/\/$/, "")}
+      ssrPath={ssrPath}
+    >
+      <LocaleRuntime routes={routes} />
+    </WouterRouter>
   );
 }
 

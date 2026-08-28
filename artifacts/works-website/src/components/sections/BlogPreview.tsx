@@ -5,10 +5,13 @@ import { useStrapiQuery } from "@/hooks/useStrapiQuery";
 import { getBlogPosts, getHomepage } from "@/lib/strapi";
 import type { BlogPost, HomepageData } from "@/lib/strapi";
 import { fallbackBlogPosts, fallbackHomepage } from "@/data/fallback";
+import { useI18n } from "@/i18n";
+import { buildLocalePath } from "@/lib/i18n-routes";
 
 export function BlogPreview() {
-  const { data: blogPosts, loading } = useStrapiQuery<BlogPost[]>("blogPosts", getBlogPosts, fallbackBlogPosts);
-  const { data: homepage } = useStrapiQuery<HomepageData>("homepage", getHomepage, fallbackHomepage);
+  const { locale, t } = useI18n();
+  const { data: blogPosts, loading } = useStrapiQuery<BlogPost[]>("blogPosts", () => getBlogPosts(locale), fallbackBlogPosts, locale);
+  const { data: homepage } = useStrapiQuery<HomepageData>("homepage", () => getHomepage(locale), fallbackHomepage, locale);
 
   const allPosts = blogPosts || [];
   const flagged = allPosts.filter((p) => p.featured);
@@ -31,11 +34,11 @@ export function BlogPreview() {
         <div className="mb-10 md:mb-16 flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-works-muted/50 pb-6 md:pb-8">
           <div>
             <h2 className="text-4xl md:text-5xl font-bold text-works-dark tracking-tight">
-              {homepage?.blogSection?.heading || "Legfrissebb írásaink"}
+              {homepage?.blogSection?.heading || t("sections.latestPostsHeading")}
             </h2>
           </div>
-          <Link href="/blog" className="group text-works-dark font-semibold hover:text-works-primary transition-colors inline-flex items-center w-fit">
-            Minden bejegyzés megtekintése
+          <Link href={buildLocalePath(locale, "blog")} className="group text-works-dark font-semibold hover:text-works-primary transition-colors inline-flex items-center w-fit">
+            {t("sections.allBlogs")}
             <span className="ml-2 inline-block transition-transform duration-300 group-hover:translate-x-1">→</span>
           </Link>
         </div>
@@ -67,7 +70,7 @@ export function BlogPreview() {
                 />
               ))}
             </div>
-            <MobileCarousel className="md:hidden" ariaLabel="Legfrissebb írásaink">
+            <MobileCarousel className="md:hidden" ariaLabel={homepage?.blogSection?.heading || t("pages.blogHeading")}>
               {previewPosts.map((post, i) => (
                 <BlogCard 
                   key={post.slug}

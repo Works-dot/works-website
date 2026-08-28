@@ -1,6 +1,7 @@
 import { Link } from "wouter";
 import { useCookieConsent } from "@/lib/cookie-consent";
 import { useI18n } from "@/i18n";
+import { buildLocalePath } from "@/lib/i18n-routes";
 
 // Süti hozzájárulási sáv — a GDPR/ePrivacy minimumnak megfelelően az
 // elutasítás ugyanolyan hangsúlyos és egyszerű, mint az elfogadás.
@@ -8,7 +9,7 @@ import { useI18n } from "@/i18n";
 // effectben áll be), így a prerenderelt HTML-t nem érinti.
 export function CookieBanner() {
   const { bannerOpen, accept, reject } = useCookieConsent();
-  const { t } = useI18n();
+  const { locale, t } = useI18n();
 
   if (!bannerOpen) return null;
 
@@ -23,7 +24,7 @@ export function CookieBanner() {
         <p className="text-sm leading-relaxed text-works-light/90 md:flex-1">
           {t("cookieBanner.text")}{" "}
           <Link
-            href="/sutik"
+            href={buildLocalePath(locale, "cookies")}
             className="underline text-white hover:text-works-primary transition-colors"
           >
             {t("cookieBanner.cookiePolicyLinkLabel")}

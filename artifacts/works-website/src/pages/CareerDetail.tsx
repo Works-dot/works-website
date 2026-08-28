@@ -6,19 +6,26 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import SEOHead from "@/components/SEOHead";
 import { useStrapiQuery } from "@/hooks/useStrapiQuery";
-import { getCareerPositions, getNextPosition } from "@/lib/strapi";
+import { getCareerPositionBySlug, getCareerPositions, getNextPosition } from "@/lib/strapi";
 import type { CareerPosition } from "@/lib/strapi";
 import { ContentBlock } from "@/components/ContentBlock";
 import { fallbackPositions, heroBackgroundFallbackImg } from "@/data/fallback";
 import { useI18n } from "@/i18n";
+import { buildLocalePath } from "@/lib/i18n-routes";
 
 export default function CareerDetail() {
-  const { t } = useI18n();
+  const { locale, t } = useI18n();
   const { slug } = useParams<{ slug: string }>();
-  const { data: positions, loading, error } = useStrapiQuery<CareerPosition[]>("careerPositions", getCareerPositions, fallbackPositions);
+  const fallbackPosition = fallbackPositions.find((p) => p.slug === slug) || null;
+  const { data: position, loading, error } = useStrapiQuery<CareerPosition | null>(
+    `careerPosition:${locale}:${slug}`,
+    () => getCareerPositionBySlug(slug || "", locale),
+    fallbackPosition,
+    locale
+  );
+  const { data: positions } = useStrapiQuery<CareerPosition[]>("careerPositions", () => getCareerPositions(locale), fallbackPositions, locale);
   const heroBgPattern = heroBackgroundFallbackImg;
 
-  const position = positions?.find((p) => p.slug === slug) || null;
   const nextPos = positions && position ? getNextPosition(positions, position.slug) : null;
 
   useEffect(() => {
@@ -45,7 +52,7 @@ export default function CareerDetail() {
           <div className="text-center">
             <h1 className="text-3xl font-bold text-works-dark mb-4">{t("states.errorHeading")}</h1>
             <p className="text-works-dark/60 mb-6">{t("states.errorBody")}</p>
-            <Link href="/karrier" className="text-works-primary font-semibold hover:underline">{t("cta.backToCareers")}</Link>
+            <Link href={buildLocalePath(locale, "careers")} className="text-works-primary font-semibold hover:underline">{t("cta.backToCareers")}</Link>
           </div>
         </main>
         <Footer />
@@ -60,7 +67,7 @@ export default function CareerDetail() {
         <main className="flex-grow pt-28 lg:pt-32 flex items-center justify-center">
           <div className="text-center">
             <h1 className="text-3xl font-bold text-works-dark mb-4">{t("states.notFoundPosition")}</h1>
-            <Link href="/karrier" className="text-works-primary font-semibold hover:underline">
+            <Link href={buildLocalePath(locale, "careers")} className="text-works-primary font-semibold hover:underline">
               {t("cta.backToCareers")}
             </Link>
           </div>
@@ -91,7 +98,7 @@ export default function CareerDetail() {
 
           <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <Link
-              href="/karrier"
+              href={buildLocalePath(locale, "careers")}
               className="inline-flex items-center gap-2 text-white/70 hover:text-white font-semibold mb-8 transition-colors"
             >
               <ArrowLeft className="w-4 h-4" />
@@ -165,7 +172,7 @@ export default function CareerDetail() {
                   </h3>
                 </div>
                 <Link
-                  href={`/karrier/${nextPos.slug}`}
+                  href={buildLocalePath(locale, "careerDetail", nextPos.slug)}
                   className="group inline-flex items-center gap-2 px-6 py-3 bg-works-primary text-white font-semibold hover:bg-works-dark transition-colors"
                 >
                   {t("cta.viewProject")}

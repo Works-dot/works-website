@@ -13,6 +13,7 @@ import type { ContactPageData, GlobalSettings, LegalDocuments } from "@/lib/stra
 import { fallbackContactPage, fallbackGlobalSettings, fallbackLegalDocuments, contactGraphicFallbackImg } from "@/data/fallback";
 import { useCookieConsent } from "@/lib/cookie-consent";
 import { useI18n } from "@/i18n";
+import { buildLocalePath } from "@/lib/i18n-routes";
 
 const fadeUp = {
   initial: { opacity: 0, y: 20 },
@@ -40,11 +41,11 @@ function isGoogleMapsHost(host: string): boolean {
   );
 }
 
-function googleQueryEmbed(q: string): string {
-  return `https://maps.google.com/maps?q=${encodeURIComponent(q)}&output=embed`;
+function googleQueryEmbed(q: string, locale: "hu" | "en"): string {
+  return `https://maps.google.com/maps?q=${encodeURIComponent(q)}&output=embed&hl=${locale}`;
 }
 
-function toMapEmbedUrl(raw: string): string {
+function toMapEmbedUrl(raw: string, locale: "hu" | "en"): string {
   const value = (raw || "").trim();
   if (!value) return "";
 
@@ -60,12 +61,12 @@ function toMapEmbedUrl(raw: string): string {
   if (at) {
     const [, lat, lng, zoom] = at;
     const z = zoom ? `&z=${Math.round(Number(zoom))}` : "";
-    return `https://maps.google.com/maps?q=${lat},${lng}${z}&output=embed`;
+    return `https://maps.google.com/maps?q=${lat},${lng}${z}&output=embed&hl=${locale}`;
   }
 
   // Sima koordináták: "47.5045,19.0514".
   if (/^-?\d+\.\d+\s*,\s*-?\d+\.\d+$/.test(candidate)) {
-    return googleQueryEmbed(candidate.replace(/\s+/g, ""));
+    return googleQueryEmbed(candidate.replace(/\s+/g, ""), locale);
   }
 
   let parsed: URL | null = null;
@@ -76,7 +77,7 @@ function toMapEmbedUrl(raw: string): string {
   }
 
   // Nem URL (sima cím) — keresésként ágyazzuk be.
-  if (!parsed) return googleQueryEmbed(candidate);
+  if (!parsed) return googleQueryEmbed(candidate, locale);
 
   // Csak https + Google Maps domain engedélyezett iframe-ben; minden más tiltott.
   if (parsed.protocol !== "https:" || !isGoogleMapsHost(parsed.hostname)) {
@@ -88,32 +89,42 @@ function toMapEmbedUrl(raw: string): string {
     parsed.pathname.includes("/maps/embed") ||
     parsed.searchParams.get("output") === "embed"
   ) {
-    return candidate;
+    parsed.searchParams.set("hl", locale);
+    return parsed.toString();
   }
 
   // Kifejezett q= paraméter (pl. ?q=Szabadság+tér).
   const q = parsed.searchParams.get("q");
-  if (q) return googleQueryEmbed(q);
+  if (q) return googleQueryEmbed(q, locale);
 
   // /place/<név>/ szakasz a path-ban.
   const place = parsed.pathname.match(/\/place\/([^/@]+)/);
   if (place) {
     const name = decodeURIComponent(place[1].replace(/\+/g, " "));
-    return googleQueryEmbed(name);
+    return googleQueryEmbed(name, locale);
   }
 
   // Google host, de ismeretlen forma — biztonságos próba output=embed-del.
-  const sep = candidate.includes("?") ? "&" : "?";
-  return `${candidate}${sep}output=embed`;
+  parsed.searchParams.set("output", "embed");
+  parsed.searchParams.set("hl", locale);
+  return parsed.toString();
 }
 
 export default function Contact() {
-  const { t } = useI18n();
+  const { locale, messages, t } = useI18n();
   const { consent, accept } = useCookieConsent();
-  const { data: contactPage } = useStrapiQuery<ContactPageData>("contactPage", getContactPage, fallbackContactPage);
-  const { data: globalSettings } = useStrapiQuery<GlobalSettings>("globalSettings", getGlobalSettings, fallbackGlobalSettings);
-  const { data: legalDocs } = useStrapiQuery<LegalDocuments>("legalDocuments", getLegalDocuments, fallbackLegalDocuments);
-  const privacyPdfUrl = legalDocs?.privacyPdfUrl || "/adatkezeles";
+  const {
+    data: contactPage,
+    loading: contactLoading,
+    error: contactError,
+  } = useStrapiQuery<ContactPageData>("contactPage", () => getContactPage(locale), fallbackContactPage, locale);
+  const {
+    data: globalSettings,
+    loading: globalSettingsLoading,
+    error: globalSettingsError,
+  } = useStrapiQuery<GlobalSettings>("globalSettings", () => getGlobalSettings(locale), fallbackGlobalSettings, locale);
+  const { data: legalDocs } = useStrapiQuery<LegalDocuments>("legalDocuments", () => getLegalDocuments(locale), fallbackLegalDocuments, locale);
+  const privacyPdfUrl = legalDocs?.privacyPdfUrl || buildLocalePath(locale, "privacy");
 
   const [formData, setFormData] = useState({
     name: "",
@@ -179,8 +190,8 @@ export default function Contact() {
       setCvError(null);
       try {
         await uploadCv(cvFile);
-      } catch (err) {
-        setCvError(err instanceof Error ? err.message : t("validation.cvUploadFailed"));
+      } catch {
+        setCvError(t("validation.cvUploadFailed"));
         setSubmitting(false);
         return;
       }
@@ -200,22 +211,53 @@ export default function Contact() {
   };
 
   const contactGraphic = contactGraphicFallbackImg;
-  const heroHeading = contactPage?.hero?.heading || "Kapcsolat.";
-  const heroDescription = contactPage?.hero?.description || "Beszéljünk a következő projektedről!";
-  const formHeading = contactPage?.formHeading || "Írj nekünk";
-  const successTitle = contactPage?.successTitle || "Üzenet elküldve!";
-  const successMessage = contactPage?.successMessage || "Köszönjük megkeresésed, hamarosan válaszolunk.";
-  const mapHeading = contactPage?.mapHeading || "Itt találsz minket";
-  const mapEmbedUrl = toMapEmbedUrl(contactPage?.mapEmbedUrl || "") || "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2695.4!2d19.0514!3d47.5045!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4741dc14ca087e31%3A0x6a06c4f9e5a2e0!2sSzabads%C3%A1g%20t%C3%A9r%2C%20Budapest%2C%201054!5e0!3m2!1shu!2shu!4v1700000000000!5m2!1shu!2shu";
+  const heroHeading = contactPage?.hero?.heading || (locale === "hu" ? "Kapcsolat." : "");
+  const heroDescription = contactPage?.hero?.description || (locale === "hu" ? "Beszéljünk a következő projektedről!" : "");
+  const formHeading = contactPage?.formHeading || (locale === "hu" ? "Írj nekünk" : "");
+  const successTitle = contactPage?.successTitle || (locale === "hu" ? "Üzenet elküldve!" : "");
+  const successMessage = contactPage?.successMessage || (locale === "hu" ? "Köszönjük megkeresésed, hamarosan válaszolunk." : "");
+  const mapHeading = contactPage?.mapHeading || (locale === "hu" ? "Itt találsz minket" : "");
+  const mapEmbedUrl = toMapEmbedUrl(contactPage?.mapEmbedUrl || "", locale) || (locale === "hu"
+    ? "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2695.4!2d19.0514!3d47.5045!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4741dc14ca087e31%3A0x6a06c4f9e5a2e0!2sSzabads%C3%A1g%20t%C3%A9r%2C%20Budapest%2C%201054!5e0!3m2!1shu!2shu!4v1700000000000!5m2!1shu!2shu"
+    : "");
   const formSubjects = contactPage?.formSubjects || [];
 
-  const address = globalSettings?.address || "1054 Budapest, Szabadság tér 7.";
+  const address = globalSettings?.address || "";
   const email = globalSettings?.contactEmail || "hello@works.hu";
-  const phone = globalSettings?.contactPhone || "+36 1 234 5678";
-  const openingHours = globalSettings?.openingHours || [
+  const phone = globalSettings?.contactPhone || (locale === "hu" ? "+36 1 234 5678" : "");
+  const openingHours = globalSettings?.openingHours || (locale === "hu" ? [
     { day: "Hétfő – Péntek", hours: "9:00 – 18:00" },
     { day: "Szombat – Vasárnap", hours: "Zárva" },
-  ];
+  ] : []);
+
+  const englishContentUnavailable =
+    locale === "en" &&
+    !contactLoading &&
+    !globalSettingsLoading &&
+    (contactError !== null ||
+      globalSettingsError !== null ||
+      contactPage === null ||
+      globalSettings === null);
+
+  if (englishContentUnavailable) {
+    return (
+      <div className="min-h-screen bg-works-bg flex flex-col">
+        <SEOHead />
+        <Header />
+        <main className="flex-grow flex items-center justify-center px-6 text-center">
+          <div className="max-w-lg">
+            <h1 className="text-3xl md:text-4xl font-bold text-works-dark mb-4">
+              {t("states.errorHeading")}
+            </h1>
+            <p className="text-works-dark/60 leading-relaxed">
+              {t("states.errorBody")}
+            </p>
+          </div>
+        </main>
+        <Footer />
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-works-bg flex flex-col selection:bg-works-primary selection:text-white">
@@ -344,15 +386,11 @@ export default function Contact() {
                           ? formSubjects.map((s) => (
                               <option key={s.value} value={s.value}>{s.label}</option>
                             ))
-                          : <>
-                              <option value="ux-research">UX kutatás</option>
-                              <option value="ui-design">UI Design</option>
-                              <option value="service-design">Service Design</option>
-                              <option value="web-development">Webfejlesztés</option>
-                              <option value="accessibility">Akadálymentesítés</option>
-                              <option value="ai-design">AI-alapú design</option>
-                              <option value="other">Egyéb</option>
-                            </>
+                          : messages.contact.fallbackSubjects.map((subject) => (
+                              <option key={subject.value} value={subject.value}>
+                                {subject.label}
+                              </option>
+                            ))
                         }
                       </select>
                     </div>
@@ -511,16 +549,16 @@ export default function Contact() {
                 </h2>
 
                 <div className="space-y-8">
-                  <div className="flex gap-4 items-center">
+                  {address && <div className="flex gap-4 items-center">
                     <div className="flex-shrink-0 w-12 h-12 bg-works-primary/10 flex items-center justify-center">
                       <MapPin className="w-5 h-5 text-works-primary" />
                     </div>
                     <p className="text-works-dark/60 leading-relaxed">
                       {address}
                     </p>
-                  </div>
+                  </div>}
 
-                  <div className="flex gap-4 items-center">
+                  {phone && <div className="flex gap-4 items-center">
                     <div className="flex-shrink-0 w-12 h-12 bg-works-primary/10 flex items-center justify-center">
                       <Mail className="w-5 h-5 text-works-primary" />
                     </div>
@@ -530,7 +568,7 @@ export default function Contact() {
                     >
                       {email}
                     </a>
-                  </div>
+                  </div>}
 
                   <div className="flex gap-4 items-center">
                     <div className="flex-shrink-0 w-12 h-12 bg-works-primary/10 flex items-center justify-center">
@@ -545,20 +583,20 @@ export default function Contact() {
                   </div>
                 </div>
 
-                <div className="mt-12 p-6 bg-works-light">
+                {openingHours.length > 0 && <div className="mt-12 p-6 bg-works-light">
                   <h3 className="font-semibold text-works-dark mb-2">{t("contact.openingHoursHeading")}</h3>
                   <div className="text-works-dark/60 text-sm leading-relaxed">
                     {openingHours.map((oh, i) => (
                       <p key={i}>{oh.day}: {oh.hours}</p>
                     ))}
                   </div>
-                </div>
+                </div>}
               </motion.div>
             </div>
           </div>
         </section>
 
-        <section className="bg-works-light">
+        {mapEmbedUrl && <section className="bg-works-light">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-28">
             <motion.div {...fadeUp}>
               <h2 className="text-3xl md:text-4xl font-bold text-works-dark mb-10">
@@ -578,7 +616,7 @@ export default function Contact() {
                   allowFullScreen
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"
-                  title={`Works. iroda - ${address}`}
+                  title={t("contact.mapTitle", { address })}
                 />
               ) : (
                 // Kétkattintásos megoldás: a Google Térkép csak kifejezett
@@ -599,7 +637,7 @@ export default function Contact() {
               )}
             </motion.div>
           </div>
-        </section>
+        </section>}
       </main>
 
       <Footer />

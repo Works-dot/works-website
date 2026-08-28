@@ -7,11 +7,13 @@ export default {
   "attributes": {
     "title": {
       "type": "string",
-      "required": true
+      "required": true,
+      "pluginOptions": { "i18n": { "localized": true } }
     },
     "description": {
       "type": "text",
-      "required": true
+      "required": true,
+      "pluginOptions": { "i18n": { "localized": true } }
     },
     "image": {
       "type": "media",

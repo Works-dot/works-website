@@ -9,7 +9,8 @@ export default {
   "attributes": {
     "text": {
       "type": "string",
-      "required": true
+      "required": true,
+      "pluginOptions": { "i18n": { "localized": true } }
     }
   }
 };

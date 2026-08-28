@@ -8,13 +8,16 @@ export default {
   "options": {},
   "attributes": {
     "kicker": {
-      "type": "string"
+      "type": "string",
+      "pluginOptions": { "i18n": { "localized": true } }
     },
     "heading": {
-      "type": "string"
+      "type": "string",
+      "pluginOptions": { "i18n": { "localized": true } }
     },
     "description": {
-      "type": "text"
+      "type": "text",
+      "pluginOptions": { "i18n": { "localized": true } }
     }
   }
 };

@@ -10,12 +10,14 @@ export default {
     "intro": {
       "type": "component",
       "repeatable": false,
-      "component": "service.section-intro"
+      "component": "service.section-intro",
+      "pluginOptions": { "i18n": { "localized": true } }
     },
     "cards": {
       "type": "component",
       "repeatable": true,
-      "component": "service.question-card"
+      "component": "service.question-card",
+      "pluginOptions": { "i18n": { "localized": true } }
     }
   }
 };

@@ -11,11 +11,12 @@ import { useI18n } from "@/i18n";
 // A régi /adatkezeles cím megmarad (footerben, régi hivatkozásokban élhet),
 // de a tartalom már a hivatalos PDF: automatikusan átirányítunk rá.
 export default function Adatkezeles() {
-  const { t } = useI18n();
+  const { locale, t } = useI18n();
   const { data: legalDocs } = useStrapiQuery<LegalDocuments>(
     "legalDocuments",
-    getLegalDocuments,
-    fallbackLegalDocuments
+    () => getLegalDocuments(locale),
+    fallbackLegalDocuments,
+    locale
   );
   const pdfUrl = legalDocs?.privacyPdfUrl || "";
 

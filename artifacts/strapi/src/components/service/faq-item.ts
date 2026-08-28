@@ -9,10 +9,12 @@ export default {
   "attributes": {
     "question": {
       "type": "string",
-      "required": true
+      "required": true,
+      "pluginOptions": { "i18n": { "localized": true } }
     },
     "answer": {
-      "type": "text"
+      "type": "text",
+      "pluginOptions": { "i18n": { "localized": true } }
     }
   }
 };

@@ -9,13 +9,16 @@ export default {
   "attributes": {
     "heading": {
       "type": "string",
-      "required": true
+      "required": true,
+      "pluginOptions": { "i18n": { "localized": true } }
     },
     "ctaText": {
-      "type": "string"
+      "type": "string",
+      "pluginOptions": { "i18n": { "localized": true } }
     },
     "ctaLink": {
-      "type": "string"
+      "type": "string",
+      "pluginOptions": { "i18n": { "localized": true } }
     }
   }
 };

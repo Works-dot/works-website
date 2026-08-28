@@ -67,10 +67,12 @@ async function runValidation() {
     matchLocalePath,
     extractSearch,
     stripSearch,
+    switchLocalePath,
     localeQueryKey,
     getPageMeta,
     buildMetaTags,
     SITE_URL,
+    getLocaleCacheKey,
   } = mod;
 
   // ------------------------------------------------------------------
@@ -78,8 +80,37 @@ async function runValidation() {
   // ------------------------------------------------------------------
   console.log("PUBLIC_LOCALES:");
   assert("PUBLIC_LOCALES contains 'hu'", PUBLIC_LOCALES.includes("hu"));
-  assert("PUBLIC_LOCALES does NOT contain 'en'", !PUBLIC_LOCALES.includes("en"));
-  assert("PUBLIC_LOCALES length is 1", PUBLIC_LOCALES.length === 1);
+  assert("PUBLIC_LOCALES contains 'en'", PUBLIC_LOCALES.includes("en"));
+  assert("PUBLIC_LOCALES length is 2", PUBLIC_LOCALES.length === 2);
+  console.log("\nEmbedded locale cache aliases:");
+  assert(
+    "header services uses localized services dataset",
+    getLocaleCacheKey("headerServices") === "services"
+  );
+  assert(
+    "footer services uses localized services dataset",
+    getLocaleCacheKey("footerServices") === "services"
+  );
+  assert(
+    "career list uses localized positions dataset",
+    getLocaleCacheKey("careerPositions") === "positions"
+  );
+  assert(
+    "career detail uses localized positions dataset",
+    getLocaleCacheKey("careerPosition:en:my-role") === "positions"
+  );
+  assert(
+    "project detail uses localized projects dataset",
+    getLocaleCacheKey("project:en:my-project") === "projects"
+  );
+  assert(
+    "blog detail uses localized blog posts dataset",
+    getLocaleCacheKey("blogPost:en:my-post") === "blogPosts"
+  );
+  assert(
+    "service detail uses localized services dataset",
+    getLocaleCacheKey("service:en:ux-research") === "services"
+  );
 
   // ------------------------------------------------------------------
   // getStaticPathsForLocale assertions
@@ -96,10 +127,10 @@ async function runValidation() {
   assert("HU paths include '/adatkezeles'", huPaths.includes("/adatkezeles"));
   assert("HU paths include '/sutik'", huPaths.includes("/sutik"));
   assert("HU paths have no /en prefix", huPaths.every((p) => !p.startsWith("/en")));
-  assertThrows(
-    "getStaticPathsForLocale('en') throws (EN not public)",
-    () => getStaticPathsForLocale("en")
-  );
+  const enPaths = getStaticPathsForLocale("en");
+  assert("EN has 8 static paths", enPaths.length === 8);
+  assert("EN paths include '/en'", enPaths.includes("/en"));
+  assert("EN paths include '/en/projects'", enPaths.includes("/en/projects"));
 
   // ------------------------------------------------------------------
   // buildLocalePath assertions
@@ -126,11 +157,11 @@ async function runValidation() {
     buildLocalePath("hu", "contact") === "/kapcsolat"
   );
   assert(
-    "EN (future) home path is '/en'",
+    "EN home path is '/en'",
     buildLocalePath("en", "home") === "/en"
   );
   assert(
-    "EN (future) projects path is '/en/projects'",
+    "EN projects path is '/en/projects'",
     buildLocalePath("en", "projects") === "/en/projects"
   );
   assert(
@@ -140,6 +171,20 @@ async function runValidation() {
   assert(
     "buildLocalePath preserves query+hash",
     buildLocalePath("hu", "projectDetail", "test", "?preview=1#top") === "/projektek/test?preview=1#top"
+  );
+  assert(
+    "language switch preserves dynamic slug, query and hash",
+    switchLocalePath("/projektek/my-project?preview=1#top", "en") ===
+      "/en/projects/my-project?preview=1#top"
+  );
+  assert(
+    "language switch maps EN dynamic path back to HU",
+    switchLocalePath("/en/blog/a-post?tag=ux#article", "hu") ===
+      "/blog/a-post?tag=ux#article"
+  );
+  assert(
+    "language switch sends unknown routes to target home",
+    switchLocalePath("/unknown?source=test", "en") === "/en"
   );
 
   // ------------------------------------------------------------------
@@ -218,13 +263,13 @@ async function runValidation() {
   const defaultMeta = getPageMeta("/rolunk");
   assert("No-locale call defaults to hu", defaultMeta.locale === "hu");
 
-  console.log("\ngetPageMeta (reserved EN routes):");
+  console.log("\ngetPageMeta (EN routes):");
   const enProjectsMeta = getPageMeta("/en/projects");
-  assert("Reserved EN route infers locale 'en'", enProjectsMeta.locale === "en");
-  assert("Reserved EN route preserves canonical path", enProjectsMeta.path === "/en/projects");
-  assert("Reserved EN route uses English generic metadata", enProjectsMeta.title === "Works. | Digital Agency");
+  assert("EN route infers locale 'en'", enProjectsMeta.locale === "en");
+  assert("EN route preserves canonical path", enProjectsMeta.path === "/en/projects");
+  assert("EN route uses route-specific English metadata", enProjectsMeta.title === "Our projects | Works.");
   const enProjectMeta = getPageMeta("/en/projects/future-project");
-  assert("Reserved EN detail is article metadata", enProjectMeta.type === "article");
+  assert("EN detail is article metadata", enProjectMeta.type === "article");
 
   // ------------------------------------------------------------------
   // buildMetaTags — og:locale correct for HU
@@ -240,16 +285,21 @@ async function runValidation() {
     !huTags.includes('content="en_US"')
   );
   const enTags = buildMetaTags(enProjectsMeta);
-  assert("Reserved EN route has og:locale=en_US", enTags.includes('content="en_US"'));
+  assert("EN route has og:locale=en_US", enTags.includes('content="en_US"'));
+  assert("EN route is indexable", !enTags.includes('name="robots" content="noindex'));
   assert(
-    "Reserved EN route has its own canonical URL",
+    "EN route has its own canonical URL",
     enTags.includes(`rel="canonical" href="${SITE_URL}/en/projects"`)
+  );
+  assert(
+    "EN projects route has localized static title",
+    enProjectsMeta.title === "Our projects | Works."
   );
 
   // ------------------------------------------------------------------
-  // No /en route in any PUBLIC output
+  // Public locale configuration
   // ------------------------------------------------------------------
-  console.log("\nEN route guard:");
+  console.log("\nPublic locale configuration:");
   assert(
     "SITE_URL is defined",
     typeof SITE_URL === "string" && SITE_URL.length > 0
@@ -287,10 +337,10 @@ function runSourceLevelChecks() {
     assert("i18n-routes exports getStaticPathsForLocale", src.includes("export function getStaticPathsForLocale"));
     assert("i18n-routes exports localeQueryKey", src.includes("export function localeQueryKey"));
     assert(
-      "PUBLIC_LOCALES contains hu only",
-      /PUBLIC_LOCALES[^=]*= \[["']hu["']\]/.test(src)
+      "PUBLIC_LOCALES contains hu and en",
+      /PUBLIC_LOCALES[^=]*= \[["']hu["'],\s*["']en["']\]/.test(src)
     );
-    assert("EN paths reserved but not public", src.includes("EN_STATIC_PATHS"));
+    assert("EN static paths are exported", src.includes("EN_STATIC_PATHS"));
     assert("getStaticPathsForLocale guards against non-public locales", src.includes("not in PUBLIC_LOCALES"));
   } catch (e) {
     console.error("  Could not read i18n-routes.ts:", e.message);

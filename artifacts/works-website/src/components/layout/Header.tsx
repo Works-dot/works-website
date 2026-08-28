@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { Link } from "wouter";
+import { Link, useLocation } from "wouter";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useStrapiQuery } from "@/hooks/useStrapiQuery";
@@ -7,30 +7,34 @@ import { getServices, getGlobalSettings } from "@/lib/strapi";
 import type { Service, GlobalSettings } from "@/lib/strapi";
 import { fallbackServices, fallbackGlobalSettings } from "@/data/fallback";
 import { useI18n } from "@/i18n";
+import { buildLocalePath, switchLocalePath } from "@/lib/i18n-routes";
 
 const FALLBACK_SERVICE_LINKS = [
-  { label: "UX Kutatás", href: "/szolgaltatasok/ux-kutatas" },
-  { label: "UX/UI Design", href: "/szolgaltatasok/ui-design" },
-  { label: "Service design", href: "/szolgaltatasok/service-design" },
-  { label: "AI-alapú digitális termékfejlesztés", href: "/szolgaltatasok/ai-termekfejlesztes" },
-  { label: "Akadálymentes digitális szolgáltatások", href: "/szolgaltatasok/akadalymentesites" },
-  { label: "Digitális képességfejlesztés", href: "/szolgaltatasok/digitalis-kepessegfejlesztes" },
+  { label: "UX Kutatás", slug: "ux-kutatas" },
+  { label: "UX/UI Design", slug: "ui-design" },
+  { label: "Service design", slug: "service-design" },
+  { label: "AI-alapú digitális termékfejlesztés", slug: "ai-termekfejlesztes" },
+  { label: "Akadálymentes digitális szolgáltatások", slug: "akadalymentesites" },
+  { label: "Digitális képességfejlesztés", slug: "digitalis-kepessegfejlesztes" },
 ];
 
 export function Header() {
-  const { t } = useI18n();
+  const { locale, t } = useI18n();
+  const [location] = useLocation();
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
   const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const { data: strapiServices } = useStrapiQuery<Service[]>("headerServices", getServices, fallbackServices);
-  const { data: settings } = useStrapiQuery<GlobalSettings>("globalSettings", getGlobalSettings, fallbackGlobalSettings);
+  const { data: strapiServices } = useStrapiQuery<Service[]>("headerServices", () => getServices(locale), fallbackServices, locale);
+  const { data: settings } = useStrapiQuery<GlobalSettings>("globalSettings", () => getGlobalSettings(locale), fallbackGlobalSettings, locale);
   const logoImg = settings?.logoUrl;
 
   const serviceLinks = strapiServices && strapiServices.length > 0
-    ? strapiServices.map((s) => ({ label: s.title, href: `/szolgaltatasok/${s.slug}` }))
-    : FALLBACK_SERVICE_LINKS;
+    ? strapiServices.map((s) => ({ label: s.title, href: buildLocalePath(locale, "serviceDetail", s.slug) }))
+    : locale === "hu"
+      ? FALLBACK_SERVICE_LINKS.map((s) => ({ label: s.label, href: buildLocalePath(locale, "serviceDetail", s.slug) }))
+      : [];
 
   useEffect(() => {
     const handleScroll = () => {
@@ -58,12 +62,30 @@ export function Header() {
   };
 
   const navLinks = [
-    { label: t("nav.projects"), href: "/projektek", isRoute: true },
-    { label: t("nav.blog"), href: "/blog", isRoute: true },
-    { label: t("nav.careers"), href: "/karrier", isRoute: true },
-    { label: t("nav.about"), href: "/rolunk", isRoute: true },
-    { label: t("nav.contact"), href: "/kapcsolat", isRoute: true },
+    { label: t("nav.projects"), href: buildLocalePath(locale, "projects"), isRoute: true },
+    { label: t("nav.blog"), href: buildLocalePath(locale, "blog"), isRoute: true },
+    { label: t("nav.careers"), href: buildLocalePath(locale, "careers"), isRoute: true },
+    { label: t("nav.about"), href: buildLocalePath(locale, "about"), isRoute: true },
+    { label: t("nav.contact"), href: buildLocalePath(locale, "contact"), isRoute: true },
   ];
+  const targetLocale = locale === "hu" ? "en" : "hu";
+  // Wouter supplies the pathname. Read browser search/hash when available so a
+  // language change never drops an in-page state or anchor.
+  const currentPath = typeof window === "undefined"
+    ? location
+    : `${location}${window.location.search}${window.location.hash}`;
+  const languageHref = switchLocalePath(currentPath, targetLocale);
+  const languageLink = (
+    <a
+      href={languageHref}
+      aria-label={t("nav.switchToLanguage")}
+      lang={targetLocale}
+      className="text-sm font-bold tracking-wide text-works-dark hover:text-works-primary transition-colors"
+      data-testid="language-switch"
+    >
+      {targetLocale.toUpperCase()}
+    </a>
+  );
 
   return (
     <header
@@ -72,7 +94,7 @@ export function Header() {
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
-        <Link href="/" className="flex items-center gap-2 z-50">
+        <Link href={buildLocalePath(locale, "home")} className="flex items-center gap-2 z-50">
           {logoImg ? (
             <img src={logoImg} alt={t("footer.logoAlt")} className="h-8 w-auto object-contain" />
           ) : (
@@ -135,6 +157,7 @@ export function Header() {
               </li>
             ))}
           </ul>
+          <div role="group" aria-label={t("nav.languageSwitchLabel")}>{languageLink}</div>
         </nav>
 
         <button
@@ -162,6 +185,24 @@ export function Header() {
             className="absolute top-0 left-0 w-full bg-white md:hidden pt-24 px-6 shadow-xl flex flex-col overflow-y-auto"
           >
             <ul className="flex flex-col gap-6 text-xl font-bold">
+              <motion.li
+                initial={{ x: -20, opacity: 0 }}
+                animate={{ x: 0, opacity: 1 }}
+                transition={{ delay: 0.1 }}
+                role="group"
+                aria-label={t("nav.languageSwitchLabel")}
+              >
+                <a
+                  href={languageHref}
+                  onClick={() => setMobileMenuOpen(false)}
+                  aria-label={t("nav.switchToLanguage")}
+                  lang={targetLocale}
+                  className="text-works-dark hover:text-works-primary block"
+                  data-testid="language-switch-mobile"
+                >
+                  {targetLocale.toUpperCase()}
+                </a>
+              </motion.li>
               <motion.li
                 initial={{ x: -20, opacity: 0 }}
                 animate={{ x: 0, opacity: 1 }}

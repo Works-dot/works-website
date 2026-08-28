@@ -9,10 +9,12 @@ export default {
   "attributes": {
     "metaTitle": {
       "type": "string",
-      "required": true
+      "required": true,
+      "pluginOptions": { "i18n": { "localized": true } }
     },
     "metaDescription": {
-      "type": "text"
+      "type": "text",
+      "pluginOptions": { "i18n": { "localized": true } }
     },
     "ogImage": {
       "type": "media",

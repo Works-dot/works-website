@@ -9,6 +9,7 @@ import {
   fallbackCareerPage,
   fallbackProjectsPage,
   fallbackBlogPage,
+  getLocaleFallback,
 } from "./data/fallback";
 import type { SeoOverride } from "./lib/strapi";
 import {
@@ -64,7 +65,7 @@ function withOverride(base: PageMeta, seo?: SeoOverride | null): PageMeta {
 }
 
 // ---------------------------------------------------------------------------
-// HU defaults (current public content)
+// Locale defaults
 // ---------------------------------------------------------------------------
 
 const DEFAULT_TITLE = "Works. | Digitális Ügynökség";
@@ -121,6 +122,48 @@ const staticMeta: Record<string, PageMeta> = {
   },
 };
 
+const enStaticMeta: Partial<Record<NonNullable<ReturnType<typeof matchLocalePath>>["routeKey"], PageMeta>> = {
+  home: {
+    title: EN_DEFAULT_TITLE,
+    description: EN_DEFAULT_DESCRIPTION,
+  },
+  projects: {
+    title: formatTitle("Our projects"),
+    description:
+      "Selected Works. case studies in UX research, UI design, accessibility and web development.",
+  },
+  blog: {
+    title: formatTitle("Blog"),
+    description:
+      "Articles on UX, UI design and digital strategy from the Works. team.",
+  },
+  about: {
+    title: formatTitle("About us"),
+    description:
+      "Meet the Works. team of UX researchers, UI designers and developers creating impactful digital products.",
+  },
+  contact: {
+    title: formatTitle("Contact"),
+    description:
+      "Contact Works. in Budapest or online about UX, UI and web development projects.",
+  },
+  careers: {
+    title: formatTitle("Careers"),
+    description:
+      "Explore career opportunities at Works. across UX research, UI design, development and service design.",
+  },
+  privacy: {
+    title: formatTitle("Privacy notice"),
+    description:
+      "Learn how Works. handles personal data belonging to website visitors and people who contact us.",
+  },
+  cookies: {
+    title: formatTitle("Cookie notice"),
+    description:
+      "Learn about cookies and embedded Google Maps on the Works. website and how to change your consent.",
+  },
+};
+
 const pageSeoOverrides: Record<string, SeoOverride | null | undefined> = {
   "/": fallbackHomepage?.seo,
   "/rolunk": fallbackAboutPage?.seo,
@@ -163,8 +206,6 @@ export function pageLocale(meta: PageMeta): Locale {
  *
  * @param route - The pathname, e.g. "/projektek/my-project"
  * @param locale - Optional BCP-47 locale; defaults to "hu".
- *   The EN locale is accepted by the type system for forward-compat, but
- *   EN routes are NOT public and must not be passed by prerender scripts.
  */
 export function getPageMeta(route: string, locale?: Locale): PageMeta {
   const strippedPath = stripSearch(route);
@@ -173,20 +214,69 @@ export function getPageMeta(route: string, locale?: Locale): PageMeta {
   const routeMatch = matchLocalePath(pathname);
   const lang = locale || routeMatch?.locale || getLocaleFromPath(pathname);
 
-  // EN content is intentionally not populated yet. Reserved EN routes still
-  // receive language-correct generic metadata and their own canonical path,
-  // without making those routes public.
   if (lang === "en") {
-    const isReservedEnglishRoute = routeMatch?.locale === "en";
+    const isEnglishRoute = routeMatch?.locale === "en";
     const isArticle =
       routeMatch?.routeKey === "blogPost" || routeMatch?.routeKey === "projectDetail";
-    return {
-      title: EN_DEFAULT_TITLE,
-      description: EN_DEFAULT_DESCRIPTION,
-      path: isReservedEnglishRoute ? pathname : undefined,
+    const staticDefault = routeMatch ? enStaticMeta[routeMatch.routeKey] : undefined;
+    const detailLabel =
+      routeMatch?.routeKey === "projectDetail"
+        ? "Projects"
+        : routeMatch?.routeKey === "blogPost"
+          ? "Blog"
+          : routeMatch?.routeKey === "serviceDetail"
+            ? "Services"
+            : routeMatch?.routeKey === "careerDetail"
+              ? "Careers"
+              : undefined;
+    const detailParent =
+      routeMatch?.routeKey === "projectDetail"
+        ? buildLocalePath("en", "projects")
+        : routeMatch?.routeKey === "blogPost"
+          ? buildLocalePath("en", "blog")
+          : routeMatch?.routeKey === "careerDetail"
+            ? buildLocalePath("en", "careers")
+            : undefined;
+    const project = routeMatch?.routeKey === "projectDetail"
+      ? getLocaleFallback<typeof fallbackProjects[number]>(`project:${routeMatch.slug}`, "en")
+      : undefined;
+    const post = routeMatch?.routeKey === "blogPost"
+      ? getLocaleFallback<typeof fallbackBlogPosts[number]>(`blogPost:${routeMatch.slug}`, "en")
+      : undefined;
+    const service = routeMatch?.routeKey === "serviceDetail"
+      ? getLocaleFallback<typeof fallbackServices[number]>(`service:${routeMatch.slug}`, "en")
+      : undefined;
+    const position = routeMatch?.routeKey === "careerDetail"
+      ? getLocaleFallback<typeof fallbackPositions[number]>(`careerPosition:${routeMatch.slug}`, "en")
+      : undefined;
+    const detailSeo = project?.seo || post?.seo || service?.seo || position?.seo;
+    const staticSeo =
+      routeMatch?.routeKey === "projects"
+        ? getLocaleFallback<typeof fallbackProjectsPage>("projectsPage", "en")?.seo
+        : routeMatch?.routeKey === "blog"
+          ? getLocaleFallback<typeof fallbackBlogPage>("blogPage", "en")?.seo
+          : undefined;
+    const detailDescription =
+      project?.caseStudy.heroSubtitle || post?.excerpt || service?.heroDescription || position?.excerpt;
+    return withOverride({
+      title: staticDefault?.title || EN_DEFAULT_TITLE,
+      description: detailDescription || staticDefault?.description || EN_DEFAULT_DESCRIPTION,
+      ogImage: project?.image || post?.image,
+      path: isEnglishRoute ? pathname : undefined,
       type: isArticle ? "article" : "website",
       locale: "en",
-    };
+      ...(post
+        ? { article: { publishedTime: post.date, author: post.author || undefined } }
+        : {}),
+      ...(detailLabel
+        ? {
+            breadcrumbs: [
+              ...(detailParent ? [{ name: detailLabel, path: detailParent }] : []),
+              { name: routeMatch?.slug || detailLabel, path: pathname },
+            ],
+          }
+        : {}),
+    }, detailSeo || staticSeo);
   }
 
   if (staticMeta[pathname]) {

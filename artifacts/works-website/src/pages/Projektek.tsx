@@ -11,6 +11,7 @@ import { getProjects, getProjectsPage } from "@/lib/strapi";
 import type { Project, ProjectsPageData } from "@/lib/strapi";
 import { fallbackProjects, fallbackProjectsPage } from "@/data/fallback";
 import { useI18n } from "@/i18n";
+import { buildLocalePath } from "@/lib/i18n-routes";
 
 function FeaturedProjectCard({ slug, title, tags, description, image, imageAlt }: {
   slug: string;
@@ -20,7 +21,7 @@ function FeaturedProjectCard({ slug, title, tags, description, image, imageAlt }
   image: string;
   imageAlt?: string;
 }) {
-  const { t } = useI18n();
+  const { locale, t } = useI18n();
   return (
     <motion.div
       layout
@@ -30,7 +31,7 @@ function FeaturedProjectCard({ slug, title, tags, description, image, imageAlt }
       transition={{ duration: 0.4 }}
       className="col-span-1 md:col-span-2 lg:col-span-3"
     >
-      <Link href={`/projektek/${slug}`} className="group flex flex-col lg:flex-row gap-8 lg:gap-12 items-center">
+      <Link href={buildLocalePath(locale, "projectDetail", slug)} className="group flex flex-col lg:flex-row gap-8 lg:gap-12 items-center">
         <div className="w-full lg:w-1/2 overflow-hidden bg-works-light aspect-[4/3]">
           <img
             src={image}
@@ -73,7 +74,7 @@ function ProjectGridCard({ slug, title, tags, description, image, imageAlt }: {
   image: string;
   imageAlt?: string;
 }) {
-  const { t } = useI18n();
+  const { locale, t } = useI18n();
   return (
     <motion.div
       layout
@@ -83,7 +84,7 @@ function ProjectGridCard({ slug, title, tags, description, image, imageAlt }: {
       transition={{ duration: 0.4 }}
       className="col-span-1"
     >
-      <Link href={`/projektek/${slug}`} className="group block">
+      <Link href={buildLocalePath(locale, "projectDetail", slug)} className="group block">
         <div className="overflow-hidden bg-works-light aspect-[4/3]">
           <img
             loading="lazy"
@@ -120,13 +121,14 @@ function ProjectGridCard({ slug, title, tags, description, image, imageAlt }: {
 }
 
 export default function Projektek() {
-  const { t } = useI18n();
+  const { locale, t } = useI18n();
   const [activeTag, setActiveTag] = useState<string | null>(null);
-  const { data: projects, loading, error } = useStrapiQuery<Project[]>("projects", getProjects, fallbackProjects);
+  const { data: projects, loading, error } = useStrapiQuery<Project[]>("projects", () => getProjects(locale), fallbackProjects, locale);
   const { data: projectsPage } = useStrapiQuery<ProjectsPageData>(
     "projectsPage",
-    getProjectsPage,
-    fallbackProjectsPage
+    () => getProjectsPage(locale),
+    fallbackProjectsPage,
+    locale
   );
 
   const allItems = projects || [];

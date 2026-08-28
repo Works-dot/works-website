@@ -8,7 +8,8 @@ export default {
   "options": {},
   "attributes": {
     "heroSubtitle": {
-      "type": "text"
+      "type": "text",
+      "pluginOptions": { "i18n": { "localized": true } }
     },
     "client": {
       "type": "string"
@@ -17,7 +18,8 @@ export default {
       "type": "string"
     },
     "duration": {
-      "type": "string"
+      "type": "string",
+      "pluginOptions": { "i18n": { "localized": true } }
     }
   }
 };

@@ -6,6 +6,7 @@ export default [
   'strapi::cors',
   'strapi::poweredBy',
   'strapi::query',
+  'global::english-locale-gate',
   'strapi::body',
   'strapi::session',
   'strapi::favicon',

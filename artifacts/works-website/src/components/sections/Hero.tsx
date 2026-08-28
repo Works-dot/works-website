@@ -3,6 +3,8 @@ import { useStrapiQuery } from "@/hooks/useStrapiQuery";
 import { getHomepage } from "@/lib/strapi";
 import type { HomepageData } from "@/lib/strapi";
 import { fallbackHomepage, heroBackgroundFallbackImg } from "@/data/fallback";
+import { useI18n } from "@/i18n";
+import { buildLocalePath, localizeInternalPath } from "@/lib/i18n-routes";
 
 function renderHeading(heading: string, highlightedWord: string) {
   if (!highlightedWord || !heading.includes(highlightedWord)) {
@@ -21,16 +23,17 @@ function renderHeading(heading: string, highlightedWord: string) {
 }
 
 export function Hero() {
-  const { data: homepage } = useStrapiQuery<HomepageData>("homepage", getHomepage, fallbackHomepage);
+  const { locale } = useI18n();
+  const { data: homepage } = useStrapiQuery<HomepageData>("homepage", () => getHomepage(locale), fallbackHomepage, locale);
   const hero = homepage?.hero;
 
-  const heading = hero?.heading || "Digitális élményeket tervezünk";
-  const highlightedWord = hero?.highlightedWord || "élményeket";
-  const description = hero?.description || "UX kutatás, UI design és fejlesztés — egy csapattól. Segítünk, hogy digitális termékeid valódi értéket teremtsenek.";
-  const primaryCtaText = hero?.primaryCtaText || "Projektjeink";
+  const heading = hero?.heading || (locale === "hu" ? "Digitális élményeket tervezünk" : "");
+  const highlightedWord = hero?.highlightedWord || (locale === "hu" ? "élményeket" : "");
+  const description = hero?.description || (locale === "hu" ? "UX kutatás, UI design és fejlesztés — egy csapattól. Segítünk, hogy digitális termékeid valódi értéket teremtsenek." : "");
+  const primaryCtaText = hero?.primaryCtaText || (locale === "hu" ? "Projektjeink" : "");
   const primaryCtaLink = hero?.primaryCtaLink || "#projects";
-  const secondaryCtaText = hero?.secondaryCtaText || "Kapcsolat";
-  const secondaryCtaLink = hero?.secondaryCtaLink || "/kapcsolat";
+  const secondaryCtaText = hero?.secondaryCtaText || (locale === "hu" ? "Kapcsolat" : "");
+  const secondaryCtaLink = localizeInternalPath(locale, hero?.secondaryCtaLink || buildLocalePath(locale, "contact"));
   const heroGraphic = heroBackgroundFallbackImg;
 
   return (
@@ -59,7 +62,7 @@ export function Hero() {
 
           <div className="flex flex-col sm:flex-row gap-5">
             <a
-              href={primaryCtaLink}
+              href={localizeInternalPath(locale, primaryCtaLink)}
               className="inline-flex justify-center items-center px-6 sm:px-8 py-4 font-semibold bg-works-primary text-white border border-works-primary hover:bg-works-primary/90 transition-all duration-300 text-base sm:text-lg whitespace-nowrap"
             >
               {primaryCtaText}

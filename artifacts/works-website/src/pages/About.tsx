@@ -8,6 +8,7 @@ import { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext
 import { getTeamMembers, getGalleryImages, getAboutPage } from "@/lib/strapi";
 import type { TeamMember, GalleryImage, AboutPageData } from "@/lib/strapi";
 import { fallbackTeamMembers, fallbackGalleryImages, fallbackAboutPage, aboutGraphicFallbackImg, heroBackgroundFallbackImg } from "@/data/fallback";
+import { useI18n } from "@/i18n";
 
 const fadeUp = {
   initial: { opacity: 0, y: 20 },
@@ -17,9 +18,10 @@ const fadeUp = {
 };
 
 export default function About() {
-  const { data: teamMembers, loading: teamLoading } = useStrapiQuery<TeamMember[]>("teamMembers", getTeamMembers, fallbackTeamMembers);
-  const { data: galleryImages, loading: galleryLoading } = useStrapiQuery<GalleryImage[]>("galleryImages", getGalleryImages, fallbackGalleryImages);
-  const { data: aboutPage } = useStrapiQuery<AboutPageData>("aboutPage", getAboutPage, fallbackAboutPage);
+  const { locale, t } = useI18n();
+  const { data: teamMembers, loading: teamLoading } = useStrapiQuery<TeamMember[]>("teamMembers", () => getTeamMembers(locale), fallbackTeamMembers, locale);
+  const { data: galleryImages, loading: galleryLoading } = useStrapiQuery<GalleryImage[]>("galleryImages", () => getGalleryImages(locale), fallbackGalleryImages, locale);
+  const { data: aboutPage } = useStrapiQuery<AboutPageData>("aboutPage", () => getAboutPage(locale), fallbackAboutPage, locale);
 
   const aboutGraphic = aboutGraphicFallbackImg;
   const heroGraphic = heroBackgroundFallbackImg;
@@ -83,10 +85,10 @@ export default function About() {
               className="max-w-sm md:max-w-md lg:max-w-lg"
             >
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-works-dark mb-6 leading-tight">
-                Rólunk.
+                 {aboutPage?.hero?.heading || (locale === "hu" ? "Rólunk." : "")}
               </h1>
               <p className="text-lg lg:text-xl text-works-dark/60 leading-relaxed">
-                Egy magyar digitális ügynökség vagyunk, akik hisznek abban, hogy a jó design kutatáson alapul, és a technológia az embereket szolgálja.
+                 {aboutPage?.hero?.description || (locale === "hu" ? "Egy magyar digitális ügynökség vagyunk, akik hisznek abban, hogy a jó design kutatáson alapul, és a technológia az embereket szolgálja." : "")}
               </p>
             </motion.div>
           </div>
@@ -96,14 +98,14 @@ export default function About() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <motion.div {...fadeUp} className="max-w-3xl">
               <h2 className="text-3xl md:text-4xl font-bold text-works-dark mb-10">
-                {aboutPage?.intro?.heading || 'Kik vagyunk?'}
+                 {aboutPage?.intro?.heading || (locale === "hu" ? "Kik vagyunk?" : "")}
               </h2>
               <p className="text-lg text-works-dark/70 leading-relaxed mb-6">
-                {aboutPage?.intro?.description || 'A Works. 2018-ban indult azzal a céllal, hogy a magyar digitális piacra világszínvonalú UX kutatást és design megoldásokat hozzon. Azóta több mint 50 projekten dolgoztunk startupokkal, nagyvállalatokkal és közszféra szereplőkkel egyaránt.'}
+                 {aboutPage?.intro?.description || (locale === "hu" ? "A Works. 2018-ban indult azzal a céllal, hogy a magyar digitális piacra világszínvonalú UX kutatást és design megoldásokat hozzon. Azóta több mint 50 projekten dolgoztunk startupokkal, nagyvállalatokkal és közszféra szereplőkkel egyaránt." : "")}
               </p>
-              <p className="text-lg text-works-dark/70 leading-relaxed">
+              {locale === "hu" && <p className="text-lg text-works-dark/70 leading-relaxed">
                 Hisszük, hogy a legjobb digitális termékek ott születnek, ahol az adatvezérelt kutatás találkozik a kreatív gondolkodással. Nem csak tervezünk — partnerként végigkísérjük ügyfeleinket az ötlettől a megvalósításig.
-              </p>
+              </p>}
             </motion.div>
           </div>
         </section>
@@ -112,7 +114,7 @@ export default function About() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <motion.div {...fadeUp}>
               <h2 className="text-3xl md:text-4xl font-bold text-works-dark mb-16">
-                Kollégáink
+                 {t("pages.teamHeading")}
               </h2>
             </motion.div>
 
@@ -210,7 +212,7 @@ export default function About() {
                   <button
                     key={i}
                     type="button"
-                    aria-label={`Ugrás a(z) ${i + 1}. képre`}
+                    aria-label={t("carousel.goToSlide", { index: i + 1 })}
                     aria-current={i === gallerySelected ? "true" : undefined}
                     onClick={() => scrollGalleryTo(i)}
                     className={`h-2 rounded-full transition-all duration-300 ${

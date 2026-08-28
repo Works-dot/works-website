@@ -8,17 +8,19 @@ import { getLegalDocuments } from "@/lib/strapi";
 import type { LegalDocuments } from "@/lib/strapi";
 import { fallbackLegalDocuments } from "@/data/fallback";
 import { useI18n } from "@/i18n";
+import { buildLocalePath } from "@/lib/i18n-routes";
 
 // A régi /sutik cím megmarad a sütisáv és más hivatkozások számára, de ha a
 // hivatalos PDF elérhető, automatikusan arra irányítunk. A korábbi rövid
 // tájékoztató használható tartalékként megmarad, ha az adminban nincs PDF.
 export default function Sutik() {
   const { openSettings } = useCookieConsent();
-  const { t } = useI18n();
+  const { locale, t } = useI18n();
   const { data: legalDocs } = useStrapiQuery<LegalDocuments>(
     "legalDocuments",
-    getLegalDocuments,
-    fallbackLegalDocuments
+    () => getLegalDocuments(locale),
+    fallbackLegalDocuments,
+    locale
   );
   const pdfUrl = legalDocs?.cookiePdfUrl || "";
 
@@ -41,36 +43,23 @@ export default function Sutik() {
             </h1>
 
             <div className="space-y-6 text-works-dark/70 leading-relaxed">
-              {/* Legal explanatory paragraphs remain as content — not UI chrome */}
-              <p>
-                A sütik (cookie-k) kis szöveges fájlok, amelyeket a
-                meglátogatott weboldalak helyeznek el a böngésződben. A Works.
-                weboldala a lehető legkevesebb sütit használja: nem futtatunk
-                látogatáskövetést, statisztikai vagy marketing célú mérést.
-              </p>
+              <p>{t("cookiePage.introBody")}</p>
 
               <h2 className="text-xl font-bold text-works-dark pt-4">
                 {t("cookiePage.sectionEssential")}
               </h2>
               <p>
-                A süti-hozzájárulásoddal kapcsolatos döntésedet a böngésződ
-                helyi tárolójában (localStorage, <code>works-cookie-consent</code>{" "}
-                kulcs) jegyezzük meg, hogy ne kelljen minden látogatáskor újra
-                nyilatkoznod. Ez nem kerül továbbításra senkinek, és bármikor
-                törölhető a böngésző adatainak törlésével.
+                {t("cookiePage.essentialBodyBeforeStorageKey")}{" "}
+                <code>works-cookie-consent</code>{" "}
+                {t("cookiePage.essentialBodyAfterStorageKey")}
               </p>
 
               <h2 className="text-xl font-bold text-works-dark pt-4">
                 {t("cookiePage.sectionThirdParty")}
               </h2>
               <p>
-                A Kapcsolat oldalon irodánk elhelyezkedését beágyazott Google
-                Térkép mutatja. A térkép betöltésekor a Google LLC sütiket
-                helyezhet el, és adatokat (pl. IP-cím) kezelhet a saját
-                adatkezelési szabályzata szerint. Ezért a térkép csak akkor
-                töltődik be, ha ehhez kifejezetten hozzájárultál — a sütisávon
-                vagy közvetlenül a térkép helyén megjelenő gombbal. A Google
-                adatkezeléséről itt olvashatsz:{" "}
+                {t("cookiePage.thirdPartyBody")}{" "}
+                {t("cookiePage.thirdPartyPolicyLeadIn")}{" "}
                 <a
                   href="https://policies.google.com/privacy"
                   target="_blank"
@@ -85,19 +74,12 @@ export default function Sutik() {
               <h2 className="text-xl font-bold text-works-dark pt-4">
                 {t("cookiePage.sectionFonts")}
               </h2>
-              <p>
-                A weboldal betűtípusait saját szerverünkről szolgáljuk ki, így a
-                megjelenítésükhöz nem történik adattovábbítás külső
-                szolgáltató felé.
-              </p>
+              <p>{t("cookiePage.fontsBody")}</p>
 
               <h2 className="text-xl font-bold text-works-dark pt-4">
                 {t("cookiePage.sectionModify")}
               </h2>
-              <p>
-                Döntésedet bármikor megváltoztathatod a lábléc „Süti
-                beállítások" hivatkozásával, vagy az alábbi gombbal:
-              </p>
+              <p>{t("cookiePage.modifyBody")}</p>
               <button
                 type="button"
                 onClick={openSettings}
@@ -108,14 +90,14 @@ export default function Sutik() {
               </button>
 
               <p className="pt-4">
-                A személyes adatok kezeléséről bővebben az{" "}
+                {t("cookiePage.privacyBodyLeadIn")}{" "}
                 <a
-                  href="/adatkezeles"
+                  href={buildLocalePath(locale, "privacy")}
                   className="text-works-primary font-semibold underline hover:no-underline"
                 >
                   {t("cookiePage.privacyPageLinkLabel")}
-                </a>{" "}
-                olvashatsz.
+                </a>
+                {t("cookiePage.privacyBodyTrailingText")}
               </p>
             </div>
           </div>

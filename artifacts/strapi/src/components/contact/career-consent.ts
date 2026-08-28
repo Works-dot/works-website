@@ -8,10 +8,12 @@ export default {
   "options": {},
   "attributes": {
     "checkbox1Text": {
-      "type": "text"
+      "type": "text",
+      "pluginOptions": { "i18n": { "localized": true } }
     },
     "checkbox2Text": {
-      "type": "text"
+      "type": "text",
+      "pluginOptions": { "i18n": { "localized": true } }
     }
   }
 };

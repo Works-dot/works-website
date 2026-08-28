@@ -20,10 +20,10 @@ const hardcodedClients: Client[] = [
 const clientsFallback = fallbackClients.length > 0 ? fallbackClients : hardcodedClients;
 
 export function Clients() {
-  const { t } = useI18n();
-  const { data: clients } = useStrapiQuery<Client[]>("clients", getClients, clientsFallback);
+  const { locale, t } = useI18n();
+  const { data: clients } = useStrapiQuery<Client[]>("clients", () => getClients(locale), clientsFallback, locale);
 
-  const displayClients = clients || clientsFallback;
+  const displayClients = clients || (locale === "hu" ? clientsFallback : []);
 
   return (
     <section className="py-20 bg-white border-y border-works-muted/30 overflow-hidden">

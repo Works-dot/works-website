@@ -11,6 +11,7 @@ import { getBlogPage, getBlogPosts } from "@/lib/strapi";
 import type { BlogPageData, BlogPost } from "@/lib/strapi";
 import { fallbackBlogPage, fallbackBlogPosts } from "@/data/fallback";
 import { useI18n } from "@/i18n";
+import { buildLocalePath } from "@/lib/i18n-routes";
 
 function FeaturedBlogCard({ slug, title, excerpt, date, image, imageAlt, author, readingTime }: {
   slug: string;
@@ -22,7 +23,7 @@ function FeaturedBlogCard({ slug, title, excerpt, date, image, imageAlt, author,
   author: string;
   readingTime: string;
 }) {
-  const { t } = useI18n();
+  const { locale, t } = useI18n();
   return (
     <motion.div
       layout
@@ -32,7 +33,7 @@ function FeaturedBlogCard({ slug, title, excerpt, date, image, imageAlt, author,
       transition={{ duration: 0.4 }}
       className="col-span-1 md:col-span-2 lg:col-span-3"
     >
-      <Link href={`/blog/${slug}`} className="group flex flex-col lg:flex-row gap-8 lg:gap-12 items-center">
+      <Link href={buildLocalePath(locale, "blogPost", slug)} className="group flex flex-col lg:flex-row gap-8 lg:gap-12 items-center">
         <div className="w-full lg:w-1/2 overflow-hidden bg-works-light aspect-[4/3]">
           <img
             src={image}
@@ -76,7 +77,7 @@ function BlogGridCard({ slug, title, excerpt, date, image, imageAlt, author, rea
   readingTime: string;
   index: number;
 }) {
-  const { t } = useI18n();
+  const { locale, t } = useI18n();
   return (
     <motion.article
       layout
@@ -86,7 +87,7 @@ function BlogGridCard({ slug, title, excerpt, date, image, imageAlt, author, rea
       transition={{ duration: 0.4, delay: index * 0.1 }}
       className="col-span-1"
     >
-      <Link href={`/blog/${slug}`} className="group flex flex-col bg-white overflow-hidden border border-works-muted/30 hover:border-works-primary/30 hover:shadow-lg transition-all duration-300">
+      <Link href={buildLocalePath(locale, "blogPost", slug)} className="group flex flex-col bg-white overflow-hidden border border-works-muted/30 hover:border-works-primary/30 hover:shadow-lg transition-all duration-300">
         <div className="w-full aspect-[4/3] overflow-hidden">
           <img
             loading="lazy"
@@ -127,10 +128,10 @@ function BlogGridCard({ slug, title, excerpt, date, image, imageAlt, author, rea
 }
 
 export default function Blog() {
-  const { t } = useI18n();
+  const { locale, t } = useI18n();
   const [activeTag, setActiveTag] = useState<string | null>(null);
-  const { data: blogPosts, loading, error } = useStrapiQuery<BlogPost[]>("blogPosts", getBlogPosts, fallbackBlogPosts);
-  const { data: blogPage } = useStrapiQuery<BlogPageData>("blogPage", getBlogPage, fallbackBlogPage);
+  const { data: blogPosts, loading, error } = useStrapiQuery<BlogPost[]>("blogPosts", () => getBlogPosts(locale), fallbackBlogPosts, locale);
+  const { data: blogPage } = useStrapiQuery<BlogPageData>("blogPage", () => getBlogPage(locale), fallbackBlogPage, locale);
 
   useEffect(() => {
     window.scrollTo(0, 0);

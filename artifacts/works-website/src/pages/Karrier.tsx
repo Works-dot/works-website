@@ -10,6 +10,7 @@ import { getCareerPositions, getCareerPage } from "@/lib/strapi";
 import type { CareerPosition, CareerPageData } from "@/lib/strapi";
 import { fallbackPositions, fallbackCareerPage, careerGraphicFallbackImg } from "@/data/fallback";
 import { useI18n } from "@/i18n";
+import { buildLocalePath } from "@/lib/i18n-routes";
 
 const fadeUp = {
   initial: { opacity: 0, y: 20 },
@@ -19,10 +20,10 @@ const fadeUp = {
 };
 
 export default function Karrier() {
-  const { t } = useI18n();
+  const { locale, t } = useI18n();
   const scrollRef = useRef<HTMLDivElement>(null);
-  const { data: positions, loading: posLoading, error: posError } = useStrapiQuery<CareerPosition[]>("careerPositions", getCareerPositions, fallbackPositions);
-  const { data: careerPage } = useStrapiQuery<CareerPageData>("careerPage", getCareerPage, fallbackCareerPage);
+  const { data: positions, loading: posLoading, error: posError } = useStrapiQuery<CareerPosition[]>("careerPositions", () => getCareerPositions(locale), fallbackPositions, locale);
+  const { data: careerPage } = useStrapiQuery<CareerPageData>("careerPage", () => getCareerPage(locale), fallbackCareerPage, locale);
 
   const contactGraphic = careerGraphicFallbackImg;
   const workWithUs = careerPage?.workWithUs;
@@ -68,10 +69,10 @@ export default function Karrier() {
               className="max-w-xl lg:max-w-lg"
             >
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-works-dark mb-6 leading-tight">
-                {t("pages.karrierHeading")}
+                {careerPage?.hero?.heading || t("pages.karrierHeading")}
               </h1>
               <p className="text-lg lg:text-xl text-works-dark/60 leading-relaxed">
-                Csatlakozz egy csapathoz, ahol a design kutatáson alapul, a technológia az embereket szolgálja, és minden nap tanulhatsz valami újat.
+                {careerPage?.hero?.description || (locale === "hu" ? "Csatlakozz egy csapathoz, ahol a design kutatáson alapul, a technológia az embereket szolgálja, és minden nap tanulhatsz valami újat." : "")}
               </p>
             </motion.div>
           </div>
@@ -81,7 +82,7 @@ export default function Karrier() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <motion.div {...fadeUp}>
               <h2 className="text-4xl md:text-5xl font-bold text-works-dark tracking-tight mb-6">
-                {workWithUs?.heading || "Dolgozz velünk"}
+                {workWithUs?.heading || (locale === "hu" ? "Dolgozz velünk" : "")}
               </h2>
               {(workWithUs?.description || "").split("\n\n").map((paragraph, i) => (
                 <p key={i} className="text-lg text-works-dark/70 leading-relaxed mb-4">
@@ -124,7 +125,7 @@ export default function Karrier() {
                     transition={{ duration: 0.5, delay: i * 0.08 }}
                   >
                     <Link
-                      href={`/karrier/${position.slug}`}
+                      href={buildLocalePath(locale, "careerDetail", position.slug)}
                       className="flex items-center justify-between py-6 lg:py-8 px-1 group"
                     >
                       <h3 className="text-xl lg:text-2xl font-bold text-works-dark group-hover:text-works-primary transition-colors">
@@ -143,7 +144,7 @@ export default function Karrier() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <motion.div {...fadeUp} className="flex items-end justify-between mb-12">
               <h2 className="text-4xl md:text-5xl font-bold text-works-dark tracking-tight">
-                {whyUs?.sectionHeading || "Miért jó nálunk dolgozni?"}
+                {whyUs?.sectionHeading || (locale === "hu" ? "Miért jó nálunk dolgozni?" : "")}
               </h2>
               <div className="hidden md:flex gap-2">
                 <button

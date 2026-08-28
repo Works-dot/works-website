@@ -9,7 +9,8 @@ export default {
   "attributes": {
     "body": {
       "type": "richtext",
-      "required": true
+      "required": true,
+      "pluginOptions": { "i18n": { "localized": true } }
     }
   }
 };

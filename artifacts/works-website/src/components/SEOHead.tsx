@@ -9,6 +9,7 @@ import {
 } from "../seo-data";
 import { getLocaleFromPath, matchLocalePath } from "@/lib/i18n-routes";
 import { useStrapiQuery } from "@/hooks/useStrapiQuery";
+import { useI18n } from "@/i18n";
 import { getBlogPage, getGlobalSettings, getProjectsPage } from "@/lib/strapi";
 import type { BlogPageData, GlobalSettings, ProjectsPageData } from "@/lib/strapi";
 import { fallbackBlogPage, fallbackGlobalSettings, fallbackProjectsPage } from "@/data/fallback";
@@ -94,24 +95,28 @@ function syncJsonLd(scriptMarkup: string[]) {
 
 export default function SEOHead() {
   const [location] = useLocation();
-  const { data: settings } = useStrapiQuery<GlobalSettings>("globalSettings", getGlobalSettings, fallbackGlobalSettings);
+  const { locale } = useI18n();
+  const { data: settings } = useStrapiQuery<GlobalSettings>("globalSettings", () => getGlobalSettings(locale), fallbackGlobalSettings, locale);
   const { data: projectsPage } = useStrapiQuery<ProjectsPageData>(
     "projectsPage",
-    getProjectsPage,
-    fallbackProjectsPage
+    () => getProjectsPage(locale),
+    fallbackProjectsPage,
+    locale
   );
   const { data: blogPage } = useStrapiQuery<BlogPageData>(
     "blogPage",
-    getBlogPage,
-    fallbackBlogPage
+    () => getBlogPage(locale),
+    fallbackBlogPage,
+    locale
   );
 
   const baseMeta = getPageMeta(location, getLocaleFromPath(location));
+  const lang = pageLocale(baseMeta);
   const routeKey = matchLocalePath(location)?.routeKey;
   const pageSeo =
-    routeKey === "projects"
+    lang === "hu" && routeKey === "projects"
       ? projectsPage?.seo
-      : routeKey === "blog"
+      : lang === "hu" && routeKey === "blog"
         ? blogPage?.seo
         : null;
   const meta = pageSeo
@@ -123,7 +128,6 @@ export default function SEOHead() {
         ogImage: pageSeo.ogImage || baseMeta.ogImage,
       }
     : baseMeta;
-  const lang = pageLocale(meta);
   const ogLocale = localeToOgLocale(lang);
   const ogImage = absoluteUrl(meta.ogImage || settings?.ogImageUrl || "/opengraph.jpg");
   const favicon = settings?.faviconUrl || "/favicon.ico";
@@ -131,8 +135,12 @@ export default function SEOHead() {
   const ogType = meta.type === "article" ? "article" : "website";
 
   useEffect(() => {
+    document.documentElement.lang = lang;
     upsertTitle(meta.title);
     upsertMeta("name", "description", meta.description);
+    document.head
+      .querySelectorAll(`meta[name="robots"][${CLIENT_SEO_ATTRIBUTE}]`)
+      .forEach((element) => element.remove());
     upsertLink("canonical", canonical);
     upsertMeta("property", "og:title", meta.title);
     upsertMeta("property", "og:description", meta.description);
@@ -165,6 +173,7 @@ export default function SEOHead() {
   }, [
     canonical,
     favicon,
+    lang,
     meta.description,
     meta.title,
     meta.article?.publishedTime,

@@ -9,72 +9,46 @@ const outDir = path.resolve(root, "dist/public");
 async function prerender() {
   const {
     render,
-    projects,
-    blogPosts,
-    services,
-    positions,
+    getLocaleFallback,
     getPageMeta,
     buildMetaTags,
     SITE_URL,
     PUBLIC_LOCALES,
     getStaticPathsForLocale,
+    getLocaleFromPath,
   } = await import(path.resolve(root, "dist/server/entry-server.js"));
-
-  // Safety: assert no /en routes can be emitted as long as EN is not public.
-  for (const locale of PUBLIC_LOCALES) {
-    if (locale === "en") {
-      throw new Error(
-        "Prerender safety check failed: 'en' locale is in PUBLIC_LOCALES. " +
-          "EN content pipeline must be complete before adding it to PUBLIC_LOCALES."
-      );
-    }
-  }
 
   const template = fs.readFileSync(path.resolve(outDir, "index.html"), "utf-8");
 
-  // Build routes from PUBLIC_LOCALES only.
-  // Currently only "hu" is public, so this mirrors the previous static list.
+  // Build every public locale from its own embedded dataset.
   const allRoutes = [];
 
   for (const locale of PUBLIC_LOCALES) {
     const staticRoutes = getStaticPathsForLocale(locale);
 
-    const dynamicRoutes =
-      locale === "hu"
-        ? [
-            ...projects.map((p) => `/projektek/${p.slug}`),
-            ...blogPosts.map((p) => `/blog/${p.slug}`),
-            ...services.map((s) => `/szolgaltatasok/${s.slug}`),
-            ...positions.map((p) => `/karrier/${p.slug}`),
-          ]
-        : [
-            // Future EN dynamic routes would be built here.
-            // e.g. ...projects.map((p) => `/en/projects/${p.slug}`),
-          ];
-
-    // Assert: no /en route slips through while EN is not public
-    for (const r of [...staticRoutes, ...dynamicRoutes]) {
-      if (r.startsWith("/en") || r.startsWith("/en/")) {
-        throw new Error(
-          `Prerender safety check failed: route "${r}" has /en prefix but EN is not a public locale.`
-        );
-      }
+    const projects = getLocaleFallback("projects", locale) || [];
+    const blogPosts = getLocaleFallback("blogPosts", locale) || [];
+    const services = getLocaleFallback("services", locale) || [];
+    const positions = getLocaleFallback("careerPositions", locale) || [];
+    if (locale === "hu" && (projects.length === 0 || blogPosts.length === 0 || services.length === 0)) {
+      throw new Error(
+        "Prerender safety check failed: HU projects, blog posts, or services list is empty."
+      );
     }
+    const dynamicRoutes = [
+      ...projects.map((p) => locale === "hu" ? `/projektek/${p.slug}` : `/en/projects/${p.slug}`),
+      ...blogPosts.map((p) => locale === "hu" ? `/blog/${p.slug}` : `/en/blog/${p.slug}`),
+      ...services.map((s) => locale === "hu" ? `/szolgaltatasok/${s.slug}` : `/en/services/${s.slug}`),
+      ...positions.map((p) => locale === "hu" ? `/karrier/${p.slug}` : `/en/careers/${p.slug}`),
+    ];
 
     allRoutes.push(...staticRoutes, ...dynamicRoutes);
-  }
-
-  if (projects.length === 0 || blogPosts.length === 0 || services.length === 0) {
-    throw new Error(
-      "Prerender safety check failed: projects, blog posts, or services list is empty — refusing to build a site with missing content."
-    );
   }
 
   let generated = 0;
 
   for (const route of allRoutes) {
-    // Derive locale for this route: /en prefix = "en", everything else = "hu"
-    const locale = route.startsWith("/en") ? "en" : "hu";
+    const locale = getLocaleFromPath(route);
     const { html } = render(route);
     const meta = getPageMeta(route, locale);
     const headTags = buildMetaTags(meta);
@@ -88,6 +62,7 @@ async function prerender() {
 
     page = page.replace("<!--ssr-head-->", headTags);
     page = page.replace("<!--ssr-outlet-->", html);
+    page = page.replace(/<html(\s[^>]*)?\slang=(["'])[^"']*\2([^>]*)>/i, `<html$1 lang="${locale}"$3>`);
 
     const filePath =
       route === "/"
@@ -127,9 +102,16 @@ async function prerender() {
         .replace(/</g, "&lt;")
         .replace(/>/g, "&gt;")
         .replace(/"/g, "&quot;");
-    const lastmodByRoute = new Map(
-      blogPosts.map((p) => [`/blog/${p.slug}`, p.date])
-    );
+    const lastmodByRoute = new Map();
+    for (const locale of PUBLIC_LOCALES) {
+      const blogPosts = getLocaleFallback("blogPosts", locale) || [];
+      for (const post of blogPosts) {
+        lastmodByRoute.set(
+          locale === "hu" ? `/blog/${post.slug}` : `/en/blog/${post.slug}`,
+          post.date
+        );
+      }
+    }
     const urls = allRoutes
       .map((route) => {
         const loc = route === "/" ? `${SITE_URL}/` : `${SITE_URL}${route}`;

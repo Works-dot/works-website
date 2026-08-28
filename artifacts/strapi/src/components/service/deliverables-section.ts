@@ -10,7 +10,8 @@ export default {
     "intro": {
       "type": "component",
       "repeatable": false,
-      "component": "service.section-intro"
+      "component": "service.section-intro",
+      "pluginOptions": { "i18n": { "localized": true } }
     },
     "variant": {
       "type": "enumeration",
@@ -21,12 +22,14 @@ export default {
     "smallCards": {
       "type": "component",
       "repeatable": true,
-      "component": "service.deliverable-card"
+      "component": "service.deliverable-card",
+      "pluginOptions": { "i18n": { "localized": true } }
     },
     "largeCards": {
       "type": "component",
       "repeatable": true,
-      "component": "service.deliverable-group"
+      "component": "service.deliverable-group",
+      "pluginOptions": { "i18n": { "localized": true } }
     }
   }
 };

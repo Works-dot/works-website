@@ -1,6 +1,8 @@
 import { Link } from "wouter";
 import { motion } from "framer-motion";
 import { Calendar, ArrowRight } from "lucide-react";
+import { useI18n } from "@/i18n";
+import { buildLocalePath } from "@/lib/i18n-routes";
 
 interface BlogCardProps {
   slug: string;
@@ -15,6 +17,7 @@ interface BlogCardProps {
 }
 
 export function BlogCard({ slug, title, excerpt, date, image, imageAlt, index, animated = true }: BlogCardProps) {
+  const { locale, t } = useI18n();
   return (
     <motion.article 
       {...(animated
@@ -27,7 +30,7 @@ export function BlogCard({ slug, title, excerpt, date, image, imageAlt, index, a
         : {})}
       className="flex flex-col group bg-white overflow-hidden border border-works-muted/30 hover:border-works-primary/30 hover:shadow-lg transition-all duration-300"
     >
-      <Link href={`/blog/${slug}`} className="flex flex-col flex-grow">
+      <Link href={buildLocalePath(locale, "blogPost", slug)} className="flex flex-col flex-grow">
         <div className="w-full aspect-[4/3] relative overflow-hidden">
           <img
             src={image}
@@ -55,7 +58,7 @@ export function BlogCard({ slug, title, excerpt, date, image, imageAlt, index, a
           </div>
           
           <span className="inline-flex items-center text-works-dark font-semibold text-sm group-hover:text-works-primary mt-auto">
-            Elolvasom
+            {t("cta.readMore")}
             <ArrowRight className="ml-1 w-4 h-4 transition-transform group-hover:translate-x-1" />
           </span>
         </div>

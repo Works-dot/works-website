@@ -19,6 +19,7 @@ import type { Service, Project, SectionIntro } from "@/lib/strapi";
 import { fallbackProjects, fallbackServices, bgGraphic1FallbackImg, bgGraphic2FallbackImg } from "@/data/fallback";
 import { getServiceHeroGraphic } from "@/data/service-hero-graphics";
 import { useI18n } from "@/i18n";
+import { buildLocalePath } from "@/lib/i18n-routes";
 
 const fadeUp = {
   initial: { opacity: 0, y: 20 },
@@ -60,15 +61,16 @@ function SectionHeading({ intro, fallbackHeading }: { intro: SectionIntro | null
 }
 
 export default function ServicePage() {
-  const { t } = useI18n();
+  const { locale, t } = useI18n();
   const { slug } = useParams<{ slug: string }>();
   const fallbackService = fallbackServices.find((s) => s.slug === slug) || null;
   const { data: service, loading: svcLoading, error: svcError } = useStrapiQuery<Service | null>(
-    `service-${slug}`,
-    () => fetchServiceBySlug(slug || ""),
-    fallbackService
+    `service:${locale}:${slug}`,
+    () => fetchServiceBySlug(slug || "", locale),
+    fallbackService,
+    locale
   );
-  const { data: projects } = useStrapiQuery<Project[]>("projects", getProjects, fallbackProjects);
+  const { data: projects } = useStrapiQuery<Project[]>("projects", () => getProjects(locale), fallbackProjects, locale);
 
   const bgGraphic = bgGraphic1FallbackImg;
   const bgGraphic2 = bgGraphic2FallbackImg;
@@ -93,7 +95,7 @@ export default function ServicePage() {
           <div className="text-center">
             <h1 className="text-3xl font-bold text-works-dark mb-4">{t("states.errorHeading")}</h1>
             <p className="text-works-dark/60 mb-6">{t("states.errorBody")}</p>
-            <Link href="/" className="text-works-primary font-semibold hover:underline">{t("cta.backToHome")}</Link>
+            <Link href={buildLocalePath(locale, "home")} className="text-works-primary font-semibold hover:underline">{t("cta.backToHome")}</Link>
           </div>
         </main>
         <Footer />
@@ -110,7 +112,7 @@ export default function ServicePage() {
             <h1 className="text-3xl font-bold text-works-dark mb-4">
               {t("states.notFoundService")}
             </h1>
-            <Link href="/" className="text-works-primary font-semibold hover:underline">
+            <Link href={buildLocalePath(locale, "home")} className="text-works-primary font-semibold hover:underline">
               {t("cta.backToHome")}
             </Link>
           </div>
@@ -207,7 +209,7 @@ export default function ServicePage() {
         {questions && questions.cards.length > 0 && (
           <section className="py-20 lg:py-28 bg-works-bg">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-              <SectionHeading intro={questions.intro} fallbackHeading="Milyen kérdésekre segítünk választ találni?" />
+              <SectionHeading intro={questions.intro} fallbackHeading={t("sections.serviceQuestionsHeading")} />
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 {questions.cards.map((card, i) => (
                   <motion.div
@@ -244,7 +246,7 @@ export default function ServicePage() {
               />
             )}
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-              <SectionHeading intro={help.intro} fallbackHeading="Miben tudunk segíteni?" />
+              <SectionHeading intro={help.intro} fallbackHeading={t("sections.serviceHelpHeading")} />
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {help.cards.map((card, i) => (
                   <motion.div
@@ -322,7 +324,7 @@ export default function ServicePage() {
         {showDeliverables && deliverables && (
           <section className="py-20 lg:py-28 bg-works-light">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-              <SectionHeading intro={deliverables.intro} fallbackHeading="Amit a projektből kapsz" />
+              <SectionHeading intro={deliverables.intro} fallbackHeading={t("sections.serviceDeliverablesHeading")} />
               {deliverables.variant === "largeCards" ? (
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
                   {deliverables.largeCards.map((card, i) => (
@@ -390,8 +392,8 @@ export default function ServicePage() {
         {service.ctaBanner?.heading && (
           <CtaBannerView
             heading={service.ctaBanner.heading}
-            ctaText={service.ctaBanner.ctaText || "Segíthetünk?"}
-            ctaLink={service.ctaBanner.ctaLink || "/kapcsolat"}
+            ctaText={service.ctaBanner.ctaText || t("sections.servicesContactCta")}
+            ctaLink={service.ctaBanner.ctaLink || buildLocalePath(locale, "contact")}
           />
         )}
 
@@ -399,13 +401,13 @@ export default function ServicePage() {
         {relatedProjects.length > 0 && (
           <section className="py-20 lg:py-28 bg-works-bg border-t border-works-muted/50">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-              <SectionHeading intro={service.projectExamplesIntro} fallbackHeading="Projektpéldák" />
+              <SectionHeading intro={service.projectExamplesIntro} fallbackHeading={t("sections.serviceProjectsHeading")} />
               <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
                 {relatedProjects.map((p, i) => (
                   <RelatedProjectCard key={p.slug} p={p} i={i} />
                 ))}
               </div>
-              <MobileCarousel className="md:hidden" ariaLabel="Projektpéldák">
+              <MobileCarousel className="md:hidden" ariaLabel={t("sections.serviceProjectsHeading")}>
                 {relatedProjects.map((p, i) => (
                   <RelatedProjectCard key={p.slug} p={p} i={i} animated={false} />
                 ))}
@@ -418,7 +420,7 @@ export default function ServicePage() {
         {faq && faq.items.length > 0 && (
           <section className="py-20 lg:py-28 bg-white">
             <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-              <SectionHeading intro={faq.intro} fallbackHeading="Gyakran ismételt kérdések" />
+              <SectionHeading intro={faq.intro} fallbackHeading={t("sections.serviceFaqHeading")} />
               <motion.div {...fadeUp}>
                 <Accordion type="single" collapsible className="space-y-3">
                   {faq.items.map((item, i) => (
@@ -445,7 +447,7 @@ export default function ServicePage() {
         {relatedServices.length > 0 && (
           <section className="py-20 lg:py-28 bg-works-bg">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-              <SectionHeading intro={service.relatedServicesIntro} fallbackHeading="Kapcsolódó szolgáltatások" />
+              <SectionHeading intro={service.relatedServicesIntro} fallbackHeading={t("sections.relatedServicesHeading")} />
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {relatedServices.map((rel, i) => (
                   <motion.div
@@ -455,7 +457,7 @@ export default function ServicePage() {
                     viewport={{ once: true, margin: "-50px" }}
                     transition={{ duration: 0.5, delay: i * 0.1 }}
                   >
-                    <Link href={`/szolgaltatasok/${rel.slug}`} className="block h-full">
+                    <Link href={buildLocalePath(locale, "serviceDetail", rel.slug)} className="block h-full">
                       <div className="bg-white/60 backdrop-blur-sm p-6 border border-works-muted/30 hover:bg-white hover:border-works-primary/30 hover:shadow-lg transition-all duration-300 group cursor-pointer h-full flex flex-col">
                         <div className="flex items-start gap-3 mb-4">
                           <div className="w-7 h-7 text-works-primary flex items-center justify-center shrink-0">
@@ -488,7 +490,7 @@ export default function ServicePage() {
 }
 
 function RelatedProjectCard({ p, i, animated = true }: { p: Project; i: number; animated?: boolean }) {
-  const { t } = useI18n();
+  const { locale, t } = useI18n();
   return (
     <motion.article
       {...(animated
@@ -501,7 +503,7 @@ function RelatedProjectCard({ p, i, animated = true }: { p: Project; i: number; 
         : {})}
       className="h-full flex flex-col group bg-white overflow-hidden border border-works-muted/30 hover:border-works-primary/30 hover:shadow-lg transition-all duration-300"
     >
-      <Link href={`/projektek/${p.slug}`} className="flex flex-col flex-grow">
+      <Link href={buildLocalePath(locale, "projectDetail", p.slug)} className="flex flex-col flex-grow">
         <div className="w-full aspect-[4/3] relative overflow-hidden bg-works-light">
           <img
             src={p.image}

@@ -9,25 +9,32 @@ export default {
   "attributes": {
     "heading": {
       "type": "string",
-      "required": true
+      "required": true,
+      "pluginOptions": { "i18n": { "localized": true } }
     },
     "highlightedWord": {
-      "type": "string"
+      "type": "string",
+      "pluginOptions": { "i18n": { "localized": true } }
     },
     "description": {
-      "type": "text"
+      "type": "text",
+      "pluginOptions": { "i18n": { "localized": true } }
     },
     "primaryCtaText": {
-      "type": "string"
+      "type": "string",
+      "pluginOptions": { "i18n": { "localized": true } }
     },
     "primaryCtaLink": {
-      "type": "string"
+      "type": "string",
+      "pluginOptions": { "i18n": { "localized": true } }
     },
     "secondaryCtaText": {
-      "type": "string"
+      "type": "string",
+      "pluginOptions": { "i18n": { "localized": true } }
     },
     "secondaryCtaLink": {
-      "type": "string"
+      "type": "string",
+      "pluginOptions": { "i18n": { "localized": true } }
     },
     "backgroundImage": {
       "type": "media",

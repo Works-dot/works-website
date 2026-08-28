@@ -9,7 +9,8 @@ export default {
   "attributes": {
     "quote": {
       "type": "richtext",
-      "required": true
+      "required": true,
+      "pluginOptions": { "i18n": { "localized": true } }
     }
   }
 };

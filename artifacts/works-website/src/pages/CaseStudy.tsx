@@ -6,24 +6,32 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import SEOHead from "@/components/SEOHead";
 import { useStrapiQuery } from "@/hooks/useStrapiQuery";
-import { getProjects, getNextProject } from "@/lib/strapi";
+import { getProjectBySlug, getProjects, getNextProject } from "@/lib/strapi";
 import type { Project } from "@/lib/strapi";
 import { ContentBlock } from "@/components/ContentBlock";
 import { fallbackProjects, heroBackgroundFallbackImg } from "@/data/fallback";
 import { useI18n } from "@/i18n";
+import { buildLocalePath } from "@/lib/i18n-routes";
 
 export default function CaseStudy() {
-  const { t } = useI18n();
+  const { locale, t } = useI18n();
   const { slug } = useParams<{ slug: string }>();
-  const { data: projects, loading, error } = useStrapiQuery<Project[]>("projects", getProjects, fallbackProjects);
+  const fallbackProject = fallbackProjects.find((p) => p.slug === slug) || null;
+  const { data: project, loading, error } = useStrapiQuery<Project | null>(
+    `project:${locale}:${slug}`,
+    () => getProjectBySlug(slug || "", locale),
+    fallbackProject,
+    locale
+  );
+  const { data: projects } = useStrapiQuery<Project[]>("projects", () => getProjects(locale), fallbackProjects, locale);
   const heroBgPattern = heroBackgroundFallbackImg;
 
-  const project = projects?.find((p) => p.slug === slug) || null;
   const nextProject = projects && project ? getNextProject(projects, project.slug) : null;
 
   if (loading) {
     return (
       <div className="min-h-screen bg-works-bg flex flex-col selection:bg-works-primary selection:text-white">
+        <SEOHead />
         <Header />
         <main className="flex-grow pt-28 lg:pt-32 flex items-center justify-center">
           <div className="animate-pulse text-works-dark/30 text-lg">{t("states.loading")}</div>
@@ -36,12 +44,13 @@ export default function CaseStudy() {
   if (error) {
     return (
       <div className="min-h-screen bg-works-bg flex flex-col selection:bg-works-primary selection:text-white">
+        <SEOHead />
         <Header />
         <main className="flex-grow pt-28 lg:pt-32 flex items-center justify-center">
           <div className="text-center">
             <h1 className="text-3xl font-bold text-works-dark mb-4">{t("states.errorHeading")}</h1>
             <p className="text-works-dark/60 mb-6">{t("states.errorBody")}</p>
-            <Link href="/projektek" className="text-works-primary font-semibold hover:underline">{t("cta.backToProjects")}</Link>
+            <Link href={buildLocalePath(locale, "projects")} className="text-works-primary font-semibold hover:underline">{t("cta.backToProjects")}</Link>
           </div>
         </main>
         <Footer />
@@ -52,11 +61,12 @@ export default function CaseStudy() {
   if (!project) {
     return (
       <div className="min-h-screen bg-works-bg flex flex-col selection:bg-works-primary selection:text-white">
+        <SEOHead />
         <Header />
         <main className="flex-grow pt-28 lg:pt-32 flex items-center justify-center">
           <div className="text-center">
             <h1 className="text-3xl font-bold text-works-dark mb-4">{t("states.notFoundProject")}</h1>
-            <Link href="/projektek" className="text-works-primary font-semibold hover:underline">
+            <Link href={buildLocalePath(locale, "projects")} className="text-works-primary font-semibold hover:underline">
               {t("cta.backToProjects")}
             </Link>
           </div>
@@ -87,7 +97,7 @@ export default function CaseStudy() {
 
           <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <Link
-              href="/projektek"
+              href={buildLocalePath(locale, "projects")}
               className="inline-flex items-center gap-2 text-white/70 hover:text-white font-semibold mb-8 transition-colors"
             >
               <ArrowLeft className="w-4 h-4" />
@@ -161,7 +171,7 @@ export default function CaseStudy() {
                   </h3>
                 </div>
                 <Link
-                  href={`/projektek/${nextProject.slug}`}
+                  href={buildLocalePath(locale, "projectDetail", nextProject.slug)}
                   className="group inline-flex items-center gap-2 px-6 py-3 bg-works-primary text-white font-semibold hover:bg-works-dark transition-colors"
                 >
                   {t("cta.viewProject")}

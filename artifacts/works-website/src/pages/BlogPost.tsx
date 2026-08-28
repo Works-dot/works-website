@@ -6,19 +6,26 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import SEOHead from "@/components/SEOHead";
 import { useStrapiQuery } from "@/hooks/useStrapiQuery";
-import { getBlogPosts, getNextBlogPost } from "@/lib/strapi";
+import { getBlogPostBySlug, getBlogPosts, getNextBlogPost } from "@/lib/strapi";
 import type { BlogPost as BlogPostType } from "@/lib/strapi";
 import { ContentBlock } from "@/components/ContentBlock";
 import { fallbackBlogPosts, heroBackgroundFallbackImg } from "@/data/fallback";
 import { useI18n } from "@/i18n";
+import { buildLocalePath } from "@/lib/i18n-routes";
 
 export default function BlogPost() {
-  const { t } = useI18n();
+  const { locale, t } = useI18n();
   const { slug } = useParams<{ slug: string }>();
-  const { data: posts, loading, error } = useStrapiQuery<BlogPostType[]>("blogPosts", getBlogPosts, fallbackBlogPosts);
+  const fallbackPost = fallbackBlogPosts.find((p) => p.slug === slug) || null;
+  const { data: post, loading, error } = useStrapiQuery<BlogPostType | null>(
+    `blogPost:${locale}:${slug}`,
+    () => getBlogPostBySlug(slug || "", locale),
+    fallbackPost,
+    locale
+  );
+  const { data: posts } = useStrapiQuery<BlogPostType[]>("blogPosts", () => getBlogPosts(locale), fallbackBlogPosts, locale);
   const heroBgPattern = heroBackgroundFallbackImg;
 
-  const post = posts?.find((p) => p.slug === slug) || null;
   const nextPost = posts && post ? getNextBlogPost(posts, post.slug) : null;
 
   useEffect(() => {
@@ -45,7 +52,7 @@ export default function BlogPost() {
           <div className="text-center">
             <h1 className="text-3xl font-bold text-works-dark mb-4">{t("states.errorHeading")}</h1>
             <p className="text-works-dark/60 mb-6">{t("states.errorBody")}</p>
-            <Link href="/blog" className="text-works-primary font-semibold hover:underline">{t("cta.backToBlog")}</Link>
+            <Link href={buildLocalePath(locale, "blog")} className="text-works-primary font-semibold hover:underline">{t("cta.backToBlog")}</Link>
           </div>
         </main>
         <Footer />
@@ -60,7 +67,7 @@ export default function BlogPost() {
         <main className="flex-grow pt-28 lg:pt-32 flex items-center justify-center">
           <div className="text-center">
             <h1 className="text-3xl font-bold text-works-dark mb-4">{t("states.notFoundPost")}</h1>
-            <Link href="/blog" className="text-works-primary font-semibold hover:underline">
+            <Link href={buildLocalePath(locale, "blog")} className="text-works-primary font-semibold hover:underline">
               {t("cta.backToBlog")}
             </Link>
           </div>
@@ -91,7 +98,7 @@ export default function BlogPost() {
 
           <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <Link
-              href="/blog"
+              href={buildLocalePath(locale, "blog")}
               className="inline-flex items-center gap-2 text-white/70 hover:text-white font-semibold mb-8 transition-colors"
             >
               <ArrowLeft className="w-4 h-4" />
@@ -167,7 +174,7 @@ export default function BlogPost() {
                   </h3>
                 </div>
                 <Link
-                  href={`/blog/${nextPost.slug}`}
+                  href={buildLocalePath(locale, "blogPost", nextPost.slug)}
                   className="group inline-flex items-center gap-2 px-6 py-3 bg-works-primary text-white font-semibold hover:bg-works-dark transition-colors"
                 >
                   {t("cta.readMore")}

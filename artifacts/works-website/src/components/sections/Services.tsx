@@ -3,13 +3,16 @@ import { useStrapiQuery } from "@/hooks/useStrapiQuery";
 import { getHomepage, getServices } from "@/lib/strapi";
 import type { HomepageData, Service } from "@/lib/strapi";
 import { fallbackServices, fallbackHomepage, bgGraphic1FallbackImg } from "@/data/fallback";
+import { useI18n } from "@/i18n";
+import { buildLocalePath } from "@/lib/i18n-routes";
 
 export function Services() {
-  const { data: homepage } = useStrapiQuery<HomepageData>("homepage", getHomepage, fallbackHomepage);
-  const { data: services } = useStrapiQuery<Service[]>("services", getServices, fallbackServices);
+  const { locale, t } = useI18n();
+  const { data: homepage } = useStrapiQuery<HomepageData>("homepage", () => getHomepage(locale), fallbackHomepage, locale);
+  const { data: services } = useStrapiQuery<Service[]>("services", () => getServices(locale), fallbackServices, locale);
   const section = homepage?.servicesSection;
 
-  const heading = section?.heading || "Miben tudunk segíteni?";
+  const heading = section?.heading || t("sections.serviceHelpHeading");
   const bgGraphic = bgGraphic1FallbackImg;
 
   const serviceCards = services && services.length > 0
@@ -47,7 +50,7 @@ export function Services() {
               title={s.title}
               description={s.desc}
               index={i}
-              href={s.slug ? `/szolgaltatasok/${s.slug}` : undefined}
+              href={s.slug ? buildLocalePath(locale, "serviceDetail", s.slug) : undefined}
             />
           ))}
         </div>

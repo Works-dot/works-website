@@ -13,8 +13,11 @@ const outPath = path.resolve(root, "src/data/strapi-cache.json");
 const STRAPI_BASE = process.env.STRAPI_URL || "http://localhost:8099";
 const STRAPI_API = `${STRAPI_BASE}/strapi/api`;
 
+let activeLocale = "hu";
+
 async function fetchApi(endpoint) {
-  const url = `${STRAPI_API}${endpoint}`;
+  const separator = endpoint.includes("?") ? "&" : "?";
+  const url = `${STRAPI_API}${endpoint}${separator}locale=${encodeURIComponent(activeLocale)}`;
   const res = await fetch(url);
   if (!res.ok) {
     const err = new Error(`${res.status} ${res.statusText} — ${url}`);
@@ -175,7 +178,8 @@ function mapService(s) {
   };
 }
 
-async function fetchAll() {
+async function fetchAll(locale) {
+  activeLocale = locale;
   const cache = {};
 
   const PROJECT_POPULATE =
@@ -482,7 +486,10 @@ async function fetchAllWithRetry() {
   for (let attempt = 1; attempt <= RETRY_ATTEMPTS; attempt++) {
     try {
       if (attempt > 1) console.log(`\nRetry ${attempt}/${RETRY_ATTEMPTS}...`);
-      return await fetchAll();
+        return {
+          hu: await fetchAll("hu"),
+          en: await fetchAll("en"),
+        };
     } catch (err) {
       lastErr = err;
       console.warn(`  ✗ attempt ${attempt}/${RETRY_ATTEMPTS} failed: ${err.message}`);

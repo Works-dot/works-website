@@ -1,11 +1,10 @@
 /**
- * i18n-routes.ts — Locale & routing foundation for future bilingual support.
+ * i18n-routes.ts — Locale & routing foundation.
  *
  * Rules:
- *  - HU is the only PUBLIC locale today; EN is defined but NOT public.
+ *  - HU and EN are public locales.
  *  - HU paths remain exactly the current unprefixed paths (no /hu prefix).
- *  - EN paths use /en prefix with English segments (reserved for the future).
- *  - Do NOT register EN routes in App.tsx or expose them in the prerender.
+ *  - EN paths use /en prefix with English segments.
  */
 
 // ---------------------------------------------------------------------------
@@ -15,12 +14,18 @@
 export type Locale = "hu" | "en";
 
 /**
- * The only locales that are publicly built and indexed.
- * EN MUST NOT be added here until the EN content pipeline is complete.
+ * The locales that are publicly built and indexed.
  */
-export const PUBLIC_LOCALES: readonly Locale[] = ["hu"] as const;
+export const PUBLIC_LOCALES: readonly Locale[] = ["hu", "en"] as const;
 
 export const DEFAULT_LOCALE: Locale = "hu";
+
+/**
+ * Locales whose route patterns are understood by the application runtime.
+ * This is deliberately separate from PUBLIC_LOCALES: registering a pattern
+ * does not make that locale public or include it in the sitemap/prerender.
+ */
+export const ROUTE_LOCALES: readonly Locale[] = ["hu", "en"] as const;
 
 // ---------------------------------------------------------------------------
 // Route segment maps
@@ -42,7 +47,7 @@ const HU_SEGMENTS = {
   cookies: "/sutik",
 } as const;
 
-/** Maps canonical route keys to their EN path segments (reserved, not public). */
+/** Maps canonical route keys to their EN path segments. */
 const EN_SEGMENTS = {
   home: "/en",
   projects: "/en/projects",
@@ -82,7 +87,7 @@ function normalizePathname(path: string): string {
 
 /**
  * Returns the locale implied by a path. Unknown /en paths are still treated as
- * English so future route guards and 404 pages can use the correct language.
+ * English so the 404 page can use the correct language.
  */
 export function getLocaleFromPath(path: string): Locale {
   const pathname = normalizePathname(path);
@@ -90,9 +95,7 @@ export function getLocaleFromPath(path: string): Locale {
 }
 
 /**
- * Matches a known static or dynamic route without making it public.
- * EN paths can therefore be validated and used by SEO preparation while
- * PUBLIC_LOCALES remains HU-only.
+ * Matches a known static or dynamic route.
  */
 export function matchLocalePath(path: string): LocaleRouteMatch | null {
   const pathname = normalizePathname(path);
@@ -193,6 +196,17 @@ export function stripSearch(pathWithSearch: string): string {
   return pathWithSearch.slice(0, end);
 }
 
+/**
+ * Localizes a CMS-authored link only when it is a known Hungarian internal
+ * route. External URLs, fragments, and unknown/custom paths are preserved.
+ */
+export function localizeInternalPath(locale: Locale, href: string): string {
+  if (!href.startsWith("/") || href.startsWith("//")) return href;
+  const match = matchLocalePath(href);
+  if (!match || match.locale !== "hu") return href;
+  return buildLocalePath(locale, match.routeKey, match.slug, extractSearch(href));
+}
+
 // ---------------------------------------------------------------------------
 // Static route lists (for prerender / sitemap)
 // ---------------------------------------------------------------------------
@@ -210,8 +224,7 @@ export const HU_STATIC_PATHS: readonly string[] = [
 ] as const;
 
 /**
- * Static EN paths (reserved — NOT included in any public prerender).
- * Exported so future EN build tooling can reference them without guessing.
+ * Static EN paths.
  */
 export const EN_STATIC_PATHS: readonly string[] = [
   "/en",
@@ -226,7 +239,7 @@ export const EN_STATIC_PATHS: readonly string[] = [
 
 /**
  * Returns the static path list for a locale.
- * Throws for any locale not in PUBLIC_LOCALES.
+ * Throws for an unsupported public locale.
  */
 export function getStaticPathsForLocale(locale: Locale): readonly string[] {
   if (!(PUBLIC_LOCALES as readonly Locale[]).includes(locale)) {
@@ -236,9 +249,15 @@ export function getStaticPathsForLocale(locale: Locale): readonly string[] {
     );
   }
   if (locale === "hu") return HU_STATIC_PATHS;
-  // EN would go here in the future:
-  // if (locale === "en") return EN_STATIC_PATHS;
-  return [];
+  return EN_STATIC_PATHS;
+}
+
+/** Builds the equivalent public path in another locale, or that locale's home
+ * when the current path is not a canonical application route. */
+export function switchLocalePath(path: string, targetLocale: Locale): string {
+  const match = matchLocalePath(path);
+  if (!match) return buildLocalePath(targetLocale, "home");
+  return buildLocalePath(targetLocale, match.routeKey, match.slug, extractSearch(path));
 }
 
 // ---------------------------------------------------------------------------

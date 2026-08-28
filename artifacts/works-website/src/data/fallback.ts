@@ -26,6 +26,7 @@ import {
 } from "@/lib/strapi";
 
 import rawCache from "./strapi-cache.json";
+import type { Locale } from "@/lib/i18n-routes";
 
 import logoFallbackImg from "@assets/New_logo_1773998946128.png";
 import heroBackgroundFallbackImg from "@assets/works-background_1774441334981.png";
@@ -47,7 +48,15 @@ export {
   homepageGraphicFallbackImg,
 };
 
-const strapiCache: Record<string, unknown> = rawCache as Record<string, unknown>;
+type CachedDataset = Record<string, unknown>;
+const rawSnapshot = rawCache as CachedDataset;
+// Cache snapshots written before bilingual publishing used a flat HU shape.
+// Treat those as HU only: an absent EN dataset must never expose HU copy.
+const localizedCache: Partial<Record<Locale, CachedDataset>> =
+  rawSnapshot.hu && typeof rawSnapshot.hu === "object"
+    ? rawSnapshot as Partial<Record<Locale, CachedDataset>>
+    : { hu: rawSnapshot };
+const strapiCache: CachedDataset = localizedCache.hu || {};
 
 function hasData(key: string): boolean {
   const val = strapiCache[key];
@@ -393,3 +402,74 @@ export const fallbackBlogPage: BlogPageData = (() => {
     seo: cached.seo ?? hardcodedBlogPage.seo,
   };
 })();
+
+/** Maps UI/query aliases to the field names persisted in a locale dataset. */
+export function getLocaleCacheKey(key: string): string {
+  const [base] = key.split(":");
+  const aliases: Record<string, string> = {
+    headerServices: "services",
+    footerServices: "services",
+    project: "projects",
+    blogPost: "blogPosts",
+    service: "services",
+    careerPositions: "positions",
+    careerPosition: "positions",
+  };
+  return aliases[base] || base;
+}
+
+/**
+ * Returns embedded content for a locale. HU retains its historical hardcoded
+ * fallbacks; EN is deliberately cache-only so incomplete/old snapshots fail
+ * closed instead of leaking Hungarian editorial content.
+ */
+export function getLocaleFallback<T>(key: string, locale: Locale): T | undefined {
+  if (locale === "en") {
+    const dataset = localizedCache.en;
+    if (!dataset) return undefined;
+    const [base, ...parts] = key.split(":");
+    const value = dataset[getLocaleCacheKey(base)];
+    if (parts.length === 0) return value as T | undefined;
+    const slug = parts[parts.length - 1];
+    if (Array.isArray(value)) {
+      return value.find((item) =>
+        typeof item === "object" && item !== null &&
+        (item as { slug?: string }).slug === slug
+      ) as T | undefined;
+    }
+    return undefined;
+  }
+
+  const [base, ...parts] = key.split(":");
+  if (parts.length > 0) {
+    const slug = parts[parts.length - 1];
+    const collections: Record<string, { slug: string }[]> = {
+      project: fallbackProjects,
+      blogPost: fallbackBlogPosts,
+      service: fallbackServices,
+      careerPosition: fallbackPositions,
+    };
+    return collections[base]?.find((item) => item.slug === slug) as T | undefined;
+  }
+  const values: Record<string, unknown> = {
+    projects: fallbackProjects,
+    blogPosts: fallbackBlogPosts,
+    services: fallbackServices,
+    headerServices: fallbackServices,
+    footerServices: fallbackServices,
+    positions: fallbackPositions,
+    careerPositions: fallbackPositions,
+    teamMembers: fallbackTeamMembers,
+    galleryImages: fallbackGalleryImages,
+    globalSettings: fallbackGlobalSettings,
+    contactPage: fallbackContactPage,
+    legalDocuments: fallbackLegalDocuments,
+    homepage: fallbackHomepage,
+    clients: fallbackClients,
+    aboutPage: fallbackAboutPage,
+    careerPage: fallbackCareerPage,
+    projectsPage: fallbackProjectsPage,
+    blogPage: fallbackBlogPage,
+  };
+  return values[base] as T | undefined;
+}

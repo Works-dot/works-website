@@ -4,10 +4,14 @@
   "version": "0.1.0",
   "description": "Works. CMS — Strapi v5",
   "scripts": {
-    "dev": "NODE_OPTIONS='--require dotenv/config' strapi develop --no-watch-admin",
-    "start": "NODE_OPTIONS='--require dotenv/config' strapi start",
+    "dev": "NODE_ENV=development STRAPI_PLUGIN_I18N_INIT_LOCALE_CODE=hu NODE_OPTIONS='--require dotenv/config' node scripts/prepare-development-i18n.mjs && NODE_ENV=development STRAPI_PLUGIN_I18N_INIT_LOCALE_CODE=hu NODE_OPTIONS='--require dotenv/config' strapi develop --no-watch-admin",
+    "start": "NODE_ENV=production NODE_OPTIONS='--require dotenv/config' strapi start",
     "build": "NODE_OPTIONS='--require dotenv/config' strapi build",
-    "strapi": "strapi"
+    "strapi": "strapi",
+    "translations:export": "NODE_ENV=development NODE_OPTIONS='--require dotenv/config' node scripts/export-translations.mjs",
+    "translations:translate": "NODE_ENV=development NODE_OPTIONS='--require dotenv/config' node scripts/translate-export.mjs",
+    "translations:import": "NODE_ENV=development NODE_OPTIONS='--require dotenv/config' node scripts/import-translations.mjs",
+    "translations:validate": "NODE_ENV=development NODE_OPTIONS='--require dotenv/config' node scripts/validate-translations.mjs"
   },
   "dependencies": {
     "@strapi/admin": "^5.12.6",

@@ -10,12 +10,14 @@ export default {
     "intro": {
       "type": "component",
       "repeatable": false,
-      "component": "service.section-intro"
+      "component": "service.section-intro",
+      "pluginOptions": { "i18n": { "localized": true } }
     },
     "steps": {
       "type": "component",
       "repeatable": true,
-      "component": "service.process-step"
+      "component": "service.process-step",
+      "pluginOptions": { "i18n": { "localized": true } }
     }
   }
 };

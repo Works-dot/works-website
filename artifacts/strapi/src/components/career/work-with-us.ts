@@ -6,10 +6,12 @@ export default {
   },
   "attributes": {
     "heading": {
-      "type": "string"
+      "type": "string",
+      "pluginOptions": { "i18n": { "localized": true } }
     },
     "description": {
-      "type": "text"
+      "type": "text",
+      "pluginOptions": { "i18n": { "localized": true } }
     }
   }
 };

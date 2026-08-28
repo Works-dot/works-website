@@ -1,8 +1,8 @@
 /**
  * context.tsx — Lightweight i18n provider and hook.
  *
- * - Active locale is hardcoded to DEFAULT_LOCALE ("hu") today.
- * - SSR/hydration safe: no client-only state involved; the locale is constant.
+ * - Active locale is supplied by the route runtime.
+ * - SSR/hydration safe: the server and client derive it from the same path.
  * - Named interpolation: t("states.clientLabel", { client: "Acme" })
  *   replaces {{client}} → "Ügyfél: Acme".
  */
@@ -12,7 +12,7 @@ import {
   useContext,
   type ReactNode,
 } from "react";
-import { DEFAULT_LOCALE, type Locale } from "@/lib/i18n-routes";
+import type { Locale } from "@/lib/i18n-routes";
 import { MESSAGES, type Messages } from "./messages";
 
 // ---------------------------------------------------------------------------
@@ -69,11 +69,11 @@ function resolvePath(obj: unknown, path: string): string {
 
 interface I18nProviderProps {
   children: ReactNode;
-  /** Override locale (for future use / tests). Defaults to DEFAULT_LOCALE. */
-  locale?: Locale;
+  /** Locale derived from the active router path. */
+  locale: Locale;
 }
 
-export function I18nProvider({ children, locale = DEFAULT_LOCALE }: I18nProviderProps) {
+export function I18nProvider({ children, locale }: I18nProviderProps) {
   const messages = MESSAGES[locale];
 
   const t = (key: string, vars?: Interpolations): string => {

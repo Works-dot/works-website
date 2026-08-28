@@ -14,7 +14,8 @@ export default {
       "allowedTypes": ["images"]
     },
     "caption": {
-      "type": "string"
+      "type": "string",
+      "pluginOptions": { "i18n": { "localized": true } }
     }
   }
 };

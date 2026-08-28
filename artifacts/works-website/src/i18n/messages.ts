@@ -31,6 +31,8 @@ export interface Messages {
     contact: string;
     openMenu: string;
     closeMenu: string;
+    languageSwitchLabel: string;
+    switchToLanguage: string;
   };
 
   // Footer
@@ -48,8 +50,14 @@ export interface Messages {
     newsletterEmailPlaceholder: string;
     newsletterSubmitting: string;
     newsletterSubscribe: string;
+    newsletterSuccessTitle: string;
+    newsletterSuccessDescription: string;
+    newsletterErrorTitle: string;
+    newsletterInvalidEmail: string;
+    newsletterErrorDescription: string;
     caseStudies: string;
     logoAlt: string;
+    fallbackServices: string[];
   };
 
   // Cookie banner
@@ -61,15 +69,24 @@ export interface Messages {
     accept: string;
   };
 
-  // Cookie settings page (Sutik.tsx) — only chrome/headings/action labels
+  // Cookie settings page (Sutik.tsx)
   cookiePage: {
     pageHeading: string;
+    introBody: string;
     sectionEssential: string;
+    essentialBodyBeforeStorageKey: string;
+    essentialBodyAfterStorageKey: string;
     sectionThirdParty: string;
+    thirdPartyBody: string;
+    thirdPartyPolicyLeadIn: string;
     sectionFonts: string;
+    fontsBody: string;
     sectionModify: string;
+    modifyBody: string;
     googlePolicyLinkLabel: string;
+    privacyBodyLeadIn: string;
     privacyPageLinkLabel: string;
+    privacyBodyTrailingText: string;
     openSettingsButton: string;
   };
 
@@ -105,6 +122,9 @@ export interface Messages {
     submitting: string;
     mapLoadButton: string;
     mapConsentText: string;
+    mapTitle: string;
+    closed: string;
+    fallbackSubjects: { value: string; label: string }[];
   };
 
   // Form validation / upload errors
@@ -163,6 +183,7 @@ export interface Messages {
     notFoundBackHome: string;
     notFoundProjects: string;
     notFoundBlog: string;
+    teamHeading: string;
   };
 
   // Sections (homepage sections)
@@ -174,6 +195,14 @@ export interface Messages {
     servicesNotFoundBody: string;
     servicesContactCta: string;
     featuredProjectsAriaLabel: string;
+    featuredProjectsHeading: string;
+    latestPostsHeading: string;
+    serviceQuestionsHeading: string;
+    serviceHelpHeading: string;
+    serviceDeliverablesHeading: string;
+    serviceProjectsHeading: string;
+    serviceFaqHeading: string;
+    relatedServicesHeading: string;
   };
 
   // Karrier page
@@ -209,6 +238,8 @@ const hu: Messages = {
     contact: "Kapcsolat",
     openMenu: "Menü megnyitása",
     closeMenu: "Menü bezárása",
+    languageSwitchLabel: "Nyelvválasztó",
+    switchToLanguage: "Váltás angol nyelvre",
   },
 
   footer: {
@@ -225,8 +256,14 @@ const hu: Messages = {
     newsletterEmailPlaceholder: "E-mail címed",
     newsletterSubmitting: "Küldés...",
     newsletterSubscribe: "Feliratkozás",
+    newsletterSuccessTitle: "Sikeres feliratkozás!",
+    newsletterSuccessDescription: "Hamarosan küldjük a legújabb UX és design tartalmakat.",
+    newsletterErrorTitle: "Hiba történt",
+    newsletterInvalidEmail: "Érvénytelen e-mail-cím.",
+    newsletterErrorDescription: "Kérjük, próbáld újra később.",
     caseStudies: "Esettanulmányok",
     logoAlt: "Works. Logo",
+    fallbackServices: ["UX Kutatás", "UI Tervezés", "Service Design", "Webfejlesztés"],
   },
 
   cookieBanner: {
@@ -239,12 +276,21 @@ const hu: Messages = {
 
   cookiePage: {
     pageHeading: "Süti (cookie) tájékoztató",
+    introBody: "A sütik (cookie-k) kis szöveges fájlok, amelyeket a meglátogatott weboldalak helyeznek el a böngésződben. A Works. weboldala a lehető legkevesebb sütit használja: nem futtatunk látogatáskövetést, statisztikai vagy marketing célú mérést.",
     sectionEssential: "Feltétlenül szükséges tárolás",
+    essentialBodyBeforeStorageKey: "A süti-hozzájárulásoddal kapcsolatos döntésedet a böngésződ helyi tárolójában (localStorage,",
+    essentialBodyAfterStorageKey: "kulcs) jegyezzük meg, hogy ne kelljen minden látogatáskor újra nyilatkoznod. Ez nem kerül továbbításra senkinek, és bármikor törölhető a böngésző adatainak törlésével.",
     sectionThirdParty: "Harmadik féltől származó tartalom: Google Térkép",
+    thirdPartyBody: "A Kapcsolat oldalon irodánk elhelyezkedését beágyazott Google Térkép mutatja. A térkép betöltésekor a Google LLC sütiket helyezhet el, és adatokat (pl. IP-cím) kezelhet a saját adatkezelési szabályzata szerint. Ezért a térkép csak akkor töltődik be, ha ehhez kifejezetten hozzájárultál — a sütisávon vagy közvetlenül a térkép helyén megjelenő gombbal.",
+    thirdPartyPolicyLeadIn: "A Google adatkezeléséről itt olvashatsz:",
     sectionFonts: "Betűtípusok",
+    fontsBody: "A weboldal betűtípusait saját szerverünkről szolgáljuk ki, így a megjelenítésükhöz nem történik adattovábbítás külső szolgáltató felé.",
     sectionModify: "A hozzájárulás módosítása",
+    modifyBody: "Döntésedet bármikor megváltoztathatod a lábléc „Süti beállítások” hivatkozásával, vagy az alábbi gombbal:",
     googlePolicyLinkLabel: "Google adatvédelmi irányelvek",
+    privacyBodyLeadIn: "A személyes adatok kezeléséről bővebben az",
     privacyPageLinkLabel: "adatkezelési tájékoztatóban",
+    privacyBodyTrailingText: " olvashatsz.",
     openSettingsButton: "Süti beállítások megnyitása",
   },
 
@@ -278,6 +324,17 @@ const hu: Messages = {
     submitting: "Küldés...",
     mapLoadButton: "Térkép betöltése (Google sütiket használ)",
     mapConsentText: "A térkép betöltésével a Google Térkép szolgáltatása sütiket használhat, és adatokat kezelhet a Google adatvédelmi irányelvei szerint.",
+    mapTitle: "Works. iroda – {{address}}",
+    closed: "Zárva",
+    fallbackSubjects: [
+      { value: "ux-research", label: "UX kutatás" },
+      { value: "ui-design", label: "UI Design" },
+      { value: "service-design", label: "Service Design" },
+      { value: "web-development", label: "Webfejlesztés" },
+      { value: "accessibility", label: "Akadálymentesítés" },
+      { value: "ai-design", label: "AI-alapú design" },
+      { value: "other", label: "Egyéb" },
+    ],
   },
 
   validation: {
@@ -332,6 +389,7 @@ const hu: Messages = {
     notFoundBackHome: "Vissza a főoldalra",
     notFoundProjects: "Projektjeink",
     notFoundBlog: "Blog",
+    teamHeading: "Kollégáink",
   },
 
   sections: {
@@ -342,6 +400,14 @@ const hu: Messages = {
     servicesNotFoundBody: "Vedd fel velünk a kapcsolatot egyedi igényeiddel kapcsolatban.",
     servicesContactCta: "Kapcsolatfelvétel",
     featuredProjectsAriaLabel: "Kiemelt projektjeink",
+    featuredProjectsHeading: "Kiemelt projektjeink",
+    latestPostsHeading: "Legfrissebb írásaink",
+    serviceQuestionsHeading: "Milyen kérdésekre segítünk választ találni?",
+    serviceHelpHeading: "Miben tudunk segíteni?",
+    serviceDeliverablesHeading: "Amit a projektből kapsz",
+    serviceProjectsHeading: "Projektpéldák",
+    serviceFaqHeading: "Gyakran ismételt kérdések",
+    relatedServicesHeading: "Kapcsolódó szolgáltatások",
   },
 
   karrier: {
@@ -374,6 +440,8 @@ const en: Messages = {
     contact: "Contact",
     openMenu: "Open menu",
     closeMenu: "Close menu",
+    languageSwitchLabel: "Language selector",
+    switchToLanguage: "Switch to Hungarian",
   },
 
   footer: {
@@ -390,8 +458,14 @@ const en: Messages = {
     newsletterEmailPlaceholder: "Your email",
     newsletterSubmitting: "Sending...",
     newsletterSubscribe: "Subscribe",
+    newsletterSuccessTitle: "Successfully subscribed!",
+    newsletterSuccessDescription: "We’ll soon send you our latest UX and design content.",
+    newsletterErrorTitle: "Something went wrong",
+    newsletterInvalidEmail: "Please enter a valid email address.",
+    newsletterErrorDescription: "Please try again later.",
     caseStudies: "Case studies",
     logoAlt: "Works. Logo",
+    fallbackServices: ["UX Research", "UI Design", "Service Design", "Web Development"],
   },
 
   cookieBanner: {
@@ -404,12 +478,21 @@ const en: Messages = {
 
   cookiePage: {
     pageHeading: "Cookie policy",
+    introBody: "Cookies are small text files that websites you visit place in your browser. The Works. website uses as few cookies as possible: we do not use visitor tracking, analytics or measurement for marketing purposes.",
     sectionEssential: "Strictly necessary storage",
+    essentialBodyBeforeStorageKey: "We store your cookie consent decision in your browser's local storage (localStorage, under the",
+    essentialBodyAfterStorageKey: "key) so that you do not have to make the choice again on every visit. This information is not transmitted to anyone and can be deleted at any time by clearing your browser data.",
     sectionThirdParty: "Third-party content: Google Maps",
+    thirdPartyBody: "An embedded Google Map shows the location of our office on the Contact page. When the map is loaded, Google LLC may set cookies and process data (such as your IP address) in accordance with its own privacy policy. The map is therefore loaded only if you have expressly consented to this, either through the cookie banner or by using the button displayed in place of the map.",
+    thirdPartyPolicyLeadIn: "You can read more about how Google processes data here:",
     sectionFonts: "Fonts",
+    fontsBody: "We serve the website's fonts from our own server, so displaying them does not involve transferring data to an external service provider.",
     sectionModify: "Modifying your consent",
+    modifyBody: "You can change your decision at any time by using the “Cookie settings” link in the footer or the button below:",
     googlePolicyLinkLabel: "Google Privacy Policy",
+    privacyBodyLeadIn: "You can read more about how we process personal data in our",
     privacyPageLinkLabel: "privacy policy",
+    privacyBodyTrailingText: ".",
     openSettingsButton: "Open cookie settings",
   },
 
@@ -443,6 +526,17 @@ const en: Messages = {
     submitting: "Sending...",
     mapLoadButton: "Load map (uses Google cookies)",
     mapConsentText: "Loading the map may cause Google Maps to use cookies and process data according to Google's privacy policy.",
+    mapTitle: "Works. office – {{address}}",
+    closed: "Closed",
+    fallbackSubjects: [
+      { value: "ux-research", label: "UX research" },
+      { value: "ui-design", label: "UI design" },
+      { value: "service-design", label: "Service design" },
+      { value: "web-development", label: "Web development" },
+      { value: "accessibility", label: "Accessibility" },
+      { value: "ai-design", label: "AI-assisted design" },
+      { value: "other", label: "Other" },
+    ],
   },
 
   validation: {
@@ -497,6 +591,7 @@ const en: Messages = {
     notFoundBackHome: "Back to home",
     notFoundProjects: "Our projects",
     notFoundBlog: "Blog",
+    teamHeading: "Our team",
   },
 
   sections: {
@@ -507,6 +602,14 @@ const en: Messages = {
     servicesNotFoundBody: "Get in touch with us about your specific needs.",
     servicesContactCta: "Get in touch",
     featuredProjectsAriaLabel: "Featured projects",
+    featuredProjectsHeading: "Featured projects",
+    latestPostsHeading: "Latest insights",
+    serviceQuestionsHeading: "What questions can we help answer?",
+    serviceHelpHeading: "How can we help?",
+    serviceDeliverablesHeading: "What you get from the project",
+    serviceProjectsHeading: "Project examples",
+    serviceFaqHeading: "Frequently asked questions",
+    relatedServicesHeading: "Related services",
   },
 
   karrier: {

@@ -9,10 +9,12 @@ export default {
   "attributes": {
     "title": {
       "type": "string",
-      "required": true
+      "required": true,
+      "pluginOptions": { "i18n": { "localized": true } }
     },
     "description": {
-      "type": "text"
+      "type": "text",
+      "pluginOptions": { "i18n": { "localized": true } }
     },
     "icon": {
       "type": "media",
@@ -22,7 +24,8 @@ export default {
     "bullets": {
       "type": "component",
       "repeatable": true,
-      "component": "service.bullet-point"
+      "component": "service.bullet-point",
+      "pluginOptions": { "i18n": { "localized": true } }
     }
   }
 };

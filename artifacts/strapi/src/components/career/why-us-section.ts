@@ -6,12 +6,14 @@ export default {
   },
   "attributes": {
     "sectionHeading": {
-      "type": "string"
+      "type": "string",
+      "pluginOptions": { "i18n": { "localized": true } }
     },
     "items": {
       "type": "component",
       "repeatable": true,
-      "component": "career.why-us-item"
+      "component": "career.why-us-item",
+      "pluginOptions": { "i18n": { "localized": true } }
     }
   }
 };

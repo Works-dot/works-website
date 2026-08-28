@@ -9,10 +9,12 @@ export default {
   "attributes": {
     "heading": {
       "type": "string",
-      "required": true
+      "required": true,
+      "pluginOptions": { "i18n": { "localized": true } }
     },
     "body": {
-      "type": "richtext"
+      "type": "richtext",
+      "pluginOptions": { "i18n": { "localized": true } }
     }
   }
 };

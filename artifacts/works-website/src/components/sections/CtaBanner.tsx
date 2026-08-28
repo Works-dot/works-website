@@ -5,11 +5,12 @@ import { useStrapiQuery } from "@/hooks/useStrapiQuery";
 import { getHomepage } from "@/lib/strapi";
 import type { HomepageData } from "@/lib/strapi";
 import { fallbackHomepage } from "@/data/fallback";
+import { useI18n } from "@/i18n";
+import { buildLocalePath, localizeInternalPath } from "@/lib/i18n-routes";
 
 const DEFAULT_HEADING =
   "A designer feladata nem csupán szép felületek tervezése — hanem valódi problémák megoldása.";
 const DEFAULT_CTA_TEXT = "Segíthetünk?";
-const DEFAULT_CTA_LINK = "/kapcsolat";
 
 export function CtaBannerView({
   heading,
@@ -20,6 +21,8 @@ export function CtaBannerView({
   ctaText: string;
   ctaLink: string;
 }) {
+  const { locale } = useI18n();
+  const localizedCtaLink = localizeInternalPath(locale, ctaLink);
   const buttonClassName =
     "group inline-flex items-center justify-center px-8 py-4 border border-white text-white font-semibold text-lg hover:bg-white hover:text-works-dark transition-colors duration-300 whitespace-nowrap shrink-0 gap-2";
 
@@ -30,7 +33,7 @@ export function CtaBannerView({
     </>
   );
 
-  const isInternal = ctaLink.startsWith("/");
+  const isInternal = localizedCtaLink.startsWith("/") && !localizedCtaLink.startsWith("//");
 
   return (
     <section className="w-full bg-works-dark py-20 lg:py-24">
@@ -46,11 +49,11 @@ export function CtaBannerView({
             {heading}
           </h2>
           {isInternal ? (
-            <Link href={ctaLink} className={buttonClassName}>
+            <Link href={localizedCtaLink} className={buttonClassName}>
               {buttonContent}
             </Link>
           ) : (
-            <a href={ctaLink} className={buttonClassName}>
+            <a href={localizedCtaLink} className={buttonClassName}>
               {buttonContent}
             </a>
           )}
@@ -61,14 +64,15 @@ export function CtaBannerView({
 }
 
 export function CtaBanner() {
-  const { data: homepage } = useStrapiQuery<HomepageData>("homepage", getHomepage, fallbackHomepage);
+  const { locale, t } = useI18n();
+  const { data: homepage } = useStrapiQuery<HomepageData>("homepage", () => getHomepage(locale), fallbackHomepage, locale);
   const banner = homepage?.ctaBanner;
 
   return (
     <CtaBannerView
-      heading={banner?.heading || DEFAULT_HEADING}
-      ctaText={banner?.ctaText || DEFAULT_CTA_TEXT}
-      ctaLink={banner?.ctaLink || DEFAULT_CTA_LINK}
+      heading={banner?.heading || (locale === "hu" ? DEFAULT_HEADING : "")}
+      ctaText={banner?.ctaText || (locale === "hu" ? DEFAULT_CTA_TEXT : t("sections.servicesContactCta"))}
+      ctaLink={banner?.ctaLink || buildLocalePath(locale, "contact")}
     />
   );
 }

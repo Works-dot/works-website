@@ -2,6 +2,7 @@ import { Link } from "wouter";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { useI18n } from "@/i18n";
+import { buildLocalePath } from "@/lib/i18n-routes";
 
 interface ProjectCardProps {
   slug: string;
@@ -18,7 +19,7 @@ interface ProjectCardProps {
 }
 
 export function ProjectCard({ slug, title, tags, description, image, imageAlt, reverse = false, animated = true, clampDescription = false }: ProjectCardProps) {
-  const { t } = useI18n();
+  const { locale, t } = useI18n();
   return (
     <motion.div
       {...(animated
@@ -57,7 +58,7 @@ export function ProjectCard({ slug, title, tags, description, image, imageAlt, r
           {description}
         </p>
         <Link
-          href={`/projektek/${slug}`}
+          href={buildLocalePath(locale, "projectDetail", slug)}
           className="inline-flex items-center text-works-primary font-semibold text-lg group hover:text-works-dark transition-colors"
         >
           {t("cta.viewCaseStudy")}
