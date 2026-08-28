@@ -1,8 +1,8 @@
 # Strapi Translation Inventory — Works. Bilingual Preparation
 
 **Scope:** Hungarian (HU) → English (EN) translation classification for every Strapi schema field.  
-**Strategy:** Strapi i18n is the recommended long-term storage model, but it stays disabled until the production content is synchronized, backed up and the migration is validated in staging. The exact rollout is defined in `strapi-rollout.md`. This document classifies fields only.
-**Status:** The translation inventory is documentation. The only preparatory schema change is the additive, default-off `englishSiteEnabled` publication gate on Global Settings; no content type is localized yet.
+**Strategy:** Native Strapi v5 i18n is enabled in every environment. Hungarian is the default locale and English is an available, currently empty locale. Production must receive the fully localized development database before Strapi boots there; the separate production rollout is described in `strapi-rollout.md`.
+**Status:** Fourteen visitor-facing content types are localized. Existing content remains Hungarian. A reversible proof created a temporary EN tag localization through Strapi's document service, edited the EN name/slug while the HU name/slug remained unchanged, then deleted the EN localization; no EN content remains.
 
 ---
 
@@ -10,14 +10,40 @@
 
 | Code | Meaning |
 |---|---|
-| **TRANSLATE** | Field contains human-readable copy that must be translated into English. Deliver as an EN duplicate field or separate EN entry. |
-| **SHARED** | Field is language-neutral (URL, number, boolean, date, media asset, enum code). Single value serves both locales. |
-| **LOCALE_RELATION** | A relation that points to records which themselves need locale variants (e.g. tags whose `name` is visible UI text). |
-| **REVIEW** | Field may need locale-specific value but is ambiguous; a human must decide (e.g. a phone number, address, or URL that differs per market). |
+| **TRANSLATE** | Field contains human-readable copy that must be translated into English. It is explicitly field-localized in the schema. |
+| **SHARED** | Field is language-neutral (number, boolean, date, most media assets, enum code). It is deliberately unannotated and Strapi copies/synchronizes it between locale variants. |
+| **LOCALE_RELATION** | A relation that points to records which themselves need locale variants (e.g. tags whose `name` is visible UI text). Relations are inherently locale-aware in Strapi. |
+| **REVIEW** | Field may need locale-specific value but is ambiguous; a human must decide (e.g. a phone number, address, or URL that differs per market). It is explicitly field-localized pending that decision. |
 
 ---
 
 ## 1. Single Types
+
+### Localization scope
+
+| Content type | Localized? | Reason |
+|---|---:|---|
+| `homepage` | Yes | Visitor-facing page copy and SEO |
+| `about-page` | Yes | Visitor-facing page copy and SEO |
+| `career-page` | Yes | Visitor-facing page copy and SEO |
+| `contact-page` | Yes | Visitor-facing copy, form subjects and legal consent |
+| `projects-page` | Yes | Visitor-facing listing-page copy and SEO |
+| `blog-page` | Yes | Visitor-facing listing-page copy and SEO |
+| `global-setting` | Yes | Footer, opening hours, legal links and other visible global copy |
+| `legal-document` | Yes | EN uses separate localized PDF relations |
+| `project` | Yes | Titles, case studies, blocks, SEO and localized relations |
+| `blog-post` | Yes | Article copy, blocks, SEO and localized relations |
+| `service` | Yes | Service-page copy, slugs, SEO and localized relations |
+| `career-position` | Yes | Job copy, blocks, SEO and localized tag relations |
+| `tag` | Yes | Visible labels/slugs must follow the requested locale |
+| `team-member` | Yes | Visible role/title must be translated; identity and image are reused |
+| `client` | No | Brand name, logo, order and flags are language-neutral; keeping one record avoids duplication |
+
+### Field-level Strapi v5 implementation
+
+The content-type-level `pluginOptions.i18n.localized: true` flag enables HU/EN locale variants for each of the 14 types above. It does **not** make every attribute a translated field. Every direct **TRANSLATE** or **REVIEW** field is annotated with `pluginOptions.i18n.localized: true`. Each component or dynamic-zone container that carries translated content is annotated too, and the translated leaf fields in the referenced component schemas are also annotated.
+
+**SHARED** fields intentionally have no i18n field annotation. Strapi copies/synchronizes those values between the localized variants. UID fields and relations are inherently localized/locale-aware, including relations to localized tags, projects, and services. Media is shared unless explicitly annotated: `legal-document.privacyPdf`, `legal-document.cookiePdf`, and `legal-document.imprintPdf` are explicitly localized media fields so each locale can select its reviewed legal PDF.
 
 ### 1.1 `homepage` (Főoldal)
 
@@ -142,10 +168,35 @@ Field path uses component notation: `component.field`.
 
 | Field | Type | Classification | Notes |
 |---|---|---|---|
-| `privacyPdf` | media (file) | **TRANSLATE** | A separate EN PDF must be uploaded; the EN locale should reference an English-language PDF |
-| `imprintPdf` | media (file) | **TRANSLATE** | Same: separate EN PDF required |
+| `privacyPdf` | media (file) | **TRANSLATE** | Explicitly localized media; the EN locale must reference an English-language PDF |
+| `cookiePdf` | media (file) | **TRANSLATE** | Explicitly localized media; a separate reviewed EN cookie-policy PDF is required |
+| `imprintPdf` | media (file) | **TRANSLATE** | Explicitly localized media; a separate reviewed EN imprint PDF is required |
 
-> **Note:** Because `legal-document` is a single type with no locale variants in the current schema, EN PDFs need either (a) two additional media fields (`privacyPdfEn`, `imprintPdfEn`) added to the schema, or (b) the record duplicated with a locale discriminator once i18n is installed. Decision deferred to rollout step — see `strapi-rollout.md §3.3`.
+> **Decision:** `legal-document` uses native localization. The future EN localization receives separate English `privacyPdf`, `cookiePdf` and `imprintPdf` media relations; the HU localization and files remain unchanged.
+
+---
+
+### 1.7 `projects-page` (Projektek gyűjtőoldal)
+
+| Field | Type | Classification | Notes |
+|---|---|---|---|
+| `heading` | string | **TRANSLATE** | Listing-page heading |
+| `description` | text | **TRANSLATE** | Listing-page introduction |
+| `seo.metaTitle` | string | **TRANSLATE** | |
+| `seo.metaDescription` | text | **TRANSLATE** | |
+| `seo.ogImage` | media | **SHARED** | Reuse unless an EN-specific visual is supplied |
+
+---
+
+### 1.8 `blog-page` (Blog gyűjtőoldal)
+
+| Field | Type | Classification | Notes |
+|---|---|---|---|
+| `heading` | string | **TRANSLATE** | Listing-page heading |
+| `description` | text | **TRANSLATE** | Listing-page introduction |
+| `seo.metaTitle` | string | **TRANSLATE** | |
+| `seo.metaDescription` | text | **TRANSLATE** | |
+| `seo.ogImage` | media | **SHARED** | Reuse unless an EN-specific visual is supplied |
 
 ---
 
@@ -301,7 +352,7 @@ Field path uses component notation: `component.field`.
 | `careerPositions` | relation | **SHARED** | Reverse relation |
 
 > `tag` has `draftAndPublish: false` — changes take effect immediately.  
-> Tags are used for filtering UI. When i18n is applied, either: (a) add `nameEn` field to the same record, or (b) create separate EN tag records. Strategy (a) is simpler and avoids relinking all relations.
+> Tags use native locale variants. Future EN projects, posts and career positions must point to EN tag localizations; the existing HU relations are retained and verified during migration.
 
 ---
 
@@ -318,7 +369,7 @@ Field path uses component notation: `component.field`.
 
 ## 3. Components (standalone classification)
 
-Components are embedded inside content types. This section lists each component for completeness; field classifications above take precedence.
+Components are embedded inside content types. This section lists each component for completeness; field classifications above take precedence. Where a component contains **TRANSLATE** or **REVIEW** content, both its embedding component/dynamic-zone container and its translated leaf attributes are explicitly annotated with `pluginOptions.i18n.localized: true`; its **SHARED** leaves remain unannotated.
 
 ### 3.1 `shared.seo`
 | Field | Classification |
@@ -524,7 +575,7 @@ Required:      false
 Description:   "When true, the English version of the site is visible to public users."
 ```
 
-**Current state:** The field exists in `artifacts/strapi/src/api/global-setting/content-types/global-setting/schema.ts`. It defaults to `false`; existing records may return `null` until resaved, and the frontend deliberately treats every value except literal `true` as disabled. Strapi i18n is still not installed or enabled.
+**Current state:** The field exists in `artifacts/strapi/src/api/global-setting/content-types/global-setting/schema.ts`. It defaults to `false`; existing records may return `null` until resaved, and the frontend deliberately treats every value except literal `true` as disabled. i18n is enabled in production as well as development; the English-locale API gate remains disabled until this field is literally `true`.
 
 The frontend can read the field via `getGlobalSettings()`. Today, EN is blocked earlier by the HU-only route registration and prerender allow-list. When EN routes are later registered, the React/Vite SSR layer must also check this boolean and return a 404 for all `/en/*` routes unless it is exactly `true`.
 
@@ -539,7 +590,7 @@ The frontend can read the field via `getGlobalSettings()`. Today, EN is blocked 
 | LOCALE_RELATION | ~10 |
 | REVIEW | ~15 |
 
-**Total tracked fields:** ~220 across 14 content types and 34 components.
+**Total tracked fields:** ~230 across 15 content types and 34 components. Fourteen content types are localized; `client` remains shared.
 
 ---
 
@@ -556,4 +607,4 @@ The following are either system-generated or logic-only:
 
 ---
 
-*Last updated: 2025. Generated from schema inspection of artifacts/strapi/src.*
+*Last updated: 2026-08-28. Verified against the current Strapi schemas.*

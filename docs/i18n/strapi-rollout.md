@@ -1,9 +1,9 @@
 # Strapi Bilingual Rollout Plan — Works. HU + EN
 
 **Goal:** Launch an English version of the Works. website alongside the existing Hungarian site.  
-**Current state:** Hungarian-only, Strapi v5 with no i18n plugin, SQLite in dev / PostgreSQL in production.  
+**Current state:** Native Strapi v5 i18n is enabled in code for development and production. The development PostgreSQL copy has `hu` as default and an empty `en` locale. Before Strapi next boots in production, production must receive the fully localized development database.
 **English site availability:** The English site MUST remain unavailable until all content is translated and reviewed. Today it is blocked by HU-only router/prerender allow-lists. When EN routes are registered, `englishSiteEnabled` becomes the final editor-controlled publication gate.  
-**Constraint:** Do NOT install `@strapi/plugin-i18n` or enable Strapi i18n until the steps in §2 are complete and a full production backup exists.
+**Constraint:** Do not run the development preparation against the production database or boot production with a database that has not already been localized. Strapi v5 already bundles `@strapi/i18n`; the obsolete v4 package `@strapi/plugin-i18n` must not be installed.
 
 ---
 
@@ -23,7 +23,7 @@
 ## 1. Architecture Decision
 
 ### Option A — Strapi i18n Plugin (recommended long-term)
-Install `@strapi/plugin-i18n`, mark every translatable content type with `"i18n": true`, and Strapi will maintain a separate document per locale (`hu` + `en`). Relations between locales use the same `documentId`.
+Enable Strapi v5's bundled `@strapi/i18n`. The content-type `pluginOptions.i18n.localized: true` flag enables locale variants (`hu` + `en`) under the same `documentId`; annotate individual translated/review fields, translated component leaves, and their content-bearing component/dynamic-zone containers with `pluginOptions.i18n.localized: true`.
 
 **Pros:** Clean separation, native locale filter API, future-proof.  
 **Cons:** Requires schema migration, all existing records must be re-seeded or migrated to `hu` locale. **Not zero-downtime.**
@@ -40,16 +40,16 @@ Duplicate the entire Strapi project for EN with its own database.
 **Pros:** Complete isolation.  
 **Cons:** Double the maintenance burden, sync hell, not scalable.
 
-### Decision: Option A (Strapi i18n Plugin) — deferred until ready
+### Decision: Option A (native Strapi v5 i18n) — enabled in every environment
 
 Option A is the correct long-term choice. However, because:
 - EN content does not exist yet,
 - A full professional translation pass is needed first,
 - The production site must not break during migration,
 
-**the i18n plugin will NOT be installed now.** This document describes the exact steps to execute when EN content is ready.
+**native i18n is enabled in code for every environment.** Production must be populated from the fully localized development database before its next Strapi boot, after its own backup, maintenance window and acceptance pass.
 
-Until then, translation work happens in external documents (spreadsheet or translation memory). The only preparatory schema change already present is the additive, default-off `englishSiteEnabled` field; no content type has been localized.
+Until then, translation work happens in external documents (spreadsheet or translation memory). The additive, default-off `englishSiteEnabled` field remains the publication gate. No EN content was created by the development migration.
 
 ---
 
@@ -85,15 +85,15 @@ Complete ALL items before touching any schema or installing any plugin:
 ### 2.2 Environment readiness
 
 - [ ] Staging environment exists and mirrors production (same PostgreSQL version, same Strapi version).
-- [ ] i18n migration is tested on **staging first**, confirmed working before touching production.
+- [ ] The fully localized development database is restored to **staging** and verified before it is restored to production.
 - [ ] All editors have been notified of the maintenance window (editing locked during migration).
-- [ ] Node.js version matches `engines` in `package.json` (>=18.0.0 <=22.x.x).
+- [ ] Node.js version is addressed by the separate runtime-maintenance task before production rollout.
 
 ### 2.3 Content readiness
 
 - [ ] All EN translations are complete and reviewed (see §5).
 - [ ] Legal texts (consent checkboxes, privacy policy, imprint) reviewed by legal counsel.
-- [ ] EN PDFs for `legal-document` (`privacyPdf`, `imprintPdf`) are uploaded and approved.
+- [ ] EN PDFs for `legal-document` (`privacyPdf`, `cookiePdf`, `imprintPdf`) are uploaded and approved.
 - [ ] All `REVIEW`-classified fields from `translation-inventory.md` have a human decision documented.
 
 ---
@@ -124,65 +124,77 @@ Before beginning the later i18n rollout:
 2. In the Strapi admin → Global Settings → confirm `englishSiteEnabled` appears and explicitly set it to `false` (older records may initially expose `null`, which the frontend also treats as disabled).
 3. Publish the Global Settings record so the API reflects the change.
 
-### 3.2 Install and configure Strapi i18n plugin
+### 3.2 Configure native Strapi v5 i18n
 
-> **Only execute after all items in §2 are checked and staging is confirmed.**
+> Development preparation is complete. Do not repeat it against production: production receives the fully localized development database before its next Strapi boot.
 
-**Step 1:** Add the plugin dependency:
-```bash
-cd artifacts/strapi
-pnpm add @strapi/plugin-i18n
-```
+**Step 1:** Do not add a package. Strapi v5 includes `@strapi/i18n` as an internal plugin.
 
-**Step 2:** Register the plugin in `artifacts/strapi/config/plugins.ts`:
+**Step 2:** Enable the bundled plugin in every environment in `artifacts/strapi/config/plugins.ts`:
 ```typescript
-export default ({}) => ({
+export default ({ env }) => ({
   i18n: {
     enabled: true,
-    config: {
-      defaultLocale: 'hu',
-      locales: ['en'],
-    },
   },
 });
 ```
 
-**Step 3:** Add locale support to each translatable content type. For each of the following, add `"i18n": true` inside `"pluginOptions"`:
+Each localized content-type schema declares `pluginOptions.i18n.localized: true` unconditionally. This is safe only because production receives the already-localized development database before Strapi boots.
+
+The development command runs `scripts/prepare-development-i18n.mjs` before Strapi. The script:
+
+1. refuses every environment except explicit `NODE_ENV=development`;
+2. requires `PRODUCTION_DATABASE_URL` and refuses any database with the same normalized host, port and database name before opening a connection;
+3. converts the untouched initial `en` locale to `hu` only while all visitor-content locale columns are still empty;
+4. stores `hu` as Strapi's default;
+5. creates the empty `en` locale idempotently.
+
+This ordering is required because Strapi assigns existing records to the current default locale during schema migration. Setting the default after the first localized boot would incorrectly label Hungarian content as English.
+
+**Step 3:** Add locale support to each scoped content type with the Strapi v5 shape `pluginOptions: { i18n: { localized: true } }`:
 
 - `homepage`
 - `about-page`
 - `career-page`
 - `contact-page`
+- `projects-page`
+- `blog-page`
 - `global-setting`
+- `legal-document`
 - `blog-post`
 - `project`
 - `service`
 - `career-position`
-- `team-member` (for `title` field only)
-- `tag` (for `name` field)
+- `team-member`
+- `tag`
+
+`client` stays non-localized because every field is language-neutral. The content-type flag enables locale variants, while field annotations control translated values: every direct **TRANSLATE**/**REVIEW** field and every component/dynamic-zone container carrying translated content is localized, and translated component leaf schemas are localized as well. **SHARED** fields remain unannotated and are copied/synchronized by Strapi. UID fields and relations are inherently localized/locale-aware. Media is shared unless explicitly localized; the three `legal-document` PDF media fields are explicitly localized.
 
 **Step 4:** Run Strapi in development to apply schema migrations:
 ```bash
 cd artifacts/strapi
 pnpm dev
 ```
-Strapi will automatically add `locale` and `localizations` columns/relations to the database tables.
+Strapi will assign `hu` to existing records when it detects the localized schemas. The locale column already exists in Strapi v5 tables; the migration is the data assignment and localized document behavior.
 
 **Step 5:** Verify the admin UI shows locale selector on each enabled content type.
 
-**Step 6:** Existing records will be assigned to the default locale (`hu`) automatically. Confirm via the admin UI.
+**Step 6:** Confirm every existing visitor record has locale `hu`, `en` has no visitor records, and locale-less public requests resolve identically to `?locale=hu`.
 
 ### 3.3 Legal document EN PDF strategy
 
-Because `legal-document` is a single type (one record), two approaches are available:
+`legal-document` uses native localization. Its `privacyPdf`, `cookiePdf`, and `imprintPdf` fields are explicitly localized media fields. The HU singleton retains its current media relations, while a future EN singleton will reference separately reviewed English privacy, cookie, and imprint PDFs in those fields. Other media fields remain shared unless explicitly localized.
 
-**Approach A (add EN-specific fields — simpler):**  
-Add `privacyPdfEn` and `imprintPdfEn` media fields to `legal-document` schema. The frontend reads the correct field based on detected locale.
+### 3.4 Verified development migration (2026-08-28)
 
-**Approach B (i18n on legal-document — cleaner):**  
-Enable `"i18n": true` on `legal-document` and upload the EN PDF in the EN locale record.
-
-Recommendation: **Approach B** (matches the i18n pattern used everywhere else).
+- A custom-format PostgreSQL dump was created before migration.
+- The active database URL was verified not to equal the production database URL.
+- All existing rows across the 14 localized content types were assigned to `hu`; no locale remained `NULL`.
+- Row counts and full row checksums excluding only the `locale` column were identical before and after migration.
+- The default locale is `hu`; both `hu` and `en` are available.
+- HU public endpoints returned HTTP 200 after restart, including `blog-page` and `projects-page`.
+- A temporary EN tag localization was created through Strapi's document service, EN name/slug were edited, HU name/slug remained unchanged, and EN was deleted; no EN content remains.
+- No production workflow, database, or website was changed.
 
 ---
 
@@ -199,23 +211,19 @@ STEP 2: B2 — Media library backup
 STEP 3: B3 — Git tag (pre-i18n-snapshot)
 STEP 4: B4 — Strapi export
 
-STEP 5: Run migration on STAGING
-        a. Install @strapi/plugin-i18n on staging
-        b. Update plugins.ts on staging
-        c. Add "i18n": true to all content type schemas on staging
-        d. Start staging Strapi, confirm migration ran (check DB columns)
-        e. Verify all HU content still appears correctly in staging admin
-        f. Verify all existing public API endpoints still respond with HU content
-        g. Run the full EN content import (see §5) on staging
-        h. QA the EN API responses on staging
-        i. Load test: ensure performance is acceptable with dual-locale queries
+STEP 5: Complete localization and review in DEVELOPMENT
+        a. Verify all HU content and schema localization
+        b. Run the full EN content import (see §5)
+        c. QA both HU and EN API responses
+        d. Load test dual-locale queries
 
-STEP 6: IF staging passes: repeat STEP 5 a-d on PRODUCTION
-        (Strapi will be offline briefly during restart — ~30 seconds typically)
+STEP 6: IF development passes: restore/copy the fully localized development
+        database to STAGING, then boot Staging Strapi and repeat verification
 
-STEP 7: Verify PRODUCTION HU content unchanged via public API spot checks
+STEP 7: IF staging passes: restore/copy the fully localized development
+        database to PRODUCTION before its next Strapi boot
 
-STEP 8: Import EN content to PRODUCTION via Strapi admin or import script (see §5)
+STEP 8: Boot production and verify HU content unchanged via public API spot checks
 
 STEP 9: Set englishSiteEnabled = false in PRODUCTION Global Settings
         (confirm it is still false — do not publish EN until §8 acceptance checklist passes)
@@ -225,14 +233,14 @@ STEP 10: End maintenance window
 
 ### Rollback procedure
 
-If anything breaks after STEP 6:
+If anything breaks after STEP 7:
 ```bash
 # Stop Strapi
 # Restore PostgreSQL from STEP 1 dump:
 pg_restore -d $DATABASE_URL backup_YYYYMMDD_HHMMSS_pre_i18n.dump
 # Revert schema files to pre-i18n-snapshot git tag:
 git checkout pre-i18n-snapshot -- artifacts/strapi/src/
-# Remove @strapi/plugin-i18n from package.json and node_modules
+# Revert the localized schema/config commit only together with the pre-i18n database
 # Restart Strapi
 ```
 
@@ -499,24 +507,19 @@ Complete this checklist on **staging** before executing ROLLOUT STEP 5 on produc
 
 ---
 
-## Appendix A — Field count summary by content type
+## Appendix A — Field scope
 
-| Content type | TRANSLATE | SHARED | LOCALE_RELATION | REVIEW |
-|---|---|---|---|---|
-| homepage | 9 | 4 | 0 | 3 |
-| about-page | 5 | 4 | 0 | 0 |
-| career-page | 9 | 5 | 0 | 0 |
-| contact-page | 9 | 3 | 0 | 2 |
-| global-setting | 7 | 12 | 0 | 4 |
-| legal-document | 2 | 0 | 0 | 0 |
-| project | 8 | 7 | 2 | 1 |
-| blog-post | 7 | 6 | 1 | 1 |
-| service | 37 | 9 | 2 | 2 |
-| career-position | 6 | 4 | 1 | 1 |
-| client | 0 | 5 | 0 | 0 |
-| tag | 1 | 3 | 0 | 1 |
-| team-member | 1 | 3 | 0 | 0 |
-| **Total** | **~101** | **~65** | **~6** | **~15** |
+The authoritative field-by-field scope is
+[`translation-inventory.md`](./translation-inventory.md). Counts are not
+duplicated here because reusable component fields appear in several content
+types, which makes a second per-type summary ambiguous and prone to drift.
+
+The implementation follows the inventory classifications directly:
+
+- `TRANSLATE` and `REVIEW` attributes are localized;
+- `LOCALE_RELATION` and UID attributes use Strapi's locale-aware semantics;
+- `SHARED` attributes remain unlocalized;
+- the three `legal-document` PDF media attributes are explicitly localized.
 
 ---
 
@@ -533,5 +536,4 @@ These are used in `getCareerPositions()` and `getCareerPositionBySlug()`. When E
 
 ---
 
-*Last updated: 2025. Generated as part of Task #94 — Kétnyelvű oldal teljes előkészítése.*  
-*Do NOT install Strapi i18n or change application code until all pre-requisites in §2 are met.*
+*Last updated: 2026-08-28. Development migration verified; production must receive the fully localized development database before Strapi boots, and rollout remains gated by §2.*

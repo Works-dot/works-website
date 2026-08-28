@@ -10,22 +10,29 @@ export default {
   "options": {
     "draftAndPublish": true
   },
-  "pluginOptions": {},
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
+    }
+  },
   "attributes": {
     "seo": {
       "type": "component",
       "repeatable": false,
-      "component": "shared.seo"
+      "component": "shared.seo",
+      "pluginOptions": { "i18n": { "localized": true } }
     },
     "hero": {
       "type": "component",
       "repeatable": false,
-      "component": "shared.hero"
+      "component": "shared.hero",
+      "pluginOptions": { "i18n": { "localized": true } }
     },
     "intro": {
       "type": "component",
       "repeatable": false,
-      "component": "about.intro"
+      "component": "about.intro",
+      "pluginOptions": { "i18n": { "localized": true } }
     },
     "galleryImages": {
       "type": "media",

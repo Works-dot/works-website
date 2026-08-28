@@ -8,8 +8,19 @@ export interface AboutIntro extends Struct.ComponentSchema {
     icon: 'information';
   };
   attributes: {
-    body: Schema.Attribute.RichText;
-    heading: Schema.Attribute.String & Schema.Attribute.Required;
+    body: Schema.Attribute.RichText &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    heading: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
   };
 }
 
@@ -20,9 +31,21 @@ export interface CareerWhyUsItem extends Struct.ComponentSchema {
     displayName: 'Why us item';
   };
   attributes: {
-    description: Schema.Attribute.Text & Schema.Attribute.Required;
+    description: Schema.Attribute.Text &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     image: Schema.Attribute.Media<'images'>;
-    title: Schema.Attribute.String & Schema.Attribute.Required;
+    title: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
   };
 }
 
@@ -33,8 +56,18 @@ export interface CareerWhyUsSection extends Struct.ComponentSchema {
     displayName: 'Mi\u00E9rt j\u00F3 n\u00E1lunk dolgozni?';
   };
   attributes: {
-    items: Schema.Attribute.Component<'career.why-us-item', true>;
-    sectionHeading: Schema.Attribute.String;
+    items: Schema.Attribute.Component<'career.why-us-item', true> &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    sectionHeading: Schema.Attribute.String &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
   };
 }
 
@@ -45,8 +78,18 @@ export interface CareerWorkWithUs extends Struct.ComponentSchema {
     displayName: 'Dolgozz vel\u00FCnk';
   };
   attributes: {
-    description: Schema.Attribute.Text;
-    heading: Schema.Attribute.String;
+    description: Schema.Attribute.Text &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    heading: Schema.Attribute.String &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
   };
 }
 
@@ -58,8 +101,18 @@ export interface ContactCareerConsent extends Struct.ComponentSchema {
     icon: 'check';
   };
   attributes: {
-    checkbox1Text: Schema.Attribute.Text;
-    checkbox2Text: Schema.Attribute.Text;
+    checkbox1Text: Schema.Attribute.Text &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    checkbox2Text: Schema.Attribute.Text &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
   };
 }
 
@@ -72,8 +125,20 @@ export interface ContactFormSubject extends Struct.ComponentSchema {
   };
   attributes: {
     isCareer: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
-    label: Schema.Attribute.String & Schema.Attribute.Required;
-    value: Schema.Attribute.String & Schema.Attribute.Required;
+    label: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    value: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
   };
 }
 
@@ -85,7 +150,13 @@ export interface ContentHighlightBlock extends Struct.ComponentSchema {
     icon: 'quote';
   };
   attributes: {
-    quote: Schema.Attribute.RichText & Schema.Attribute.Required;
+    quote: Schema.Attribute.RichText &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
   };
 }
 
@@ -97,7 +168,12 @@ export interface ContentImageBlock extends Struct.ComponentSchema {
     icon: 'picture';
   };
   attributes: {
-    caption: Schema.Attribute.String;
+    caption: Schema.Attribute.String &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     image: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
   };
 }
@@ -110,7 +186,13 @@ export interface ContentTextBlock extends Struct.ComponentSchema {
     icon: 'align-left';
   };
   attributes: {
-    body: Schema.Attribute.RichText & Schema.Attribute.Required;
+    body: Schema.Attribute.RichText &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
   };
 }
 
@@ -122,7 +204,13 @@ export interface HomepageBlogSection extends Struct.ComponentSchema {
     icon: 'file-text';
   };
   attributes: {
-    heading: Schema.Attribute.String & Schema.Attribute.Required;
+    heading: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
   };
 }
 
@@ -134,9 +222,25 @@ export interface HomepageCtaBanner extends Struct.ComponentSchema {
     icon: 'megaphone';
   };
   attributes: {
-    ctaLink: Schema.Attribute.String;
-    ctaText: Schema.Attribute.String;
-    heading: Schema.Attribute.String & Schema.Attribute.Required;
+    ctaLink: Schema.Attribute.String &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    ctaText: Schema.Attribute.String &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    heading: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
   };
 }
 
@@ -149,13 +253,49 @@ export interface HomepageHero extends Struct.ComponentSchema {
   };
   attributes: {
     backgroundImage: Schema.Attribute.Media<'images'>;
-    description: Schema.Attribute.Text;
-    heading: Schema.Attribute.String & Schema.Attribute.Required;
-    highlightedWord: Schema.Attribute.String;
-    primaryCtaLink: Schema.Attribute.String;
-    primaryCtaText: Schema.Attribute.String;
-    secondaryCtaLink: Schema.Attribute.String;
-    secondaryCtaText: Schema.Attribute.String;
+    description: Schema.Attribute.Text &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    heading: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    highlightedWord: Schema.Attribute.String &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    primaryCtaLink: Schema.Attribute.String &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    primaryCtaText: Schema.Attribute.String &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    secondaryCtaLink: Schema.Attribute.String &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    secondaryCtaText: Schema.Attribute.String &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
   };
 }
 
@@ -167,7 +307,13 @@ export interface HomepageProjectsSection extends Struct.ComponentSchema {
     icon: 'briefcase';
   };
   attributes: {
-    heading: Schema.Attribute.String & Schema.Attribute.Required;
+    heading: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
   };
 }
 
@@ -179,7 +325,13 @@ export interface HomepageServicesSection extends Struct.ComponentSchema {
     icon: 'apps';
   };
   attributes: {
-    heading: Schema.Attribute.String & Schema.Attribute.Required;
+    heading: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
   };
 }
 
@@ -192,8 +344,18 @@ export interface ProjectCaseStudy extends Struct.ComponentSchema {
   };
   attributes: {
     client: Schema.Attribute.String;
-    duration: Schema.Attribute.String;
-    heroSubtitle: Schema.Attribute.Text;
+    duration: Schema.Attribute.String &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    heroSubtitle: Schema.Attribute.Text &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     year: Schema.Attribute.String;
   };
 }
@@ -206,7 +368,13 @@ export interface ServiceBulletPoint extends Struct.ComponentSchema {
     icon: 'bulletList';
   };
   attributes: {
-    text: Schema.Attribute.String & Schema.Attribute.Required;
+    text: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
   };
 }
 
@@ -218,9 +386,20 @@ export interface ServiceDeliverableCard extends Struct.ComponentSchema {
     icon: 'apps';
   };
   attributes: {
-    description: Schema.Attribute.Text;
+    description: Schema.Attribute.Text &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     icon: Schema.Attribute.Media<'images'>;
-    title: Schema.Attribute.String & Schema.Attribute.Required;
+    title: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
   };
 }
 
@@ -232,10 +411,26 @@ export interface ServiceDeliverableGroup extends Struct.ComponentSchema {
     icon: 'apps';
   };
   attributes: {
-    bullets: Schema.Attribute.Component<'service.bullet-point', true>;
-    description: Schema.Attribute.Text;
+    bullets: Schema.Attribute.Component<'service.bullet-point', true> &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    description: Schema.Attribute.Text &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     icon: Schema.Attribute.Media<'images'>;
-    title: Schema.Attribute.String & Schema.Attribute.Required;
+    title: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
   };
 }
 
@@ -247,9 +442,24 @@ export interface ServiceDeliverablesSection extends Struct.ComponentSchema {
     icon: 'gift';
   };
   attributes: {
-    intro: Schema.Attribute.Component<'service.section-intro', false>;
-    largeCards: Schema.Attribute.Component<'service.deliverable-group', true>;
-    smallCards: Schema.Attribute.Component<'service.deliverable-card', true>;
+    intro: Schema.Attribute.Component<'service.section-intro', false> &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    largeCards: Schema.Attribute.Component<'service.deliverable-group', true> &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    smallCards: Schema.Attribute.Component<'service.deliverable-card', true> &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     variant: Schema.Attribute.Enumeration<['smallCards', 'largeCards']> &
       Schema.Attribute.Required &
       Schema.Attribute.DefaultTo<'smallCards'>;
@@ -264,8 +474,19 @@ export interface ServiceFaqItem extends Struct.ComponentSchema {
     icon: 'question';
   };
   attributes: {
-    answer: Schema.Attribute.Text;
-    question: Schema.Attribute.String & Schema.Attribute.Required;
+    answer: Schema.Attribute.Text &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    question: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
   };
 }
 
@@ -277,8 +498,18 @@ export interface ServiceFaqSection extends Struct.ComponentSchema {
     icon: 'question';
   };
   attributes: {
-    intro: Schema.Attribute.Component<'service.section-intro', false>;
-    items: Schema.Attribute.Component<'service.faq-item', true>;
+    intro: Schema.Attribute.Component<'service.section-intro', false> &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    items: Schema.Attribute.Component<'service.faq-item', true> &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
   };
 }
 
@@ -290,13 +521,34 @@ export interface ServiceGeneral extends Struct.ComponentSchema {
     icon: 'layout';
   };
   attributes: {
-    heroDescription: Schema.Attribute.Text;
+    heroDescription: Schema.Attribute.Text &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     icon: Schema.Attribute.Media<'images'>;
     slug: Schema.Attribute.String &
       Schema.Attribute.Required &
-      Schema.Attribute.Unique;
-    subtitle: Schema.Attribute.String;
-    title: Schema.Attribute.String & Schema.Attribute.Required;
+      Schema.Attribute.Unique &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    subtitle: Schema.Attribute.String &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    title: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
   };
 }
 
@@ -308,9 +560,20 @@ export interface ServiceHelpCard extends Struct.ComponentSchema {
     icon: 'check-circle';
   };
   attributes: {
-    description: Schema.Attribute.Text;
+    description: Schema.Attribute.Text &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     icon: Schema.Attribute.Media<'images'>;
-    title: Schema.Attribute.String & Schema.Attribute.Required;
+    title: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
   };
 }
 
@@ -322,8 +585,18 @@ export interface ServiceHelpSection extends Struct.ComponentSchema {
     icon: 'grid';
   };
   attributes: {
-    cards: Schema.Attribute.Component<'service.help-card', true>;
-    intro: Schema.Attribute.Component<'service.section-intro', false>;
+    cards: Schema.Attribute.Component<'service.help-card', true> &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    intro: Schema.Attribute.Component<'service.section-intro', false> &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
   };
 }
 
@@ -335,8 +608,18 @@ export interface ServiceProcessSection extends Struct.ComponentSchema {
     icon: 'arrow-right';
   };
   attributes: {
-    intro: Schema.Attribute.Component<'service.section-intro', false>;
-    steps: Schema.Attribute.Component<'service.process-step', true>;
+    intro: Schema.Attribute.Component<'service.section-intro', false> &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    steps: Schema.Attribute.Component<'service.process-step', true> &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
   };
 }
 
@@ -348,8 +631,19 @@ export interface ServiceProcessStep extends Struct.ComponentSchema {
     icon: 'arrow-right';
   };
   attributes: {
-    description: Schema.Attribute.Text;
-    title: Schema.Attribute.String & Schema.Attribute.Required;
+    description: Schema.Attribute.Text &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    title: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
   };
 }
 
@@ -361,8 +655,19 @@ export interface ServiceQuestionCard extends Struct.ComponentSchema {
     icon: 'question';
   };
   attributes: {
-    description: Schema.Attribute.Text;
-    title: Schema.Attribute.String & Schema.Attribute.Required;
+    description: Schema.Attribute.Text &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    title: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
   };
 }
 
@@ -374,8 +679,18 @@ export interface ServiceQuestionsSection extends Struct.ComponentSchema {
     icon: 'question';
   };
   attributes: {
-    cards: Schema.Attribute.Component<'service.question-card', true>;
-    intro: Schema.Attribute.Component<'service.section-intro', false>;
+    cards: Schema.Attribute.Component<'service.question-card', true> &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    intro: Schema.Attribute.Component<'service.section-intro', false> &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
   };
 }
 
@@ -387,9 +702,24 @@ export interface ServiceSectionIntro extends Struct.ComponentSchema {
     icon: 'layout';
   };
   attributes: {
-    description: Schema.Attribute.Text;
-    heading: Schema.Attribute.String;
-    kicker: Schema.Attribute.String;
+    description: Schema.Attribute.Text &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    heading: Schema.Attribute.String &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    kicker: Schema.Attribute.String &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
   };
 }
 
@@ -402,8 +732,19 @@ export interface SharedHero extends Struct.ComponentSchema {
   };
   attributes: {
     backgroundImage: Schema.Attribute.Media<'images'>;
-    description: Schema.Attribute.Text;
-    heading: Schema.Attribute.String & Schema.Attribute.Required;
+    description: Schema.Attribute.Text &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    heading: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
   };
 }
 
@@ -415,8 +756,20 @@ export interface SharedLegalLink extends Struct.ComponentSchema {
     icon: 'file';
   };
   attributes: {
-    label: Schema.Attribute.String & Schema.Attribute.Required;
-    url: Schema.Attribute.String & Schema.Attribute.Required;
+    label: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    url: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
   };
 }
 
@@ -428,8 +781,20 @@ export interface SharedOpeningHours extends Struct.ComponentSchema {
     icon: 'clock';
   };
   attributes: {
-    day: Schema.Attribute.String & Schema.Attribute.Required;
-    hours: Schema.Attribute.String & Schema.Attribute.Required;
+    day: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    hours: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
   };
 }
 
@@ -441,8 +806,19 @@ export interface SharedSeo extends Struct.ComponentSchema {
     icon: 'search';
   };
   attributes: {
-    metaDescription: Schema.Attribute.Text;
-    metaTitle: Schema.Attribute.String & Schema.Attribute.Required;
+    metaDescription: Schema.Attribute.Text &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    metaTitle: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     ogImage: Schema.Attribute.Media<'images'>;
   };
 }

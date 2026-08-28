@@ -10,25 +10,32 @@ export default {
   "options": {
     "draftAndPublish": true
   },
-  "pluginOptions": {},
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
+    }
+  },
   "attributes": {
     "privacyPdf": {
       "type": "media",
       "multiple": false,
       "required": false,
-      "allowedTypes": ["files"]
+      "allowedTypes": ["files"],
+      "pluginOptions": { "i18n": { "localized": true } }
     },
     "cookiePdf": {
       "type": "media",
       "multiple": false,
       "required": false,
-      "allowedTypes": ["files"]
+      "allowedTypes": ["files"],
+      "pluginOptions": { "i18n": { "localized": true } }
     },
     "imprintPdf": {
       "type": "media",
       "multiple": false,
       "required": false,
-      "allowedTypes": ["files"]
+      "allowedTypes": ["files"],
+      "pluginOptions": { "i18n": { "localized": true } }
     }
   }
 };

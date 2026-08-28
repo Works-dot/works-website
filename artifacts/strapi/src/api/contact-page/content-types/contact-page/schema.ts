@@ -10,39 +10,51 @@ export default {
   "options": {
     "draftAndPublish": true
   },
-  "pluginOptions": {},
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
+    }
+  },
   "attributes": {
     "seo": {
       "type": "component",
       "repeatable": false,
-      "component": "shared.seo"
+      "component": "shared.seo",
+      "pluginOptions": { "i18n": { "localized": true } }
     },
     "hero": {
       "type": "component",
       "repeatable": false,
-      "component": "shared.hero"
+      "component": "shared.hero",
+      "pluginOptions": { "i18n": { "localized": true } }
     },
     "formHeading": {
-      "type": "string"
+      "type": "string",
+      "pluginOptions": { "i18n": { "localized": true } }
     },
     "formSubjects": {
       "type": "component",
       "repeatable": true,
-      "component": "contact.form-subject"
+      "component": "contact.form-subject",
+      "pluginOptions": { "i18n": { "localized": true } }
     },
     "careerConsent": {
       "type": "component",
       "repeatable": false,
-      "component": "contact.career-consent"
+      "component": "contact.career-consent",
+      "pluginOptions": { "i18n": { "localized": true } }
     },
     "successTitle": {
-      "type": "string"
+      "type": "string",
+      "pluginOptions": { "i18n": { "localized": true } }
     },
     "successMessage": {
-      "type": "text"
+      "type": "text",
+      "pluginOptions": { "i18n": { "localized": true } }
     },
     "mapHeading": {
-      "type": "string"
+      "type": "string",
+      "pluginOptions": { "i18n": { "localized": true } }
     },
     "mapEmbedUrl": {
       "type": "text"

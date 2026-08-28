@@ -10,19 +10,26 @@ export default {
   "options": {
     "draftAndPublish": true
   },
-  "pluginOptions": {},
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
+    }
+  },
   "attributes": {
     "slug": {
       "type": "uid",
       "targetField": "title",
-      "required": true
+      "required": true,
+      "pluginOptions": { "i18n": { "localized": true } }
     },
     "title": {
       "type": "string",
-      "required": true
+      "required": true,
+      "pluginOptions": { "i18n": { "localized": true } }
     },
     "excerpt": {
-      "type": "text"
+      "type": "text",
+      "pluginOptions": { "i18n": { "localized": true } }
     },
     "date": {
       "type": "date"
@@ -41,10 +48,12 @@ export default {
       "type": "relation",
       "relation": "manyToMany",
       "target": "api::tag.tag",
-      "inversedBy": "blogPosts"
+      "inversedBy": "blogPosts",
+      "pluginOptions": { "i18n": { "localized": true } }
     },
     "readingTime": {
-      "type": "string"
+      "type": "string",
+      "pluginOptions": { "i18n": { "localized": true } }
     },
     "featured": {
       "type": "boolean",
@@ -56,7 +65,8 @@ export default {
     "seo": {
       "type": "component",
       "repeatable": false,
-      "component": "shared.seo"
+      "component": "shared.seo",
+      "pluginOptions": { "i18n": { "localized": true } }
     },
     "contentBlocks": {
       "type": "dynamiczone",
@@ -64,7 +74,8 @@ export default {
         "content.text-block",
         "content.image-block",
         "content.highlight-block"
-      ]
+      ],
+      "pluginOptions": { "i18n": { "localized": true } }
     }
   }
 };

@@ -10,11 +10,16 @@ export default {
   "options": {
     "draftAndPublish": true
   },
-  "pluginOptions": {},
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
+    }
+  },
   "attributes": {
     "siteName": {
       "type": "string",
-      "required": true
+      "required": true,
+      "pluginOptions": { "i18n": { "localized": true } }
     },
     "logo": {
       "type": "media",
@@ -40,32 +45,40 @@ export default {
       "type": "email"
     },
     "contactPhone": {
-      "type": "string"
+      "type": "string",
+      "pluginOptions": { "i18n": { "localized": true } }
     },
     "address": {
-      "type": "text"
+      "type": "text",
+      "pluginOptions": { "i18n": { "localized": true } }
     },
     "openingHours": {
       "type": "component",
       "repeatable": true,
-      "component": "shared.opening-hours"
+      "component": "shared.opening-hours",
+      "pluginOptions": { "i18n": { "localized": true } }
     },
     "footerTagline": {
-      "type": "text"
+      "type": "text",
+      "pluginOptions": { "i18n": { "localized": true } }
     },
     "newsletterHeading": {
-      "type": "string"
+      "type": "string",
+      "pluginOptions": { "i18n": { "localized": true } }
     },
     "newsletterDescription": {
-      "type": "text"
+      "type": "text",
+      "pluginOptions": { "i18n": { "localized": true } }
     },
     "copyrightText": {
-      "type": "string"
+      "type": "string",
+      "pluginOptions": { "i18n": { "localized": true } }
     },
     "legalLinks": {
       "type": "component",
       "repeatable": true,
-      "component": "shared.legal-link"
+      "component": "shared.legal-link",
+      "pluginOptions": { "i18n": { "localized": true } }
     },
     "heroBackgroundPattern": {
       "type": "media",
