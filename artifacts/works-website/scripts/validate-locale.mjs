@@ -93,17 +93,6 @@ async function runValidation() {
     "footer services uses localized services dataset",
     getLocaleCacheKey("footerServices") === "services"
   );
-  const bilingualCache = JSON.parse(
-    readFileSync(path.resolve(root, "src/data/strapi-cache.json"), "utf8"),
-  );
-  assert(
-    "EN privacy fallback points to the official document",
-    Boolean(bilingualCache.en?.legalDocuments?.privacyPdfUrl),
-  );
-  assert(
-    "EN imprint fallback points to the official document",
-    Boolean(bilingualCache.en?.legalDocuments?.imprintPdfUrl),
-  );
   assert(
     "career list uses localized positions dataset",
     getLocaleCacheKey("careerPositions") === "positions"

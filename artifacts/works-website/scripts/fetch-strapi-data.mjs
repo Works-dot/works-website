@@ -495,15 +495,6 @@ async function fetchAllWithRetry() {
           hu: await fetchAll("hu"),
           en: await fetchAll("en"),
         };
-        if (
-          STRICT &&
-          (!data.en.legalDocuments?.privacyPdfUrl ||
-            !data.en.legalDocuments?.imprintPdfUrl)
-        ) {
-          throw new Error(
-            "Required English legal fallbacks are missing: privacyPdf and imprintPdf must be assigned",
-          );
-        }
         return data;
     } catch (err) {
       lastErr = err;

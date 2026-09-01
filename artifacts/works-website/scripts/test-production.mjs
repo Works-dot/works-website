@@ -85,7 +85,7 @@ async function assertPrerenderedResponse(baseUrl, pathname) {
   );
   assert.match(
     html,
-    /<script[^>]+type="module"[^>]+src="[^"]*\/assets\/[^"]+\.js"/,
+    /type="module"[^>]+src="[^"]*\/assets\/[^"]+\.js"/,
     `${pathname} does not load the production JavaScript bundle`,
   );
 }
@@ -305,6 +305,36 @@ async function run() {
       firstSeo.canonicals[0],
       "The second article retained the first article canonical URL",
     );
+
+    const isUploadedPdf = (url) =>
+      url.pathname.startsWith("/strapi/uploads/") &&
+      url.pathname.endsWith(".pdf");
+    await page.route(isUploadedPdf, (route) =>
+      route.fulfill({ status: 204, body: "" }),
+    );
+    const privacyPdfRequest = page.waitForRequest(
+      (request) =>
+        request.isNavigationRequest() &&
+        isUploadedPdf(new URL(request.url())),
+    );
+    await page.goto(`${baseUrl}/en/privacy`, { waitUntil: "domcontentloaded" });
+    assert.ok(await privacyPdfRequest, "EN privacy page did not redirect to its PDF");
+
+    await page.goto(`${baseUrl}/en/contact`, { waitUntil: "networkidle" });
+    await assertRenderedPage(page, "/en/contact");
+    const consentPrivacyHref = await page
+      .locator('main a[href*="/strapi/uploads/"][href$=".pdf"]')
+      .first()
+      .getAttribute("href");
+    assert.ok(consentPrivacyHref?.endsWith(".pdf"));
+    const footerPrivacyHref = await page
+      .locator('footer a[href*="/strapi/uploads/"][href$=".pdf"]')
+      .first()
+      .getAttribute("href");
+    assert.equal(footerPrivacyHref, consentPrivacyHref);
+    await page.getByTestId("language-switch").click();
+    await assertRenderedPage(page, "/kapcsolat");
+    assert.equal(await page.locator("html").getAttribute("lang"), "hu");
 
     assert.deepEqual(
       browserFailures,

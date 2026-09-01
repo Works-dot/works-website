@@ -124,10 +124,7 @@ export default function Contact() {
     error: globalSettingsError,
   } = useStrapiQuery<GlobalSettings>("globalSettings", () => getGlobalSettings(locale), fallbackGlobalSettings, locale);
   const { data: legalDocs } = useStrapiQuery<LegalDocuments>("legalDocuments", () => getLegalDocuments(locale), fallbackLegalDocuments, locale);
-  const privacyPdfUrl =
-    locale === "en"
-      ? buildLocalePath(locale, "privacy")
-      : legalDocs?.privacyPdfUrl || buildLocalePath(locale, "privacy");
+  const privacyPdfUrl = legalDocs?.privacyPdfUrl || buildLocalePath(locale, "privacy");
 
   const [formData, setFormData] = useState({
     name: "",

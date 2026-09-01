@@ -94,7 +94,6 @@ export interface Messages {
   privacyPage: {
     pageHeading: string;
     redirectingText: string;
-    documentLanguageNotice: string;
     openLinkLabel: string;
     loadingText: string;
   };
@@ -298,7 +297,6 @@ const hu: Messages = {
   privacyPage: {
     pageHeading: "Adatkezelési tájékoztató",
     redirectingText: "Átirányítunk a dokumentumhoz… Ha nem történik meg automatikusan,",
-    documentLanguageNotice: "A hivatalos dokumentum magyar nyelven érhető el.",
     openLinkLabel: "kattints ide a megnyitáshoz",
     loadingText: "A dokumentum betöltése folyamatban…",
   },
@@ -455,7 +453,7 @@ const en: Messages = {
     privacy: "Privacy policy",
     cookies: "Cookie policy",
     cookieSettings: "Cookie settings",
-    imprint: "Imprint (Hungarian PDF)",
+    imprint: "Imprint",
     newsletterEmailLabel: "Your email",
     newsletterEmailPlaceholder: "Your email",
     newsletterSubmitting: "Sending...",
@@ -501,7 +499,6 @@ const en: Messages = {
   privacyPage: {
     pageHeading: "Privacy policy",
     redirectingText: "Redirecting you to the document… If it does not happen automatically,",
-    documentLanguageNotice: "The official privacy notice is currently available in Hungarian.",
     openLinkLabel: "click here to open it",
     loadingText: "Loading document…",
   },
