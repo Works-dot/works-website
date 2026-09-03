@@ -30,7 +30,7 @@ export function ResponsiveFilter({
           className={`px-4 py-2 text-sm font-semibold border transition-colors ${
             value === null
               ? "bg-works-primary text-white border-works-primary"
-              : "bg-white text-works-dark border-works-muted hover:border-works-primary"
+              : "bg-white text-works-dark border-works-muted hover:border-works-dark"
           }`}
         >
           {allLabel}
@@ -42,7 +42,7 @@ export function ResponsiveFilter({
             className={`px-4 py-2 text-sm font-semibold border transition-colors ${
               value === tag
                 ? "bg-works-primary text-white border-works-primary"
-                : "bg-white text-works-dark border-works-muted hover:border-works-primary"
+                : "bg-white text-works-dark border-works-muted hover:border-works-dark"
             }`}
           >
             {tag}
