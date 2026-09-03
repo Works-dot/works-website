@@ -33,7 +33,7 @@ export function ServiceCard({ iconSrc, title, description, index, href }: Servic
       {href && (
         <div className="flex justify-end mt-4">
           <ArrowRight
-            className="w-5 h-5 text-works-dark/40 group-hover:text-works-primary group-hover:translate-x-1 transition-all duration-300"
+            className="w-5 h-5 text-works-primary group-hover:translate-x-1 transition-all duration-300"
             strokeWidth={1.5}
             aria-hidden="true"
           />
