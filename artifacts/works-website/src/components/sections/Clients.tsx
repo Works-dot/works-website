@@ -39,7 +39,7 @@ export function Clients() {
           {[...displayClients, ...displayClients, ...displayClients].map((client, i) => (
             <div
               key={i}
-              className="group/card flex-shrink-0 flex flex-col items-center justify-center w-56 h-24 mx-4 bg-works-bg border border-works-muted/50 hover:border-works-muted hover:shadow-md transition-all duration-300 cursor-default gap-1"
+              className="group/card flex-shrink-0 flex flex-col items-center justify-center w-56 h-24 mx-4 bg-works-bg border border-works-muted/50 transition-all duration-300 cursor-default gap-1"
             >
               {client.logo ? (
                 <img
