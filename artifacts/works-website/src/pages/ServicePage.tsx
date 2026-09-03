@@ -20,6 +20,7 @@ import { fallbackProjects, fallbackServices, bgGraphic1FallbackImg, bgGraphic2Fa
 import { getServiceHeroGraphic } from "@/data/service-hero-graphics";
 import { useI18n } from "@/i18n";
 import { buildLocalePath } from "@/lib/i18n-routes";
+import { ArrowLinkLabel } from "@/components/ui/arrow-link-label";
 
 const fadeUp = {
   initial: { opacity: 0, y: 20 },
@@ -218,7 +219,7 @@ export default function ServicePage() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: "-50px" }}
                     transition={{ duration: 0.5, delay: i * 0.1 }}
-                    className="bg-white p-6 border border-works-muted/30 border-b-2 border-b-works-primary hover:shadow-lg transition-all duration-300"
+                    className="bg-white p-6 border border-works-muted/30 border-b-2 border-b-works-primary"
                   >
                     <HelpCircle className="w-6 h-6 text-works-primary mb-4" strokeWidth={1.5} aria-hidden="true" />
                     <h3 className="text-lg font-bold text-works-dark mb-3 leading-snug">
@@ -530,10 +531,9 @@ function RelatedProjectCard({ p, i, animated = true }: { p: Project; i: number; 
           <p className="text-works-dark/60 mb-6 line-clamp-3 leading-relaxed">
             {p.description}
           </p>
-          <span className="inline-flex items-center text-works-dark font-semibold text-sm group-hover:text-works-primary mt-auto">
+          <ArrowLinkLabel size="small" className="mt-auto">
             {t("cta.viewCaseStudy")}
-            <ArrowRight className="ml-1 w-4 h-4 transition-transform group-hover:translate-x-1" />
-          </span>
+          </ArrowLinkLabel>
         </div>
       </Link>
     </motion.article>

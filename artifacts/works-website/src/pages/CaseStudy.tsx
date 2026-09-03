@@ -12,6 +12,7 @@ import { ContentBlock } from "@/components/ContentBlock";
 import { fallbackProjects, heroBackgroundFallbackImg } from "@/data/fallback";
 import { useI18n } from "@/i18n";
 import { buildLocalePath } from "@/lib/i18n-routes";
+import { PrimaryAction } from "@/components/ui/button";
 
 export default function CaseStudy() {
   const { locale, t } = useI18n();
@@ -170,13 +171,12 @@ export default function CaseStudy() {
                     {nextProject.title}
                   </h3>
                 </div>
-                <Link
-                  href={buildLocalePath(locale, "projectDetail", nextProject.slug)}
-                  className="group inline-flex items-center gap-2 px-6 py-3 bg-works-primary text-white font-semibold hover:bg-works-dark transition-colors"
-                >
-                  {t("cta.viewProject")}
-                  <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-                </Link>
+                <PrimaryAction asChild className="group">
+                  <Link href={buildLocalePath(locale, "projectDetail", nextProject.slug)}>
+                    {t("cta.viewProject")}
+                    <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                  </Link>
+                </PrimaryAction>
               </div>
             </div>
           </section>

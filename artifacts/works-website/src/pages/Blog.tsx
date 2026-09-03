@@ -1,7 +1,7 @@
 import { useEffect, useState, useMemo } from "react";
 import { Link } from "wouter";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight, Calendar } from "lucide-react";
+import { Calendar } from "lucide-react";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { ResponsiveFilter } from "@/components/ui/ResponsiveFilter";
@@ -12,6 +12,7 @@ import type { BlogPageData, BlogPost } from "@/lib/strapi";
 import { fallbackBlogPage, fallbackBlogPosts } from "@/data/fallback";
 import { useI18n } from "@/i18n";
 import { buildLocalePath } from "@/lib/i18n-routes";
+import { ArrowLinkLabel } from "@/components/ui/arrow-link-label";
 
 function FeaturedBlogCard({ slug, title, excerpt, date, image, imageAlt, author, readingTime }: {
   slug: string;
@@ -56,10 +57,9 @@ function FeaturedBlogCard({ slug, title, excerpt, date, image, imageAlt, author,
             {excerpt}
           </p>
           <p className="text-sm text-works-dark/50 mb-6">{author}</p>
-          <span className="inline-flex items-center gap-2 text-works-primary font-semibold text-sm">
+          <ArrowLinkLabel size="small">
             {t("cta.readMore")}
-            <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-          </span>
+          </ArrowLinkLabel>
         </div>
       </Link>
     </motion.div>
@@ -116,10 +116,9 @@ function BlogGridCard({ slug, title, excerpt, date, image, imageAlt, author, rea
           </div>
           <div className="flex items-center justify-between mt-auto">
             <span className="text-sm text-works-dark/50">{author}</span>
-            <span className="inline-flex items-center gap-1 text-works-primary font-semibold text-sm">
+            <ArrowLinkLabel size="small">
               {t("cta.readMore")}
-              <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-            </span>
+            </ArrowLinkLabel>
           </div>
         </div>
       </Link>

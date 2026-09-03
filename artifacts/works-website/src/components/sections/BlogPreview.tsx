@@ -7,6 +7,7 @@ import type { BlogPost, HomepageData } from "@/lib/strapi";
 import { fallbackBlogPosts, fallbackHomepage } from "@/data/fallback";
 import { useI18n } from "@/i18n";
 import { buildLocalePath } from "@/lib/i18n-routes";
+import { ArrowLinkLabel } from "@/components/ui/arrow-link-label";
 
 export function BlogPreview() {
   const { locale, t } = useI18n();
@@ -37,9 +38,8 @@ export function BlogPreview() {
               {homepage?.blogSection?.heading || t("sections.latestPostsHeading")}
             </h2>
           </div>
-          <Link href={buildLocalePath(locale, "blog")} className="group text-works-dark font-semibold hover:text-works-primary transition-colors inline-flex items-center w-fit">
-            {t("sections.allBlogs")}
-            <span className="ml-2 inline-block transition-transform duration-300 group-hover:translate-x-1">→</span>
+          <Link href={buildLocalePath(locale, "blog")} className="group w-fit">
+            <ArrowLinkLabel>{t("sections.allBlogs")}</ArrowLinkLabel>
           </Link>
         </div>
         

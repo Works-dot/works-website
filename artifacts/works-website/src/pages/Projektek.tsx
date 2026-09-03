@@ -1,7 +1,6 @@
 import { useState, useMemo } from "react";
 import { Link } from "wouter";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight } from "lucide-react";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { ResponsiveFilter } from "@/components/ui/ResponsiveFilter";
@@ -12,6 +11,7 @@ import type { Project, ProjectsPageData } from "@/lib/strapi";
 import { fallbackProjects, fallbackProjectsPage } from "@/data/fallback";
 import { useI18n } from "@/i18n";
 import { buildLocalePath } from "@/lib/i18n-routes";
+import { ArrowLinkLabel } from "@/components/ui/arrow-link-label";
 
 function FeaturedProjectCard({ slug, title, tags, description, image, imageAlt }: {
   slug: string;
@@ -56,10 +56,9 @@ function FeaturedProjectCard({ slug, title, tags, description, image, imageAlt }
           <p className="text-base lg:text-lg text-works-dark/60 leading-relaxed mb-6">
             {description}
           </p>
-          <span className="inline-flex items-center gap-2 text-works-primary font-semibold text-sm">
+          <ArrowLinkLabel size="small">
             {t("cta.viewDetails")}
-            <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-          </span>
+          </ArrowLinkLabel>
         </div>
       </Link>
     </motion.div>
@@ -110,10 +109,9 @@ function ProjectGridCard({ slug, title, tags, description, image, imageAlt }: {
           <p className="text-sm text-works-dark/60 leading-relaxed mb-3 line-clamp-3">
             {description}
           </p>
-          <span className="inline-flex items-center gap-2 text-works-primary font-semibold text-sm">
+          <ArrowLinkLabel size="small">
             {t("cta.viewDetails")}
-            <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-          </span>
+          </ArrowLinkLabel>
         </div>
       </Link>
     </motion.div>

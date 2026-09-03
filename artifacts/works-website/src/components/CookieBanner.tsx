@@ -2,6 +2,7 @@ import { Link } from "wouter";
 import { useCookieConsent } from "@/lib/cookie-consent";
 import { useI18n } from "@/i18n";
 import { buildLocalePath } from "@/lib/i18n-routes";
+import { PrimaryAction } from "@/components/ui/button";
 
 // Süti hozzájárulási sáv — a GDPR/ePrivacy minimumnak megfelelően az
 // elutasítás ugyanolyan hangsúlyos és egyszerű, mint az elfogadás.
@@ -40,14 +41,15 @@ export function CookieBanner() {
           >
             {t("cookieBanner.reject")}
           </button>
-          <button
+          <PrimaryAction
             type="button"
             onClick={accept}
-            className="px-5 py-2.5 text-sm font-semibold bg-works-primary text-white hover:bg-works-primary/90 transition-colors"
+            size="compact"
+            className="text-sm"
             data-testid="button-cookie-accept"
           >
             {t("cookieBanner.accept")}
-          </button>
+          </PrimaryAction>
         </div>
       </div>
     </div>

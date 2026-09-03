@@ -26,6 +26,7 @@ import {
 } from "@/lib/i18n-routes";
 import type { AppRoutes } from "./routes.types";
 import { useStrapiQuery } from "@/hooks/useStrapiQuery";
+import { PrimaryAction } from "@/components/ui/button";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -102,13 +103,12 @@ function RouteErrorFallback() {
           {t("states.navigationErrorBody")}
         </p>
         <div className="flex flex-wrap justify-center gap-3">
-          <button
+          <PrimaryAction
             type="button"
             onClick={() => window.location.reload()}
-            className="px-6 py-3 bg-works-primary text-white font-semibold hover:bg-works-primary/90 transition-colors"
           >
             {t("states.reloadPage")}
-          </button>
+          </PrimaryAction>
           <a
             href={buildLocalePath(locale, "home")}
             className="px-6 py-3 border border-works-dark/20 text-works-dark font-semibold hover:border-works-primary hover:text-works-primary transition-colors"

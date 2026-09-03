@@ -1,8 +1,8 @@
 import { Link } from "wouter";
 import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
 import { useI18n } from "@/i18n";
 import { buildLocalePath } from "@/lib/i18n-routes";
+import { ArrowLinkLabel } from "@/components/ui/arrow-link-label";
 
 interface ProjectCardProps {
   slug: string;
@@ -59,10 +59,11 @@ export function ProjectCard({ slug, title, tags, description, image, imageAlt, r
         </p>
         <Link
           href={buildLocalePath(locale, "projectDetail", slug)}
-          className="inline-flex items-center text-works-primary font-semibold text-lg group hover:text-works-dark transition-colors"
+          className="group"
         >
-          {t("cta.viewCaseStudy")}
-          <ArrowRight className="ml-2 w-5 h-5 transition-transform group-hover:translate-x-1" />
+          <ArrowLinkLabel size="large">
+            {t("cta.viewCaseStudy")}
+          </ArrowLinkLabel>
         </Link>
       </div>
     </motion.div>

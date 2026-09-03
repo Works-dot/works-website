@@ -42,6 +42,23 @@ const buttonVariants = cva(
   }
 )
 
+const primaryActionVariants = cva(
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap bg-works-primary text-white font-semibold transition-colors duration-300 hover:bg-works-primary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-works-primary/40 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50",
+  {
+    variants: {
+      size: {
+        compact: "px-5 py-2.5",
+        default: "px-6 py-3",
+        large: "px-8 py-4",
+        hero: "px-6 py-4 sm:px-8",
+      },
+    },
+    defaultVariants: {
+      size: "default",
+    },
+  },
+)
+
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof buttonVariants> {
@@ -62,4 +79,24 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 )
 Button.displayName = "Button"
 
-export { Button, buttonVariants }
+export interface PrimaryActionProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
+    VariantProps<typeof primaryActionVariants> {
+  asChild?: boolean
+}
+
+const PrimaryAction = React.forwardRef<HTMLButtonElement, PrimaryActionProps>(
+  ({ className, size, asChild = false, ...props }, ref) => {
+    const Comp = asChild ? Slot : "button"
+    return (
+      <Comp
+        className={cn(primaryActionVariants({ size, className }))}
+        ref={ref}
+        {...props}
+      />
+    )
+  }
+)
+PrimaryAction.displayName = "PrimaryAction"
+
+export { Button, buttonVariants, PrimaryAction, primaryActionVariants }

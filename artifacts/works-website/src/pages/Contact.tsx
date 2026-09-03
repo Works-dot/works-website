@@ -14,6 +14,7 @@ import { fallbackContactPage, fallbackGlobalSettings, fallbackLegalDocuments, co
 import { useCookieConsent } from "@/lib/cookie-consent";
 import { useI18n } from "@/i18n";
 import { buildLocalePath } from "@/lib/i18n-routes";
+import { PrimaryAction } from "@/components/ui/button";
 
 const fadeUp = {
   initial: { opacity: 0, y: 20 },
@@ -527,15 +528,16 @@ export default function Contact() {
                       </span>
                     </label>
 
-                    <button
+                    <PrimaryAction
                       type="submit"
                       disabled={!consentsSatisfied || !cvSatisfied || submitting}
-                      className="group inline-flex items-center gap-2 bg-works-primary text-white font-semibold px-8 py-4 hover:bg-works-primary/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                      size="large"
+                      className="group"
                       data-testid="contact-submit"
                     >
                       {submitting ? t("contact.submitting") : t("contact.submitButton")}
                       <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
-                    </button>
+                    </PrimaryAction>
                   </form>
                 )}
               </motion.div>
@@ -625,14 +627,14 @@ export default function Contact() {
                   <p className="text-works-dark/60 max-w-md leading-relaxed">
                     {t("contact.mapConsentText")}
                   </p>
-                  <button
+                  <PrimaryAction
                     type="button"
                     onClick={accept}
-                    className="px-6 py-3 text-sm font-semibold bg-works-primary text-white hover:bg-works-primary/90 transition-colors"
+                    className="text-sm"
                     data-testid="button-load-map"
                   >
                     {t("contact.mapLoadButton")}
-                  </button>
+                  </PrimaryAction>
                 </div>
               )}
             </motion.div>

@@ -5,6 +5,7 @@ import type { HomepageData } from "@/lib/strapi";
 import { fallbackHomepage, heroBackgroundFallbackImg } from "@/data/fallback";
 import { useI18n } from "@/i18n";
 import { buildLocalePath, localizeInternalPath } from "@/lib/i18n-routes";
+import { PrimaryAction } from "@/components/ui/button";
 
 function renderHeading(heading: string, highlightedWord: string) {
   if (!highlightedWord || !heading.includes(highlightedWord)) {
@@ -61,12 +62,15 @@ export function Hero() {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-5">
-            <a
-              href={localizeInternalPath(locale, primaryCtaLink)}
-              className="inline-flex justify-center items-center px-6 sm:px-8 py-4 font-semibold bg-works-primary text-white border border-works-primary hover:bg-works-primary/90 transition-all duration-300 text-base sm:text-lg whitespace-nowrap"
+            <PrimaryAction
+              asChild
+              size="hero"
+              className="border border-works-primary text-base sm:text-lg"
             >
-              {primaryCtaText}
-            </a>
+              <a href={localizeInternalPath(locale, primaryCtaLink)}>
+                {primaryCtaText}
+              </a>
+            </PrimaryAction>
             <a
               href={secondaryCtaLink}
               className="inline-flex justify-center items-center px-8 py-4 font-semibold text-works-dark border border-works-muted hover:border-works-dark transition-all duration-300 text-lg"

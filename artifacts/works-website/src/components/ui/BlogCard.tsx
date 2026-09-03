@@ -1,8 +1,9 @@
 import { Link } from "wouter";
 import { motion } from "framer-motion";
-import { Calendar, ArrowRight } from "lucide-react";
+import { Calendar } from "lucide-react";
 import { useI18n } from "@/i18n";
 import { buildLocalePath } from "@/lib/i18n-routes";
+import { ArrowLinkLabel } from "@/components/ui/arrow-link-label";
 
 interface BlogCardProps {
   slug: string;
@@ -57,10 +58,9 @@ export function BlogCard({ slug, title, excerpt, date, image, imageAlt, index, a
             </p>
           </div>
           
-          <span className="inline-flex items-center text-works-dark font-semibold text-sm group-hover:text-works-primary mt-auto">
+          <ArrowLinkLabel size="small" className="mt-auto">
             {t("cta.readMore")}
-            <ArrowRight className="ml-1 w-4 h-4 transition-transform group-hover:translate-x-1" />
-          </span>
+          </ArrowLinkLabel>
         </div>
       </Link>
     </motion.article>

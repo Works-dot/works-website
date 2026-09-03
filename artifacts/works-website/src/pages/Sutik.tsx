@@ -3,6 +3,7 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import SEOHead from "@/components/SEOHead";
 import { useCookieConsent } from "@/lib/cookie-consent";
+import { PrimaryAction } from "@/components/ui/button";
 import { useStrapiQuery } from "@/hooks/useStrapiQuery";
 import { getLegalDocuments } from "@/lib/strapi";
 import type { LegalDocuments } from "@/lib/strapi";
@@ -80,14 +81,14 @@ export default function Sutik() {
                 {t("cookiePage.sectionModify")}
               </h2>
               <p>{t("cookiePage.modifyBody")}</p>
-              <button
+              <PrimaryAction
                 type="button"
                 onClick={openSettings}
-                className="px-6 py-3 text-sm font-semibold bg-works-primary text-white hover:bg-works-primary/90 transition-colors"
+                className="text-sm"
                 data-testid="button-open-cookie-settings"
               >
                 {t("cookiePage.openSettingsButton")}
-              </button>
+              </PrimaryAction>
 
               <p className="pt-4">
                 {t("cookiePage.privacyBodyLeadIn")}{" "}

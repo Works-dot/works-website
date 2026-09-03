@@ -7,6 +7,7 @@ import type { Project, HomepageData } from "@/lib/strapi";
 import { fallbackProjects, fallbackHomepage, bgGraphic2FallbackImg } from "@/data/fallback";
 import { useI18n } from "@/i18n";
 import { buildLocalePath } from "@/lib/i18n-routes";
+import { ArrowLinkLabel } from "@/components/ui/arrow-link-label";
 
 export function Projects() {
   const { locale, t } = useI18n();
@@ -44,9 +45,8 @@ export function Projects() {
               {homepage?.projectsSection?.heading || t("sections.featuredProjectsHeading")}
             </h2>
           </div>
-          <Link href={buildLocalePath(locale, "projects")} className="group text-works-dark font-semibold hover:text-works-primary transition-colors inline-flex items-center w-fit">
-            {t("sections.allProjects")}
-            <span className="ml-2 inline-block transition-transform duration-300 group-hover:translate-x-1">&rarr;</span>
+          <Link href={buildLocalePath(locale, "projects")} className="group w-fit">
+            <ArrowLinkLabel>{t("sections.allProjects")}</ArrowLinkLabel>
           </Link>
         </div>
 

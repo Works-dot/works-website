@@ -12,6 +12,7 @@ import { ContentBlock } from "@/components/ContentBlock";
 import { fallbackBlogPosts, heroBackgroundFallbackImg } from "@/data/fallback";
 import { useI18n } from "@/i18n";
 import { buildLocalePath } from "@/lib/i18n-routes";
+import { PrimaryAction } from "@/components/ui/button";
 
 export default function BlogPost() {
   const { locale, t } = useI18n();
@@ -173,13 +174,12 @@ export default function BlogPost() {
                     {nextPost.title}
                   </h3>
                 </div>
-                <Link
-                  href={buildLocalePath(locale, "blogPost", nextPost.slug)}
-                  className="group inline-flex items-center gap-2 px-6 py-3 bg-works-primary text-white font-semibold hover:bg-works-dark transition-colors"
-                >
-                  {t("cta.readMore")}
-                  <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-                </Link>
+                <PrimaryAction asChild className="group">
+                  <Link href={buildLocalePath(locale, "blogPost", nextPost.slug)}>
+                    {t("cta.readMore")}
+                    <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                  </Link>
+                </PrimaryAction>
               </div>
             </div>
           </section>
