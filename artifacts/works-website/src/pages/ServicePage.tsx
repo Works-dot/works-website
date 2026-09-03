@@ -518,7 +518,7 @@ function RelatedProjectCard({ p, i, animated = true }: { p: Project; i: number; 
               {p.tags.map((tag) => (
                 <span
                   key={tag}
-                  className="px-2.5 py-0.5 text-xs font-semibold text-works-primary border border-works-primary bg-transparent"
+                  className="px-2.5 py-0.5 text-xs font-semibold text-neutral-600 border border-neutral-400 bg-transparent"
                 >
                   {tag}
                 </span>

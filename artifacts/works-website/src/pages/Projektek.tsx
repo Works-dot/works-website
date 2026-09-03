@@ -44,7 +44,7 @@ function FeaturedProjectCard({ slug, title, tags, description, image, imageAlt }
             {tags.map((tag) => (
               <span
                 key={tag}
-                className="px-3 py-1 text-xs font-semibold text-works-primary border border-works-primary bg-transparent"
+                className="px-3 py-1 text-xs font-semibold text-neutral-600 border border-neutral-400 bg-transparent"
               >
                 {tag}
               </span>
@@ -97,7 +97,7 @@ function ProjectGridCard({ slug, title, tags, description, image, imageAlt }: {
             {tags.map((tag) => (
               <span
                 key={tag}
-                className="px-3 py-1 text-xs font-semibold text-works-primary border border-works-primary bg-transparent"
+                className="px-3 py-1 text-xs font-semibold text-neutral-600 border border-neutral-400 bg-transparent"
               >
                 {tag}
               </span>

@@ -48,7 +48,7 @@ export function ProjectCard({ slug, title, tags, description, image, imageAlt, r
           {tags.map((tag) => (
             <span
               key={tag}
-              className="px-3 py-1 text-sm font-semibold text-works-primary border border-works-primary bg-transparent"
+              className="px-3 py-1 text-sm font-semibold text-neutral-600 border border-neutral-400 bg-transparent"
             >
               {tag}
             </span>

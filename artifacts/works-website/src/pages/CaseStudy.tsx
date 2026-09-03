@@ -114,7 +114,7 @@ export default function CaseStudy() {
                 {project.tags.map((tag) => (
                   <span
                     key={tag}
-                    className="px-3 py-1 text-sm font-semibold text-works-primary border border-works-primary bg-transparent"
+                    className="px-3 py-1 text-sm font-semibold text-white border border-white bg-transparent"
                   >
                     {tag}
                   </span>
