@@ -3,6 +3,7 @@ import react from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
 import path from "path";
 import runtimeErrorOverlay from "@replit/vite-plugin-runtime-error-modal";
+import { subscribeNewsletter } from "./newsletter-server.mjs";
 
 const rawPort = process.env.PORT;
 
@@ -27,6 +28,46 @@ export default defineConfig({
             return;
           }
           next();
+        });
+      },
+    },
+    {
+      name: "newsletter-api",
+      configureServer(server) {
+        server.middlewares.use("/api/newsletter/subscribe", async (req, res) => {
+          if (req.method !== "POST") {
+            res.statusCode = 405;
+            res.setHeader("Content-Type", "application/json");
+            res.end(JSON.stringify({ ok: false, code: "method_not_allowed" }));
+            return;
+          }
+
+          try {
+            const chunks: Buffer[] = [];
+            let totalSize = 0;
+
+            for await (const chunk of req) {
+              const buffer = Buffer.isBuffer(chunk) ? chunk : Buffer.from(chunk);
+              totalSize += buffer.length;
+              if (totalSize > 10 * 1024) {
+                res.statusCode = 413;
+                res.setHeader("Content-Type", "application/json");
+                res.end(JSON.stringify({ ok: false, code: "request_too_large" }));
+                return;
+              }
+              chunks.push(buffer);
+            }
+
+            const body = JSON.parse(Buffer.concat(chunks).toString("utf8") || "{}");
+            const result = await subscribeNewsletter(body.email);
+            res.statusCode = result.status;
+            res.setHeader("Content-Type", "application/json");
+            res.end(JSON.stringify(result.body));
+          } catch {
+            res.statusCode = 400;
+            res.setHeader("Content-Type", "application/json");
+            res.end(JSON.stringify({ ok: false, code: "invalid_request" }));
+          }
         });
       },
     },

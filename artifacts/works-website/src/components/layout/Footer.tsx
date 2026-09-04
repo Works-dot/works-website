@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "wouter";
 import { Linkedin, Instagram, Dribbble, ArrowRight } from "lucide-react";
-import { useSubscribeNewsletter } from "@/hooks/use-newsletter";
+import { NewsletterError, useSubscribeNewsletter } from "@/hooks/use-newsletter";
 import { useStrapiQuery } from "@/hooks/useStrapiQuery";
 import { getGlobalSettings, getServices, getLegalDocuments } from "@/lib/strapi";
 import type { GlobalSettings, Service, LegalDocuments } from "@/lib/strapi";
@@ -23,7 +23,7 @@ export function Footer() {
   const { locale, messages, t } = useI18n();
   const [email, setEmail] = useState("");
   const { openSettings } = useCookieConsent();
-  const { mutate, isPending } = useSubscribeNewsletter();
+  const { mutate, isPending, isSuccess, isError, error: newsletterError } = useSubscribeNewsletter();
   const { data: settings } = useStrapiQuery<GlobalSettings>("globalSettings", () => getGlobalSettings(locale), fallbackGlobalSettings, locale);
   const { data: services } = useStrapiQuery<Service[]>("footerServices", () => getServices(locale), fallbackServices, locale);
   const { data: legalDocs } = useStrapiQuery<LegalDocuments>("legalDocuments", () => getLegalDocuments(locale), fallbackLegalDocuments, locale);
@@ -80,6 +80,17 @@ export function Footer() {
               {isPending ? t("footer.newsletterSubmitting") : t("footer.newsletterSubscribe")}
               {!isPending && <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />}
             </button>
+            <span className="sr-only" role="status" aria-live="polite">
+              {isPending
+                ? t("footer.newsletterSubmitting")
+                : isSuccess
+                  ? t("footer.newsletterSuccessDescription")
+                  : isError
+                    ? newsletterError instanceof NewsletterError && newsletterError.code === "invalid_email"
+                      ? t("footer.newsletterInvalidEmail")
+                      : t("footer.newsletterErrorDescription")
+                    : ""}
+            </span>
           </form>
         </div>
       </div>
