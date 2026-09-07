@@ -937,7 +937,7 @@ export const CV_MAX_SIZE_BYTES = 10 * 1024 * 1024; // 10 MB
 export const CV_ACCEPT = ".pdf,.doc,.docx";
 export const CV_ALLOWED_EXTENSIONS = [".pdf", ".doc", ".docx"];
 
-export async function uploadCv(file: File): Promise<void> {
+export async function uploadCv(file: File): Promise<string> {
   const formData = new FormData();
   formData.append("file", file);
   // Alapértelmezés: azonos origin, a /strapi proxy-útvonalon keresztül.
@@ -955,6 +955,12 @@ export async function uploadCv(file: File): Promise<void> {
     // different locale. The caller maps this stable code to localized UI text.
     throw new Error("CV_UPLOAD_FAILED");
   }
+  const result = await res.json() as { url?: string };
+  if (!result.url) throw new Error("CV_UPLOAD_FAILED");
+  if (STRAPI_PUBLIC_ORIGIN) {
+    return new URL(result.url, `${STRAPI_PUBLIC_ORIGIN}/`).toString();
+  }
+  return new URL(`/strapi${result.url.startsWith("/") ? result.url : `/${result.url}`}`, window.location.origin).toString();
 }
 
 export interface LegalDocuments {

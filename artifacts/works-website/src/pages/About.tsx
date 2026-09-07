@@ -7,8 +7,10 @@ import { useStrapiQuery } from "@/hooks/useStrapiQuery";
 import { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext, type CarouselApi } from "@/components/ui/carousel";
 import { getTeamMembers, getGalleryImages, getAboutPage } from "@/lib/strapi";
 import type { TeamMember, GalleryImage, AboutPageData } from "@/lib/strapi";
-import { fallbackTeamMembers, fallbackGalleryImages, fallbackAboutPage, aboutGraphicFallbackImg, heroBackgroundFallbackImg } from "@/data/fallback";
+import { fallbackTeamMembers, fallbackGalleryImages, fallbackAboutPage } from "@/data/fallback";
 import { useI18n } from "@/i18n";
+import { FullBleedHero } from "@/components/ui/FullBleedHero";
+import aboutHeroImage from "@assets/Rolunk_hero_1788787925044.png";
 
 const fadeUp = {
   initial: { opacity: 0, y: 20 },
@@ -22,9 +24,6 @@ export default function About() {
   const { data: teamMembers, loading: teamLoading } = useStrapiQuery<TeamMember[]>("teamMembers", () => getTeamMembers(locale), fallbackTeamMembers, locale);
   const { data: galleryImages, loading: galleryLoading } = useStrapiQuery<GalleryImage[]>("galleryImages", () => getGalleryImages(locale), fallbackGalleryImages, locale);
   const { data: aboutPage } = useStrapiQuery<AboutPageData>("aboutPage", () => getAboutPage(locale), fallbackAboutPage, locale);
-
-  const aboutGraphic = aboutGraphicFallbackImg;
-  const heroGraphic = heroBackgroundFallbackImg;
 
   const [galleryApi, setGalleryApi] = useState<CarouselApi>();
   const [gallerySnaps, setGallerySnaps] = useState<number[]>([]);
@@ -57,42 +56,14 @@ export default function About() {
       <Header />
 
       <main className="flex-grow">
-        <section className="relative pt-28 lg:pt-36 pb-16 lg:pb-32 bg-white overflow-hidden">
-          {heroGraphic && (
-            <img
-              src={heroGraphic}
-              alt=""
-              aria-hidden="true"
-              className="absolute top-[72px] -right-[15%] w-[70vw] h-auto opacity-10 md:hidden pointer-events-none select-none z-0"
-            />
-          )}
-          {aboutGraphic && (
-            <motion.img
-              src={aboutGraphic}
-              alt=""
-              aria-hidden="true"
-              initial={{ opacity: 0, scale: 0.85 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 1, delay: 0.2, ease: "easeOut" }}
-              className="hidden md:block absolute md:right-4 lg:right-4 top-1/2 -translate-y-[40%] md:w-[55%] lg:w-[60%] max-w-[800px] pointer-events-none select-none z-0 opacity-90"
-            />
-          )}
-          <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className="max-w-sm md:max-w-md lg:max-w-lg"
-            >
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-works-dark mb-6 leading-tight">
-                 {aboutPage?.hero?.heading || (locale === "hu" ? "Rólunk." : "")}
-              </h1>
-              <p className="text-lg lg:text-xl text-works-dark/60 leading-relaxed">
-                 {aboutPage?.hero?.description || (locale === "hu" ? "Egy magyar digitális ügynökség vagyunk, akik hisznek abban, hogy a jó design kutatáson alapul, és a technológia az embereket szolgálja." : "")}
-              </p>
-            </motion.div>
-          </div>
-        </section>
+        <FullBleedHero backgroundImage={aboutHeroImage}>
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-works-dark mb-6 leading-tight">
+             {aboutPage?.hero?.heading || (locale === "hu" ? "Rólunk." : "")}
+          </h1>
+          <p className="text-lg lg:text-xl text-works-dark/60 leading-relaxed">
+             {aboutPage?.hero?.description || (locale === "hu" ? "Egy magyar digitális ügynökség vagyunk, akik hisznek abban, hogy a jó design kutatáson alapul, és a technológia az embereket szolgálja." : "")}
+          </p>
+        </FullBleedHero>
 
         <section className="py-20 lg:py-28 bg-works-bg relative z-10">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

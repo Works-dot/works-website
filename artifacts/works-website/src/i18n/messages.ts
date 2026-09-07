@@ -120,6 +120,7 @@ export interface Messages {
     privacyConsentLinkLabel: string;
     submitButton: string;
     submitting: string;
+    submitError: string;
     mapLoadButton: string;
     mapConsentText: string;
     mapTitle: string;
@@ -138,6 +139,7 @@ export interface Messages {
   cta: {
     readMore: string;
     viewProject: string;
+    viewProjectCard: string;
     viewCaseStudy: string;
     viewDetails: string;
     backToBlog: string;
@@ -322,6 +324,7 @@ const hu: Messages = {
     privacyConsentLinkLabel: "adatkezelési tájékoztatót",
     submitButton: "Üzenet küldése",
     submitting: "Küldés...",
+    submitError: "Az üzenet elküldése nem sikerült. Kérjük, próbáld újra később.",
     mapLoadButton: "Térkép betöltése (Google sütiket használ)",
     mapConsentText: "A térkép betöltésével a Google Térkép szolgáltatása sütiket használhat, és adatokat kezelhet a Google adatvédelmi irányelvei szerint.",
     mapTitle: "Works. iroda – {{address}}",
@@ -346,6 +349,7 @@ const hu: Messages = {
   cta: {
     readMore: "Elolvasom",
     viewProject: "Megnézem",
+    viewProjectCard: "Megnézem",
     viewCaseStudy: "Megnézem az esettanulmányt",
     viewDetails: "Részletek",
     backToBlog: "Vissza a blogra",
@@ -524,6 +528,7 @@ const en: Messages = {
     privacyConsentLinkLabel: "privacy policy",
     submitButton: "Send message",
     submitting: "Sending...",
+    submitError: "Your message could not be sent. Please try again later.",
     mapLoadButton: "Load map (uses Google cookies)",
     mapConsentText: "Loading the map may cause Google Maps to use cookies and process data according to Google's privacy policy.",
     mapTitle: "Works. office – {{address}}",
@@ -548,6 +553,7 @@ const en: Messages = {
   cta: {
     readMore: "Read more",
     viewProject: "View project",
+    viewProjectCard: "View",
     viewCaseStudy: "View case study",
     viewDetails: "Details",
     backToBlog: "Back to blog",

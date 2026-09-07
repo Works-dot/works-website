@@ -25,6 +25,7 @@ export function useSubscribeNewsletter() {
     mutationFn: async (email: string) => {
       const response = await fetch(NEWSLETTER_API_URL, {
         method: "POST",
+        credentials: "omit",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email: email.trim().toLowerCase() }),
       });

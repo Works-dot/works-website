@@ -10,11 +10,14 @@ import SEOHead from "@/components/SEOHead";
 import { useStrapiQuery } from "@/hooks/useStrapiQuery";
 import { getContactPage, getGlobalSettings, getLegalDocuments, uploadCv, CV_MAX_SIZE_BYTES, CV_ACCEPT, CV_ALLOWED_EXTENSIONS } from "@/lib/strapi";
 import type { ContactPageData, GlobalSettings, LegalDocuments } from "@/lib/strapi";
-import { fallbackContactPage, fallbackGlobalSettings, fallbackLegalDocuments, contactGraphicFallbackImg } from "@/data/fallback";
+import { fallbackContactPage, fallbackGlobalSettings, fallbackLegalDocuments } from "@/data/fallback";
 import { useCookieConsent } from "@/lib/cookie-consent";
 import { useI18n } from "@/i18n";
 import { buildLocalePath } from "@/lib/i18n-routes";
 import { PrimaryAction } from "@/components/ui/button";
+import { sendContactMessage } from "@/hooks/use-contact";
+import { FullBleedHero } from "@/components/ui/FullBleedHero";
+import contactHeroImage from "@assets/Kapcsolat_hero_1788787925043.png";
 
 const fadeUp = {
   initial: { opacity: 0, y: 20 },
@@ -139,6 +142,7 @@ export default function Contact() {
   const [cvFile, setCvFile] = useState<File | null>(null);
   const [cvError, setCvError] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
   const cvInputRef = useRef<HTMLInputElement>(null);
 
   // Karrier tárgy esetén megjelenő hozzájárulás-checkboxok (CMS-ből).
@@ -186,19 +190,27 @@ export default function Contact() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!consentsSatisfied || !cvSatisfied || submitting) return;
-    if (isCareerSubject && cvFile) {
-      setSubmitting(true);
-      setCvError(null);
-      try {
-        await uploadCv(cvFile);
-      } catch {
+    setSubmitting(true);
+    setSubmitError(null);
+    setCvError(null);
+    try {
+      const cvUrl = isCareerSubject && cvFile ? await uploadCv(cvFile) : undefined;
+      await sendContactMessage({
+        ...formData,
+        subject: selectedSubject?.label || formData.subject,
+        privacyAccepted: true,
+        cvUrl,
+      });
+      setSubmitted(true);
+    } catch (error) {
+      if (error instanceof Error && error.message === "CV_UPLOAD_FAILED") {
         setCvError(t("validation.cvUploadFailed"));
-        setSubmitting(false);
-        return;
+      } else {
+        setSubmitError(t("contact.submitError"));
       }
+    } finally {
       setSubmitting(false);
     }
-    setSubmitted(true);
   };
 
   const handleChange = (
@@ -211,7 +223,6 @@ export default function Contact() {
     }
   };
 
-  const contactGraphic = contactGraphicFallbackImg;
   const heroHeading = contactPage?.hero?.heading || (locale === "hu" ? "Kapcsolat." : "");
   const heroDescription = contactPage?.hero?.description || (locale === "hu" ? "Beszéljünk a következő projektedről!" : "");
   const formHeading = contactPage?.formHeading || (locale === "hu" ? "Írj nekünk" : "");
@@ -266,38 +277,14 @@ export default function Contact() {
       <Header />
 
       <main className="flex-grow">
-        <section className="relative pt-28 lg:pt-36 pb-32 lg:pb-44 bg-white overflow-hidden">
-          {contactGraphic && (
-            <motion.div
-              initial={{ opacity: 0, scale: 0.85 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 1, delay: 0.2, ease: "easeOut" }}
-              className="absolute top-[70px] -right-[15%] w-[70vw] h-auto lg:top-auto lg:right-10 lg:bottom-0 lg:w-auto lg:h-[calc(100%-44px)] pointer-events-none select-none z-0"
-            >
-              <img
-                src={contactGraphic}
-                alt=""
-                aria-hidden="true"
-                className="w-full h-full object-contain opacity-10 lg:opacity-100"
-              />
-            </motion.div>
-          )}
-          <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className="max-w-xl lg:max-w-lg"
-            >
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-works-dark mb-6 leading-tight">
-                {heroHeading}
-              </h1>
-              <p className="text-lg lg:text-xl text-works-dark/60 leading-relaxed">
-                {heroDescription}
-              </p>
-            </motion.div>
-          </div>
-        </section>
+        <FullBleedHero backgroundImage={contactHeroImage}>
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-works-dark mb-6 leading-tight">
+            {heroHeading}
+          </h1>
+          <p className="text-lg lg:text-xl text-works-dark/60 leading-relaxed">
+            {heroDescription}
+          </p>
+        </FullBleedHero>
 
         <section className="py-20 lg:py-28 bg-works-bg">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -538,6 +525,11 @@ export default function Contact() {
                       {submitting ? t("contact.submitting") : t("contact.submitButton")}
                       <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
                     </PrimaryAction>
+                    {submitError && (
+                      <p role="alert" aria-live="assertive" className="text-sm text-red-600">
+                        {submitError}
+                      </p>
+                    )}
                   </form>
                 )}
               </motion.div>

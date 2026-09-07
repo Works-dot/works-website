@@ -8,9 +8,11 @@ import SEOHead from "@/components/SEOHead";
 import { useStrapiQuery } from "@/hooks/useStrapiQuery";
 import { getCareerPositions, getCareerPage } from "@/lib/strapi";
 import type { CareerPosition, CareerPageData } from "@/lib/strapi";
-import { fallbackPositions, fallbackCareerPage, careerGraphicFallbackImg } from "@/data/fallback";
+import { fallbackPositions, fallbackCareerPage } from "@/data/fallback";
 import { useI18n } from "@/i18n";
 import { buildLocalePath } from "@/lib/i18n-routes";
+import { FullBleedHero } from "@/components/ui/FullBleedHero";
+import careerHeroImage from "@assets/Karrier_hero_1788787925043.png";
 
 const fadeUp = {
   initial: { opacity: 0, y: 20 },
@@ -25,7 +27,6 @@ export default function Karrier() {
   const { data: positions, loading: posLoading, error: posError } = useStrapiQuery<CareerPosition[]>("careerPositions", () => getCareerPositions(locale), fallbackPositions, locale);
   const { data: careerPage } = useStrapiQuery<CareerPageData>("careerPage", () => getCareerPage(locale), fallbackCareerPage, locale);
 
-  const contactGraphic = careerGraphicFallbackImg;
   const workWithUs = careerPage?.workWithUs;
   const whyUs = careerPage?.whyUs;
 
@@ -45,38 +46,14 @@ export default function Karrier() {
       <Header />
 
       <main className="flex-grow">
-        <section className="relative pt-28 lg:pt-36 pb-16 lg:pb-44 bg-white overflow-hidden">
-          {contactGraphic && (
-            <motion.div
-              initial={{ opacity: 0, scale: 0.85 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 1, delay: 0.2, ease: "easeOut" }}
-              className="absolute top-[70px] -right-[15%] w-[70vw] h-auto lg:top-auto lg:right-10 lg:bottom-0 lg:w-auto lg:h-[calc(100%-44px)] pointer-events-none select-none z-0"
-            >
-              <img
-                src={contactGraphic}
-                alt=""
-                aria-hidden="true"
-                className="w-full h-full object-contain opacity-10 lg:opacity-100"
-              />
-            </motion.div>
-          )}
-          <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className="max-w-xl lg:max-w-lg"
-            >
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-works-dark mb-6 leading-tight">
-                {careerPage?.hero?.heading || t("pages.karrierHeading")}
-              </h1>
-              <p className="text-lg lg:text-xl text-works-dark/60 leading-relaxed">
-                {careerPage?.hero?.description || (locale === "hu" ? "Csatlakozz egy csapathoz, ahol a design kutatáson alapul, a technológia az embereket szolgálja, és minden nap tanulhatsz valami újat." : "")}
-              </p>
-            </motion.div>
-          </div>
-        </section>
+        <FullBleedHero backgroundImage={careerHeroImage}>
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-works-dark mb-6 leading-tight">
+            {careerPage?.hero?.heading || t("pages.karrierHeading")}
+          </h1>
+          <p className="text-lg lg:text-xl text-works-dark/60 leading-relaxed">
+            {careerPage?.hero?.description || (locale === "hu" ? "Csatlakozz egy csapathoz, ahol a design kutatáson alapul, a technológia az embereket szolgálja, és minden nap tanulhatsz valami újat." : "")}
+          </p>
+        </FullBleedHero>
 
         <section className="py-20 lg:py-28 bg-works-bg">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

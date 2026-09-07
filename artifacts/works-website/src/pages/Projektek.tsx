@@ -57,7 +57,7 @@ function FeaturedProjectCard({ slug, title, tags, description, image, imageAlt }
             {description}
           </p>
           <ArrowLinkLabel size="small">
-            {t("cta.viewDetails")}
+            {t("cta.viewProjectCard")}
           </ArrowLinkLabel>
         </div>
       </Link>
@@ -110,7 +110,7 @@ function ProjectGridCard({ slug, title, tags, description, image, imageAlt }: {
             {description}
           </p>
           <ArrowLinkLabel size="small">
-            {t("cta.viewDetails")}
+            {t("cta.viewProjectCard")}
           </ArrowLinkLabel>
         </div>
       </Link>

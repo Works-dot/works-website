@@ -532,7 +532,7 @@ function RelatedProjectCard({ p, i, animated = true }: { p: Project; i: number; 
             {p.description}
           </p>
           <ArrowLinkLabel size="small" className="mt-auto">
-            {t("cta.viewCaseStudy")}
+            {t("cta.viewProjectCard")}
           </ArrowLinkLabel>
         </div>
       </Link>

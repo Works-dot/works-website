@@ -62,7 +62,7 @@ export function ProjectCard({ slug, title, tags, description, image, imageAlt, r
           className="group"
         >
           <ArrowLinkLabel size="large">
-            {t("cta.viewCaseStudy")}
+            {t("cta.viewProjectCard")}
           </ArrowLinkLabel>
         </Link>
       </div>

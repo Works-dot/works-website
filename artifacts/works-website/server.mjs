@@ -4,22 +4,23 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import fs from "node:fs";
 import { subscribeNewsletter } from "./newsletter-server.mjs";
+import { sendContactMessage } from "./contact-server.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const distDir = path.join(__dirname, "dist", "public");
 
 const PORT = Number(process.env.PORT) || 8080;
 const STRAPI_TARGET = process.env.STRAPI_URL || process.env.STRAPI_PROXY_TARGET;
-const NEWSLETTER_ALLOWED_ORIGINS = new Set([
+const API_ALLOWED_ORIGINS = new Set([
   "https://works.hu",
   "https://www.works.hu",
   "https://workspaceworks-website-production.up.railway.app",
   "https://works-website.replit.app",
 ]);
 
-function setNewsletterCors(req, res) {
+function setApiCors(req, res) {
   const origin = req.get("origin");
-  if (origin && NEWSLETTER_ALLOWED_ORIGINS.has(origin)) {
+  if (origin && API_ALLOWED_ORIGINS.has(origin)) {
     res.setHeader("Access-Control-Allow-Origin", origin);
     res.setHeader("Vary", "Origin");
   }
@@ -37,15 +38,28 @@ app.disable("x-powered-by");
 app.use(express.json({ limit: "10kb" }));
 
 app.options("/api/newsletter/subscribe", (req, res) => {
-  setNewsletterCors(req, res);
+  setApiCors(req, res);
   res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
   res.status(204).end();
 });
 
 app.post("/api/newsletter/subscribe", async (req, res) => {
-  setNewsletterCors(req, res);
+  setApiCors(req, res);
   const result = await subscribeNewsletter(req.body?.email);
+  res.status(result.status).json(result.body);
+});
+
+app.options("/api/contact/send", (req, res) => {
+  setApiCors(req, res);
+  res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+  res.status(204).end();
+});
+
+app.post("/api/contact/send", async (req, res) => {
+  setApiCors(req, res);
+  const result = await sendContactMessage(req.body);
   res.status(result.status).json(result.body);
 });
 
