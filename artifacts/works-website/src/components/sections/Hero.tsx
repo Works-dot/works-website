@@ -38,7 +38,7 @@ export function Hero() {
   const secondaryCtaLink = localizeInternalPath(locale, hero?.secondaryCtaLink || buildLocalePath(locale, "contact"));
   return (
     <FullBleedHero backgroundImage={homeHeroImage} desktopHeight="viewport">
-      <h1 className="text-5xl sm:text-6xl lg:text-7xl xl:text-[80px] font-bold text-works-dark tracking-tight leading-[1.05] mb-8">
+      <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-works-dark tracking-tight leading-[1.05] mb-8">
         {renderHeading(heading, highlightedWord)}
       </h1>
 
