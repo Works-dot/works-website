@@ -166,7 +166,7 @@ export default function ServicePage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="max-w-[750px] bg-white/25 backdrop-blur-xl backdrop-saturate-150 border border-white/50 pt-7 px-6 pb-10 sm:pt-9 sm:px-10 sm:pb-[52px] lg:pt-[52px] lg:px-16 lg:pb-[76px] xl:pt-[65px] xl:px-20 xl:pb-[95px]"
+              className="max-w-[750px] bg-white/25 backdrop-blur-xl backdrop-saturate-150 border border-white/50 shadow-[0_40px_80px_0_rgba(57,25,67,0.05)] pt-7 px-6 pb-10 sm:pt-9 sm:px-10 sm:pb-[52px] lg:pt-[52px] lg:px-16 lg:pb-[76px] xl:pt-[65px] xl:px-20 xl:pb-[95px]"
             >
               <span className="text-works-primary font-bold text-sm tracking-widest uppercase mb-4 block">
                 {service.subtitle}
