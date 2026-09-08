@@ -56,7 +56,7 @@ export default function About() {
       <Header />
 
       <main className="flex-grow">
-        <FullBleedHero backgroundImage={aboutHeroImage}>
+        <FullBleedHero backgroundImage={aboutHeroImage} showDecoration>
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-works-dark mb-6 leading-tight">
              {aboutPage?.hero?.heading || (locale === "hu" ? "Rólunk." : "")}
           </h1>

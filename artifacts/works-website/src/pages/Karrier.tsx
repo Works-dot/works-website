@@ -46,7 +46,7 @@ export default function Karrier() {
       <Header />
 
       <main className="flex-grow">
-        <FullBleedHero backgroundImage={careerHeroImage}>
+        <FullBleedHero backgroundImage={careerHeroImage} showDecoration>
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-works-dark mb-6 leading-tight">
             {careerPage?.hero?.heading || t("pages.karrierHeading")}
           </h1>

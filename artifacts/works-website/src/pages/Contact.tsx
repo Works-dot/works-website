@@ -277,7 +277,7 @@ export default function Contact() {
       <Header />
 
       <main className="flex-grow">
-        <FullBleedHero backgroundImage={contactHeroImage}>
+        <FullBleedHero backgroundImage={contactHeroImage} showDecoration>
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-works-dark mb-6 leading-tight">
             {heroHeading}
           </h1>

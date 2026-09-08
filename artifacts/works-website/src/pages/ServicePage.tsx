@@ -151,7 +151,7 @@ export default function ServicePage() {
 
       <main className="flex-grow">
         {/* 1. Hero */}
-        <section className="service-hero relative mt-20 md:mt-[72px] pt-10 lg:pt-[120px] pb-12 lg:pb-16 bg-white overflow-hidden flex items-start">
+        <section className="service-hero relative mt-20 md:mt-[72px] pt-10 lg:pt-[120px] pb-12 lg:pb-16 bg-[#F5F6FF] overflow-hidden flex items-start">
           {heroGraphic && (
             <img
               src={heroGraphic}
@@ -166,7 +166,7 @@ export default function ServicePage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="max-w-[750px] bg-white/25 backdrop-blur-xl backdrop-saturate-150 border border-white/50 p-5 sm:p-6 lg:p-[25px]"
+              className="max-w-[750px] bg-white/25 backdrop-blur-xl backdrop-saturate-150 border border-white/50 pt-7 px-6 pb-10 sm:pt-9 sm:px-10 sm:pb-[52px] lg:pt-[52px] lg:px-16 lg:pb-[76px] xl:pt-[65px] xl:px-20 xl:pb-[95px]"
             >
               <span className="text-works-primary font-bold text-sm tracking-widest uppercase mb-4 block">
                 {service.subtitle}
@@ -177,6 +177,10 @@ export default function ServicePage() {
               <p className="text-lg lg:text-xl text-works-dark/85 leading-relaxed">
                 {service.heroDescription}
               </p>
+              <div
+                aria-hidden="true"
+                className="mt-6 h-4 w-4 shrink-0 bg-[#E73352]"
+              />
             </motion.div>
           </div>
         </section>

@@ -6,6 +6,7 @@ type FullBleedHeroProps = {
   children: ReactNode;
   contentClassName?: string;
   desktopHeight?: "tall" | "viewport";
+  showDecoration?: boolean;
 };
 
 export function FullBleedHero({
@@ -13,6 +14,7 @@ export function FullBleedHero({
   children,
   contentClassName = "",
   desktopHeight = "tall",
+  showDecoration = false,
 }: FullBleedHeroProps) {
   const desktopHeightClass =
     desktopHeight === "viewport"
@@ -38,6 +40,12 @@ export function FullBleedHero({
           className={`max-w-[750px] bg-white/25 backdrop-blur-xl backdrop-saturate-150 border border-white/50 shadow-[0_40px_80px_0_rgba(57,25,67,0.05)] pt-7 px-6 pb-10 sm:pt-9 sm:px-10 sm:pb-[52px] lg:pt-[52px] lg:px-16 lg:pb-[76px] xl:pt-[65px] xl:px-20 xl:pb-[95px] ${contentClassName}`}
         >
           {children}
+          {showDecoration && (
+            <div
+              aria-hidden="true"
+              className="mt-6 h-4 w-4 bg-[#E73352]"
+            />
+          )}
         </motion.div>
       </div>
     </section>
