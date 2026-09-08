@@ -6,7 +6,7 @@ import { useI18n } from "@/i18n";
 import { buildLocalePath, localizeInternalPath } from "@/lib/i18n-routes";
 import { PrimaryAction } from "@/components/ui/button";
 import { FullBleedHero } from "@/components/ui/FullBleedHero";
-import homeHeroImage from "@assets/Home_hero_1788787925042.png";
+import homeHeroImage from "@/assets/home-hero.png";
 
 function renderHeading(heading: string, highlightedWord: string) {
   if (!highlightedWord || !heading.includes(highlightedWord)) {
