@@ -21,6 +21,7 @@ import { getServiceHeroGraphic } from "@/data/service-hero-graphics";
 import { useI18n } from "@/i18n";
 import { buildLocalePath } from "@/lib/i18n-routes";
 import { ArrowLinkLabel } from "@/components/ui/arrow-link-label";
+import { FullBleedHero } from "@/components/ui/FullBleedHero";
 
 const fadeUp = {
   initial: { opacity: 0, y: 20 },
@@ -151,39 +152,17 @@ export default function ServicePage() {
 
       <main className="flex-grow">
         {/* 1. Hero */}
-        <section className="service-hero relative mt-20 md:mt-[72px] pt-10 lg:pt-[120px] pb-12 lg:pb-16 bg-[#F5F6FF] overflow-hidden flex items-start">
-          {heroGraphic && (
-            <img
-              src={heroGraphic}
-              alt=""
-              aria-hidden="true"
-              className="absolute inset-0 h-full w-full object-cover object-center pointer-events-none select-none"
-            />
-          )}
-
-          <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className="max-w-[750px] bg-white/25 backdrop-blur-xl backdrop-saturate-150 border border-white/50 shadow-[0_40px_80px_0_rgba(57,25,67,0.05)] pt-7 px-6 pb-10 sm:pt-9 sm:px-10 sm:pb-[52px] lg:pt-[52px] lg:px-16 lg:pb-[76px] xl:pt-[65px] xl:px-20 xl:pb-[95px]"
-            >
-              <span className="text-works-primary font-bold text-sm tracking-widest uppercase mb-4 block">
-                {service.subtitle}
-              </span>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-works-dark mb-6 leading-tight">
-                {service.title}.
-              </h1>
-              <p className="text-lg lg:text-xl text-works-dark/85 leading-relaxed">
-                {service.heroDescription}
-              </p>
-              <div
-                aria-hidden="true"
-                className="mt-6 h-4 w-4 shrink-0 bg-[#E73352]"
-              />
-            </motion.div>
-          </div>
-        </section>
+        <FullBleedHero backgroundImage={heroGraphic} showDecoration>
+          <span className="text-white font-bold text-sm tracking-widest uppercase mb-4 block">
+            {service.subtitle}
+          </span>
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
+            {service.title}.
+          </h1>
+          <p className="text-lg lg:text-xl text-white leading-relaxed">
+            {service.heroDescription}
+          </p>
+        </FullBleedHero>
 
         {/* 2. Definíció */}
         {showDefinition && definition && (

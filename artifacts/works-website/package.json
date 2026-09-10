@@ -11,7 +11,11 @@
     "test:production": "playwright install chromium && VITE_STRAPI_ENABLED=false pnpm run build && node scripts/test-production.mjs",
     "verify:newsletter:production": "node scripts/verify-newsletter-production.mjs",
     "verify:contact:production": "node scripts/verify-contact-production.mjs",
+    "verify:release:production": "node scripts/verify-release-production.mjs",
+    "test:verify-release": "node --test scripts/verify-release-production.test.mjs",
     "verify:service-heroes": "node scripts/verify-service-hero-graphics.mjs",
+    "release:website": "node scripts/release-website.mjs",
+    "test:release-website": "node --test scripts/release-website.test.mjs",
     "typecheck": "tsc -p tsconfig.json --noEmit"
   },
   "devDependencies": {

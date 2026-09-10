@@ -1,11 +1,11 @@
 {
   "graphics": {
-    "uxResearch": "UX_kutatas_1787571512457.png",
-    "uxUiDesign": "UXUI_design_1787571512458.png",
-    "serviceDesign": "Service_design_1787571512457.png",
-    "aiProductDevelopment": "ai_termekfejlesztes_1787571512455.png",
-    "accessibleServices": "akadalymentes_szolgaltatasok_1787571512456.png",
-    "digitalSkills": "digitalis_kepessegfejlesztes_1787571512456.png"
+    "uxResearch": "Hero_ux_kutatas_1789027068382.png",
+    "uxUiDesign": "UI_Design_1789027068381.png",
+    "serviceDesign": "Hero_service_design_1789027068382.png",
+    "aiProductDevelopment": "Hero_ai_product_1789027068382.png",
+    "accessibleServices": "Hero_akadalymentes_1789027068382.png",
+    "digitalSkills": "Hero_digitalis_kepessegfejlesztes_1789027068383.png"
   },
   "slugs": {
     "ux-kutatas": "uxResearch",

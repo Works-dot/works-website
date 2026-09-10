@@ -10,7 +10,7 @@ import type { TeamMember, GalleryImage, AboutPageData } from "@/lib/strapi";
 import { fallbackTeamMembers, fallbackGalleryImages, fallbackAboutPage } from "@/data/fallback";
 import { useI18n } from "@/i18n";
 import { FullBleedHero } from "@/components/ui/FullBleedHero";
-import aboutHeroImage from "@assets/Rolunk_hero_1788787925044.png";
+import aboutHeroImage from "@/assets/heroes/Hero_about_1789027068380.png";
 
 const fadeUp = {
   initial: { opacity: 0, y: 20 },
@@ -57,10 +57,10 @@ export default function About() {
 
       <main className="flex-grow">
         <FullBleedHero backgroundImage={aboutHeroImage} showDecoration>
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-works-dark mb-6 leading-tight">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
              {aboutPage?.hero?.heading || (locale === "hu" ? "Rólunk." : "")}
           </h1>
-          <p className="text-lg lg:text-xl text-works-dark/60 leading-relaxed">
+          <p className="text-lg lg:text-xl text-white leading-relaxed">
              {aboutPage?.hero?.description || (locale === "hu" ? "Egy magyar digitális ügynökség vagyunk, akik hisznek abban, hogy a jó design kutatáson alapul, és a technológia az embereket szolgálja." : "")}
           </p>
         </FullBleedHero>

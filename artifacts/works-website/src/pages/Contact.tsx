@@ -17,7 +17,7 @@ import { buildLocalePath } from "@/lib/i18n-routes";
 import { PrimaryAction } from "@/components/ui/button";
 import { sendContactMessage } from "@/hooks/use-contact";
 import { FullBleedHero } from "@/components/ui/FullBleedHero";
-import contactHeroImage from "@assets/Kapcsolat_hero_1788787925043.png";
+import contactHeroImage from "@/assets/heroes/Hero_contact_1789027068383.png";
 
 const fadeUp = {
   initial: { opacity: 0, y: 20 },
@@ -278,10 +278,10 @@ export default function Contact() {
 
       <main className="flex-grow">
         <FullBleedHero backgroundImage={contactHeroImage} showDecoration>
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-works-dark mb-6 leading-tight">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
             {heroHeading}
           </h1>
-          <p className="text-lg lg:text-xl text-works-dark/60 leading-relaxed">
+          <p className="text-lg lg:text-xl text-white leading-relaxed">
             {heroDescription}
           </p>
         </FullBleedHero>

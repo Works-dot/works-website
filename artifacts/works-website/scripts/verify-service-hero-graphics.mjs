@@ -4,9 +4,9 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
-const workspaceRoot = path.resolve(root, "..", "..");
 const manifestPath = path.join(root, "src", "data", "service-hero-graphics.json");
 const cachePath = path.join(root, "src", "data", "strapi-cache.json");
+const heroGraphicsDirectory = path.join(root, "src", "assets", "heroes");
 
 const manifest = JSON.parse(fs.readFileSync(manifestPath, "utf8"));
 const cache = JSON.parse(fs.readFileSync(cachePath, "utf8"));
@@ -30,7 +30,7 @@ for (const [locale, services] of servicesByLocale) {
 for (const [key, filename] of Object.entries(graphics)) {
   assert.equal(typeof filename, "string", `Hero graphic "${key}" has no asset filename`);
   assert.ok(
-    fs.existsSync(path.join(workspaceRoot, "attached_assets", filename)),
+    fs.existsSync(path.join(heroGraphicsDirectory, filename)),
     `Hero graphic asset is missing: ${filename}`,
   );
 }

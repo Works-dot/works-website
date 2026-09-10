@@ -1,0 +1,19 @@
+.full-bleed-hero {
+  /* Unscrolled header: 40px vertical padding + 40px mobile menu button. */
+  --hero-header-height: 80px;
+  margin-top: var(--hero-header-height);
+  min-height: calc(100vh - var(--hero-header-height));
+}
+
+@media (min-width: 768px) {
+  .full-bleed-hero {
+    /* Desktop header: 40px vertical padding + 32px logo. */
+    --hero-header-height: 72px;
+  }
+}
+
+@supports (height: 100dvh) {
+  .full-bleed-hero {
+    min-height: calc(100dvh - var(--hero-header-height));
+  }
+}

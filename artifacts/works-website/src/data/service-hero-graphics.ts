@@ -1,10 +1,10 @@
-import defaultServiceHeroGraphic from "@assets/works-background_1774441334981.png";
-import uxResearchHeroGraphic from "@assets/UX_kutatas_1787571512457.png";
-import uxUiDesignHeroGraphic from "@assets/UXUI_design_1787571512458.png";
-import serviceDesignHeroGraphic from "@assets/Service_design_1787571512457.png";
-import aiProductDevelopmentHeroGraphic from "@assets/ai_termekfejlesztes_1787571512455.png";
-import accessibleServicesHeroGraphic from "@assets/akadalymentes_szolgaltatasok_1787571512456.png";
-import digitalSkillsHeroGraphic from "@assets/digitalis_kepessegfejlesztes_1787571512456.png";
+import defaultServiceHeroGraphic from "@/assets/heroes/Hero_ux_kutatas_1789027068382.png";
+import uxResearchHeroGraphic from "@/assets/heroes/Hero_ux_kutatas_1789027068382.png";
+import uxUiDesignHeroGraphic from "@/assets/heroes/UI_Design_1789027068381.png";
+import serviceDesignHeroGraphic from "@/assets/heroes/Hero_service_design_1789027068382.png";
+import aiProductDevelopmentHeroGraphic from "@/assets/heroes/Hero_ai_product_1789027068382.png";
+import accessibleServicesHeroGraphic from "@/assets/heroes/Hero_akadalymentes_1789027068382.png";
+import digitalSkillsHeroGraphic from "@/assets/heroes/Hero_digitalis_kepessegfejlesztes_1789027068383.png";
 import serviceHeroGraphicManifest from "./service-hero-graphics.json";
 
 type ServiceHeroGraphicKey = keyof typeof serviceHeroGraphicManifest.graphics;

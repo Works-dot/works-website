@@ -6,7 +6,7 @@ import { useI18n } from "@/i18n";
 import { buildLocalePath, localizeInternalPath } from "@/lib/i18n-routes";
 import { PrimaryAction } from "@/components/ui/button";
 import { FullBleedHero } from "@/components/ui/FullBleedHero";
-import homeHeroImage from "@/assets/home-hero.png";
+import homeHeroImage from "@/assets/heroes/Hero_home_1789027068381.png";
 
 function renderHeading(heading: string, highlightedWord: string) {
   if (!highlightedWord || !heading.includes(highlightedWord)) {
@@ -18,7 +18,7 @@ function renderHeading(heading: string, highlightedWord: string) {
   return (
     <>
       {before}
-      <span className="text-works-primary">{highlightedWord}</span>
+       <span className="text-white">{highlightedWord}</span>
       {after}
     </>
   );
@@ -37,20 +37,20 @@ export function Hero() {
   const secondaryCtaText = hero?.secondaryCtaText || (locale === "hu" ? "Kapcsolat" : "");
   const secondaryCtaLink = localizeInternalPath(locale, hero?.secondaryCtaLink || buildLocalePath(locale, "contact"));
   return (
-    <FullBleedHero backgroundImage={homeHeroImage} desktopHeight="viewport">
-      <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-works-dark tracking-tight leading-[1.05] mb-8">
+    <FullBleedHero backgroundImage={homeHeroImage}>
+      <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-white tracking-tight leading-[1.05] mb-8">
         {renderHeading(heading, highlightedWord)}
       </h1>
 
-      <p className="text-xl sm:text-2xl text-works-dark/60 mb-10 leading-relaxed max-w-xl">
+      <p className="text-xl sm:text-2xl text-white mb-10 leading-relaxed max-w-xl">
         {description}
       </p>
 
-      <div className="flex flex-col sm:flex-row gap-5">
+      <div className="flex flex-col sm:flex-row sm:flex-wrap gap-5">
         <PrimaryAction
           asChild
           size="hero"
-          className="border border-works-primary text-base sm:text-lg"
+          className="border border-white/70 text-base sm:text-lg whitespace-normal focus-visible:ring-white focus-visible:ring-offset-works-dark"
         >
           <a href={localizeInternalPath(locale, primaryCtaLink)}>
             {primaryCtaText}
@@ -58,7 +58,7 @@ export function Hero() {
         </PrimaryAction>
         <a
           href={secondaryCtaLink}
-          className="inline-flex justify-center items-center px-8 py-4 font-semibold text-works-dark border border-works-muted hover:border-works-dark transition-all duration-300 text-lg"
+          className="inline-flex justify-center items-center px-8 py-4 font-semibold text-white border border-white/70 hover:border-white hover:bg-white hover:text-works-dark transition-all duration-300 text-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-works-dark"
         >
           {secondaryCtaText}
         </a>

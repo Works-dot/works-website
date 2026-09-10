@@ -12,7 +12,7 @@ import { fallbackPositions, fallbackCareerPage } from "@/data/fallback";
 import { useI18n } from "@/i18n";
 import { buildLocalePath } from "@/lib/i18n-routes";
 import { FullBleedHero } from "@/components/ui/FullBleedHero";
-import careerHeroImage from "@assets/Karrier_hero_1788787925043.png";
+import careerHeroImage from "@/assets/heroes/Hero_career_1789027068381.png";
 
 const fadeUp = {
   initial: { opacity: 0, y: 20 },
@@ -47,10 +47,10 @@ export default function Karrier() {
 
       <main className="flex-grow">
         <FullBleedHero backgroundImage={careerHeroImage} showDecoration>
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-works-dark mb-6 leading-tight">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
             {careerPage?.hero?.heading || t("pages.karrierHeading")}
           </h1>
-          <p className="text-lg lg:text-xl text-works-dark/60 leading-relaxed">
+          <p className="text-lg lg:text-xl text-white leading-relaxed">
             {careerPage?.hero?.description || (locale === "hu" ? "Csatlakozz egy csapathoz, ahol a design kutatáson alapul, a technológia az embereket szolgálja, és minden nap tanulhatsz valami újat." : "")}
           </p>
         </FullBleedHero>
