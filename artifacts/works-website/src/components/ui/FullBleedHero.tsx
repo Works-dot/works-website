@@ -25,12 +25,12 @@ export function FullBleedHero({
         aria-hidden="true"
         className="absolute inset-0 -z-10 h-full w-full object-cover object-right pointer-events-none select-none"
       />
-        <div className="flex w-full min-w-0 items-center py-12 sm:py-16 lg:w-1/2 lg:py-20">
+      <div className="mx-auto flex w-full min-w-0 max-w-7xl items-center px-4 py-12 sm:px-6 sm:py-16 lg:px-8 lg:py-20">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className={`mx-auto w-full min-w-0 max-w-[720px] px-6 sm:px-10 lg:px-12 xl:px-16 [overflow-wrap:anywhere] ${contentClassName}`}
+            className={`w-full min-w-0 lg:w-1/2 [overflow-wrap:anywhere] ${contentClassName}`}
           >
             {children}
             {showDecoration && (
@@ -40,7 +40,7 @@ export function FullBleedHero({
               />
             )}
           </motion.div>
-        </div>
+      </div>
     </section>
   );
 }
