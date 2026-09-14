@@ -11,6 +11,7 @@ const heroGraphicsDirectory = path.join(root, "src", "assets", "heroes");
 const manifest = JSON.parse(fs.readFileSync(manifestPath, "utf8"));
 const cache = JSON.parse(fs.readFileSync(cachePath, "utf8"));
 const graphics = manifest.graphics ?? {};
+const mobileGraphics = manifest.mobileGraphics ?? {};
 const slugMap = manifest.slugs ?? {};
 const localizedDatasets = cache.hu && cache.en
   ? [["hu", cache.hu], ["en", cache.en]]
@@ -35,6 +36,18 @@ for (const [key, filename] of Object.entries(graphics)) {
   );
 }
 
+for (const [key, filename] of Object.entries(mobileGraphics)) {
+  assert.ok(
+    Object.hasOwn(graphics, key),
+    `Mobile hero graphic "${key}" has no corresponding desktop hero graphic`,
+  );
+  assert.equal(typeof filename, "string", `Mobile hero graphic "${key}" has no asset filename`);
+  assert.ok(
+    fs.existsSync(path.join(heroGraphicsDirectory, filename)),
+    `Mobile hero graphic asset is missing: ${filename}`,
+  );
+}
+
 const assignmentsByLocale = servicesByLocale.map(([locale, services]) => [
   locale,
   services.map((service) => {
@@ -50,8 +63,17 @@ const assignmentsByLocale = servicesByLocale.map(([locale, services]) => [
       Object.hasOwn(graphics, graphicKey),
       `Published ${locale.toUpperCase()} service "${slug}" references unknown hero graphic "${graphicKey}"`,
     );
+    assert.ok(
+      Object.hasOwn(mobileGraphics, graphicKey),
+      `Published ${locale.toUpperCase()} service "${slug}" references unknown mobile hero graphic "${graphicKey}"`,
+    );
 
-    return { slug, graphicKey, filename: graphics[graphicKey] };
+    return {
+      slug,
+      graphicKey,
+      filename: graphics[graphicKey],
+      mobileFilename: mobileGraphics[graphicKey],
+    };
   }),
 ]);
 
@@ -73,5 +95,8 @@ for (const [locale, assignments] of assignmentsByLocale) {
   );
   for (const { slug, filename } of assignments) {
     console.log(`  ${slug} → ${filename}`);
+  }
+  for (const { slug, mobileFilename } of assignments) {
+    console.log(`  ${slug} → ${mobileFilename} (mobile)`);
   }
 }

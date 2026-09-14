@@ -18,6 +18,7 @@ import { PrimaryAction } from "@/components/ui/button";
 import { sendContactMessage } from "@/hooks/use-contact";
 import { FullBleedHero } from "@/components/ui/FullBleedHero";
 import contactHeroImage from "@/assets/heroes/Hero_contact_1789027068383.png";
+import contactMobileHeroImage from "@/assets/heroes/Hero_contact_mobile_1789374396074.png";
 
 const fadeUp = {
   initial: { opacity: 0, y: 20 },
@@ -277,7 +278,7 @@ export default function Contact() {
       <Header />
 
       <main className="flex-grow">
-        <FullBleedHero backgroundImage={contactHeroImage} showDecoration>
+        <FullBleedHero backgroundImage={contactHeroImage} mobileBackgroundImage={contactMobileHeroImage} showDecoration>
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
             {heroHeading}
           </h1>

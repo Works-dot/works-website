@@ -17,7 +17,7 @@ import { useStrapiQuery } from "@/hooks/useStrapiQuery";
 import { getServiceBySlug as fetchServiceBySlug, getProjects } from "@/lib/strapi";
 import type { Service, Project, SectionIntro } from "@/lib/strapi";
 import { fallbackProjects, fallbackServices, bgGraphic1FallbackImg, bgGraphic2FallbackImg } from "@/data/fallback";
-import { getServiceHeroGraphic } from "@/data/service-hero-graphics";
+import { getServiceHeroGraphic, getServiceMobileHeroGraphic } from "@/data/service-hero-graphics";
 import { useI18n } from "@/i18n";
 import { buildLocalePath } from "@/lib/i18n-routes";
 import { ArrowLinkLabel } from "@/components/ui/arrow-link-label";
@@ -125,6 +125,7 @@ export default function ServicePage() {
   }
 
   const heroGraphic = getServiceHeroGraphic(service.slug);
+  const mobileHeroGraphic = getServiceMobileHeroGraphic(service.slug);
 
   const relatedProjects = service.relatedProjectSlugs
     .map(s => (projects || []).find(p => p.slug === s))
@@ -152,7 +153,11 @@ export default function ServicePage() {
 
       <main className="flex-grow">
         {/* 1. Hero */}
-        <FullBleedHero backgroundImage={heroGraphic} showDecoration>
+        <FullBleedHero
+          backgroundImage={heroGraphic}
+          mobileBackgroundImage={mobileHeroGraphic}
+          showDecoration
+        >
           <span className="text-white font-bold text-sm tracking-widest uppercase mb-4 block">
             {service.subtitle}
           </span>

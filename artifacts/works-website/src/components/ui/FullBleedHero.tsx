@@ -4,6 +4,7 @@ import "./FullBleedHero.css";
 
 type FullBleedHeroProps = {
   backgroundImage: string;
+  mobileBackgroundImage?: string;
   children: ReactNode;
   contentClassName?: string;
   showDecoration?: boolean;
@@ -11,6 +12,7 @@ type FullBleedHeroProps = {
 
 export function FullBleedHero({
   backgroundImage,
+  mobileBackgroundImage,
   children,
   contentClassName = "",
   showDecoration = false,
@@ -19,12 +21,17 @@ export function FullBleedHero({
     <section
       className="full-bleed-hero relative isolate overflow-hidden flex bg-works-dark text-white"
     >
-      <img
-        src={backgroundImage}
-        alt=""
-        aria-hidden="true"
-        className="absolute inset-0 -z-10 h-full w-full object-cover object-right pointer-events-none select-none"
-      />
+      <picture className="absolute inset-0 -z-10 pointer-events-none select-none">
+        {mobileBackgroundImage && (
+          <source media="(width < 768px)" srcSet={mobileBackgroundImage} />
+        )}
+        <img
+          src={backgroundImage}
+          alt=""
+          aria-hidden="true"
+          className={`h-full w-full object-cover ${mobileBackgroundImage ? "object-center md:object-right" : "object-right"}`}
+        />
+      </picture>
       <div className="mx-auto flex w-full min-w-0 max-w-7xl items-center px-4 py-12 sm:px-6 sm:py-16 lg:px-8 lg:py-20">
           <motion.div
             initial={{ opacity: 0, y: 20 }}

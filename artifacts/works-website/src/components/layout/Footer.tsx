@@ -190,7 +190,7 @@ export function Footer() {
 
         <div className="max-w-6xl mx-auto pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-works-muted/60">
           <p>&copy; {copyrightText}</p>
-          <div className="flex gap-6">
+          <div className="flex w-full flex-col items-center gap-4 text-center md:w-auto md:flex-row md:items-stretch md:gap-6 md:text-left">
             <a
               href={privacyPdfUrl || buildLocalePath(locale, "privacy")}
               {...(privacyPdfUrl ? { target: "_blank", rel: "noopener noreferrer" } : {})}

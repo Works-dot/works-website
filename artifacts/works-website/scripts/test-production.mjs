@@ -5,6 +5,7 @@ import net from "node:net";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { chromium } from "playwright";
+import { assertProjectFilters } from "./test-project-filters.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const distDir = path.join(root, "dist", "public");
@@ -335,6 +336,8 @@ async function run() {
     await page.getByTestId("language-switch").click();
     await assertRenderedPage(page, "/kapcsolat");
     assert.equal(await page.locator("html").getAttribute("lang"), "hu");
+
+    await assertProjectFilters(page, baseUrl);
 
     assert.deepEqual(
       browserFailures,

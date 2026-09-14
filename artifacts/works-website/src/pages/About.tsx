@@ -11,6 +11,7 @@ import { fallbackTeamMembers, fallbackGalleryImages, fallbackAboutPage } from "@
 import { useI18n } from "@/i18n";
 import { FullBleedHero } from "@/components/ui/FullBleedHero";
 import aboutHeroImage from "@/assets/heroes/Hero_about_1789027068380.png";
+import aboutMobileHeroImage from "@/assets/heroes/Hero_about_mobile_1789374396077.png";
 
 const fadeUp = {
   initial: { opacity: 0, y: 20 },
@@ -56,7 +57,7 @@ export default function About() {
       <Header />
 
       <main className="flex-grow">
-        <FullBleedHero backgroundImage={aboutHeroImage} showDecoration>
+        <FullBleedHero backgroundImage={aboutHeroImage} mobileBackgroundImage={aboutMobileHeroImage} showDecoration>
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
              {aboutPage?.hero?.heading || (locale === "hu" ? "Rólunk." : "")}
           </h1>

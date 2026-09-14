@@ -7,6 +7,14 @@
     "accessibleServices": "Hero_akadalymentes_1789027068382.png",
     "digitalSkills": "Hero_digitalis_kepessegfejlesztes_1789027068383.png"
   },
+  "mobileGraphics": {
+    "uxResearch": "Hero_service_ux_kutatas_mobile_1789374396076.png",
+    "uxUiDesign": "Hero_service_uxui_design_mobile_1789374396077.png",
+    "serviceDesign": "Hero_service_sevice_design_mobile_1789374396076.png",
+    "aiProductDevelopment": "Hero_service_ai_product_mobile_1789374396075.png",
+    "accessibleServices": "Hero_service_accesibility_mobile_1789374396075.png",
+    "digitalSkills": "Hero_service_digital_mobile_1789374396076.png"
+  },
   "slugs": {
     "ux-kutatas": "uxResearch",
     "ux-research": "uxResearch",

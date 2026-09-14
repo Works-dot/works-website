@@ -7,6 +7,7 @@ import { buildLocalePath, localizeInternalPath } from "@/lib/i18n-routes";
 import { PrimaryAction } from "@/components/ui/button";
 import { FullBleedHero } from "@/components/ui/FullBleedHero";
 import homeHeroImage from "@/assets/heroes/Hero_home_1789027068381.png";
+import homeMobileHeroImage from "@/assets/heroes/Hero_home_mobile_1789374396075.png";
 
 function renderHeading(heading: string, highlightedWord: string) {
   if (!highlightedWord || !heading.includes(highlightedWord)) {
@@ -37,7 +38,7 @@ export function Hero() {
   const secondaryCtaText = hero?.secondaryCtaText || (locale === "hu" ? "Kapcsolat" : "");
   const secondaryCtaLink = localizeInternalPath(locale, hero?.secondaryCtaLink || buildLocalePath(locale, "contact"));
   return (
-    <FullBleedHero backgroundImage={homeHeroImage}>
+    <FullBleedHero backgroundImage={homeHeroImage} mobileBackgroundImage={homeMobileHeroImage}>
       <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-white tracking-tight leading-[1.05] mb-8">
         {renderHeading(heading, highlightedWord)}
       </h1>

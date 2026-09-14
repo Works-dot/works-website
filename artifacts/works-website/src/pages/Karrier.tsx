@@ -13,6 +13,7 @@ import { useI18n } from "@/i18n";
 import { buildLocalePath } from "@/lib/i18n-routes";
 import { FullBleedHero } from "@/components/ui/FullBleedHero";
 import careerHeroImage from "@/assets/heroes/Hero_career_1789027068381.png";
+import careerMobileHeroImage from "@/assets/heroes/Hero_career_mobile_1789374396078.png";
 
 const fadeUp = {
   initial: { opacity: 0, y: 20 },
@@ -46,7 +47,7 @@ export default function Karrier() {
       <Header />
 
       <main className="flex-grow">
-        <FullBleedHero backgroundImage={careerHeroImage} showDecoration>
+        <FullBleedHero backgroundImage={careerHeroImage} mobileBackgroundImage={careerMobileHeroImage} showDecoration>
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
             {careerPage?.hero?.heading || t("pages.karrierHeading")}
           </h1>
