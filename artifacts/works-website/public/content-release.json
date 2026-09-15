@@ -1,0 +1,22 @@
+{
+  "contentVersion": "career-values-v4",
+  "source": "production-strapi",
+  "sourceUpdatedAt": {
+    "hu": "2026-09-15T11:22:36.725Z",
+    "en": "2026-09-15T11:22:37.644Z"
+  },
+  "careerValues": {
+    "hu": [
+      "Empátia",
+      "Alkalmazkodás",
+      "Együttműködés",
+      "Céltudatosság"
+    ],
+    "en": [
+      "Empathy",
+      "Adaptability",
+      "Collaboration",
+      "Purposefulness"
+    ]
+  }
+}
