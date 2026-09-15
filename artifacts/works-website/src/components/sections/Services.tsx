@@ -5,6 +5,7 @@ import type { HomepageData, Service } from "@/lib/strapi";
 import { fallbackServices, fallbackHomepage, bgGraphic1FallbackImg } from "@/data/fallback";
 import { useI18n } from "@/i18n";
 import { buildLocalePath } from "@/lib/i18n-routes";
+import { TermText } from "@/components/Terminology";
 
 export function Services() {
   const { locale, t } = useI18n();
@@ -38,7 +39,7 @@ export function Services() {
 
         <div className="mb-16 md:mb-24 flex flex-col max-w-3xl">
           <h2 className="text-4xl md:text-5xl font-bold text-works-dark tracking-tight">
-            {heading}
+            <TermText>{heading}</TermText>
           </h2>
         </div>
 

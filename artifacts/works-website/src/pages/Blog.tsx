@@ -13,6 +13,8 @@ import { fallbackBlogPage, fallbackBlogPosts } from "@/data/fallback";
 import { useI18n } from "@/i18n";
 import { buildLocalePath } from "@/lib/i18n-routes";
 import { ArrowLinkLabel } from "@/components/ui/arrow-link-label";
+import { TermText } from "@/components/Terminology";
+import { accessibleTermLabel } from "@/lib/terminology";
 
 function FeaturedBlogCard({ slug, title, excerpt, date, image, imageAlt, author, readingTime }: {
   slug: string;
@@ -38,7 +40,7 @@ function FeaturedBlogCard({ slug, title, excerpt, date, image, imageAlt, author,
         <div className="w-full lg:w-1/2 overflow-hidden bg-works-light aspect-[4/3]">
           <img
             src={image}
-            alt={imageAlt || title}
+            alt={accessibleTermLabel(imageAlt || title, locale)}
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
           />
         </div>
@@ -46,19 +48,19 @@ function FeaturedBlogCard({ slug, title, excerpt, date, image, imageAlt, author,
           <div className="flex items-center gap-4 text-sm text-works-dark/50 mb-4 font-medium">
             <span className="flex items-center gap-1.5">
               <Calendar className="w-4 h-4 text-works-primary" />
-              {date}
+              <TermText>{date}</TermText>
             </span>
-            <span>{readingTime}</span>
+            <span><TermText>{readingTime}</TermText></span>
           </div>
           <h3 className="text-2xl lg:text-3xl font-bold text-works-dark mb-3 leading-tight group-hover:text-works-primary transition-colors">
-            {title}
+            <TermText>{title}</TermText>
           </h3>
           <p className="text-base lg:text-lg text-works-dark/60 leading-relaxed mb-4">
-            {excerpt}
+            <TermText>{excerpt}</TermText>
           </p>
-          <p className="text-sm text-works-dark/50 mb-6">{author}</p>
+          <p className="text-sm text-works-dark/50 mb-6"><TermText>{author}</TermText></p>
           <ArrowLinkLabel size="small">
-            {t("cta.readMore")}
+            <TermText>{t("cta.readMore")}</TermText>
           </ArrowLinkLabel>
         </div>
       </Link>
@@ -92,7 +94,7 @@ function BlogGridCard({ slug, title, excerpt, date, image, imageAlt, author, rea
           <img
             loading="lazy"
             src={image}
-            alt={imageAlt || title}
+            alt={accessibleTermLabel(imageAlt || title, locale)}
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
           />
         </div>
@@ -100,24 +102,24 @@ function BlogGridCard({ slug, title, excerpt, date, image, imageAlt, author, rea
           <div className="flex items-center gap-4 text-sm text-works-dark/50 mb-4 font-medium">
             <span className="flex items-center gap-1.5">
               <Calendar className="w-4 h-4 text-works-primary" />
-              {date}
+              <TermText>{date}</TermText>
             </span>
-            <span>{readingTime}</span>
+            <span><TermText>{readingTime}</TermText></span>
           </div>
           <div className="mb-2 min-h-[3.5rem]">
             <h3 className="text-lg lg:text-xl font-bold text-works-dark leading-tight group-hover:text-works-primary transition-colors line-clamp-2">
-              {title}
+              <TermText>{title}</TermText>
             </h3>
           </div>
           <div className="mb-4 min-h-[4.5rem]">
             <p className="text-sm text-works-dark/60 leading-relaxed line-clamp-3">
-              {excerpt}
+                <TermText>{excerpt}</TermText>
             </p>
           </div>
           <div className="flex items-center justify-between mt-auto">
-            <span className="text-sm text-works-dark/50">{author}</span>
+            <span className="text-sm text-works-dark/50"><TermText>{author}</TermText></span>
             <ArrowLinkLabel size="small">
-              {t("cta.readMore")}
+              <TermText>{t("cta.readMore")}</TermText>
             </ArrowLinkLabel>
           </div>
         </div>
@@ -159,10 +161,10 @@ export default function Blog() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="mb-12 lg:mb-16">
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-works-dark tracking-tight mb-4">
-                {blogPage?.heading?.trim() || t("pages.blogHeading")}
+                <TermText>{blogPage?.heading?.trim() || t("pages.blogHeading")}</TermText>
               </h1>
               <p className="text-lg lg:text-xl text-works-dark/60 max-w-2xl">
-                {blogPage?.description?.trim() || t("pages.blogSubheading")}
+                <TermText>{blogPage?.description?.trim() || t("pages.blogSubheading")}</TermText>
               </p>
             </div>
 
@@ -179,8 +181,8 @@ export default function Blog() {
 
             {error ? (
               <div className="text-center py-16">
-                <p className="text-xl font-semibold text-works-dark mb-2">{t("states.errorHeading")}</p>
-                <p className="text-works-dark/60">{t("states.errorBody")}</p>
+                <p className="text-xl font-semibold text-works-dark mb-2"><TermText>{t("states.errorHeading")}</TermText></p>
+                <p className="text-works-dark/60"><TermText>{t("states.errorBody")}</TermText></p>
               </div>
             ) : loading ? (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
@@ -234,14 +236,14 @@ export default function Blog() {
             {!loading && filtered.length === 0 && (
               <div className="text-center py-20">
                 <p className="text-works-dark/60 text-lg">
-                  {t("states.noResults")}
+                  <TermText>{t("states.noResults")}</TermText>
                 </p>
                 <button
                   onClick={() => setActiveTag(null)}
                   className="mt-4 text-works-primary font-semibold hover:underline"
                   data-testid="blog-show-all"
                 >
-                  {t("sections.allBlogs")}
+                  <TermText>{t("sections.allBlogs")}</TermText>
                 </button>
               </div>
             )}

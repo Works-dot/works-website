@@ -1,4 +1,5 @@
 import { FilterDropdown } from "./FilterDropdown";
+import { TermText } from "@/components/Terminology";
 
 interface ResponsiveFilterProps {
   options: string[];
@@ -33,7 +34,7 @@ export function ResponsiveFilter({
               : "bg-white text-works-dark border-works-muted hover:border-works-dark"
           }`}
         >
-          {allLabel}
+          <TermText>{allLabel}</TermText>
         </button>
         {options.map((tag) => (
           <button
@@ -45,7 +46,7 @@ export function ResponsiveFilter({
                 : "bg-white text-works-dark border-works-muted hover:border-works-dark"
             }`}
           >
-            {tag}
+            <TermText>{tag}</TermText>
           </button>
         ))}
       </div>

@@ -22,6 +22,8 @@ import { useI18n } from "@/i18n";
 import { buildLocalePath } from "@/lib/i18n-routes";
 import { ArrowLinkLabel } from "@/components/ui/arrow-link-label";
 import { FullBleedHero } from "@/components/ui/FullBleedHero";
+import { TermText } from "@/components/Terminology";
+import { accessibleTermLabel } from "@/lib/terminology";
 
 const fadeUp = {
   initial: { opacity: 0, y: 20 },
@@ -47,15 +49,15 @@ function SectionHeading({ intro, fallbackHeading }: { intro: SectionIntro | null
     <motion.div {...fadeUp} className="mb-12 max-w-3xl">
       {intro?.kicker && (
         <span className="text-works-primary font-bold text-sm tracking-widest uppercase mb-3 block">
-          {intro.kicker}
+          <TermText>{intro.kicker}</TermText>
         </span>
       )}
       <h2 className="text-3xl md:text-4xl font-bold text-works-dark">
-        {intro?.heading || fallbackHeading}
+        <TermText>{intro?.heading || fallbackHeading}</TermText>
       </h2>
       {intro?.description && (
         <p className="text-lg text-works-dark/60 leading-relaxed mt-4">
-          {intro.description}
+          <TermText>{intro.description}</TermText>
         </p>
       )}
     </motion.div>
@@ -82,7 +84,7 @@ export default function ServicePage() {
       <div className="min-h-screen bg-works-bg flex flex-col selection:bg-works-primary selection:text-white">
         <Header />
         <main className="flex-grow pt-28 lg:pt-32 flex items-center justify-center">
-          <div className="animate-pulse text-works-dark/30 text-lg">{t("states.loading")}</div>
+          <div className="animate-pulse text-works-dark/30 text-lg"><TermText>{t("states.loading")}</TermText></div>
         </main>
         <Footer />
       </div>
@@ -95,9 +97,9 @@ export default function ServicePage() {
         <Header />
         <main className="flex-grow pt-28 lg:pt-32 flex items-center justify-center">
           <div className="text-center">
-            <h1 className="text-3xl font-bold text-works-dark mb-4">{t("states.errorHeading")}</h1>
-            <p className="text-works-dark/60 mb-6">{t("states.errorBody")}</p>
-            <Link href={buildLocalePath(locale, "home")} className="text-works-primary font-semibold hover:underline">{t("cta.backToHome")}</Link>
+            <h1 className="text-3xl font-bold text-works-dark mb-4"><TermText>{t("states.errorHeading")}</TermText></h1>
+            <p className="text-works-dark/60 mb-6"><TermText>{t("states.errorBody")}</TermText></p>
+            <Link href={buildLocalePath(locale, "home")} className="text-works-primary font-semibold hover:underline"><TermText>{t("cta.backToHome")}</TermText></Link>
           </div>
         </main>
         <Footer />
@@ -112,10 +114,10 @@ export default function ServicePage() {
         <main className="flex-grow pt-28 lg:pt-32 flex items-center justify-center">
           <div className="text-center">
             <h1 className="text-3xl font-bold text-works-dark mb-4">
-              {t("states.notFoundService")}
+              <TermText>{t("states.notFoundService")}</TermText>
             </h1>
             <Link href={buildLocalePath(locale, "home")} className="text-works-primary font-semibold hover:underline">
-              {t("cta.backToHome")}
+              <TermText>{t("cta.backToHome")}</TermText>
             </Link>
           </div>
         </main>
@@ -159,13 +161,13 @@ export default function ServicePage() {
           showDecoration
         >
           <span className="text-white font-bold text-sm tracking-widest uppercase mb-4 block">
-            {service.subtitle}
+            <TermText>{service.subtitle}</TermText>
           </span>
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
-            {service.title}.
+            <TermText>{`${service.title}.`}</TermText>
           </h1>
           <p className="text-lg lg:text-xl text-white leading-relaxed">
-            {service.heroDescription}
+            <TermText>{service.heroDescription}</TermText>
           </p>
         </FullBleedHero>
 
@@ -176,17 +178,17 @@ export default function ServicePage() {
               <motion.div {...fadeUp} className="max-w-3xl">
                 {definition.kicker && (
                   <span className="text-works-primary font-bold text-sm tracking-widest uppercase mb-3 block">
-                    {definition.kicker}
+                    <TermText>{definition.kicker}</TermText>
                   </span>
                 )}
                 {definition.heading && (
                   <h2 className="text-3xl md:text-4xl font-bold text-works-dark">
-                    {definition.heading}
+                    <TermText>{definition.heading}</TermText>
                   </h2>
                 )}
                 {definition.description && (
                   <p className="text-lg text-works-dark/60 leading-relaxed mt-4">
-                    {definition.description}
+                    <TermText>{definition.description}</TermText>
                   </p>
                 )}
               </motion.div>
@@ -211,10 +213,10 @@ export default function ServicePage() {
                   >
                     <HelpCircle className="w-6 h-6 text-works-primary mb-4" strokeWidth={1.5} aria-hidden="true" />
                     <h3 className="text-lg font-bold text-works-dark mb-3 leading-snug">
-                      {card.title}
+                      <TermText>{card.title}</TermText>
                     </h3>
                     <p className="text-works-dark/60 leading-relaxed text-sm">
-                      {card.description}
+                      <TermText>{card.description}</TermText>
                     </p>
                   </motion.div>
                 ))}
@@ -249,11 +251,11 @@ export default function ServicePage() {
                     <div className="flex items-start gap-3 mb-3">
                       <IconBox icon={card.icon} />
                       <h3 className="text-lg font-bold text-works-dark">
-                        {card.title}
+                          <TermText>{card.title}</TermText>
                       </h3>
                     </div>
                     <p className="text-works-dark/60 leading-relaxed text-sm">
-                      {card.description}
+                          <TermText>{card.description}</TermText>
                     </p>
                   </motion.div>
                 ))}
@@ -296,10 +298,10 @@ export default function ServicePage() {
                         {String(i + 1).padStart(2, "0")}
                       </span>
                       <h3 className="text-xl font-bold text-works-dark mb-2">
-                        {step.title}
+                        <TermText>{step.title}</TermText>
                       </h3>
                       <p className="text-works-dark/60 leading-relaxed">
-                        {step.description}
+                        <TermText>{step.description}</TermText>
                       </p>
                     </motion.li>
                   ))}
@@ -328,12 +330,12 @@ export default function ServicePage() {
                       <div className="flex items-start gap-3 mb-3">
                         <IconBox icon={card.icon} />
                         <h3 className="text-xl font-bold text-works-dark">
-                          {card.title}
+                          <TermText>{card.title}</TermText>
                         </h3>
                       </div>
                       {card.description && (
                         <p className="text-works-dark/60 leading-relaxed mb-5">
-                          {card.description}
+                          <TermText>{card.description}</TermText>
                         </p>
                       )}
                       {card.bullets.length > 0 && (
@@ -341,7 +343,7 @@ export default function ServicePage() {
                           {card.bullets.map((b, j) => (
                             <li key={j} className="flex items-start gap-3 text-works-dark/80">
                               <ArrowRight className="w-4 h-4 text-works-primary shrink-0 mt-1" strokeWidth={2} />
-                              <span className="leading-relaxed text-sm">{b}</span>
+                              <span className="leading-relaxed text-sm"><TermText>{b}</TermText></span>
                             </li>
                           ))}
                         </ul>
@@ -363,11 +365,11 @@ export default function ServicePage() {
                       <div className="flex items-start gap-3 mb-3">
                         <IconBox icon={card.icon} />
                         <h3 className="text-lg font-bold text-works-dark">
-                          {card.title}
+                          <TermText>{card.title}</TermText>
                         </h3>
                       </div>
                       <p className="text-works-dark/60 leading-relaxed text-sm">
-                        {card.description}
+                        <TermText>{card.description}</TermText>
                       </p>
                     </motion.div>
                   ))}
@@ -419,10 +421,10 @@ export default function ServicePage() {
                       className="border border-works-muted/30 bg-works-bg px-6 data-[state=open]:border-works-primary/30"
                     >
                       <AccordionTrigger className="text-left text-base md:text-lg font-bold text-works-dark hover:text-works-primary hover:no-underline py-5">
-                        {item.question}
+                        <TermText>{item.question}</TermText>
                       </AccordionTrigger>
                       <AccordionContent className="text-works-dark/60 leading-relaxed text-base pb-5">
-                        {item.answer}
+                        <TermText>{item.answer}</TermText>
                       </AccordionContent>
                     </AccordionItem>
                   ))}
@@ -457,11 +459,11 @@ export default function ServicePage() {
                             )}
                           </div>
                           <h3 className="text-xl font-bold text-works-dark group-hover:text-works-primary transition-colors">
-                            {rel.title}
+                            <TermText>{rel.title}</TermText>
                           </h3>
                         </div>
                         <p className="text-works-dark/60 leading-relaxed flex-grow text-sm">
-                          {rel.description}
+                          <TermText>{rel.description}</TermText>
                         </p>
                       </div>
                     </Link>
@@ -496,7 +498,7 @@ function RelatedProjectCard({ p, i, animated = true }: { p: Project; i: number; 
         <div className="w-full aspect-[4/3] relative overflow-hidden bg-works-light">
           <img
             src={p.image}
-            alt={p.imageAlt || p.title}
+            alt={accessibleTermLabel(p.imageAlt || p.title, locale)}
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
           />
         </div>
@@ -508,19 +510,19 @@ function RelatedProjectCard({ p, i, animated = true }: { p: Project; i: number; 
                   key={tag}
                   className="px-2.5 py-0.5 text-xs font-semibold text-neutral-600 border border-neutral-400 bg-transparent"
                 >
-                  {tag}
+                    <TermText>{tag}</TermText>
                 </span>
               ))}
             </div>
           )}
           <h3 className="text-xl sm:text-2xl font-bold text-works-dark mb-3 line-clamp-2 group-hover:text-works-primary transition-colors">
-            {p.title}
+            <TermText>{p.title}</TermText>
           </h3>
           <p className="text-works-dark/60 mb-6 line-clamp-3 leading-relaxed">
-            {p.description}
+            <TermText>{p.description}</TermText>
           </p>
           <ArrowLinkLabel size="small" className="mt-auto">
-            {t("cta.viewProjectCard")}
+            <TermText>{t("cta.viewProjectCard")}</TermText>
           </ArrowLinkLabel>
         </div>
       </Link>

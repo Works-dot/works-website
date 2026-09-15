@@ -4,6 +4,8 @@ import { Calendar } from "lucide-react";
 import { useI18n } from "@/i18n";
 import { buildLocalePath } from "@/lib/i18n-routes";
 import { ArrowLinkLabel } from "@/components/ui/arrow-link-label";
+import { TermText } from "@/components/Terminology";
+import { accessibleTermLabel } from "@/lib/terminology";
 
 interface BlogCardProps {
   slug: string;
@@ -35,7 +37,7 @@ export function BlogCard({ slug, title, excerpt, date, image, imageAlt, index, a
         <div className="w-full aspect-[4/3] relative overflow-hidden">
           <img
             src={image}
-            alt={imageAlt || title}
+            alt={accessibleTermLabel(imageAlt || title, locale)}
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
           />
         </div>
@@ -48,18 +50,18 @@ export function BlogCard({ slug, title, excerpt, date, image, imageAlt, index, a
           
           <div className="mb-3 min-h-[3.5rem] sm:min-h-[4rem]">
             <h3 className="text-xl sm:text-2xl font-bold text-works-dark line-clamp-2 group-hover:text-works-primary transition-colors">
-              {title}
+              <TermText>{title}</TermText>
             </h3>
           </div>
 
           <div className="mb-6 min-h-[4.5rem] sm:min-h-[5rem]">
             <p className="text-works-dark/60 line-clamp-3 leading-relaxed">
-              {excerpt}
+              <TermText>{excerpt}</TermText>
             </p>
           </div>
           
           <ArrowLinkLabel size="small" className="mt-auto">
-            {t("cta.readMore")}
+            <TermText>{t("cta.readMore")}</TermText>
           </ArrowLinkLabel>
         </div>
       </Link>

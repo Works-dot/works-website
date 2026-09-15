@@ -3,6 +3,8 @@ import { motion } from "framer-motion";
 import { useI18n } from "@/i18n";
 import { buildLocalePath } from "@/lib/i18n-routes";
 import { ArrowLinkLabel } from "@/components/ui/arrow-link-label";
+import { TermText } from "@/components/Terminology";
+import { accessibleTermLabel } from "@/lib/terminology";
 
 interface ProjectCardProps {
   slug: string;
@@ -36,33 +38,35 @@ export function ProjectCard({ slug, title, tags, description, image, imageAlt, r
         <div className="w-full aspect-[4/3] relative overflow-hidden flex items-center justify-center">
           <img
             src={image}
-            alt={imageAlt || title}
+            alt={accessibleTermLabel(imageAlt || title, locale)}
             className="relative z-10 w-full h-full object-contain"
           />
         </div>
       </div>
 
       <div className="w-full lg:w-1/2 flex flex-col items-start py-4">
-        <h3 className="text-3xl lg:text-4xl font-bold text-works-dark mb-4 leading-tight">{title}</h3>
+        <h3 className="text-3xl lg:text-4xl font-bold text-works-dark mb-4 leading-tight">
+          <TermText>{title}</TermText>
+        </h3>
         <div className="flex flex-wrap gap-2 mb-6">
           {tags.map((tag) => (
             <span
               key={tag}
               className="px-3 py-1 text-sm font-semibold text-neutral-600 border border-neutral-400 bg-transparent"
             >
-              {tag}
+              <TermText>{tag}</TermText>
             </span>
           ))}
         </div>
         <p className={`text-lg text-works-dark/60 mb-8 leading-relaxed${clampDescription ? " line-clamp-3" : ""}`}>
-          {description}
+          <TermText>{description}</TermText>
         </p>
         <Link
           href={buildLocalePath(locale, "projectDetail", slug)}
           className="group"
         >
           <ArrowLinkLabel size="large">
-            {t("cta.viewProjectCard")}
+            <TermText>{t("cta.viewProjectCard")}</TermText>
           </ArrowLinkLabel>
         </Link>
       </div>

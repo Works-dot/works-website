@@ -1,6 +1,7 @@
 import { Search, ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
 import { Link } from "wouter";
+import { TermText } from "@/components/Terminology";
 
 interface ServiceCardProps {
   iconSrc?: string;
@@ -27,9 +28,11 @@ export function ServiceCard({ iconSrc, title, description, index, href }: Servic
             <Search className="w-6 h-6" strokeWidth={1.5} />
           )}
         </div>
-        <h3 className="text-xl font-bold text-works-dark group-hover:text-works-primary transition-colors">{title}</h3>
+        <h3 className="text-xl font-bold text-works-dark group-hover:text-works-primary transition-colors">
+          <TermText>{title}</TermText>
+        </h3>
       </div>
-      <p className="text-works-dark/60 leading-relaxed flex-grow">{description}</p>
+      <p className="text-works-dark/60 leading-relaxed flex-grow"><TermText>{description}</TermText></p>
       {href && (
         <div className="flex justify-end mt-4">
           <ArrowRight

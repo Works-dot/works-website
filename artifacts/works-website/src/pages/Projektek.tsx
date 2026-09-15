@@ -12,6 +12,8 @@ import { fallbackProjects, fallbackProjectsPage } from "@/data/fallback";
 import { useI18n } from "@/i18n";
 import { buildLocalePath } from "@/lib/i18n-routes";
 import { ArrowLinkLabel } from "@/components/ui/arrow-link-label";
+import { TermText } from "@/components/Terminology";
+import { accessibleTermLabel } from "@/lib/terminology";
 
 function FeaturedProjectCard({ slug, title, tags, description, image, imageAlt }: {
   slug: string;
@@ -35,7 +37,7 @@ function FeaturedProjectCard({ slug, title, tags, description, image, imageAlt }
         <div className="w-full lg:w-1/2 overflow-hidden bg-works-light aspect-[4/3]">
           <img
             src={image}
-            alt={imageAlt || title}
+            alt={accessibleTermLabel(imageAlt || title, locale)}
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
           />
         </div>
@@ -46,18 +48,18 @@ function FeaturedProjectCard({ slug, title, tags, description, image, imageAlt }
                 key={tag}
                 className="px-3 py-1 text-xs font-semibold text-neutral-600 border border-neutral-400 bg-transparent"
               >
-                {tag}
+                <TermText>{tag}</TermText>
               </span>
             ))}
           </div>
           <h3 className="text-2xl lg:text-3xl font-bold text-works-dark mb-3 leading-tight group-hover:text-works-primary transition-colors">
-            {title}
+            <TermText>{title}</TermText>
           </h3>
           <p className="text-base lg:text-lg text-works-dark/60 leading-relaxed mb-6">
-            {description}
+            <TermText>{description}</TermText>
           </p>
           <ArrowLinkLabel size="small">
-            {t("cta.viewProjectCard")}
+            <TermText>{t("cta.viewProjectCard")}</TermText>
           </ArrowLinkLabel>
         </div>
       </Link>
@@ -88,7 +90,7 @@ function ProjectGridCard({ slug, title, tags, description, image, imageAlt }: {
           <img
             loading="lazy"
             src={image}
-            alt={imageAlt || title}
+            alt={accessibleTermLabel(imageAlt || title, locale)}
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
           />
         </div>
@@ -99,18 +101,18 @@ function ProjectGridCard({ slug, title, tags, description, image, imageAlt }: {
                 key={tag}
                 className="px-3 py-1 text-xs font-semibold text-neutral-600 border border-neutral-400 bg-transparent"
               >
-                {tag}
+                <TermText>{tag}</TermText>
               </span>
             ))}
           </div>
           <h3 className="text-lg lg:text-xl font-bold text-works-dark mb-2 leading-tight group-hover:text-works-primary transition-colors">
-            {title}
+              <TermText>{title}</TermText>
           </h3>
           <p className="text-sm text-works-dark/60 leading-relaxed mb-3 line-clamp-3">
-            {description}
+              <TermText>{description}</TermText>
           </p>
           <ArrowLinkLabel size="small">
-            {t("cta.viewProjectCard")}
+              <TermText>{t("cta.viewProjectCard")}</TermText>
           </ArrowLinkLabel>
         </div>
       </Link>
@@ -152,10 +154,10 @@ export default function Projektek() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="mb-12 lg:mb-16">
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-works-dark tracking-tight mb-4">
-                {projectsPage?.heading?.trim() || t("pages.projectsHeading")}
+                <TermText>{projectsPage?.heading?.trim() || t("pages.projectsHeading")}</TermText>
               </h1>
               <p className="text-lg lg:text-xl text-works-dark/60 max-w-2xl">
-                {projectsPage?.description?.trim() || t("pages.projectsSubheading")}
+                <TermText>{projectsPage?.description?.trim() || t("pages.projectsSubheading")}</TermText>
               </p>
             </div>
 
@@ -172,8 +174,8 @@ export default function Projektek() {
 
             {error ? (
               <div className="text-center py-16">
-                <p className="text-xl font-semibold text-works-dark mb-2">{t("states.errorHeading")}</p>
-                <p className="text-works-dark/60">{t("states.errorBody")}</p>
+                <p className="text-xl font-semibold text-works-dark mb-2"><TermText>{t("states.errorHeading")}</TermText></p>
+                <p className="text-works-dark/60"><TermText>{t("states.errorBody")}</TermText></p>
               </div>
             ) : loading ? (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
@@ -222,14 +224,14 @@ export default function Projektek() {
             {!loading && filtered.length === 0 && (
               <div className="text-center py-20">
                 <p className="text-works-dark/60 text-lg">
-                  {t("states.noResults")}
+                  <TermText>{t("states.noResults")}</TermText>
                 </p>
                 <button
                   onClick={() => setActiveTag(null)}
                   className="mt-4 text-works-primary font-semibold hover:underline"
                   data-testid="projektek-show-all"
                 >
-                  {t("sections.allProjects")}
+                  <TermText>{t("sections.allProjects")}</TermText>
                 </button>
               </div>
             )}

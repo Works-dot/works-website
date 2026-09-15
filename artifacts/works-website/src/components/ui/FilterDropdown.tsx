@@ -1,6 +1,8 @@
 import { useState, useRef, useEffect, useCallback, useId } from "react";
 import { ChevronDown } from "lucide-react";
 import { useI18n } from "@/i18n";
+import { TermText } from "@/components/Terminology";
+import { accessibleTermLabel } from "@/lib/terminology";
 
 interface FilterDropdownProps {
   options: string[];
@@ -15,7 +17,7 @@ export function FilterDropdown({
   onChange,
   allLabel = "Mind",
 }: FilterDropdownProps) {
-  const { t } = useI18n();
+  const { locale, t } = useI18n();
   const [open, setOpen] = useState(false);
   const [focusedIndex, setFocusedIndex] = useState(-1);
   const ref = useRef<HTMLDivElement>(null);
@@ -99,10 +101,10 @@ export function FilterDropdown({
         aria-haspopup="listbox"
         aria-expanded={open}
         aria-controls={open ? listboxId : undefined}
-        aria-label={t("filter.ariaLabel", { label: displayLabel })}
+         aria-label={accessibleTermLabel(t("filter.ariaLabel", { label: displayLabel }), locale)}
         className="flex items-center gap-2 px-4 py-2.5 text-sm font-semibold border border-works-muted bg-white text-works-dark hover:border-works-primary transition-colors w-full justify-between"
       >
-        <span className="truncate">{displayLabel}</span>
+         <span className="truncate"><TermText>{displayLabel}</TermText></span>
         <ChevronDown
           className={`w-4 h-4 shrink-0 transition-transform duration-200 ${open ? "rotate-180" : ""}`}
         />
@@ -134,7 +136,7 @@ export function FilterDropdown({
                       : "text-works-dark hover:bg-works-light"
                 }`}
               >
-                {label}
+                <TermText>{label}</TermText>
               </div>
             );
           })}

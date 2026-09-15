@@ -9,6 +9,8 @@ import { fallbackGlobalSettings, fallbackServices, fallbackLegalDocuments } from
 import { useCookieConsent } from "@/lib/cookie-consent";
 import { useI18n } from "@/i18n";
 import { buildLocalePath } from "@/lib/i18n-routes";
+import { TermText } from "@/components/Terminology";
+import { accessibleTermLabel } from "@/lib/terminology";
 
 const SOCIAL_ICONS: Record<string, React.ReactNode> = {
   linkedin: <Linkedin className="w-5 h-5" />,
@@ -52,15 +54,19 @@ export function Footer() {
   return (
     <footer className="w-full relative z-10">
       <div className="bg-works-dark text-white py-20 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-6xl mx-auto flex flex-col lg:flex-row lg:items-center gap-8 lg:gap-12">
+        <div className="max-w-6xl lg:max-w-[calc(var(--container-7xl)-4rem)] mx-auto flex flex-col lg:flex-row lg:items-center gap-8 lg:gap-12">
           <div className="lg:flex-1">
-            <h2 className="text-4xl md:text-5xl font-bold text-white tracking-tight mb-4">{newsletterHeading}</h2>
+            <h2 className="text-4xl md:text-5xl font-bold text-white tracking-tight mb-4">
+              <TermText>{newsletterHeading}</TermText>
+            </h2>
             <p className="text-works-light/80 text-lg">
-              {newsletterDescription}
+              <TermText>{newsletterDescription}</TermText>
             </p>
           </div>
           <form onSubmit={handleSubscribe} className="flex flex-col sm:flex-row gap-3 max-w-lg lg:max-w-none lg:flex-1">
-            <label htmlFor="newsletter-email" className="sr-only">{t("footer.newsletterEmailLabel")}</label>
+            <label htmlFor="newsletter-email" className="sr-only">
+              <TermText>{t("footer.newsletterEmailLabel")}</TermText>
+            </label>
             <input
               id="newsletter-email"
               type="email"
@@ -77,34 +83,42 @@ export function Footer() {
               className="group px-8 py-4 border border-white text-white font-semibold hover:bg-white hover:text-works-dark transition-colors flex items-center justify-center gap-2 disabled:opacity-70"
               data-testid="footer-newsletter-submit"
             >
-              {isPending ? t("footer.newsletterSubmitting") : t("footer.newsletterSubscribe")}
+              <TermText>
+                {isPending ? t("footer.newsletterSubmitting") : t("footer.newsletterSubscribe")}
+              </TermText>
               {!isPending && <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />}
             </button>
             <span className="sr-only" role="status" aria-live="polite">
-              {isPending
-                ? t("footer.newsletterSubmitting")
-                : isSuccess
-                  ? t("footer.newsletterSuccessDescription")
-                  : isError
-                    ? newsletterError instanceof NewsletterError && newsletterError.code === "invalid_email"
-                      ? t("footer.newsletterInvalidEmail")
-                      : t("footer.newsletterErrorDescription")
-                    : ""}
+              <TermText>
+                {isPending
+                  ? t("footer.newsletterSubmitting")
+                  : isSuccess
+                    ? t("footer.newsletterSuccessDescription")
+                    : isError
+                      ? newsletterError instanceof NewsletterError && newsletterError.code === "invalid_email"
+                        ? t("footer.newsletterInvalidEmail")
+                        : t("footer.newsletterErrorDescription")
+                      : ""}
+              </TermText>
             </span>
           </form>
         </div>
       </div>
 
       <div className="bg-works-deepdark pt-20 pb-10 px-4 sm:px-6 lg:px-8 text-works-muted">
-        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+        <div className="max-w-6xl lg:max-w-[calc(var(--container-7xl)-4rem)] mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
           <div className="lg:col-span-1">
             {logoImg ? (
-              <img src={logoImg} alt={t("footer.logoAlt")} className="h-8 w-auto object-contain brightness-0 invert mb-6" />
+              <img
+                src={logoImg}
+                alt={accessibleTermLabel(t("footer.logoAlt"), locale)}
+                className="h-8 w-auto object-contain brightness-0 invert mb-6"
+              />
             ) : (
               <span className="text-xl font-bold text-white mb-6 block">Works.</span>
             )}
             <p className="text-works-muted/80 leading-relaxed mb-8 whitespace-pre-line">
-              {footerTagline}
+              <TermText>{footerTagline}</TermText>
             </p>
             <div className="flex gap-4">
               {socialLinks.length > 0 ? (
@@ -116,7 +130,7 @@ export function Footer() {
                       href={link.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      aria-label={link.platform}
+                      aria-label={accessibleTermLabel(link.platform, locale)}
                       className="w-10 h-10 bg-white/5 flex items-center justify-center hover:bg-works-primary hover:text-white transition-colors duration-300"
                     >
                       {SOCIAL_ICONS[key] || <span className="text-xs font-bold">{link.platform.slice(0, 2).toUpperCase()}</span>}
@@ -125,13 +139,13 @@ export function Footer() {
                 })
               ) : locale === "hu" ? (
                 <>
-                  <a href="#" aria-label="LinkedIn" className="w-10 h-10 bg-white/5 flex items-center justify-center hover:bg-works-primary hover:text-white transition-colors duration-300">
+                    <a href="#" aria-label={accessibleTermLabel("LinkedIn", locale)} className="w-10 h-10 bg-white/5 flex items-center justify-center hover:bg-works-primary hover:text-white transition-colors duration-300">
                     <Linkedin className="w-5 h-5" />
                   </a>
-                  <a href="#" aria-label="Instagram" className="w-10 h-10 bg-white/5 flex items-center justify-center hover:bg-works-primary hover:text-white transition-colors duration-300">
+                   <a href="#" aria-label={accessibleTermLabel("Instagram", locale)} className="w-10 h-10 bg-white/5 flex items-center justify-center hover:bg-works-primary hover:text-white transition-colors duration-300">
                     <Instagram className="w-5 h-5" />
                   </a>
-                  <a href="#" aria-label="Dribbble" className="w-10 h-10 bg-white/5 flex items-center justify-center hover:bg-works-primary hover:text-white transition-colors duration-300">
+                   <a href="#" aria-label={accessibleTermLabel("Dribbble", locale)} className="w-10 h-10 bg-white/5 flex items-center justify-center hover:bg-works-primary hover:text-white transition-colors duration-300">
                     <Dribbble className="w-5 h-5" />
                   </a>
                 </>
@@ -140,13 +154,15 @@ export function Footer() {
           </div>
 
           <div>
-            <h4 className="text-white font-bold mb-6 uppercase tracking-wider text-sm">{t("footer.servicesHeading")}</h4>
+             <h4 className="text-white font-bold mb-6 uppercase tracking-wider text-sm">
+               <TermText>{t("footer.servicesHeading")}</TermText>
+             </h4>
             <ul className="space-y-4">
               {footerServices.length > 0 ? (
                 footerServices.map((svc) => (
                   <li key={svc.slug}>
                     <Link href={buildLocalePath(locale, "serviceDetail", svc.slug)} className="hover:text-works-primary transition-colors">
-                      {svc.title}
+                       <TermText>{svc.title}</TermText>
                     </Link>
                   </li>
                 ))
@@ -156,7 +172,7 @@ export function Footer() {
                     href={buildLocalePath(locale, "home", undefined, "#services")}
                     className="hover:text-works-primary transition-colors"
                   >
-                    {label}
+                     <TermText>{label}</TermText>
                   </a>
                 </li>
               ))}
@@ -164,31 +180,35 @@ export function Footer() {
           </div>
 
           <div>
-            <h4 className="text-white font-bold mb-6 uppercase tracking-wider text-sm">{t("footer.companyHeading")}</h4>
+             <h4 className="text-white font-bold mb-6 uppercase tracking-wider text-sm">
+               <TermText>{t("footer.companyHeading")}</TermText>
+             </h4>
             <ul className="space-y-4">
-              <li><Link href={buildLocalePath(locale, "about")} className="hover:text-works-primary transition-colors">{t("nav.about")}</Link></li>
-              <li><Link href={buildLocalePath(locale, "careers")} className="hover:text-works-primary transition-colors">{t("nav.careers")}</Link></li>
-              <li><Link href={buildLocalePath(locale, "blog")} className="hover:text-works-primary transition-colors">{t("nav.blog")}</Link></li>
-              <li><Link href={buildLocalePath(locale, "projects")} className="hover:text-works-primary transition-colors">{t("footer.caseStudies")}</Link></li>
+               <li><Link href={buildLocalePath(locale, "about")} className="hover:text-works-primary transition-colors"><TermText>{t("nav.about")}</TermText></Link></li>
+               <li><Link href={buildLocalePath(locale, "careers")} className="hover:text-works-primary transition-colors"><TermText>{t("nav.careers")}</TermText></Link></li>
+               <li><Link href={buildLocalePath(locale, "blog")} className="hover:text-works-primary transition-colors"><TermText>{t("nav.blog")}</TermText></Link></li>
+               <li><Link href={buildLocalePath(locale, "projects")} className="hover:text-works-primary transition-colors"><TermText>{t("footer.caseStudies")}</TermText></Link></li>
             </ul>
           </div>
 
           <div>
-            <h4 className="text-white font-bold mb-6 uppercase tracking-wider text-sm">{t("footer.contactHeading")}</h4>
+             <h4 className="text-white font-bold mb-6 uppercase tracking-wider text-sm">
+               <TermText>{t("footer.contactHeading")}</TermText>
+             </h4>
             <ul className="space-y-4">
               <li className="flex flex-col">
-                <span className="text-sm text-works-muted/60 mb-1">{t("footer.addressLabel")}</span>
-                <span className="text-works-muted">{address}</span>
+                 <span className="text-sm text-works-muted/60 mb-1"><TermText>{t("footer.addressLabel")}</TermText></span>
+                 <span className="text-works-muted"><TermText>{address}</TermText></span>
               </li>
               <li className="flex flex-col">
-                <span className="text-sm text-works-muted/60 mb-1">{t("footer.emailLabel")}</span>
+                 <span className="text-sm text-works-muted/60 mb-1"><TermText>{t("footer.emailLabel")}</TermText></span>
                 <a href={`mailto:${contactEmail}`} className="text-works-primary font-semibold hover:underline">{contactEmail}</a>
               </li>
             </ul>
           </div>
         </div>
 
-        <div className="max-w-6xl mx-auto pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-works-muted/60">
+        <div className="max-w-6xl lg:max-w-[calc(var(--container-7xl)-4rem)] mx-auto pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-works-muted/60">
           <p>&copy; {copyrightText}</p>
           <div className="flex w-full flex-col items-center gap-4 text-center md:w-auto md:flex-row md:items-stretch md:gap-6 md:text-left">
             <a
@@ -196,14 +216,14 @@ export function Footer() {
               {...(privacyPdfUrl ? { target: "_blank", rel: "noopener noreferrer" } : {})}
               className="hover:text-white transition-colors"
             >
-              {t("footer.privacy")}
+              <TermText>{t("footer.privacy")}</TermText>
             </a>
             <a
               href={cookiePdfUrl || buildLocalePath(locale, "cookies")}
               {...(cookiePdfUrl ? { target: "_blank", rel: "noopener noreferrer" } : {})}
               className="hover:text-white transition-colors"
             >
-              {t("footer.cookies")}
+              <TermText>{t("footer.cookies")}</TermText>
             </a>
             <button
               type="button"
@@ -211,7 +231,7 @@ export function Footer() {
               className="hover:text-white transition-colors"
               data-testid="button-cookie-settings"
             >
-              {t("footer.cookieSettings")}
+              <TermText>{t("footer.cookieSettings")}</TermText>
             </button>
             {imprintPdfUrl && (
               <a
@@ -220,7 +240,7 @@ export function Footer() {
                 rel="noopener noreferrer"
                 className="hover:text-white transition-colors"
               >
-                {t("footer.imprint")}
+                <TermText>{t("footer.imprint")}</TermText>
               </a>
             )}
           </div>

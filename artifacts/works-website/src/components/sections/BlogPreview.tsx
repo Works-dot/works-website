@@ -8,6 +8,7 @@ import { fallbackBlogPosts, fallbackHomepage } from "@/data/fallback";
 import { useI18n } from "@/i18n";
 import { buildLocalePath } from "@/lib/i18n-routes";
 import { ArrowLinkLabel } from "@/components/ui/arrow-link-label";
+import { TermText } from "@/components/Terminology";
 
 export function BlogPreview() {
   const { locale, t } = useI18n();
@@ -35,11 +36,11 @@ export function BlogPreview() {
         <div className="mb-10 md:mb-16 flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-works-muted/50 pb-6 md:pb-8">
           <div>
             <h2 className="text-4xl md:text-5xl font-bold text-works-dark tracking-tight">
-              {homepage?.blogSection?.heading || t("sections.latestPostsHeading")}
+              <TermText>{homepage?.blogSection?.heading || t("sections.latestPostsHeading")}</TermText>
             </h2>
           </div>
           <Link href={buildLocalePath(locale, "blog")} className="group w-fit">
-            <ArrowLinkLabel>{t("sections.allBlogs")}</ArrowLinkLabel>
+            <ArrowLinkLabel><TermText>{t("sections.allBlogs")}</TermText></ArrowLinkLabel>
           </Link>
         </div>
         

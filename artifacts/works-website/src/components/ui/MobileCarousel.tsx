@@ -1,5 +1,6 @@
 import { Children, ReactNode, useCallback, useEffect, useRef, useState } from "react";
 import { useI18n } from "@/i18n";
+import { accessibleTermLabel } from "@/lib/terminology";
 
 interface MobileCarouselProps {
   children: ReactNode;
@@ -18,7 +19,7 @@ interface MobileCarouselProps {
  * desktop via className="md:hidden" (or similar).
  */
 export function MobileCarousel({ children, className = "", ariaLabel }: MobileCarouselProps) {
-  const { t } = useI18n();
+  const { locale, t } = useI18n();
   const trackRef = useRef<HTMLDivElement>(null);
   const [selected, setSelected] = useState(0);
   const count = Children.count(children);
@@ -64,7 +65,11 @@ export function MobileCarousel({ children, className = "", ariaLabel }: MobileCa
   };
 
   return (
-    <div className={className} role="region" aria-label={ariaLabel}>
+    <div
+      className={className}
+      role="region"
+      aria-label={ariaLabel ? accessibleTermLabel(ariaLabel, locale) : undefined}
+    >
       <div
         ref={trackRef}
         className="flex gap-4 overflow-x-auto snap-x snap-mandatory -mx-4 pl-4 pr-10 sm:-mx-6 sm:pl-6 sm:pr-8 scroll-px-4 sm:scroll-px-6 scrollbar-hide"
@@ -82,7 +87,10 @@ export function MobileCarousel({ children, className = "", ariaLabel }: MobileCa
             <button
               key={i}
               type="button"
-              aria-label={t("carousel.goToSlide", { index: String(i + 1) })}
+              aria-label={accessibleTermLabel(
+                t("carousel.goToSlide", { index: String(i + 1) }),
+                locale,
+              )}
               aria-current={i === selected ? "true" : undefined}
               onClick={() => scrollTo(i)}
               className="p-2 flex items-center focus-visible:outline focus-visible:outline-2 focus-visible:outline-works-primary"

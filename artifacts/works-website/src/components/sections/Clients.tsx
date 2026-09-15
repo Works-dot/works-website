@@ -3,6 +3,8 @@ import { getClients } from "@/lib/strapi";
 import type { Client } from "@/lib/strapi";
 import { fallbackClients } from "@/data/fallback";
 import { useI18n } from "@/i18n";
+import { TermText } from "@/components/Terminology";
+import { accessibleTermLabel } from "@/lib/terminology";
 
 const hardcodedClients: Client[] = [
   { name: "Fintech Innovator", initials: "FI", order: 0, featured: false },
@@ -28,7 +30,9 @@ export function Clients() {
   return (
     <section className="py-20 bg-white border-y border-works-muted/30 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12">
-        <h2 className="text-4xl md:text-5xl font-bold text-works-dark tracking-tight">{t("sections.clientsHeading")}</h2>
+        <h2 className="text-4xl md:text-5xl font-bold text-works-dark tracking-tight">
+          <TermText>{t("sections.clientsHeading")}</TermText>
+        </h2>
       </div>
 
       <div className="relative w-full flex overflow-hidden group">
@@ -44,14 +48,14 @@ export function Clients() {
               {client.logo ? (
                 <img
                   src={client.logo}
-                  alt={client.logoAlt || client.name}
+                  alt={accessibleTermLabel(client.logoAlt || client.name, locale)}
                   loading="lazy"
                   className="h-10 max-w-[70%] w-auto object-contain"
                 />
               ) : (
                 <>
                   <span className="text-works-dark/20 font-bold text-2xl tracking-wider">{client.initials}</span>
-                  <span className="text-works-dark/30 text-xs font-medium">{client.name}</span>
+                  <span className="text-works-dark/30 text-xs font-medium"><TermText>{client.name}</TermText></span>
                 </>
               )}
             </div>

@@ -6,21 +6,22 @@ import { useI18n } from "@/i18n";
 import { buildLocalePath, localizeInternalPath } from "@/lib/i18n-routes";
 import { PrimaryAction } from "@/components/ui/button";
 import { FullBleedHero } from "@/components/ui/FullBleedHero";
+import { TermText } from "@/components/Terminology";
 import homeHeroImage from "@/assets/heroes/Hero_home_1789027068381.png";
 import homeMobileHeroImage from "@/assets/heroes/Hero_home_mobile_1789374396075.png";
 
 function renderHeading(heading: string, highlightedWord: string) {
   if (!highlightedWord || !heading.includes(highlightedWord)) {
-    return <>{heading}</>;
+    return <TermText>{heading}</TermText>;
   }
   const idx = heading.indexOf(highlightedWord);
   const before = heading.slice(0, idx);
   const after = heading.slice(idx + highlightedWord.length);
   return (
     <>
-      {before}
-       <span className="text-white">{highlightedWord}</span>
-      {after}
+      {before && <TermText>{before}</TermText>}
+      <span className="text-white"><TermText>{highlightedWord}</TermText></span>
+      {after && <TermText>{after}</TermText>}
     </>
   );
 }
@@ -44,7 +45,7 @@ export function Hero() {
       </h1>
 
       <p className="text-xl sm:text-2xl text-white mb-10 leading-relaxed max-w-xl">
-        {description}
+        <TermText>{description}</TermText>
       </p>
 
       <div className="flex flex-col sm:flex-row sm:flex-wrap gap-5">
@@ -54,14 +55,14 @@ export function Hero() {
           className="border border-white/70 text-base sm:text-lg whitespace-normal focus-visible:ring-white focus-visible:ring-offset-works-dark"
         >
           <a href={localizeInternalPath(locale, primaryCtaLink)}>
-            {primaryCtaText}
+            <TermText>{primaryCtaText}</TermText>
           </a>
         </PrimaryAction>
         <a
           href={secondaryCtaLink}
           className="inline-flex justify-center items-center px-8 py-4 font-semibold text-white border border-white/70 hover:border-white hover:bg-white hover:text-works-dark transition-all duration-300 text-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-works-dark"
         >
-          {secondaryCtaText}
+          <TermText>{secondaryCtaText}</TermText>
         </a>
       </div>
     </FullBleedHero>

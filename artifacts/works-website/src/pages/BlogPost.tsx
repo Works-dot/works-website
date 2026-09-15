@@ -13,6 +13,7 @@ import { fallbackBlogPosts, heroBackgroundFallbackImg } from "@/data/fallback";
 import { useI18n } from "@/i18n";
 import { buildLocalePath } from "@/lib/i18n-routes";
 import { PrimaryAction } from "@/components/ui/button";
+import { TermText } from "@/components/Terminology";
 
 export default function BlogPost() {
   const { locale, t } = useI18n();
@@ -38,7 +39,7 @@ export default function BlogPost() {
       <div className="min-h-screen bg-works-bg flex flex-col selection:bg-works-primary selection:text-white">
         <Header />
         <main className="flex-grow pt-28 lg:pt-32 flex items-center justify-center">
-          <div className="animate-pulse text-works-dark/30 text-lg">{t("states.loading")}</div>
+            <div className="animate-pulse text-works-dark/30 text-lg"><TermText>{t("states.loading")}</TermText></div>
         </main>
         <Footer />
       </div>
@@ -51,9 +52,9 @@ export default function BlogPost() {
         <Header />
         <main className="flex-grow pt-28 lg:pt-32 flex items-center justify-center">
           <div className="text-center">
-            <h1 className="text-3xl font-bold text-works-dark mb-4">{t("states.errorHeading")}</h1>
-            <p className="text-works-dark/60 mb-6">{t("states.errorBody")}</p>
-            <Link href={buildLocalePath(locale, "blog")} className="text-works-primary font-semibold hover:underline">{t("cta.backToBlog")}</Link>
+            <h1 className="text-3xl font-bold text-works-dark mb-4"><TermText>{t("states.errorHeading")}</TermText></h1>
+            <p className="text-works-dark/60 mb-6"><TermText>{t("states.errorBody")}</TermText></p>
+            <Link href={buildLocalePath(locale, "blog")} className="text-works-primary font-semibold hover:underline"><TermText>{t("cta.backToBlog")}</TermText></Link>
           </div>
         </main>
         <Footer />
@@ -67,9 +68,9 @@ export default function BlogPost() {
         <Header />
         <main className="flex-grow pt-28 lg:pt-32 flex items-center justify-center">
           <div className="text-center">
-            <h1 className="text-3xl font-bold text-works-dark mb-4">{t("states.notFoundPost")}</h1>
+            <h1 className="text-3xl font-bold text-works-dark mb-4"><TermText>{t("states.notFoundPost")}</TermText></h1>
             <Link href={buildLocalePath(locale, "blog")} className="text-works-primary font-semibold hover:underline">
-              {t("cta.backToBlog")}
+              <TermText>{t("cta.backToBlog")}</TermText>
             </Link>
           </div>
         </main>
@@ -103,7 +104,7 @@ export default function BlogPost() {
               className="inline-flex items-center gap-2 text-white/70 hover:text-white font-semibold mb-8 transition-colors"
             >
               <ArrowLeft className="w-4 h-4" />
-              {t("cta.backToBlog")}
+              <TermText>{t("cta.backToBlog")}</TermText>
             </Link>
 
             <motion.div
@@ -117,15 +118,15 @@ export default function BlogPost() {
                     key={tag}
                     className="px-3 py-1 text-sm font-semibold text-works-primary border border-works-primary bg-transparent"
                   >
-                    {tag}
+                    <TermText>{tag}</TermText>
                   </span>
                 ))}
               </div>
               <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6 leading-tight">
-                {post.title}
+                <TermText>{post.title}</TermText>
               </h1>
               <p className="text-lg lg:text-xl text-white/70 leading-relaxed max-w-3xl">
-                {post.excerpt}
+                <TermText>{post.excerpt}</TermText>
               </p>
             </motion.div>
 
@@ -133,16 +134,16 @@ export default function BlogPost() {
               {post.author && (
                 <div className="flex items-center gap-2">
                   <User className="w-4 h-4" />
-                  <span>{post.author}</span>
+                  <span><TermText>{post.author}</TermText></span>
                 </div>
               )}
               <div className="flex items-center gap-2">
                 <Calendar className="w-4 h-4" />
-                <span>{post.date}</span>
+                <span><TermText>{post.date}</TermText></span>
               </div>
               <div className="flex items-center gap-2">
                 <Clock className="w-4 h-4" />
-                <span>{post.readingTime}</span>
+                <span><TermText>{post.readingTime}</TermText></span>
               </div>
             </div>
           </div>
@@ -168,15 +169,15 @@ export default function BlogPost() {
               <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
                 <div>
                   <span className="text-works-dark/50 text-sm font-semibold uppercase tracking-widest mb-2 block">
-                    {t("cta.nextPost")}
+                    <TermText>{t("cta.nextPost")}</TermText>
                   </span>
                   <h3 className="text-2xl lg:text-3xl font-bold text-works-dark">
-                    {nextPost.title}
+                    <TermText>{nextPost.title}</TermText>
                   </h3>
                 </div>
                 <PrimaryAction asChild className="group">
                   <Link href={buildLocalePath(locale, "blogPost", nextPost.slug)}>
-                    {t("cta.readMore")}
+                    <TermText>{t("cta.readMore")}</TermText>
                     <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
                   </Link>
                 </PrimaryAction>

@@ -1041,7 +1041,7 @@ export async function getCareerPage(locale?: string): Promise<CareerPageData> {
     workWithUs: { heading: string; description: string } | null;
     whyUs: {
       sectionHeading: string;
-      items: { title: string; description: string; image: StrapiMedia | null }[];
+      items: { title: string; description: string | null; image: StrapiMedia | null }[];
     } | null;
     seo?: StrapiSeo | null;
   }>>(appendLocale("/career-page?populate[0]=hero&populate[1]=hero.backgroundImage&populate[2]=workWithUs&populate[3]=whyUs&populate[4]=whyUs.items&populate[5]=whyUs.items.image&populate[6]=seo.ogImage", locale));
@@ -1060,7 +1060,7 @@ export async function getCareerPage(locale?: string): Promise<CareerPageData> {
       sectionHeading: d.whyUs?.sectionHeading || "",
       items: (d.whyUs?.items || []).map((item) => ({
         title: item.title,
-        description: item.description,
+        description: item.description ?? "",
         image: strapiImageUrl(item.image?.url),
         imageAlt: item.image?.alternativeText || "",
       })),

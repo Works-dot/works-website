@@ -12,7 +12,6 @@ export default {
     },
     "description": {
       "type": "text",
-      "required": true,
       "pluginOptions": { "i18n": { "localized": true } }
     },
     "image": {

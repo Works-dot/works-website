@@ -1,6 +1,12 @@
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import type { ContentBlock as ContentBlockType } from "@/lib/strapi";
+import { useI18n } from "@/i18n";
+import {
+  accessibleTermLabel,
+  terminologyRemarkPlugin,
+} from "@/lib/terminology";
+import { TermText } from "@/components/Terminology";
 
 const markdownClasses = [
   "prose prose-lg max-w-none mb-8",
@@ -24,18 +30,22 @@ const highlightMarkdownClasses = [
   "prose-a:text-works-primary prose-a:font-semibold prose-a:no-underline hover:prose-a:underline",
 ].join(" ");
 
-const remarkPlugins = [remarkGfm];
-
 /** Egységes markdown-megjelenítő — egy helyen konfigurálva. */
 export function Markdown({ className, children }: { className: string; children: string }) {
+  const { locale } = useI18n();
+
   return (
     <div className={className}>
-      <ReactMarkdown remarkPlugins={remarkPlugins}>{children}</ReactMarkdown>
+      <ReactMarkdown remarkPlugins={[remarkGfm, terminologyRemarkPlugin(locale)]}>
+        {children}
+      </ReactMarkdown>
     </div>
   );
 }
 
 export function ContentBlock({ block }: { block: ContentBlockType }) {
+  const { locale } = useI18n();
+
   if (block.type === "text") {
     return <Markdown className={markdownClasses}>{block.content}</Markdown>;
   }
@@ -49,19 +59,21 @@ export function ContentBlock({ block }: { block: ContentBlockType }) {
   }
 
   if (block.type === "image") {
+    const imageAlt = block.alt !== undefined ? block.alt : block.caption || "";
+
     return (
       <figure className="my-10">
         <div className="overflow-hidden bg-works-light">
           <img
             src={block.content}
-            alt={block.alt || block.caption || ""}
+            alt={accessibleTermLabel(imageAlt, locale)}
             loading="lazy"
             className="w-full h-auto object-cover"
           />
         </div>
         {block.caption && (
           <figcaption className="mt-3 text-sm text-works-dark/50 text-center">
-            {block.caption}
+            <TermText locale={locale}>{block.caption}</TermText>
           </figcaption>
         )}
       </figure>

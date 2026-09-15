@@ -453,7 +453,7 @@ async function fetchAll(locale) {
         sectionHeading: cd2?.whyUs?.sectionHeading || "",
         items: (cd2?.whyUs?.items || []).map((item) => ({
           title: item.title,
-          description: item.description,
+          description: item.description ?? "",
           image: strapiImageUrl(item.image?.url),
           imageAlt: item.image?.alternativeText || "",
         })),

@@ -14,9 +14,12 @@ import { fallbackContactPage, fallbackGlobalSettings, fallbackLegalDocuments } f
 import { useCookieConsent } from "@/lib/cookie-consent";
 import { useI18n } from "@/i18n";
 import { buildLocalePath } from "@/lib/i18n-routes";
+import { terminologyRemarkPlugin } from "@/lib/terminology";
 import { PrimaryAction } from "@/components/ui/button";
 import { sendContactMessage } from "@/hooks/use-contact";
 import { FullBleedHero } from "@/components/ui/FullBleedHero";
+import { TermText } from "@/components/Terminology";
+import { accessibleTermLabel } from "@/lib/terminology";
 import contactHeroImage from "@/assets/heroes/Hero_contact_1789027068383.png";
 import contactMobileHeroImage from "@/assets/heroes/Hero_contact_mobile_1789374396074.png";
 
@@ -260,10 +263,10 @@ export default function Contact() {
         <main className="flex-grow flex items-center justify-center px-6 text-center">
           <div className="max-w-lg">
             <h1 className="text-3xl md:text-4xl font-bold text-works-dark mb-4">
-              {t("states.errorHeading")}
+              <TermText>{t("states.errorHeading")}</TermText>
             </h1>
             <p className="text-works-dark/60 leading-relaxed">
-              {t("states.errorBody")}
+              <TermText>{t("states.errorBody")}</TermText>
             </p>
           </div>
         </main>
@@ -280,10 +283,10 @@ export default function Contact() {
       <main className="flex-grow">
         <FullBleedHero backgroundImage={contactHeroImage} mobileBackgroundImage={contactMobileHeroImage} showDecoration>
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
-            {heroHeading}
+            <TermText>{heroHeading}</TermText>
           </h1>
           <p className="text-lg lg:text-xl text-white leading-relaxed">
-            {heroDescription}
+            <TermText>{heroDescription}</TermText>
           </p>
         </FullBleedHero>
 
@@ -292,7 +295,7 @@ export default function Contact() {
             <div className="grid grid-cols-1 lg:grid-cols-5 gap-16 lg:gap-20 items-start">
               <motion.div {...fadeUp} className="lg:col-span-3">
                 <h2 className="text-3xl md:text-4xl font-bold text-works-dark mb-10">
-                  {formHeading}
+                  <TermText>{formHeading}</TermText>
                 </h2>
 
                 {submitted ? (
@@ -305,10 +308,10 @@ export default function Contact() {
                       <ArrowRight className="w-7 h-7 text-green-600" />
                     </div>
                     <h3 className="text-xl font-bold text-works-dark mb-2">
-                      {successTitle}
+                      <TermText>{successTitle}</TermText>
                     </h3>
                     <p className="text-works-dark/60">
-                      {successMessage}
+                      <TermText>{successMessage}</TermText>
                     </p>
                   </motion.div>
                 ) : (
@@ -319,7 +322,7 @@ export default function Contact() {
                           htmlFor="name"
                           className="block text-sm font-semibold text-works-dark mb-2"
                         >
-                          {t("contact.formNameLabel")}
+                          <TermText>{t("contact.formNameLabel")}</TermText>
                         </label>
                         <input
                           type="text"
@@ -338,7 +341,7 @@ export default function Contact() {
                           htmlFor="email"
                           className="block text-sm font-semibold text-works-dark mb-2"
                         >
-                          {t("contact.formEmailLabel")}
+                          <TermText>{t("contact.formEmailLabel")}</TermText>
                         </label>
                         <input
                           type="email"
@@ -359,7 +362,7 @@ export default function Contact() {
                         htmlFor="subject"
                         className="block text-sm font-semibold text-works-dark mb-2"
                       >
-                        {t("contact.formSubjectLabel")}
+                          <TermText>{t("contact.formSubjectLabel")}</TermText>
                       </label>
                       <select
                         id="subject"
@@ -370,13 +373,28 @@ export default function Contact() {
                         className={inputClass}
                         data-testid="contact-field-subject"
                       >
-                        <option value="">{t("contact.formSubjectPlaceholder")}</option>
+                        <option
+                          value=""
+                          aria-label={accessibleTermLabel(t("contact.formSubjectPlaceholder"), locale)}
+                        >
+                          {t("contact.formSubjectPlaceholder")}
+                        </option>
                         {formSubjects.length > 0
                           ? formSubjects.map((s) => (
-                              <option key={s.value} value={s.value}>{s.label}</option>
+                              <option
+                                key={s.value}
+                                value={s.value}
+                                aria-label={accessibleTermLabel(s.label, locale)}
+                              >
+                                {s.label}
+                              </option>
                             ))
                           : messages.contact.fallbackSubjects.map((subject) => (
-                              <option key={subject.value} value={subject.value}>
+                              <option
+                                key={subject.value}
+                                value={subject.value}
+                                aria-label={accessibleTermLabel(subject.label, locale)}
+                              >
                                 {subject.label}
                               </option>
                             ))
@@ -389,7 +407,7 @@ export default function Contact() {
                         htmlFor="message"
                         className="block text-sm font-semibold text-works-dark mb-2"
                       >
-                        {t("contact.formMessageLabel")}
+                          <TermText>{t("contact.formMessageLabel")}</TermText>
                       </label>
                       <textarea
                         id="message"
@@ -407,7 +425,7 @@ export default function Contact() {
                     {isCareerSubject && (
                       <div>
                         <label className="block text-sm font-semibold text-works-dark mb-2">
-                          {t("contact.cvUploadLabel")}
+                          <TermText>{t("contact.cvUploadLabel")}</TermText>
                         </label>
                         <input
                           ref={cvInputRef}
@@ -429,7 +447,7 @@ export default function Contact() {
                             <button
                               type="button"
                               onClick={clearCv}
-                              aria-label={t("contact.cvRemoveLabel")}
+                              aria-label={accessibleTermLabel(t("contact.cvRemoveLabel"), locale)}
                               className="text-works-dark/40 hover:text-works-dark transition-colors flex-shrink-0"
                             >
                               <X className="w-5 h-5" />
@@ -447,14 +465,14 @@ export default function Contact() {
                           >
                             <Upload className="w-6 h-6 text-works-primary" />
                             <span className="text-sm text-works-dark/70">
-                              {t("contact.cvUploadDragText")}{" "}
-                              <span className="text-works-primary font-semibold">{t("contact.cvUploadBrowse")}</span>
+                              <TermText>{t("contact.cvUploadDragText")}</TermText>{" "}
+                              <span className="text-works-primary font-semibold"><TermText>{t("contact.cvUploadBrowse")}</TermText></span>
                             </span>
-                            <span className="text-xs text-works-dark/40">{t("contact.cvUploadHint")}</span>
+                            <span className="text-xs text-works-dark/40"><TermText>{t("contact.cvUploadHint")}</TermText></span>
                           </label>
                         )}
                         {cvError && (
-                          <p className="mt-2 text-sm text-red-600">{cvError}</p>
+                          <p className="mt-2 text-sm text-red-600"><TermText>{cvError}</TermText></p>
                         )}
                       </div>
                     )}
@@ -477,7 +495,7 @@ export default function Contact() {
                             />
                             <span className="[&_p]:inline [&_a]:text-works-primary [&_a]:font-semibold [&_a]:underline hover:[&_a]:no-underline">
                               <ReactMarkdown
-                                remarkPlugins={[remarkGfm]}
+                                remarkPlugins={[remarkGfm, terminologyRemarkPlugin(locale)]}
                                 components={{
                                   a: ({ href, children }) => (
                                     <a href={href} target="_blank" rel="noopener noreferrer">
@@ -503,14 +521,14 @@ export default function Contact() {
                         className="mt-1 w-4 h-4 flex-shrink-0 accent-works-primary"
                       />
                       <span>
-                        {t("contact.privacyConsentText")}{" "}
+                        <TermText>{t("contact.privacyConsentText")}</TermText>{" "}
                         <a
                           href={privacyPdfUrl}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="text-works-primary font-semibold underline hover:no-underline"
                         >
-                          {t("contact.privacyConsentLinkLabel")}
+                          <TermText>{t("contact.privacyConsentLinkLabel")}</TermText>
                         </a>
                         .
                       </span>
@@ -523,12 +541,12 @@ export default function Contact() {
                       className="group"
                       data-testid="contact-submit"
                     >
-                      {submitting ? t("contact.submitting") : t("contact.submitButton")}
+                      <TermText>{submitting ? t("contact.submitting") : t("contact.submitButton")}</TermText>
                       <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
                     </PrimaryAction>
                     {submitError && (
                       <p role="alert" aria-live="assertive" className="text-sm text-red-600">
-                        {submitError}
+                        <TermText>{submitError}</TermText>
                       </p>
                     )}
                   </form>
@@ -540,7 +558,7 @@ export default function Contact() {
                 className="lg:col-span-2"
               >
                 <h2 className="text-3xl md:text-4xl font-bold text-works-dark mb-10">
-                  {t("contact.sectionContacts")}
+                  <TermText>{t("contact.sectionContacts")}</TermText>
                 </h2>
 
                 <div className="space-y-8">
@@ -549,7 +567,7 @@ export default function Contact() {
                       <MapPin className="w-5 h-5 text-works-primary" />
                     </div>
                     <p className="text-works-dark/60 leading-relaxed">
-                      {address}
+                      <TermText>{address}</TermText>
                     </p>
                   </div>}
 
@@ -579,10 +597,10 @@ export default function Contact() {
                 </div>
 
                 {openingHours.length > 0 && <div className="mt-12 p-6 bg-works-light">
-                  <h3 className="font-semibold text-works-dark mb-2">{t("contact.openingHoursHeading")}</h3>
+                  <h3 className="font-semibold text-works-dark mb-2"><TermText>{t("contact.openingHoursHeading")}</TermText></h3>
                   <div className="text-works-dark/60 text-sm leading-relaxed">
                     {openingHours.map((oh, i) => (
-                      <p key={i}>{oh.day}: {oh.hours}</p>
+                      <p key={i}><TermText>{oh.day}</TermText>: <TermText>{oh.hours}</TermText></p>
                     ))}
                   </div>
                 </div>}
@@ -595,7 +613,7 @@ export default function Contact() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-28">
             <motion.div {...fadeUp}>
               <h2 className="text-3xl md:text-4xl font-bold text-works-dark mb-10">
-                {mapHeading}
+                <TermText>{mapHeading}</TermText>
               </h2>
             </motion.div>
             <motion.div
@@ -611,14 +629,14 @@ export default function Contact() {
                   allowFullScreen
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"
-                  title={t("contact.mapTitle", { address })}
+                  title={accessibleTermLabel(t("contact.mapTitle", { address }), locale)}
                 />
               ) : (
                 // Kétkattintásos megoldás: a Google Térkép csak kifejezett
                 // hozzájárulás után töltődik be; addig tájékoztató felület látszik.
                 <div className="h-[450px] bg-works-dark/5 border border-works-dark/10 flex flex-col items-center justify-center text-center px-6 gap-4">
                   <p className="text-works-dark/60 max-w-md leading-relaxed">
-                    {t("contact.mapConsentText")}
+                    <TermText>{t("contact.mapConsentText")}</TermText>
                   </p>
                   <PrimaryAction
                     type="button"
@@ -626,7 +644,7 @@ export default function Contact() {
                     className="text-sm"
                     data-testid="button-load-map"
                   >
-                    {t("contact.mapLoadButton")}
+                    <TermText>{t("contact.mapLoadButton")}</TermText>
                   </PrimaryAction>
                 </div>
               )}

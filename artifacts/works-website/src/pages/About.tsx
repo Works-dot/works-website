@@ -10,6 +10,8 @@ import type { TeamMember, GalleryImage, AboutPageData } from "@/lib/strapi";
 import { fallbackTeamMembers, fallbackGalleryImages, fallbackAboutPage } from "@/data/fallback";
 import { useI18n } from "@/i18n";
 import { FullBleedHero } from "@/components/ui/FullBleedHero";
+import { TermText } from "@/components/Terminology";
+import { accessibleTermLabel } from "@/lib/terminology";
 import aboutHeroImage from "@/assets/heroes/Hero_about_1789027068380.png";
 import aboutMobileHeroImage from "@/assets/heroes/Hero_about_mobile_1789374396077.png";
 
@@ -59,10 +61,10 @@ export default function About() {
       <main className="flex-grow">
         <FullBleedHero backgroundImage={aboutHeroImage} mobileBackgroundImage={aboutMobileHeroImage} showDecoration>
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
-             {aboutPage?.hero?.heading || (locale === "hu" ? "Rólunk." : "")}
+             <TermText>{aboutPage?.hero?.heading || (locale === "hu" ? "Rólunk." : "")}</TermText>
           </h1>
           <p className="text-lg lg:text-xl text-white leading-relaxed">
-             {aboutPage?.hero?.description || (locale === "hu" ? "Egy magyar digitális ügynökség vagyunk, akik hisznek abban, hogy a jó design kutatáson alapul, és a technológia az embereket szolgálja." : "")}
+             <TermText>{aboutPage?.hero?.description || (locale === "hu" ? "Egy magyar digitális ügynökség vagyunk, akik hisznek abban, hogy a jó design kutatáson alapul, és a technológia az embereket szolgálja." : "")}</TermText>
           </p>
         </FullBleedHero>
 
@@ -70,13 +72,13 @@ export default function About() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <motion.div {...fadeUp} className="max-w-3xl">
               <h2 className="text-3xl md:text-4xl font-bold text-works-dark mb-10">
-                 {aboutPage?.intro?.heading || (locale === "hu" ? "Kik vagyunk?" : "")}
+                 <TermText>{aboutPage?.intro?.heading || (locale === "hu" ? "Kik vagyunk?" : "")}</TermText>
               </h2>
               <p className="text-lg text-works-dark/70 leading-relaxed mb-6">
-                 {aboutPage?.intro?.description || (locale === "hu" ? "A Works. 2018-ban indult azzal a céllal, hogy a magyar digitális piacra világszínvonalú UX kutatást és design megoldásokat hozzon. Azóta több mint 50 projekten dolgoztunk startupokkal, nagyvállalatokkal és közszféra szereplőkkel egyaránt." : "")}
+                 <TermText>{aboutPage?.intro?.description || (locale === "hu" ? "A Works. 2018-ban indult azzal a céllal, hogy a magyar digitális piacra világszínvonalú UX kutatást és design megoldásokat hozzon. Azóta több mint 50 projekten dolgoztunk startupokkal, nagyvállalatokkal és közszféra szereplőkkel egyaránt." : "")}</TermText>
               </p>
               {locale === "hu" && <p className="text-lg text-works-dark/70 leading-relaxed">
-                Hisszük, hogy a legjobb digitális termékek ott születnek, ahol az adatvezérelt kutatás találkozik a kreatív gondolkodással. Nem csak tervezünk — partnerként végigkísérjük ügyfeleinket az ötlettől a megvalósításig.
+                <TermText>Hisszük, hogy a legjobb digitális termékek ott születnek, ahol az adatvezérelt kutatás találkozik a kreatív gondolkodással. Nem csak tervezünk — partnerként végigkísérjük ügyfeleinket az ötlettől a megvalósításig.</TermText>
               </p>}
             </motion.div>
           </div>
@@ -86,7 +88,7 @@ export default function About() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <motion.div {...fadeUp}>
               <h2 className="text-3xl md:text-4xl font-bold text-works-dark mb-16">
-                 {t("pages.teamHeading")}
+                 <TermText>{t("pages.teamHeading")}</TermText>
               </h2>
             </motion.div>
 
@@ -114,7 +116,7 @@ export default function About() {
                       {member.image ? (
                         <img
                           src={member.image}
-                          alt={member.imageAlt || member.name}
+                          alt={accessibleTermLabel(member.imageAlt || member.name || "", locale)}
                           className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500"
                         />
                       ) : (
@@ -123,8 +125,8 @@ export default function About() {
                         </div>
                       )}
                     </div>
-                    <h3 className="font-bold text-works-dark text-sm">{member.name}</h3>
-                    <p className="text-sm text-works-dark/60">{member.title}</p>
+                    <h3 className="font-bold text-works-dark text-sm"><TermText>{member.name}</TermText></h3>
+                    <p className="text-sm text-works-dark/60"><TermText>{member.title}</TermText></p>
                   </motion.div>
                 ))}
               </div>
@@ -136,7 +138,7 @@ export default function About() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <motion.div {...fadeUp}>
               <h2 className="text-3xl md:text-4xl font-bold text-works-dark mb-16">
-                Works moments
+                <TermText>Works moments</TermText>
               </h2>
             </motion.div>
 
@@ -164,7 +166,7 @@ export default function About() {
                         <img
                           loading="lazy"
                           src={img.src}
-                          alt={img.alt}
+                          alt={accessibleTermLabel(img.alt || "", locale)}
                           className="w-full aspect-[4/3] object-cover hover:scale-105 transition-transform duration-500"
                         />
                       </div>
@@ -184,7 +186,7 @@ export default function About() {
                   <button
                     key={i}
                     type="button"
-                    aria-label={t("carousel.goToSlide", { index: i + 1 })}
+                    aria-label={accessibleTermLabel(t("carousel.goToSlide", { index: i + 1 }), locale)}
                     aria-current={i === gallerySelected ? "true" : undefined}
                     onClick={() => scrollGalleryTo(i)}
                     className={`h-2 rounded-full transition-all duration-300 ${

@@ -8,6 +8,7 @@ import { fallbackProjects, fallbackHomepage, bgGraphic2FallbackImg } from "@/dat
 import { useI18n } from "@/i18n";
 import { buildLocalePath } from "@/lib/i18n-routes";
 import { ArrowLinkLabel } from "@/components/ui/arrow-link-label";
+import { TermText } from "@/components/Terminology";
 
 export function Projects() {
   const { locale, t } = useI18n();
@@ -42,11 +43,11 @@ export function Projects() {
         <div className="mb-10 md:mb-20 flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-works-muted/50 pb-6 md:pb-8">
           <div>
             <h2 className="text-4xl md:text-5xl font-bold text-works-dark tracking-tight">
-              {homepage?.projectsSection?.heading || t("sections.featuredProjectsHeading")}
+              <TermText>{homepage?.projectsSection?.heading || t("sections.featuredProjectsHeading")}</TermText>
             </h2>
           </div>
           <Link href={buildLocalePath(locale, "projects")} className="group w-fit">
-            <ArrowLinkLabel>{t("sections.allProjects")}</ArrowLinkLabel>
+            <ArrowLinkLabel><TermText>{t("sections.allProjects")}</TermText></ArrowLinkLabel>
           </Link>
         </div>
 

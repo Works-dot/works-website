@@ -1,7 +1,6 @@
-import { useRef } from "react";
 import { Link } from "wouter";
 import { motion } from "framer-motion";
-import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import SEOHead from "@/components/SEOHead";
@@ -12,6 +11,8 @@ import { fallbackPositions, fallbackCareerPage } from "@/data/fallback";
 import { useI18n } from "@/i18n";
 import { buildLocalePath } from "@/lib/i18n-routes";
 import { FullBleedHero } from "@/components/ui/FullBleedHero";
+import { TermText } from "@/components/Terminology";
+import { CareerValues } from "@/components/sections/CareerValues";
 import careerHeroImage from "@/assets/heroes/Hero_career_1789027068381.png";
 import careerMobileHeroImage from "@/assets/heroes/Hero_career_mobile_1789374396078.png";
 
@@ -24,22 +25,11 @@ const fadeUp = {
 
 export default function Karrier() {
   const { locale, t } = useI18n();
-  const scrollRef = useRef<HTMLDivElement>(null);
   const { data: positions, loading: posLoading, error: posError } = useStrapiQuery<CareerPosition[]>("careerPositions", () => getCareerPositions(locale), fallbackPositions, locale);
   const { data: careerPage } = useStrapiQuery<CareerPageData>("careerPage", () => getCareerPage(locale), fallbackCareerPage, locale);
 
   const workWithUs = careerPage?.workWithUs;
   const whyUs = careerPage?.whyUs;
-
-  const scroll = (direction: "left" | "right") => {
-    if (!scrollRef.current) return;
-    const cardWidth = scrollRef.current.querySelector("div")?.offsetWidth || 400;
-    const scrollAmount = cardWidth + 24;
-    scrollRef.current.scrollBy({
-      left: direction === "left" ? -scrollAmount : scrollAmount,
-      behavior: "smooth",
-    });
-  };
 
   return (
     <div className="min-h-screen bg-works-bg flex flex-col selection:bg-works-primary selection:text-white">
@@ -49,10 +39,10 @@ export default function Karrier() {
       <main className="flex-grow">
         <FullBleedHero backgroundImage={careerHeroImage} mobileBackgroundImage={careerMobileHeroImage} showDecoration>
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
-            {careerPage?.hero?.heading || t("pages.karrierHeading")}
+            <TermText>{careerPage?.hero?.heading || t("pages.karrierHeading")}</TermText>
           </h1>
           <p className="text-lg lg:text-xl text-white leading-relaxed">
-            {careerPage?.hero?.description || (locale === "hu" ? "Csatlakozz egy csapathoz, ahol a design kutatáson alapul, a technológia az embereket szolgálja, és minden nap tanulhatsz valami újat." : "")}
+            <TermText>{careerPage?.hero?.description || (locale === "hu" ? "Csatlakozz egy csapathoz, ahol a design kutatáson alapul, a technológia az embereket szolgálja, és minden nap tanulhatsz valami újat." : "")}</TermText>
           </p>
         </FullBleedHero>
 
@@ -60,11 +50,11 @@ export default function Karrier() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <motion.div {...fadeUp}>
               <h2 className="text-4xl md:text-5xl font-bold text-works-dark tracking-tight mb-6">
-                {workWithUs?.heading || (locale === "hu" ? "Dolgozz velünk" : "")}
+                <TermText>{workWithUs?.heading || (locale === "hu" ? "Dolgozz velünk" : "")}</TermText>
               </h2>
               {(workWithUs?.description || "").split("\n\n").map((paragraph, i) => (
                 <p key={i} className="text-lg text-works-dark/70 leading-relaxed mb-4">
-                  {paragraph}
+                  <TermText>{paragraph}</TermText>
                 </p>
               ))}
             </motion.div>
@@ -75,14 +65,14 @@ export default function Karrier() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <motion.div {...fadeUp}>
               <h2 className="text-4xl md:text-5xl font-bold text-works-dark tracking-tight mb-16">
-                {t("pages.openPositionsHeading")}
+                <TermText>{t("pages.openPositionsHeading")}</TermText>
               </h2>
             </motion.div>
 
             {posError ? (
               <div className="text-center py-16">
-                <p className="text-xl font-semibold text-works-dark mb-2">{t("states.errorHeading")}</p>
-                <p className="text-works-dark/60">{t("states.errorBody")}</p>
+                <p className="text-xl font-semibold text-works-dark mb-2"><TermText>{t("states.errorHeading")}</TermText></p>
+                <p className="text-works-dark/60"><TermText>{t("states.errorBody")}</TermText></p>
               </div>
             ) : posLoading ? (
               <div className="divide-y divide-works-dark/10">
@@ -107,7 +97,7 @@ export default function Karrier() {
                       className="flex items-center justify-between py-6 lg:py-8 px-1 group"
                     >
                       <h3 className="text-xl lg:text-2xl font-bold text-works-dark group-hover:text-works-primary transition-colors">
-                        {position.title}
+                        <TermText>{position.title}</TermText>
                       </h3>
                       <ArrowRight className="w-5 h-5 text-works-primary flex-shrink-0 ml-4 transition-transform group-hover:translate-x-1" />
                     </Link>
@@ -118,78 +108,7 @@ export default function Karrier() {
           </div>
         </section>
 
-        <section className="py-20 lg:py-28 bg-works-bg overflow-hidden">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <motion.div {...fadeUp} className="flex items-end justify-between mb-12">
-              <h2 className="text-4xl md:text-5xl font-bold text-works-dark tracking-tight">
-                {whyUs?.sectionHeading || (locale === "hu" ? "Miért jó nálunk dolgozni?" : "")}
-              </h2>
-              <div className="hidden md:flex gap-2">
-                <button
-                  onClick={() => scroll("left")}
-                  className="w-12 h-12 flex items-center justify-center border border-works-dark/10 hover:border-works-primary hover:text-works-primary transition-colors"
-                  aria-label={t("karrier.prevSlide")}
-                  data-testid="karrier-prev-slide"
-                >
-                  <ChevronLeft className="w-5 h-5" />
-                </button>
-                <button
-                  onClick={() => scroll("right")}
-                  className="w-12 h-12 flex items-center justify-center border border-works-dark/10 hover:border-works-primary hover:text-works-primary transition-colors"
-                  aria-label={t("karrier.nextSlide")}
-                  data-testid="karrier-next-slide"
-                >
-                  <ChevronRight className="w-5 h-5" />
-                </button>
-              </div>
-            </motion.div>
-          </div>
-
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true, margin: "-50px" }}
-            transition={{ duration: 0.6 }}
-          >
-            <div
-              ref={scrollRef}
-              className="flex gap-6 overflow-x-auto scrollbar-hide snap-x snap-mandatory"
-              style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
-            >
-              {(whyUs?.items || []).map((card, i) => (
-                <div
-                  key={i}
-                  className={`flex-shrink-0 w-[calc(100vw-3rem)] sm:w-[calc(50vw-2rem)] lg:w-[calc(33.333vw-2rem)] snap-start${i === 0 ? " ml-4 sm:ml-6 lg:ml-8" : ""}`}
-                >
-                  <div className="bg-white border border-works-dark/5 overflow-hidden h-full">
-                    <div className="aspect-[16/10] overflow-hidden bg-works-muted/20">
-                      {card.image ? (
-                        <img
-                          loading="lazy"
-                          src={card.image}
-                          alt={card.imageAlt || card.title}
-                          className="w-full h-full object-cover"
-                        />
-                      ) : (
-                        <div className="w-full h-full flex items-center justify-center text-works-dark/10">
-                          <svg className="w-12 h-12" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
-                        </div>
-                      )}
-                    </div>
-                    <div className="p-6 lg:p-8">
-                      <h3 className="text-xl font-bold text-works-dark mb-3">
-                        {card.title}
-                      </h3>
-                      <p className="text-works-dark/60 leading-relaxed">
-                        {card.description}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </motion.div>
-        </section>
+        <CareerValues values={whyUs} />
       </main>
 
       <Footer />

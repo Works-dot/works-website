@@ -10,6 +10,7 @@ import type { LegalDocuments } from "@/lib/strapi";
 import { fallbackLegalDocuments } from "@/data/fallback";
 import { useI18n } from "@/i18n";
 import { buildLocalePath } from "@/lib/i18n-routes";
+import { TermText } from "@/components/Terminology";
 
 // A régi /sutik cím megmarad a sütisáv és más hivatkozások számára, de ha a
 // hivatalos PDF elérhető, automatikusan arra irányítunk. A korábbi rövid
@@ -40,65 +41,65 @@ export default function Sutik() {
         <section className="pt-28 lg:pt-36 pb-20 lg:pb-28 bg-white">
           <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
             <h1 className="text-3xl md:text-4xl font-bold text-works-dark mb-8 leading-tight">
-              {t("cookiePage.pageHeading")}
+              <TermText>{t("cookiePage.pageHeading")}</TermText>
             </h1>
 
             <div className="space-y-6 text-works-dark/70 leading-relaxed">
-              <p>{t("cookiePage.introBody")}</p>
+              <p><TermText>{t("cookiePage.introBody")}</TermText></p>
 
               <h2 className="text-xl font-bold text-works-dark pt-4">
-                {t("cookiePage.sectionEssential")}
+                <TermText>{t("cookiePage.sectionEssential")}</TermText>
               </h2>
               <p>
-                {t("cookiePage.essentialBodyBeforeStorageKey")}{" "}
+                <TermText>{t("cookiePage.essentialBodyBeforeStorageKey")}</TermText>{" "}
                 <code>works-cookie-consent</code>{" "}
-                {t("cookiePage.essentialBodyAfterStorageKey")}
+                <TermText>{t("cookiePage.essentialBodyAfterStorageKey")}</TermText>
               </p>
 
               <h2 className="text-xl font-bold text-works-dark pt-4">
-                {t("cookiePage.sectionThirdParty")}
+                <TermText>{t("cookiePage.sectionThirdParty")}</TermText>
               </h2>
               <p>
-                {t("cookiePage.thirdPartyBody")}{" "}
-                {t("cookiePage.thirdPartyPolicyLeadIn")}{" "}
+                <TermText>{t("cookiePage.thirdPartyBody")}</TermText>{" "}
+                <TermText>{t("cookiePage.thirdPartyPolicyLeadIn")}</TermText>{" "}
                 <a
                   href="https://policies.google.com/privacy"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-works-primary font-semibold underline hover:no-underline"
                 >
-                  {t("cookiePage.googlePolicyLinkLabel")}
+                  <TermText>{t("cookiePage.googlePolicyLinkLabel")}</TermText>
                 </a>
                 .
               </p>
 
               <h2 className="text-xl font-bold text-works-dark pt-4">
-                {t("cookiePage.sectionFonts")}
+                <TermText>{t("cookiePage.sectionFonts")}</TermText>
               </h2>
-              <p>{t("cookiePage.fontsBody")}</p>
+              <p><TermText>{t("cookiePage.fontsBody")}</TermText></p>
 
               <h2 className="text-xl font-bold text-works-dark pt-4">
-                {t("cookiePage.sectionModify")}
+                <TermText>{t("cookiePage.sectionModify")}</TermText>
               </h2>
-              <p>{t("cookiePage.modifyBody")}</p>
+              <p><TermText>{t("cookiePage.modifyBody")}</TermText></p>
               <PrimaryAction
                 type="button"
                 onClick={openSettings}
                 className="text-sm"
                 data-testid="button-open-cookie-settings"
               >
-                {t("cookiePage.openSettingsButton")}
+                <TermText>{t("cookiePage.openSettingsButton")}</TermText>
               </PrimaryAction>
 
               <p className="pt-4">
-                {t("cookiePage.privacyBodyLeadIn")}{" "}
+                <TermText>{t("cookiePage.privacyBodyLeadIn")}</TermText>{" "}
                 <a
                   href={buildLocalePath(locale, "privacy")}
                   className="text-works-primary font-semibold underline hover:no-underline"
                 >
-                  {t("cookiePage.privacyPageLinkLabel")}
+                  <TermText>{t("cookiePage.privacyPageLinkLabel")}</TermText>
                 </a>
-                {t("cookiePage.privacyBodyTrailingText")}
+                <TermText>{t("cookiePage.privacyBodyTrailingText")}</TermText>
               </p>
             </div>
           </div>

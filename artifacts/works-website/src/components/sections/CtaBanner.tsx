@@ -7,6 +7,7 @@ import type { HomepageData } from "@/lib/strapi";
 import { fallbackHomepage } from "@/data/fallback";
 import { useI18n } from "@/i18n";
 import { buildLocalePath, localizeInternalPath } from "@/lib/i18n-routes";
+import { TermText } from "@/components/Terminology";
 
 const DEFAULT_HEADING =
   "A designer feladata nem csupán szép felületek tervezése — hanem valódi problémák megoldása.";
@@ -28,7 +29,7 @@ export function CtaBannerView({
 
   const buttonContent = (
     <>
-      {ctaText}
+      <TermText>{ctaText}</TermText>
       <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
     </>
   );
@@ -46,7 +47,7 @@ export function CtaBannerView({
           className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8 lg:gap-16"
         >
           <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white leading-tight max-w-2xl">
-            {heading}
+            <TermText>{heading}</TermText>
           </h2>
           {isInternal ? (
             <Link href={localizedCtaLink} className={buttonClassName}>

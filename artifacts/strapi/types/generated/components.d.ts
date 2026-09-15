@@ -32,7 +32,6 @@ export interface CareerWhyUsItem extends Struct.ComponentSchema {
   };
   attributes: {
     description: Schema.Attribute.Text &
-      Schema.Attribute.Required &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
           localized: true;

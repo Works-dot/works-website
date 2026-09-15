@@ -13,6 +13,7 @@ import { fallbackPositions, heroBackgroundFallbackImg } from "@/data/fallback";
 import { useI18n } from "@/i18n";
 import { buildLocalePath } from "@/lib/i18n-routes";
 import { PrimaryAction } from "@/components/ui/button";
+import { TermText } from "@/components/Terminology";
 
 export default function CareerDetail() {
   const { locale, t } = useI18n();
@@ -38,7 +39,7 @@ export default function CareerDetail() {
       <div className="min-h-screen bg-works-bg flex flex-col selection:bg-works-primary selection:text-white">
         <Header />
         <main className="flex-grow pt-28 lg:pt-32 flex items-center justify-center">
-          <div className="animate-pulse text-works-dark/30 text-lg">{t("states.loading")}</div>
+            <div className="animate-pulse text-works-dark/30 text-lg"><TermText>{t("states.loading")}</TermText></div>
         </main>
         <Footer />
       </div>
@@ -51,9 +52,9 @@ export default function CareerDetail() {
         <Header />
         <main className="flex-grow pt-28 lg:pt-32 flex items-center justify-center">
           <div className="text-center">
-            <h1 className="text-3xl font-bold text-works-dark mb-4">{t("states.errorHeading")}</h1>
-            <p className="text-works-dark/60 mb-6">{t("states.errorBody")}</p>
-            <Link href={buildLocalePath(locale, "careers")} className="text-works-primary font-semibold hover:underline">{t("cta.backToCareers")}</Link>
+            <h1 className="text-3xl font-bold text-works-dark mb-4"><TermText>{t("states.errorHeading")}</TermText></h1>
+            <p className="text-works-dark/60 mb-6"><TermText>{t("states.errorBody")}</TermText></p>
+            <Link href={buildLocalePath(locale, "careers")} className="text-works-primary font-semibold hover:underline"><TermText>{t("cta.backToCareers")}</TermText></Link>
           </div>
         </main>
         <Footer />
@@ -67,9 +68,9 @@ export default function CareerDetail() {
         <Header />
         <main className="flex-grow pt-28 lg:pt-32 flex items-center justify-center">
           <div className="text-center">
-            <h1 className="text-3xl font-bold text-works-dark mb-4">{t("states.notFoundPosition")}</h1>
+            <h1 className="text-3xl font-bold text-works-dark mb-4"><TermText>{t("states.notFoundPosition")}</TermText></h1>
             <Link href={buildLocalePath(locale, "careers")} className="text-works-primary font-semibold hover:underline">
-              {t("cta.backToCareers")}
+              <TermText>{t("cta.backToCareers")}</TermText>
             </Link>
           </div>
         </main>
@@ -103,7 +104,7 @@ export default function CareerDetail() {
               className="inline-flex items-center gap-2 text-white/70 hover:text-white font-semibold mb-8 transition-colors"
             >
               <ArrowLeft className="w-4 h-4" />
-              {t("cta.backToCareers")}
+              <TermText>{t("cta.backToCareers")}</TermText>
             </Link>
 
             <motion.div
@@ -117,30 +118,30 @@ export default function CareerDetail() {
                     key={tag}
                     className="px-3 py-1 text-sm font-semibold text-works-primary border border-works-primary bg-transparent"
                   >
-                    {tag}
+                    <TermText>{tag}</TermText>
                   </span>
                 ))}
               </div>
               <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6 leading-tight">
-                {position.title}
+                <TermText>{position.title}</TermText>
               </h1>
               <p className="text-lg lg:text-xl text-white/70 leading-relaxed max-w-3xl">
-                {position.excerpt}
+                <TermText>{position.excerpt}</TermText>
               </p>
             </motion.div>
 
             <div className="mt-10 flex flex-wrap gap-8 text-white/60 text-sm">
               <div className="flex items-center gap-2">
                 <Users className="w-4 h-4" />
-                <span>{position.team}</span>
+                <span><TermText>{position.team}</TermText></span>
               </div>
               <div className="flex items-center gap-2">
                 <MapPin className="w-4 h-4" />
-                <span>{position.location}</span>
+                <span><TermText>{position.location}</TermText></span>
               </div>
               <div className="flex items-center gap-2">
                 <Briefcase className="w-4 h-4" />
-                <span>{position.type}</span>
+                <span><TermText>{position.type}</TermText></span>
               </div>
             </div>
           </div>
@@ -166,15 +167,15 @@ export default function CareerDetail() {
               <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
                 <div>
                   <span className="text-works-dark/50 text-sm font-semibold uppercase tracking-widest mb-2 block">
-                    {t("cta.nextPosition")}
+                    <TermText>{t("cta.nextPosition")}</TermText>
                   </span>
                   <h3 className="text-2xl lg:text-3xl font-bold text-works-dark">
-                    {nextPos.title}
+                    <TermText>{nextPos.title}</TermText>
                   </h3>
                 </div>
                 <PrimaryAction asChild className="group">
                   <Link href={buildLocalePath(locale, "careerDetail", nextPos.slug)}>
-                    {t("cta.viewProject")}
+                    <TermText>{t("cta.viewProject")}</TermText>
                     <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
                   </Link>
                 </PrimaryAction>

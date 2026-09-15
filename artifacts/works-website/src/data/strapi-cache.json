@@ -4433,20 +4433,26 @@
           {
             "title": "Empátia",
             "description": "Hiszünk abban, hogy a megértés képes hidat építeni emberek, márkák és technológiák között.",
-            "image": "/strapi/uploads/Works_ertekeink_Empatia_1180x738_2b684c48ab.png",
-            "imageAlt": ""
+            "image": "/strapi/uploads/empatia_1789464581345_fefbb234aa.png",
+            "imageAlt": "Empátia"
           },
           {
             "title": "Alkalmazkodás",
             "description": "Hiszünk abban, hogy a tartós érték nem a változatlanságból, hanem a megújulás képességéből születik.",
-            "image": "/strapi/uploads/Works_ertekeink_Alkalmazkodas_1180x738_69a82495ed.png",
-            "imageAlt": ""
+            "image": "/strapi/uploads/alkalmazkodas_1789464581344_34ebdd02d9.png",
+            "imageAlt": "Alkalmazkodás"
           },
           {
             "title": "Együttműködés",
             "description": "Hiszünk abban, hogy az együttműködés képes összekapcsolni tudást, tapasztalatot és emberi energiákat.",
-            "image": "/strapi/uploads/Works_ertekeink_Egyuttmukodes_1180x738_1208be8f24.png",
-            "imageAlt": ""
+            "image": "/strapi/uploads/egyuttmukodes_1789464581343_653509f787.png",
+            "imageAlt": "Együttműködés"
+          },
+          {
+            "title": "Céltudatosság",
+            "description": "",
+            "image": "/strapi/uploads/celtudatossag_1789464581344_7e00458d37.png",
+            "imageAlt": "Céltudatosság"
           }
         ]
       },
@@ -8842,20 +8848,26 @@
           {
             "title": "Empathy",
             "description": "We believe that understanding can build bridges between people, brands and technology.",
-            "image": "/strapi/uploads/Works_ertekeink_Empatia_1180x738_2b684c48ab.png",
-            "imageAlt": ""
+            "image": "/strapi/uploads/empatia_1789464581345_fefbb234aa.png",
+            "imageAlt": "Empátia"
           },
           {
             "title": "Adaptability",
             "description": "We believe that lasting value comes not from standing still, but from the ability to adapt and renew.",
-            "image": "/strapi/uploads/Works_ertekeink_Alkalmazkodas_1180x738_69a82495ed.png",
-            "imageAlt": ""
+            "image": "/strapi/uploads/alkalmazkodas_1789464581344_34ebdd02d9.png",
+            "imageAlt": "Alkalmazkodás"
           },
           {
             "title": "Collaboration",
             "description": "We believe that collaboration can bring together knowledge, experience and human energy.",
-            "image": "/strapi/uploads/Works_ertekeink_Egyuttmukodes_1180x738_1208be8f24.png",
-            "imageAlt": ""
+            "image": "/strapi/uploads/egyuttmukodes_1789464581343_653509f787.png",
+            "imageAlt": "Együttműködés"
+          },
+          {
+            "title": "Purposefulness",
+            "description": "",
+            "image": "/strapi/uploads/celtudatossag_1789464581344_7e00458d37.png",
+            "imageAlt": "Céltudatosság"
           }
         ]
       },

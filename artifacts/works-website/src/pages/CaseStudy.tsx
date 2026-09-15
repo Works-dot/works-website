@@ -13,6 +13,7 @@ import { fallbackProjects, heroBackgroundFallbackImg } from "@/data/fallback";
 import { useI18n } from "@/i18n";
 import { buildLocalePath } from "@/lib/i18n-routes";
 import { PrimaryAction } from "@/components/ui/button";
+import { TermText } from "@/components/Terminology";
 
 export default function CaseStudy() {
   const { locale, t } = useI18n();
@@ -35,7 +36,7 @@ export default function CaseStudy() {
         <SEOHead />
         <Header />
         <main className="flex-grow pt-28 lg:pt-32 flex items-center justify-center">
-          <div className="animate-pulse text-works-dark/30 text-lg">{t("states.loading")}</div>
+            <div className="animate-pulse text-works-dark/30 text-lg"><TermText>{t("states.loading")}</TermText></div>
         </main>
         <Footer />
       </div>
@@ -49,9 +50,9 @@ export default function CaseStudy() {
         <Header />
         <main className="flex-grow pt-28 lg:pt-32 flex items-center justify-center">
           <div className="text-center">
-            <h1 className="text-3xl font-bold text-works-dark mb-4">{t("states.errorHeading")}</h1>
-            <p className="text-works-dark/60 mb-6">{t("states.errorBody")}</p>
-            <Link href={buildLocalePath(locale, "projects")} className="text-works-primary font-semibold hover:underline">{t("cta.backToProjects")}</Link>
+            <h1 className="text-3xl font-bold text-works-dark mb-4"><TermText>{t("states.errorHeading")}</TermText></h1>
+            <p className="text-works-dark/60 mb-6"><TermText>{t("states.errorBody")}</TermText></p>
+            <Link href={buildLocalePath(locale, "projects")} className="text-works-primary font-semibold hover:underline"><TermText>{t("cta.backToProjects")}</TermText></Link>
           </div>
         </main>
         <Footer />
@@ -66,9 +67,9 @@ export default function CaseStudy() {
         <Header />
         <main className="flex-grow pt-28 lg:pt-32 flex items-center justify-center">
           <div className="text-center">
-            <h1 className="text-3xl font-bold text-works-dark mb-4">{t("states.notFoundProject")}</h1>
+            <h1 className="text-3xl font-bold text-works-dark mb-4"><TermText>{t("states.notFoundProject")}</TermText></h1>
             <Link href={buildLocalePath(locale, "projects")} className="text-works-primary font-semibold hover:underline">
-              {t("cta.backToProjects")}
+              <TermText>{t("cta.backToProjects")}</TermText>
             </Link>
           </div>
         </main>
@@ -102,7 +103,7 @@ export default function CaseStudy() {
               className="inline-flex items-center gap-2 text-white/70 hover:text-white font-semibold mb-8 transition-colors"
             >
               <ArrowLeft className="w-4 h-4" />
-              {t("cta.backToProjects")}
+              <TermText>{t("cta.backToProjects")}</TermText>
             </Link>
 
             <motion.div
@@ -116,30 +117,30 @@ export default function CaseStudy() {
                     key={tag}
                     className="px-3 py-1 text-sm font-semibold text-white border border-white bg-transparent"
                   >
-                    {tag}
+                    <TermText>{tag}</TermText>
                   </span>
                 ))}
               </div>
               <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6 leading-tight">
-                {project.title}
+                <TermText>{project.title}</TermText>
               </h1>
               <p className="text-lg lg:text-xl text-white/70 leading-relaxed max-w-3xl">
-                {project.caseStudy.heroSubtitle}
+                <TermText>{project.caseStudy.heroSubtitle}</TermText>
               </p>
             </motion.div>
 
             <div className="mt-10 flex flex-wrap gap-8 text-white/60 text-sm">
               <div className="flex items-center gap-2">
                 <Building2 className="w-4 h-4" />
-                <span>{t("states.clientLabel", { client: project.caseStudy.client })}</span>
+                <span><TermText>{t("states.clientLabel", { client: project.caseStudy.client })}</TermText></span>
               </div>
               <div className="flex items-center gap-2">
                 <Calendar className="w-4 h-4" />
-                <span>{project.caseStudy.year}</span>
+                <span><TermText>{project.caseStudy.year}</TermText></span>
               </div>
               <div className="flex items-center gap-2">
                 <Clock className="w-4 h-4" />
-                <span>{project.caseStudy.duration}</span>
+                <span><TermText>{project.caseStudy.duration}</TermText></span>
               </div>
             </div>
           </div>
@@ -165,15 +166,15 @@ export default function CaseStudy() {
               <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
                 <div>
                   <span className="text-works-dark/50 text-sm font-semibold uppercase tracking-widest mb-2 block">
-                    {t("cta.nextProject")}
+                    <TermText>{t("cta.nextProject")}</TermText>
                   </span>
                   <h3 className="text-2xl lg:text-3xl font-bold text-works-dark">
-                    {nextProject.title}
+                    <TermText>{nextProject.title}</TermText>
                   </h3>
                 </div>
                 <PrimaryAction asChild className="group">
                   <Link href={buildLocalePath(locale, "projectDetail", nextProject.slug)}>
-                    {t("cta.viewProject")}
+                    <TermText>{t("cta.viewProject")}</TermText>
                     <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
                   </Link>
                 </PrimaryAction>
