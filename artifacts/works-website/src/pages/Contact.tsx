@@ -5,7 +5,7 @@ import remarkGfm from "remark-gfm";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { useRef } from "react";
-import { MapPin, Mail, Phone, ArrowRight, Upload, X, FileText } from "lucide-react";
+import { MapPin, Mail, Phone, ArrowRight, Upload, X, FileText, ChevronDown } from "lucide-react";
 import SEOHead from "@/components/SEOHead";
 import { useStrapiQuery } from "@/hooks/useStrapiQuery";
 import { getContactPage, getGlobalSettings, getLegalDocuments, uploadCv, CV_MAX_SIZE_BYTES, CV_ACCEPT, CV_ALLOWED_EXTENSIONS } from "@/lib/strapi";
@@ -31,7 +31,7 @@ const fadeUp = {
 };
 
 const inputClass =
-  "w-full px-5 py-4 border border-works-dark/10 bg-white text-works-dark placeholder:text-works-dark/30 focus:outline-none focus:ring-2 focus:ring-works-primary/30 focus:border-works-primary transition-colors";
+  "w-full px-5 py-4 border border-works-dark/10 bg-white text-works-dark placeholder:text-works-dark/70 placeholder:opacity-100 focus:outline-none focus:ring-2 focus:ring-works-primary/30 focus:border-works-primary transition-colors";
 
 // A Google Maps csak a speciális beágyazó (embed) linket engedi <iframe>-be.
 // Ez a függvény a leggyakoribb, adminban beragasztott link-formákat alakítja
@@ -364,13 +364,14 @@ export default function Contact() {
                       >
                           <TermText>{t("contact.formSubjectLabel")}</TermText>
                       </label>
+                      <div className="relative">
                       <select
                         id="subject"
                         name="subject"
                         required
                         value={formData.subject}
                         onChange={handleChange}
-                        className={inputClass}
+                        className={`${inputClass} appearance-none pr-12`}
                         data-testid="contact-field-subject"
                       >
                         <option
@@ -400,6 +401,12 @@ export default function Contact() {
                             ))
                         }
                       </select>
+                      <ChevronDown
+                        aria-hidden="true"
+                        focusable="false"
+                        className="pointer-events-none absolute right-5 top-1/2 h-4 w-4 -translate-y-1/2 text-works-dark"
+                      />
+                      </div>
                     </div>
 
                     <div>
@@ -598,7 +605,7 @@ export default function Contact() {
 
                 {openingHours.length > 0 && <div className="mt-12 p-6 bg-works-light">
                   <h3 className="font-semibold text-works-dark mb-2"><TermText>{t("contact.openingHoursHeading")}</TermText></h3>
-                  <div className="text-works-dark/60 text-sm leading-relaxed">
+                  <div className="text-works-dark/70 text-sm leading-relaxed">
                     {openingHours.map((oh, i) => (
                       <p key={i}><TermText>{oh.day}</TermText>: <TermText>{oh.hours}</TermText></p>
                     ))}

@@ -7,19 +7,127 @@ import { cn } from "@/lib/utils"
 
 const ToastProvider = ToastPrimitives.Provider
 
+const DEFAULT_VIEWPORT_HOTKEY = ["F8"]
+const DEFAULT_VIEWPORT_LABEL = "Notifications ({hotkey})"
+
+type ToastViewportProps = React.ComponentPropsWithoutRef<
+  typeof ToastPrimitives.Viewport
+> & {
+  /**
+   * Whether a toast is currently open.
+   *
+   * Radix keeps the viewport mounted so that its portal target is available.
+   * The wrapper uses this state to keep the otherwise empty region out of the
+   * accessibility tree. It deliberately remains mounted while a toast is
+   * retained in the hook state, so reopening that toast still has a portal.
+   */
+  active?: boolean
+}
+
 const ToastViewport = React.forwardRef<
   React.ElementRef<typeof ToastPrimitives.Viewport>,
-  React.ComponentPropsWithoutRef<typeof ToastPrimitives.Viewport>
->(({ className, ...props }, ref) => (
-  <ToastPrimitives.Viewport
-    ref={ref}
-    className={cn(
-      "fixed top-0 z-[100] flex max-h-screen w-full flex-col-reverse p-4 sm:bottom-0 sm:right-0 sm:top-auto sm:flex-col md:max-w-[420px]",
-      className
-    )}
-    {...props}
-  />
-))
+  ToastViewportProps
+>(({ active = true, className, hotkey = DEFAULT_VIEWPORT_HOTKEY, label = DEFAULT_VIEWPORT_LABEL, ...props }, forwardedRef) => {
+  const containerRef = React.useRef<HTMLDivElement>(null)
+  const viewportRef = React.useRef<
+    React.ElementRef<typeof ToastPrimitives.Viewport>
+  >(null)
+  const [focusWithin, setFocusWithin] = React.useState(false)
+
+  const setViewportRef = React.useCallback(
+    (node: React.ElementRef<typeof ToastPrimitives.Viewport> | null) => {
+      viewportRef.current = node
+      if (typeof forwardedRef === "function") {
+        forwardedRef(node)
+      } else if (forwardedRef) {
+        forwardedRef.current = node
+      }
+    },
+    [forwardedRef]
+  )
+
+  React.useEffect(() => {
+    const container = containerRef.current
+    if (!container) return
+
+    const syncFocusWithin = () => {
+      const nextFocusWithin = container.contains(document.activeElement)
+      setFocusWithin((current) =>
+        current === nextFocusWithin ? current : nextFocusWithin
+      )
+    }
+
+    const observer =
+      typeof MutationObserver === "undefined"
+        ? null
+        : new MutationObserver(syncFocusWithin)
+    observer?.observe(container, { childList: true, subtree: true })
+    document.addEventListener("focusin", syncFocusWithin, true)
+    document.addEventListener("focusout", syncFocusWithin, true)
+    syncFocusWithin()
+
+    return () => {
+      observer?.disconnect()
+      document.removeEventListener("focusin", syncFocusWithin, true)
+      document.removeEventListener("focusout", syncFocusWithin, true)
+    }
+  }, [])
+
+  React.useEffect(() => {
+    if (!active || hotkey.length === 0) return
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      const isHotkeyPressed = hotkey.every(
+        (key) => event.key === key || event.code === key
+      )
+      if (isHotkeyPressed) viewportRef.current?.focus()
+    }
+
+    // Radix's built-in listener is disabled below so it cannot focus an
+    // aria-hidden, empty viewport. Keep the same F8 (or custom hotkey)
+    // behavior when there is an open toast.
+    document.addEventListener("keydown", handleKeyDown)
+    return () => document.removeEventListener("keydown", handleKeyDown)
+  }, [active, hotkey])
+
+  const hotkeyLabel = hotkey
+    .join("+")
+    .replace(/Key/g, "")
+    .replace(/Digit/g, "")
+  const resolvedLabel = label.replace("{hotkey}", hotkeyLabel)
+  const hideFromAccessibilityTree = !active && !focusWithin
+
+  return (
+    <div
+      ref={containerRef}
+      aria-hidden={hideFromAccessibilityTree ? true : undefined}
+      onFocusCapture={() => setFocusWithin(true)}
+      onBlurCapture={(event) => {
+        const relatedTarget = event.relatedTarget
+        if (
+          !relatedTarget ||
+          !event.currentTarget.contains(relatedTarget as Node)
+        ) {
+          setFocusWithin(false)
+        }
+      }}
+    >
+      <ToastPrimitives.Viewport
+        ref={setViewportRef}
+        // The wrapper owns the hotkey so it can refuse to focus an inactive
+        // viewport. Passing an empty list disables Radix's unconditional F8
+        // focus behavior while preserving the public prop above.
+        hotkey={[]}
+        label={resolvedLabel}
+        className={cn(
+          "fixed top-0 z-[100] flex max-h-screen w-full flex-col-reverse p-4 sm:bottom-0 sm:right-0 sm:top-auto sm:flex-col md:max-w-[420px]",
+          className
+        )}
+        {...props}
+      />
+    </div>
+  )
+})
 ToastViewport.displayName = ToastPrimitives.Viewport.displayName
 
 const toastVariants = cva(

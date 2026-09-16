@@ -342,7 +342,9 @@ export default function ServicePage() {
                         <ul className="space-y-3 mt-auto">
                           {card.bullets.map((b, j) => (
                             <li key={j} className="flex items-start gap-3 text-works-dark/80">
-                              <ArrowRight className="w-4 h-4 text-works-primary shrink-0 mt-1" strokeWidth={2} />
+                              <span aria-hidden="true" className="w-4 h-4 shrink-0 mt-1 flex items-center justify-center">
+                                <span className="w-1.5 h-1.5 rounded-full bg-works-primary" />
+                              </span>
                               <span className="leading-relaxed text-sm"><TermText>{b}</TermText></span>
                             </li>
                           ))}

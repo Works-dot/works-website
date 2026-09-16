@@ -53,12 +53,13 @@ export function Footer() {
 
   return (
     <footer className="w-full relative z-10">
+      <h2 className="sr-only">{t("footer.contentHeading")}</h2>
       <div className="bg-works-dark text-white py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-6xl lg:max-w-[calc(var(--container-7xl)-4rem)] mx-auto flex flex-col lg:flex-row lg:items-center gap-8 lg:gap-12">
           <div className="lg:flex-1">
-            <h2 className="text-4xl md:text-5xl font-bold text-white tracking-tight mb-4">
+            <h3 className="text-4xl md:text-5xl font-bold text-white tracking-tight mb-4">
               <TermText>{newsletterHeading}</TermText>
-            </h2>
+            </h3>
             <p className="text-works-light/80 text-lg">
               <TermText>{newsletterDescription}</TermText>
             </p>
@@ -106,6 +107,7 @@ export function Footer() {
       </div>
 
       <div className="bg-works-deepdark pt-20 pb-10 px-4 sm:px-6 lg:px-8 text-works-muted">
+        <h3 className="sr-only">{t("footer.menuHeading")}</h3>
         <div className="max-w-6xl lg:max-w-[calc(var(--container-7xl)-4rem)] mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
           <div className="lg:col-span-1">
             {logoImg ? (
@@ -157,17 +159,17 @@ export function Footer() {
              <h4 className="text-white font-bold mb-6 uppercase tracking-wider text-sm">
                <TermText>{t("footer.servicesHeading")}</TermText>
              </h4>
-            <ul className="space-y-4">
+            <ul role="list" className="space-y-4">
               {footerServices.length > 0 ? (
-                footerServices.map((svc) => (
-                  <li key={svc.slug}>
+                footerServices.map((svc, index) => (
+                  <li key={svc.slug} aria-posinset={index + 1} aria-setsize={footerServices.length}>
                     <Link href={buildLocalePath(locale, "serviceDetail", svc.slug)} className="hover:text-works-primary transition-colors">
                        <TermText>{svc.title}</TermText>
                     </Link>
                   </li>
                 ))
-              ) : messages.footer.fallbackServices.map((label) => (
-                <li key={label}>
+              ) : messages.footer.fallbackServices.map((label, index) => (
+                <li key={label} aria-posinset={index + 1} aria-setsize={messages.footer.fallbackServices.length}>
                   <a
                     href={buildLocalePath(locale, "home", undefined, "#services")}
                     className="hover:text-works-primary transition-colors"
@@ -183,11 +185,11 @@ export function Footer() {
              <h4 className="text-white font-bold mb-6 uppercase tracking-wider text-sm">
                <TermText>{t("footer.companyHeading")}</TermText>
              </h4>
-            <ul className="space-y-4">
-               <li><Link href={buildLocalePath(locale, "about")} className="hover:text-works-primary transition-colors"><TermText>{t("nav.about")}</TermText></Link></li>
-               <li><Link href={buildLocalePath(locale, "careers")} className="hover:text-works-primary transition-colors"><TermText>{t("nav.careers")}</TermText></Link></li>
-               <li><Link href={buildLocalePath(locale, "blog")} className="hover:text-works-primary transition-colors"><TermText>{t("nav.blog")}</TermText></Link></li>
-               <li><Link href={buildLocalePath(locale, "projects")} className="hover:text-works-primary transition-colors"><TermText>{t("footer.caseStudies")}</TermText></Link></li>
+            <ul role="list" className="space-y-4">
+               <li aria-posinset={1} aria-setsize={4}><Link href={buildLocalePath(locale, "about")} className="hover:text-works-primary transition-colors"><TermText>{t("nav.about")}</TermText></Link></li>
+               <li aria-posinset={2} aria-setsize={4}><Link href={buildLocalePath(locale, "careers")} className="hover:text-works-primary transition-colors"><TermText>{t("nav.careers")}</TermText></Link></li>
+               <li aria-posinset={3} aria-setsize={4}><Link href={buildLocalePath(locale, "blog")} className="hover:text-works-primary transition-colors"><TermText>{t("nav.blog")}</TermText></Link></li>
+               <li aria-posinset={4} aria-setsize={4}><Link href={buildLocalePath(locale, "projects")} className="hover:text-works-primary transition-colors"><TermText>{t("footer.caseStudies")}</TermText></Link></li>
             </ul>
           </div>
 
@@ -195,12 +197,12 @@ export function Footer() {
              <h4 className="text-white font-bold mb-6 uppercase tracking-wider text-sm">
                <TermText>{t("footer.contactHeading")}</TermText>
              </h4>
-            <ul className="space-y-4">
-              <li className="flex flex-col">
+            <ul role="list" className="space-y-4">
+              <li aria-posinset={1} aria-setsize={2} className="flex flex-col">
                  <span className="text-sm text-works-muted/60 mb-1"><TermText>{t("footer.addressLabel")}</TermText></span>
                  <span className="text-works-muted"><TermText>{address}</TermText></span>
               </li>
-              <li className="flex flex-col">
+              <li aria-posinset={2} aria-setsize={2} className="flex flex-col">
                  <span className="text-sm text-works-muted/60 mb-1"><TermText>{t("footer.emailLabel")}</TermText></span>
                 <a href={`mailto:${contactEmail}`} className="text-works-primary font-semibold hover:underline">{contactEmail}</a>
               </li>

@@ -1,4 +1,4 @@
-modules = ["nodejs-24", "python-3.11", "postgresql-16"]
+modules = ["python-3.11", "postgresql-16", "nodejs-22"]
 
 [deployment]
 router = "application"
@@ -52,3 +52,6 @@ packages = ["glib", "nss", "nspr", "dbus", "atk", "at-spi2-atk", "cups", "libdrm
 
 [userenv.development]
 PREVIEW_CLIENT_URL = "https://81b234ea-07bf-4cff-b177-1f0b1b6faeb3-00-2lvzpt0idpdlw.spock.replit.dev"
+
+[userenv.shared]
+MAILCHIMP_SERVER_PREFIX = "us3"

@@ -35,8 +35,17 @@ export interface Messages {
     switchToLanguage: string;
   };
 
+  // Toast notifications
+  toast: {
+    providerLabel: string;
+    viewportLabel: string;
+    closeLabel: string;
+  };
+
   // Footer
   footer: {
+    contentHeading: string;
+    menuHeading: string;
     servicesHeading: string;
     companyHeading: string;
     contactHeading: string;
@@ -244,7 +253,15 @@ const hu: Messages = {
     switchToLanguage: "Váltás angol nyelvre",
   },
 
+  toast: {
+    providerLabel: "Értesítés",
+    viewportLabel: "Értesítések ({hotkey})",
+    closeLabel: "Értesítés bezárása",
+  },
+
   footer: {
+    contentHeading: "Tartalom lábléc",
+    menuHeading: "Lábléc menü",
     servicesHeading: "Szolgáltatások",
     companyHeading: "Cég",
     contactHeading: "Kapcsolat",
@@ -448,7 +465,15 @@ const en: Messages = {
     switchToLanguage: "Switch to Hungarian",
   },
 
+  toast: {
+    providerLabel: "Notification",
+    viewportLabel: "Notifications ({hotkey})",
+    closeLabel: "Close notification",
+  },
+
   footer: {
+    contentHeading: "Footer content",
+    menuHeading: "Footer menu",
     servicesHeading: "Services",
     companyHeading: "Company",
     contactHeading: "Contact",

@@ -7,12 +7,15 @@ import {
   ToastTitle,
   ToastViewport,
 } from "@/components/ui/toast"
+import { useI18n } from "@/i18n"
 
 export function Toaster() {
   const { toasts } = useToast()
+  const { t } = useI18n()
+  const hasOpenToast = toasts.some(({ open }) => open !== false)
 
   return (
-    <ToastProvider>
+    <ToastProvider label={t("toast.providerLabel")}>
       {toasts.map(function ({ id, title, description, action, ...props }) {
         return (
           <Toast key={id} {...props}>
@@ -23,11 +26,14 @@ export function Toaster() {
               )}
             </div>
             {action}
-            <ToastClose />
+            <ToastClose aria-label={t("toast.closeLabel")} />
           </Toast>
         )
       })}
-      <ToastViewport />
+      <ToastViewport
+        active={hasOpenToast}
+        label={t("toast.viewportLabel")}
+      />
     </ToastProvider>
   )
 }

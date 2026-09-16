@@ -11,8 +11,8 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const STRAPI_ROOT = path.resolve(__dirname, '..');
 const ATTACHED_ASSETS = path.resolve(STRAPI_ROOT, '..', '..', 'attached_assets');
 const SNAPSHOT_DIR = path.join(STRAPI_ROOT, '.tmp');
-const BEFORE_SNAPSHOT = path.join(SNAPSHOT_DIR, 'career-values-before.json');
-const REPORT_PATH = path.join(SNAPSHOT_DIR, 'career-values-report.json');
+const BEFORE_SNAPSHOT = path.join(SNAPSHOT_DIR, 'career-values-three-before.json');
+const REPORT_PATH = path.join(SNAPSHOT_DIR, 'career-values-three-report.json');
 const CAREER_UID = 'api::career-page.career-page';
 const LOCALES = ['hu', 'en'];
 const DOCUMENT_STATUS = 'draft';
@@ -30,18 +30,23 @@ const SYSTEM_FIELDS = new Set([
 
 const VALUES = {
   hu: [
-    { title: 'Empátia', file: 'empatia_1789464581345.png' },
-    { title: 'Alkalmazkodás', file: 'alkalmazkodas_1789464581344.png' },
-    { title: 'Együttműködés', file: 'egyuttmukodes_1789464581343.png' },
-    { title: 'Céltudatosság', file: 'celtudatossag_1789464581344.png' },
+    { title: 'Együttműködés', file: 'egyuttmukodes-new_1789551061820.png' },
+    { title: 'Alkalmazkodás', file: 'alkalmazkodas-new_1789551061821.png' },
+    { title: 'Empátia', file: 'empatia-new_1789551061821.png' },
   ],
   en: [
-    { title: 'Empathy', file: 'empatia_1789464581345.png' },
-    { title: 'Adaptability', file: 'alkalmazkodas_1789464581344.png' },
-    { title: 'Collaboration', file: 'egyuttmukodes_1789464581343.png' },
-    { title: 'Purposefulness', file: 'celtudatossag_1789464581344.png' },
+    { title: 'Collaboration', file: 'egyuttmukodes-new_1789551061820.png' },
+    { title: 'Adaptability', file: 'alkalmazkodas-new_1789551061821.png' },
+    { title: 'Empathy', file: 'empatia-new_1789551061821.png' },
   ],
 };
+
+const REMOVED_TITLES = {
+  hu: 'Céltudatosság',
+  en: 'Purposefulness',
+};
+
+const EXPECTED_IMAGE_DIMENSIONS = { width: 960, height: 610 };
 
 const PAGE_POPULATE = {
   seo: { populate: ['*'] },
@@ -265,8 +270,8 @@ async function findExistingMedia(strapi, filename, sourceBuffer) {
       if (
         record.provider === 'local'
         && record.mime === 'image/png'
-        && record.width === 670
-        && record.height === 460
+        && record.width === EXPECTED_IMAGE_DIMENSIONS.width
+        && record.height === EXPECTED_IMAGE_DIMENSIONS.height
       ) {
         return { record, reused: true, needsOriginalRepair: true };
       }
@@ -295,6 +300,15 @@ async function uploadMedia(strapi, definition) {
   const sourceBuffer = await fsp.readFile(sourcePath);
   const sourceHash = sha256(sourceBuffer);
   const alpha = pngAlphaInfo(sourceBuffer);
+  if (
+    alpha.width !== EXPECTED_IMAGE_DIMENSIONS.width
+    || alpha.height !== EXPECTED_IMAGE_DIMENSIONS.height
+  ) {
+    throw new Error(
+      `${definition.file} dimensions are ${alpha.width}x${alpha.height}; `
+      + `expected ${EXPECTED_IMAGE_DIMENSIONS.width}x${EXPECTED_IMAGE_DIMENSIONS.height}.`,
+    );
+  }
   const existing = await findExistingMedia(strapi, definition.file, sourceBuffer);
   let record;
   let reused = false;
@@ -302,6 +316,7 @@ async function uploadMedia(strapi, definition) {
 
   if (existing) {
     ({ record, reused, needsOriginalRepair } = existing);
+    needsOriginalRepair ||= record.width !== alpha.width || record.height !== alpha.height;
   } else {
     const uploaded = await strapi.plugin('upload').service('upload').upload({
       data: {
@@ -334,13 +349,26 @@ async function uploadMedia(strapi, definition) {
     await fsp.copyFile(sourcePath, storedPath);
     await strapi.db.query('plugin::upload.file').update({
       where: { id: record.id },
-      data: { size: sourceBuffer.length / 1000 },
+      data: {
+        size: sourceBuffer.length / 1000,
+        width: alpha.width,
+        height: alpha.height,
+      },
+    });
+    record = await strapi.db.query('plugin::upload.file').findOne({
+      where: { id: record.id },
     });
   }
   const storedBuffer = await fsp.readFile(storedPath);
   const storedHash = sha256(storedBuffer);
   if (!storedBuffer.equals(sourceBuffer)) {
     throw new Error(`Uploaded original bytes changed for ${definition.file}.`);
+  }
+  if (
+    record.width !== alpha.width
+    || record.height !== alpha.height
+  ) {
+    throw new Error(`Media metadata dimensions changed for ${definition.file}.`);
   }
 
   return {
@@ -366,17 +394,38 @@ function assertWhyUsShape(page, locale) {
   if (!Array.isArray(page.whyUs.items) || page.whyUs.items.length < 3) {
     throw new Error(`Career page ${locale} must have at least three existing whyUs items.`);
   }
+
+  const expectedTitles = new Set(VALUES[locale].map(({ title }) => title));
+  const seenTitles = new Set();
+  for (const item of page.whyUs.items) {
+    if (seenTitles.has(item.title)) {
+      throw new Error(`${locale} whyUs contains duplicate title ${JSON.stringify(item.title)}.`);
+    }
+    seenTitles.add(item.title);
+  }
+  for (const title of expectedTitles) {
+    if (!seenTitles.has(title)) {
+      throw new Error(`${locale} whyUs is missing expected title ${JSON.stringify(title)}.`);
+    }
+  }
+  const extras = page.whyUs.items.filter((item) => !expectedTitles.has(item.title));
+  if (extras.length > 1 || (extras.length === 1 && extras[0].title !== REMOVED_TITLES[locale])) {
+    throw new Error(
+      `${locale} whyUs contains an unexpected item; refusing to remove anything except `
+      + `${JSON.stringify(REMOVED_TITLES[locale])}.`,
+    );
+  }
 }
 
 function makeWhyUsPayload(page, locale, mediaIds) {
-  const existingItems = page.whyUs.items;
+  const existingItems = new Map(page.whyUs.items.map((item) => [item.title, item]));
   return {
     sectionHeading: page.whyUs.sectionHeading ?? null,
     items: VALUES[locale].map((value, index) => ({
-      title: value.title,
-      // Preserve all existing descriptions, including a later editor's
-      // fourth description. The first run has no fourth item, so it is blank.
-      description: existingItems[index]?.description ?? (index === 3 ? '' : null),
+      // Use the existing item by title rather than by index: the requested
+      // reorder must not silently move a description to a different value.
+      title: existingItems.get(value.title).title,
+      description: existingItems.get(value.title).description ?? null,
       image: mediaIds[index],
     })),
   };
@@ -404,6 +453,31 @@ async function readCareerPages(strapi, documentId) {
     assertWhyUsShape(pages[locale], locale);
   }
   return pages;
+}
+
+async function assertTrackedMediaUnchanged(strapi, beforePages) {
+  const ids = new Set();
+  for (const locale of LOCALES) {
+    for (const item of beforePages[locale].whyUs.items) {
+      if (item.image?.id) ids.add(item.image.id);
+    }
+  }
+  const query = strapi.db.query('plugin::upload.file');
+  for (const id of ids) {
+    const record = await query.findOne({ where: { id } });
+    if (!record) throw new Error(`Existing media record ${id} disappeared.`);
+  }
+}
+
+async function readBeforeReport() {
+  const snapshot = JSON.parse(await fsp.readFile(BEFORE_SNAPSHOT, 'utf8'));
+  return Object.fromEntries(LOCALES.map((locale) => [
+    locale,
+    {
+      sectionHeading: snapshot.locales[locale].whyUs.sectionHeading,
+      items: snapshot.locales[locale].whyUs.items,
+    },
+  ]));
 }
 
 await (async () => {
@@ -486,32 +560,39 @@ await (async () => {
       if (afterWhyUs.sectionHeading !== beforePages[locale].whyUs.sectionHeading) {
         throw new Error(`${locale} whyUs section heading changed unexpectedly.`);
       }
-      for (let index = 0; index < 3; index += 1) {
-        if (afterWhyUs.items[index].description !== beforeItems[index].description) {
-          throw new Error(`${locale} first-three description ${index + 1} changed unexpectedly.`);
+      if (afterWhyUs.items.length !== 3) {
+        throw new Error(`${locale} whyUs must contain exactly three items after update.`);
+      }
+      const beforeByTitle = new Map(beforeItems.map((item) => [item.title, item]));
+      for (let index = 0; index < VALUES[locale].length; index += 1) {
+        const expectedTitle = VALUES[locale][index].title;
+        const beforeItem = beforeByTitle.get(expectedTitle);
+        const afterItem = afterWhyUs.items[index];
+        if (afterItem.title !== beforeItem.title) {
+          throw new Error(`${locale} item ${index + 1} title changed unexpectedly.`);
+        }
+        if (afterItem.description !== beforeItem.description) {
+          throw new Error(`${locale} ${expectedTitle} description changed unexpectedly.`);
         }
       }
-      if (afterWhyUs.items.length !== 4) {
-        throw new Error(`${locale} whyUs must contain exactly four items after update.`);
+      const removed = beforeItems.filter(
+        (item) => item.title === REMOVED_TITLES[locale],
+      );
+      if (
+        (beforeItems.length === 4 && removed.length !== 1)
+        || (beforeItems.length === 3 && removed.length !== 0)
+      ) {
+        throw new Error(`${locale} expected exactly one removed Purposefulness item.`);
       }
     }
+    await assertTrackedMediaUnchanged(strapi, beforePages);
 
     const report = {
-      format: 'works-career-values-update-report-v1',
+      format: 'works-career-values-three-update-report-v1',
       applied: args.apply,
       documentId,
       beforeSnapshot: BEFORE_SNAPSHOT,
-      before: Object.fromEntries(LOCALES.map((locale) => [
-        locale,
-        {
-          sectionHeading: beforePages[locale].whyUs.sectionHeading,
-          items: beforePages[locale].whyUs.items.map((item) => ({
-            title: item.title,
-            description: item.description ?? null,
-            image: mediaSemantic(item.image),
-          })),
-        },
-      ])),
+      before: await readBeforeReport(),
       afterDraft: Object.fromEntries(LOCALES.map((locale) => [
         locale,
         {

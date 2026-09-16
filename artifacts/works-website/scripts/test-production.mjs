@@ -134,6 +134,14 @@ async function readSeo(page) {
   });
 }
 
+async function readVisibleArticleTitle(page) {
+  return page.locator("main h1").first().evaluate((heading) => {
+    const copy = heading.cloneNode(true);
+    copy.querySelectorAll('.sr-only, [aria-hidden="true"]').forEach((node) => node.remove());
+    return copy.textContent.trim();
+  });
+}
+
 function assertSingleton(values, label, { allowEmpty = false } = {}) {
   assert.equal(values.length, 1, `Expected one ${label}, found ${values.length}`);
   if (!allowEmpty) {
@@ -262,7 +270,7 @@ async function run() {
 
     await page.goto(`${baseUrl}${firstArticlePath}`, { waitUntil: "networkidle" });
     await assertRenderedPage(page, firstArticlePath);
-    const firstTitle = (await page.locator("main h1").first().innerText()).trim();
+    const firstTitle = await readVisibleArticleTitle(page);
     const firstSeo = await assertSeo(page, {
       pathname: firstArticlePath,
       type: "article",
@@ -289,7 +297,7 @@ async function run() {
     await nextArticleLink.click();
     await assertRenderedPage(page, nextArticlePath);
 
-    const nextTitle = (await page.locator("main h1").first().innerText()).trim();
+    const nextTitle = await readVisibleArticleTitle(page);
     assert.notEqual(nextTitle, firstTitle, "The navigation did not open a different article");
     const nextSeo = await assertSeo(page, {
       pathname: nextArticlePath,
