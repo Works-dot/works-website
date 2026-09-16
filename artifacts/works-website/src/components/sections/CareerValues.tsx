@@ -38,10 +38,10 @@ export function CareerValues({ values }: { values?: CareerWhyUsSection }) {
               } bg-works-bg shadow-[0_4px_24px_rgba(0,0,0,0.06)] lg:min-h-[31.77vw]`}
               style={{ zIndex: 30 - index }}
             >
-              {/* Image Background for Mobile / Image Column for Desktop */}
+              {/* Stacked graphic on mobile; alternating image column on desktop. */}
               <div
                 data-testid="career-value-image"
-                className="absolute inset-0 lg:relative lg:inset-auto lg:w-1/2 overflow-hidden flex items-center justify-center z-0 lg:z-10 pointer-events-none lg:pointer-events-auto"
+                className={`relative w-full lg:w-1/2 overflow-hidden ${item.image ? "flex aspect-[96/61]" : "hidden"} lg:flex lg:aspect-auto items-center justify-center lg:z-10`}
                 aria-hidden="true"
               >
                 {item.image ? (
@@ -54,14 +54,12 @@ export function CareerValues({ values }: { values?: CareerWhyUsSection }) {
                 ) : (
                   <div className="absolute inset-0 w-full h-full bg-works-muted/20 hidden lg:block" />
                 )}
-                {/* Mobile Overlay */}
-                <div className="absolute inset-0 bg-white/90 lg:hidden" />
               </div>
 
               {/* Text Column */}
               <div
                 data-testid="career-value-text"
-                className="relative z-10 w-full min-w-0 lg:w-1/2 flex items-center py-16 sm:py-20 lg:py-28"
+                className="relative z-10 w-full min-w-0 lg:w-1/2 flex items-center py-8 sm:py-10 lg:py-28"
               >
                 <div
                   className={`w-full max-w-[40rem] px-4 sm:px-6 ${
@@ -70,7 +68,7 @@ export function CareerValues({ values }: { values?: CareerWhyUsSection }) {
                       : "lg:mr-auto lg:ml-0 lg:pr-8 lg:pl-12 xl:pl-16"
                   }`}
                 >
-                  <h3 className="text-3xl lg:text-[32px] leading-tight font-bold text-works-dark mb-6 break-words">
+                  <h3 className={`text-3xl lg:text-[32px] leading-tight font-bold text-works-dark ${item.description?.trim() ? "mb-4 sm:mb-6" : "mb-0"} lg:mb-6 break-words`}>
                     <ValueHeadingText title={item.title} />
                   </h3>
                   {item.description?.trim() && (

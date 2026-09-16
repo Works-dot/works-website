@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { chromium } from "playwright";
 const DESKTOP = 1024;
-const WIDTHS = [320, 390, 1440, 1920];
+const WIDTHS = [320, 390, 768, 1023, 1024, 1440, 1920];
 const FIXTURE_WIDTHS = [320, 1440];
 const HEADING_WIDTHS = [390, 1440];
 const HEADINGS_ONLY = process.argv.includes("--headings-only");
@@ -231,7 +231,12 @@ async function assertValues(page, expected, width, label) {
     }
 
     const [imageBox, textBox] = await Promise.all([imageRegion.boundingBox(), textRegion.boundingBox()]);
-    assert.ok(imageBox && textBox, `${label}: missing region geometry ${i}`);
+    assert.ok(textBox, `${label}: missing text geometry ${i}`);
+    if (width < DESKTOP && !value.image) {
+      assert.equal(imageBox, null, `${label}: missing mobile image reserves empty space ${i}`);
+      continue;
+    }
+    assert.ok(imageBox, `${label}: missing image geometry ${i}`);
     if (width >= DESKTOP) {
       assert.equal(textBox.x < imageBox.x, i % 2 === 0, `${label}: desktop text/image order ${i}`);
       assert.ok(Math.abs(imageBox.width - textBox.width) <= 1,
@@ -240,84 +245,29 @@ async function assertValues(page, expected, width, label) {
         Math.abs(textBox.width - viewport.width / 2) <= 1,
       `${label}: desktop columns are not 50/50 ${i}`);
     } else {
-      if (!value.image) continue;
       const presentation = await row.evaluate((element) => {
         const imageRegion = element.querySelector('[data-testid="career-value-image"]');
         const image = imageRegion?.querySelector("img");
         const textRegion = element.querySelector('[data-testid="career-value-text"]');
-        const rowStyle = getComputedStyle(element);
-        const imageRegionStyle = imageRegion ? getComputedStyle(imageRegion) : null;
-        const imageStyle = image ? getComputedStyle(image) : null;
-        const textStyle = textRegion ? getComputedStyle(textRegion) : null;
-        const parseColor = (color) => {
-          const oklab = color?.match(/oklab\(\s*([\d.]+)[^/)]*(?:\/\s*([\d.]+))?\s*\)/i);
-          if (oklab && Number(oklab[1]) >= 0.95) {
-            return { r: 255, g: 255, b: 255, a: oklab[2] == null ? 1 : Number(oklab[2]) };
-          }
-          const match = color?.match(/rgba?\(\s*([\d.]+)[,\s]+([\d.]+)[,\s]+([\d.]+)(?:[,\s/]+([\d.]+))?\s*\)/i);
-          if (!match) return null;
-          return { r: Number(match[1]), g: Number(match[2]), b: Number(match[3]), a: match[4] == null ? 1 : Number(match[4]) };
-        };
-        const luminance = ({ r, g, b }) => {
-          const channel = (value) => {
-            const normalized = value / 255;
-            return normalized <= 0.03928 ? normalized / 12.92 : ((normalized + 0.055) / 1.055) ** 2.4;
-          };
-          return 0.2126 * channel(r) + 0.7152 * channel(g) + 0.0722 * channel(b);
-        };
-        const contrast = (foreground, background) => {
-          const foregroundLuminance = luminance(foreground);
-          const backgroundLuminance = luminance(background);
-          return (Math.max(foregroundLuminance, backgroundLuminance) + 0.05) /
-            (Math.min(foregroundLuminance, backgroundLuminance) + 0.05);
-        };
-        const layerNodes = [textRegion, imageRegion, element].flatMap((node) => node ? [
-          node,
-          ...node.querySelectorAll("*"),
-        ] : []);
-        const layers = layerNodes.flatMap((node) => [
-          getComputedStyle(node),
-          getComputedStyle(node, "::before"),
-          getComputedStyle(node, "::after"),
-        ]);
-        const textColor = textStyle && parseColor(textStyle.color);
-        const overlays = layers.map((style) => parseColor(style.backgroundColor))
-          .filter((color) => color && color.r >= 245 && color.g >= 245 && color.b >= 245 && color.a > 0);
-        const overlayContrasts = textColor ? overlays.map((overlay) => {
-          const worstCaseBackground = {
-            r: 255 * overlay.a,
-            g: 255 * overlay.a,
-            b: 255 * overlay.a,
-          };
-          return { alpha: overlay.a, ratio: contrast(textColor, worstCaseBackground) };
-        }) : [];
-        const textRect = textRegion?.getBoundingClientRect();
-        const imageRect = imageRegion?.getBoundingClientRect();
-        const rowRect = element.getBoundingClientRect();
-        const overlapY = textRect && imageRect
-          ? Math.min(textRect.bottom, imageRect.bottom) - Math.max(textRect.top, imageRect.top)
-          : 0;
-        const point = textRect && textRect.width > 0 && textRect.height > 0
-          ? document.elementsFromPoint(textRect.left + textRect.width / 2, textRect.top + textRect.height / 2)
-          : [];
-        const textIsOnTop = textRegion && point.some((node) => node === textRegion || textRegion.contains(node));
+        const style = getComputedStyle(textRegion);
         return {
-          rowOpacity: Number(rowStyle.opacity),
-          imagePosition: imageStyle?.position,
-          imageRegionPosition: imageRegionStyle?.position,
-          overlapY,
-          textIsOnTop,
-          overlayContrasts,
-          rowHeight: rowRect.height,
+          imageRegionPosition: getComputedStyle(imageRegion).position,
+          extraImageLayers: imageRegion.querySelectorAll(":scope > :not(img)").length,
+          naturalRatio: image.naturalWidth / image.naturalHeight,
+          paddingTop: parseFloat(style.paddingTop),
+          paddingBottom: parseFloat(style.paddingBottom),
         };
       });
-      assert.ok(presentation.rowOpacity >= 0.99, `${label}: mobile row opacity fades text ${i}`);
-      assert.ok(presentation.imagePosition === "absolute" || presentation.imageRegionPosition === "absolute",
-        `${label}: mobile image is not absolutely positioned behind text ${i}`);
-      assert.ok(presentation.overlapY > 0, `${label}: mobile image is stacked separately from text ${i}`);
-      assert.equal(presentation.textIsOnTop, true, `${label}: mobile text is not above the image ${i}`);
-      assert.ok(presentation.overlayContrasts.some(({ alpha, ratio }) => alpha < 1 && ratio >= 4.5),
-        `${label}: mobile white overlay does not provide 4.5:1 worst-case contrast ${i}`);
+      assert.notEqual(presentation.imageRegionPosition, "absolute", `${label}: mobile graphic must occupy flow ${i}`);
+      assert.equal(presentation.extraImageLayers, 0, `${label}: mobile graphic has a covering layer ${i}`);
+      assert.ok(Math.abs(imageBox.width - viewport.width) <= 1, `${label}: mobile graphic width ${i}`);
+      assert.ok(Math.abs(imageBox.width / imageBox.height - presentation.naturalRatio) < 0.01,
+        `${label}: mobile graphic is cropped or distorted ${i}`);
+      assert.ok(Math.abs(textBox.y - imageBox.y - imageBox.height) <= 1,
+        `${label}: mobile text is not directly below the graphic ${i}`);
+      assert.ok(presentation.paddingTop >= 32 && presentation.paddingTop <= 40 &&
+        presentation.paddingBottom >= 32 && presentation.paddingBottom <= 40,
+      `${label}: mobile text spacing ${i}`);
     }
   }
 }
@@ -606,12 +556,10 @@ async function testLocale(context, locale) {
     await page.setViewportSize({ width, height: 1000 });
     await page.goto(pageUrl(path), { waitUntil: "domcontentloaded" });
     await assertValues(page, expected, width, `${locale} ${width}px CMS`);
-    if (NATIVE_ONLY) {
-      await assertHeadingMarkup(page, {
-        sectionHeading: recordSectionHeading(before),
-        items: expected,
-      }, `${locale} ${width}px published headings`);
-    }
+    await assertHeadingMarkup(page, {
+      sectionHeading: recordSectionHeading(before),
+      items: expected,
+    }, `${locale} ${width}px published headings`);
   }
 
   if (NATIVE_ONLY) {
