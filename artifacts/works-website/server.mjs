@@ -133,28 +133,40 @@ export function canonicalRedirectLocation(req, canonicalOrigin) {
 }
 
 function addCanonicalRedirect(app, canonicalOrigin) {
-  if (!canonicalOrigin) return;
+  if (canonicalOrigin && new URL(canonicalOrigin).hostname.endsWith(".railway.app")) {
+    throw new Error("CANONICAL_ORIGIN must not point to a Railway infrastructure hostname");
+  }
 
   app.use((req, res, next) => {
+    // Match the actual Host only. Forwarded host is untrusted and can cause
+    // redirect loops through reverse proxies or poison shared cache entries.
+    const knownWebsiteHost = requestHost(req) === "workspaceworks-website-production.up.railway.app";
+    const targetOrigin = knownWebsiteHost ? "https://www.worksdot.hu" : canonicalOrigin;
     if (
+      !targetOrigin ||
       (req.method !== "GET" && req.method !== "HEAD") ||
       req.path === "/healthz" ||
-      req.path === "/readyz"
+      req.path === "/readyz" ||
+      ["/api", "/strapi", "/uploads", "/assets", "/media"].some(
+        (prefix) => req.path === prefix || req.path.startsWith(`${prefix}/`),
+      )
     ) {
       next();
       return;
     }
 
-    if (requestHost(req) === new URL(canonicalOrigin).host.toLowerCase()) {
+    if (requestHost(req) === new URL(targetOrigin).host.toLowerCase()) {
       next();
       return;
     }
 
-    const location = canonicalRedirectLocation(req, canonicalOrigin);
+    const location = canonicalRedirectLocation(req, targetOrigin);
     if (!location) {
       next();
       return;
     }
+    res.vary("Host");
+    setNoStore(res);
     res.status(308).setHeader("Location", location).end();
   });
 }

@@ -69,3 +69,13 @@ test("resolveSiteUrl rejects non-origin and non-HTTPS values", () => {
     /SITE_URL must be an HTTPS origin/,
   );
 });
+
+test("production SEO defaults to www and rejects stale Railway overrides", () => {
+  assert.equal(config.DEFAULT_SITE_URL, "https://www.worksdot.hu");
+  assert.equal(config.resolveSiteUrl(), "https://www.worksdot.hu");
+  assert.equal(config.resolveSiteUrl("https://www.worksdot.hu/"), "https://www.worksdot.hu");
+  assert.throws(
+    () => config.resolveSiteUrl("https://workspaceworks-website-production.up.railway.app"),
+    /must not use a Railway/,
+  );
+});

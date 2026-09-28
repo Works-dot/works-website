@@ -151,6 +151,46 @@ describe("website health endpoints", () => {
 });
 
 describe("sanitized errors and canonical redirects", () => {
+  it("redirects only the known website Railway host by default, preserving public and backend traffic", async () => {
+    const base = await listen(createApp({ distDir: writeFixture(), canonicalOrigin: null }));
+    const railway = "workspaceworks-website-production.up.railway.app";
+    // Node fetch can replace Host with the URL authority. Use raw HTTP here
+    // to exercise the same virtual-host routing Railway presents to Express.
+    const hostRequest = (url, options = {}) => new Promise((resolve, reject) => {
+      const request = http.request(url, options, (response) => {
+        response.resume();
+        response.on("end", () => resolve({
+          status: response.statusCode,
+          headers: new Headers(response.headers),
+        }));
+      });
+      request.on("error", reject);
+      request.end(options.body);
+    });
+    for (const method of ["GET", "HEAD"]) {
+      const response = await hostRequest(`${base}/en/blog/example?ref=a%20b`, {
+        method, headers: { host: railway }, redirect: "manual",
+      });
+      assert.equal(response.status, 308);
+      assert.equal(response.headers.get("location"), "https://www.worksdot.hu/en/blog/example?ref=a%20b");
+      assert.match(response.headers.get("cache-control"), /no-store/);
+    }
+    for (const host of ["www.worksdot.hu", "localhost", "unknown.example"]) {
+      const response = await hostRequest(`${base}/`, { headers: { host, "x-forwarded-host": railway }, redirect: "manual" });
+      assert.equal(response.status, 200);
+      assert.equal(response.headers.get("x-robots-tag"), null);
+      assert.equal(response.headers.get("location"), null);
+    }
+    for (const route of ["/healthz", "/readyz", "/api/unknown", "/strapi/unknown", "/media/test-abc123.webp", "/assets/site.js", "/uploads/unknown"]) {
+      const response = await hostRequest(base + route, { headers: { host: railway }, redirect: "manual" });
+      assert.equal(response.headers.get("location"), null, route);
+    }
+    const post = await hostRequest(`${base}/api/contact/send`, { method: "POST", headers: { host: railway, "content-type": "application/json" }, body: "{", redirect: "manual" });
+    assert.equal(post.status, 400);
+    assert.equal(post.headers.get("location"), null);
+    assert.throws(() => createApp({ distDir: writeFixture(), canonicalOrigin: `https://${railway}` }), /must not point to a Railway/);
+  });
+
   it("bounds provider operations without exposing provider details", async () => {
     await assert.rejects(
       withTimeout(

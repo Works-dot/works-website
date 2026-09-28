@@ -1,14 +1,12 @@
 /**
  * The SEO metadata origin used by both the browser bundle and the
- * server/prerender bundle. Keep this fallback on the existing Railway
- * deployment until the production domain is chosen; do not infer an origin
- * from the current host.
+ * server/prerender bundle. The public production origin is fixed below;
+ * never infer it from the current host or the infrastructure hostname.
  *
  * This setting is deliberately separate from CANONICAL_ORIGIN. SITE_URL
  * controls generated metadata only; it does not enable server redirects.
  */
-export const DEFAULT_SITE_URL =
-  "https://workspaceworks-website-production.up.railway.app";
+export const DEFAULT_SITE_URL = "https://www.worksdot.hu";
 
 const LOCAL_HTTP_HOSTNAMES = new Set(["localhost", "127.0.0.1", "[::1]"]);
 
@@ -82,5 +80,9 @@ export function resolveSiteUrl(value?: string): string {
   if (value === undefined) return DEFAULT_SITE_URL;
   if (typeof value !== "string") throw invalidSiteUrl();
   if (value.trim() === "") return DEFAULT_SITE_URL;
-  return normalizeSiteUrl(value);
+  const origin = normalizeSiteUrl(value);
+  if (new URL(origin).hostname.endsWith(".railway.app")) {
+    throw new Error("SITE_URL must not use a Railway infrastructure hostname; use https://www.worksdot.hu");
+  }
+  return origin;
 }

@@ -1,4 +1,5 @@
 export default [
+  'global::search-indexing',
   { name: 'global::strip-prefix', config: {} },
   'strapi::logger',
   'strapi::errors',

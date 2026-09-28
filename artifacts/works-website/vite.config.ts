@@ -18,12 +18,16 @@ if (rawPort !== undefined && (Number.isNaN(port) || (port as number) <= 0)) {
 const basePath = process.env.BASE_PATH ?? "/";
 // Keep the SEO metadata origin identical in the browser and SSR bundles.
 // SITE_URL configures metadata only; it does not enable server redirects.
-// CANONICAL_ORIGIN remains a separate, optional server setting until the
-// production domain is confirmed. VITE_SITE_URL remains accepted for local
+// CANONICAL_ORIGIN remains a separate, optional server setting.
+// VITE_SITE_URL remains accepted for local
 // tooling, but cannot diverge from SITE_URL when both are present.
 const siteUrl = resolveSiteUrl(
   process.env.SITE_URL || process.env.VITE_SITE_URL || DEFAULT_SITE_URL,
 );
+// Validate both inputs even when SITE_URL wins precedence.
+if (process.env.VITE_SITE_URL && resolveSiteUrl(process.env.VITE_SITE_URL) !== siteUrl) {
+  throw new Error("SITE_URL and VITE_SITE_URL must agree");
+}
 
 export default defineConfig({
   base: basePath,

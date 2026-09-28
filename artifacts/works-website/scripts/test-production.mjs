@@ -12,7 +12,7 @@ const distDir = path.join(root, "dist", "public");
 const siteUrl = (
   process.env.SITE_URL ||
   process.env.VITE_SITE_URL ||
-  "https://workspaceworks-website-production.up.railway.app"
+  "https://www.worksdot.hu"
 ).replace(/\/+$/, "");
 
 function getFreePort() {
