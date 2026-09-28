@@ -3,6 +3,7 @@ import { createProxyMiddleware } from "http-proxy-middleware";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import fs from "node:fs";
+import { addLegacyRedirects, readLegacyRedirects } from "./legacy-redirects.mjs";
 import { subscribeNewsletter } from "./newsletter-server.mjs";
 import { sendContactMessage } from "./contact-server.mjs";
 import {
@@ -294,6 +295,7 @@ export function createApp({
   distDir = DEFAULT_DIST_DIR,
   canonicalOrigin = parseCanonicalOrigin(process.env.CANONICAL_ORIGIN),
   readinessCheck = checkStaticReadiness,
+  legacyRedirects = null,
 } = {}) {
   const app = express();
   // The deployed dist is immutable for the lifetime of this process.  Scan
@@ -302,6 +304,7 @@ export function createApp({
 
   app.disable("x-powered-by");
   app.use(express.json({ limit: "10kb" }));
+  addLegacyRedirects(app, legacyRedirects);
   addCanonicalRedirect(app, canonicalOrigin);
   addHealthRoutes(app, { readinessResult });
   addApiRoutes(app);
@@ -328,7 +331,8 @@ export function startServer({
   distDir = DEFAULT_DIST_DIR,
   canonicalOrigin = parseCanonicalOrigin(process.env.CANONICAL_ORIGIN),
 } = {}) {
-  const app = createApp({ distDir, canonicalOrigin });
+  const legacyRedirects = readLegacyRedirects(distDir);
+  const app = createApp({ distDir, canonicalOrigin, legacyRedirects });
 
   if (!fs.existsSync(distDir)) {
     // Preserve the production startup contract: a deploy without its build

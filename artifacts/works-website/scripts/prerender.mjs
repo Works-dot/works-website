@@ -1,6 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { buildLegacyRedirects } from "../legacy-redirects.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const root = path.resolve(__dirname, "..");
@@ -31,6 +32,13 @@ async function prerender() {
   } = await import(path.resolve(root, "dist/server/entry-server.js"));
 
   const template = fs.readFileSync(path.resolve(outDir, "index.html"), "utf-8");
+  // Use exactly the HU content snapshot consumed by the rendered footer.
+  // Keep this server-only manifest outside the publicly served directory.
+  const redirects = buildLegacyRedirects(
+    getLocaleFallback("legalDocuments", "hu")?.imprintPdfUrl,
+  );
+  fs.writeFileSync(path.resolve(outDir, "../legacy-redirects.json"),
+    JSON.stringify(redirects, null, 2));
 
   // Build every public locale from its own embedded dataset.
   const allRoutes = [];

@@ -14,6 +14,7 @@ import {
   withTimeout,
 } from "../server-error.mjs";
 import { validateStaticBuild } from "../server-health.mjs";
+import { buildLegacyRedirects, readLegacyRedirects, LEGACY_PATHS } from "../legacy-redirects.mjs";
 
 let fixtureRoot;
 let servers = [];
@@ -73,6 +74,50 @@ afterEach(async () => {
 });
 
 describe("website health endpoints", () => {
+  it("redirects every approved legacy route directly, preserving queries and method boundaries", async () => {
+    const redirects = buildLegacyRedirects("/strapi/uploads/current-imprint.pdf");
+    assert.equal(Object.keys(redirects).length, 29);
+    const base = await listen(createApp({
+      distDir: writeFixture(), canonicalOrigin: "https://www.worksdot.hu",
+      legacyRedirects: redirects,
+    }));
+    for (const [source, destination] of Object.entries(redirects)) {
+      for (const method of ["GET", "HEAD"]) {
+        for (const suffix of ["", "/", "?utm=a%20b&tag=x&tag=y", "/?utm=a%20b&tag=x&tag=y"]) {
+          const response = await fetch(base + source + suffix, { method, redirect: "manual" });
+          assert.equal(response.status, 301, `${method} ${source}${suffix}`);
+          assert.equal(response.headers.get("location"),
+            destination + (suffix.includes("?") ? "?utm=a%20b&tag=x&tag=y" : ""));
+          assert.equal(await response.text(), "");
+        }
+      }
+    }
+    const isolated = await listen(createApp({ distDir: writeFixture(), canonicalOrigin: null, legacyRedirects: redirects }));
+    for (const route of ["/about/child", "/about-extra", "/en/about-old", "/unknown", "/impresszum", "/api/unknown", "/strapi/unknown"]) {
+      const response = await fetch(isolated + route, { redirect: "manual" });
+      assert.equal(response.status, 404, route);
+      assert.equal(response.headers.get("location"), null);
+    }
+    for (const route of ["/", "/en", "/healthz", "/readyz", "/assets/site.js", "/media/test-abc123.webp"]) {
+      assert.equal((await fetch(isolated + route)).status, 200, route);
+    }
+    for (const source of Object.keys(LEGACY_PATHS)) {
+      const response = await fetch(isolated + source, { method: "POST", redirect: "manual" });
+      assert.equal(response.status, 404);
+      assert.equal(response.headers.get("location"), null);
+    }
+    assert.throws(() => buildLegacyRedirects(""), /require/);
+    for (const invalid of ["//evil.example/a.pdf", "javascript:a.pdf", "https://user:pass@example.com/a.pdf", "/not-pdf"]) {
+      assert.throws(() => buildLegacyRedirects(invalid));
+    }
+    const distDir = writeFixture();
+    assert.throws(() => readLegacyRedirects(distDir));
+    fs.writeFileSync(path.join(distDir, "..", "legacy-redirects.json"), JSON.stringify(redirects));
+    assert.deepEqual(readLegacyRedirects(distDir), redirects);
+    fs.writeFileSync(path.join(distDir, "..", "legacy-redirects.json"), JSON.stringify({...redirects, "/about": "https://evil.example/"}));
+    assert.throws(() => readLegacyRedirects(distDir), /approved routes/);
+  });
+
   it("reports liveness independently and readiness for both locales", async () => {
     const distDir = writeFixture();
     const baseUrl = await listen(createApp({ distDir }));
