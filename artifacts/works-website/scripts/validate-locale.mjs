@@ -70,6 +70,7 @@ async function runValidation() {
     switchLocalePath,
     localeQueryKey,
     getPageMeta,
+    getAlternateLinks,
     buildMetaTags,
     SITE_URL,
     getLocaleCacheKey,
@@ -313,7 +314,12 @@ async function runValidation() {
   assert("EN route preserves canonical path", enProjectsMeta.path === "/en/projects");
   assert("EN route uses route-specific English metadata", enProjectsMeta.title === "Our projects | Works.");
   const enProjectMeta = getPageMeta("/en/projects/future-project");
-  assert("EN detail is article metadata", enProjectMeta.type === "article");
+  assert(
+    "unknown EN detail has no fabricated canonical or alternates",
+    enProjectMeta.path === undefined &&
+      enProjectMeta.type === "website" &&
+      (enProjectMeta.alternates || []).length === 0,
+  );
 
   // ------------------------------------------------------------------
   // buildMetaTags — og:locale correct for HU
@@ -339,6 +345,38 @@ async function runValidation() {
     "EN projects route has localized static title",
     enProjectsMeta.title === "Our projects | Works."
   );
+  const huAlternateTags = huTags.match(/rel="alternate"/g) || [];
+  assert("HU home emits reciprocal locale alternates", huAlternateTags.length === 3);
+  assert(
+    "HU home emits x-default pointing to the HU home",
+    huTags.includes(`hreflang="x-default" href="${SITE_URL}/"`),
+  );
+  const huProject = (getLocaleFallback("projects", "hu") || [])[0];
+  const enProject = (getLocaleFallback("projects", "en") || []).find(
+    (record) => record.documentId === huProject?.documentId,
+  );
+  if (huProject && enProject) {
+    const projectAlternates = getAlternateLinks(
+      `/projektek/${huProject.slug}`,
+      "hu",
+    );
+    assert(
+      "paired detail alternates use the localized EN slug",
+      projectAlternates.some(
+        (alternate) =>
+          alternate.hreflang === "en" &&
+          alternate.href === `${SITE_URL}/en/projects/${enProject.slug}`,
+      ),
+    );
+    assert(
+      "paired detail alternates include HU x-default",
+      projectAlternates.some(
+        (alternate) =>
+          alternate.hreflang === "x-default" &&
+          alternate.href === `${SITE_URL}/projektek/${huProject.slug}`,
+      ),
+    );
+  }
 
   // ------------------------------------------------------------------
   // Public locale configuration

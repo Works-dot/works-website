@@ -15,6 +15,7 @@ import { buildLocalePath } from "@/lib/i18n-routes";
 import { ArrowLinkLabel } from "@/components/ui/arrow-link-label";
 import { TermText } from "@/components/Terminology";
 import { accessibleTermLabel } from "@/lib/terminology";
+import { ResponsiveImage } from "@/components/ui/ResponsiveImage";
 
 function FeaturedBlogCard({ slug, title, excerpt, date, image, imageAlt, author, readingTime }: {
   slug: string;
@@ -38,9 +39,13 @@ function FeaturedBlogCard({ slug, title, excerpt, date, image, imageAlt, author,
     >
       <Link href={buildLocalePath(locale, "blogPost", slug)} className="group flex flex-col lg:flex-row gap-8 lg:gap-12 items-center">
         <div className="w-full lg:w-1/2 overflow-hidden bg-works-light aspect-[4/3]">
-          <img
+          <ResponsiveImage
             src={image}
             alt={accessibleTermLabel(imageAlt || title, locale)}
+            loading="eager"
+            fetchPriority="high"
+            pictureClassName="block w-full h-full"
+            sizes="(min-width: 1024px) 50vw, 100vw"
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
           />
         </div>
@@ -91,10 +96,12 @@ function BlogGridCard({ slug, title, excerpt, date, image, imageAlt, author, rea
     >
       <Link href={buildLocalePath(locale, "blogPost", slug)} className="group flex flex-col bg-white overflow-hidden border border-works-muted/30 hover:border-works-primary/30 hover:shadow-lg transition-all duration-300">
         <div className="w-full aspect-[4/3] overflow-hidden">
-          <img
+          <ResponsiveImage
             loading="lazy"
             src={image}
             alt={accessibleTermLabel(imageAlt || title, locale)}
+            pictureClassName="block w-full h-full"
+            sizes="(min-width: 1024px) 33vw, 50vw"
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
           />
         </div>

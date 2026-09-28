@@ -5,6 +5,7 @@ import path from "path";
 import runtimeErrorOverlay from "@replit/vite-plugin-runtime-error-modal";
 import { subscribeNewsletter } from "./newsletter-server.mjs";
 import { sendContactMessage } from "./contact-server.mjs";
+import { DEFAULT_SITE_URL, resolveSiteUrl } from "./src/seo-config";
 
 const rawPort = process.env.PORT;
 
@@ -15,9 +16,20 @@ if (rawPort !== undefined && (Number.isNaN(port) || (port as number) <= 0)) {
 }
 
 const basePath = process.env.BASE_PATH ?? "/";
+// Keep the SEO metadata origin identical in the browser and SSR bundles.
+// SITE_URL configures metadata only; it does not enable server redirects.
+// CANONICAL_ORIGIN remains a separate, optional server setting until the
+// production domain is confirmed. VITE_SITE_URL remains accepted for local
+// tooling, but cannot diverge from SITE_URL when both are present.
+const siteUrl = resolveSiteUrl(
+  process.env.SITE_URL || process.env.VITE_SITE_URL || DEFAULT_SITE_URL,
+);
 
 export default defineConfig({
   base: basePath,
+  define: {
+    "import.meta.env.VITE_SITE_URL": JSON.stringify(siteUrl),
+  },
   plugins: [
     {
       name: "admin-redirect",

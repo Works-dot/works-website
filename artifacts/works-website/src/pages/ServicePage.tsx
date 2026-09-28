@@ -24,6 +24,7 @@ import { ArrowLinkLabel } from "@/components/ui/arrow-link-label";
 import { FullBleedHero } from "@/components/ui/FullBleedHero";
 import { TermText } from "@/components/Terminology";
 import { accessibleTermLabel } from "@/lib/terminology";
+import { ResponsiveImage } from "@/components/ui/ResponsiveImage";
 
 const fadeUp = {
   initial: { opacity: 0, y: 20 },
@@ -498,9 +499,12 @@ function RelatedProjectCard({ p, i, animated = true }: { p: Project; i: number; 
     >
       <Link href={buildLocalePath(locale, "projectDetail", p.slug)} className="flex flex-col flex-grow">
         <div className="w-full aspect-[4/3] relative overflow-hidden bg-works-light">
-          <img
+          <ResponsiveImage
             src={p.image}
             alt={accessibleTermLabel(p.imageAlt || p.title, locale)}
+            loading="lazy"
+            pictureClassName="block w-full h-full"
+            sizes="(min-width: 1024px) 33vw, 50vw"
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
           />
         </div>

@@ -5,6 +5,7 @@ import { buildLocalePath } from "@/lib/i18n-routes";
 import { ArrowLinkLabel } from "@/components/ui/arrow-link-label";
 import { TermText } from "@/components/Terminology";
 import { accessibleTermLabel } from "@/lib/terminology";
+import { ResponsiveImage } from "@/components/ui/ResponsiveImage";
 
 interface ProjectCardProps {
   slug: string;
@@ -18,9 +19,11 @@ interface ProjectCardProps {
   animated?: boolean;
   /** Clamp the description to 3 lines with an ellipsis (mobile carousel). */
   clampDescription?: boolean;
+  /** Keep the real above-the-fold candidate eager; cards default to lazy. */
+  priority?: boolean;
 }
 
-export function ProjectCard({ slug, title, tags, description, image, imageAlt, reverse = false, animated = true, clampDescription = false }: ProjectCardProps) {
+export function ProjectCard({ slug, title, tags, description, image, imageAlt, reverse = false, animated = true, clampDescription = false, priority = false }: ProjectCardProps) {
   const { locale, t } = useI18n();
   return (
     <motion.div
@@ -36,10 +39,14 @@ export function ProjectCard({ slug, title, tags, description, image, imageAlt, r
     >
       <div className="w-full lg:w-1/2 overflow-hidden">
         <div className="w-full aspect-[4/3] relative overflow-hidden flex items-center justify-center">
-          <img
+          <ResponsiveImage
             src={image}
             alt={accessibleTermLabel(imageAlt || title, locale)}
             className="relative z-10 w-full h-full object-contain"
+            pictureClassName="block w-full h-full"
+            loading={priority ? "eager" : "lazy"}
+            fetchPriority={priority ? "high" : "auto"}
+            sizes="(min-width: 1024px) 50vw, 100vw"
           />
         </div>
       </div>

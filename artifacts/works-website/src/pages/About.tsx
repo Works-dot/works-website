@@ -12,6 +12,7 @@ import { useI18n } from "@/i18n";
 import { FullBleedHero } from "@/components/ui/FullBleedHero";
 import { TermText } from "@/components/Terminology";
 import { accessibleTermLabel } from "@/lib/terminology";
+import { ResponsiveImage } from "@/components/ui/ResponsiveImage";
 import aboutHeroImage from "@/assets/heroes/Hero_about_1789027068380.png";
 import aboutMobileHeroImage from "@/assets/heroes/Hero_about_mobile_1789374396077.png";
 
@@ -114,9 +115,12 @@ export default function About() {
                   >
                     <div className="aspect-square overflow-hidden mb-3 bg-works-muted/20">
                       {member.image ? (
-                        <img
+                        <ResponsiveImage
                           src={member.image}
                           alt={accessibleTermLabel(member.imageAlt || member.name || "", locale)}
+                           loading="lazy"
+                           pictureClassName="block w-full h-full"
+                           sizes="(min-width: 768px) 20vw, 50vw"
                           className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500"
                         />
                       ) : (
@@ -163,10 +167,12 @@ export default function About() {
                       className="pl-4 basis-[calc(100vw-1rem)] sm:basis-[calc((100vw-2rem)/2)] lg:basis-[calc((min(100vw,80rem)-3rem)/3)]"
                     >
                       <div className="overflow-hidden">
-                        <img
+                        <ResponsiveImage
                           loading="lazy"
                           src={img.src}
                           alt={accessibleTermLabel(img.alt || "", locale)}
+                          pictureClassName="block w-full"
+                          sizes="(min-width: 1024px) 33vw, 50vw"
                           className="w-full aspect-[4/3] object-cover hover:scale-105 transition-transform duration-500"
                         />
                       </div>

@@ -6,6 +6,7 @@ import { buildLocalePath } from "@/lib/i18n-routes";
 import { ArrowLinkLabel } from "@/components/ui/arrow-link-label";
 import { TermText } from "@/components/Terminology";
 import { accessibleTermLabel } from "@/lib/terminology";
+import { ResponsiveImage } from "@/components/ui/ResponsiveImage";
 
 interface BlogCardProps {
   slug: string;
@@ -17,9 +18,11 @@ interface BlogCardProps {
   index: number;
   /** Disable the scroll-into-view entry animation (needed inside horizontal carousels, where the peeking card would stay invisible). */
   animated?: boolean;
+  /** Keep the real above-the-fold candidate eager; cards default to lazy. */
+  priority?: boolean;
 }
 
-export function BlogCard({ slug, title, excerpt, date, image, imageAlt, index, animated = true }: BlogCardProps) {
+export function BlogCard({ slug, title, excerpt, date, image, imageAlt, index, animated = true, priority = false }: BlogCardProps) {
   const { locale, t } = useI18n();
   return (
     <motion.article 
@@ -35,10 +38,14 @@ export function BlogCard({ slug, title, excerpt, date, image, imageAlt, index, a
     >
       <Link href={buildLocalePath(locale, "blogPost", slug)} className="flex flex-col flex-grow">
         <div className="w-full aspect-[4/3] relative overflow-hidden">
-          <img
+          <ResponsiveImage
             src={image}
             alt={accessibleTermLabel(imageAlt || title, locale)}
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+            pictureClassName="block w-full h-full"
+            loading={priority ? "eager" : "lazy"}
+            fetchPriority={priority ? "high" : "auto"}
+            sizes="(min-width: 1024px) 33vw, 100vw"
           />
         </div>
         

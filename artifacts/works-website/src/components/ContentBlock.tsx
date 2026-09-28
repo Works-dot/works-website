@@ -7,6 +7,7 @@ import {
   terminologyRemarkPlugin,
 } from "@/lib/terminology";
 import { TermText } from "@/components/Terminology";
+import { ResponsiveImage } from "@/components/ui/ResponsiveImage";
 
 const markdownClasses = [
   "prose prose-lg max-w-none mb-8",
@@ -64,10 +65,11 @@ export function ContentBlock({ block }: { block: ContentBlockType }) {
     return (
       <figure className="my-10">
         <div className="overflow-hidden bg-works-light">
-          <img
+          <ResponsiveImage
             src={block.content}
             alt={accessibleTermLabel(imageAlt, locale)}
             loading="lazy"
+            pictureClassName="block w-full"
             className="w-full h-auto object-cover"
           />
         </div>

@@ -10,8 +10,8 @@ import { assertProjectFilters } from "./test-project-filters.mjs";
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const distDir = path.join(root, "dist", "public");
 const siteUrl = (
-  process.env.VITE_SITE_URL ||
   process.env.SITE_URL ||
+  process.env.VITE_SITE_URL ||
   "https://workspaceworks-website-production.up.railway.app"
 ).replace(/\/+$/, "");
 
@@ -130,6 +130,12 @@ async function readSeo(page) {
       ogTypes: contents('meta[property="og:type"]'),
       ogUrls: contents('meta[property="og:url"]'),
       publishedTimes: contents('meta[property="article:published_time"]'),
+      alternates: Array.from(
+        document.head.querySelectorAll('link[rel="alternate"]'),
+      ).map((element) => ({
+        hreflang: element.getAttribute("hreflang"),
+        href: element.getAttribute("href"),
+      })),
     };
   });
 }
@@ -149,7 +155,7 @@ function assertSingleton(values, label, { allowEmpty = false } = {}) {
   }
 }
 
-async function assertSeo(page, { pathname, type, articleTitle }) {
+async function assertSeo(page, { pathname, type, articleTitle, xDefaultPath = pathname }) {
   await page.waitForFunction(
     ({ expectedCanonical, expectedType, expectedTitle }) => {
       const canonical = document.head.querySelector('link[rel="canonical"]')?.href;
@@ -180,6 +186,16 @@ async function assertSeo(page, { pathname, type, articleTitle }) {
   assert.equal(seo.ogTypes[0], type);
   assert.equal(seo.ogTitles[0], seo.titles[0]);
   assert.equal(seo.ogDescriptions[0], seo.descriptions[0]);
+  assert.deepEqual(
+    seo.alternates.map((alternate) => alternate.hreflang),
+    ["hu", "en", "x-default"],
+    `${pathname} should expose the reciprocal HU/EN alternates`,
+  );
+  assert.equal(
+    seo.alternates.find((alternate) => alternate.hreflang === "x-default")?.href,
+    `${siteUrl}${xDefaultPath}`,
+    `${pathname} should use the real HU page as x-default`,
+  );
 
   if (type === "article") {
     assertSingleton(seo.publishedTimes, "article:published_time");
@@ -284,6 +300,11 @@ async function run() {
       type: "website",
     });
     assert.notEqual(projectsSeo.titles[0], firstSeo.titles[0]);
+    assert.notDeepEqual(
+      projectsSeo.alternates,
+      firstSeo.alternates,
+      "client navigation retained stale hreflang URLs",
+    );
 
     await clickHeaderLink(page, "/blog");
     await assertRenderedPage(page, "/blog");
@@ -331,6 +352,11 @@ async function run() {
 
     await page.goto(`${baseUrl}/en/contact`, { waitUntil: "networkidle" });
     await assertRenderedPage(page, "/en/contact");
+    await assertSeo(page, {
+      pathname: "/en/contact",
+      type: "website",
+      xDefaultPath: "/kapcsolat",
+    });
     const consentPrivacyHref = await page
       .locator('main a[href*="/strapi/uploads/"][href$=".pdf"]')
       .first()

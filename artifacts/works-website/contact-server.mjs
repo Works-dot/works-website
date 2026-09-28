@@ -1,3 +1,9 @@
+import {
+  ProviderTimeoutError,
+  PROVIDER_TIMEOUT_MS,
+  withTimeout,
+} from "./server-error.mjs";
+
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const RESEND_API_URL = "https://api.resend.com/emails";
 const DEFAULT_FROM = "Works. kapcsolat <design@worksdot.hu>";
@@ -59,28 +65,35 @@ export async function sendContactMessage(payload) {
   const cvText = cvUrl ? `\nÖnéletrajz: ${cvUrl}` : "";
 
   try {
-    const response = await fetch(RESEND_API_URL, {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${apiKey}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        from,
-        to: [to],
-        reply_to: email,
-        subject: `Kapcsolatfelvétel: ${subject}`,
-        html: [
-          `<p><strong>Név:</strong> ${escapeHtml(name)}</p>`,
-          `<p><strong>E-mail:</strong> ${escapeHtml(email)}</p>`,
-          `<p><strong>Tárgy:</strong> ${escapeHtml(subject)}</p>`,
-          `<p><strong>Üzenet:</strong><br>${escapedMessage}</p>`,
-          cvHtml,
-        ].join(""),
-        text: `Név: ${name}\nE-mail: ${email}\nTárgy: ${subject}\n\nÜzenet:\n${message}${cvText}`,
-      }),
-    });
-    const result = await response.json().catch(() => null);
+    const { response, result } = await withTimeout(async (signal) => {
+      const response = await fetch(RESEND_API_URL, {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${apiKey}`,
+          "Content-Type": "application/json",
+        },
+        signal,
+        body: JSON.stringify({
+          from,
+          to: [to],
+          reply_to: email,
+          subject: `Kapcsolatfelvétel: ${subject}`,
+          html: [
+            `<p><strong>Név:</strong> ${escapeHtml(name)}</p>`,
+            `<p><strong>E-mail:</strong> ${escapeHtml(email)}</p>`,
+            `<p><strong>Tárgy:</strong> ${escapeHtml(subject)}</p>`,
+            `<p><strong>Üzenet:</strong><br>${escapedMessage}</p>`,
+            cvHtml,
+          ].join(""),
+          text: `Név: ${name}\nE-mail: ${email}\nTárgy: ${subject}\n\nÜzenet:\n${message}${cvText}`,
+        }),
+      });
+      const result =
+        typeof response?.json === "function"
+          ? await Promise.resolve(response.json()).catch(() => null)
+          : null;
+      return { response, result };
+    }, PROVIDER_TIMEOUT_MS);
 
     if (!response.ok || !result?.id) {
       const providerError = typeof result?.name === "string" ? result.name : "unknown";
@@ -91,6 +104,10 @@ export async function sendContactMessage(payload) {
     console.info(`Contact email accepted by Resend (${result.id})`);
     return { status: 200, body: { ok: true, code: "sent" } };
   } catch (error) {
+    if (error instanceof ProviderTimeoutError) {
+      console.error("Contact email delivery timed out");
+      return { status: 503, body: { ok: false, code: "service_unavailable" } };
+    }
     const message = error instanceof Error ? error.message : "unknown error";
     console.error(`Contact email delivery failed: ${message}`);
     return { status: 503, body: { ok: false, code: "service_unavailable" } };

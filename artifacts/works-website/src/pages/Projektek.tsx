@@ -14,6 +14,7 @@ import { buildLocalePath } from "@/lib/i18n-routes";
 import { ArrowLinkLabel } from "@/components/ui/arrow-link-label";
 import { TermText } from "@/components/Terminology";
 import { accessibleTermLabel } from "@/lib/terminology";
+import { ResponsiveImage } from "@/components/ui/ResponsiveImage";
 
 function FeaturedProjectCard({ slug, title, tags, description, image, imageAlt }: {
   slug: string;
@@ -35,9 +36,13 @@ function FeaturedProjectCard({ slug, title, tags, description, image, imageAlt }
     >
       <Link href={buildLocalePath(locale, "projectDetail", slug)} className="group flex flex-col lg:flex-row gap-8 lg:gap-12 items-center">
         <div className="w-full lg:w-1/2 overflow-hidden bg-works-light aspect-[4/3]">
-          <img
+          <ResponsiveImage
             src={image}
             alt={accessibleTermLabel(imageAlt || title, locale)}
+            loading="eager"
+            fetchPriority="high"
+            pictureClassName="block w-full h-full"
+            sizes="(min-width: 1024px) 50vw, 100vw"
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
           />
         </div>
@@ -87,10 +92,12 @@ function ProjectGridCard({ slug, title, tags, description, image, imageAlt }: {
     >
       <Link href={buildLocalePath(locale, "projectDetail", slug)} className="group block">
         <div className="overflow-hidden bg-works-light aspect-[4/3]">
-          <img
+          <ResponsiveImage
             loading="lazy"
             src={image}
             alt={accessibleTermLabel(imageAlt || title, locale)}
+            pictureClassName="block w-full h-full"
+            sizes="(min-width: 1024px) 33vw, 50vw"
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
           />
         </div>

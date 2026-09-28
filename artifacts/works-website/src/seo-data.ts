@@ -10,6 +10,7 @@ import {
   fallbackProjectsPage,
   fallbackBlogPage,
   getLocaleFallback,
+  getLocaleCounterpartSlug,
 } from "./data/fallback";
 import type { SeoOverride } from "./lib/strapi";
 import {
@@ -18,7 +19,9 @@ import {
   matchLocalePath,
   stripSearch,
   type Locale,
+  type RouteKey,
 } from "./lib/i18n-routes";
+import { DEFAULT_SITE_URL, resolveSiteUrl } from "./seo-config";
 
 export interface PageMeta {
   title: string;
@@ -37,17 +40,26 @@ export interface PageMeta {
    * Defaults to "hu" when absent.
    */
   locale?: Locale;
+  /** Reciprocal language alternates for this real, public page. */
+  alternates?: AlternateLink[];
 }
 
+export interface AlternateLink {
+  hreflang: "hu" | "en" | "x-default";
+  href: string;
+}
+
+/*
+ * Vite replaces this value in both the browser and SSR bundles.  The
+ * vite.config.ts define below deliberately gives both bundles the same value,
+ * so a separately configured SITE_URL cannot make client and server disagree.
+ */
 const configuredSiteUrl =
   (typeof import.meta !== "undefined" &&
     (import.meta as { env?: Record<string, string> }).env?.VITE_SITE_URL) ||
-  (typeof process !== "undefined" && process.env?.SITE_URL) ||
-  "";
+  DEFAULT_SITE_URL;
 
-export const SITE_URL = (
-  configuredSiteUrl || "https://workspaceworks-website-production.up.railway.app"
-).replace(/\/+$/, "");
+export const SITE_URL = resolveSiteUrl(configuredSiteUrl);
 
 function absoluteUrl(pathOrUrl: string): string {
   if (/^https?:\/\//.test(pathOrUrl)) return pathOrUrl;
@@ -78,6 +90,116 @@ const DEFAULT_OG_IMAGE = "/opengraph.jpg";
 
 function formatTitle(pageTitle: string): string {
   return `${pageTitle} | Works.`;
+}
+
+type DetailRouteKey =
+  | "projectDetail"
+  | "blogPost"
+  | "serviceDetail"
+  | "careerDetail";
+
+const detailCollectionKeys: Record<DetailRouteKey, string> = {
+  projectDetail: "projects",
+  blogPost: "blogPosts",
+  serviceDetail: "services",
+  careerDetail: "careerPositions",
+};
+
+function isDetailRouteKey(routeKey: RouteKey): routeKey is DetailRouteKey {
+  return routeKey in detailCollectionKeys;
+}
+
+function detailRecordExists(
+  locale: Locale,
+  routeKey: DetailRouteKey,
+  slug: string,
+): boolean {
+  const records = getLocaleFallback<{ slug: string }[]>(
+    detailCollectionKeys[routeKey],
+    locale,
+  );
+  return Boolean(records?.some((record) => record.slug === slug));
+}
+
+/**
+ * Returns absolute reciprocal language links only for pages that really exist
+ * in both locale datasets.  Detail pages are paired by Strapi's stable
+ * documentId through getLocaleCounterpartSlug; matching slugs is not safe.
+ *
+ * An HU-only detail page is still a real default-language page, so it gets a
+ * self HU link and x-default.  An EN-only detail page gets no alternates: it
+ * cannot claim a reciprocal HU translation or fabricate an HU URL.
+ */
+export function getAlternateLinks(
+  route: string,
+  locale?: Locale,
+): AlternateLink[] {
+  const pathname = stripSearch(route);
+  const routeMatch = matchLocalePath(pathname);
+  if (!routeMatch) return [];
+
+  const sourceLocale = locale || routeMatch.locale;
+  const routeKey = routeMatch.routeKey;
+  const huPath = buildLocalePath(
+    "hu",
+    routeKey,
+    routeMatch.slug ? decodeURIComponent(routeMatch.slug) : undefined,
+  );
+  const enPath = buildLocalePath(
+    "en",
+    routeKey,
+    routeMatch.slug ? decodeURIComponent(routeMatch.slug) : undefined,
+  );
+
+  if (!isDetailRouteKey(routeKey)) {
+    return [
+      { hreflang: "hu", href: absoluteUrl(huPath) },
+      { hreflang: "en", href: absoluteUrl(enPath) },
+      { hreflang: "x-default", href: absoluteUrl(huPath) },
+    ];
+  }
+
+  const sourceSlug = routeMatch.slug
+    ? decodeURIComponent(routeMatch.slug)
+    : undefined;
+  if (!sourceSlug || !detailRecordExists(sourceLocale, routeKey, sourceSlug)) {
+    return [];
+  }
+
+  const targetLocale: Locale = sourceLocale === "hu" ? "en" : "hu";
+  const counterpartSlug = getLocaleCounterpartSlug(
+    sourceLocale,
+    targetLocale,
+    routeKey,
+    sourceSlug,
+  );
+
+  if (sourceLocale === "en" && !counterpartSlug) {
+    return [];
+  }
+
+  if (!counterpartSlug) {
+    const currentHuPath = buildLocalePath("hu", routeKey, sourceSlug);
+    return [
+      { hreflang: "hu", href: absoluteUrl(currentHuPath) },
+      { hreflang: "x-default", href: absoluteUrl(currentHuPath) },
+    ];
+  }
+
+  const pairedHuPath =
+    sourceLocale === "hu"
+      ? buildLocalePath("hu", routeKey, sourceSlug)
+      : buildLocalePath("hu", routeKey, counterpartSlug);
+  const pairedEnPath =
+    sourceLocale === "en"
+      ? buildLocalePath("en", routeKey, sourceSlug)
+      : buildLocalePath("en", routeKey, counterpartSlug);
+
+  return [
+    { hreflang: "hu", href: absoluteUrl(pairedHuPath) },
+    { hreflang: "en", href: absoluteUrl(pairedEnPath) },
+    { hreflang: "x-default", href: absoluteUrl(pairedHuPath) },
+  ];
 }
 
 const staticMeta: Record<string, PageMeta> = {
@@ -216,8 +338,9 @@ export function getPageMeta(route: string, locale?: Locale): PageMeta {
 
   if (lang === "en") {
     const isEnglishRoute = routeMatch?.locale === "en";
-    const isArticle =
-      routeMatch?.routeKey === "blogPost" || routeMatch?.routeKey === "projectDetail";
+    const detailSlug = routeMatch?.slug
+      ? decodeURIComponent(routeMatch.slug)
+      : undefined;
     const staticDefault = routeMatch ? enStaticMeta[routeMatch.routeKey] : undefined;
     const detailLabel =
       routeMatch?.routeKey === "projectDetail"
@@ -238,17 +361,23 @@ export function getPageMeta(route: string, locale?: Locale): PageMeta {
             ? buildLocalePath("en", "careers")
             : undefined;
     const project = routeMatch?.routeKey === "projectDetail"
-      ? getLocaleFallback<typeof fallbackProjects[number]>(`project:${routeMatch.slug}`, "en")
+      ? getLocaleFallback<typeof fallbackProjects[number]>(`project:${detailSlug}`, "en")
       : undefined;
     const post = routeMatch?.routeKey === "blogPost"
-      ? getLocaleFallback<typeof fallbackBlogPosts[number]>(`blogPost:${routeMatch.slug}`, "en")
+      ? getLocaleFallback<typeof fallbackBlogPosts[number]>(`blogPost:${detailSlug}`, "en")
       : undefined;
     const service = routeMatch?.routeKey === "serviceDetail"
-      ? getLocaleFallback<typeof fallbackServices[number]>(`service:${routeMatch.slug}`, "en")
+      ? getLocaleFallback<typeof fallbackServices[number]>(`service:${detailSlug}`, "en")
       : undefined;
     const position = routeMatch?.routeKey === "careerDetail"
-      ? getLocaleFallback<typeof fallbackPositions[number]>(`careerPosition:${routeMatch.slug}`, "en")
+      ? getLocaleFallback<typeof fallbackPositions[number]>(`careerPosition:${detailSlug}`, "en")
       : undefined;
+    const detailRecord = project || post || service || position;
+    const isDetailRoute = routeMatch ? isDetailRouteKey(routeMatch.routeKey) : false;
+    const hasRealEnglishPage = !isDetailRoute || Boolean(detailRecord);
+    const isArticle =
+      hasRealEnglishPage &&
+      (routeMatch?.routeKey === "blogPost" || routeMatch?.routeKey === "projectDetail");
     const detailSeo = project?.seo || post?.seo || service?.seo || position?.seo;
     const staticSeo =
       routeMatch?.routeKey === "projects"
@@ -258,17 +387,19 @@ export function getPageMeta(route: string, locale?: Locale): PageMeta {
           : undefined;
     const detailDescription =
       project?.caseStudy.heroSubtitle || post?.excerpt || service?.heroDescription || position?.excerpt;
-    return withOverride({
+    const meta = withOverride({
       title: staticDefault?.title || EN_DEFAULT_TITLE,
       description: detailDescription || staticDefault?.description || EN_DEFAULT_DESCRIPTION,
       ogImage: project?.image || post?.image,
-      path: isEnglishRoute ? pathname : undefined,
+      // A route pattern alone is not an English detail page.  Only a record
+      // present in the EN dataset may receive a canonical or hreflang URL.
+      path: isEnglishRoute && hasRealEnglishPage ? pathname : undefined,
       type: isArticle ? "article" : "website",
       locale: "en",
       ...(post
         ? { article: { publishedTime: post.date, author: post.author || undefined } }
         : {}),
-      ...(detailLabel
+      ...(detailLabel && detailRecord && hasRealEnglishPage
         ? {
             breadcrumbs: [
               ...(detailParent ? [{ name: detailLabel, path: detailParent }] : []),
@@ -277,11 +408,24 @@ export function getPageMeta(route: string, locale?: Locale): PageMeta {
           }
         : {}),
     }, detailSeo || staticSeo);
+    return {
+      ...meta,
+      alternates:
+        meta.path && hasRealEnglishPage
+          ? getAlternateLinks(pathname, "en")
+          : [],
+    };
   }
 
   if (staticMeta[pathname]) {
     const base = withOverride(staticMeta[pathname], pageSeoOverrides[pathname]);
-    return { ...base, path: pathname, type: "website", locale: lang };
+    return {
+      ...base,
+      path: pathname,
+      type: "website",
+      locale: lang,
+      alternates: getAlternateLinks(pathname, lang),
+    };
   }
 
   const projectMatch = pathname.match(/^\/projektek\/(.+)$/);
@@ -301,6 +445,7 @@ export function getPageMeta(route: string, locale?: Locale): PageMeta {
         path: pathname,
         type: "article",
         locale: lang,
+        alternates: getAlternateLinks(pathname, "hu"),
         breadcrumbs: [
           { name: "Projektek", path: "/projektek" },
           { name: project.title, path: pathname },
@@ -326,6 +471,7 @@ export function getPageMeta(route: string, locale?: Locale): PageMeta {
         path: pathname,
         type: "article",
         locale: lang,
+        alternates: getAlternateLinks(pathname, "hu"),
         article: { publishedTime: post.date, author: post.author || undefined },
         breadcrumbs: [
           { name: "Blog", path: "/blog" },
@@ -351,6 +497,7 @@ export function getPageMeta(route: string, locale?: Locale): PageMeta {
         path: pathname,
         type: "website",
         locale: lang,
+        alternates: getAlternateLinks(pathname, "hu"),
         breadcrumbs: [{ name: service.title, path: pathname }],
       };
     }
@@ -372,6 +519,7 @@ export function getPageMeta(route: string, locale?: Locale): PageMeta {
         path: pathname,
         type: "website",
         locale: lang,
+        alternates: getAlternateLinks(pathname, "hu"),
         breadcrumbs: [
           { name: "Karrier", path: "/karrier" },
           { name: position.title, path: pathname },
@@ -380,7 +528,13 @@ export function getPageMeta(route: string, locale?: Locale): PageMeta {
     }
   }
 
-  return { title: DEFAULT_TITLE, description: DEFAULT_DESCRIPTION, type: "website", locale: lang };
+  return {
+    title: DEFAULT_TITLE,
+    description: DEFAULT_DESCRIPTION,
+    type: "website",
+    locale: lang,
+    alternates: [],
+  };
 }
 
 function jsonLdScript(data: object): string {
@@ -473,6 +627,10 @@ export function buildMetaTags(meta: PageMeta): string {
     `<title data-ssr>${escaped(meta.title)}</title>`,
     `<meta data-ssr name="description" content="${escaped(meta.description)}" />`,
     ...(canonical ? [`<link data-ssr rel="canonical" href="${escaped(canonical)}" />`] : []),
+    ...(meta.alternates || []).map(
+      ({ hreflang, href }) =>
+        `<link data-ssr rel="alternate" hreflang="${hreflang}" href="${escaped(href)}" />`,
+    ),
     `<meta data-ssr property="og:title" content="${escaped(meta.title)}" />`,
     `<meta data-ssr property="og:description" content="${escaped(meta.description)}" />`,
     `<meta data-ssr property="og:type" content="${ogType}" />`,

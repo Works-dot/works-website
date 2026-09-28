@@ -5,6 +5,7 @@ dist
 tmp
 out-tsc
 *.tsbuildinfo
+artifacts/works-website/public/media
 .expo
 .expo-shared
 

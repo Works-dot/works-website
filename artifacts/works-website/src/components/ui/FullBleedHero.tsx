@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import type { ReactNode } from "react";
+import { ResponsiveImage } from "@/components/ui/ResponsiveImage";
 import "./FullBleedHero.css";
 
 type FullBleedHeroProps = {
@@ -21,17 +22,19 @@ export function FullBleedHero({
     <section
       className="full-bleed-hero relative isolate overflow-hidden flex bg-works-dark text-white"
     >
-      <picture className="absolute inset-0 -z-10 pointer-events-none select-none">
-        {mobileBackgroundImage && (
-          <source media="(width < 768px)" srcSet={mobileBackgroundImage} />
-        )}
-        <img
+      <div className="absolute inset-0 -z-10 pointer-events-none select-none">
+        <ResponsiveImage
           src={backgroundImage}
+          mobileSource={mobileBackgroundImage}
           alt=""
           aria-hidden="true"
+          loading="eager"
+          fetchPriority="high"
+          sizes="100vw"
+          pictureClassName="block h-full w-full"
           className={`h-full w-full object-cover ${mobileBackgroundImage ? "object-center md:object-right" : "object-right"}`}
         />
-      </picture>
+      </div>
       <div className="mx-auto flex w-full min-w-0 max-w-7xl items-center px-4 py-12 sm:px-6 sm:py-16 lg:px-8 lg:py-20">
           <motion.div
             initial={{ opacity: 0, y: 20 }}

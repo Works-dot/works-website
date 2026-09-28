@@ -6,6 +6,18 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const root = path.resolve(__dirname, "..");
 const outDir = path.resolve(root, "dist/public");
 
+function clearGeneratedHead(page) {
+  // Never carry generated SSR/client-owned tags from a previous template into
+  // a newly prerendered route. Static assets such as the favicon are not owned
+  // by SEO and are intentionally left untouched.
+  return page
+    .replace(/<title[^>]*data-ssr[^>]*>[\s\S]*?<\/title>/gi, "")
+    .replace(/<meta[^>]*data-ssr[^>]*\/?>/gi, "")
+    .replace(/<link[^>]*data-ssr[^>]*\/?>/gi, "")
+    .replace(/<link[^>]*data-client-seo[^>]*\/?>/gi, "")
+    .replace(/<script[^>]*data-ssr[^>]*>[\s\S]*?<\/script>/gi, "");
+}
+
 async function prerender() {
   const {
     render,
@@ -53,7 +65,7 @@ async function prerender() {
     const meta = getPageMeta(route, locale);
     const headTags = buildMetaTags(meta);
 
-    let page = template;
+    let page = clearGeneratedHead(template);
 
     page = page.replace(
       /<title>.*?<\/title>/,
@@ -79,7 +91,7 @@ async function prerender() {
   // az ismeretlen címekre a főoldal (soft-404) helyett.
   {
     const { html } = render("/__not_found__");
-    let page = template;
+    let page = clearGeneratedHead(template);
     page = page.replace(/<title>.*?<\/title>/, "");
     page = page.replace(
       "<!--ssr-head-->",

@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useLocation } from "wouter";
 import {
   buildJsonLd,
+  getAlternateLinks,
   getPageMeta,
   SITE_URL,
   localeToOgLocale,
@@ -59,6 +60,33 @@ function upsertLink(rel: "canonical" | "icon", href: string) {
   element.href = href;
   element.setAttribute(CLIENT_SEO_ATTRIBUTE, "");
   element.removeAttribute("data-ssr");
+}
+
+function removeOwnedLink(rel: "canonical" | "alternate") {
+  document.head
+    .querySelectorAll(
+      `link[rel="${rel}"][data-ssr], link[rel="${rel}"][${CLIENT_SEO_ATTRIBUTE}]`,
+    )
+    .forEach((element) => element.remove());
+}
+
+function syncAlternateLinks(
+  alternates: { hreflang: string; href: string }[],
+) {
+  // SSR owns the initial links; the client takes ownership on hydration and
+  // removes the previous route's links before adding the current set. This
+  // prevents stale language URLs after SPA navigation without touching
+  // third-party, unowned head tags.
+  removeOwnedLink("alternate");
+
+  for (const { hreflang, href } of alternates) {
+    const element = document.createElement("link");
+    element.rel = "alternate";
+    element.hreflang = hreflang;
+    element.href = href;
+    element.setAttribute(CLIENT_SEO_ATTRIBUTE, "");
+    document.head.appendChild(element);
+  }
 }
 
 function upsertTitle(title: string) {
@@ -131,8 +159,9 @@ export default function SEOHead() {
   const ogLocale = localeToOgLocale(lang);
   const ogImage = absoluteUrl(meta.ogImage || settings?.ogImageUrl || "/opengraph.jpg");
   const favicon = settings?.faviconUrl || "/favicon.ico";
-  const canonical = absoluteUrl(meta.path || location);
+  const canonical = meta.path ? absoluteUrl(meta.path) : undefined;
   const ogType = meta.type === "article" ? "article" : "website";
+  const alternates = meta.path ? getAlternateLinks(location, lang) : [];
 
   useEffect(() => {
     document.documentElement.lang = lang;
@@ -141,11 +170,20 @@ export default function SEOHead() {
     document.head
       .querySelectorAll(`meta[name="robots"][${CLIENT_SEO_ATTRIBUTE}]`)
       .forEach((element) => element.remove());
-    upsertLink("canonical", canonical);
+    if (canonical) {
+      upsertLink("canonical", canonical);
+    } else {
+      removeOwnedLink("canonical");
+    }
+    syncAlternateLinks(alternates);
     upsertMeta("property", "og:title", meta.title);
     upsertMeta("property", "og:description", meta.description);
     upsertMeta("property", "og:type", ogType);
-    upsertMeta("property", "og:url", canonical);
+    if (canonical) {
+      upsertMeta("property", "og:url", canonical);
+    } else {
+      removeMeta("property", "og:url");
+    }
     upsertMeta("property", "og:locale", ogLocale);
     upsertMeta("property", "og:site_name", settings?.siteName || "Works.");
     upsertMeta("property", "og:image", ogImage);
@@ -181,6 +219,7 @@ export default function SEOHead() {
     ogImage,
     ogLocale,
     ogType,
+    alternates,
     settings?.siteName,
   ]);
 

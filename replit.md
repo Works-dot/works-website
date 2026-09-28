@@ -53,7 +53,9 @@ Every package extends `tsconfig.base.json` which sets `composite: true`. The roo
 ## Works. Website Release Workflow
 
 - For user-approved changes intended for the production Works. website, publishing the verified project state to `Works-dot/works-website` on GitHub `main` is part of task completion unless the user explicitly requests a local-only change.
-- Update GitHub with a non-force fast-forward from its current `main`, then verify that the remote tree matches the tested local tree.
+- Run `pnpm --filter @workspace/works-website release:website -- --dry-run` to identify the current GitHub `main` commit and print the website-only diff with each local Git blob hash.
+- After approving and testing that exact state, rerun the command with the printed plan hash: `pnpm --filter @workspace/works-website release:website -- --publish --plan <PRINTED_PLAN_HASH> --message "Release description"`. The helper refuses a different snapshot, rechecks local hashes, uses only the existing Replit GitHub connection, creates only `artifacts/works-website/` tree entries, and atomically refuses force updates or a moved GitHub head.
+- Do not use a manual GitHub tree assembly or normal `git push` for website releases.
 - Railway deploys the website automatically from GitHub `main`; verify that the resulting website deployment finishes successfully before closing the release task.
 
 ## Packages
