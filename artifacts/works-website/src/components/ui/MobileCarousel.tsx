@@ -72,10 +72,12 @@ export function MobileCarousel({ children, className = "", ariaLabel }: MobileCa
     >
       <div
         ref={trackRef}
-        className="flex gap-4 overflow-x-auto snap-x snap-mandatory -mx-4 pl-4 pr-10 sm:-mx-6 sm:pl-6 sm:pr-8 scroll-px-4 sm:scroll-px-6 scrollbar-hide"
+        className="flex gap-4 overflow-x-auto overflow-y-hidden snap-x snap-mandatory -mx-4 pl-4 pr-10 sm:-mx-6 sm:pl-6 sm:pr-8 scroll-px-4 sm:scroll-px-6 scrollbar-hide"
         // The scroll track's offscreen cards must not enlarge the mobile
         // layout viewport (which also stretches the fixed header in Chrome).
         // Paint containment clips only this track; its own scrolling remains.
+        // Explicitly hide vertical overflow: overflow-x:auto otherwise makes
+        // overflow-y:auto, including clipped text's offscreen accessible spans.
         style={{ scrollbarWidth: "none", msOverflowStyle: "none", contain: "paint" }}
       >
         {Children.map(children, (child) => (
