@@ -22,6 +22,7 @@ import {
   type RouteKey,
 } from "./lib/i18n-routes";
 import { DEFAULT_SITE_URL, resolveSiteUrl } from "./seo-config";
+import { organizationIdentity } from "./data/organization";
 
 export interface PageMeta {
   title: string;
@@ -584,14 +585,20 @@ export function buildJsonLd(
   const localizedHome = absoluteUrl(buildLocalePath(lang, "home"));
   const localizedDescription = lang === "en" ? EN_DEFAULT_DESCRIPTION : DEFAULT_DESCRIPTION;
   const sameAs = validSocialLinks(settings?.socialLinks).map((link) => link.url);
+  const email = settings?.contactEmail?.trim();
+  const telephone = settings?.contactPhone?.trim();
 
   scripts.push(
     jsonLdScript({
       "@context": "https://schema.org",
       "@type": "Organization",
       name: "Works.",
+      legalName: organizationIdentity.legalName,
       url: SITE_URL,
-      logo: absoluteUrl("/favicon.svg"),
+      logo: absoluteUrl(organizationIdentity.logoPath),
+      address: organizationIdentity.address,
+      ...(email ? { email } : {}),
+      ...(telephone ? { telephone } : {}),
       description: localizedDescription,
       ...(sameAs.length ? { sameAs } : {}),
     })

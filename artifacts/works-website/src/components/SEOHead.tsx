@@ -222,6 +222,8 @@ export default function SEOHead() {
     alternates,
     settings?.siteName,
     settings?.socialLinks,
+    settings?.contactEmail,
+    settings?.contactPhone,
   ]);
 
   return null;

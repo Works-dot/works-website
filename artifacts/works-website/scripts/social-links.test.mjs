@@ -3,6 +3,7 @@ import { readFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { after, before, test } from "node:test";
 import { createServer } from "vite";
+import sharp from "sharp";
 
 const root = fileURLToPath(new URL("..", import.meta.url));
 let vite;
@@ -76,4 +77,42 @@ test("footer uses Facebook and Clutch SVG marks instead of initials", () => {
   assert.doesNotMatch(source, /platform\.slice\(/);
   assert.match(source, /SOCIAL_ICONS\[key\] \|\| <LinkIcon/);
   assert.doesNotMatch(source, /href=["']#["']/);
+});
+
+test("Organization identifies the registered company consistently in HU and EN", () => {
+  const identities = ["hu", "en"].map((locale) => {
+    const data = organization({ title: "Home", description: "Home", locale });
+    assert.equal(data.name, "Works.");
+    assert.equal(data.legalName, "Works. Hungary Kft.");
+    assert.equal(data.email, "info@worksdot.hu");
+    assert.equal(data.telephone, "+36 30 930 4901");
+    assert.deepEqual(data.address, {
+      "@type": "PostalAddress",
+      streetAddress: "Ménesi út 18.",
+      postalCode: "1118",
+      addressLocality: "Budapest",
+      addressCountry: "HU",
+    });
+    assert.equal(data.logo, `${seo.SITE_URL}/organization-logo.png`);
+    const { description, ...identity } = data;
+    return identity;
+  });
+  assert.deepEqual(identities[0], identities[1]);
+});
+
+test("Organization uses reactive CMS contacts without inventing missing values", () => {
+  const meta = { title: "Home", description: "Home", locale: "en" };
+  const data = organization(meta, { contactEmail: " new@example.com ", contactPhone: " +36 1 234 5678 " });
+  assert.equal(data.email, "new@example.com");
+  assert.equal(data.telephone, "+36 1 234 5678");
+  const empty = organization(meta, { contactEmail: "", contactPhone: " " });
+  assert.equal("email" in empty, false);
+  assert.equal("telephone" in empty, false);
+});
+
+test("Organization logo is a crawlable PNG of at least 112 by 112 pixels", async () => {
+  const metadata = await sharp(fileURLToPath(new URL("../public/organization-logo.png", import.meta.url))).metadata();
+  assert.equal(metadata.format, "png");
+  assert.ok(metadata.width >= 112);
+  assert.ok(metadata.height >= 112);
 });
