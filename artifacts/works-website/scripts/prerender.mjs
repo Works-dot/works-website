@@ -149,9 +149,9 @@ async function prerender() {
     console.log("  ✓ /sitemap.xml");
   }
 
-  // robots.txt — mindent enged, sitemap-hivatkozással.
+  // Public uploads override the broader CMS crawl restriction.
   {
-    const robots = `User-agent: *\nAllow: /\nDisallow: /strapi/\n\nSitemap: ${SITE_URL}/sitemap.xml\n`;
+    const robots = `User-agent: *\nAllow: /\nDisallow: /strapi/\nAllow: /strapi/uploads/\n\nSitemap: ${SITE_URL}/sitemap.xml\n`;
     fs.writeFileSync(path.resolve(outDir, "robots.txt"), robots);
     console.log("  ✓ /robots.txt");
   }

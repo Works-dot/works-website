@@ -28,5 +28,27 @@ for await (const entry of await fs.readdir(root, { recursive: true })) {
   }
 }
 assert.ok(canonicalPages >= locs.length, "missing generated canonical pages");
-assert.match(await fs.readFile(path.join(root, "robots.txt"), "utf8"), /Sitemap: https:\/\/www\.worksdot\.hu\/sitemap\.xml/);
+const robots = await fs.readFile(path.join(root, "robots.txt"), "utf8");
+// Lock down this single wildcard group, so no more-specific user-agent group
+// can silently override the public-upload exception.
+assert.equal(robots.replaceAll("\r\n", "\n"),
+  `User-agent: *\nAllow: /\nDisallow: /strapi/\nAllow: /strapi/uploads/\n\nSitemap: ${origin}/sitemap.xml\n`);
+const rules = [...robots.matchAll(/^(Allow|Disallow): (\/[^\r\n]*)$/gm)]
+  .map(([, directive, prefix]) => ({ allow: directive === "Allow", prefix }));
+// These fixtures exercise literal rules only. RFC 9309: longest matching
+// rule wins, with Allow preferred on equal specificity; NOT first-match.
+const allowed = (pathname) => {
+  const matches = rules.filter(({ prefix }) => pathname.startsWith(prefix))
+    .sort((a, b) => b.prefix.length - a.prefix.length || Number(b.allow) - Number(a.allow));
+  return matches[0]?.allow ?? true;
+};
+for (const pathname of ["/", "/blog", "/en/blog", "/media/image.webp",
+  "/strapi/uploads/photo.png", "/strapi/uploads/impresszum.pdf",
+  "/strapi/uploads/nested/photo.svg"]) {
+  assert.equal(allowed(pathname), true, `must allow ${pathname}`);
+}
+for (const pathname of ["/strapi/", "/strapi/admin", "/strapi/api/services",
+  "/strapi/uploads-private/file.pdf", "/strapi/uploads"]) {
+  assert.equal(allowed(pathname), false, `must disallow ${pathname}`);
+}
 console.log(`PASS production origin: ${locs.length} sitemap URLs, ${canonicalPages} canonical HTML pages, alternates, OG, JSON-LD and robots`);
