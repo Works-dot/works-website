@@ -68,8 +68,12 @@ test("SSR defaults use the matching locale's embedded CMS social profiles", () =
   }
 });
 
-test("footer registers a Facebook icon and has no placeholder social anchors", () => {
+test("footer uses Facebook and Clutch SVG marks instead of initials", () => {
   const source = readFileSync(new URL("../src/components/layout/Footer.tsx", import.meta.url), "utf8");
-  assert.match(source, /facebook:\s*<Facebook\b/);
+  assert.match(source, /data-social-icon="facebook"/);
+  assert.match(source, /data-social-icon="clutch"/);
+  assert.match(source, /platform\.trim\(\)\.toLowerCase\(\)/);
+  assert.doesNotMatch(source, /platform\.slice\(/);
+  assert.match(source, /SOCIAL_ICONS\[key\] \|\| <LinkIcon/);
   assert.doesNotMatch(source, /href=["']#["']/);
 });
