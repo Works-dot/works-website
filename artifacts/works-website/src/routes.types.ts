@@ -14,6 +14,7 @@ export interface AppRoutes {
   Karrier: RouteComponent;
   Adatkezeles: RouteComponent;
   Sutik: RouteComponent;
+  Impresszum: RouteComponent;
   CareerDetail: RouteComponent;
   NotFound: RouteComponent;
 }

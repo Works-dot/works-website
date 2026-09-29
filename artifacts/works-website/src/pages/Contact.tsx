@@ -8,9 +8,9 @@ import { useRef } from "react";
 import { MapPin, Mail, Phone, ArrowRight, Upload, X, FileText, ChevronDown } from "lucide-react";
 import SEOHead from "@/components/SEOHead";
 import { useStrapiQuery } from "@/hooks/useStrapiQuery";
-import { getContactPage, getGlobalSettings, getLegalDocuments, uploadCv, CV_MAX_SIZE_BYTES, CV_ACCEPT, CV_ALLOWED_EXTENSIONS } from "@/lib/strapi";
-import type { ContactPageData, GlobalSettings, LegalDocuments } from "@/lib/strapi";
-import { fallbackContactPage, fallbackGlobalSettings, fallbackLegalDocuments } from "@/data/fallback";
+import { getContactPage, getGlobalSettings, uploadCv, CV_MAX_SIZE_BYTES, CV_ACCEPT, CV_ALLOWED_EXTENSIONS } from "@/lib/strapi";
+import type { ContactPageData, GlobalSettings } from "@/lib/strapi";
+import { fallbackContactPage, fallbackGlobalSettings } from "@/data/fallback";
 import { useCookieConsent } from "@/lib/cookie-consent";
 import { useI18n } from "@/i18n";
 import { buildLocalePath } from "@/lib/i18n-routes";
@@ -131,8 +131,7 @@ export default function Contact() {
     loading: globalSettingsLoading,
     error: globalSettingsError,
   } = useStrapiQuery<GlobalSettings>("globalSettings", () => getGlobalSettings(locale), fallbackGlobalSettings, locale);
-  const { data: legalDocs } = useStrapiQuery<LegalDocuments>("legalDocuments", () => getLegalDocuments(locale), fallbackLegalDocuments, locale);
-  const privacyPdfUrl = legalDocs?.privacyPdfUrl || buildLocalePath(locale, "privacy");
+  const privacyPdfUrl = buildLocalePath("hu", "privacy");
 
   const [formData, setFormData] = useState({
     name: "",
@@ -531,11 +530,12 @@ export default function Contact() {
                         <TermText>{t("contact.privacyConsentText")}</TermText>{" "}
                         <a
                           href={privacyPdfUrl}
+                          aria-label={locale === "en" ? "Privacy notice (Hungarian)" : undefined}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="text-works-primary font-semibold underline hover:no-underline"
                         >
-                          <TermText>{t("contact.privacyConsentLinkLabel")}</TermText>
+                          <TermText>{t("contact.privacyConsentLinkLabel")}</TermText>{locale === "en" ? " (Hungarian)" : ""}
                         </a>
                         .
                       </span>

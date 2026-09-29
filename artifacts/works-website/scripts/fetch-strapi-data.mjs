@@ -422,9 +422,15 @@ async function fetchAll(locale) {
   }
 
   try {
-    const legalRes = await fetchApi("/legal-document?populate=*");
+    const legalRes = await fetchApi("/legal-document?populate=*&status=published");
     const ld = legalRes.data;
     cache.legalDocuments = {
+      privacyTitle: activeLocale === "hu" ? ld?.privacyTitle || "" : "",
+      privacyBody: activeLocale === "hu" ? ld?.privacyBody || "" : "",
+      cookieTitle: activeLocale === "hu" ? ld?.cookieTitle || "" : "",
+      cookieBody: activeLocale === "hu" ? ld?.cookieBody || "" : "",
+      imprintTitle: activeLocale === "hu" ? ld?.imprintTitle || "" : "",
+      imprintBody: activeLocale === "hu" ? ld?.imprintBody || "" : "",
       privacyPdfUrl: ld?.privacyPdf?.url ? strapiImageUrl(ld.privacyPdf.url) : "",
       cookiePdfUrl: ld?.cookiePdf?.url ? strapiImageUrl(ld.cookiePdf.url) : "",
       imprintPdfUrl: ld?.imprintPdf?.url ? strapiImageUrl(ld.imprintPdf.url) : "",

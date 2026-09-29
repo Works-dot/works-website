@@ -162,7 +162,8 @@ async function runValidation() {
   // ------------------------------------------------------------------
   console.log("\ngetStaticPathsForLocale:");
   const huPaths = getStaticPathsForLocale("hu");
-  assert("HU has 8 static paths", huPaths.length === 8);
+  assert("HU has 9 static paths", huPaths.length === 9);
+  assert("HU includes imprint HTML", huPaths.includes("/impresszum"));
   assert("HU paths include '/'", huPaths.includes("/"));
   assert("HU paths include '/projektek'", huPaths.includes("/projektek"));
   assert("HU paths include '/blog'", huPaths.includes("/blog"));
@@ -173,7 +174,8 @@ async function runValidation() {
   assert("HU paths include '/sutik'", huPaths.includes("/sutik"));
   assert("HU paths have no /en prefix", huPaths.every((p) => !p.startsWith("/en")));
   const enPaths = getStaticPathsForLocale("en");
-  assert("EN has 8 static paths", enPaths.length === 8);
+  assert("EN has 6 static paths while legal approval is pending", enPaths.length === 6);
+  assert("EN legal redirects are not generated pages", !enPaths.some((path) => ["/en/privacy", "/en/cookies", "/en/imprint"].includes(path)));
   assert("EN paths include '/en'", enPaths.includes("/en"));
   assert("EN paths include '/en/projects'", enPaths.includes("/en/projects"));
 

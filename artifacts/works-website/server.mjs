@@ -4,6 +4,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import fs from "node:fs";
 import { addLegacyRedirects, readLegacyRedirects } from "./legacy-redirects.mjs";
+import { pendingLegalRedirect } from "./legal-redirects.mjs";
 import { subscribeNewsletter } from "./newsletter-server.mjs";
 import { sendContactMessage } from "./contact-server.mjs";
 import {
@@ -305,6 +306,7 @@ export function createApp({
   app.disable("x-powered-by");
   app.use(express.json({ limit: "10kb" }));
   addLegacyRedirects(app, legacyRedirects);
+  app.use(pendingLegalRedirect);
   addCanonicalRedirect(app, canonicalOrigin);
   addHealthRoutes(app, { readinessResult });
   addApiRoutes(app);

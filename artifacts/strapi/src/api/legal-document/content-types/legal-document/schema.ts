@@ -5,7 +5,7 @@ export default {
     "singularName": "legal-document",
     "pluralName": "legal-documents",
     "displayName": "Jogi dokumentumok",
-    "description": "Adatkezelési, sütikezelési és impresszum PDF-ek"
+    "description": "Lokalizált jogi szövegek és letölthető PDF-mellékletek"
   },
   "options": {
     "draftAndPublish": true
@@ -16,6 +16,30 @@ export default {
     }
   },
   "attributes": {
+    "privacyTitle": {
+      "type": "string",
+      "pluginOptions": { "i18n": { "localized": true } }
+    },
+    "privacyBody": {
+      "type": "richtext",
+      "pluginOptions": { "i18n": { "localized": true } }
+    },
+    "cookieTitle": {
+      "type": "string",
+      "pluginOptions": { "i18n": { "localized": true } }
+    },
+    "cookieBody": {
+      "type": "richtext",
+      "pluginOptions": { "i18n": { "localized": true } }
+    },
+    "imprintTitle": {
+      "type": "string",
+      "pluginOptions": { "i18n": { "localized": true } }
+    },
+    "imprintBody": {
+      "type": "richtext",
+      "pluginOptions": { "i18n": { "localized": true } }
+    },
     "privacyPdf": {
       "type": "media",
       "multiple": false,

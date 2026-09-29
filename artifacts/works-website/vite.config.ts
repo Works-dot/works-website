@@ -6,6 +6,7 @@ import runtimeErrorOverlay from "@replit/vite-plugin-runtime-error-modal";
 import { subscribeNewsletter } from "./newsletter-server.mjs";
 import { sendContactMessage } from "./contact-server.mjs";
 import { DEFAULT_SITE_URL, resolveSiteUrl } from "./src/seo-config";
+import { pendingLegalRedirect } from "./legal-redirects.mjs";
 
 const rawPort = process.env.PORT;
 
@@ -38,6 +39,7 @@ export default defineConfig({
     {
       name: "admin-redirect",
       configureServer(server) {
+        server.middlewares.use(pendingLegalRedirect);
         server.middlewares.use((req, res, next) => {
           if (req.url && (req.url === "/admin" || req.url.startsWith("/admin/"))) {
             res.writeHead(302, { Location: "/strapi" + req.url });

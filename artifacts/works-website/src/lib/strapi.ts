@@ -14,7 +14,8 @@ async function fetchApi<T>(path: string, params?: Record<string, string>): Promi
     Object.entries(params).forEach(([k, v]) => url.searchParams.set(k, v));
   }
   const previewStatus = getPreviewStatus();
-  if (previewStatus) url.searchParams.set("status", previewStatus);
+  if (url.pathname.endsWith("/legal-document")) url.searchParams.set("status", "published");
+  else if (previewStatus) url.searchParams.set("status", previewStatus);
   const res = await fetch(url.toString());
   if (!res.ok) throw new Error(`Strapi API error: ${res.status} ${res.statusText}`);
   return res.json();
@@ -964,6 +965,12 @@ export async function uploadCv(file: File): Promise<string> {
 }
 
 export interface LegalDocuments {
+  privacyTitle?: string;
+  privacyBody?: string;
+  cookieTitle?: string;
+  cookieBody?: string;
+  imprintTitle?: string;
+  imprintBody?: string;
   privacyPdfUrl: string;
   cookiePdfUrl: string;
   imprintPdfUrl: string;
@@ -977,9 +984,22 @@ export async function getLegalDocuments(locale?: string): Promise<LegalDocuments
     privacyPdf: StrapiMedia | null;
     cookiePdf: StrapiMedia | null;
     imprintPdf: StrapiMedia | null;
+    privacyTitle?: string;
+    privacyBody?: string;
+    cookieTitle?: string;
+    cookieBody?: string;
+    imprintTitle?: string;
+    imprintBody?: string;
   }>>(appendLocale("/legal-document?populate=*", locale));
   const d = res.data;
+  if (!d) throw new Error("Published legal documents are unavailable.");
   return {
+    privacyTitle: d?.privacyTitle || "",
+    privacyBody: d?.privacyBody || "",
+    cookieTitle: d?.cookieTitle || "",
+    cookieBody: d?.cookieBody || "",
+    imprintTitle: d?.imprintTitle || "",
+    imprintBody: d?.imprintBody || "",
     privacyPdfUrl: d.privacyPdf?.url ? strapiImageUrl(d.privacyPdf.url) : "",
     cookiePdfUrl: d.cookiePdf?.url
       ? strapiImageUrl(d.cookiePdf.url)

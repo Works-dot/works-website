@@ -45,6 +45,7 @@ const HU_SEGMENTS = {
   careerDetail: "/karrier/:slug",
   privacy: "/adatkezeles",
   cookies: "/sutik",
+  imprint: "/impresszum",
 } as const;
 
 /** Maps canonical route keys to their EN path segments. */
@@ -61,6 +62,7 @@ const EN_SEGMENTS = {
   careerDetail: "/en/careers/:slug",
   privacy: "/en/privacy",
   cookies: "/en/cookies",
+  imprint: "/en/imprint",
 } as const;
 
 export type RouteKey = keyof typeof HU_SEGMENTS;
@@ -149,7 +151,9 @@ export function buildLocalePath(
   slug?: string,
   search?: string
 ): string {
-  let path = SEGMENT_MAP[locale][key] as string;
+  // English legal translations are pending separate approval.
+  const legal = key === "privacy" || key === "cookies" || key === "imprint";
+  let path = SEGMENT_MAP[legal ? "hu" : locale][key] as string;
   if (slug !== undefined) {
     path = path.replace(":slug", encodeURIComponent(slug));
   }
@@ -221,6 +225,7 @@ export const HU_STATIC_PATHS: readonly string[] = [
   "/karrier",
   "/adatkezeles",
   "/sutik",
+  "/impresszum",
 ] as const;
 
 /**
@@ -233,8 +238,6 @@ export const EN_STATIC_PATHS: readonly string[] = [
   "/en/about",
   "/en/contact",
   "/en/careers",
-  "/en/privacy",
-  "/en/cookies",
 ] as const;
 
 /**

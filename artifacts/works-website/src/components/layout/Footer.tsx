@@ -3,9 +3,9 @@ import { Link } from "wouter";
 import { Linkedin, Instagram, Dribbble, ArrowRight } from "lucide-react";
 import { NewsletterError, useSubscribeNewsletter } from "@/hooks/use-newsletter";
 import { useStrapiQuery } from "@/hooks/useStrapiQuery";
-import { getGlobalSettings, getServices, getLegalDocuments } from "@/lib/strapi";
-import type { GlobalSettings, Service, LegalDocuments } from "@/lib/strapi";
-import { fallbackGlobalSettings, fallbackServices, fallbackLegalDocuments } from "@/data/fallback";
+import { getGlobalSettings, getServices } from "@/lib/strapi";
+import type { GlobalSettings, Service } from "@/lib/strapi";
+import { fallbackGlobalSettings, fallbackServices } from "@/data/fallback";
 import { useCookieConsent } from "@/lib/cookie-consent";
 import { useI18n } from "@/i18n";
 import { buildLocalePath } from "@/lib/i18n-routes";
@@ -28,10 +28,6 @@ export function Footer() {
   const { mutate, isPending, isSuccess, isError, error: newsletterError } = useSubscribeNewsletter();
   const { data: settings } = useStrapiQuery<GlobalSettings>("globalSettings", () => getGlobalSettings(locale), fallbackGlobalSettings, locale);
   const { data: services } = useStrapiQuery<Service[]>("footerServices", () => getServices(locale), fallbackServices, locale);
-  const { data: legalDocs } = useStrapiQuery<LegalDocuments>("legalDocuments", () => getLegalDocuments(locale), fallbackLegalDocuments, locale);
-  const privacyPdfUrl = legalDocs?.privacyPdfUrl || "";
-  const cookiePdfUrl = legalDocs?.cookiePdfUrl || "";
-  const imprintPdfUrl = legalDocs?.imprintPdfUrl || "";
   const logoImg = settings?.logoUrl;
 
   const handleSubscribe = (e: React.FormEvent) => {
@@ -214,18 +210,16 @@ export function Footer() {
           <p>&copy; {copyrightText}</p>
           <div className="flex w-full flex-col items-center gap-4 text-center md:w-auto md:flex-row md:items-stretch md:gap-6 md:text-left">
             <a
-              href={privacyPdfUrl || buildLocalePath(locale, "privacy")}
-              {...(privacyPdfUrl ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+              href={buildLocalePath("hu", "privacy")}
               className="hover:text-white transition-colors"
             >
-              <TermText>{t("footer.privacy")}</TermText>
+              <TermText>{t("footer.privacy")}</TermText>{locale === "en" ? " (Hungarian)" : ""}
             </a>
             <a
-              href={cookiePdfUrl || buildLocalePath(locale, "cookies")}
-              {...(cookiePdfUrl ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+              href={buildLocalePath("hu", "cookies")}
               className="hover:text-white transition-colors"
             >
-              <TermText>{t("footer.cookies")}</TermText>
+              <TermText>{t("footer.cookies")}</TermText>{locale === "en" ? " (Hungarian)" : ""}
             </a>
             <button
               type="button"
@@ -235,14 +229,12 @@ export function Footer() {
             >
               <TermText>{t("footer.cookieSettings")}</TermText>
             </button>
-            {imprintPdfUrl && (
+            {(
               <a
-                href={imprintPdfUrl}
-                target="_blank"
-                rel="noopener noreferrer"
+                href={buildLocalePath("hu", "imprint")}
                 className="hover:text-white transition-colors"
               >
-                <TermText>{t("footer.imprint")}</TermText>
+                <TermText>{t("footer.imprint")}</TermText>{locale === "en" ? " (Hungarian)" : ""}
               </a>
             )}
           </div>

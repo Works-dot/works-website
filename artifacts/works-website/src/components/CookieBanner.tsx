@@ -30,7 +30,7 @@ export function CookieBanner() {
             href={buildLocalePath(locale, "cookies")}
             className="underline text-white hover:text-works-primary transition-colors"
           >
-            <TermText>{t("cookieBanner.cookiePolicyLinkLabel")}</TermText>
+            <TermText>{t("cookieBanner.cookiePolicyLinkLabel")}</TermText>{locale === "en" ? " (Hungarian)" : ""}
           </Link>
           .
         </p>

@@ -140,6 +140,12 @@ export function getAlternateLinks(
 
   const sourceLocale = locale || routeMatch.locale;
   const routeKey = routeMatch.routeKey;
+  if (["privacy", "cookies", "imprint"].includes(routeKey)) {
+    return routeMatch.locale === "hu" ? [
+      { hreflang: "hu", href: absoluteUrl(buildLocalePath("hu", routeKey)) },
+      { hreflang: "x-default", href: absoluteUrl(buildLocalePath("hu", routeKey)) },
+    ] : [];
+  }
   const huPath = buildLocalePath(
     "hu",
     routeKey,
@@ -236,6 +242,10 @@ const staticMeta: Record<string, PageMeta> = {
     title: formatTitle("Adatkezelési tájékoztató"),
     description:
       "A Works. adatkezelési tájékoztatója — hogyan kezeljük a weboldal látogatóinak és a velünk kapcsolatba lépőknek a személyes adatait.",
+  },
+  "/impresszum": {
+    title: formatTitle("Impresszum"),
+    description: "A Works. Hungary Kft. cégadatai, elérhetőségei és tárhelyszolgáltatója.",
   },
   "/sutik": {
     title: formatTitle("Süti tájékoztató"),
@@ -335,6 +345,10 @@ export function getPageMeta(route: string, locale?: Locale): PageMeta {
     strippedPath.length > 1 ? strippedPath.replace(/\/+$/, "") : strippedPath;
   const routeMatch = matchLocalePath(pathname);
   const lang = locale || routeMatch?.locale || getLocaleFromPath(pathname);
+  if (routeMatch?.locale === "en" && ["privacy", "cookies", "imprint"].includes(routeMatch.routeKey)) {
+    // These URLs are temporary redirects, not published English documents.
+    return { title: EN_DEFAULT_TITLE, description: EN_DEFAULT_DESCRIPTION, locale: "en", alternates: [] };
+  }
 
   if (lang === "en") {
     const isEnglishRoute = routeMatch?.locale === "en";

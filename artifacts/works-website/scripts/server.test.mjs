@@ -74,8 +74,26 @@ afterEach(async () => {
 });
 
 describe("website health endpoints", () => {
+  it("temporarily redirects unapproved English legal routes before canonical/static handling", async () => {
+    const base = await listen(createApp({
+      distDir: writeFixture(), canonicalOrigin: "https://www.worksdot.hu",
+    }));
+    for (const [source, target] of Object.entries({
+      "/en/privacy": "/adatkezeles", "/en/cookies": "/sutik", "/en/imprint": "/impresszum",
+    })) {
+      for (const method of ["GET", "HEAD"]) {
+        for (const suffix of ["", "/", "?x=1&x=2", "/?x=1&x=2"]) {
+          const response = await fetch(base + source + suffix, { method, redirect: "manual" });
+          assert.equal(response.status, 302);
+          assert.equal(response.headers.get("location"), target + (suffix.includes("?") ? "?x=1&x=2" : ""));
+          assert.equal(response.headers.get("x-robots-tag"), "noindex");
+          assert.equal(response.headers.get("cache-control"), "no-store");
+        }
+      }
+    }
+  });
   it("redirects every approved legacy route directly, preserving queries and method boundaries", async () => {
-    const redirects = buildLegacyRedirects("/strapi/uploads/current-imprint.pdf");
+    const redirects = buildLegacyRedirects();
     assert.equal(Object.keys(redirects).length, 29);
     const base = await listen(createApp({
       distDir: writeFixture(), canonicalOrigin: "https://www.worksdot.hu",
@@ -106,10 +124,8 @@ describe("website health endpoints", () => {
       assert.equal(response.status, 404);
       assert.equal(response.headers.get("location"), null);
     }
-    assert.throws(() => buildLegacyRedirects(""), /require/);
-    for (const invalid of ["//evil.example/a.pdf", "javascript:a.pdf", "https://user:pass@example.com/a.pdf", "/not-pdf"]) {
-      assert.throws(() => buildLegacyRedirects(invalid));
-    }
+    assert.equal(redirects["/imprint"], "https://www.worksdot.hu/impresszum");
+    assert.equal(redirects["/terms"], "https://www.worksdot.hu/impresszum");
     const distDir = writeFixture();
     assert.throws(() => readLegacyRedirects(distDir));
     fs.writeFileSync(path.join(distDir, "..", "legacy-redirects.json"), JSON.stringify(redirects));

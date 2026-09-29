@@ -7,6 +7,7 @@ import {
 import {
   Switch,
   Route,
+  Redirect,
   Router as WouterRouter,
   useLocation,
 } from "wouter";
@@ -52,6 +53,7 @@ const ROUTE_COMPONENTS: readonly [
   ["careers", "Karrier"],
   ["privacy", "Adatkezeles"],
   ["cookies", "Sutik"],
+  ["imprint", "Impresszum"],
   ["careerDetail", "CareerDetail"],
 ];
 
@@ -63,7 +65,9 @@ function Router({ routes }: { routes: AppRoutes }) {
           <Route
             key={`${locale}:${routeKey}`}
             path={getRoutePath(locale, routeKey)}
-            component={routes[componentKey]}
+            component={locale === "en" && ["privacy", "cookies", "imprint"].includes(routeKey)
+              ? () => <Redirect to={buildLocalePath("hu", routeKey)} replace />
+              : routes[componentKey]}
           />
         ))
       )}

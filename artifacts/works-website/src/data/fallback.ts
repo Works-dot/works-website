@@ -351,6 +351,12 @@ const cachedLegalDocuments = hasData("legalDocuments")
   : {};
 
 export const fallbackLegalDocuments: LegalDocuments = {
+  privacyTitle: cachedLegalDocuments.privacyTitle || "",
+  privacyBody: cachedLegalDocuments.privacyBody || "",
+  cookieTitle: cachedLegalDocuments.cookieTitle || "",
+  cookieBody: cachedLegalDocuments.cookieBody || "",
+  imprintTitle: cachedLegalDocuments.imprintTitle || "",
+  imprintBody: cachedLegalDocuments.imprintBody || "",
   privacyPdfUrl: cachedLegalDocuments.privacyPdfUrl || "",
   cookiePdfUrl: cachedLegalDocuments.cookiePdfUrl || DEFAULT_COOKIE_PDF_URL,
   imprintPdfUrl: cachedLegalDocuments.imprintPdfUrl || "",

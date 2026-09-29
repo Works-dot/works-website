@@ -1044,7 +1044,7 @@ export interface ApiHomepageHomepage extends Struct.SingleTypeSchema {
 export interface ApiLegalDocumentLegalDocument extends Struct.SingleTypeSchema {
   collectionName: 'legal_documents';
   info: {
-    description: 'Adatkezel\u00E9si, s\u00FCtikezel\u00E9si \u00E9s impresszum PDF-ek';
+    description: 'Lokaliz\u00E1lt jogi sz\u00F6vegek \u00E9s let\u00F6lthet\u0151 PDF-mell\u00E9kletek';
     displayName: 'Jogi dokumentumok';
     pluralName: 'legal-documents';
     singularName: 'legal-document';
@@ -1058,7 +1058,19 @@ export interface ApiLegalDocumentLegalDocument extends Struct.SingleTypeSchema {
     };
   };
   attributes: {
+    cookieBody: Schema.Attribute.RichText &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     cookiePdf: Schema.Attribute.Media<'files'> &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    cookieTitle: Schema.Attribute.String &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
           localized: true;
@@ -1067,7 +1079,19 @@ export interface ApiLegalDocumentLegalDocument extends Struct.SingleTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    imprintBody: Schema.Attribute.RichText &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     imprintPdf: Schema.Attribute.Media<'files'> &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    imprintTitle: Schema.Attribute.String &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
           localized: true;
@@ -1078,7 +1102,19 @@ export interface ApiLegalDocumentLegalDocument extends Struct.SingleTypeSchema {
       'oneToMany',
       'api::legal-document.legal-document'
     >;
+    privacyBody: Schema.Attribute.RichText &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     privacyPdf: Schema.Attribute.Media<'files'> &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    privacyTitle: Schema.Attribute.String &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
           localized: true;

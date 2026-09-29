@@ -34,9 +34,11 @@ async function prerender() {
   const template = fs.readFileSync(path.resolve(outDir, "index.html"), "utf-8");
   // Use exactly the HU content snapshot consumed by the rendered footer.
   // Keep this server-only manifest outside the publicly served directory.
-  const redirects = buildLegacyRedirects(
-    getLocaleFallback("legalDocuments", "hu")?.imprintPdfUrl,
-  );
+  const redirects = buildLegacyRedirects();
+  const legal = getLocaleFallback("legalDocuments", "hu");
+  for (const field of ["privacyTitle", "privacyBody", "cookieTitle", "cookieBody", "imprintTitle", "imprintBody"]) {
+    if (!legal?.[field]?.trim()) throw new Error(`Publish HU legal CMS field before building: ${field}`);
+  }
   fs.writeFileSync(path.resolve(outDir, "../legacy-redirects.json"),
     JSON.stringify(redirects, null, 2));
 

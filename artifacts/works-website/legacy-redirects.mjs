@@ -3,7 +3,7 @@ import path from "node:path";
 
 export const LEGACY_ORIGIN = "https://www.worksdot.hu";
 // Approved first two CSV columns; the two legal destinations were explicitly
-// changed by the owner to the current CMS imprint PDF.
+// changed by the owner to the CMS-backed Hungarian imprint HTML page.
 export const LEGACY_PATHS = {
   "/user-research": "/szolgaltatasok/ux-kutatas",
   "/ux-ui-design": "/szolgaltatasok/ux-ui-design",
@@ -17,10 +17,10 @@ export const LEGACY_PATHS = {
   "/contact": "/kapcsolat",
   "/references": "/projektek",
   "/vacancies": "/karrier",
-  "/imprint": null,
+  "/imprint": "/impresszum",
   "/privacy-statement": "/adatkezeles",
   "/privacy-policy": "/adatkezeles",
-  "/terms": null,
+  "/terms": "/impresszum",
   "/ux-researcher": "/karrier",
   "/ui-designer": "/karrier",
   "/digital-product-designer": "/karrier",
@@ -36,24 +36,15 @@ export const LEGACY_PATHS = {
   "/blog-1": "/blog",
 };
 
-export function buildLegacyRedirects(imprintPdfUrl) {
-  if (typeof imprintPdfUrl !== "string" || !imprintPdfUrl.trim() ||
-      imprintPdfUrl.includes("\\") || imprintPdfUrl.startsWith("//")) {
-    throw new Error("Legacy redirects require the current CMS imprint PDF URL");
-  }
-  const pdf = new URL(imprintPdfUrl, LEGACY_ORIGIN);
-  if (pdf.protocol !== "https:" || pdf.username || pdf.password ||
-      !pdf.pathname.toLowerCase().endsWith(".pdf") || pdf.hash) {
-    throw new Error("Invalid CMS imprint PDF URL for legacy redirects");
-  }
+export function buildLegacyRedirects() {
   return Object.fromEntries(Object.entries(LEGACY_PATHS).map(([source, target]) =>
-    [source, target === null ? pdf.href : new URL(target, LEGACY_ORIGIN).href]));
+    [source, new URL(target, LEGACY_ORIGIN).href]));
 }
 
 export function readLegacyRedirects(distDir) {
   const manifest = JSON.parse(fs.readFileSync(
     path.join(distDir, "..", "legacy-redirects.json"), "utf8"));
-  const expected = buildLegacyRedirects(manifest["/imprint"]);
+  const expected = buildLegacyRedirects();
   if (JSON.stringify(Object.entries(manifest).sort()) !==
       JSON.stringify(Object.entries(expected).sort())) {
     throw new Error("Legacy redirect manifest does not match approved routes; rebuild");

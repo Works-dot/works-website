@@ -139,6 +139,12 @@ const CONTACT_EDIT_ORDER = [
 ];
 
 const LEGAL_DOCUMENT_FIELD_LABELS: Record<string, { label: string; description?: string }> = {
+  privacyTitle: { label: "Adatkezelés – cím" },
+  privacyBody: { label: "Adatkezelés – teljes szöveg", description: "Markdown. A weboldal kizárólag a publikált magyar szöveget jeleníti meg." },
+  cookieTitle: { label: "Sütitájékoztató – cím" },
+  cookieBody: { label: "Sütitájékoztató – teljes szöveg", description: "Markdown. Az angol fordítás külön jóváhagyásig nem publikálható." },
+  imprintTitle: { label: "Impresszum – cím" },
+  imprintBody: { label: "Impresszum – teljes szöveg", description: "Markdown. A PDF külön letölthető melléklet marad." },
   privacyPdf: {
     label: "Adatkezelési tájékoztató (PDF)",
     description: "A weboldalon megnyíló aktuális adatkezelési tájékoztató",
@@ -153,7 +159,11 @@ const LEGAL_DOCUMENT_FIELD_LABELS: Record<string, { label: string; description?:
   },
 };
 
-const LEGAL_DOCUMENT_EDIT_ORDER = ["privacyPdf", "cookiePdf", "imprintPdf"];
+const LEGAL_DOCUMENT_EDIT_ORDER = [
+  "privacyTitle", "privacyBody", "privacyPdf",
+  "cookieTitle", "cookieBody", "cookiePdf",
+  "imprintTitle", "imprintBody", "imprintPdf",
+];
 
 const PROJECTS_PAGE_FIELD_LABELS: Record<string, { label: string; description?: string }> = {
   heading: { label: "Oldal címe", description: "A projektek gyűjtőoldalának főcíme" },
@@ -2178,6 +2188,12 @@ async function uploadSeedPdf(strapi: any, filePath: string, name: string): Promi
 }
 
 async function seedLegalDocuments(strapi: any) {
+  // Once HTML editing begins, legacy PDF bootstrap must not publish an
+  // editor's legal draft as a side effect of repairing a media relation.
+  const legalDraft = await strapi.documents("api::legal-document.legal-document")
+    .findFirst({ locale: "hu", status: "draft" });
+  if (legalDraft && ["privacyTitle", "privacyBody", "cookieTitle", "cookieBody", "imprintTitle", "imprintBody"]
+    .some((field) => legalDraft[field])) return;
   const path = require("path");
   const store = strapi.store({ type: "plugin", name: "migrations" });
   const done = await store.get({ key: "legal_documents_seed_v2" });
