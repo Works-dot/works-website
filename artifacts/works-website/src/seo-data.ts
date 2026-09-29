@@ -12,7 +12,7 @@ import {
   getLocaleFallback,
   getLocaleCounterpartSlug,
 } from "./data/fallback";
-import type { SeoOverride } from "./lib/strapi";
+import type { GlobalSettings, SeoOverride } from "./lib/strapi";
 import {
   buildLocalePath,
   getLocaleFromPath,
@@ -557,11 +557,33 @@ function jsonLdScript(data: object): string {
   return `<script data-ssr type="application/ld+json">${json}</script>`;
 }
 
-export function buildJsonLd(meta: PageMeta): string[] {
+/** Keep published URLs verbatim; reject values that would be reinterpreted by URL parsing. */
+export function validSocialLinks(links?: GlobalSettings["socialLinks"]): GlobalSettings["socialLinks"] {
+  const seen = new Set<string>();
+  return (links || []).filter((link) => {
+    if (!link || typeof link.url !== "string" || !/^https?:\/\//i.test(link.url) ||
+        /[\s\\]/.test(link.url)) return false;
+    try {
+      const parsed = new URL(link.url);
+      if (!["http:", "https:"].includes(parsed.protocol) || !parsed.hostname ||
+          parsed.username || parsed.password || seen.has(parsed.href)) return false;
+      seen.add(parsed.href);
+      return true;
+    } catch {
+      return false;
+    }
+  });
+}
+
+export function buildJsonLd(
+  meta: PageMeta,
+  settings: GlobalSettings | null | undefined = getLocaleFallback<GlobalSettings>("globalSettings", pageLocale(meta)),
+): string[] {
   const scripts: string[] = [];
   const lang = pageLocale(meta);
   const localizedHome = absoluteUrl(buildLocalePath(lang, "home"));
   const localizedDescription = lang === "en" ? EN_DEFAULT_DESCRIPTION : DEFAULT_DESCRIPTION;
+  const sameAs = validSocialLinks(settings?.socialLinks).map((link) => link.url);
 
   scripts.push(
     jsonLdScript({
@@ -571,6 +593,7 @@ export function buildJsonLd(meta: PageMeta): string[] {
       url: SITE_URL,
       logo: absoluteUrl("/favicon.svg"),
       description: localizedDescription,
+      ...(sameAs.length ? { sameAs } : {}),
     })
   );
 

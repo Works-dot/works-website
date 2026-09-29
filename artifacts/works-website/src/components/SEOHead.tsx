@@ -203,7 +203,7 @@ export default function SEOHead() {
       removeMeta("property", "article:published_time");
     }
 
-    syncJsonLd(buildJsonLd(meta));
+    syncJsonLd(buildJsonLd(meta, settings));
 
     document
       .querySelectorAll(`head [data-ssr]:not([${CLIENT_SEO_ATTRIBUTE}])`)
@@ -221,6 +221,7 @@ export default function SEOHead() {
     ogType,
     alternates,
     settings?.siteName,
+    settings?.socialLinks,
   ]);
 
   return null;

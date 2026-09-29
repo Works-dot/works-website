@@ -180,11 +180,7 @@ const hardcodedGlobalSettings: GlobalSettings = {
     { day: "Hétfő – Péntek", hours: "9:00 – 18:00" },
     { day: "Szombat – Vasárnap", hours: "Zárva" },
   ],
-  socialLinks: [
-    { platform: "LinkedIn", url: "https://linkedin.com/company/works-agency" },
-    { platform: "Instagram", url: "https://instagram.com/works.agency" },
-    { platform: "Facebook", url: "https://facebook.com/works.agency" },
-  ],
+  socialLinks: [],
 };
 
 const hardcodedContactPage: ContactPageData = {
