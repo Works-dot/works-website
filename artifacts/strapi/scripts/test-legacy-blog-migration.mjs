@@ -17,21 +17,39 @@ function makeMock() {
     const original = source.find((post) => post.slug === record.slug);
     assert.ok(original, record.slug);
     const entry = {
-      documentId: record.documentId, slug: record.slug,
+      id: sequence++, documentId: record.documentId, slug: record.slug,
       title: original.title, excerpt: original.excerpt,
-      image: { id: sequence++ }, author: { id: 77 }, tags: [{ id: 8 }],
+      image: { id: sequence++, documentId: `hero-${record.slug}`, url: "/hero.png" },
+      author: { id: 77, documentId: "author-77", name: "Original author" },
+      tags: [{ id: 8, documentId: "tag-8", name: "Research" }],
+      seo: {
+        id: sequence++, metaTitle: "Original SEO", metaDescription: "Original description",
+        ogImage: { id: sequence++, documentId: `seo-${record.slug}`, url: "/og.png" },
+      },
       contentBlocks: original.blocks.map((block) => {
         if (block.type === "image") return {
+          id: sequence++,
           __component: "content.image-block",
-          image: { id: sequence++ },
+          image: { id: sequence++, documentId: `body-${record.slug}-${sequence}`, url: "/body.png" },
           caption: block.caption || "",
         };
-        if (block.type === "text") return { __component: "content.text-block", body: block.markdown };
-        if (block.type === "highlight") return { __component: "content.highlight-block", quote: block.markdown };
+        if (block.type === "text") return { id: sequence++, __component: "content.text-block", body: block.markdown };
+        if (block.type === "highlight") return { id: sequence++, __component: "content.highlight-block", quote: block.markdown };
         throw new Error("Unexpected fixture block");
       }),
     };
-    data.hu.set(record.documentId, { draft: clone(entry), published: clone(entry) });
+    const draft = clone(entry);
+    // Strapi draft and published rows/components have different database IDs.
+    draft.id += 99999;
+    draft.seo.id += 99999;
+    draft.image.id += 99999;
+    draft.author.id += 99999;
+    draft.tags[0].id += 99999;
+    for (const block of draft.contentBlocks) {
+      block.id += 99999;
+      if (block.image) block.image.id += 99999;
+    }
+    data.hu.set(record.documentId, { draft, published: clone(entry) });
     data.en.set(record.documentId, clone(entry));
   }
   const calls = [];
@@ -81,6 +99,12 @@ function makeMock() {
 const images = (entry) => entry.contentBlocks
   .filter((block) => block.__component === "content.image-block").map((block) => block.image.id);
 const changes = (mock) => mock.calls.filter((call) => call.action === "update" || call.action === "publish");
+const meaningful = (value) => {
+  if (Array.isArray(value)) return value.map(meaningful);
+  if (value && typeof value === "object") return Object.fromEntries(
+    Object.entries(value).filter(([key]) => key !== "id").map(([key, item]) => [key, meaningful(item)]));
+  return value;
+};
 
 {
   const mock = makeMock();
@@ -97,9 +121,10 @@ const changes = (mock) => mock.calls.filter((call) => call.action === "update" |
     assert.deepEqual(actual.published, actual.draft);
     assert.equal(actual.published.slug, record.slug);
     assert.deepEqual(images(actual.published), images(before.get(record.documentId)));
-    assert.deepEqual(actual.published.image, before.get(record.documentId).image);
-    assert.deepEqual(actual.published.tags, before.get(record.documentId).tags);
-    assert.deepEqual(actual.published.author, before.get(record.documentId).author);
+    assert.deepEqual(meaningful(actual.published.image), meaningful(before.get(record.documentId).image));
+    assert.deepEqual(meaningful(actual.published.tags), meaningful(before.get(record.documentId).tags));
+    assert.deepEqual(meaningful(actual.published.author), meaningful(before.get(record.documentId).author));
+    assert.deepEqual(meaningful(actual.published.seo), meaningful(before.get(record.documentId).seo));
   }
   const count = changes(mock).length;
   await migrateLegacyBlogHungarian(mock.strapi);
@@ -113,6 +138,14 @@ for (const [description, corrupt] of [
   ["missing HU document", (entry, mock, id) => mock.data.hu.delete(id)],
   ["changed published copy", (entry) => { entry.published.contentBlocks[0].body += " editor change"; }],
   ["changed draft copy", (entry) => { entry.draft.title += " editor change"; }],
+  ["changed draft hero media", (entry) => { entry.draft.image.documentId = "other-image"; }],
+  ["changed draft body media", (entry) => {
+    entry.draft.contentBlocks.find((b) => b.image).image.documentId = "other-body-image";
+  }],
+  ["changed draft tags", (entry) => { entry.draft.tags[0].documentId = "other-tag"; }],
+  ["changed draft author", (entry) => { entry.draft.author.documentId = "other-author"; }],
+  ["changed draft SEO image", (entry) => { entry.draft.seo.ogImage.documentId = "other-seo-image"; }],
+  ["changed draft SEO copy", (entry) => { entry.draft.seo.metaTitle = "New SEO title"; }],
   ["changed slug", (entry) => { entry.published.slug = "wrong"; }],
   ["changed block layout", (entry) => { entry.published.contentBlocks.pop(); }],
   ["missing image", (entry) => { entry.published.contentBlocks.find((b) => b.image).image = null; }],

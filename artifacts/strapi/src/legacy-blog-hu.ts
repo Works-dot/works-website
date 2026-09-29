@@ -44,6 +44,39 @@ function matchesTranslation(post: any, translation: Translation): boolean {
     && JSON.stringify(blocksOf(post)) === JSON.stringify(translation.content);
 }
 
+const populatePost = {
+  image: true,
+  author: true,
+  tags: true,
+  seo: { populate: { ogImage: true } },
+  contentBlocks: {
+    on: { "content.image-block": { populate: { image: true } } },
+  },
+};
+
+// Strapi gives draft/published components different row IDs and timestamps;
+// relations may likewise have different row IDs while pointing to the same
+// documentId. Compare every other property, recursively, including any future
+// component fields. Do not flatten components or ignore nested media/SEO.
+function comparable(value: any, parentKey = ""): any {
+  if (Array.isArray(value)) return value.map((item) => comparable(item, parentKey));
+  if (value && typeof value === "object") {
+    const hasIdentity = value.documentId != null || value.__component != null || parentKey === "seo";
+    return Object.fromEntries(Object.entries(value)
+      .filter(([key]) => !["createdAt", "updatedAt", "publishedAt", "createdBy", "updatedBy"].includes(key)
+        && !(key === "id" && hasIdentity))
+      .sort(([left], [right]) => left.localeCompare(right))
+      .map(([key, child]) => [key, comparable(child, key)]));
+  }
+  return value;
+}
+
+function componentPayload(block: any): any {
+  // Keep any future meaningful component properties when replacing a block.
+  return Object.fromEntries(Object.entries(block)
+    .filter(([key]) => !["id", "createdAt", "updatedAt", "publishedAt"].includes(key)));
+}
+
 export async function migrateLegacyBlogHungarian(strapi: any) {
   const store = strapi.store({ type: "plugin", name: "migrations" });
   if (await store.get({ key: migrationKey })) return;
@@ -64,14 +97,17 @@ export async function migrateLegacyBlogHungarian(strapi: any) {
   for (const record of records) {
     const published = await documents.findOne({
       documentId: record.documentId, locale: "hu", status: "published",
-      populate: ["contentBlocks.image"],
+      populate: populatePost,
     });
     const draft = await documents.findOne({
       documentId: record.documentId, locale: "hu", status: "draft",
-      populate: ["contentBlocks.image"],
+      populate: populatePost,
     });
     if (!published || published.slug !== record.slug || !draft || draft.slug !== record.slug) {
       throw new Error(`Legacy HU blog post missing or identity mismatch: ${record.slug}`);
+    }
+    if (JSON.stringify(comparable(published)) !== JSON.stringify(comparable(draft))) {
+      throw new Error(`Legacy HU blog has unpublished draft edits: ${record.slug}. Review manually before deploying.`);
     }
     for (const version of [published, draft]) {
       if (blocksOf(version).length !== record.content.length
@@ -97,11 +133,11 @@ export async function migrateLegacyBlogHungarian(strapi: any) {
       const contentBlocks = record.content.map((block, i) => {
         const previous = source.contentBlocks[i];
         if (block.type === "image") return {
-          __component: "content.image-block", image: previous.image.id, caption: block.caption,
+          ...componentPayload(previous), image: previous.image.id, caption: block.caption,
         };
         return block.type === "text"
-          ? { __component: "content.text-block", body: block.content }
-          : { __component: "content.highlight-block", quote: block.content };
+          ? { ...componentPayload(previous), body: block.content }
+          : { ...componentPayload(previous), quote: block.content };
       });
       await documents.update({
         documentId: record.documentId, locale: "hu", status: "draft",
