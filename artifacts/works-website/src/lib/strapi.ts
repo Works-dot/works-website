@@ -14,7 +14,7 @@ async function fetchApi<T>(path: string, params?: Record<string, string>): Promi
     Object.entries(params).forEach(([k, v]) => url.searchParams.set(k, v));
   }
   const previewStatus = getPreviewStatus();
-  if (url.pathname.endsWith("/legal-document")) url.searchParams.set("status", "published");
+  if (url.pathname.endsWith("/legal-document") || url.pathname.endsWith("/career-positions")) url.searchParams.set("status", "published");
   else if (previewStatus) url.searchParams.set("status", previewStatus);
   const res = await fetch(url.toString());
   if (!res.ok) throw new Error(`Strapi API error: ${res.status} ${res.statusText}`);
@@ -247,6 +247,7 @@ interface StrapiCareerPosition {
   tags: StrapiTag[];
   excerpt: string;
   isActive: boolean;
+  publishedAt: string | null;
   contentBlocks: StrapiContentBlock[];
   seo?: StrapiSeo | null;
 }
@@ -682,11 +683,11 @@ const CAREER_POPULATE = "populate[0]=tags&populate[1]=contentBlocks&populate[2]=
 export async function getCareerPositions(locale?: string): Promise<CareerPosition[]> {
   const res = await fetchApi<StrapiListResponse<StrapiCareerPosition>>(
     appendLocale(
-      `/career-positions?${CAREER_POPULATE}&pagination[pageSize]=100&filters[isActive][$eq]=true`,
+      `/career-positions?${CAREER_POPULATE}&pagination[pageSize]=100&filters[isActive][$eq]=true&status=published`,
       locale
     )
   );
-  return res.data.map((c) => ({
+  return res.data.filter((c) => c.isActive === true && !!c.publishedAt).map((c) => ({
     documentId: c.documentId,
     slug: c.slug,
     title: c.title,
@@ -703,11 +704,11 @@ export async function getCareerPositions(locale?: string): Promise<CareerPositio
 export async function getCareerPositionBySlug(slug: string, locale?: string): Promise<CareerPosition | null> {
   const res = await fetchApi<StrapiListResponse<StrapiCareerPosition>>(
     appendLocale(
-      `/career-positions?${CAREER_POPULATE}&filters[slug][$eq]=${encodeURIComponent(slug)}`,
+      `/career-positions?${CAREER_POPULATE}&filters[isActive][$eq]=true&status=published&filters[slug][$eq]=${encodeURIComponent(slug)}`,
       locale
     )
   );
-  return res.data[0]
+  return res.data[0]?.isActive === true && !!res.data[0].publishedAt
     ? {
         documentId: res.data[0].documentId,
         slug: res.data[0].slug,

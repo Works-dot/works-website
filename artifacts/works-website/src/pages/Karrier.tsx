@@ -82,6 +82,10 @@ export default function Karrier() {
                   </div>
                 ))}
               </div>
+            ) : !positions?.length ? (
+              <p className="py-16 text-xl text-works-dark" data-testid="status-no-positions">
+                {locale === "hu" ? "Jelenleg nincs aktív álláshirdetés." : "There are currently no active job openings."}
+              </p>
             ) : (
               <div className="divide-y divide-works-dark/10">
                 {(positions || []).map((position, i) => (

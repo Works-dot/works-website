@@ -242,9 +242,9 @@ async function fetchAll(locale) {
 
   const CAREER_POPULATE = "populate[0]=tags&populate[1]=contentBlocks&populate[2]=contentBlocks.image&populate[3]=seo.ogImage";
   const careersRes = await fetchApi(
-    `/career-positions?${CAREER_POPULATE}&pagination[pageSize]=100&filters[isActive][$eq]=true`
+    `/career-positions?${CAREER_POPULATE}&pagination[pageSize]=100&filters[isActive][$eq]=true&status=published`
   );
-  cache.positions = careersRes.data.map((c) => ({
+  cache.positions = careersRes.data.filter((c) => c.isActive === true && !!c.publishedAt).map((c) => ({
     documentId: c.documentId,
     slug: c.slug,
     title: c.title,
@@ -533,7 +533,17 @@ async function main() {
       process.exit(1);
     }
     if (fs.existsSync(outPath)) {
-      console.warn("  Keeping the existing cached data — build will use the previously fetched content.\n");
+      // Keep unrelated development content, but never retain an old job list
+      // after a failed refresh. Production fails above without writing a cache.
+      const previous = JSON.parse(fs.readFileSync(outPath, "utf-8"));
+      if (previous.hu) {
+        previous.hu.positions = [];
+        if (previous.en) previous.en.positions = [];
+      } else {
+        previous.positions = [];
+      }
+      fs.writeFileSync(outPath, JSON.stringify(previous, null, 2), "utf-8");
+      console.warn("  Keeping unrelated cached content; career positions cleared after refresh failure.\n");
     } else {
       console.warn("  No previous cache found — writing empty cache; build will use hardcoded fallback data.\n");
       fs.writeFileSync(outPath, JSON.stringify({}), "utf-8");

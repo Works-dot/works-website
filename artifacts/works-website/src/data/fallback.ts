@@ -1,6 +1,5 @@
 import { projects as rawProjects } from "./projects";
 import { blogPosts as rawBlogPosts } from "./blog-posts";
-import { positions as rawPositions } from "./careers";
 import { whyUsCards as rawWhyUsCards } from "./careers";
 import { teamMembers as rawTeamMembers } from "./team";
 import { galleryImages as rawGalleryImages } from "./team";
@@ -97,21 +96,6 @@ const hardcodedBlogPosts: BlogPost[] = rawBlogPosts.map((bp) => ({
   tags: bp.tags,
   readingTime: bp.readingTime,
   content: bp.content.map((b) => ({
-    type: b.type,
-    content: b.content,
-    caption: b.caption,
-  })),
-}));
-
-const hardcodedPositions: CareerPosition[] = rawPositions.map((cp) => ({
-  slug: cp.slug,
-  title: cp.title,
-  team: cp.team,
-  location: "Budapest / Hybrid",
-  type: "Teljes munkaidő",
-  tags: cp.tags,
-  excerpt: cp.excerpt,
-  content: cp.content.map((b) => ({
     type: b.type,
     content: b.content,
     caption: b.caption,
@@ -308,9 +292,10 @@ export const fallbackBlogPosts: BlogPost[] = hasData("blogPosts")
   ? (strapiCache.blogPosts as BlogPost[])
   : hardcodedBlogPosts;
 
-export const fallbackPositions: CareerPosition[] = hasData("positions")
+// Empty is valid CMS content. Jobs never have demo/editorial fallbacks.
+export const fallbackPositions: CareerPosition[] = Array.isArray(strapiCache.positions)
   ? (strapiCache.positions as CareerPosition[])
-  : hardcodedPositions;
+  : [];
 
 export const fallbackTeamMembers: TeamMember[] = hasData("teamMembers")
   ? (strapiCache.teamMembers as TeamMember[])

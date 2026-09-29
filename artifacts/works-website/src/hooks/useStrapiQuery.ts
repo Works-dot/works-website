@@ -13,12 +13,15 @@ export function useStrapiQuery<T>(
   locale: Locale = "hu"
 ): { data: T | null; loading: boolean; error: string | null } {
   const cacheKey = `${locale}:${key}`;
+  const isCareer = key === "careerPositions" || key.startsWith("careerPosition:");
   // The embedded snapshot is locale-scoped. Old flat snapshots are HU-only,
   // which makes EN fail closed rather than displaying Hungarian content.
   const localeFallback = getLocaleFallback<T>(key, locale) ??
-    (locale === "hu" ? fallbackData : undefined);
+    (isCareer ? (key === "careerPositions" ? [] as T : undefined) : locale === "hu" ? fallbackData : undefined);
+  const [resolvedKey, setResolvedKey] = useState(cacheKey);
   const [data, setData] = useState<T | null>(() => {
     if (!STRAPI_ENABLED) return localeFallback ?? null;
+    if (isCareer) return null;
     const cached = cache.get(cacheKey);
     if (cached && Date.now() - cached.timestamp < CACHE_TTL) {
       return cached.data as T;
@@ -33,6 +36,7 @@ export function useStrapiQuery<T>(
   fallbackRef.current = localeFallback;
 
   useEffect(() => {
+    setResolvedKey(cacheKey);
     if (!STRAPI_ENABLED) {
       // Strapi is disabled at runtime (production SSG build). The component
       // instance is reused across client-side navigations (e.g. service ->
@@ -41,6 +45,37 @@ export function useStrapiQuery<T>(
       setLoading(false);
       setError(null);
       return;
+    }
+
+    if (isCareer) {
+      // Jobs are availability-sensitive: never reuse a snapshot or TTL cache
+      // in live mode. Revalidate on navigation, focus and while left open.
+      let cancelled = false;
+      let request = 0;
+      const refresh = () => {
+        const currentRequest = ++request;
+        setData(null);
+        setLoading(true);
+        setError(null);
+        Promise.resolve().then(() => fetcherRef.current()).then((result) => {
+          if (cancelled || currentRequest !== request) return;
+          setData(result);
+          setLoading(false);
+        }).catch((err) => {
+          if (cancelled || currentRequest !== request) return;
+          setData(null);
+          setError(err instanceof Error ? err.message : "Unable to load career positions");
+          setLoading(false);
+        });
+      };
+      refresh();
+      const interval = window.setInterval(refresh, 60_000);
+      window.addEventListener("focus", refresh);
+      return () => {
+        cancelled = true;
+        window.clearInterval(interval);
+        window.removeEventListener("focus", refresh);
+      };
     }
 
     const cached = cache.get(cacheKey);
@@ -78,7 +113,12 @@ export function useStrapiQuery<T>(
     return () => {
       cancelled = true;
     };
-  }, [cacheKey]);
+  }, [cacheKey, isCareer]);
 
+  if (isCareer && resolvedKey !== cacheKey) {
+    return STRAPI_ENABLED
+      ? { data: null, loading: true, error: null }
+      : { data: localeFallback ?? null, loading: false, error: null };
+  }
   return { data, loading, error };
 }
