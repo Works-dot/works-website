@@ -4,12 +4,64 @@
 // A bilingual build requires the localized Strapi schema to be live first.
 import fs from "node:fs";
 import path from "node:path";
-import { fileURLToPath } from "node:url";
+import { createHash } from "node:crypto";
+import { fileURLToPath, pathToFileURL } from "node:url";
 import { mapContentBlocks, strapiImageUrl } from "../src/lib/content-blocks.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const root = path.resolve(__dirname, "..");
 const outPath = path.resolve(root, "src/data/strapi-cache.json");
+const translationPath = path.resolve(root, "../strapi/translation/legacy-blog-hu.json");
+
+// Fingerprints of the original English titles and non-image body blocks from
+// the nine reviewed source documents. Independent of the checked-in website
+// cache and the translation text: subsequent Hungarian editorial changes and
+// deliberate unpublishing/deletion must remain possible.
+const originalEnglish = {
+  nh6ut44kpi0lqaggf5tirux1: { title: "7756710fce455ccf6311e1bc903eb6f9cd57e6c8b9349aa7b208a3eff91519cf", body: "1e70a9c1d159794fb8cdcd55c7447415a894c922d42b76b89c8a3fba0091f6bc" },
+  ujw1s67r9rio7l9vcc9s2vrx: { title: "124b60e3ede7c67fad69592bae68d921c736c1b0dba3596854374337530f9b4c", body: "db875c825869290adb7f670582dca64f5057e6e0a865868dae20f811176e17ca" },
+  ajkhd25h7aplaip5v1z4v4gs: { title: "01337de1672e019a25344986f0c73da573d02a50a792a82510288c16eac4d829", body: "7fc14bd1bd7d78e1f7aeb2c04cf2533bd8318fdab39204277c71315abbd432e3" },
+  cjz20nuq4d3qug249hmlex0r: { title: "c7cb88b488ad780644b7bc1c3abbb91ccc82c4a4780934438a22c0e27a19f3eb", body: "b1a2f1b3499bcc026b3affc2642bdd1a3c997541434fafa9c9bad13a2e7b247b" },
+  vfttft8q8d6l1g2six84e23w: { title: "ae5bb7956549887ef2286d589fbc89aa0fe1f406c43b8e178b16c5a77e46db56", body: "a1c1fb33726b8f86f668309ffa73b4c8b600c31093fec87e26a55a7a5b007ce0" },
+  o3lvxuv4pul8az9yhc5tujeg: { title: "0a7eef119b138d8527cec3c0e2fcc1c9a773cf7e3eacf72be80260fef27172f3", body: "5697928c2d9db87597b57b17614d860dc206e7adbf77b9269e0fc44ba81b05f7" },
+  e110e4p6k0c4ml9a1wtm56bw: { title: "9e62cb79ea4eabf0e08ece822c953879829bb1bf584ba1e0d5f3672e2debf65d", body: "a9c0466806a2928beb6125278effcef7e721271e82d13ca3e19ff341b46161e2" },
+  yg84ksnrfvfppqxzyscf8x74: { title: "3e8ccd5d870034ea78e038c3c7b40fa8bf77354beb22485b9bd3e5bfab419f65", body: "42cb7ade1661f3ea908c72b3cc258ba04bb0a3549ead780e5db0fef197573b7b" },
+  qya03sr2vay1guwkurkueza6: { title: "d22eb3ac010ed1a9f3dfb2d335263328bcc61be179eb6958b3418f3d4f01477c", body: "c0cff78152a40431156cd2e64de4f8c9676c4bff0821cc37458b4e7787a7c79e" },
+};
+
+const fingerprint = (text) => createHash("sha256").update(text).digest("hex");
+const bodyFingerprint = (post) => post?.content && fingerprint(JSON.stringify(
+  post.content.filter((block) => block.type === "text" || block.type === "highlight")
+    .map((block) => [block.type, block.content]),
+));
+
+// Check *fresh published* HU and EN API results; never decide against the
+// checked-in cache. This is a permanent no-regression check, not an exact
+// translation sync gate or a prohibition on editorial unpublishing.
+export function verifyLegacyHuTranslation(data, translation) {
+  if (translation?.version !== 1 || !Array.isArray(translation.records) ||
+      translation.records.length !== 9 ||
+      new Set(translation.records.map((record) => record.documentId)).size !== 9 ||
+      translation.records.some((record) => !originalEnglish[record.documentId])) {
+    throw new Error("Invalid nine-post HU translation package");
+  }
+  if (!Array.isArray(data?.hu?.blogPosts) || !Array.isArray(data?.en?.blogPosts)) {
+    throw new Error("Published HU/EN blog lists missing from fresh Strapi response");
+  }
+  for (const record of translation.records) {
+    const matches = data.hu.blogPosts.filter((post) => post.documentId === record.documentId);
+    if (matches.length > 1) throw new Error(`Duplicate published HU document: ${record.documentId}`);
+    if (!matches.length) continue; // Deliberately unpublished or removed by an editor.
+    const post = matches[0];
+    const en = data.en.blogPosts.find((item) => item.documentId === record.documentId);
+    const source = originalEnglish[record.documentId];
+    const huBody = bodyFingerprint(post);
+    if ((post.title && (fingerprint(post.title) === source.title || post.title === en?.title)) ||
+        (huBody && (huBody === source.body || huBody === bodyFingerprint(en)))) {
+      throw new Error(`Published HU post still contains original English title/body: ${record.slug} (${record.documentId}); deploy/verify CMS first`);
+    }
+  }
+}
 
 const STRAPI_BASE = process.env.STRAPI_URL || "http://localhost:8099";
 const STRAPI_API = `${STRAPI_BASE}/strapi/api`;
@@ -522,6 +574,13 @@ async function main() {
 
   try {
     const data = await fetchAllWithRetry();
+    if (STRICT) {
+      // Read only after a successful fresh fetch, so neither committed cache
+      // nor an earlier retry can satisfy the guard.
+      const translation = JSON.parse(fs.readFileSync(translationPath, "utf-8"));
+      verifyLegacyHuTranslation(data, translation);
+      console.log("  ✓ published legacy HU posts do not regress to original English");
+    }
     fs.writeFileSync(outPath, JSON.stringify(data, null, 2), "utf-8");
     console.log(`\nStrapi data cached to ${path.relative(root, outPath)}`);
   } catch (err) {
@@ -552,4 +611,6 @@ async function main() {
   }
 }
 
-main();
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
+  await main();
+}

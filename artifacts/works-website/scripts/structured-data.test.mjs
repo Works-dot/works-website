@@ -45,6 +45,14 @@ test("HU/EN service FAQ exactly matches published visible questions; missing con
   assert.equal(ofType(graphs(seo.getPageMeta("/en/services/nonexistent")), "Service").length, 0);
 });
 
+test("no LocalBusiness claims a customer-facing office from registered or mailing addresses", () => {
+  for (const path of ["/", "/en", "/kapcsolat", "/en/contact"]) {
+    const nodes = graphs(seo.getPageMeta(path));
+    assert.equal(ofType(nodes, "LocalBusiness").length, 0);
+    assert.equal(ofType(nodes, "Organization").length, 1);
+  }
+});
+
 test("jobs only on actual detail records; only sourced publication and office locality", () => {
   for (const [locale, path] of [["hu", "/karrier/ux-researcher"], ["en", "/en/careers/ux-researcher"]]) {
     const meta = seo.getPageMeta(path);
