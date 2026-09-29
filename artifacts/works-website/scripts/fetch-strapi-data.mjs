@@ -246,6 +246,7 @@ async function fetchAll(locale) {
   );
   cache.positions = careersRes.data.filter((c) => c.isActive === true && !!c.publishedAt).map((c) => ({
     documentId: c.documentId,
+    publishedAt: c.publishedAt,
     slug: c.slug,
     title: c.title,
     team: c.team || "",

@@ -13,6 +13,7 @@ import { useStrapiQuery } from "@/hooks/useStrapiQuery";
 import { useI18n } from "@/i18n";
 import { getBlogPage, getGlobalSettings, getProjectsPage } from "@/lib/strapi";
 import type { BlogPageData, GlobalSettings, ProjectsPageData } from "@/lib/strapi";
+import type { StructuredContent } from "../seo-data";
 import { fallbackBlogPage, fallbackGlobalSettings, fallbackProjectsPage } from "@/data/fallback";
 
 const CLIENT_SEO_ATTRIBUTE = "data-client-seo";
@@ -121,7 +122,7 @@ function syncJsonLd(scriptMarkup: string[]) {
   }
 }
 
-export default function SEOHead() {
+export default function SEOHead({ structuredContent }: { structuredContent?: StructuredContent }) {
   const [location] = useLocation();
   const { locale } = useI18n();
   const { data: settings } = useStrapiQuery<GlobalSettings>("globalSettings", () => getGlobalSettings(locale), fallbackGlobalSettings, locale);
@@ -203,7 +204,7 @@ export default function SEOHead() {
       removeMeta("property", "article:published_time");
     }
 
-    syncJsonLd(buildJsonLd(meta, settings));
+    syncJsonLd(buildJsonLd(meta, settings, structuredContent));
 
     document
       .querySelectorAll(`head [data-ssr]:not([${CLIENT_SEO_ATTRIBUTE}])`)
@@ -224,6 +225,7 @@ export default function SEOHead() {
     settings?.socialLinks,
     settings?.contactEmail,
     settings?.contactPhone,
+    structuredContent,
   ]);
 
   return null;

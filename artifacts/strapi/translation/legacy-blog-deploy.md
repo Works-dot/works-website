@@ -1,0 +1,8 @@
+# Nine legacy blog posts: HU translation rollout
+
+1. Commit/push the CMS translation, guarded migration and website cache changes together. Back up the **production Strapi database** before restarting the CMS; do not run this against production until the backup and review are approved.
+2. **Deploy CMS first**, with `STRAPI_TRANSLATE_LEGACY_BLOG_HU=true` set on the CMS service for this one rollout. Leave `STRAPI_RUN_CONTENT_MIGRATIONS` **unset/false**; the latter enables unrelated migrations. Startup validates all nine existing Hungarian documents against their original content and document IDs before it writes. A missing document, editor-modified text, changed block structure or missing image aborts the targeted migration without marking it complete. It never creates a new localization or touches English records.
+3. Confirm all nine HU posts are published with their expected Hungarian copy, existing images and links; confirm the matching EN documents and hreflang identity remain intact. Then remove `STRAPI_TRANSLATE_LEGACY_BLOG_HU` from the CMS environment (or set it to `false`). The migration also carries a completion flag to prevent reapplication. **No automatic website rebuild is requested by this migration.**
+4. **Deploy website second.** Its Railway build fetches published data afresh from the production CMS, replacing the checked-in cache at build time. Do not deploy the website first: the cache is only for local verification, not a substitute for the production CMS.
+
+No production database access, publication, deployment or GitHub push is performed by the content-preparation scripts.

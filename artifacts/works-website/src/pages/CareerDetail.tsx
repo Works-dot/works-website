@@ -81,7 +81,7 @@ export default function CareerDetail() {
 
   return (
     <div className="min-h-screen bg-works-bg flex flex-col selection:bg-works-primary selection:text-white">
-      <SEOHead />
+      <SEOHead structuredContent={{ position }} />
       <Header />
 
       <main className="flex-grow">

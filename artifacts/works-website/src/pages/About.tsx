@@ -56,7 +56,7 @@ export default function About() {
 
   return (
     <div className="min-h-screen bg-works-bg flex flex-col selection:bg-works-primary selection:text-white">
-      <SEOHead />
+      <SEOHead structuredContent={{ team: teamLoading ? [] : teamMembers }} />
       <Header />
 
       <main className="flex-grow">

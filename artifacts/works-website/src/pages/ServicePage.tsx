@@ -151,7 +151,7 @@ export default function ServicePage() {
 
   return (
     <div className="min-h-screen bg-works-bg flex flex-col selection:bg-works-primary selection:text-white">
-      <SEOHead />
+      <SEOHead structuredContent={{ service }} />
       <Header />
 
       <main className="flex-grow">

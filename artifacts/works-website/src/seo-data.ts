@@ -23,6 +23,44 @@ import {
 } from "./lib/i18n-routes";
 import { DEFAULT_SITE_URL, resolveSiteUrl } from "./seo-config";
 import { organizationIdentity } from "./data/organization";
+import type { BlogPost, CareerPosition, Project, Service, TeamMember } from "./lib/strapi";
+import cachedContent from "./data/strapi-cache.json";
+
+export interface StructuredContent {
+  service?: Service | null;
+  position?: CareerPosition | null;
+  team?: TeamMember[] | null;
+  projects?: Project[] | null;
+  posts?: BlogPost[] | null;
+}
+
+// Unlike editorial fallbacks, team identities must come from published CMS content.
+function publishedTeam(locale: Locale): TeamMember[] {
+  const cache = cachedContent as Partial<Record<Locale, { teamMembers?: TeamMember[] }>>;
+  return cache[locale]?.teamMembers || [];
+}
+
+function routeContent(meta: PageMeta, supplied?: StructuredContent): StructuredContent {
+  if (!meta.path) return {};
+  const route = matchLocalePath(meta.path);
+  if (!route) return {};
+  const locale = pageLocale(meta);
+  const slug = route.slug ? decodeURIComponent(route.slug) : "";
+  switch (route.routeKey) {
+    case "serviceDetail":
+      return { service: supplied ? supplied.service : getLocaleFallback<Service>(`service:${slug}`, locale) };
+    case "careerDetail":
+      return { position: supplied ? supplied.position : getLocaleFallback<CareerPosition>(`careerPosition:${slug}`, locale) };
+    case "about":
+      return { team: supplied ? supplied.team : publishedTeam(locale) };
+    case "projects":
+      return { projects: supplied ? supplied.projects : getLocaleFallback<Project[]>("projects", locale) };
+    case "blog":
+      return { posts: supplied ? supplied.posts : getLocaleFallback<BlogPost[]>("blogPosts", locale) };
+    default:
+      return {};
+  }
+}
 
 export interface PageMeta {
   title: string;
@@ -579,6 +617,7 @@ export function validSocialLinks(links?: GlobalSettings["socialLinks"]): GlobalS
 export function buildJsonLd(
   meta: PageMeta,
   settings: GlobalSettings | null | undefined = getLocaleFallback<GlobalSettings>("globalSettings", pageLocale(meta)),
+  supplied?: StructuredContent,
 ): string[] {
   const scripts: string[] = [];
   const lang = pageLocale(meta);
@@ -651,6 +690,83 @@ export function buildJsonLd(
     if (meta.article.publishedTime) posting.datePublished = meta.article.publishedTime;
     if (meta.article.author) posting.author = { "@type": "Person", name: meta.article.author };
     scripts.push(jsonLdScript(posting));
+  }
+
+  const content = routeContent(meta, supplied);
+  const route = meta.path ? matchLocalePath(meta.path) : null;
+  const slug = route?.slug ? decodeURIComponent(route.slug) : "";
+  const url = meta.path ? absoluteUrl(meta.path) : "";
+  if (route?.routeKey === "serviceDetail" && content.service?.slug === slug) {
+    const service = content.service;
+    scripts.push(jsonLdScript({
+      "@context": "https://schema.org", "@type": "Service",
+      name: service.title, description: service.heroDescription,
+      url, inLanguage: lang,
+      provider: { "@type": "Organization", name: "Works.", url: SITE_URL },
+    }));
+    // Only the Q&A rendered on this service detail page may be marked as FAQ.
+    const questions = service.faqSection?.items.filter((item) => item.question?.trim() && item.answer?.trim()) || [];
+    if (questions.length) scripts.push(jsonLdScript({
+      "@context": "https://schema.org", "@type": "FAQPage",
+      inLanguage: lang, url,
+      mainEntity: questions.map((item) => ({
+        "@type": "Question", name: item.question,
+        acceptedAnswer: { "@type": "Answer", text: item.answer },
+      })),
+    }));
+  }
+
+  if (route?.routeKey === "careerDetail" && content.position?.slug === slug &&
+      content.position.title?.trim() && (content.position.excerpt?.trim() || content.position.content?.length)) {
+    const position = content.position;
+    const description = position.content?.filter((block) => block.type !== "image")
+      .map((block) => block.content).filter(Boolean).join("\n\n") || position.excerpt;
+    // The positions collection contains only active, published Strapi records.
+    // Only these explicit job-copy statements establish a Budapest office.
+    // Do not mistake the registered/mailing address or generic UI label for
+    // the office. Other jobs need a structured CMS location.
+    const budapestOffice = /\bbudapesti irodai jelenlét\w*|\bBudapest office\b/i.test(description);
+    // Strapi's publishedAt is the only sourced publication timestamp.
+    scripts.push(jsonLdScript({
+      "@context": "https://schema.org", "@type": "JobPosting",
+      title: position.title, description,
+      url, inLanguage: lang,
+      ...(position.publishedAt && !Number.isNaN(Date.parse(position.publishedAt))
+        ? { datePosted: position.publishedAt } : {}),
+      ...(budapestOffice ? { jobLocation: {
+        "@type": "Place",
+        address: { "@type": "PostalAddress", addressLocality: "Budapest", addressCountry: "HU" },
+      } } : {}),
+      hiringOrganization: { "@type": "Organization", name: "Works.", sameAs: SITE_URL, logo: absoluteUrl(organizationIdentity.logoPath) },
+    }));
+  }
+
+  if (route?.routeKey === "about" && content.team?.length) {
+    // CMS snapshot names are verified identities; never mark up demo fallback people.
+    const verified = new Set(publishedTeam(lang).map((member) => member.name));
+    for (const person of content.team) {
+      if (!person.name?.trim() || !verified.has(person.name)) continue;
+      scripts.push(jsonLdScript({
+        "@context": "https://schema.org", "@type": "Person",
+        name: person.name, ...(person.title?.trim() ? { jobTitle: person.title } : {}),
+        ...(person.image ? { image: absoluteUrl(person.image) } : {}),
+        worksFor: { "@type": "Organization", name: "Works.", url: SITE_URL },
+      }));
+    }
+  }
+
+  const listing = route?.routeKey === "projects" ? content.projects :
+    route?.routeKey === "blog" ? content.posts : undefined;
+  if (listing?.length) {
+    const key = route?.routeKey === "projects" ? "projectDetail" : "blogPost";
+    scripts.push(jsonLdScript({
+      "@context": "https://schema.org", "@type": "ItemList",
+      url, inLanguage: lang,
+      itemListElement: listing.map((item, index) => ({
+        "@type": "ListItem", position: index + 1, name: item.title,
+        url: absoluteUrl(buildLocalePath(lang, key, item.slug)),
+      })),
+    }));
   }
 
   return scripts;

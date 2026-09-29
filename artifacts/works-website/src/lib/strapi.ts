@@ -399,6 +399,8 @@ export interface CareerWorkWithUs {
 
 export interface CareerPosition {
   documentId?: string;
+  /** Strapi publication timestamp; only present for an active published job. */
+  publishedAt?: string;
   slug: string;
   title: string;
   team: string;
@@ -689,6 +691,7 @@ export async function getCareerPositions(locale?: string): Promise<CareerPositio
   );
   return res.data.filter((c) => c.isActive === true && !!c.publishedAt).map((c) => ({
     documentId: c.documentId,
+    publishedAt: c.publishedAt!,
     slug: c.slug,
     title: c.title,
     team: c.team || "",
@@ -711,6 +714,7 @@ export async function getCareerPositionBySlug(slug: string, locale?: string): Pr
   return res.data[0]?.isActive === true && !!res.data[0].publishedAt
     ? {
         documentId: res.data[0].documentId,
+        publishedAt: res.data[0].publishedAt!,
         slug: res.data[0].slug,
         title: res.data[0].title,
         team: res.data[0].team || "",

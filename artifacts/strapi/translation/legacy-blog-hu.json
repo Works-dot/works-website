@@ -1,0 +1,586 @@
+{
+  "version": 1,
+  "records": [
+    {
+      "documentId": "nh6ut44kpi0lqaggf5tirux1",
+      "slug": "how-do-we-pay-online",
+      "sourceChecksum": "857e7adebcd13a520f2a1b7221d84cde4336fa6775e5a2735bbbd6496cf38212",
+      "title": "Hogyan fizetünk online?",
+      "excerpt": "Melyek a preferált fizetési módok a magyar vásárlók körében? Feltárjuk, milyen szempontok alapján döntenek, és hogyan viszonyulnak az egyre népszerűbb virtuális kártyás fizetésekhez.",
+      "content": [
+        {
+          "type": "text",
+          "content": "### Online vásárlás és kiszállítás – 1. rész\n\n### A magyar piac kutatása"
+        },
+        {
+          "type": "image",
+          "caption": ""
+        },
+        {
+          "type": "text",
+          "content": "*Az elmúlt években mindenki megtapasztalta, hogyan változtatta meg életünket az online vásárlás világa. Az online vásárlások exponenciális növekedése és az online platformok széles körű elterjedése új lehetőségeket teremtett a vállalkozások számára, miközben a fogyasztók számára kényelmes és gyors hozzáférést biztosít a termékek és szolgáltatások széles skálájához.*\n\n*Az online megrendelések kézbesítésével kapcsolatos kutatásaink alapján ebben a cikksorozatban bemutatjuk a felhasználók elvárásait és tapasztalatait az online rendelés fizetésével, kiszállításával és a rendelés közbeni kommunikációval kapcsolatban.*\n\n*E cikkünket egy nem reprezentatív online kérdőív, mélyinterjúk és másodlagos forráskutatás előzte meg. Kérdőíves felmérésünkben 16 és 75 év közötti résztvevőket kérdeztünk meg.*"
+        },
+        {
+          "type": "text",
+          "content": "### Online vásárlás és kiszállítás sorozat\n\n#1 – Hogyan fizethetünk online?\n\nBemutatjuk, mely fizetési módokat részesítik előnyben a vásárlók. Feltárjuk, milyen szempontok alapján döntenek, és hogyan viszonyulnak az egyre népszerűbb virtuális kártyás fizetésekhez.\n\n[#2 – A COVID-19 gazdasági hatásai](https://worksdot.hu/blog/the-economic-effects-of-covid-19)\n\nA korabeli kutatásban megvizsgáljuk a gazdasági környezet online vásárlásra gyakorolt hatását: tartósak maradtak-e a COVID-időszakban kialakult vásárlási szokások, és hogyan befolyásolhatta az akkori infláció a fizetési és kiszállítási módok választását.\n\n[#3 – Szállítás és átvétel](https://worksdot.hu/blog/shipping-and-receiving)\n\nEbben a cikkben megvizsgáljuk a vásárlók visszajelzéseit a különböző szállítási módokról és preferenciákról. Megbeszéljük azt is, hogy a szállítási mód termékkategóriánkénti megválasztása hogyan befolyásolja a vásárlókat, illetve mit gondolnak a környezetbarát szállítási módokról.\n\n[#4 - Üzenetek szállítás közben](https://worksdot.hu/blog/messages-during-shipping)\n\nA megrendelés pillanatától kezdve meghatározó a megrendelt termékek állapota és az átvétellel kapcsolatos kommunikáció. Ebben a cikkben arra fókuszáltunk, hogy mely üzeneteket és értesítéseket tartanak fontosnak az ügyfelek.\n\n[#5 - Problémák a csomagokkal](https://worksdot.hu/blog/issues-with-packages)\n\nEbben a cikkben megvitatjuk, hogy a vásárlók hogyan vélekednek az online vásárlás biztonságáról, milyen termékeket küldenek vissza, valamint a nemzetközi weboldalakon történő vásárlással kapcsolatos félelmeiket és elvárásaikat."
+        },
+        {
+          "type": "text",
+          "content": "### Milyen fizetési módok állnak a felhasználók rendelkezésére?\n\nA 2010-es évek elején az utánvétes fizetés és a banki átutalás volt a jellemző fizetési mód az online vásárlásnál. Az évtized végére azonban gyorsan megnőtt a kártyás fizetés elérhetősége az online rendeléseknél, amikor megjelentek az olyan online fizetési szolgáltatók, mint a Barion vagy a Simple. Ezt követték az érintés nélküli fizetési szolgáltatók, mint például az Apple Pay, a Google Pay vagy a Paypal, amelyek lehetővé tették számunkra, hogy készpénz vagy fizikai bankkártya használata nélkül is tudjunk fizetni. Ennek köszönhetően ma már számos fizetési mód közül választhatunk online rendelés leadásakor, beleértve az utánvétes fizetést, az előre utalást, az online kártyás fizetést vagy az elektronikus pénztárca által kínált fizetési lehetőségeket.\n\nA Magyar Nemzeti Bank Fizetési Rendszer Jelentése szerint a cikk megjelenését megelőző évben 24 százalékkal nőtt az elektronikus fizetést elfogadó internetes kereskedők száma, így 42 000 elfogadóhelyhez jutottunk online rendeléseinkhez. Emellett az elektronikus pénztárcák is jelentős növekedést produkáltak, a mobiltárcában nyilvántartott kártyák száma elérte az 1,7 milliót, ami az ilyen szolgáltatásokban nyilvántartott bankkártyák közel 18%-át teszi ki. ([forrás 1](https://www.mnb.hu/letoltes/fizetesi-rendszer-jelentes-20230626-kiemelt.pdf))\n\n### Hogyan fizetnek szívesebben az emberek az online vásárlásokért?\n\nAz online rendelések fizetési módjának kiválasztását gyakran az egyéni preferenciák és a korkülönbségek határozzák meg. Ha bizalom van a kereskedő webhelye iránt, akkor az online kártyás fizetés kerül előtérbe. Tovább növelheti a bizalmat, ha a kereskedő oldalán olyan ismert fizetési rendszerek állnak rendelkezésre, mint a Barion vagy a Simple Pay. Ez a módszer gyors és kényelmes, lehetővé téve az ügyfelek számára, hogy egyszerűen és biztonságosan vásároljanak online. További előnye, hogy az online kártyás vásárlásnál nem kell utánvétes fizetéssel foglalkozni, hiszen bárki átveheti a csomagot."
+        },
+        {
+          "type": "image",
+          "caption": "1. diagram: Fizetési mód választási gyakoriság"
+        },
+        {
+          "type": "text",
+          "content": "Korosztálytól függetlenül a válaszadók többsége a rendelések leadásakor fizet. Míg a válaszadók 69%-a kártyát használ az online fizetéshez, az utánvétes fizetés továbbra is fontos szerepet játszik. A banki átutalás a legkevésbé preferált fizetési mód. Ennek oka az lehet, hogy a modern fizetési módok felváltották a banki átutalás szükségességét, és az elavult banki átutalás helyett a könnyebb és gyorsabb online kártyás fizetést választják. A preferált fizetési módok azonban korcsoportonként eltérőek."
+        },
+        {
+          "type": "image",
+          "caption": "2. ábra: Fizetési módok korcsoportonkénti megoszlása"
+        },
+        {
+          "type": "text",
+          "content": "A 15-25 éves korosztályban az érintés nélküli fizetés népszerűbb, mint a többi korcsoportban, ami a technológiai fejlődésnek és a fiatalok körében elterjedt okostelefon-használatnak köszönhető. Ez a generáció elsősorban az általuk kínált egyszerűség, gyorsaság és kényelem miatt fordul a digitális fizetési megoldások felé.\n\nA 26-35 éves korosztályban továbbra is az online kártyás fizetés dominál, és a fizetési módok között az utánvétes fizetés is fontos szerepet játszik. Az elektronikus pénztárca használata némileg népszerű, ami a kényelmi preferenciákat és a technológiai fejlesztésekhez való pozitív hozzáállást tükrözi ebben a korosztályban.\n\nA 36-45 éves korosztály számára továbbra is az online kártyás fizetés a legelterjedtebb választás, de fontos az utánvét is. Figyelemre méltó az elektronikus pénztárca használata, de a fiatalabb korosztályokhoz képest kisebb arányban.\n\nA 46 év feletti korosztályban az utánvétes fizetési mód a többi korosztályhoz képest népszerűbb. Ennek a generációnak a biztonság és a kényelem fontosabb, és inkább a termék kiszállításakor fizetnek.\n\nA fizetési módok széles skálájának kínálata jelentős költséget jelenthet az online kiskereskedők számára. Másrészt az ügyfelek nagyobb valószínűséggel választanak másik kereskedőt, ha a kínált fizetési mód nem felel meg a preferenciáiknak. ([forrás 2](https://www.mnb.hu/letoltes/fizetesi-rendszer-jelentes-20230626-kiemelt.pdf))"
+        },
+        {
+          "type": "image",
+          "caption": "3. diagram : Az online áruházak által kínált elégtelen fizetési módok"
+        },
+        {
+          "type": "text",
+          "content": "A válaszadók 71%-a tapasztalt már olyan helyzetet, amikor egy webáruház nem kínálta a keresett fizetési módot, így kénytelen volt máshol vásárolni, mert nem teljesültek az elvárásaik.\n\nEbből az információból látható, hogy a fizetési módok megoszlása ​​korcsoportonként eltérő lehet, és a vállalkozásoknak figyelembe kell venniük ezeket az adatokat, hogy megfeleljenek vásárlóik igényeinek, és fokozzák a sikeres online vásárlási élményt.\n\n### Mi befolyásolja az ügyfelek fizetési mód választását?"
+        },
+        {
+          "type": "image",
+          "caption": "4. diagram: A fizetési mód választását befolyásoló tényezők"
+        },
+        {
+          "type": "text",
+          "content": "Az ügyfelek által választott fizetési mód több tényezőtől is függhet. Az adatok szerint a fizetési mód kiválasztását leginkább a fizetéssel járó többletköltségek, a biztonság és az egyszerűség befolyásolják.\n\n### A készpénz használatának költsége\n\nA válaszadók 25%-a kifejezetten figyelembe veszi a fizetési móddal járó többletköltségeket. Különösen a legolcsóbb szállítási módokat keresik, és kerülik a magasabb költségekkel járókat. Ahol lehetséges, olyan opciókat választanak, amelyeknél nincs vagy alacsony a szállítási és fizetési díj.\n\n### Biztonság és egyszerűség\n\nA biztonság is fontos szempont, erre a válaszadók 21%-a hivatkozott. Az ügyfelek megbízható fizetési módokat szeretnének használni, amelyek védik személyes és pénzügyi adataikat.\n\nAz egyszerűség is fontos, erre a válaszadók 16%-a hivatkozott. Az emberek egyszerűen és gyorsan szeretnének vásárolni, ezért kevésbé bonyolult és könnyebben használható fizetési módokat választanak.\n\nA fizetési mód kiválasztását egyéb tényezők is befolyásolhatják, mint például a választott szállítási mód vagy a rendelés végösszege. Emellett a termék típusa is befolyásolhatja a fizetési módot, de ez az összképben kevésbé fontos.\n\n### Mi határozza meg a fizetési lehetőségeket a különböző korcsoportokban?\n\nA korcsoport-elemzés szerint a 15-25 éves és a 46 év felettiek számára a biztonság a legfontosabb. E két generáció számára kiemelten fontos a személyes és pénzügyi adatok védelme az online vásárlás során.\n\nA 26-35 és 36-45 éves korosztálynál fontos szerepet játszanak a fizetési módokhoz kapcsolódó többletköltségek. Az ilyen korcsoportba tartozó ügyfelek igyekeznek minimalizálni a többletköltségeket.\n\n### A virtuális kártyák világa\n\nA virtuális kártya (más néven webkártya vagy internetes kártya) egy digitális bankkártya, amelyet kizárólag online vásárlásra terveztek. Nem használható készpénzfelvételre vagy POS terminálokon történő fizetésre. A hagyományos bankkártyához hasonlóan bankszámlához kötődik, és az online vásárláshoz elengedhetetlen kártyaadatokat, például kártyaszámot, lejárati dátumot és CVV2 kódot tartalmaz.\n\nSokan azért választják a virtuális kártyákat, mert az online vásárláshoz csak annyit tudnak betölteni, amennyire szükségük van, így nincs szükség az elsődleges bankkártya adatainak megadására az online fizetési platformokon. Ez minimálisra csökkenti az esetleges csalás vagy túlköltekezés kockázatát. Lehetőség van eldobható vagy rövid élettartamú virtuális kártyák létrehozására is, ahol a kártyaadatok a fizetés után azonnal lejárnak. ([forrás 3](https://www.erstebank.hu/hu/ebh-nyito/mindennapi-penzugyek/beteti-kartyak/visa-beteti-kartyak/visa-virtualis-bankkartya)) ([forrás 4](https://www.kh.hu/cikkek/virtualis-bankkartya))\n\nNapjainkban egyre több banktól válnak elérhetővé a virtuális kártyák, amelyek segítenek megvédeni az egyéneket a csalástól. Magyarországon a virtuális kártyákat a Gránit Bank, a CIB Bank, az Erste Bank, az OTP Bank, a Revolut és a Wise kínálja. ([forrás 5](https://tudastar.money.hu/ismerteto/virtualis-bankkartya-igenyles/))"
+        },
+        {
+          "type": "image",
+          "caption": "5. diagram: A virtuális kártyák ismerete és használata"
+        },
+        {
+          "type": "text",
+          "content": "Az adatok szerint a válaszadók 37%-a hallott már a virtuális kártyákról, és 39%-uk használta már ezeket a kártyákat. Az egyszer használatos virtuális kártyákról viszont a válaszadók 24%-a még nem hallott."
+        },
+        {
+          "type": "image",
+          "caption": "6. ábra: A virtuális kártyák használatának okai"
+        },
+        {
+          "type": "text",
+          "content": "A válaszadók körében a biztonság volt a fő oka a virtuális kártyák használatának. Az adatok azt mutatják, hogy a válaszadók 80%-a biztonsági okokból választotta ezt a fizetési módot. Ez a jelentős százalékarány azt sugallja, hogy a virtuális kártyák magasabb szintű védelmet kínálnak az ügyfelek számára, csökkentve ezzel a csalás vagy adathalászat kockázatát.\n\nA válaszadók kisebb hányada, 12% mondta azt, hogy szeretné kipróbálni a virtuális kártyák használatának élményét. Az egyszerűség viszont csak a válaszadók 8%-a választotta a virtuális kártyákat.\n\nAz adatokból jól látszik, hogy elsősorban biztonsági okokból népszerű a virtuális kártyák használata. Ez a fizetési mód lehetővé teszi az ügyfelek számára, hogy megvédjék magukat az esetleges csalásoktól, és biztonságosan vásároljanak online. Mint ilyenek, az eldobható virtuális kártyák hatékony és megbízható eszközt jelentenek az ügyfelek számára a digitális tranzakciók során."
+        },
+        {
+          "type": "text",
+          "content": "A sorozat következő részében az online vásárlásra gyakorolt ​​gazdasági hatásról lesz szó. Megvizsgáljuk, hogy a COVID-időszak során a vásárlási szokásokban bekövetkezett változások tartósak voltak-e, és hogy a növekvő inflációs környezet hogyan befolyásolhatja a felhasználók fizetési és szállítási módokkal kapcsolatos döntéseit."
+        }
+      ]
+    },
+    {
+      "documentId": "ujw1s67r9rio7l9vcc9s2vrx",
+      "slug": "the-economic-effects-of-covid-19",
+      "sourceChecksum": "0fa802ad24ede4807d744d61a2231c80a4fb826aa78bfaf84bd5ef23ec8f63e9",
+      "title": "A COVID-19 gazdasági hatásai",
+      "excerpt": "A cikk a COVID-időszak online vásárlásra gyakorolt gazdasági hatásait vizsgálja: tartósak maradtak-e a járvány idején kialakult vásárlási szokások, és hogyan befolyásolhatja az akkori, erősödő infláció a fizetési és kiszállítási módok választását?",
+      "content": [
+        {
+          "type": "text",
+          "content": "### Online vásárlás és kiszállítás – 2. rész\n\n### A magyar piac kutatása"
+        },
+        {
+          "type": "image",
+          "caption": ""
+        },
+        {
+          "type": "text",
+          "content": "*Az elmúlt években mindenki megtapasztalta, hogyan változtatta meg életünket az online vásárlás világa. Az online vásárlások exponenciális növekedése és az online platformok széles körű elterjedése új lehetőségeket teremtett a vállalkozások számára, miközben a fogyasztók számára kényelmes és gyors hozzáférést biztosít a termékek és szolgáltatások széles skálájához.*\n\n*Az online megrendelések kézbesítésével kapcsolatos kutatásaink alapján ebben a cikksorozatban bemutatjuk a felhasználók elvárásait és tapasztalatait az online rendelés fizetésével, kiszállításával és a rendelés közbeni kommunikációval kapcsolatban.*\n\n*E cikkünket egy nem reprezentatív online kérdőív, mélyinterjúk és másodlagos forráskutatás előzte meg. Kérdőíves felmérésünkben 16 és 75 év közötti résztvevőket kérdeztünk meg.*"
+        },
+        {
+          "type": "text",
+          "content": "### Online vásárlás és kiszállítás sorozat\n\n[#1 – Hogyan fizethetünk online?](https://worksdot.hu/blog/how-do-we-pay-online)\n\nBemutatjuk, mely fizetési módokat részesítik előnyben a vásárlók. Feltárjuk, milyen szempontok alapján döntenek, és hogyan viszonyulnak az egyre népszerűbb virtuális kártyás fizetésekhez.\n\n#2 – A COVID-19 gazdasági hatásai\n\nA korabeli kutatásban megvizsgáljuk a gazdasági környezet online vásárlásra gyakorolt hatását: tartósak maradtak-e a COVID-időszakban kialakult vásárlási szokások, és hogyan befolyásolhatta az akkori infláció a fizetési és kiszállítási módok választását.\n\n[#3 – Szállítás és átvétel](https://worksdot.hu/blog/shipping-and-receiving)\n\nEbben a cikkben megvizsgáljuk a vásárlók visszajelzéseit a különböző szállítási módokról és preferenciákról. Megbeszéljük azt is, hogy a szállítási mód termékkategóriánkénti megválasztása hogyan befolyásolja a vásárlókat, illetve mit gondolnak a környezetbarát szállítási módokról.\n\n[#4 - Üzenetek szállítás közben](https://worksdot.hu/blog/messages-during-shipping)\n\nA megrendelés pillanatától kezdve meghatározó a megrendelt termékek állapota és az átvétellel kapcsolatos kommunikáció. Ebben a cikkben arra fókuszáltunk, hogy mely üzeneteket és értesítéseket tartanak fontosnak az ügyfelek.\n\n[#5 - Problémák a csomagokkal](https://worksdot.hu/blog/issues-with-packages)\n\nEbben a cikkben megvitatjuk, hogy a vásárlók hogyan vélekednek az online vásárlás biztonságáról, milyen termékeket küldenek vissza, valamint a nemzetközi weboldalakon történő vásárlással kapcsolatos félelmeiket és elvárásaikat."
+        },
+        {
+          "type": "text",
+          "content": "### A járvány átrendezte mindennapjainkat\n\nA COVID-időszakban sok fogyasztó vásárlási szokásai megváltoztak: előtérbe kerültek az érintésmentes és digitális megoldások. A kutatás idején arra voltunk kíváncsiak, hogy az ekkor kipróbált módszerek beépültek-e a vásárlási szokásokba, vagy a fogyasztók visszatértek a korábbi gyakorlathoz.\n\nA járvány miatt az embereknek alkalmazkodniuk kellett a korlátozásokhoz, a társadalmi távolságtartáshoz és a bezártsághoz, ami megváltoztatta vásárlási szokásaikat és preferenciáikat is.\n\nA járvány következtében a vásárlók el akarták kerülni a zsúfolt helyeket és a társadalmi interakciókat. Ez az online vásárlás felfutásához vezetett minden ágazatban, az élelmiszerektől a ruházaton át az elektronikai cikkekig. Például még az élelmiszerek esetében is egyre többen választják az online rendelést, hogy minimalizálják a vírus terjedésének kockázatát.\n\nEz idő alatt jelentősen megnőtt a kereslet a fertőtlenítőszerek, maszkok és egyéb egészségügyi termékek iránt, mivel az emberek tudatosabbá váltak higiéniai szokásaikkal. Így az online vásárlás és az érintés nélküli átvétel kiváló alternatívának bizonyult azok számára, akik mindent meg akarnak tenni a vírus terjedésének visszaszorításáért.\n\nAhogy a vírus alábbhagyott, a vásárlási szokások ismét megváltoztak. Míg néhányan visszatértek a hagyományos boltokban való vásárláshoz, és visszafogták online rendeléseiket, a vásárlók jelentős része továbbra is az online vásárlást kényelmi okokból, de akár kisebb vásárlások céljából is folytatta. Ezenkívül az online termékek vásárlása továbbra is népszerű olyan termékek esetében, amelyeket nehéz megtalálni a fizikai boltokban.\n\n### A Covid-19 hatása az online vásárlási szokásokra"
+        },
+        {
+          "type": "image",
+          "caption": "1. ábra: A Covid hatása az online vásárlási szokásokra"
+        },
+        {
+          "type": "text",
+          "content": "A válaszadók több mint fele arról számolt be, hogy a Covid-járvány miatt nem változtak lényegesen az online vásárlási szokásaik. A válaszadók 14%-a tért vissza korábbi rendelési szokásaihoz, a válaszadók harmada pedig továbbra is fenntartja a Covid időszakban bevezetett online vásárlási szokásait.\n\n### A Covid-19 teret adott az új fizetési módok használatának"
+        },
+        {
+          "type": "image",
+          "caption": "2. ábra: A Covid hatása a fizetési mód kiválasztására"
+        },
+        {
+          "type": "text",
+          "content": "Az adatokból kitűnik, hogy a Covid hatása miatt a válaszadók 27%-a valamilyen formában változtatott az online rendeléseknél alkalmazott fizetési módokon, és továbbra is előszeretettel alkalmazza azokat. Ilyen például az érintés nélküli fizetés, az online rendelés leadásakor történő fizetés vagy a korábban nem használt fizetési módok használata.\n\nArra is kíváncsiak voltunk, hogy válaszadóink elfogadtak-e új szokásokat a Covid következtében. Interjúinkból és beszélgetéseinkből megtudtuk, hogy a Covid óta a vásárlók gyakrabban vásárolnak online és rendelnek élelmiszert, mint a járvány előtt.\n\n### A Covid hatása a szállítási módokra"
+        },
+        {
+          "type": "image",
+          "caption": "3. táblázat: A Covid hatása a szállítási mód preferenciáira"
+        },
+        {
+          "type": "text",
+          "content": "A Covid-19 világjárvány következtében a szállítási módok is megváltoztak. Válaszadóink körülbelül 45%-a nyilatkozott úgy, hogy megváltoztak a szállítási szokásaik. Általában többet rendelnek online, és minimalizálják a zsúfolt helyeken való találkozást. Gyakori, hogy kevesebb készpénzt használnak fel, ezért a felhasználók a futárnak szánt borravalót is online adják. A megváltozott szokásokról beszámoló, 45%-nyi válaszadó körében a járvány kezdete óta 22% a csomagautomatákat, 18% a házhozszállítást, 5% pedig az átvételi pontokra történő kiszállítást részesíti előnyben.\n\n### Gazdasági hatások\n\nAz elmúlt években a vásárlási szokásokat nemcsak a Covid-hoz kapcsolódó korlátozások és a kapcsolódó fogyasztási szokások, hanem a magas infláció által súlyosbított bizonytalan gazdasági helyzet is befolyásolta.\n\nAmikor az üzletekben vásárolunk vagy kifizetjük a számláinkat, személyesen is megtapasztalhatjuk a folyamatos drágulást. Minden fogyasztót érint. Míg a fizikai kiskereskedelemben jellemzően visszaesés tapasztalható a folyamatos áremelkedések miatt, addig az e-kereskedelem az alacsonyabb árú termékek felé fordult, a prémium piacon nem történt jelentős visszaesés."
+        },
+        {
+          "type": "image",
+          "caption": "4. ábra: Az infláció hatása az online rendelési szokásokra"
+        },
+        {
+          "type": "text",
+          "content": "Az infláció online vásárlási szokásokra gyakorolt ​​hatása a válaszadók 43%-át érintette. Az áremelkedések az internetes vásárlások esetében is növelték a tudatosságot és a vásárlás előtti tájékozódást"
+        },
+        {
+          "type": "image",
+          "caption": "5. ábra: A gazdasági változások hatása az online rendelési szokásokra"
+        },
+        {
+          "type": "text",
+          "content": "A gazdasági változások óvatosabbá tették az embereket a költésekkel kapcsolatban, aminek következtében kevesebb az impulzusvásárlás, és jobban megfontolják, hogy valóban szükségük van-e egy adott termékre. Ha valamire szükségük van, már nem az első talált terméket rendelik meg az interneten, hanem több webáruház árait hasonlítják össze, hogy megtalálják a legkedvezőbb kosárértéket.\n\nHasonló attitűdbeli változások voltak megfigyelhetők az interjúk során. A válaszadók elmondták, hogy ma már gyakrabban hasonlítják össze az árakat, és jobban odafigyelnek azokra a termékekre, amelyek a lejárathoz közelednek. Ezek a termékek nem csak azért olcsóbbak, mert közel a lejárati idejük, hanem hozzájárulnak a fenntarthatósághoz is. Ezen túlmenően a válaszadók azt mondták, hogy készek alternatív termékeket vásárolni a preferált márkák helyett, hogy pénzt takarítsanak meg, például a kozmetikumok esetében. A költségminimalizálás az online rendelésnél is fókuszba került, a válaszadók 15%-a keresi az olcsóbb vagy akár ingyenes fizetési lehetőségeket vásárláskor. Hasonlóképpen 15% mondta azt, hogy a rossz gazdasági feltételek miatt kevesebbet vásárol online. A válaszadók 10%-a el is halaszt bizonyos online vásárlásokat.\n\nAz utóbbi időben a fogyasztók érezték a szállítási költségek növekedését, és költséghatékony szállítási megoldásokat keresnek. Sokan olyan alternatívákat választanak, mint a házhozszállítás helyett a kiszállítási pontokról vagy üzletekből történő átvétel. Ha egy kiválasztott online termék szállítási költsége magas, a fogyasztók hajlandóak átvenni a terméket az üzletben, hogy megtakarítsák a költségeket.\n\n### Szezonális vásárlás"
+        },
+        {
+          "type": "image",
+          "caption": ""
+        },
+        {
+          "type": "text",
+          "content": "Szezonvégi akciók, Black Friday, végkiárusítás, ünnepi akciók – a lista folytatható. Továbbra is népszerűek a vásárlók körében az ünnepek előtti kedvezmények és akciók. A válaszadók 53%-a vásárolt ezekben az időszakokban, 26%-uk pedig rendszeresen vásárol akciós rendezvényeken. Csupán 20%-uk mondta azt, hogy nem vásárol ünnepek előtt vagy akciók alatt.\n\nA felhasználói interjúk során a válaszadók azt mondták, hogy igyekeznek időben vásárolni karácsonyra – nem pedig az utolsó pillanatra hagyni –, mivel arra számítanak, hogy az évnek ebben a szakaszában lassabban érkeznek meg online rendeléseik. Az ügyfelek a hosszabb szállítási határidőket is jobban elfogadják. Ilyenkor az információhiány bosszantóbb, mintha tovább kellene várni egy adott termékre."
+        }
+      ]
+    },
+    {
+      "documentId": "ajkhd25h7aplaip5v1z4v4gs",
+      "slug": "shipping-and-receiving",
+      "sourceChecksum": "f0179435dea6f8a69820873977e0fe669c5a3ec4222404d113f7bbcdef01681a",
+      "title": "Szállítás és átvétel",
+      "excerpt": "Az online vásárlás térnyerése alapvetően megváltoztatta a mindennapjainkat: kényelmet és széles termékválasztékot kínál. Cikkünkben kérdőívek, interjúk és háttérkutatás alapján vizsgáljuk a megrendelések kiszállításával kapcsolatos felhasználói elvárásokat és tapasztalatokat.",
+      "content": [
+        {
+          "type": "text",
+          "content": "### Online vásárlás és kiszállítás – 3. rész\n\n### A magyar piac kutatása"
+        },
+        {
+          "type": "image",
+          "caption": ""
+        },
+        {
+          "type": "text",
+          "content": "*Az elmúlt években mindenki megtapasztalta, hogyan változtatta meg életünket az online vásárlás világa. Az online vásárlások exponenciális növekedése és az online platformok széles körű elterjedése új lehetőségeket teremtett a vállalkozások számára, miközben a fogyasztók számára kényelmes és gyors hozzáférést biztosít a termékek és szolgáltatások széles skálájához.*\n\n*Az online megrendelések kézbesítésével kapcsolatos kutatásaink alapján ebben a cikksorozatban bemutatjuk a felhasználók elvárásait és tapasztalatait az online rendelés fizetésével, kiszállításával és a rendelés közbeni kommunikációval kapcsolatban.*\n\n*E cikkünket egy nem reprezentatív online kérdőív, mélyinterjúk és másodlagos forráskutatás előzte meg. Kérdőíves felmérésünkben 16 és 75 év közötti résztvevőket kérdeztünk meg.*"
+        },
+        {
+          "type": "text",
+          "content": "### Online vásárlás és kiszállítás sorozat\n\n[#1 – Hogyan fizethetünk online?](https://worksdot.hu/blog/how-do-we-pay-online)\n\nBemutatjuk, mely fizetési módokat részesítik előnyben a vásárlók. Feltárjuk, milyen szempontok alapján döntenek, és hogyan viszonyulnak az egyre népszerűbb virtuális kártyás fizetésekhez.\n\n[#2 – A COVID-19 gazdasági hatásai](https://worksdot.hu/blog/the-economic-effects-of-covid-19)\n\nA korabeli kutatásban megvizsgáljuk a gazdasági környezet online vásárlásra gyakorolt hatását: tartósak maradtak-e a COVID-időszakban kialakult vásárlási szokások, és hogyan befolyásolhatta az akkori infláció a fizetési és kiszállítási módok választását.\n\n#3 – Szállítás és átvétel\n\nEbben a cikkben megvizsgáljuk a vásárlók visszajelzéseit a különböző szállítási módokról és preferenciákról. Megbeszéljük azt is, hogy a szállítási mód termékkategóriánkénti megválasztása hogyan befolyásolja a vásárlókat, illetve mit gondolnak a környezetbarát szállítási módokról.\n\n[#4 - Üzenetek szállítás közben](https://worksdot.hu/blog/messages-during-shipping)\n\nA megrendelés pillanatától kezdve meghatározó a megrendelt termékek állapota és az átvétellel kapcsolatos kommunikáció. Ebben a cikkben arra fókuszáltunk, hogy mely üzeneteket és értesítéseket tartanak fontosnak az ügyfelek.\n\n[#5 - Problémák a csomagokkal](https://worksdot.hu/blog/issues-with-packages)\n\nEbben a cikkben megvitatjuk, hogy a vásárlók hogyan vélekednek az online vásárlás biztonságáról, milyen termékeket küldenek vissza, valamint a nemzetközi weboldalakon történő vásárlással kapcsolatos félelmeiket és elvárásaikat."
+        },
+        {
+          "type": "text",
+          "content": "### Az online vásárlók szállítási preferenciái és döntéshozatali háttere\n\nAz online vásárlás a modern élet szerves része. A termékek és szolgáltatások online megrendelése kényelmes, de a szállítás elengedhetetlen. Ezért a szállítási mód és a szolgáltató kiválasztása kulcsfontosságú a pozitív ügyfélélményhez. Az online vásárlók előnyben részesítenek bizonyos szállítási módokat és szolgáltatókat, és megvizsgáljuk, hogy a fogyasztók milyen szempontok alapján hozzák meg döntéseiket.\n\n### Átvételi beállítások\n\nKutatásunk megerősítette, hogy egyértelműen a házhozszállítás a legnépszerűbb kézbesítési mód az online vásárlók körében, válaszadóink többsége ezt a lehetőséget választja első helyen.\n\nA szállítási preferenciák életkortól függően jelentősen eltérnek. A 15-25 éves vásárlók inkább a csomagautomatákat, az idősebb korosztályok pedig a házhozszállítást részesítik előnyben. A fiatalabb demográfiai csoport hajlamosabb arra, hogy a lehető leggyorsabban megszerezze megrendeléseit, még akkor is, ha ez nagyobb erőfeszítést igényel. Az életkor előrehaladtával a kényelem egyre fontosabb tényezővé válik. A bolti átvétel a legkevésbé népszerű lehetőség.\n\nA termékkategóriák befolyásolják a szállítási preferenciákat. A készételeket, háztartási gépeket, bútorokat, élelmiszereket általában házhoz szállítják (pl. Kifli.hu, Tesco). A csomagautomaták gyakran előnyben részesítik a könyveket, írószereket, szépségápolási termékeket, kozmetikumokat és játékokat. A bolti személyes átvétel népszerű választás olyan termékek esetében, mint a gyógyszerek, orvosi eszközök, hardverek, építőanyagok, valamint autó- és motorkerékpár-alkatrészek. Ezzel a lehetőséggel az ügyfelek személyesen vehetik át a vásárlásaikat, ahelyett, hogy kézbesítenék azokat.\n\n### A házhozszállítás a legnépszerűbb lehetőség\n\nA kisvárosokban, falvakban sokszor a házhozszállítás az egyetlen lehetőség, mivel a csomagpontok vagy csomagautomaták gyakran távol helyezkednek el a vásárló otthonától. Nagyobb vagy nehezebb csomagok házhozszállítással a legegyszerűbb a vevő portájáig eljuttatni. Például egy hűtőszekrény vagy egy futópad vásárlásakor már nem elég a családi autó hátsó ülésére vagy csomagtartójára támaszkodni. Az ügyfelek arról számoltak be, hogy a szállítási határidők túl tágak, ami frusztráló lehet, ha a futár kellemetlen időpontban érkezik, és az ügyfél nem tudja átvenni a rendelést. Ilyen helyzetekben az ügyfelek megkérhetnek valaki mást, például családtagot, kollégát vagy szomszédot, hogy a nevükben fogadja el a szállítást."
+        },
+        {
+          "type": "image",
+          "caption": "1. táblázat: A leggyakrabban házhoz szállítással rendelt termékkategóriák"
+        },
+        {
+          "type": "text",
+          "content": "### A fiatalok körében népszerű a csomag átvétele a csomagautomatából\n\nA csomagautomaták népszerűek a városi lakosok körében, különösen a fiatalabb generáció körében. Az ügyfelek előre fizetnek a termékért, nehogy később foglalkozzanak vele.\n\nA válaszadók szívesebben használják a csomagautomatákat kis és kis értékű csomagok esetén. A városlakók nagyra értékelik, hogy a szekrények a nap bármely szakában könnyen hozzáférhetők, így elkerülhető, hogy menetrendjüket a futár érkezéséhez igazítsák. A csomagmegőrzők jó választás a diszkrét kézbesítést kedvelő ügyfelek számára. Az átvétel során nem kell találkozni senkivel."
+        },
+        {
+          "type": "image",
+          "caption": "2. táblázat: A csomagautomatákban leggyakrabban rendelt termékkategóriák"
+        },
+        {
+          "type": "text",
+          "content": "### Ingyenes átvétel az üzletben\n\nMint említettük, bizonyos termékkategóriákat részesítenek előnyben a személyes átvételnél. Ezekben az esetekben a vásárlók elvárják, hogy a termék már az üzletben átvehető legyen és ingyenesen átvehető legyen. Bizonyos termékeket előnyben részesítenek a személyes átvételhez, például a sebezhető tárgyakat, a kicsi, de drága elektronikai cikkeket, hardvereket és orvosi eszközöket. A vásárlók azt is mérlegelik, milyen sürgősen van szükségük a termékre. Ha az üzlet könnyen megközelíthető, a vásárlók dönthetnek úgy, hogy az üzletben veszik át a vásárlást a gyorsabb elérhetőség érdekében, ahelyett, hogy a házhozszállításra várnának, ami több napig is eltarthat, különösen születésnapi ajándék vásárlásakor."
+        },
+        {
+          "type": "image",
+          "caption": "3. táblázat: Az üzletben leggyakrabban személyes átvétellel megrendelt termékkategóriák"
+        },
+        {
+          "type": "text",
+          "content": "### Hogyan választják ki az ügyfelek az átvétel módját?\n\nA válaszadók az árat, a gyorsaságot és a kényelmet vették figyelembe az átvételi mód kiválasztásakor. Az adatok azt mutatják, hogy az átvétel költsége a legdöntőbb tényező minden korcsoportban. A második és harmadik legfontosabb szempont azonban életkortól függően változik."
+        },
+        {
+          "type": "image",
+          "caption": "4. táblázat: Főbb szempontok a szállítási mód kiválasztásánál"
+        },
+        {
+          "type": "text",
+          "content": "### Szolgáltatók\n\nVálaszadóink gyakran választják a GLS és MPL házhozszállítást, illetve a Foxpost csomagautomatáit. A Foxpost csomagautomatái különösen a fiatalabb korosztályok körében népszerűek, míg az idősebb korosztályok a GLS házhozszállítását részesítik előnyben. A szolgáltató kiválasztását jellemzően a szállítási díj befolyásolja. Ha a szolgáltatói árakban nincs jelentős különbség, általában a kényelem alapján döntenek. Ha következetesen ugyanazt a futárt használja házhozszállításhoz, akkor bizalmi kapcsolat alakulhat ki a futárral. Ez azt eredményezheti, hogy az ügyfél automatikusan ezt az átvételi lehetőséget választja a jövőbeni vásárlásokhoz."
+        },
+        {
+          "type": "image",
+          "caption": "5. táblázat: Leggyakrabban választott szállítási módok és szolgáltatók"
+        },
+        {
+          "type": "text",
+          "content": "### A szállítási idő jelentősége a vevői elégedettségben\n\nA megfelelő kiszállítási idő a terméktől vagy szolgáltatástól függ. A vásárlói visszajelzések alapján a készételeket egy órán belül, a gyógyszereket, gyógyászati ​​segédeszközöket, online élelmiszereket pedig még aznap meg kell szállítani. Ruházati cikkek és elektronikai termékek esetében a vásárlók 2–3 napos, bútoroknál 1–2 hetes kiszállítást várnak el. Elégedetlenséget okoz, ha nincs megadva a kiszállítás várható időpontja, vagy csak egy egész napos időablakot kapnak a futár érkezésére. Az ideális szállítási idő 2-3 óra. Online vásárlásnál az egyórás kézbesítési időablak a legvonzóbb, de a 2–3 órás időablakot is elfogadhatónak tartják.\n\nA szállítás várhatóan az ígért határidőn belül megtörténik. Késés esetén az ügyfelek tájékoztatást várnak a várható további várakozási időről. Az élelmiszerrendeléseknél a vásárlók kevésbé toleránsak, és tudni akarják a várható szállítási időt.\n\nA szezonális vásárlások során, például karácsonykor a vásárlók türelmesebbek lehetnek a szállítási késedelmekkel kapcsolatban, de továbbra is számítanak az előzetes tájékoztatásra. A kiszállítás idejét és a vásárlói elvárásokat összhangba kell hozni a fenntartható, kielégítő online vásárlási élményhez."
+        },
+        {
+          "type": "image",
+          "caption": "6. táblázat: Az online vásárlással kapcsolatos elvárások a nagyobb ünnepek előtt"
+        },
+        {
+          "type": "text",
+          "content": "### Környezettudatosság az online vásárlás során\n\nAz elmúlt években a fenntarthatóság egyre fontosabbá vált mind az üzleti, mind a szociális szektorban. A globális környezeti kihívásokra és a klímaváltozásra adott válaszként egyre több vállalat és szervezet ismeri fel annak szükségességét, hogy üzleti tevékenységét felelősségteljesen irányítsa. A fenntarthatóság kulcsfontosságú tényezővé vált a szállító cégek körében, mivel ezek a vállalkozások hozzájárulnak az üvegházhatást okozó gázok kibocsátásához és egyéb környezeti hatásokhoz, ezért fokozott figyelmet fordítanak erre a kérdésre.\n\nA válaszadók véleménye eltérő a környezettudatosságról. Elsősorban a fenntarthatóság irányába mutató változásokat várják a szállító cégektől. Úgy vélik, hogy még a szállítási útvonalak optimalizálása, a rendelések összevonása és a csomagok utólagos kézbesítése is csökkentheti a szén-dioxid-kibocsátást.\n\nA válaszadók 51%-a fontosnak tartja a környezettudatosságot az online rendelések kiszállítása során, de nem hajlandó ezért külön fizetni."
+        },
+        {
+          "type": "image",
+          "caption": "7. táblázat: A környezettudatosság fontossága online rendeléskor"
+        },
+        {
+          "type": "text",
+          "content": "A környezetbarát csomagolóanyagokat használó cégek hozzájárulnak a fenntarthatósághoz. Egyes vállalkozások már visszaveszik a korábbi szállítások során használt bevásárlószatyrokat, amit a vásárlók jó példának tartanak. A műanyag zacskók helyett már léteznek alternatívák, például biológiailag lebomló, újrahasznosítható vagy újrafelhasználható zacskók. A felhasználók úgy vélik, hogy ezek az apró változtatások is hozzájárulhatnak a fenntarthatósághoz és a hulladékcsökkentéshez."
+        }
+      ]
+    },
+    {
+      "documentId": "cjz20nuq4d3qug249hmlex0r",
+      "slug": "messages-during-shipping",
+      "sourceChecksum": "5bb01ea35685ee5f20523c95a667e4a7a862f5b274ba315b26cb0ad4a427bc06",
+      "title": "Üzenetek szállítás közben",
+      "excerpt": "Melyek a legfontosabb értesítések és üzenetek online vásárláskor? A megrendeléstől kezdve a megrendelt termékek állapota és az átvétellel kapcsolatos kommunikáció meghatározó.",
+      "content": [
+        {
+          "type": "text",
+          "content": "### Online vásárlás és kiszállítás – 4. rész\n\n### A magyar piac kutatása"
+        },
+        {
+          "type": "image",
+          "caption": ""
+        },
+        {
+          "type": "text",
+          "content": "*Az elmúlt években mindenki megtapasztalta, hogyan változtatta meg életünket az online vásárlás világa. Az online vásárlások exponenciális növekedése és az online platformok széles körű elterjedése új lehetőségeket teremtett a vállalkozások számára, miközben a fogyasztók számára kényelmes és gyors hozzáférést biztosít a termékek és szolgáltatások széles skálájához.*\n\n*Az online megrendelések kézbesítésével kapcsolatos kutatásaink alapján ebben a cikksorozatban bemutatjuk a felhasználók elvárásait és tapasztalatait az online rendelés fizetésével, kiszállításával és a rendelés közbeni kommunikációval kapcsolatban.*\n\n*E cikkünket egy nem reprezentatív online kérdőív, mélyinterjúk és másodlagos forráskutatás előzte meg. Kérdőíves felmérésünkben 16 és 75 év közötti résztvevőket kérdeztünk meg.*"
+        },
+        {
+          "type": "text",
+          "content": "### Online vásárlás és kiszállítás sorozat\n\n[#1 – Hogyan fizethetünk online?](https://worksdot.hu/blog/how-do-we-pay-online)\n\nBemutatjuk, mely fizetési módokat részesítik előnyben a vásárlók. Feltárjuk, milyen szempontok alapján döntenek, és hogyan viszonyulnak az egyre népszerűbb virtuális kártyás fizetésekhez.\n\n[#2 – A COVID-19 gazdasági hatásai](https://worksdot.hu/blog/the-economic-effects-of-covid-19)\n\nA korabeli kutatásban megvizsgáljuk a gazdasági környezet online vásárlásra gyakorolt hatását: tartósak maradtak-e a COVID-időszakban kialakult vásárlási szokások, és hogyan befolyásolhatta az akkori infláció a fizetési és kiszállítási módok választását.\n\n[#3 – Szállítás és átvétel](https://worksdot.hu/blog/shipping-and-receiving)\n\nEbben a cikkben megvizsgáljuk a vásárlók visszajelzéseit a különböző szállítási módokról és preferenciákról. Megbeszéljük azt is, hogy a szállítási mód termékkategóriánkénti megválasztása hogyan befolyásolja a vásárlókat, illetve mit gondolnak a környezetbarát szállítási módokról.\n\n#4 - Üzenetek szállítás közben\n\nA megrendelés pillanatától kezdve meghatározó a megrendelt termékek állapota és az átvétellel kapcsolatos kommunikáció. Ebben a cikkben arra fókuszáltunk, hogy mely üzeneteket és értesítéseket tartanak fontosnak az ügyfelek.\n\n[#5 - Problémák a csomagokkal](https://worksdot.hu/blog/issues-with-packages)\n\nEbben a cikkben megvitatjuk, hogy a vásárlók hogyan vélekednek az online vásárlás biztonságáról, milyen termékeket küldenek vissza, valamint a nemzetközi weboldalakon történő vásárlással kapcsolatos félelmeiket és elvárásaikat."
+        },
+        {
+          "type": "text",
+          "content": "### Egy új üzenete van\n\nAz értesítések és az e-mailek döntő szerepet játszanak az online vásárlásban, fontos kommunikációs csatornaként szolgálva a vállalkozások és a fogyasztók között. Az időszerű értesítések, például a rendelés visszaigazolása, a szállítási frissítések és a kézbesítési értesítések tájékoztatják az ügyfeleket vásárlásaik állapotáról, és javítják az általános vásárlási élményt. Az átvétellel kapcsolatos értesítések jelentős szerepet játszanak az ügyfélélményben. A válaszadók számára a „Sikeres rendelés” üzenet a legfontosabb, függetlenül a választott átvételi módtól. Az ügyfelek elsősorban az átvétellel kapcsolatos üzeneteket várják a szállító cégtől. A legkevésbé informatív üzenetek azok, amelyek azt jelzik, hogy a csomag a raktárak között mozog. A választott kézbesítési módtól függően az üzenetek beállításai eltérőek.\n\nAz ügyfelek elsődleges kommunikációs csatornája, különösen a házhozszállítással kapcsolatban, az e-mail. Ha a szállítás tovább tart, az ügyfelek gyakran e-mailben követik nyomon csomagjaikat. A „Sikeres rendelés” üzenet a vásárlás után azonnal megérkezik, de ezt követően számukra a legfontosabb üzenet a futár várható érkezési ideje. Nem értékelik, ha csak az átvétel reggelén kapnak e-mailes értesítést a futár érkezéséről, mivel gyakran nem tudnak megfelelően felkészülni. Ha az e-mailes kommunikáció kellően informatív, nem érzik szükségét a további nyomon követésnek."
+        },
+        {
+          "type": "image",
+          "caption": "1. táblázat: A csomaggal kapcsolatos legfontosabb üzenetek"
+        },
+        {
+          "type": "text",
+          "content": "### Üzenetek ételszállítás közben\n\nA digitális világ számos lehetőséget nyitott meg az elmúlt években, lehetővé téve, hogy ne csak technológiai termékeket és ruhákat vásároljunk online, hanem egy lustálkodó napon kihagyjuk a főzést, mindössze néhány kattintással rendelünk ételt otthonunkba. A dedikált telefonos alkalmazások lehetővé teszik a felhasználók számára, hogy éttermek széles skáláját böngészhessék, ellenőrizzék az árakat és a promóciókat, és egyszerűen online fizessenek a választott ételekért. Az élelmiszer-kiszállítással kapcsolatban azonban az elvárások eltérőek, és az ügyfelek gyakran előnyben részesítik a kézbesítés gyorsaságát. A vizsgálatban résztvevők visszajelzései szerint a vásárlók elvárják, hogy ételrendeléseiket a megrendeléstől számított legfeljebb 1 órán belül kézbesítsék.\n\nHázhoz szállításnál csak ételrendelés esetén térnek el a vásárlói preferenciák az üzenetek tekintetében. Ebben az esetben elsősorban az alkalmazáson keresztül várnak értesítéseket, és nem igazán követik az e-mail üzeneteket. Élelmiszerrendeléseknél sokkal fontosabbnak tartják azt az üzenetet, hogy a futár átvette a csomagot, mint más házhozszállítási forgatókönyveknél, mivel a kézbesítés ezen szakasz után jellemzően rövid ideig tart."
+        },
+        {
+          "type": "image",
+          "caption": "2. táblázat: A legfontosabb üzenet az étteremből történő ételrendelés során"
+        },
+        {
+          "type": "text",
+          "content": "A csomagpontokon és szekrényeken történő átvételnél a legfontosabb információ, hogy mikor vehető át a csomag. Kevésbé informatívnak tartják a csomagot átvevő futárral kapcsolatos előzetes értesítéseket vagy üzeneteket. Itt is elsősorban e-mailben várják a tájékoztatást, de figyelemfelkeltőnek tartják az SMS-eket és a Viber-üzeneteket is.\n\nSzemélyes átvétel esetén a \"Sikeres rendelés\" üzenet után a \"mikor vehető át a termék\" üzenet számít a legfontosabbnak.\n\nKíváncsiak voltunk arra is, hogy jelenleg milyen csatornákat használnak a rendelési értesítéseik fogadására. Válaszadóink 62%-a úgy gondolja, hogy függetlenül attól, hogy mobilalkalmazással vagy böngészővel kezdte a vásárlást, továbbra is elvárja, hogy minden állapotról e-mailben értesítést kapjon."
+        },
+        {
+          "type": "image",
+          "caption": "3. diagram: A bejövő csomagokról szóló értesítések preferált csatornái"
+        },
+        {
+          "type": "text",
+          "content": "### Hol van a csomagom?\n\nAz emberek különféle módokon követik nyomon online rendeléseiket, és mára a modern vásárlási élmény szerves részévé vált. A fogyasztók nagyra értékelik azt a kényelmet, hogy valós idejű nyomon követhetik megrendeléseik állapotát és helyét, ami átláthatóságot és nyugalmat biztosít számukra a szállítási folyamat során. Legyen szó csomagról vagy élelmiszer-kiszállításról, az online rendeléskövetés növeli az ügyfelek elégedettségét azáltal, hogy láthatóságot és frissítéseket biztosít vásárlásaik útjáról a kiskereskedőtől a házalóig. \nA válaszadók közel fele csak a lényeges státuszokra koncentrál, 33%-uk pedig az összes állapotértesítést követi. A válaszadók 12%-a csak akkor követi nyomon a csomagot, ha sokáig tart a megérkezés, míg 9%-uk csak bizonyos termékkategóriáknál figyel az állapotokra."
+        },
+        {
+          "type": "image",
+          "caption": "4. diagram: A csomagkövetés jelentősége"
+        },
+        {
+          "type": "text",
+          "content": "A korcsoportok is eltérően viszonyulnak a csomagkövetéshez. A fiatalabb korosztály (15-25 évesek) általában minden állapotértesítést követ, mert több időt tölt az interneten, míg a 46 év felettiek inkább csak a lényeges állapotokat követik."
+        }
+      ]
+    },
+    {
+      "documentId": "vfttft8q8d6l1g2six84e23w",
+      "slug": "issues-with-packages",
+      "sourceChecksum": "560317434fe4afe3f99f61eeb429f54b5fdf062e1c7f52806255114d2dac9e56",
+      "title": "Problémák a csomagokkal",
+      "excerpt": "Az online vásárlás során számos probléma merül fel a rendelésekkel kapcsolatban. Ez a cikk az online vásárlás kihívásait tárgyalja, beleértve a fizetés biztonságát, a kézbesítési problémákat és a visszaküldés fontosságát.",
+      "content": [
+        {
+          "type": "text",
+          "content": "### Online vásárlás és kiszállítás – 5. rész\n\n### A magyar piac kutatása"
+        },
+        {
+          "type": "image",
+          "caption": ""
+        },
+        {
+          "type": "text",
+          "content": "*Az elmúlt években mindenki megtapasztalta, hogyan változtatta meg életünket az online vásárlás világa. Az online vásárlások exponenciális növekedése és az online platformok széles körű elterjedése új lehetőségeket teremtett a vállalkozások számára, miközben a fogyasztók számára kényelmes és gyors hozzáférést biztosít a termékek és szolgáltatások széles skálájához.*\n\n*Az online megrendelések kézbesítésével kapcsolatos kutatásaink alapján ebben a cikksorozatban bemutatjuk a felhasználók elvárásait és tapasztalatait az online rendelés fizetésével, kiszállításával és a rendelés közbeni kommunikációval kapcsolatban.*\n\n*E cikkünket egy nem reprezentatív online kérdőív, mélyinterjúk és másodlagos forráskutatás előzte meg. Kérdőíves felmérésünkben 16 és 75 év közötti résztvevőket kérdeztünk meg.*"
+        },
+        {
+          "type": "text",
+          "content": "### Online vásárlás és kiszállítás sorozat\n\n[#1 – Hogyan fizethetünk online?](https://worksdot.hu/blog/how-do-we-pay-online)\n\nBemutatjuk, mely fizetési módokat részesítik előnyben a vásárlók. Feltárjuk, milyen szempontok alapján döntenek, és hogyan viszonyulnak az egyre népszerűbb virtuális kártyás fizetésekhez.\n\n[#2 – A COVID-19 gazdasági hatásai](https://worksdot.hu/blog/the-economic-effects-of-covid-19)\n\nA korabeli kutatásban megvizsgáljuk a gazdasági környezet online vásárlásra gyakorolt hatását: tartósak maradtak-e a COVID-időszakban kialakult vásárlási szokások, és hogyan befolyásolhatta az akkori infláció a fizetési és kiszállítási módok választását.\n\n[#3 – Szállítás és átvétel](https://worksdot.hu/blog/shipping-and-receiving)\n\nEbben a cikkben megvizsgáljuk a vásárlók visszajelzéseit a különböző szállítási módokról és preferenciákról. Megbeszéljük azt is, hogy a szállítási mód termékkategóriánkénti megválasztása hogyan befolyásolja a vásárlókat, illetve mit gondolnak a környezetbarát szállítási módokról.\n\n[#4 - Üzenetek szállítás közben](https://worksdot.hu/blog/messages-during-shipping)\n\nA megrendelés pillanatától kezdve meghatározó a megrendelt termékek állapota és az átvétellel kapcsolatos kommunikáció. Ebben a cikkben arra fókuszáltunk, hogy mely üzeneteket és értesítéseket tartanak fontosnak az ügyfelek.\n\n#5 - Csomagokkal kapcsolatos problémák és segítségkérés\n\nEbben a cikkben megvitatjuk, hogy a vásárlók hogyan vélekednek az online vásárlás biztonságáról, milyen termékeket küldenek vissza, valamint a nemzetközi weboldalakon történő vásárlással kapcsolatos félelmeiket és elvárásaikat."
+        },
+        {
+          "type": "text",
+          "content": "### Az online áruház megbízhatósága\n\nAz online vásárlás során számos probléma merül fel a rendelésekkel kapcsolatban. Azon túl, hogy a csomag hibásan vagy sérülten érkezhet, ügyelnünk kell az adott webáruház megbízhatóságára is. Ahogy az elmúlt években nőtt az internetes vásárlók száma, úgy nőtt azon esetek száma is, amikor magánszemélyek estek átverés áldozatává. Ilyen esetekben ezek a vásárlók vagy átadták banki adataikat egy harmadik félnek, aki azokat kihasználta, vagy a fizetést követően nem kapták meg a kívánt terméket.\n\nVálaszadóink úgy vélik, hogy bizonyos szintű digitális írástudásra van szükség ahhoz, hogy felismerjük az adathalász e-maileket és SMS-eket, amelyek e-mail címük vagy banki adataik megosztását kérik. Ez a veszély elsősorban az idősebb generációkat érinti, mivel ők kevesebb időt töltenek online, és nincs tapasztalatuk abban, hogy mikor, kivel és milyen adatokat oszthatnak meg biztonságosan.\n\nA digitális világban aktívabb és online rendeléseket lebonyolító fiatalabb generációk általában óvatosabbak egy adott online áruház biztonságát illetően. Kutatásunk szerint azok, akik szkeptikusak egy bizonyos webáruházból történő vásárlással kapcsolatban, digitális megoldásokat, például egyszer használatos virtuális kártyákat használnak a fizetési problémák elkerülése érdekében.\n\nAz egyszer használatos virtuális kártya olyan digitális kártya, amely minden használat után egyedi kártyaszámot generál, így kiküszöböli annak kockázatát, hogy a teljes összeghez hozzáférhessenek a csalók.\n\n### Általános félelmek az online vásárlással kapcsolatban\n\nA fizetés biztonsága mellett válaszadóink visszajelzései alapján a legnagyobb félelmet a hibás vagy sérült csomag (26%) vagy egyáltalán nem kapás (21%) jelenti. E félelmek elkerülése érdekében az online áruházaknak megfelelően tájékoztatniuk kell a felhasználókat a termék visszaküldésének módjáról.\n\nA válaszadók 17%-a mondta, hogy aggódik, ha nem talál információt a weboldalon a termék visszaküldésének módjáról. Szintén gyakori aggodalomra ad okot, hogy az interneten rendelt termék színe vagy mérete nem azonos az online megjelenésével. Ezt válaszadóink 16%-a emelte ki problémaként.\n\nVálaszadóink számára is fontos szempont a pontos szállítás. Születésnapi ajándék online vásárlásakor az időben történő kiszállítás a legfontosabb szempont. Válaszadóink 10%-a aggódik amiatt, hogy nem érkezik meg a csomag az ígért időben."
+        },
+        {
+          "type": "image",
+          "caption": "1. táblázat: A legnagyobb félelmek az online csomagrendelés kapcsán"
+        },
+        {
+          "type": "text",
+          "content": "### Szállítással kapcsolatos problémák\n\nGyakori probléma, hogy a vásárló nem látja a terméket, amíg azt ki nem szállítják. Sok esetben csak a megrendelt termék megérkezésekor fedezi fel a vásárló a problémát. Például, ha a vásárló hűtőszekrényt vásárol, tipikus probléma, hogy a termék méretéből és súlyából adódóan a terméket tartalmazó csomagolás könnyen megsérülhet a kiszállítás során, ami ütéseket, karcolásokat eredményezhet a terméken.\n\nEzen problémák elkerülése érdekében a vásárlók előszeretettel nyitják ki a csomagot a futár előtt, hogy közösen ellenőrizzék a termék állapotát, így azonnal jelezni tudják, ha nem kívánják átvenni és vissza akarják küldeni. Sérült, törött termék esetén válaszadóink jellemzően csereterméket vagy kedvezményt várnak el az eladótól.\n\n### Nemzetközi csomagok\n\nA legtöbb válaszadó külföldről vásárolt terméket. Szerintük általában türelmesebbek a hosszú nemzetközi kiszállításoknál, de ebben az esetben a megrendelés nyomon követése játssza a főszerepet. Az Európán belüli rendeléseknél jellemzően pozitív tapasztalataik vannak, a kiszállítás gyorsnak számít, a megrendelt csomag általában a megadott időn belül megérkezik. Az Európán kívülről érkező megrendeléseket ugyanakkor problémásnak tartják a vásárlók, mivel a szállítás hosszabb időt vesz igénybe, a vámkezeléssel kapcsolatos feladatok pedig bonyolítják a folyamatot. A kellemetlenséget elsősorban az okozza, hogy a vámkezelésről csak akkor kapnak tájékoztatást, amikor a csomag Magyarországra érkezik, a kapcsolódó dokumentációs feladatokat bonyolult kitölteni, a vámok pedig igen költségesek lehetnek.\n\n### Visszatér\n\nA termék visszaküldésének lehetősége számos terméktípus esetében elengedhetetlen szolgáltatás. Ha a visszaküldés lehetősége nem garantált, a vásárló könnyen abbahagyja a vásárlást, és felkeres egy másik webáruházat, ahol ez garantált. Adataink szerint a válaszadók fele legalább egyszer visszaküldte a terméket."
+        },
+        {
+          "type": "image",
+          "caption": "2. táblázat: Online megrendelt termék visszaküldése"
+        },
+        {
+          "type": "text",
+          "content": "Válaszadóink a ruhákat adják vissza leginkább (35%). Ezt az okozza, hogy sokkal több impulzusunk van, amikor személyesen vásárolunk. Egy boltban egy egyszerű vásárlás előtti próbával könnyen eldönthetjük, hogy szeretnénk-e pulóvert venni, de ha online vásárolunk, ezt nem tudjuk megtenni. Érezni lehet például a pulóver anyagát, vastagságát, láthatjuk a valódi színét, árnyalatát. És ha felpróbálja, láthatja, mennyire kényelmes és hogyan illeszkedik. Mindez segíti a döntéshozatali folyamatot. Ezek az élmények korlátozottak az online vásárlás során. A döntést az online áruházban elérhető képek és méretek alapján kell meghozni."
+        },
+        {
+          "type": "image",
+          "caption": "3. táblázat: Gyakran visszaküldött termékkategóriák"
+        },
+        {
+          "type": "text",
+          "content": "Az elektronikai eszközök a második leggyakrabban említett termékkategória (24%). Míg a ruházat esetében a fő ok egyszerűen az, hogy „nem szeretem”, ez nem jellemző az elektronikára. Ezeknél a termékeknél a garanciális időszakon belüli visszaküldés a leggyakoribb. Tipikus probléma például egy fülhallgatóval, hogy nem úgy teljesít, ahogy ígérték, gyorsan lemerül az akkumulátor, vagy a tartozékok könnyen megsérülnek a mindennapi használat során.\n\nA harmadik legtöbbet visszaadott kategória válaszadóinknál a sport- és szabadidős felszerelések (10%) voltak. A görkorcsolya kiválasztásakor például fontos, hogy megfelelő méretűek legyenek, és a kerekek kibírják a nagy igénybevételt a forró nyári utcákon.\n\nA legkevésbé visszaadott termékkategóriák a gyógyszerek és a könyvek voltak. Ezeknek a termékeknek nincsenek könnyen törhető műszaki részei és kevésbé jelentősek a külső sérülések. Elmondhatjuk, hogy válaszadóink manapság alapvető értéknek tartják az áru visszaküldésének lehetőségét, ezért minden webáruház számára elengedhetetlen ennek biztosítása."
+        }
+      ]
+    },
+    {
+      "documentId": "o3lvxuv4pul8az9yhc5tujeg",
+      "slug": "microinteractions-when-how-and-why",
+      "sourceChecksum": "6fd6d3c6a8c59ab24412c98de193d7e45bca1ca32d274a0ec007b46c68860a6f",
+      "title": "Mikrointerakciók – Mikor, hogyan és miért?",
+      "excerpt": "Amikor a legtöbb ember meghallja ezt a kifejezést, feltűnő animációk, mozgó betöltési képernyők, balra-jobbra billenő fejlécek juthatnak eszébe, és a lista a végtelenségig folytatható. A mikrointerakciók azonban sokkal többet jelentenek puszta vizuális elemnél.",
+      "content": [
+        {
+          "type": "text",
+          "content": "Amikor a legtöbb ember meghallja ezt a kifejezést, feltűnő animációk, mozgó betöltési képernyők, balra-jobbra billenő fejlécek juthatnak eszébe, és a lista a végtelenségig folytatható. A mikrointerakciók azonban sokkal többet jelentenek puszta vizuális elemnél. Konkrét célt szolgálnak, szemben a pusztán látványos, öncélú animációkkal.\n\nA mikrointerakciók segítik a felhasználókat a felületen való navigálásban, intuitívabbá téve a használatát, és ezáltal magasabb szintre emelve a felhasználói élményt. Ezt rövid animációkkal, hangeffektusokkal vagy akár tapintható visszajelzésekkel érik el.\n\nHa definiálnánk, talán így lehetne a legjobban megfogalmazni:"
+        },
+        {
+          "type": "highlight",
+          "content": "*\"A mikrointerakció egy kis válasz, amelyet egy kiváltó esemény vált ki a felületen. A legtöbb esetben vizuális, de hangalapú is lehet. Ennek létrejöttéhez a felhasználónak interakcióba kell lépnie az interfésszel, vagy az interfésznek interakciót kell kérnie.\"*"
+        },
+        {
+          "type": "text",
+          "content": "Elsőre bonyolultnak tűnhet, de nézzük meg közelebbről:"
+        },
+        {
+          "type": "image",
+          "caption": ""
+        },
+        {
+          "type": "text",
+          "content": "**KIVÁLTÓ ESEMÉNY ➡ MIKROINTERAKCIÓ ➡ VISSZAJELZÉS**\n\nEz a három összetevője a jó mikrointerakciónak.\n\nA mikrointerakciót minden esetben kiváltja valamilyen esemény. Ezután a mikrointerakciónak futnia kell, és releváns visszajelzést kell adnia a felhasználónak.\n\nA kiváltó esemény a felhasználótól vagy a rendszertől is származhat. Kiváltó esemény nélkül azonban nem beszélhetünk mikrointerakcióról. Ez később még fontosabb lesz, amikor megvitatjuk, mi különbözteti meg a mikrointerakciót a puszta animációtól.\n\nNézzünk egy gyakorlati példát:\n\nAmikor a felhasználó az egeret egy gomb fölé viszi, a gomb színe megváltozik. Ebben az esetben a kiváltó esemény a gomb fölé mutató egér. A mikrointerakció a gomb színének változása, ami azt sugallja a felhasználónak, hogy a gombbal nem csak grafikus elemként, hanem interakcióba is lehet lépni. Ez a visszajelzés.\n\nVagy képzeljünk el egy e-mail programot. Megírjuk az e-mailt, a küldés gombra kattintunk, és a rendszer egy rövid, suhanó hanggal jelzi, hogy az üzenetet valóban elküldtük.\n\n**Kiváltó esemény:** Kattintás a küldés gombra,\n\n**Mikrointerakció:** Suhanó hang,\n\n**Visszajelzés:** Az e-mailt elküldtük.\n\nEgy másik ismerős eset, amikor új üzenet érkezik egy alkalmazásba, és az alkalmazás ikonján egy számmal ellátott piros kör jelenik meg. Ebben az esetben a kiváltó esemény egy új üzenet érkezése, a mikrointerakció a piros kör a számmal, a visszajelzés pedig az, hogy új e-mail érkezett.\n\nTehát különféle esetekben használhatjuk őket, de mik ezek az esetek pontosan?\n\n### Visszajelzés a rendszer állapotáról:\n\n- Képernyők betöltése (a rendszer betöltődik, nincs lefagyva)"
+        },
+        {
+          "type": "image",
+          "caption": ""
+        },
+        {
+          "type": "text",
+          "content": "- Elküldött e-mail (suhanó hang vagy rövid animáció)"
+        },
+        {
+          "type": "text",
+          "content": "- A beírt karakterek jelzése (pl. jelszó megadásakor)\n\n### Változások kiemelése:\n\n- A jelölőnégyzet be van jelölve (vizuálisan jelzi, hogy valamit kijelöltek)"
+        },
+        {
+          "type": "text",
+          "content": "- Egy kapcsoló átkapcsolása (jelzi, hogy más állapot lett beállítva)"
+        },
+        {
+          "type": "text",
+          "content": "- Új üzenet érkezett (piros jelvény számmal)"
+        },
+        {
+          "type": "image",
+          "caption": ""
+        },
+        {
+          "type": "text",
+          "content": "### Cselekvésre ösztönzés:\n\n- Hozzájárulás jóváhagyása szükséges (a felületen kiemelve a kötelező szakasz, amely jelzi, hogy az elfogadásig a felhasználó nem léphet tovább)\n- Útmutatás egy folyamaton (ha a felhasználó túl sokáig vár egy folyamat során, jelezze a felületen, hogy hogyan tud továbblépni. Pl. a tovább gomb mozog/színt vált, stb.)"
+        },
+        {
+          "type": "text",
+          "content": "Mindezen példák után talán magunk is meg tudjuk válaszolni a kérdést:\n\n### Mi különbözteti meg a mikrointerakciót az animációtól?"
+        },
+        {
+          "type": "highlight",
+          "content": "\"Ami felhasználói interakciót igényel és megkönnyíti a megértést, az a mikrointerakció. Ami kizárólag a vizuális élményt szolgálja, az az animáció.\""
+        },
+        {
+          "type": "text",
+          "content": "Vagyis ha csak azért animálunk egy elemet, mert szerintünk attól szebb lesz az oldal, akkor az nem lesz mikrointerakció.\n\nBizonyára sokan emlékszünk a 2000-es évek elejére, amikor a lelkes webdizájnerek GIF-animációkkal töltötték meg az oldalakat, és annyi minden mozgott a kezelőfelületen, hogy az animációk között nehéz volt felismerni a tényleges tartalmat. Ez senkinek nem célja, ezért óvatosan bánjunk az önkényes animációkkal!\n\nOké, de mi a helyzet a mikrointerakciókkal? Tudjuk túlzásba vinni őket? A rövid válasz: igen, ezért van itt néhány irányelv, amelyet figyelembe kell venni a mikrointerakciók tervezésekor.\n\n### Hogyan tervezzünk mikrointerakciókat?\n\n- A mikrointerakcióknak legyen céljuk: támogassák az élményt, ne vonják el róla a figyelmet!\n- Valaminek nem szabad megmozdulnia csak azért, hogy \"menőnek\" tűnjön. A céltalan mozgás csak összezavar.\n- Használjunk rövid, célzott animációkat, amelyek hatékonyan közvetítik az információkat.\n- A mikrointerakció is design elem; illeszkednie kell a márka identitásához, és része kell legyen a design systemnek.\n\nÉs talán a legfontosabb szabály:"
+        },
+        {
+          "type": "highlight",
+          "content": "\"A mikrointerakciók nem helyettesítik a gondos tervezést, egy folyamatnak/interfésznek könnyen érthetőnek, intuitívnak és mikrointerakciók nélkül is könnyen használhatónak kell lennie. Ha az alap jó, csak akkor tudjuk mikrointerakciókkal magasabb szintre emelni az élményt.\""
+        },
+        {
+          "type": "text",
+          "content": "Jó tervezést kívánok!"
+        }
+      ]
+    },
+    {
+      "documentId": "e110e4p6k0c4ml9a1wtm56bw",
+      "slug": "why-lofi-design-is-important-in-the-design-process",
+      "sourceChecksum": "2f6c3abf7fdcf8b95af338e7f5f3ad5b769876a225787676069213de2e1ae86d",
+      "title": "Miért fontos a lo-fi tervezés a tervezési folyamatban?",
+      "excerpt": "Hogyan kapcsolódik a lakás alaprajza az autógyártásból ismert agyagmaketthez? Ezek is prototípuskészítési módszerek. Hasonló eszközöket használunk a digitális interfészek tervezésénél is. Lássuk, melyiket és mikor érdemes használni.",
+      "content": [
+        {
+          "type": "text",
+          "content": "**Hogyan kapcsolódik a lakás alaprajza az autógyártásból ismert agyagmaketthez? Ezek is prototípuskészítési módszerek. Hasonló eszközöket használunk a digitális interfészek tervezésénél is. Lássuk, melyiket és mikor érdemes használni.**\n\nLegutóbb költözésünkkor a családnak gondja volt, hogy az új helyen hova kerüljenek a meglévő bútorok, hova kerüljön a könyvespolc, a gardrób, a kanapé, a zongora. Ezt jó előre ki kellett volna találni, különben nem tudtuk volna eldönteni, hogy milyen bútorok hiányoznak, mit kell még vásárolni, sőt már a költözés napján is tisztában kellett lenni azzal, hogy melyik doboz hova kerül – különben hogyan tudtuk volna irányítani a költözésben segítő barátokat, családtagokat. Ezért elkészítettük az új lakás alaprajzát, és kartonból ugyanilyen arányban kivágtuk a meglévő bútorok alaprajzát (pontosabban felülnézetét), és elkezdődött a tolás-tolás játék. Minden a helyére került – csak azzal nem számoltunk, hogy a bútorok elférnek-e a szobákba vezető folyosón, de ez egy másik történet..."
+        },
+        {
+          "type": "image",
+          "caption": "Papíron könnyebb a bútorokat mozgatni"
+        },
+        {
+          "type": "text",
+          "content": "A lakás alaprajzára rárakott arányos bútorok – ez is egyfajta prototípus, amellyel időt és fáradságot spóroltunk meg költözéskor.\n\nHa a lakást próbálgatással kellene berendezni, akkor a zongorát elég sokat kellene költöztetni.\n\nA papírkivágások mozgatása lényegesen gyorsabb. Hasonló a helyzet egyébként a bonyolultabb tárgyak gyártásával is, a General Motors például a harmincas évektől alkalmazza ezt a módszert. Általában igaz, hogy akkor érdemes prototípust készíteni, ha a prototípus előállítása lényegesen olcsóbb, mint a késztermék.\n\n### Prototípustípusok\n\nÜgynöki munkánk során gyakran találkozunk azzal a dilemmával, hogy a tervezési folyamatban mikor és milyen részletességgel indokolt egy prototípus. Kezdjük tehát először egy értelmezéssel:\n\n### Low-fidelity (lo-fi) prototípus\n\nA low-fidelity prototípus, vagy ahogy a szakzsargon hívja: lo-fi prototípus, lofi drótváz, a weboldal vagy alkalmazás egyszerű szürkeárnyalatos sematikus rajza, amely csak az elrendezés tartalmára és szerkezeti elemeire fókuszál."
+        },
+        {
+          "type": "image",
+          "caption": "Így néz ki egy lo-fi prototípus"
+        },
+        {
+          "type": "text",
+          "content": "*Szándékosan hiányoznak a színek, az ikonok, a logók vagy bármilyen valódi dizájnelem, amely elveszi a tartalomra, a navigációra és a szerkezetre való összpontosítást.*\n\nA cél az, hogy a projekt korai szakaszában vizuálisan megértsék az oldalt vagy képernyőt, hogy a kreatív fázis megkezdése előtt megkapják a csapat jóváhagyását.\n\nA lofi drótváz már alkalmas a folyamatok szemléltetésére, így a vezetőség felé történő bemutatására is. Alkalmas arra is, hogy a felhasználók bevonásával használhatósági tesztnek vessük alá — természetesen ilyenkor a felület esztétikájával kapcsolatos kritikákat ki kell szűrni a visszajelzésekből.\n\nA tapasztalatok azt mutatják, hogy a vezetőknek arra is fel kell készülniük, hogy amit látnak, az nem a végső felület (kaptunk már olyan kritikát, hogy „ennél jobban rajzol a gyerekem” – ekkor tudtuk meg, hogy a kliens oldaláról a menedzsernek jobban fel kell készülnie, mit kapsz a lofival és mit kapsz később). A lofi célja a szerkezet és a folyamatok modellezése, az esztétikától éppúgy távol áll, mint a tapéta és a csempe színétől a lakás alaprajza.\n\nA lofinak pedig van még egy határozott előnye: ez alapján nagy pontossággal megbecsülhető a fejlesztési igény.\n\nTermészetesen a projekt későbbi szakaszaiban még előfordulhatnak változások, és az is igaz, hogy a végleges tervezésben még lehetnek nehezebb megoldások, de általában ezek az eltérések szűk tartományon belül vannak a lofi alapján adott fejlesztési becsléshez képest. Az is nagyon klassz, hogy már van egy jó fejlesztési becslésünk a lofi alapján, mert ez alapján akár le is lehet állítani a projektet: egy tervezőcég blogbejegyzésében ez elsőre talán nem hangzik valami pozitívan, de tényleg pozitív: időben el lehet dönteni a beruházást, hogy megéri-e vagy sem? Még a tervezési költség is mérsékeltebb lesz, hiszen nem is kellett hifi prototípust készíteni, hiszen a projekt idővel félbeszakadhat. A lofi elkészülte jó döntési pont. Persze még jobb, ha a projekt folytatódik, és a lofi végén már csak pihen a csapat, és a hifivel folytatja a munkáját."
+        },
+        {
+          "type": "image",
+          "caption": "Életnagyságú agyagból készült autómodell"
+        },
+        {
+          "type": "text",
+          "content": "**Nagy kidolgozottságú (hi-fi) prototípus**\n\nEbben az esetben a drótváz létrehozása már nagyobb erőfeszítést igényel, hiszen ez a végtermék részletesebb és teljesebb ábrázolása lesz."
+        },
+        {
+          "type": "image",
+          "caption": "Így néz ki egy hifi prototípus"
+        },
+        {
+          "type": "text",
+          "content": "Célja annak bemutatása, hogy az esztétikai jellemzők hogyan támogatják az alapvető funkciókat.\n\nEgyértelmű dizájnelemek felhasználásával készült, sőt, minden olyan elemet tartalmaz, amivel a felhasználó \"élő\" környezetben találkozhat.\n\nA hi-fi prototípus továbbra is „csak” prototípus, se több, se kevesebb. Vagyis a végső működés modellje, de még nem maga a végleges képernyőterv, és főleg nem maga a működő megoldás. Egy hifi prototípus alapján a használhatósági kutatás már nagyon pontos közelítést ad a működő szoftveren végzett kutatásokhoz képest, itt már fel sem merül a lofival még esetleg zavaró esztétikai kérdés, a hifi tényleg nagyon hasonlít a végső képernyőkre.\n\n### Amikor használjuk őket\n\nA lofi és a hifi prototípus a tervezési folyamatban használható eszközök. De nem mindig van értelme mindkét típust használni.\n\nNagyon leegyszerűsítve a tervezési feladatok két esetre oszthatók:\n\n1. A tervezés vagy újratervezés sok szempontot érint, jellemzően a feladat összetettsége közepes vagy magas. Fontos megérteni a projekt korai szakaszában, hogy a felhasználó milyen utakat jár be, hogyan kapcsolódnak egymáshoz az egyes képernyők, és milyen információkat kell tartalmaznia az egyes oldalaknak. Ez jellemzően egy teljes webáruház újratervezése, vagy egy korábban nem létező mobilalkalmazás kialakítása. Az első esetben – tapasztalataink szerint – a projekt jellemzően vízesés-modellt követ. A csapat közösen értelmezi az üzleti igényeket, készíti el és validálja a terveket, majd több iterációs körön keresztül jut el a végleges tervekhez. A lofi által megtestesített és általában egy dokumentumban leírt üzleti követelmény ezután elküldésre kerül a fejlesztőcsapatnak. Itt van igazán a helye és szerepe a lo-fi drótváznak ebben a műveletben.\n2. Egy másik tipikus eset, amikor a tervezés már működő keretek között történik. Várhatóan nem a meglévő struktúrákat kell újratervezni vagy jelentősen átalakítani, hanem a meglévő elemek felhasználásával valami újat kell létrehozni. Ez lehet például egy új funkció vagy oldaltípus beillesztése a meglévő folyamatba vagy oldalszerkezetbe.\n\nAz agilis tervezésben összetettebb feladatok is elvégezhetők. Ebben az esetben azonban tapasztalataink szerint a lo-fi, majd a hifigyártás egyszerűen nem fér bele a néhány hetes sprintperiódusokba, és ilyenkor érdemesebb elhagyni a lofit. Alternatív megoldás lehet, hogy a csapat a projekt korai szakaszában külön sprintet tervez a lo-fi drótvázak előkészítésére és a felhasználói utak átgondolására.\n\nA második esetben ritkán találkoztunk lo-fi drótvázak iránti igénysel. Sokszor csak időt veszít, és nincs valódi hozzáadott értéke, hiszen a hifi drótváz könnyen összeállítható már meglévő elemekből.\n\n### Összegzés\n\nÖsszefoglalva, a lo-fi drótvázakat akkor érdemes legjobban elkészíteni\n\n- új és összetett felhasználói utakat kell kialakítani,\n- fontos az információs hierarchia tisztázása,\n- fontos a közös megértés kialakítása a csapaton belül vagy a projekt szponzorával\n- és végül a szerkezet validálása is fontos a részletes tervezés előtt.\n\nVannak olyan projektek, amelyekből kihagyhatod a lofit, és azonnal nekiláthatsz egy hifi prototípus elkészítésének. De ezzel vigyázni kell, érdemes kétszer is átgondolni, hogy tényleg kihagyható-e a lofi. Nehogy az derüljön ki, hogy egy bútormozgatási projektben ülünk, és ahelyett, hogy méretarányos maketteket vágtunk volna ki papírból, máris mozgatjuk a zongorát az új lakásban."
+        }
+      ]
+    },
+    {
+      "documentId": "yg84ksnrfvfppqxzyscf8x74",
+      "slug": "how-state-diagram-can-help-designers",
+      "sourceChecksum": "ac65962291b50bab91e0c9a2e9887a2a17a6b66ba57ad26a4de5a7b7360954d7",
+      "title": "Hogyan segítheti az állapotdiagram a tervezőket?",
+      "excerpt": "Az állapotdiagram (vagy állapot-átmenet diagram vagy állapotmodell) úgy hangzik, mint egy mérnöki hívószó a 80-as évekből, de ez egy nagyon hatékony eszköz, amelyet az UX/UI tervezők használhatnak projektjeik során.",
+      "content": [
+        {
+          "type": "text",
+          "content": "Az állapotdiagram (vagy állapot-átmenet diagram vagy állapotmodell) úgy hangzik, mint egy mérnöki hívószó a 80-as évekből, de ez egy nagyon hatékony eszköz, amelyet az UX/UI tervezők használhatnak projektjeik során. Egy UX/UI tervezési projektben, ahol az UX az utazásra összpontosít, az UI valójában az állapotokra és az állapotátmenetekre összpontosít. Az állapotdiagram meglehetősen rugalmas, igény szerint alakíthatja. Bónusz: a fejlesztők könnyen megérthetik. Lássuk, mi ez, és hogyan használhatod.\n\n### Mi az állapotdiagram?\n\nAz állapotdiagram egy reprezentációs eszköz, „amelyet egy rendszeren belüli entitás különböző lehetséges állapotainak leírására és elemzésére használnak” (Business analyst know-how, v3, 2015). Az entitás bármely objektum lehet a rendszeren belül, attól függően, hogy milyen rendszert tervez vagy elemez. Egy tervezési rendszerben az entitás már nagyon jól definiált: komponensnek nevezzük, pl. egy szín, egy gomb, egy fejléc, egy táblázat, egy oldal.\n\nAz állapot a felhasználói felület kialakításában is ismert definíció: például egy gombnak lehet lenyomott állapota és alapértelmezett állapota. Nem minden összetevőnek van különböző állapota, általában egy elsődleges színnek nincs állapota, de az ezt az elsődleges színt használó összetevőknek lehetnek. Ezeknek az entitásoknak lehetnek olyan állapotai, amelyek „megcsinálnak” valamit maguktól vagy egy felhasználói művelet eredményeként. A webáruházban a kosár lehet üres vagy nem üres, egy űrlap mezője lehet aktív vagy inaktív, stb. Az összetettebb összetevőknek is lehetnek állapotai: egy keresési eredménylista lehet üres, és ebben az állapotban másképp viselkedhet, mint amikor találatok vannak a listában.\n\nEgy komponens, amelynek több állapota is lehet, előre meghatározott sorrendben haladhat át ezeken az állapotokon, és a legtöbb esetben az egyik állapotból a másik állapotba való átlépés bizonyos szabályokat követ. Például. webáruházban az üres kosárba nem lehet „kifizetett” állapot, először tartalmaznia kell valamit. Egy inaktív gombnak nem lehet lenyomott állapota, először aktívnak kell lennie. Tehát ha egy komponensnek több állapota van, nem minden átmenet (egyik állapotból a másikba) érvényes.\n\nAz állapotdiagramban négyzeteket használunk az állapotok, a nyilakat pedig az érvényes állapotátmenetek ábrázolására. Az állapotdiagramok a tevékenységdiagramok egyfajta kiegészítő módszerei: a tevékenységdiagramon a dobozok a tevékenységeket (átmeneteket), a nyilak pedig az állapotokat mutatják.\n\nLássunk egy példát. A tervezést egy gyógyszeripari cég dokumentumkezelő rendszer bevezetési projektjében végeztük. Ebben a rendszerben a dokumentum a következő állapotokkal rendelkezhet:\n\n- **Szerkesztés**: attól kezdve, hogy a felhasználó létrehozta a dokumentumot, szerkesztheti azt. Amíg a dokumentum tulajdonosa jóváhagyásra el nem küldi, addig szerkesztés alatt állónak tekintjük.\n- **Jóváhagyásra vár**: Ebben az állapotban a dokumentum nem szerkeszthető, és a vezetők hagyhatják jóvá vagy elutasíthatják azt. A jóváhagyás után a jóváhagyási fázisba lép. Az elutasítás után visszatér a szerkesztéshez.\n- **Jóváhagyva, aláírásra vár**: Amikor minden jóváhagyó jóváhagyta a dokumentumot, egy másik vezetői szint kerül aláírásra. Az aláírók továbbra is elutasíthatják, majd visszatér a szerkesztéshez. Vagy összegyűjtik az összes aláírást, majd aláírt állapotba kerül.\n- **Aláírva**: Minden aláíró aláírta, a dokumentum a dokumentum jellegétől függően házon belül terjeszthető vagy visszaküldhető az eladónak. Nem szerkeszthető tovább, ez egy „végleges” verzió.\n- **Érvénytelen**: Előfordulhat, hogy ugyanannak a dokumentumnak az új verziója megkapja az összes aláírást (pl. képzeljünk el egy belső ünnepi szabályzatot), a dokumentum korábbi verziója érvénytelen lesz.\n\nNézzük meg, hogyan néznek ki ezek a lépések egy állapotdiagramon:"
+        },
+        {
+          "type": "image",
+          "caption": "Egy dokumentumkezelő rendszerből vett példát bemutató állapotdiagram"
+        },
+        {
+          "type": "text",
+          "content": "### Hogyan használhatunk állapotdiagramot?\n\nBármely ábrázolási módszer csak ajánlás. Igényeinkhez igazíthatjuk őket. Egyetlen tanár sem áll mögötted, hogy ellenőrizze, mennyire pontosan használod az állapotdiagramot. Az üzleti elemzők szeretik szabványosítani eszközeiket, de pusztán azért, mert létezik hivatalos helyesírási könyv az Ön nyelvén, nem jelenti azt, hogy ne fejezhetnénk ki magunkat másképp. Mutatom, mire gondolok.\n\nA fenti formátumú állapotdiagram elsőre praktikusnak tűnhet, de nehéz további információkat hozzáadni hozzá. Tehát először tegyük egydimenzióssá, simítsuk ki. Ez azt jelenti, hogy az állapotok egy sorban lesznek – ez túl sok nyilat eredményezhet körülöttük, de ez a kompromisszum ára."
+        },
+        {
+          "type": "image",
+          "caption": "Az állapotdiagram a fentivel megegyező tartalommal, de ez a verzió „lapított”"
+        },
+        {
+          "type": "text",
+          "content": "Most újabb dimenziót adhatunk a diagramunkhoz, így mátrix lesz belőle. Azt javaslom, hogy a másik dimenzióba vegyük fel a komponenseket, így meg tudjuk mutatni, hogyan néznek ki az egyes komponensek az egyes állapotokban. Egyszerűen hozzáadhat egy leírást, vagy hozzáadhatja a grafikus változatokat a mátrixhoz, attól függ, mi a könnyebben érthető és létrehozható. Azt javaslom, hogy erre a mátrixra csak azokat a komponenseket helyezze el, amelyek állapot szerint változnak, és ne tegyen bele minden komponenst a mátrixba, nehogy túl nagy és használhatatlan legyen.\n\nA többi dimenzióba is hozzáadhatunk funkcionalitást, és megmutathatjuk, hogy az egyes állapotokban melyik felhasználói csoport rendelkezik jogosultsággal a funkciók elérésére."
+        },
+        {
+          "type": "image",
+          "caption": "Állapotdiagram egy további dimenzióval, amely az egyes állapotok felhasználói jogait mutatja"
+        },
+        {
+          "type": "text",
+          "content": "Így kapunk egy felhasználói jogosultsági mátrixot, és a fejlesztők rendkívül boldogok lesznek. Ennek a felhasználói jogok vs. állapotmátrixnak egy másik előnye, hogy nincs lefedetlen eset, mivel a mátrix minden funkciót és állapotot tartalmaz (és a mátrix összes celláját kitöltöttük), nem lehet olyan speciális eset, amelyre nem gondoltunk.\n\nJó hír, hogy az előző két mátrix is ​​kombinálható: az állapotok, a fő komponensek és a jogosultságok mind egy mátrixra tehetők.\n\n### Hogyan segíti az állapotdiagram a tervezést?\n\nÚgy gondolom, hogy az állapotdiagramok a felhasználói felület tervezési folyamatának természetes eszközei. Az UX-ben az ügyfélútra összpontosítunk, amely tevékenység-orientált megközelítés. Attól a ponttól kezdve, hogy meg kell terveznünk a végső képernyőket, gondolkodásmódunkat állapotorientált megközelítésre kell váltanunk, fel kell építeni a felhasználói felület összetevőit, és meg kell határoznunk, hogy az egyes képernyőknek hogyan kell viselkedniük. Az emberek folyamatokat végeznek, a képernyőknek állapotai vannak. Ha már definiáltuk az utakat és a képernyő-folyamatokat, meg kell határoznunk ezen összetevők állapotát. Egyes esetekben ezek az állapotok triviálisak (egy gomb aktív vagy inaktív állapota), de összetettebb komponensek vagy bonyolultabb folyamatok esetén ezek az állapotok korántsem triviálisak. Tehát szüksége van egy jó eszközre ezen állapotok összegyűjtéséhez, leírásához és ábrázolásához: ez az állapotdiagram.\n\nAz állapotdiagram egyben minőségellenőrző eszköz is: miután azonosította a fő komponensek összes lehetséges állapotát, látni fogja, hogy a kisebb komponensek összes állapotára gondolt-e. Az állapotdiagram ebben a megközelítésben egy kettős ellenőrzési eszköz, egy keret, amelyet ki kell tölteni.\n\nAz állapotdiagram segíti a fejlesztőkkel való kommunikációt is, mivel általában megpróbálják megtalálni a hiányosságokat a folyamatorientált tervezésben. Miután meghatározta az összes állapotot, és az összes összetevőt minden állapotban meghatározza: nincs hézag, és a fejlesztő boldog, ami a siker fele."
+        }
+      ]
+    },
+    {
+      "documentId": "qya03sr2vay1guwkurkueza6",
+      "slug": "is-the-ux-designer-a-dying-breed-mlfg5",
+      "sourceChecksum": "a7ea8e468752c36384452a262246cbce114017894264e93d8caf07054f6cf4ca",
+      "title": "Kihalóban van a UX-tervező szakma?",
+      "excerpt": "Több szűk területre szakosodott UX-szakemberre van szükségünk? Élénk vita folyik erről a tervezők között. A legújabb trendek szerint talán inkább a sokoldalú, problémamegoldó szemléletű tervezőké a jövő. Generalista UX-tervezőként magam is közel érzem magamhoz ezt a gondolatot.",
+      "content": [
+        {
+          "type": "text",
+          "content": "Több szűk területre szakosodott UX-szakemberre van szükségünk? Élénk vita folyik erről a tervezők között. A legújabb trendek szerint talán inkább a sokoldalú, problémamegoldó szemléletű tervezőké a jövő. Generalista UX-tervezőként magam is közel érzem magamhoz ezt a gondolatot."
+        },
+        {
+          "type": "image",
+          "caption": ""
+        },
+        {
+          "type": "text",
+          "content": "Amikor elhatároztam, hogy UX-tervező leszek, zavarba ejtett a sokféle munkakör: UX/UI-tervező, product designer, UX-kutató, production designer. Világos volt, hogy tapasztalat nélkül nem kaphatok product designer állást. De pontosan miért nem?\n\n### Korábban tanácsadóként és üzleti elemzőként dolgoztam; pályám során informatikai és üzleti projekteken segítettem az ügyfeleket, így a problémamegoldás szinte a véremben van. Minden UX-képzés, amelyen részt vettem, erre épült: hogyan készítsünk interjúkat, miért helyezzük előtérbe a felhasználókat, és hogyan alkossunk prototípusokat."
+        },
+        {
+          "type": "highlight",
+          "content": "**Jelenlegi munkakörömben élménytervezőként dolgozom: ez a UX-kutató, a UX-tervező, a szolgáltatástervező, az üzleti elemző és a projektmenedzser szerepének finom ötvözete.**"
+        },
+        {
+          "type": "text",
+          "content": "Azoknak, akik nem ismerik a UX-tervező kifejezést, mindig úgy magyaráztam a munkámat, hogy ez egyfajta tanácsadás. Mivel közel egy évtizedig tanácsadó voltam, a családom számára is érthető volt ez a párhuzam 🙂. Végre olyan munkakörben dolgozhattam, amelyben mindazt hasznosíthatom, amit tanácsadóként megtanultam. Mondhatnám, hogy szerencsém volt, de őszintén hiszem, hogy a hozzám hasonló generalista szemlélet különböztet meg minket más ügynökségektől.\n\nA [Works.](https://worksdot.hu/) élménytervezőinek többsége generalista. Ebben a munkakörben elengedhetetlen, hogy tudjunk beszélni az ügyfelekkel, felhasználói interjúkat készíteni, rendszerezni a problémákat és lehetséges megoldásokat kidolgozni."
+        },
+        {
+          "type": "highlight",
+          "content": "**UX-, üzleti elemzési és projektmenedzsment-eszközökkel, valamint szakértelmünkkel segítjük ügyfeleinket üzleti céljaik elérésében.**"
+        },
+        {
+          "type": "image",
+          "caption": ""
+        },
+        {
+          "type": "text",
+          "content": "1. **UX:** Ismernünk kell a jellemző felhasználói viselkedést, a UX-elveket és a tervezési folyamatokat, valamint tudnunk kell egyszerűbb és összetettebb, alacsony kidolgozottságú prototípusokat készíteni. Ezek a készségek szorosan összefüggenek: a UX-kutatás és a tervezés együtt segít olyan termékeket létrehozni, amelyeket a felhasználók szeretnek használni. Fontos, hogy ötleteinket az ügyféllel közös workshopokon is be tudjuk mutatni az érintetteknek, és világosan megfogalmazzuk felismeréseinket és megoldásainkat.\n2. Egy üzleti elemző vagy projektmenedzser szerepe elsőre szokatlannak tűnhet az élménytervező eszköztárában. **Az üzleti elemző gondoskodik arról, hogy a terv megfeleljen az ügyfél elvárásainak**, és hogy a követelmények összhangban legyenek a tervvel. Feltérképezzük a folyamatokat, [állapotdiagramokat](https://medium.com/works/how-state-diagram-can-help-designers-fa13a7f8207f) készítünk, és dokumentáljuk a terv megértéséhez szükséges információkat, hogy az ügyfél követni, a fejlesztők pedig megvalósítani tudják a terméket.\n3. **És a projektmenedzsment?** Nos, ezt szívből utálja mindenki, engem is beleértve. Számomra ide tartozik a kommunikáció, a feladatok kezelése, a problémamegoldás és a projektdokumentáció, például az értekezletek jegyzőkönyvei és a retrospektívek. Ha határidőre szeretnénk elkészülni, nehéz elképzelni nélkülük egy tervezési projektet.\n\nEz persze nem jelenti azt, hogy mindannyian egyformán jók vagyunk hosszú üzleti specifikációk írásában, prototípuskészítésben vagy a kvantitatív kutatás adatainak elemzésében. Ez így van rendjén: különböző tudású és érdeklődésű emberekből áll a csapatunk."
+        },
+        {
+          "type": "highlight",
+          "content": "***Ügynökségként mégis arra törekszünk, hogy junior élménytervezőink alapkészségeit az alapoktól építsük fel: tanuljanak meg kutatni, kezelni saját idejüket és feladataikat, majd bővítsék tovább a tudásukat.*** *A kutatás minden UX-tervező munkájának alapja: a jó UX-tervezéshez nélkülözhetetlen a felhasználókkal való kapcsolattartás és igényeik, problémáik megértése.*"
+        },
+        {
+          "type": "text",
+          "content": "Az üzleti elemzőt gyakran az üzleti és az informatikai terület közötti hídként írják le. Élménytervezőként úgy látom, hogy a felhasználók és az ügyfelek között teremtek kapcsolatot, miközben folyamatosan szem előtt tartom: a tervnek megvalósíthatónak kell lennie."
+        },
+        {
+          "type": "highlight",
+          "content": "**Az élménytervező tehát több, mint egy üzleti elemző és egy UX-tervező szerepének egyszerű összege.** *Ez természetesen nem jelenti azt, hogy egy tervezési projekt egyszemélyes munka lenne: mindannyiunknak szüksége van a csapat visszajelzéseire és a közös ötletelésre.*"
+        },
+        {
+          "type": "text",
+          "content": "Ezért gondoskodunk róla, hogy egy projekten mindig legalább két élménytervező dolgozzon. Így tanulhatnak egymástól és erősíthetik egymás készségeit. Egy biztos: a tervezőcsapat minden tagjának értenie kell a felhasználóinkat, az üzleti szempontokat, valamint a tervezési folyamatokat és módszereket, miközben a saját projektjeit is kézben tartja.\n\nÉs mi a helyzet a UI-tervezéssel? Az ügynökségi működésben, ahol egyszerre több ügyfélprojekt fut, nehéz egy időben UX- és UI-tervezőként is dolgozni. A UI-tervezéshez kreatív munkára van szükség: mockupok és hangulattáblák készítésére, számos képernyő és design system megtervezésére. A UX-tervezőnek eközben az átfogó képre kell figyelnie: a koncepcióra, az információarchitektúrára és a felhasználói utakra."
+        },
+        {
+          "type": "highlight",
+          "content": "**Nem a szükséges készségek, hanem az eltérő gondolkodásmód miatt kivitelezhetetlen, sőt szinte lehetetlen egyszerre UX- és UI-munkát végezni.** *Ha szerencsénk van, és egymás után foglalkozhatunk velük, az működhet, de egy ügynökségnél jellemzően nem így dolgozunk.*"
+        },
+        {
+          "type": "text",
+          "content": "Lehet, hogy a kizárólag UX-szel foglalkozó tervezőből egyre kevesebb lesz, mert egyre többféle készség kell ahhoz, hogy valaki sikeres legyen ezen a területen. Az elkövetkező években ezek a szerepek akár teljesen el is tűnhetnek, ha a vállalatok felismerik a sokoldalú élménytervezők előnyeit. De hogyan készíthetik fel a képzések a pályakezdőket erre a kihívásra? A következő cikkben ezt járjuk körül."
+        }
+      ]
+    }
+  ]
+}

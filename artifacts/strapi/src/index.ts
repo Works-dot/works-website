@@ -6,6 +6,7 @@ import {
   triggerWebsiteRebuildNow,
 } from "./website-rebuild";
 import { registerCvUploadRoutes } from "./cv-upload";
+import { migrateLegacyBlogHungarian } from "./legacy-blog-hu";
 
 function registerWebsiteRebuildAdminRoutes(strapi: any) {
   strapi.server.routes({
@@ -2717,6 +2718,13 @@ function shouldRunBootstrapContentMigrations(): boolean {
   return process.env.STRAPI_RUN_CONTENT_MIGRATIONS === "true";
 }
 
+function shouldTranslateLegacyBlogHungarian(): boolean {
+  if (process.env.NODE_ENV !== "production") return true;
+  // Independent opt-in: never enable unrelated legacy content migrations
+  // merely to publish the nine reviewed HU translations.
+  return process.env.STRAPI_TRANSLATE_LEGACY_BLOG_HU === "true";
+}
+
 async function runBootstrapContentMigrations(strapi: any) {
   await migrateSlugToGeneral(strapi);
   await syncServiceTitles(strapi);
@@ -2751,6 +2759,7 @@ export default {
     await ensurePublicPermissions(strapi);
     setupWebsiteAutoRebuild(strapi);
     const runContentMigrations = shouldRunBootstrapContentMigrations();
+    const translateLegacyBlog = shouldTranslateLegacyBlogHungarian();
 
     if (!runContentMigrations) {
       strapi.log.info(
@@ -2765,11 +2774,10 @@ export default {
         const migrations = Promise.all([
           ensureProjectsPage(strapi),
           ensureBlogPage(strapi),
-        ]).then(() =>
-          runContentMigrations
-            ? runBootstrapContentMigrations(strapi)
-            : undefined
-        );
+        ]).then(async () => {
+          if (runContentMigrations) await runBootstrapContentMigrations(strapi);
+          if (translateLegacyBlog) await migrateLegacyBlogHungarian(strapi);
+        });
 
         migrations
           .then(() => strapi.log.info("Bootstrap tasks completed successfully"))
@@ -2784,6 +2792,9 @@ export default {
       await ensureBlogPage(strapi);
       if (runContentMigrations) {
         await runBootstrapContentMigrations(strapi);
+      }
+      if (translateLegacyBlog) {
+        await migrateLegacyBlogHungarian(strapi);
       }
       strapi.log.info("Bootstrap tasks completed successfully");
       markWebsiteAutoRebuildReady(strapi);

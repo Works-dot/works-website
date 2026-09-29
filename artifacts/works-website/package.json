@@ -14,6 +14,7 @@
     "test:images": "node --test scripts/optimize-images.test.mjs",
     "test:seo": "node scripts/validate-locale.mjs",
     "test:seo-config": "node --test scripts/seo-config.test.mjs",
+    "test:structured-data": "node --test scripts/structured-data.test.mjs",
     "test:organization": "node --test scripts/social-links.test.mjs",
     "verify:organization:production": "node scripts/verify-organization-production.mjs",
     "test:seo-origin": "node scripts/test-seo-production-origin.mjs",
