@@ -472,7 +472,20 @@ export function Header() {
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
-        <Link href={buildLocalePath(locale, "home")} className="flex items-center gap-2 z-50" data-testid="link-logo">
+        <Link
+          href={buildLocalePath(locale, "home")}
+          className="flex items-center gap-2 z-50"
+          data-testid="link-logo"
+          onClick={(event) => {
+            if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+            setMobileMenuOpen(false);
+            setMobileServicesOpen(false);
+            closeDesktopServices();
+            if (location.replace(/\/+$/, "") === buildLocalePath(locale, "home").replace(/\/+$/, "")) {
+              window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+            }
+          }}
+        >
           {logoImg ? (
             <img src={logoImg} alt={accessibleTermLabel(t("footer.logoAlt"), locale)} className="h-8 w-auto object-contain" />
           ) : (
