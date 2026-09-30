@@ -76,3 +76,9 @@ For multi-file releases, the workspace's `@replit/connectors-sdk` can perform au
 **Why:** sequential verified binary blob uploads and atomic GraphQL ref updates succeeded through the SDK, avoiding the durable runtime's replay failure and many individual tool calls.
 
 **How to apply:** prefer the existing scoped release helper when its scope fits. For a broader explicitly approved release, use a fixed allowlist, verify blob hashes and candidate tree, reject changed local files, and atomically update the remote ref with `beforeOid` and `force:false`.
+
+Large flat tree requests can repeatedly return HTTP 502 through the connector even after every blob upload succeeds. Build the candidate using batches of about 100 changed entries, each based on the preceding candidate tree, then verify the final tree hash before updating the ref.
+
+**Why:** splitting the same payload into small tree requests succeeded where full-tree requests repeatedly failed; already uploaded blobs did not need re-uploading.
+
+**How to apply:** retain a verified blob-hash upload cache for retry, keep the branch unchanged during intermediate tree creation, and perform only one final atomic ref update.
