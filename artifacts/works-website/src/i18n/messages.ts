@@ -287,7 +287,7 @@ const hu: Messages = {
 
   cookieBanner: {
     dialogLabel: "Süti beállítások",
-    text: "Weboldalunk működéséhez nem használunk követő sütiket. A Kapcsolat oldalon beágyazott Google Térkép azonban a betöltésekor a Google sütijeit használhatja — ehhez kérjük a hozzájárulásod. Részletek a",
+    text: "Hozzájárulásoddal Google Analytics és hirdetési mérést használhatunk; a Kapcsolat oldalon beágyazott Google Térkép is használhat sütiket. Elutasítás esetén a mérési tárolást tiltjuk, a térképet nem töltjük be. Részletek a",
     cookiePolicyLinkLabel: "süti tájékoztatóban",
     reject: "Elutasítom",
     accept: "Elfogadom",
@@ -295,7 +295,7 @@ const hu: Messages = {
 
   cookiePage: {
     pageHeading: "Süti (cookie) tájékoztató",
-    introBody: "A sütik (cookie-k) kis szöveges fájlok, amelyeket a meglátogatott weboldalak helyeznek el a böngésződben. A Works. weboldala a lehető legkevesebb sütit használja: nem futtatunk látogatáskövetést, statisztikai vagy marketing célú mérést.",
+    introBody: "A sütik (cookie-k) kis szöveges fájlok, amelyeket a meglátogatott weboldalak helyeznek el a böngésződben. A Works. Google Tag Managert használhat statisztikai és hirdetési méréshez a hozzájárulási beállításaid szerint.",
     sectionEssential: "Feltétlenül szükséges tárolás",
     essentialBodyBeforeStorageKey: "A süti-hozzájárulásoddal kapcsolatos döntésedet a böngésződ helyi tárolójában (localStorage,",
     essentialBodyAfterStorageKey: "kulcs) jegyezzük meg, hogy ne kelljen minden látogatáskor újra nyilatkoznod. Ez nem kerül továbbításra senkinek, és bármikor törölhető a böngésző adatainak törlésével.",
@@ -499,7 +499,7 @@ const en: Messages = {
 
   cookieBanner: {
     dialogLabel: "Cookie settings",
-    text: "We do not use tracking cookies on our website. However, the embedded Google Map on the Contact page may use Google cookies when loaded — please give your consent for this. Details in the",
+    text: "With your consent, we may use Google Analytics and advertising measurement; the embedded Google Map on the Contact page may also use cookies. Rejecting denies measurement storage and prevents the map from loading. Details in the",
     cookiePolicyLinkLabel: "cookie policy",
     reject: "Reject",
     accept: "Accept",
@@ -507,7 +507,7 @@ const en: Messages = {
 
   cookiePage: {
     pageHeading: "Cookie policy",
-    introBody: "Cookies are small text files that websites you visit place in your browser. The Works. website uses as few cookies as possible: we do not use visitor tracking, analytics or measurement for marketing purposes.",
+    introBody: "Cookies are small text files that websites you visit place in your browser. Works. may use Google Tag Manager for analytics and advertising measurement according to your consent settings.",
     sectionEssential: "Strictly necessary storage",
     essentialBodyBeforeStorageKey: "We store your cookie consent decision in your browser's local storage (localStorage, under the",
     essentialBodyAfterStorageKey: "key) so that you do not have to make the choice again on every visit. This information is not transmitted to anyone and can be deleted at any time by clearing your browser data.",

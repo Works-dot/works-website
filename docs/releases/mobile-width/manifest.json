@@ -1,0 +1,19 @@
+{
+  "repository": "Works-dot/works-website",
+  "branch": "main",
+  "baseCommit": "14ce1f6fe03a5d10b3cd88fdd54803955885a22f",
+  "patch": "release.patch",
+  "patchSha256": "40ecfbdaaac1d939da32a898938bb6d4d93255efed3c1cd58e4e439f107600cf",
+  "files": [
+    {
+      "path": "artifacts/works-website/src/components/ui/MobileCarousel.tsx",
+      "status": "M",
+      "sha256": "3dfda006daeaffb5f32148db326ce6f39257ca31253f6c5ac68bb24ca580f6a9"
+    },
+    {
+      "path": "artifacts/works-website/scripts/test-mobile-width.mjs",
+      "status": "A",
+      "sha256": "7f1e12528b40d296b55cc698d39b195b2386787bce950d028f52deb0d7667384"
+    }
+  ]
+}

@@ -28,7 +28,9 @@ export function useStrapiQuery<T>(
     }
     return localeFallback ?? null;
   });
-  const [loading, setLoading] = useState(STRAPI_ENABLED && data === null);
+  // A fallback snapshot is displayable, but not yet the final CMS result.
+  const [loading, setLoading] = useState(STRAPI_ENABLED &&
+    (isCareer || !cache.get(cacheKey) || Date.now() - cache.get(cacheKey)!.timestamp >= CACHE_TTL));
   const [error, setError] = useState<string | null>(null);
   const fetcherRef = useRef(fetcher);
   fetcherRef.current = fetcher;
@@ -115,9 +117,9 @@ export function useStrapiQuery<T>(
     };
   }, [cacheKey, isCareer]);
 
-  if (isCareer && resolvedKey !== cacheKey) {
+  if (resolvedKey !== cacheKey) {
     return STRAPI_ENABLED
-      ? { data: null, loading: true, error: null }
+      ? { data: isCareer ? null : localeFallback ?? null, loading: true, error: null }
       : { data: localeFallback ?? null, loading: false, error: null };
   }
   return { data, loading, error };

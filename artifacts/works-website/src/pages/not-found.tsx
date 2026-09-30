@@ -2,14 +2,14 @@ import { Link } from "wouter";
 import { ArrowRight } from "lucide-react";
 import { useI18n } from "@/i18n";
 import { buildLocalePath } from "@/lib/i18n-routes";
-import { Helmet } from "react-helmet-async";
+import SEOHead from "@/components/SEOHead";
 import { TermText } from "@/components/Terminology";
 
 export default function NotFound() {
   const { locale, t } = useI18n();
   return (
     <div className="min-h-screen w-full flex items-center justify-center bg-background px-4">
-      <Helmet><meta name="robots" content="noindex, nofollow" /></Helmet>
+      <SEOHead noindex />
       <div className="max-w-lg text-center">
         <p className="text-7xl font-bold text-primary mb-4">404</p>
         <h1 className="text-2xl md:text-3xl font-bold text-foreground mb-4">

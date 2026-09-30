@@ -1,0 +1,16 @@
+uploads = []
+generated = []
+
+[[outputs]]
+id = "64MFcaTa3KkIk0YUjqXw2"
+uri = "file://.local/legal-review/english-approval.html"
+type = "html"
+title = "Jogi dokumentumok – angol fordítás jóváhagyásra"
+description = "A három teljes angol fordítás a magyar forrásszöveggel párosítva. Ellenőrzési anyag; a weboldalon és a GitHub-repositoryban nincs publikálva."
+logical_id = "87bd3934-33db-4602-8322-223609e7c648"
+content_hash = "sha256:5f7be617821c02dc3a8acc7747a35d6863da20889d07e529690f176b132c7eb0"
+size = 78823
+mtime_ms = 1790681313067
+storage_uri = "gcs://replit-rams-assets-spock/rams/assets/repl:81b234ea-07bf-4cff-b177-1f0b1b6faeb3/87bd3934-33db-4602-8322-223609e7c648/5fc71919-b945-4c30-ae71-d958f305faec"
+storage_version_token = "1790682641310911"
+content_type = "text/html"

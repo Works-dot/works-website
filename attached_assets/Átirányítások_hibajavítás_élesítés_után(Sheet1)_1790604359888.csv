@@ -1,0 +1,30 @@
+﻿Régi URL (most 404);Új URL (301 cél);Típus;Kategória;Célcím állapota;Megjegyzés;
+https://www.worksdot.hu/user-research;https://www.worksdot.hu/szolgaltatasok/ux-kutatas;301;Szolgáltatás;létezik (200);;
+https://www.worksdot.hu/ux-ui-design;https://www.worksdot.hu/szolgaltatasok/ux-ui-design;301;Szolgáltatás;létezik (200);;
+https://www.worksdot.hu/service-design;https://www.worksdot.hu/szolgaltatasok/service-design;301;Szolgáltatás;létezik (200);;
+https://www.worksdot.hu/accessibility-audit;https://www.worksdot.hu/szolgaltatasok/akadalymentesites;301;Szolgáltatás;létezik (200);az akadalymentes.worksdot.hu is ide megy – az már működik;
+https://www.worksdot.hu/customer-centric-design-workshop;https://www.worksdot.hu/szolgaltatasok/digitalis-kepessegfejlesztes;301;Szolgáltatás;létezik (200);tréning → képességfejlesztés;
+https://www.worksdot.hu/usability-training;https://www.worksdot.hu/szolgaltatasok/digitalis-kepessegfejlesztes;301;Szolgáltatás;létezik (200);tréning → képességfejlesztés;
+https://www.worksdot.hu/strategic-planning;https://www.worksdot.hu/szolgaltatasok/service-design;301;Szolgáltatás;létezik (200);DÖNTÉS: nincs pontos megfelelője. Javaslat: service-design. Ha nem jó; mehet a főoldalra.
+https://www.worksdot.hu/services;https://www.worksdot.hu/;301;Szolgáltatás-index;létezik (200);DÖNTÉS: /szolgaltatasok index oldal NEM létezik (404); ezért a főoldal a cél
+https://www.worksdot.hu/about;https://www.worksdot.hu/rolunk;301;Statikus oldal;létezik (200);;
+https://www.worksdot.hu/contact;https://www.worksdot.hu/kapcsolat;301;Statikus oldal;létezik (200);;
+https://www.worksdot.hu/references;https://www.worksdot.hu/projektek;301;Statikus oldal;létezik (200);;
+https://www.worksdot.hu/vacancies;https://www.worksdot.hu/karrier;301;Statikus oldal;létezik (200);;
+https://www.worksdot.hu/imprint;https://www.worksdot.hu/impresszum;301;Jogi;HIÁNYZIK – előbb létre kell hozni;FIGYELEM: az /impresszum oldal még nem létezik (404). Előbb létre kell hozni; utána élesíteni a redirectet.
+https://www.worksdot.hu/privacy-statement;https://www.worksdot.hu/adatkezeles;301;Jogi;létezik (200);;
+https://www.worksdot.hu/privacy-policy;https://www.worksdot.hu/adatkezeles;301;Jogi;létezik (200);alternatív régi slug;
+https://www.worksdot.hu/terms;https://www.worksdot.hu/impresszum;301;Jogi;HIÁNYZIK – előbb létre kell hozni;ugyanaz: előbb az /impresszum oldal kell;
+https://www.worksdot.hu/ux-researcher;https://www.worksdot.hu/karrier;301;Designer / állás;létezik (200);volt szerves forgalma;
+https://www.worksdot.hu/ui-designer;https://www.worksdot.hu/karrier;301;Designer / állás;létezik (200);;
+https://www.worksdot.hu/digital-product-designer;https://www.worksdot.hu/karrier;301;Designer / állás;létezik (200);a legtöbb megjelenést hozó régi URL (~1515) – ezt ne hagyjuk ki;
+https://www.worksdot.hu/designers;https://www.worksdot.hu/karrier;301;Designer / állás;létezik (200);;
+https://www.worksdot.hu/portfolio-dani;https://www.worksdot.hu/karrier;301;Portfólió;létezik (200);;
+https://www.worksdot.hu/portfolio-joci;https://www.worksdot.hu/karrier;301;Portfólió;létezik (200);;
+https://www.worksdot.hu/portfolio-kriszti;https://www.worksdot.hu/karrier;301;Portfólió;létezik (200);;
+https://www.worksdot.hu/portfolio-peti;https://www.worksdot.hu/karrier;301;Portfólió;létezik (200);;
+https://www.worksdot.hu/portfolio-zoli;https://www.worksdot.hu/karrier;301;Portfólió;létezik (200);;
+https://www.worksdot.hu/portfolio-zsofi;https://www.worksdot.hu/karrier;301;Portfólió;létezik (200);;
+https://www.worksdot.hu/home;https://www.worksdot.hu/;301;Duplikátum;létezik (200);Squarespace /home;
+https://www.worksdot.hu/references-v4;https://www.worksdot.hu/projektek;301;Duplikátum;létezik (200);régi references verzió;
+https://www.worksdot.hu/blog-1;https://www.worksdot.hu/blog;301;Squarespace demó;létezik (200);placeholder;

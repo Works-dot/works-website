@@ -1,0 +1,3608 @@
+diff --git a/.gitignore b/.gitignore
+index 12bc7fa..5daea95 100644
+--- a/.gitignore
++++ b/.gitignore
+@@ -5,6 +5,7 @@ dist
+ tmp
+ out-tsc
+ *.tsbuildinfo
++artifacts/works-website/public/media
+ .expo
+ .expo-shared
+ 
+diff --git a/artifacts/works-website/contact-server.mjs b/artifacts/works-website/contact-server.mjs
+index 424cb01..fd2bd6f 100644
+--- a/artifacts/works-website/contact-server.mjs
++++ b/artifacts/works-website/contact-server.mjs
+@@ -1,3 +1,9 @@
++import {
++  ProviderTimeoutError,
++  PROVIDER_TIMEOUT_MS,
++  withTimeout,
++} from "./server-error.mjs";
++
+ const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+ const RESEND_API_URL = "https://api.resend.com/emails";
+ const DEFAULT_FROM = "Works. kapcsolat <design@worksdot.hu>";
+@@ -59,28 +65,35 @@ export async function sendContactMessage(payload) {
+   const cvText = cvUrl ? `\nÖnéletrajz: ${cvUrl}` : "";
+ 
+   try {
+-    const response = await fetch(RESEND_API_URL, {
+-      method: "POST",
+-      headers: {
+-        Authorization: `Bearer ${apiKey}`,
+-        "Content-Type": "application/json",
+-      },
+-      body: JSON.stringify({
+-        from,
+-        to: [to],
+-        reply_to: email,
+-        subject: `Kapcsolatfelvétel: ${subject}`,
+-        html: [
+-          `<p><strong>Név:</strong> ${escapeHtml(name)}</p>`,
+-          `<p><strong>E-mail:</strong> ${escapeHtml(email)}</p>`,
+-          `<p><strong>Tárgy:</strong> ${escapeHtml(subject)}</p>`,
+-          `<p><strong>Üzenet:</strong><br>${escapedMessage}</p>`,
+-          cvHtml,
+-        ].join(""),
+-        text: `Név: ${name}\nE-mail: ${email}\nTárgy: ${subject}\n\nÜzenet:\n${message}${cvText}`,
+-      }),
+-    });
+-    const result = await response.json().catch(() => null);
++    const { response, result } = await withTimeout(async (signal) => {
++      const response = await fetch(RESEND_API_URL, {
++        method: "POST",
++        headers: {
++          Authorization: `Bearer ${apiKey}`,
++          "Content-Type": "application/json",
++        },
++        signal,
++        body: JSON.stringify({
++          from,
++          to: [to],
++          reply_to: email,
++          subject: `Kapcsolatfelvétel: ${subject}`,
++          html: [
++            `<p><strong>Név:</strong> ${escapeHtml(name)}</p>`,
++            `<p><strong>E-mail:</strong> ${escapeHtml(email)}</p>`,
++            `<p><strong>Tárgy:</strong> ${escapeHtml(subject)}</p>`,
++            `<p><strong>Üzenet:</strong><br>${escapedMessage}</p>`,
++            cvHtml,
++          ].join(""),
++          text: `Név: ${name}\nE-mail: ${email}\nTárgy: ${subject}\n\nÜzenet:\n${message}${cvText}`,
++        }),
++      });
++      const result =
++        typeof response?.json === "function"
++          ? await Promise.resolve(response.json()).catch(() => null)
++          : null;
++      return { response, result };
++    }, PROVIDER_TIMEOUT_MS);
+ 
+     if (!response.ok || !result?.id) {
+       const providerError = typeof result?.name === "string" ? result.name : "unknown";
+@@ -91,6 +104,10 @@ export async function sendContactMessage(payload) {
+     console.info(`Contact email accepted by Resend (${result.id})`);
+     return { status: 200, body: { ok: true, code: "sent" } };
+   } catch (error) {
++    if (error instanceof ProviderTimeoutError) {
++      console.error("Contact email delivery timed out");
++      return { status: 503, body: { ok: false, code: "service_unavailable" } };
++    }
+     const message = error instanceof Error ? error.message : "unknown error";
+     console.error(`Contact email delivery failed: ${message}`);
+     return { status: 503, body: { ok: false, code: "service_unavailable" } };
+diff --git a/artifacts/works-website/newsletter-server.mjs b/artifacts/works-website/newsletter-server.mjs
+index 49cc59b..d2fa57a 100644
+--- a/artifacts/works-website/newsletter-server.mjs
++++ b/artifacts/works-website/newsletter-server.mjs
+@@ -1,5 +1,10 @@
+ import { createHash } from "node:crypto";
+ import { ReplitConnectors } from "@replit/connectors-sdk";
++import {
++  ProviderTimeoutError,
++  PROVIDER_TIMEOUT_MS,
++  withTimeout,
++} from "./server-error.mjs";
+ 
+ const AUDIENCE_ID = "3f0813c75a";
+ const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+@@ -9,7 +14,8 @@ function normalizeEmail(value) {
+ }
+ 
+ async function readJson(response) {
+-  return response.json().catch(() => null);
++  if (!response || typeof response.json !== "function") return null;
++  return Promise.resolve(response.json()).catch(() => null);
+ }
+ 
+ export async function subscribeNewsletter(rawEmail) {
+@@ -23,10 +29,16 @@ export async function subscribeNewsletter(rawEmail) {
+     const connectors = new ReplitConnectors();
+     const memberHash = createHash("md5").update(email).digest("hex");
+     const memberPath = `/3.0/lists/${AUDIENCE_ID}/members/${memberHash}`;
+-    const existingResponse = await connectors.proxy("mailchimp", memberPath, {
+-      method: "GET",
+-    });
+-    const existing = await readJson(existingResponse);
++    const { response: existingResponse, body: existing } = await withTimeout(
++      async (signal) => {
++        const response = await connectors.proxy("mailchimp", memberPath, {
++          method: "GET",
++          signal,
++        });
++        return { response, body: await readJson(response) };
++      },
++      PROVIDER_TIMEOUT_MS,
++    );
+ 
+     if (existingResponse.ok && existing?.status === "subscribed") {
+       return { status: 200, body: { ok: true, code: "subscribed" } };
+@@ -37,16 +49,22 @@ export async function subscribeNewsletter(rawEmail) {
+       return { status: 502, body: { ok: false, code: "provider_error" } };
+     }
+ 
+-    const response = await connectors.proxy("mailchimp", memberPath, {
+-      method: "PUT",
+-      headers: { "Content-Type": "application/json" },
+-      body: JSON.stringify({
+-        email_address: email,
+-        status_if_new: "subscribed",
+-        status: "subscribed",
+-      }),
+-    });
+-    const result = await readJson(response);
++    const { response, body: result } = await withTimeout(
++      async (signal) => {
++        const response = await connectors.proxy("mailchimp", memberPath, {
++          method: "PUT",
++          headers: { "Content-Type": "application/json" },
++          signal,
++          body: JSON.stringify({
++            email_address: email,
++            status_if_new: "subscribed",
++            status: "subscribed",
++          }),
++        });
++        return { response, body: await readJson(response) };
++      },
++      PROVIDER_TIMEOUT_MS,
++    );
+ 
+     if (!response.ok) {
+       const title = typeof result?.title === "string" ? result.title : "unknown";
+@@ -58,6 +76,10 @@ export async function subscribeNewsletter(rawEmail) {
+ 
+     return { status: 200, body: { ok: true, code: "subscribed" } };
+   } catch (error) {
++    if (error instanceof ProviderTimeoutError) {
++      console.error("Newsletter subscription timed out");
++      return { status: 503, body: { ok: false, code: "service_unavailable" } };
++    }
+     const message = error instanceof Error ? error.message : "unknown error";
+     console.error(`Newsletter subscription failed: ${message}`);
+     return { status: 503, body: { ok: false, code: "service_unavailable" } };
+diff --git a/artifacts/works-website/package.json b/artifacts/works-website/package.json
+index ece66f4..fa040d4 100644
+--- a/artifacts/works-website/package.json
++++ b/artifacts/works-website/package.json
+@@ -5,10 +5,15 @@
+   "type": "module",
+   "scripts": {
+     "dev": "vite --config vite.config.ts --host 0.0.0.0",
++    "prebuild": "node scripts/optimize-images.mjs",
+     "build": "vite build --config vite.config.ts && vite build --config vite.config.ts --ssr src/entry-server.tsx --outDir dist/server && node scripts/prerender.mjs",
+     "serve": "vite preview --config vite.config.ts --host 0.0.0.0",
+     "start": "node server.mjs",
+     "test:production": "playwright install chromium && VITE_STRAPI_ENABLED=false pnpm run build && node scripts/test-production.mjs",
++    "perf:browser": "node scripts/perf-browser.mjs",
++    "test:images": "node --test scripts/optimize-images.test.mjs",
++    "test:seo": "node scripts/validate-locale.mjs",
++    "test:seo-config": "node --test scripts/seo-config.test.mjs",
+     "verify:newsletter:production": "node scripts/verify-newsletter-production.mjs",
+     "verify:contact:production": "node scripts/verify-contact-production.mjs",
+     "verify:release:production": "node scripts/verify-release-production.mjs",
+@@ -63,6 +68,7 @@
+     "framer-motion": "catalog:",
+     "lucide-react": "catalog:",
+     "playwright": "^1.62.1",
++    "sharp": "^0.33.5",
+     "react": "catalog:",
+     "react-dom": "catalog:",
+     "tailwind-merge": "catalog:",
+diff --git a/artifacts/works-website/railway.json b/artifacts/works-website/railway.json
+index 31ec35c..f3c91ec 100644
+--- a/artifacts/works-website/railway.json
++++ b/artifacts/works-website/railway.json
+@@ -6,6 +6,7 @@
+   },
+   "deploy": {
+     "startCommand": "pnpm --filter @workspace/works-website run start",
++    "healthcheckPath": "/readyz",
+     "restartPolicyType": "ON_FAILURE",
+     "restartPolicyMaxRetries": 10
+   }
+diff --git a/artifacts/works-website/scripts/optimize-images.mjs b/artifacts/works-website/scripts/optimize-images.mjs
+new file mode 100644
+index 0000000..2003f5b
+--- /dev/null
++++ b/artifacts/works-website/scripts/optimize-images.mjs
+@@ -0,0 +1,229 @@
++import fs from "node:fs/promises";
++import path from "node:path";
++import { fileURLToPath } from "node:url";
++import sharp from "sharp";
++
++const scriptDir = path.dirname(fileURLToPath(import.meta.url));
++const root = path.resolve(scriptDir, "..");
++const cachePath = path.join(root, "src", "data", "strapi-cache.json");
++const cmsUploadsDir = process.env.STRAPI_UPLOADS_DIR
++  ? path.resolve(process.env.STRAPI_UPLOADS_DIR)
++  : path.resolve(root, "..", "strapi", "public", "uploads");
++const mediaDir = path.join(root, "public", "media");
++const manifestPath = path.join(root, "src", "data", "image-manifest.ts");
++
++const WIDTHS = [320, 480, 768, 1200, 1600, 1920];
++const RASTER_EXTENSIONS = new Set([".png", ".jpg", ".jpeg", ".webp"]);
++
++export function hashSourceTransform(source, width) {
++  const input = `${source}\0${width}\0webp80\0effort4`;
++  let hash = 2166136261;
++  for (let index = 0; index < input.length; index++) {
++    hash ^= input.charCodeAt(index);
++    hash = Math.imul(hash, 16777619);
++  }
++  return (hash >>> 0).toString(36).padStart(7, "0");
++}
++
++function normalizeSource(source) {
++  return source.split(/[?#]/, 1)[0];
++}
++
++export function safeName(value) {
++  return value.replace(/[^a-zA-Z0-9._-]+/g, "-");
++}
++
++export function isRasterSource(source) {
++  return RASTER_EXTENSIONS.has(path.extname(source).toLowerCase());
++}
++
++export function getVariantWidths(intrinsicWidth) {
++  const widths = WIDTHS.filter((width) => width < intrinsicWidth);
++  widths.push(intrinsicWidth);
++  return [...new Set(widths)].sort((a, b) => a - b);
++}
++
++function collectStrings(value, output) {
++  if (typeof value === "string") {
++    const source = normalizeSource(value);
++    if (source.startsWith("/strapi/uploads/")) output.add(source);
++    return;
++  }
++  if (Array.isArray(value)) {
++    for (const item of value) collectStrings(item, output);
++    return;
++  }
++  if (value && typeof value === "object") {
++    for (const item of Object.values(value)) collectStrings(item, output);
++  }
++}
++
++async function collectLocalAssets(directory, relative = "") {
++  let entries;
++  try {
++    entries = await fs.readdir(directory, { withFileTypes: true });
++  } catch (error) {
++    if (error.code === "ENOENT" && relative === "") return [];
++    throw error;
++  }
++  const assets = [];
++  for (const entry of entries) {
++    const absolute = path.join(directory, entry.name);
++    const nextRelative = path.join(relative, entry.name);
++    if (entry.isDirectory()) {
++      assets.push(...(await collectLocalAssets(absolute, nextRelative)));
++    } else if (isRasterSource(entry.name)) {
++      assets.push({ absolute, relative: nextRelative.split(path.sep).join("/") });
++    }
++  }
++  return assets;
++}
++
++async function writeVariants({
++  absolute,
++  source,
++  key,
++  outputSubdirectory,
++  manifest,
++  cmsManifest,
++}) {
++  const metadata = await sharp(absolute).metadata();
++  if (!metadata.width || !metadata.height) {
++    throw new Error(`Could not read dimensions for image: ${absolute}`);
++  }
++  // Do not flatten animated WebP files while creating static width variants.
++  if (metadata.pages && metadata.pages > 1) return false;
++
++  const extension = path.extname(source);
++  const baseName = safeName(path.basename(source, extension));
++  const outputDirectory = path.join(mediaDir, outputSubdirectory);
++  await fs.mkdir(outputDirectory, { recursive: true });
++
++  const uniqueWidths = getVariantWidths(metadata.width);
++  const variants = [];
++
++  for (const width of uniqueWidths) {
++    const hash = hashSourceTransform(source, width);
++    const outputName = `${baseName}-${hash}-${width}.webp`;
++    const outputPath = path.join(outputDirectory, outputName);
++    await sharp(absolute)
++      .resize({ width, withoutEnlargement: true })
++      .webp({ quality: 80, effort: 4 })
++      .toFile(outputPath);
++    variants.push({
++      hash,
++      width,
++      url: `/media/${outputSubdirectory}/${outputName}`,
++    });
++  }
++
++  const largest = variants[variants.length - 1];
++  if (manifest) {
++    manifest[key] = {
++      source,
++      src: largest.url,
++      srcSet: variants.map((variant) => `${variant.url} ${variant.width}w`).join(", "),
++      width: metadata.width,
++      height: metadata.height,
++    };
++  }
++  if (cmsManifest) {
++    cmsManifest[key] = variants.map((variant) => [variant.hash, variant.width]);
++  }
++  return true;
++}
++
++async function main() {
++  let cache = {};
++  try {
++    cache = JSON.parse(await fs.readFile(cachePath, "utf8"));
++  } catch (error) {
++    if (error.code !== "ENOENT") throw error;
++    console.warn(`CMS cache is unavailable; keeping original CMS image URLs: ${cachePath}`);
++  }
++  const cmsSources = new Set();
++  collectStrings(cache, cmsSources);
++
++  const localAssetDirectory = path.join(root, "src", "assets");
++  const localAssets = await collectLocalAssets(localAssetDirectory);
++  const hasCmsUploads = await fs
++    .access(cmsUploadsDir)
++    .then(() => true)
++    .catch(() => false);
++
++  await fs.rm(mediaDir, { recursive: true, force: true });
++  await fs.mkdir(mediaDir, { recursive: true });
++
++  const manifest = {};
++  const cmsManifest = {};
++  let generated = 0;
++
++  let skippedCms = 0;
++  for (const source of [...cmsSources].sort()) {
++    if (!hasCmsUploads) {
++      skippedCms++;
++      continue;
++    }
++    const filename = source.slice("/strapi/uploads/".length);
++    const absolute = path.join(cmsUploadsDir, filename);
++    if (!isRasterSource(filename)) continue;
++    try {
++      await fs.access(absolute);
++    } catch {
++      skippedCms++;
++      continue;
++    }
++    const created = await writeVariants({
++      absolute,
++      source,
++      key: source,
++      outputSubdirectory: "uploads",
++      manifest: null,
++      cmsManifest,
++    });
++    if (created) generated++;
++  }
++
++  for (const asset of localAssets.sort((a, b) => a.relative.localeCompare(b.relative))) {
++    const source = `/assets/${asset.relative}`;
++    const created = await writeVariants({
++      absolute: asset.absolute,
++      source,
++      key: `local:${asset.relative}`,
++      outputSubdirectory: "local",
++      manifest,
++      cmsManifest: null,
++    });
++    if (created) generated++;
++  }
++
++  const manifestSource = [
++    "/* Generated by scripts/optimize-images.mjs. Do not edit by hand. */",
++    'import type { OptimizedImageManifestEntry } from "./image-manifest-types";',
++    "",
++    `const imageManifest: Record<string, OptimizedImageManifestEntry> = ${JSON.stringify(manifest, null, 2)};`,
++    "",
++    `export const optimizedCmsImageVariants: Record<string, Array<[string, number]>> = ${JSON.stringify(cmsManifest, null, 2)};`,
++    "",
++    "export default imageManifest;",
++    "",
++  ].join("\n");
++  await fs.writeFile(manifestPath, manifestSource);
++  if (skippedCms > 0) {
++    console.warn(
++      `Kept ${skippedCms} CMS image URL(s) unchanged because their local upload snapshot is unavailable.`,
++    );
++  }
++  console.log(`Generated WebP variants for ${generated} source images.`);
++}
++
++const isMainModule =
++  process.argv[1] &&
++  path.resolve(process.argv[1]) === fileURLToPath(import.meta.url);
++
++if (isMainModule) {
++  main().catch((error) => {
++    console.error(`Image optimization failed: ${error.message}`);
++    process.exitCode = 1;
++  });
++}
+\ No newline at end of file
+diff --git a/artifacts/works-website/scripts/optimize-images.test.mjs b/artifacts/works-website/scripts/optimize-images.test.mjs
+new file mode 100644
+index 0000000..db5e29e
+--- /dev/null
++++ b/artifacts/works-website/scripts/optimize-images.test.mjs
+@@ -0,0 +1,31 @@
++import assert from "node:assert/strict";
++import test from "node:test";
++import {
++  getVariantWidths,
++  hashSourceTransform,
++  isRasterSource,
++  safeName,
++} from "./optimize-images.mjs";
++
++test("only static raster sources are eligible for WebP variants", () => {
++  assert.equal(isRasterSource("/strapi/uploads/photo.png"), true);
++  assert.equal(isRasterSource("/strapi/uploads/photo.jpeg"), true);
++  assert.equal(isRasterSource("/strapi/uploads/animation.gif"), false);
++  assert.equal(isRasterSource("/strapi/uploads/illustration.svg"), false);
++});
++
++test("variant widths never advertise pixels larger than the source", () => {
++  assert.deepEqual(getVariantWidths(246), [246]);
++  assert.deepEqual(getVariantWidths(1280), [320, 480, 768, 1200, 1280]);
++  assert.deepEqual(getVariantWidths(1920), [320, 480, 768, 1200, 1600, 1920]);
++});
++
++test("variant names include the source and transform hash", () => {
++  const source = "/strapi/uploads/photo.png";
++  assert.notEqual(hashSourceTransform(source, 320), hashSourceTransform(source, 768));
++  assert.notEqual(
++    hashSourceTransform(source, 320),
++    hashSourceTransform("/strapi/uploads/other.png", 320),
++  );
++  assert.equal(safeName("photo with spaces.png"), "photo-with-spaces.png");
++});
+\ No newline at end of file
+diff --git a/artifacts/works-website/scripts/perf-browser.mjs b/artifacts/works-website/scripts/perf-browser.mjs
+new file mode 100644
+index 0000000..b1db239
+--- /dev/null
++++ b/artifacts/works-website/scripts/perf-browser.mjs
+@@ -0,0 +1,159 @@
++import fs from "node:fs/promises";
++import path from "node:path";
++import process from "node:process";
++import { chromium } from "playwright";
++
++const baseUrl = process.env.PERF_BASE_URL || "http://127.0.0.1:8080";
++const label = process.env.PERF_LABEL || "production";
++const outputPath =
++  process.env.PERF_OUTPUT ||
++  path.resolve("/tmp", `works-performance-${label}.json`);
++const routes = [
++  { name: "hu-home", path: "/" },
++  { name: "en-home", path: "/en" },
++  { name: "service", path: "/szolgaltatasok/ux-kutatas" },
++  {
++    name: "project",
++    path: "/projektek/ux-kutatassal-megalapozott-biztositasi-ugyfelportal",
++  },
++  {
++    name: "blog",
++    path: "/blog/bizzuk-az-ai-ra-a-felhasznaloi-visszajelzesek-elemzeset",
++  },
++  { name: "career", path: "/karrier" },
++];
++const viewports = [
++  { name: "mobile", width: 390, height: 844, isMobile: true },
++  { name: "desktop", width: 1440, height: 900, isMobile: false },
++];
++
++async function measureRoute(browser, viewport, route) {
++  const context = await browser.newContext({
++    viewport: { width: viewport.width, height: viewport.height },
++    isMobile: viewport.isMobile,
++    deviceScaleFactor: 1,
++    serviceWorkers: "block",
++  });
++  const page = await context.newPage();
++  const failures = [];
++  const httpErrors = [];
++
++  page.on("requestfailed", (request) => {
++    failures.push({
++      url: request.url(),
++      error: request.failure()?.errorText || "unknown",
++    });
++  });
++  page.on("response", (response) => {
++    if (response.status() >= 400) {
++      httpErrors.push({ url: response.url(), status: response.status() });
++    }
++  });
++  await page.addInitScript(() => {
++    window.__worksLargestContentfulPaint = 0;
++    window.__worksCumulativeLayoutShift = 0;
++    try {
++      new PerformanceObserver((list) => {
++        const entries = list.getEntries();
++        const last = entries[entries.length - 1];
++        if (last) window.__worksLargestContentfulPaint = last.startTime;
++      }).observe({ type: "largest-contentful-paint", buffered: true });
++      new PerformanceObserver((list) => {
++        for (const entry of list.getEntries()) {
++          if (!entry.hadRecentInput) {
++            window.__worksCumulativeLayoutShift += entry.value;
++          }
++        }
++      }).observe({ type: "layout-shift", buffered: true });
++    } catch {
++      // Unsupported observers are represented as null in the report.
++      window.__worksLargestContentfulPaint = null;
++      window.__worksCumulativeLayoutShift = null;
++    }
++  });
++
++  const url = new URL(route.path, baseUrl).toString();
++  let navigationError = null;
++  try {
++    await page.goto(url, { waitUntil: "load", timeout: 30_000 });
++    // Allow the final LCP candidate and delayed layout shifts to be observed.
++    await page.waitForTimeout(500);
++  } catch (error) {
++    navigationError = error instanceof Error ? error.message : String(error);
++  }
++
++  const metrics = await page.evaluate(() => {
++    const navigation = performance.getEntriesByType("navigation")[0];
++    const resources = performance.getEntriesByType("resource");
++    const transferred = (entry) => entry.transferSize || entry.encodedBodySize || 0;
++    const scripts = resources.filter((entry) => entry.initiatorType === "script");
++    const images = resources.filter((entry) => entry.initiatorType === "img");
++    return {
++      lcpMs: window.__worksLargestContentfulPaint,
++      cls: window.__worksCumulativeLayoutShift,
++      navigation: navigation
++        ? {
++            responseEndMs: navigation.responseEnd,
++            domContentLoadedMs: navigation.domContentLoadedEventEnd,
++            loadEventEndMs: navigation.loadEventEnd,
++          }
++        : null,
++      resources: resources.length,
++      transferredBytes: resources.reduce((sum, entry) => sum + transferred(entry), 0),
++      jsTransferredBytes: scripts.reduce((sum, entry) => sum + transferred(entry), 0),
++      imageTransferredBytes: images.reduce((sum, entry) => sum + transferred(entry), 0),
++      imageRequests: images.length,
++    };
++  });
++
++  await context.close();
++  return {
++    route: route.path,
++    viewport: viewport.name,
++    url,
++    ...metrics,
++    failures,
++    httpErrors,
++    navigationError,
++  };
++}
++
++async function main() {
++  const browser = await chromium.launch({ headless: true });
++  const results = [];
++  for (const viewport of viewports) {
++    for (const route of routes) {
++      const result = await measureRoute(browser, viewport, route);
++      results.push({ name: route.name, ...result });
++      console.log(
++        `${viewport.name.padEnd(7)} ${route.name.padEnd(8)} ` +
++          `LCP=${result.lcpMs === null ? "n/a" : `${Math.round(result.lcpMs)}ms`} ` +
++          `CLS=${result.cls === null ? "n/a" : result.cls.toFixed(3)} ` +
++          `bytes=${result.transferredBytes}`,
++      );
++    }
++  }
++  await browser.close();
++
++  const report = {
++    generatedAt: new Date().toISOString(),
++    baseUrl,
++    label,
++    routes,
++    viewports,
++    caveats: [
++      "Each route uses a fresh Chromium context and service workers are blocked.",
++      "No CPU or network throttling is applied; results describe this local lab only.",
++      "Transferred bytes use Resource Timing transferSize when available and fall back to encodedBodySize.",
++    ],
++    targets: { lcpMs: 2500, cls: 0.1 },
++    results,
++  };
++  await fs.writeFile(outputPath, `${JSON.stringify(report, null, 2)}\n`);
++  console.log(`Wrote ${outputPath}`);
++}
++
++main().catch((error) => {
++  console.error(error);
++  process.exitCode = 1;
++});
+\ No newline at end of file
+diff --git a/artifacts/works-website/scripts/prerender.mjs b/artifacts/works-website/scripts/prerender.mjs
+index d3f3cd2..45977d3 100644
+--- a/artifacts/works-website/scripts/prerender.mjs
++++ b/artifacts/works-website/scripts/prerender.mjs
+@@ -6,6 +6,18 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
+ const root = path.resolve(__dirname, "..");
+ const outDir = path.resolve(root, "dist/public");
+ 
++function clearGeneratedHead(page) {
++  // Never carry generated SSR/client-owned tags from a previous template into
++  // a newly prerendered route. Static assets such as the favicon are not owned
++  // by SEO and are intentionally left untouched.
++  return page
++    .replace(/<title[^>]*data-ssr[^>]*>[\s\S]*?<\/title>/gi, "")
++    .replace(/<meta[^>]*data-ssr[^>]*\/?>/gi, "")
++    .replace(/<link[^>]*data-ssr[^>]*\/?>/gi, "")
++    .replace(/<link[^>]*data-client-seo[^>]*\/?>/gi, "")
++    .replace(/<script[^>]*data-ssr[^>]*>[\s\S]*?<\/script>/gi, "");
++}
++
+ async function prerender() {
+   const {
+     render,
+@@ -53,7 +65,7 @@ async function prerender() {
+     const meta = getPageMeta(route, locale);
+     const headTags = buildMetaTags(meta);
+ 
+-    let page = template;
++    let page = clearGeneratedHead(template);
+ 
+     page = page.replace(
+       /<title>.*?<\/title>/,
+@@ -79,7 +91,7 @@ async function prerender() {
+   // az ismeretlen címekre a főoldal (soft-404) helyett.
+   {
+     const { html } = render("/__not_found__");
+-    let page = template;
++    let page = clearGeneratedHead(template);
+     page = page.replace(/<title>.*?<\/title>/, "");
+     page = page.replace(
+       "<!--ssr-head-->",
+diff --git a/artifacts/works-website/scripts/seo-config.test.mjs b/artifacts/works-website/scripts/seo-config.test.mjs
+new file mode 100644
+index 0000000..b0c76df
+--- /dev/null
++++ b/artifacts/works-website/scripts/seo-config.test.mjs
+@@ -0,0 +1,71 @@
++import assert from "node:assert/strict";
++import { fileURLToPath } from "node:url";
++import { after, before, test } from "node:test";
++import { createServer } from "vite";
++
++const root = fileURLToPath(new URL("..", import.meta.url));
++let vite;
++let config;
++
++before(async () => {
++  vite = await createServer({
++    root,
++    configFile: false,
++    server: { middlewareMode: true, hmr: false },
++    appType: "custom",
++    optimizeDeps: { noDiscovery: true },
++  });
++  config = await vite.ssrLoadModule("/src/seo-config.ts");
++});
++
++after(async () => {
++  await vite?.close();
++});
++
++test("resolveSiteUrl accepts HTTPS origins and loopback HTTP for development", () => {
++  assert.equal(config.resolveSiteUrl("https://example.test"), "https://example.test");
++  assert.equal(config.resolveSiteUrl("https://example.test/"), "https://example.test");
++  assert.equal(
++    config.resolveSiteUrl(" https://example.test/ "),
++    "https://example.test",
++  );
++  assert.equal(
++    config.resolveSiteUrl("http://localhost:5173/"),
++    "http://localhost:5173",
++  );
++  assert.equal(
++    config.resolveSiteUrl("http://127.0.0.1:4173"),
++    "http://127.0.0.1:4173",
++  );
++  assert.equal(config.resolveSiteUrl(), config.DEFAULT_SITE_URL);
++  assert.equal(config.resolveSiteUrl(""), config.DEFAULT_SITE_URL);
++});
++
++test("resolveSiteUrl rejects non-origin and non-HTTPS values", () => {
++  for (const value of [
++    "https://example.test/path",
++    "https://example.test/foo/..",
++    "https://example.test//",
++    "https://user:pass@example.test",
++    "https://@example.test",
++    "https://example.test?utm=launch",
++    "https://example.test#section",
++    "http://example.test",
++    "ftp://example.test",
++    "javascript:alert(1)",
++    "https://",
++    "https://example.test\\evil.test",
++    null,
++  ]) {
++    assert.throws(
++      () => config.resolveSiteUrl(value),
++      /SITE_URL must be an HTTPS origin/,
++      value,
++    );
++  }
++
++  assert.throws(
++    () => config.normalizeSiteUrl("https://example.test/path"),
++    /SITE_URL must be an HTTPS origin/,
++  );
++});
+\ No newline at end of file
+diff --git a/artifacts/works-website/scripts/server.test.mjs b/artifacts/works-website/scripts/server.test.mjs
+new file mode 100644
+index 0000000..a476dfc
+--- /dev/null
++++ b/artifacts/works-website/scripts/server.test.mjs
+@@ -0,0 +1,232 @@
++import assert from "node:assert/strict";
++import fs from "node:fs";
++import http from "node:http";
++import os from "node:os";
++import path from "node:path";
++import { afterEach, beforeEach, describe, it } from "node:test";
++import {
++  canonicalRedirectLocation,
++  createApp,
++  parseCanonicalOrigin,
++} from "../server.mjs";
++import {
++  ProviderTimeoutError,
++  withTimeout,
++} from "../server-error.mjs";
++import { validateStaticBuild } from "../server-health.mjs";
++
++let fixtureRoot;
++let servers = [];
++
++function writeFixture({ missingAsset = false } = {}) {
++  const distDir = path.join(fixtureRoot, "dist", "public");
++  fs.mkdirSync(path.join(distDir, "en", "assets"), { recursive: true });
++  fs.mkdirSync(path.join(distDir, "assets"), { recursive: true });
++  fs.mkdirSync(path.join(distDir, "media"), { recursive: true });
++
++  const html = (localePath) => `<!doctype html>
++<html lang="${localePath === "/en" ? "en" : "hu"}">
++  <head>
++    <link rel="stylesheet" href="/assets/site.css">
++    <script type="module" src="/assets/site.js"></script>
++  </head>
++  <body><div id="root"><main>Works. ${localePath}</main></div></body>
++</html>`;
++  fs.writeFileSync(path.join(distDir, "index.html"), html("/"));
++  fs.writeFileSync(path.join(distDir, "en", "index.html"), html("/en"));
++  fs.writeFileSync(path.join(distDir, "assets", "site.js"), "console.log('ok')");
++  fs.writeFileSync(path.join(distDir, "media", "test-abc123.webp"), "fixture");
++  fs.writeFileSync(
++    path.join(distDir, "assets", "site.css"),
++    missingAsset ? "body { background: url('/assets/missing.png') }" : "body { color: black }",
++  );
++  return distDir;
++}
++
++async function listen(app) {
++  const server = http.createServer(app);
++  servers.push(server);
++  await new Promise((resolve) => server.listen(0, "127.0.0.1", resolve));
++  const address = server.address();
++  assert(address && typeof address === "object");
++  return `http://127.0.0.1:${address.port}`;
++}
++
++beforeEach(() => {
++  fixtureRoot = fs.mkdtempSync(path.join(os.tmpdir(), "works-server-"));
++});
++
++afterEach(async () => {
++  await Promise.all(
++    servers.splice(0).map(
++      (server) =>
++        new Promise((resolve) => {
++          if (!server.listening) {
++            resolve();
++            return;
++          }
++          server.close(() => resolve());
++        }),
++    ),
++  );
++  fs.rmSync(fixtureRoot, { recursive: true, force: true });
++});
++
++describe("website health endpoints", () => {
++  it("reports liveness independently and readiness for both locales", async () => {
++    const distDir = writeFixture();
++    const baseUrl = await listen(createApp({ distDir }));
++
++    const live = await fetch(`${baseUrl}/healthz`);
++    assert.equal(live.status, 200);
++    assert.equal(live.headers.get("cache-control"), "no-store, no-cache, must-revalidate");
++    assert.deepEqual(await live.json(), { ok: true, status: "alive" });
++
++    const ready = await fetch(`${baseUrl}/readyz`);
++    assert.equal(ready.status, 200);
++    assert.deepEqual(await ready.json(), { ok: true, status: "ready" });
++
++    const media = await fetch(`${baseUrl}/media/test-abc123.webp`);
++    assert.equal(media.status, 200);
++    assert.equal(
++      media.headers.get("cache-control"),
++      "public, max-age=31536000, immutable",
++    );
++
++    const head = await fetch(`${baseUrl}/readyz`, { method: "HEAD" });
++    assert.equal(head.status, 200);
++    assert.equal(await head.text(), "");
++  });
++
++  it("returns 503 readiness for a missing build or referenced asset", async () => {
++    const missingBuild = await listen(
++      createApp({ distDir: path.join(fixtureRoot, "not-built") }),
++    );
++    const missingBuildResponse = await fetch(`${missingBuild}/readyz`);
++    assert.equal(missingBuildResponse.status, 503);
++    assert.deepEqual(await missingBuildResponse.json(), {
++      ok: false,
++      status: "not_ready",
++      code: "static_build_unavailable",
++    });
++
++    const missingAssetDist = writeFixture({ missingAsset: true });
++    const missingAsset = await listen(createApp({ distDir: missingAssetDist }));
++    const missingAssetResponse = await fetch(`${missingAsset}/readyz`);
++    assert.equal(missingAssetResponse.status, 503);
++    assert.deepEqual(await missingAssetResponse.json(), {
++      ok: false,
++      status: "not_ready",
++      code: "static_build_unavailable",
++    });
++  });
++
++  it("scans immutable static readiness once across repeated GET/HEAD probes", async () => {
++    const distDir = writeFixture();
++    let scanCount = 0;
++    const app = createApp({
++      distDir,
++      readinessCheck: (options) => {
++        scanCount += 1;
++        return validateStaticBuild(options);
++      },
++    });
++    const baseUrl = await listen(app);
++    fs.rmSync(path.join(distDir, "assets", "site.js"));
++
++    const responses = await Promise.all([
++      fetch(`${baseUrl}/readyz`),
++      fetch(`${baseUrl}/readyz`, { method: "HEAD" }),
++      fetch(`${baseUrl}/readyz`),
++      fetch(`${baseUrl}/readyz`, { method: "HEAD" }),
++      fetch(`${baseUrl}/healthz`),
++    ]);
++
++    assert.equal(scanCount, 1);
++    assert.deepEqual(
++      responses.slice(0, 4).map((response) => response.status),
++      [200, 200, 200, 200],
++    );
++  });
++});
++
++describe("sanitized errors and canonical redirects", () => {
++  it("bounds provider operations without exposing provider details", async () => {
++    await assert.rejects(
++      withTimeout(
++        () => new Promise(() => {}),
++        5,
++      ),
++      ProviderTimeoutError,
++    );
++  });
++
++  it("returns sanitized JSON for malformed API bodies", async () => {
++    const baseUrl = await listen(createApp({ distDir: writeFixture() }));
++    const response = await fetch(`${baseUrl}/api/contact/send`, {
++      method: "POST",
++      headers: { "content-type": "application/json" },
++      body: "{",
++    });
++
++    assert.equal(response.status, 400);
++    assert.deepEqual(await response.json(), {
++      ok: false,
++      code: "invalid_request",
++    });
++  });
++
++  it("preserves path and query, ignores forwarded host, and bypasses probes", async () => {
++    const canonicalOrigin = "https://canonical.example.test";
++    const app = createApp({
++      distDir: writeFixture(),
++      canonicalOrigin,
++    });
++    const baseUrl = await listen(app);
++
++    const redirected = await fetch(`${baseUrl}/en/projects?utm=health`, {
++      headers: {
++        host: "untrusted.example.test",
++        "x-forwarded-host": "canonical.example.test",
++      },
++      redirect: "manual",
++    });
++    assert.equal(redirected.status, 308);
++    assert.equal(
++      redirected.headers.get("location"),
++      "https://canonical.example.test/en/projects?utm=health",
++    );
++
++    const health = await fetch(`${baseUrl}/healthz`, {
++      headers: { host: "untrusted.example.test" },
++    });
++    assert.equal(health.status, 200);
++    assert.deepEqual(await health.json(), { ok: true, status: "alive" });
++  });
++
++  it("validates canonical settings and never emits an untrusted redirect origin", () => {
++    assert.equal(parseCanonicalOrigin(undefined), null);
++    assert.equal(parseCanonicalOrigin(""), null);
++    assert.equal(parseCanonicalOrigin("https://example.test/"), "https://example.test");
++    assert.equal(
++      parseCanonicalOrigin("http://localhost:8080/"),
++      "http://localhost:8080",
++    );
++    assert.throws(() => parseCanonicalOrigin("https://example.test/path"));
++    assert.throws(() => parseCanonicalOrigin("https://example.test/foo/.."));
++    assert.throws(() => parseCanonicalOrigin("https://user:pass@example.test"));
++    assert.throws(() => parseCanonicalOrigin("https://@example.test"));
++    assert.throws(() => parseCanonicalOrigin("https://example.test?utm=launch"));
++    assert.throws(() => parseCanonicalOrigin("https://example.test#section"));
++    assert.throws(() => parseCanonicalOrigin("http://example.test"));
++    assert.throws(() => parseCanonicalOrigin("ftp://example.test"));
++
++    assert.equal(
++      canonicalRedirectLocation(
++        { originalUrl: "/\\evil.example.test/?x=1" },
++        "https://canonical.example.test",
++      ),
++      "https://canonical.example.test/",
++    );
++  });
++});
+\ No newline at end of file
+diff --git a/artifacts/works-website/scripts/test-production.mjs b/artifacts/works-website/scripts/test-production.mjs
+index 81fff67..f1d15f7 100644
+--- a/artifacts/works-website/scripts/test-production.mjs
++++ b/artifacts/works-website/scripts/test-production.mjs
+@@ -10,8 +10,8 @@ import { assertProjectFilters } from "./test-project-filters.mjs";
+ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
+ const distDir = path.join(root, "dist", "public");
+ const siteUrl = (
+-  process.env.VITE_SITE_URL ||
+   process.env.SITE_URL ||
++  process.env.VITE_SITE_URL ||
+   "https://workspaceworks-website-production.up.railway.app"
+ ).replace(/\/+$/, "");
+ 
+@@ -130,6 +130,12 @@ async function readSeo(page) {
+       ogTypes: contents('meta[property="og:type"]'),
+       ogUrls: contents('meta[property="og:url"]'),
+       publishedTimes: contents('meta[property="article:published_time"]'),
++      alternates: Array.from(
++        document.head.querySelectorAll('link[rel="alternate"]'),
++      ).map((element) => ({
++        hreflang: element.getAttribute("hreflang"),
++        href: element.getAttribute("href"),
++      })),
+     };
+   });
+ }
+@@ -149,7 +155,7 @@ function assertSingleton(values, label, { allowEmpty = false } = {}) {
+   }
+ }
+ 
+-async function assertSeo(page, { pathname, type, articleTitle }) {
++async function assertSeo(page, { pathname, type, articleTitle, xDefaultPath = pathname }) {
+   await page.waitForFunction(
+     ({ expectedCanonical, expectedType, expectedTitle }) => {
+       const canonical = document.head.querySelector('link[rel="canonical"]')?.href;
+@@ -180,6 +186,16 @@ async function assertSeo(page, { pathname, type, articleTitle }) {
+   assert.equal(seo.ogTypes[0], type);
+   assert.equal(seo.ogTitles[0], seo.titles[0]);
+   assert.equal(seo.ogDescriptions[0], seo.descriptions[0]);
++  assert.deepEqual(
++    seo.alternates.map((alternate) => alternate.hreflang),
++    ["hu", "en", "x-default"],
++    `${pathname} should expose the reciprocal HU/EN alternates`,
++  );
++  assert.equal(
++    seo.alternates.find((alternate) => alternate.hreflang === "x-default")?.href,
++    `${siteUrl}${xDefaultPath}`,
++    `${pathname} should use the real HU page as x-default`,
++  );
+ 
+   if (type === "article") {
+     assertSingleton(seo.publishedTimes, "article:published_time");
+@@ -284,6 +300,11 @@ async function run() {
+       type: "website",
+     });
+     assert.notEqual(projectsSeo.titles[0], firstSeo.titles[0]);
++    assert.notDeepEqual(
++      projectsSeo.alternates,
++      firstSeo.alternates,
++      "client navigation retained stale hreflang URLs",
++    );
+ 
+     await clickHeaderLink(page, "/blog");
+     await assertRenderedPage(page, "/blog");
+@@ -331,6 +352,11 @@ async function run() {
+ 
+     await page.goto(`${baseUrl}/en/contact`, { waitUntil: "networkidle" });
+     await assertRenderedPage(page, "/en/contact");
++    await assertSeo(page, {
++      pathname: "/en/contact",
++      type: "website",
++      xDefaultPath: "/kapcsolat",
++    });
+     const consentPrivacyHref = await page
+       .locator('main a[href*="/strapi/uploads/"][href$=".pdf"]')
+       .first()
+diff --git a/artifacts/works-website/scripts/validate-locale.mjs b/artifacts/works-website/scripts/validate-locale.mjs
+index 969778c..64e0785 100644
+--- a/artifacts/works-website/scripts/validate-locale.mjs
++++ b/artifacts/works-website/scripts/validate-locale.mjs
+@@ -70,6 +70,7 @@ async function runValidation() {
+     switchLocalePath,
+     localeQueryKey,
+     getPageMeta,
++    getAlternateLinks,
+     buildMetaTags,
+     SITE_URL,
+     getLocaleCacheKey,
+@@ -313,7 +314,12 @@ async function runValidation() {
+   assert("EN route preserves canonical path", enProjectsMeta.path === "/en/projects");
+   assert("EN route uses route-specific English metadata", enProjectsMeta.title === "Our projects | Works.");
+   const enProjectMeta = getPageMeta("/en/projects/future-project");
+-  assert("EN detail is article metadata", enProjectMeta.type === "article");
++  assert(
++    "unknown EN detail has no fabricated canonical or alternates",
++    enProjectMeta.path === undefined &&
++      enProjectMeta.type === "website" &&
++      (enProjectMeta.alternates || []).length === 0,
++  );
+ 
+   // ------------------------------------------------------------------
+   // buildMetaTags — og:locale correct for HU
+@@ -339,6 +345,38 @@ async function runValidation() {
+     "EN projects route has localized static title",
+     enProjectsMeta.title === "Our projects | Works."
+   );
++  const huAlternateTags = huTags.match(/rel="alternate"/g) || [];
++  assert("HU home emits reciprocal locale alternates", huAlternateTags.length === 3);
++  assert(
++    "HU home emits x-default pointing to the HU home",
++    huTags.includes(`hreflang="x-default" href="${SITE_URL}/"`),
++  );
++  const huProject = (getLocaleFallback("projects", "hu") || [])[0];
++  const enProject = (getLocaleFallback("projects", "en") || []).find(
++    (record) => record.documentId === huProject?.documentId,
++  );
++  if (huProject && enProject) {
++    const projectAlternates = getAlternateLinks(
++      `/projektek/${huProject.slug}`,
++      "hu",
++    );
++    assert(
++      "paired detail alternates use the localized EN slug",
++      projectAlternates.some(
++        (alternate) =>
++          alternate.hreflang === "en" &&
++          alternate.href === `${SITE_URL}/en/projects/${enProject.slug}`,
++      ),
++    );
++    assert(
++      "paired detail alternates include HU x-default",
++      projectAlternates.some(
++        (alternate) =>
++          alternate.hreflang === "x-default" &&
++          alternate.href === `${SITE_URL}/projektek/${huProject.slug}`,
++      ),
++    );
++  }
+ 
+   // ------------------------------------------------------------------
+   // Public locale configuration
+diff --git a/artifacts/works-website/server-error.mjs b/artifacts/works-website/server-error.mjs
+new file mode 100644
+index 0000000..3ac2054
+--- /dev/null
++++ b/artifacts/works-website/server-error.mjs
+@@ -0,0 +1,77 @@
++/**
++ * Errors that can safely cross the server boundary.
++ *
++ * Provider requests are deliberately bounded.  The callback receives an
++ * AbortSignal when the underlying client understands one, while the race also
++ * protects us from a client implementation that ignores the signal.
++ */
++export const PROVIDER_TIMEOUT_MS = 10_000;
++
++export class ProviderTimeoutError extends Error {
++  constructor() {
++    super("The provider request timed out");
++    this.name = "ProviderTimeoutError";
++    this.code = "provider_timeout";
++  }
++}
++
++export function withTimeout(
++  operation,
++  timeoutMs = PROVIDER_TIMEOUT_MS,
++) {
++  const controller = new AbortController();
++  let timer;
++
++  const timeout = new Promise((_, reject) => {
++    timer = setTimeout(() => {
++      controller.abort();
++      reject(new ProviderTimeoutError());
++    }, timeoutMs);
++  });
++
++  const work = Promise.resolve().then(() => operation(controller.signal));
++
++  return Promise.race([work, timeout]).finally(() => {
++    clearTimeout(timer);
++  });
++}
++
++/**
++ * Keep errors returned by HTTP handlers intentionally small and stable.
++ * Never pass provider messages, request bodies, or stack traces to clients.
++ */
++export function sendSanitizedError(res, status = 500, code = "server_error") {
++  if (res.headersSent) return false;
++
++  const safeStatus =
++    Number.isInteger(status) && status >= 400 && status <= 599 ? status : 500;
++  const safeCode = /^[a-z][a-z0-9_]{1,63}$/.test(code)
++    ? code
++    : "server_error";
++
++  res.status(safeStatus).json({ ok: false, code: safeCode });
++  return true;
++}
++
++export function classifyBodyParserError(error) {
++  if (!error) return null;
++
++  if (
++    error.type === "entity.too.large" ||
++    error.status === 413 ||
++    error.statusCode === 413
++  ) {
++    return { status: 413, code: "request_too_large" };
++  }
++
++  if (
++    error.type === "entity.parse.failed" ||
++    error instanceof SyntaxError ||
++    error.status === 400 ||
++    error.statusCode === 400
++  ) {
++    return { status: 400, code: "invalid_request" };
++  }
++
++  return null;
++}
+\ No newline at end of file
+diff --git a/artifacts/works-website/server-health.mjs b/artifacts/works-website/server-health.mjs
+new file mode 100644
+index 0000000..5096dbc
+--- /dev/null
++++ b/artifacts/works-website/server-health.mjs
+@@ -0,0 +1,402 @@
++import fs from "node:fs";
++import path from "node:path";
++
++const PUBLIC_PAGES = [
++  { locale: "hu", relativePath: "index.html", requestPath: "/" },
++  { locale: "en", relativePath: path.join("en", "index.html"), requestPath: "/en" },
++];
++
++const HTML_RESOURCE_ATTRIBUTES = new Set([
++  "src",
++  "href",
++  "poster",
++  "data",
++  "srcset",
++]);
++
++const CSS_URL_PATTERN = /url\(\s*(['"]?)(.*?)\1\s*\)/gi;
++const JS_IMPORT_PATTERN =
++  /(?:\bfrom\s*|\bimport\s*\(|\bimport\s+)["']([^"']+)["']/g;
++
++function pageFilePath(distDir, relativePath) {
++  return path.resolve(distDir, relativePath);
++}
++
++function isWithinDirectory(directory, filePath) {
++  const relative = path.relative(directory, filePath);
++  return relative === "" || (relative && !relative.startsWith("..") && !path.isAbsolute(relative));
++}
++
++function isExternalReference(reference) {
++  const value = reference.trim().toLowerCase();
++  return (
++    !value ||
++    value.startsWith("#") ||
++    value.startsWith("data:") ||
++    value.startsWith("blob:") ||
++    value.startsWith("javascript:") ||
++    value.startsWith("mailto:") ||
++    value.startsWith("tel:") ||
++    value.startsWith("//") ||
++    /^[a-z][a-z\d+\-.]*:/i.test(value)
++  );
++}
++
++function parseTagAttributes(tag) {
++  const attributes = [];
++  const attributePattern =
++    /([a-zA-Z_:][\w:.-]*)\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s"'=<>`]+))/g;
++
++  for (const match of tag.matchAll(attributePattern)) {
++    attributes.push({
++      name: match[1].toLowerCase(),
++      value: match[2] ?? match[3] ?? match[4] ?? "",
++    });
++  }
++
++  return attributes;
++}
++
++function resolveRequestPath(reference, sourceRequestPath) {
++  const rawReference = reference.trim();
++  if (isExternalReference(rawReference)) return null;
++
++  let parsed;
++  try {
++    const base = new URL(
++      sourceRequestPath.startsWith("/")
++        ? `http://static.invalid${sourceRequestPath}`
++        : `http://static.invalid/${sourceRequestPath}`,
++    );
++    parsed = new URL(rawReference, base);
++  } catch {
++    return { invalid: true };
++  }
++
++  // A malformed backslash or protocol-relative reference must never escape
++  // the local origin while being checked.
++  if (parsed.origin !== "http://static.invalid") {
++    return null;
++  }
++
++  let pathname;
++  try {
++    pathname = decodeURIComponent(parsed.pathname);
++  } catch {
++    return { invalid: true };
++  }
++
++  if (!pathname.startsWith("/") || pathname.startsWith("//")) {
++    return { invalid: true };
++  }
++
++  // These are runtime endpoints, not build artifacts.  Checking them would
++  // make static readiness depend on the CMS or an API service.
++  if (pathname === "/strapi" || pathname.startsWith("/strapi/")) return null;
++  if (pathname === "/api" || pathname.startsWith("/api/")) return null;
++
++  return { pathname };
++}
++
++function localFileForRequestPath(distDir, pathname) {
++  const relativePath = pathname.replace(/^\/+/, "");
++  const candidate = path.resolve(distDir, relativePath || "index.html");
++  if (!isWithinDirectory(distDir, candidate)) return null;
++
++  try {
++    if (fs.statSync(candidate).isFile()) return candidate;
++  } catch {
++    return null;
++  }
++
++  // A relative application route is served by its prerendered index file.
++  if (!path.extname(candidate)) {
++    const indexCandidate = path.join(candidate, "index.html");
++    if (isWithinDirectory(distDir, indexCandidate)) {
++      try {
++        if (fs.statSync(indexCandidate).isFile()) return indexCandidate;
++      } catch {
++        // The caller reports the missing reference below.
++      }
++    }
++  }
++
++  return null;
++}
++
++function addHtmlReferences(html, requestPath, queue) {
++  for (const tagMatch of html.matchAll(/<([a-z][\w:-]*)\b[^>]*>/gi)) {
++    const tagName = tagMatch[1].toLowerCase();
++    const attributes = parseTagAttributes(tagMatch[0]);
++
++    for (const attribute of attributes) {
++      if (!HTML_RESOURCE_ATTRIBUTES.has(attribute.name)) continue;
++
++      if (attribute.name === "srcset") {
++        for (const candidate of attribute.value.split(",")) {
++          const reference = candidate.trim().split(/\s+/)[0];
++          if (reference) queue.push({ reference, sourceRequestPath: requestPath });
++        }
++      } else if (
++        attribute.name === "src" ||
++        attribute.name === "poster" ||
++        attribute.name === "data" ||
++        (attribute.name === "href" &&
++          (tagName === "link" || tagName === "base"))
++      ) {
++        queue.push({
++          reference: attribute.value,
++          sourceRequestPath: requestPath,
++        });
++      }
++    }
++  }
++}
++
++function addAssetReferences(contents, assetPath, queue) {
++  const extension = path.extname(assetPath).toLowerCase();
++
++  if (extension === ".css") {
++    for (const match of contents.matchAll(CSS_URL_PATTERN)) {
++      if (match[2]) {
++        queue.push({
++          reference: match[2],
++          sourceRequestPath: `/${assetPath}`,
++        });
++      }
++    }
++    return;
++  }
++
++  if (extension !== ".js" && extension !== ".mjs") return;
++
++  for (const match of contents.matchAll(JS_IMPORT_PATTERN)) {
++    const reference = match[1];
++    if (
++      reference.startsWith(".") ||
++      reference.startsWith("/assets/") ||
++      reference.startsWith("/favicon")
++    ) {
++      queue.push({
++        reference,
++        sourceRequestPath: `/${assetPath}`,
++      });
++    }
++  }
++
++}
++
++function readText(filePath) {
++  try {
++    return fs.readFileSync(filePath, "utf8");
++  } catch {
++    return null;
++  }
++}
++
++function hasUsableHtml(html, expectedLocale) {
++  const declaredLocale = html.match(/<html\b[^>]*\blang=["']([^"']+)["']/i)?.[1];
++  return (
++    html.trim().length > 0 &&
++    /<html\b/i.test(html) &&
++    /<body\b/i.test(html) &&
++    (!declaredLocale || declaredLocale.toLowerCase().startsWith(expectedLocale)) &&
++    !html.includes("<!--ssr-outlet-->")
++  );
++}
++
++function canonicalFromHtml(html) {
++  const canonicalTag = [...html.matchAll(/<link\b[^>]*>/gi)]
++    .map((match) => match[0])
++    .find((tag) => {
++      const attributes = parseTagAttributes(tag);
++      return attributes.some(
++        (attribute) =>
++          attribute.name === "rel" &&
++          attribute.value
++            .split(/\s+/)
++            .some((value) => value.toLowerCase() === "canonical"),
++      );
++    });
++
++  if (!canonicalTag) return null;
++  const href = parseTagAttributes(canonicalTag).find(
++    (attribute) => attribute.name === "href",
++  )?.value;
++  if (!href) return null;
++
++  try {
++    const url = new URL(href, "http://static.invalid");
++    return {
++      origin: url.origin,
++      pathname: url.pathname,
++      search: url.search,
++      hash: url.hash,
++    };
++  } catch {
++    return null;
++  }
++}
++
++function canonicalPath(pathname) {
++  if (pathname === "/") return pathname;
++  return pathname.replace(/\/+$/, "");
++}
++
++function validateCanonicalOrigin(canonicalOrigin) {
++  if (canonicalOrigin === null || canonicalOrigin === undefined) return null;
++  try {
++    // Keep readiness validation aligned with the opt-in redirect setting:
++    // HTTPS origins only, with loopback HTTP reserved for local development.
++    if (typeof canonicalOrigin !== "string") return null;
++    const trimmed = canonicalOrigin.trim();
++    const scheme = trimmed.match(/^[a-z][a-z\d+.-]*:\/\//i);
++    const authorityAndPath = scheme
++      ? trimmed.slice(scheme[0].length)
++      : "";
++    const authorityEnd = authorityAndPath.search(/[/?#]/);
++    const authority =
++      authorityEnd === -1
++        ? authorityAndPath
++        : authorityAndPath.slice(0, authorityEnd);
++    const firstSlash = authorityAndPath.indexOf("/");
++    const url = new URL(trimmed);
++    const isLoopbackHttp =
++      url.protocol === "http:" &&
++      ["localhost", "127.0.0.1", "[::1]"].includes(
++        url.hostname.toLowerCase(),
++      );
++    if (
++      (!(
++        url.protocol === "https:" ||
++        (url.protocol === "http:" && isLoopbackHttp)
++      )) ||
++      !url.origin ||
++      authority.includes("@") ||
++      url.username ||
++      url.password ||
++      trimmed.includes("\\") ||
++      !scheme ||
++      (firstSlash !== -1 && authorityAndPath.slice(firstSlash) !== "/") ||
++      url.pathname !== "/" ||
++      url.search ||
++      url.hash
++    ) {
++      return null;
++    }
++    return url.origin;
++  } catch {
++    return null;
++  }
++}
++
++/**
++ * Validate only artifacts needed by the static website.  In particular this
++ * never performs a CMS, mail provider, or API request.
++ */
++export function validateStaticBuild({ distDir, canonicalOrigin } = {}) {
++  const root = path.resolve(distDir || ".");
++  const expectedCanonicalOrigin = validateCanonicalOrigin(canonicalOrigin);
++  const issues = [];
++  const pages = {};
++  const queue = [];
++  const visited = new Set();
++
++  if (!fs.existsSync(root)) {
++    return {
++      ok: false,
++      code: "static_build_missing",
++      pages,
++      issues: [{ code: "static_build_missing" }],
++    };
++  }
++
++  if (canonicalOrigin !== undefined && canonicalOrigin !== null && !expectedCanonicalOrigin) {
++    issues.push({ code: "invalid_canonical_origin" });
++  }
++
++  for (const page of PUBLIC_PAGES) {
++    const filePath = pageFilePath(root, page.relativePath);
++    const html = readText(filePath);
++    if (!html) {
++      pages[page.locale] = { ok: false, code: "html_missing" };
++      issues.push({ code: "html_missing", locale: page.locale });
++      continue;
++    }
++
++    if (!hasUsableHtml(html, page.locale)) {
++      pages[page.locale] = { ok: false, code: "html_unusable" };
++      issues.push({ code: "html_unusable", locale: page.locale });
++      continue;
++    }
++
++    const pageCanonical = canonicalFromHtml(html);
++    if (
++      expectedCanonicalOrigin &&
++      (!pageCanonical ||
++        pageCanonical.origin !== expectedCanonicalOrigin ||
++        canonicalPath(pageCanonical.pathname) !== canonicalPath(page.requestPath) ||
++        pageCanonical.search ||
++        pageCanonical.hash)
++    ) {
++      issues.push({ code: "canonical_origin_mismatch", locale: page.locale });
++    }
++
++    pages[page.locale] = { ok: true };
++    addHtmlReferences(html, page.requestPath, queue);
++  }
++
++  while (queue.length > 0) {
++    const item = queue.shift();
++    const resolved = resolveRequestPath(item.reference, item.sourceRequestPath);
++    if (!resolved) continue;
++    if (resolved.invalid) {
++      issues.push({ code: "invalid_local_reference" });
++      continue;
++    }
++
++    const assetPath = localFileForRequestPath(root, resolved.pathname);
++    if (!assetPath) {
++      issues.push({ code: "asset_missing" });
++      continue;
++    }
++
++    const relativeAssetPath = path.relative(root, assetPath);
++    if (visited.has(relativeAssetPath)) continue;
++    visited.add(relativeAssetPath);
++
++    const extension = path.extname(assetPath).toLowerCase();
++    if (![".css", ".js", ".mjs"].includes(extension)) continue;
++
++    const contents = readText(assetPath);
++    if (contents === null) {
++      issues.push({ code: "asset_unreadable" });
++      continue;
++    }
++    addAssetReferences(contents, relativeAssetPath, queue);
++  }
++
++  // Keep the public result safe to use in a health response: no filesystem
++  // paths or HTML content are returned.
++  const uniqueIssues = [];
++  const seenIssueCodes = new Set();
++  for (const issue of issues) {
++    const key = `${issue.code}:${issue.locale || ""}`;
++    if (seenIssueCodes.has(key)) continue;
++    seenIssueCodes.add(key);
++    uniqueIssues.push({ code: issue.code, ...(issue.locale ? { locale: issue.locale } : {}) });
++  }
++
++  return {
++    ok: uniqueIssues.length === 0,
++    code: uniqueIssues.length === 0 ? "static_build_ready" : "static_build_invalid",
++    pages,
++    issues: uniqueIssues,
++  };
++}
++
++export const checkStaticReadiness = validateStaticBuild;
++
++export function validateCanonicalSetting(value) {
++  return validateCanonicalOrigin(value);
++}
+\ No newline at end of file
+diff --git a/artifacts/works-website/server.mjs b/artifacts/works-website/server.mjs
+index d40d43f..ae5a18c 100644
+--- a/artifacts/works-website/server.mjs
++++ b/artifacts/works-website/server.mjs
+@@ -5,12 +5,18 @@ import { fileURLToPath } from "node:url";
+ import fs from "node:fs";
+ import { subscribeNewsletter } from "./newsletter-server.mjs";
+ import { sendContactMessage } from "./contact-server.mjs";
++import {
++  classifyBodyParserError,
++  sendSanitizedError,
++} from "./server-error.mjs";
++import {
++  checkStaticReadiness,
++  validateCanonicalSetting,
++} from "./server-health.mjs";
+ 
+ const __dirname = path.dirname(fileURLToPath(import.meta.url));
+-const distDir = path.join(__dirname, "dist", "public");
++const DEFAULT_DIST_DIR = path.join(__dirname, "dist", "public");
+ 
+-const PORT = Number(process.env.PORT) || 8080;
+-const STRAPI_TARGET = process.env.STRAPI_URL || process.env.STRAPI_PROXY_TARGET;
+ const API_ALLOWED_ORIGINS = new Set([
+   "https://works.hu",
+   "https://www.works.hu",
+@@ -18,6 +24,82 @@ const API_ALLOWED_ORIGINS = new Set([
+   "https://works-website.replit.app",
+ ]);
+ 
++function configuredPort() {
++  const rawPort = process.env.PORT;
++  if (rawPort === undefined || rawPort === "") return 8080;
++
++  const port = Number(rawPort);
++  if (!Number.isInteger(port) || port <= 0 || port > 65_535) {
++    throw new Error("Invalid PORT value");
++  }
++  return port;
++}
++
++/**
++ * CANONICAL_ORIGIN is intentionally opt-in and independent from SITE_URL,
++ * which only configures SEO metadata. It is an origin, not an arbitrary URL:
++ * deployed values must use HTTPS; HTTP is allowed only for loopback
++ * development hosts. Paths, credentials, query strings, and hashes are
++ * rejected.
++ */
++export function parseCanonicalOrigin(value) {
++  if (value === undefined || value === null) return null;
++  if (typeof value !== "string") throw new Error("Invalid CANONICAL_ORIGIN value");
++  if (value.trim() === "") return null;
++
++  let origin;
++  try {
++    const trimmed = value.trim();
++    const scheme = trimmed.match(/^[a-z][a-z\d+.-]*:\/\//i);
++    const authorityAndPath = scheme
++      ? trimmed.slice(scheme[0].length)
++      : "";
++    const authorityEnd = authorityAndPath.search(/[/?#]/);
++    const authority =
++      authorityEnd === -1
++        ? authorityAndPath
++        : authorityAndPath.slice(0, authorityEnd);
++    const firstSlash = authorityAndPath.indexOf("/");
++    const url = new URL(trimmed);
++    const isLoopbackHttp =
++      url.protocol === "http:" &&
++      ["localhost", "127.0.0.1", "[::1]"].includes(
++        url.hostname.toLowerCase(),
++      );
++    if (
++      (!(
++        url.protocol === "https:" ||
++        (url.protocol === "http:" && isLoopbackHttp)
++      )) ||
++      authority.includes("@") ||
++      url.username ||
++      url.password ||
++      value.includes("\\") ||
++      !scheme ||
++      (firstSlash !== -1 && authorityAndPath.slice(firstSlash) !== "/") ||
++      url.pathname !== "/" ||
++      url.search ||
++      url.hash
++    ) {
++      throw new Error("invalid origin");
++    }
++    origin = url.origin;
++  } catch {
++    throw new Error("Invalid CANONICAL_ORIGIN value");
++  }
++
++  if (validateCanonicalSetting(origin) !== origin) {
++    throw new Error("Invalid CANONICAL_ORIGIN value");
++  }
++  return origin;
++}
++
++function setNoStore(res) {
++  res.setHeader("Cache-Control", "no-store, no-cache, must-revalidate");
++  res.setHeader("Pragma", "no-cache");
++  res.setHeader("Expires", "0");
++}
++
+ function setApiCors(req, res) {
+   const origin = req.get("origin");
+   if (origin && API_ALLOWED_ORIGINS.has(origin)) {
+@@ -26,96 +108,238 @@ function setApiCors(req, res) {
+   }
+ }
+ 
+-if (!fs.existsSync(distDir)) {
+-  throw new Error(
+-    `Static build not found at ${distDir}. Run the build step before starting the server.`,
+-  );
++function requestHost(req) {
++  // Do not use X-Forwarded-Host.  The redirect target is fixed by the
++  // explicitly validated CANONICAL_ORIGIN setting.
++  return typeof req.get("host") === "string" ? req.get("host").toLowerCase() : "";
+ }
+ 
+-const app = express();
+-
+-app.disable("x-powered-by");
+-app.use(express.json({ limit: "10kb" }));
+-
+-app.options("/api/newsletter/subscribe", (req, res) => {
+-  setApiCors(req, res);
+-  res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
+-  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+-  res.status(204).end();
+-});
+-
+-app.post("/api/newsletter/subscribe", async (req, res) => {
+-  setApiCors(req, res);
+-  const result = await subscribeNewsletter(req.body?.email);
+-  res.status(result.status).json(result.body);
+-});
+-
+-app.options("/api/contact/send", (req, res) => {
+-  setApiCors(req, res);
+-  res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
+-  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+-  res.status(204).end();
+-});
+-
+-app.post("/api/contact/send", async (req, res) => {
+-  setApiCors(req, res);
+-  const result = await sendContactMessage(req.body);
+-  res.status(result.status).json(result.body);
+-});
+-
+-if (STRAPI_TARGET) {
++export function canonicalRedirectLocation(req, canonicalOrigin) {
++  if (!canonicalOrigin) return null;
++
++  const rawUrl = typeof req.originalUrl === "string" ? req.originalUrl : "/";
++  const requestTarget =
++    rawUrl.startsWith("/") && !rawUrl.startsWith("//") ? rawUrl : "/";
++
++  try {
++    const target = new URL(requestTarget, `${canonicalOrigin}/`);
++    // URL treats some backslash forms as authority separators.  Refuse those
++    // forms rather than ever emitting an untrusted redirect destination.
++    if (target.origin !== canonicalOrigin) return `${canonicalOrigin}/`;
++    return target.toString();
++  } catch {
++    return `${canonicalOrigin}/`;
++  }
++}
++
++function addCanonicalRedirect(app, canonicalOrigin) {
++  if (!canonicalOrigin) return;
++
++  app.use((req, res, next) => {
++    if (
++      (req.method !== "GET" && req.method !== "HEAD") ||
++      req.path === "/healthz" ||
++      req.path === "/readyz"
++    ) {
++      next();
++      return;
++    }
++
++    if (requestHost(req) === new URL(canonicalOrigin).host.toLowerCase()) {
++      next();
++      return;
++    }
++
++    const location = canonicalRedirectLocation(req, canonicalOrigin);
++    if (!location) {
++      next();
++      return;
++    }
++    res.status(308).setHeader("Location", location).end();
++  });
++}
++
++function healthResponse(res, status, body) {
++  setNoStore(res);
++  res.status(status).json(body);
++}
++
++function addHealthRoutes(app, { readinessResult }) {
++  const liveness = (_req, res) => {
++    healthResponse(res, 200, { ok: true, status: "alive" });
++  };
++
++  const readiness = (_req, res) => {
++    if (readinessResult.ok) {
++      healthResponse(res, 200, { ok: true, status: "ready" });
++      return;
++    }
++
++    // Do not expose filesystem paths, HTML, environment variables, or
++    // provider details in health responses.
++    healthResponse(res, 503, {
++      ok: false,
++      status: "not_ready",
++      code: "static_build_unavailable",
++    });
++  };
++
++  app.get("/healthz", liveness);
++  app.head("/healthz", liveness);
++  app.get("/readyz", readiness);
++  app.head("/readyz", readiness);
++}
++
++function addApiRoutes(app) {
++  app.options("/api/newsletter/subscribe", (req, res) => {
++    setApiCors(req, res);
++    res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
++    res.setHeader("Access-Control-Allow-Headers", "Content-Type");
++    res.status(204).end();
++  });
++
++  app.post("/api/newsletter/subscribe", async (req, res) => {
++    setApiCors(req, res);
++    const result = await subscribeNewsletter(req.body?.email);
++    res.status(result.status).json(result.body);
++  });
++
++  app.options("/api/contact/send", (req, res) => {
++    setApiCors(req, res);
++    res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
++    res.setHeader("Access-Control-Allow-Headers", "Content-Type");
++    res.status(204).end();
++  });
++
++  app.post("/api/contact/send", async (req, res) => {
++    setApiCors(req, res);
++    const result = await sendContactMessage(req.body);
++    res.status(result.status).json(result.body);
++  });
++}
++
++function addStaticRoutes(app, distDir) {
++  const publicDir = path.resolve(distDir);
++  const immutableDirectories = [
++    `${path.join(publicDir, "assets")}${path.sep}`,
++    `${path.join(publicDir, "media")}${path.sep}`,
++  ];
++  const strapiTarget = process.env.STRAPI_URL || process.env.STRAPI_PROXY_TARGET;
++  if (strapiTarget) {
++    app.use(
++      createProxyMiddleware({
++        pathFilter: (pathname) =>
++          pathname === "/strapi" || pathname.startsWith("/strapi/"),
++        target: strapiTarget,
++        changeOrigin: true,
++        xfwd: true,
++      }),
++    );
++  }
++
+   app.use(
+-    createProxyMiddleware({
+-      pathFilter: (pathname) => pathname === "/strapi" || pathname.startsWith("/strapi/"),
+-      target: STRAPI_TARGET,
+-      changeOrigin: true,
+-      xfwd: true,
++    express.static(distDir, {
++      extensions: ["html"],
++      index: "index.html",
++      redirect: false,
++      setHeaders: (res, filePath) => {
++        // A Vite hash assetjei (dist/public/assets/*) örökre cache-elhetők;
++        // a generált, content-hashed média (dist/public/media/*) is;
++        // a HTML és a generált sitemap/robots mindig revalidálódjon.
++        if (immutableDirectories.some((directory) => filePath.startsWith(directory))) {
++          res.setHeader("Cache-Control", "public, max-age=31536000, immutable");
++        } else if (
++          filePath.endsWith(".html") ||
++          filePath.endsWith("sitemap.xml") ||
++          filePath.endsWith("robots.txt")
++        ) {
++          res.setHeader("Cache-Control", "no-cache");
++        } else {
++          res.setHeader("Cache-Control", "public, max-age=3600");
++        }
++      },
+     }),
+   );
+-}
+-
+-app.use(
+-  express.static(distDir, {
+-    extensions: ["html"],
+-    index: "index.html",
+-    redirect: false,
+-    setHeaders: (res, filePath) => {
+-      // A Vite hash-elt assetjei (dist/public/assets/*) örökre cache-elhetők;
+-      // a HTML és a generált sitemap/robots mindig revalidálódjon.
+-      if (filePath.includes(`${path.sep}assets${path.sep}`)) {
+-        res.setHeader("Cache-Control", "public, max-age=31536000, immutable");
+-      } else if (
+-        filePath.endsWith(".html") ||
+-        filePath.endsWith("sitemap.xml") ||
+-        filePath.endsWith("robots.txt")
+-      ) {
+-        res.setHeader("Cache-Control", "no-cache");
+-      } else {
+-        res.setHeader("Cache-Control", "public, max-age=3600");
+-      }
+-    },
+-  }),
+-);
+ 
+-const notFoundPage = path.join(distDir, "404.html");
++  const notFoundPage = path.join(distDir, "404.html");
++  app.get(/.*/, (req, res) => {
++    res.setHeader("Cache-Control", "no-cache");
++    const candidate = path.join(distDir, req.path, "index.html");
++    res.sendFile(candidate, (error) => {
++      if (!error) return;
+ 
+-app.get(/.*/, (req, res) => {
+-  res.setHeader("Cache-Control", "no-cache");
+-  const candidate = path.join(distDir, req.path, "index.html");
+-  res.sendFile(candidate, (err) => {
+-    if (err) {
+       // Ismeretlen cím: 404-es státusz + 404-es oldal (ne a főoldal 200-zal).
+       if (fs.existsSync(notFoundPage)) {
+         res.status(404).sendFile(notFoundPage);
+       } else {
+         res.status(404).sendFile(path.join(distDir, "index.html"));
+       }
++    });
++  });
++}
++
++export function createApp({
++  distDir = DEFAULT_DIST_DIR,
++  canonicalOrigin = parseCanonicalOrigin(process.env.CANONICAL_ORIGIN),
++  readinessCheck = checkStaticReadiness,
++} = {}) {
++  const app = express();
++  // The deployed dist is immutable for the lifetime of this process.  Scan
++  // it once at startup so frequent Railway probes stay cheap and deterministic.
++  const readinessResult = readinessCheck({ distDir, canonicalOrigin });
++
++  app.disable("x-powered-by");
++  app.use(express.json({ limit: "10kb" }));
++  addCanonicalRedirect(app, canonicalOrigin);
++  addHealthRoutes(app, { readinessResult });
++  addApiRoutes(app);
++  addStaticRoutes(app, distDir);
++
++  // Express 5 forwards rejected async handlers here.  Keep parser errors and
++  // all unexpected failures JSON and deliberately free of implementation
++  // details.
++  app.use((error, req, res, _next) => {
++    setApiCors(req, res);
++    const parserError = classifyBodyParserError(error);
++    if (parserError) {
++      sendSanitizedError(res, parserError.status, parserError.code);
++      return;
+     }
++    sendSanitizedError(res);
++  });
++
++  return app;
++}
++
++export function startServer({
++  port = configuredPort(),
++  distDir = DEFAULT_DIST_DIR,
++  canonicalOrigin = parseCanonicalOrigin(process.env.CANONICAL_ORIGIN),
++} = {}) {
++  const app = createApp({ distDir, canonicalOrigin });
++
++  if (!fs.existsSync(distDir)) {
++    // Preserve the production startup contract: a deploy without its build
++    // should fail rather than ever being considered healthy.  createApp()
++    // remains injectable for readiness tests and local diagnostics.
++    throw new Error("Static build not found; run the build step before starting the server");
++  }
++
++  return app.listen(port, "0.0.0.0", () => {
++    console.log(`Works. website serving on :${port}`);
++    console.log(`  static: ${distDir}`);
++    console.log(
++      process.env.STRAPI_URL || process.env.STRAPI_PROXY_TARGET
++        ? "  proxy: /strapi/* enabled"
++        : "  proxy: disabled",
++    );
+   });
+-});
++}
++
++const isMainModule =
++  process.argv[1] &&
++  path.resolve(process.argv[1]) === fileURLToPath(import.meta.url);
+ 
+-app.listen(PORT, "0.0.0.0", () => {
+-  console.log(`Works. website serving on :${PORT}`);
+-  console.log(`  static: ${distDir}`);
+-  console.log(STRAPI_TARGET ? `  proxy: /strapi/* -> ${STRAPI_TARGET}` : "  proxy: disabled");
+-});
++if (isMainModule) {
++  startServer();
++}
+\ No newline at end of file
+diff --git a/artifacts/works-website/src/components/ContentBlock.tsx b/artifacts/works-website/src/components/ContentBlock.tsx
+index b940751..77ab360 100644
+--- a/artifacts/works-website/src/components/ContentBlock.tsx
++++ b/artifacts/works-website/src/components/ContentBlock.tsx
+@@ -7,6 +7,7 @@ import {
+   terminologyRemarkPlugin,
+ } from "@/lib/terminology";
+ import { TermText } from "@/components/Terminology";
++import { ResponsiveImage } from "@/components/ui/ResponsiveImage";
+ 
+ const markdownClasses = [
+   "prose prose-lg max-w-none mb-8",
+@@ -64,10 +65,11 @@ export function ContentBlock({ block }: { block: ContentBlockType }) {
+     return (
+       <figure className="my-10">
+         <div className="overflow-hidden bg-works-light">
+-          <img
++          <ResponsiveImage
+             src={block.content}
+             alt={accessibleTermLabel(imageAlt, locale)}
+             loading="lazy"
++            pictureClassName="block w-full"
+             className="w-full h-auto object-cover"
+           />
+         </div>
+diff --git a/artifacts/works-website/src/components/SEOHead.tsx b/artifacts/works-website/src/components/SEOHead.tsx
+index cdeb5f3..986e9e7 100644
+--- a/artifacts/works-website/src/components/SEOHead.tsx
++++ b/artifacts/works-website/src/components/SEOHead.tsx
+@@ -2,6 +2,7 @@ import { useEffect } from "react";
+ import { useLocation } from "wouter";
+ import {
+   buildJsonLd,
++  getAlternateLinks,
+   getPageMeta,
+   SITE_URL,
+   localeToOgLocale,
+@@ -61,6 +62,33 @@ function upsertLink(rel: "canonical" | "icon", href: string) {
+   element.removeAttribute("data-ssr");
+ }
+ 
++function removeOwnedLink(rel: "canonical" | "alternate") {
++  document.head
++    .querySelectorAll(
++      `link[rel="${rel}"][data-ssr], link[rel="${rel}"][${CLIENT_SEO_ATTRIBUTE}]`,
++    )
++    .forEach((element) => element.remove());
++}
++
++function syncAlternateLinks(
++  alternates: { hreflang: string; href: string }[],
++) {
++  // SSR owns the initial links; the client takes ownership on hydration and
++  // removes the previous route's links before adding the current set. This
++  // prevents stale language URLs after SPA navigation without touching
++  // third-party, unowned head tags.
++  removeOwnedLink("alternate");
++
++  for (const { hreflang, href } of alternates) {
++    const element = document.createElement("link");
++    element.rel = "alternate";
++    element.hreflang = hreflang;
++    element.href = href;
++    element.setAttribute(CLIENT_SEO_ATTRIBUTE, "");
++    document.head.appendChild(element);
++  }
++}
++
+ function upsertTitle(title: string) {
+   let element = document.head.querySelector<HTMLTitleElement>("title");
+ 
+@@ -131,8 +159,9 @@ export default function SEOHead() {
+   const ogLocale = localeToOgLocale(lang);
+   const ogImage = absoluteUrl(meta.ogImage || settings?.ogImageUrl || "/opengraph.jpg");
+   const favicon = settings?.faviconUrl || "/favicon.ico";
+-  const canonical = absoluteUrl(meta.path || location);
++  const canonical = meta.path ? absoluteUrl(meta.path) : undefined;
+   const ogType = meta.type === "article" ? "article" : "website";
++  const alternates = meta.path ? getAlternateLinks(location, lang) : [];
+ 
+   useEffect(() => {
+     document.documentElement.lang = lang;
+@@ -141,11 +170,20 @@ export default function SEOHead() {
+     document.head
+       .querySelectorAll(`meta[name="robots"][${CLIENT_SEO_ATTRIBUTE}]`)
+       .forEach((element) => element.remove());
+-    upsertLink("canonical", canonical);
++    if (canonical) {
++      upsertLink("canonical", canonical);
++    } else {
++      removeOwnedLink("canonical");
++    }
++    syncAlternateLinks(alternates);
+     upsertMeta("property", "og:title", meta.title);
+     upsertMeta("property", "og:description", meta.description);
+     upsertMeta("property", "og:type", ogType);
+-    upsertMeta("property", "og:url", canonical);
++    if (canonical) {
++      upsertMeta("property", "og:url", canonical);
++    } else {
++      removeMeta("property", "og:url");
++    }
+     upsertMeta("property", "og:locale", ogLocale);
+     upsertMeta("property", "og:site_name", settings?.siteName || "Works.");
+     upsertMeta("property", "og:image", ogImage);
+@@ -181,6 +219,7 @@ export default function SEOHead() {
+     ogImage,
+     ogLocale,
+     ogType,
++    alternates,
+     settings?.siteName,
+   ]);
+ 
+diff --git a/artifacts/works-website/src/components/ui/BlogCard.tsx b/artifacts/works-website/src/components/ui/BlogCard.tsx
+index c9930b6..d18dcef 100644
+--- a/artifacts/works-website/src/components/ui/BlogCard.tsx
++++ b/artifacts/works-website/src/components/ui/BlogCard.tsx
+@@ -6,6 +6,7 @@ import { buildLocalePath } from "@/lib/i18n-routes";
+ import { ArrowLinkLabel } from "@/components/ui/arrow-link-label";
+ import { TermText } from "@/components/Terminology";
+ import { accessibleTermLabel } from "@/lib/terminology";
++import { ResponsiveImage } from "@/components/ui/ResponsiveImage";
+ 
+ interface BlogCardProps {
+   slug: string;
+@@ -17,9 +18,11 @@ interface BlogCardProps {
+   index: number;
+   /** Disable the scroll-into-view entry animation (needed inside horizontal carousels, where the peeking card would stay invisible). */
+   animated?: boolean;
++  /** Keep the real above-the-fold candidate eager; cards default to lazy. */
++  priority?: boolean;
+ }
+ 
+-export function BlogCard({ slug, title, excerpt, date, image, imageAlt, index, animated = true }: BlogCardProps) {
++export function BlogCard({ slug, title, excerpt, date, image, imageAlt, index, animated = true, priority = false }: BlogCardProps) {
+   const { locale, t } = useI18n();
+   return (
+     <motion.article 
+@@ -35,10 +38,14 @@ export function BlogCard({ slug, title, excerpt, date, image, imageAlt, index, a
+     >
+       <Link href={buildLocalePath(locale, "blogPost", slug)} className="flex flex-col flex-grow">
+         <div className="w-full aspect-[4/3] relative overflow-hidden">
+-          <img
++          <ResponsiveImage
+             src={image}
+             alt={accessibleTermLabel(imageAlt || title, locale)}
+             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
++            pictureClassName="block w-full h-full"
++            loading={priority ? "eager" : "lazy"}
++            fetchPriority={priority ? "high" : "auto"}
++            sizes="(min-width: 1024px) 33vw, 100vw"
+           />
+         </div>
+         
+diff --git a/artifacts/works-website/src/components/ui/FullBleedHero.tsx b/artifacts/works-website/src/components/ui/FullBleedHero.tsx
+index c757db4..98b0255 100644
+--- a/artifacts/works-website/src/components/ui/FullBleedHero.tsx
++++ b/artifacts/works-website/src/components/ui/FullBleedHero.tsx
+@@ -1,5 +1,6 @@
+ import { motion } from "framer-motion";
+ import type { ReactNode } from "react";
++import { ResponsiveImage } from "@/components/ui/ResponsiveImage";
+ import "./FullBleedHero.css";
+ 
+ type FullBleedHeroProps = {
+@@ -21,17 +22,19 @@ export function FullBleedHero({
+     <section
+       className="full-bleed-hero relative isolate overflow-hidden flex bg-works-dark text-white"
+     >
+-      <picture className="absolute inset-0 -z-10 pointer-events-none select-none">
+-        {mobileBackgroundImage && (
+-          <source media="(width < 768px)" srcSet={mobileBackgroundImage} />
+-        )}
+-        <img
++      <div className="absolute inset-0 -z-10 pointer-events-none select-none">
++        <ResponsiveImage
+           src={backgroundImage}
++          mobileSource={mobileBackgroundImage}
+           alt=""
+           aria-hidden="true"
++          loading="eager"
++          fetchPriority="high"
++          sizes="100vw"
++          pictureClassName="block h-full w-full"
+           className={`h-full w-full object-cover ${mobileBackgroundImage ? "object-center md:object-right" : "object-right"}`}
+         />
+-      </picture>
++      </div>
+       <div className="mx-auto flex w-full min-w-0 max-w-7xl items-center px-4 py-12 sm:px-6 sm:py-16 lg:px-8 lg:py-20">
+           <motion.div
+             initial={{ opacity: 0, y: 20 }}
+diff --git a/artifacts/works-website/src/components/ui/ProjectCard.tsx b/artifacts/works-website/src/components/ui/ProjectCard.tsx
+index 81e2e20..19c12dd 100644
+--- a/artifacts/works-website/src/components/ui/ProjectCard.tsx
++++ b/artifacts/works-website/src/components/ui/ProjectCard.tsx
+@@ -5,6 +5,7 @@ import { buildLocalePath } from "@/lib/i18n-routes";
+ import { ArrowLinkLabel } from "@/components/ui/arrow-link-label";
+ import { TermText } from "@/components/Terminology";
+ import { accessibleTermLabel } from "@/lib/terminology";
++import { ResponsiveImage } from "@/components/ui/ResponsiveImage";
+ 
+ interface ProjectCardProps {
+   slug: string;
+@@ -18,9 +19,11 @@ interface ProjectCardProps {
+   animated?: boolean;
+   /** Clamp the description to 3 lines with an ellipsis (mobile carousel). */
+   clampDescription?: boolean;
++  /** Keep the real above-the-fold candidate eager; cards default to lazy. */
++  priority?: boolean;
+ }
+ 
+-export function ProjectCard({ slug, title, tags, description, image, imageAlt, reverse = false, animated = true, clampDescription = false }: ProjectCardProps) {
++export function ProjectCard({ slug, title, tags, description, image, imageAlt, reverse = false, animated = true, clampDescription = false, priority = false }: ProjectCardProps) {
+   const { locale, t } = useI18n();
+   return (
+     <motion.div
+@@ -36,10 +39,14 @@ export function ProjectCard({ slug, title, tags, description, image, imageAlt, r
+     >
+       <div className="w-full lg:w-1/2 overflow-hidden">
+         <div className="w-full aspect-[4/3] relative overflow-hidden flex items-center justify-center">
+-          <img
++          <ResponsiveImage
+             src={image}
+             alt={accessibleTermLabel(imageAlt || title, locale)}
+             className="relative z-10 w-full h-full object-contain"
++            pictureClassName="block w-full h-full"
++            loading={priority ? "eager" : "lazy"}
++            fetchPriority={priority ? "high" : "auto"}
++            sizes="(min-width: 1024px) 50vw, 100vw"
+           />
+         </div>
+       </div>
+diff --git a/artifacts/works-website/src/components/ui/ResponsiveImage.tsx b/artifacts/works-website/src/components/ui/ResponsiveImage.tsx
+new file mode 100644
+index 0000000..24d4f05
+--- /dev/null
++++ b/artifacts/works-website/src/components/ui/ResponsiveImage.tsx
+@@ -0,0 +1,145 @@
++import type { ImgHTMLAttributes } from "react";
++import imageManifest, {
++  optimizedCmsImageVariants,
++} from "@/data/image-manifest";
++import type { OptimizedImageManifestEntry } from "@/data/image-manifest-types";
++
++type ImageLoading = "eager" | "lazy";
++type ImagePriority = "high" | "low" | "auto";
++
++export interface ResponsiveImageSource extends OptimizedImageManifestEntry {
++  original: string;
++}
++
++export interface ResponsiveImageProps
++  extends Omit<ImgHTMLAttributes<HTMLImageElement>, "loading" | "fetchPriority"> {
++  src: string;
++  loading?: ImageLoading;
++  fetchPriority?: ImagePriority;
++  sizes?: string;
++  pictureClassName?: string;
++  /** Optional second source used for approved mobile art direction. */
++  mobileSource?: string;
++  mobileMedia?: string;
++}
++
++function withoutQuery(source: string): string {
++  return source.split(/[?#]/, 1)[0];
++}
++
++function findLocalManifestEntry(source: string): OptimizedImageManifestEntry | undefined {
++  const cleanSource = withoutQuery(source);
++  const filename = cleanSource.slice(cleanSource.lastIndexOf("/") + 1);
++  if (!filename) return undefined;
++
++  for (const [key, entry] of Object.entries(imageManifest)) {
++    if (!key.startsWith("local:")) continue;
++    const originalName = entry.source.slice(entry.source.lastIndexOf("/") + 1);
++    const extension = originalName.lastIndexOf(".");
++    const stem = extension === -1 ? originalName : originalName.slice(0, extension);
++    if (
++      filename === originalName ||
++      filename.startsWith(`${stem}-`) ||
++      cleanSource.endsWith(`/${originalName}`)
++    ) {
++      return entry;
++    }
++  }
++  return undefined;
++}
++
++function safeSourceName(source: string): string {
++  return source.replace(/[^a-zA-Z0-9._-]+/g, "-");
++}
++
++function getCmsImageSource(source: string): OptimizedImageManifestEntry | undefined {
++  const cleanSource = withoutQuery(source);
++  if (!cleanSource.startsWith("/strapi/uploads/")) {
++    return undefined;
++  }
++  const variants = optimizedCmsImageVariants[cleanSource];
++  if (!variants) return undefined;
++  const filename = cleanSource.slice("/strapi/uploads/".length);
++  const extension = filename.lastIndexOf(".");
++  if (extension < 1) return undefined;
++  const baseName = safeSourceName(filename.slice(0, extension));
++  const sources = variants.map(
++    ([hash, width]) => `/media/uploads/${baseName}-${hash}-${width}.webp ${width}w`,
++  );
++  return {
++    source: cleanSource,
++    src: sources[sources.length - 1].split(" ")[0],
++    srcSet: sources.join(", "),
++  };
++}
++
++export function getResponsiveImageSource(source: string): ResponsiveImageSource | undefined {
++  if (!source) return undefined;
++  const cleanSource = withoutQuery(source);
++  const exact = imageManifest[cleanSource];
++  const entry =
++    (import.meta.env.PROD && exact) ||
++    (import.meta.env.PROD && getCmsImageSource(cleanSource)) ||
++    undefined;
++  const localEntry =
++    import.meta.env.PROD && findLocalManifestEntry(cleanSource);
++  const resolved = entry || localEntry;
++  if (!resolved) return undefined;
++  return { ...resolved, original: source };
++}
++
++function Source({
++  source,
++  sizes,
++  media,
++}: {
++  source: string;
++  sizes?: string;
++  media?: string;
++}) {
++  const responsive = getResponsiveImageSource(source);
++  if (!responsive) return null;
++  return (
++    <source
++      type="image/webp"
++      srcSet={responsive.srcSet}
++      sizes={sizes}
++      media={media}
++    />
++  );
++}
++
++export function ResponsiveImage({
++  src,
++  alt,
++  className,
++  pictureClassName,
++  loading = "lazy",
++  fetchPriority = "auto",
++  sizes,
++  mobileSource,
++  mobileMedia = "(width < 768px)",
++  ...props
++}: ResponsiveImageProps) {
++  const responsive = getResponsiveImageSource(src);
++  return (
++    <picture className={pictureClassName}>
++      {mobileSource && (
++        <Source source={mobileSource} sizes={sizes} media={mobileMedia} />
++      )}
++      {mobileSource && <source media={mobileMedia} srcSet={mobileSource} />}
++      <Source source={src} sizes={sizes} />
++      <img
++        {...props}
++        src={src}
++        alt={alt}
++        className={className}
++        loading={loading}
++        fetchPriority={fetchPriority}
++        width={responsive?.width}
++        height={responsive?.height}
++        decoding="async"
++      />
++    </picture>
++  );
++}
+\ No newline at end of file
+diff --git a/artifacts/works-website/src/data/image-manifest-types.ts b/artifacts/works-website/src/data/image-manifest-types.ts
+new file mode 100644
+index 0000000..7522c51
+--- /dev/null
++++ b/artifacts/works-website/src/data/image-manifest-types.ts
+@@ -0,0 +1,7 @@
++export interface OptimizedImageManifestEntry {
++  source: string;
++  src: string;
++  srcSet: string;
++  width?: number;
++  height?: number;
++}
+\ No newline at end of file
+diff --git a/artifacts/works-website/src/data/image-manifest.ts b/artifacts/works-website/src/data/image-manifest.ts
+new file mode 100644
+index 0000000..8d904cd
+--- /dev/null
++++ b/artifacts/works-website/src/data/image-manifest.ts
+@@ -0,0 +1,487 @@
++/* Generated by scripts/optimize-images.mjs. Do not edit by hand. */
++import type { OptimizedImageManifestEntry } from "./image-manifest-types";
++
++const imageManifest: Record<string, OptimizedImageManifestEntry> = {
++  "local:blog-accessibility.png": {
++    "source": "/assets/blog-accessibility.png",
++    "src": "/media/local/blog-accessibility-0q9w599-1280.webp",
++    "srcSet": "/media/local/blog-accessibility-0ivfqwl-320.webp 320w, /media/local/blog-accessibility-1fwxsio-480.webp 480w, /media/local/blog-accessibility-1wfzjed-768.webp 768w, /media/local/blog-accessibility-11p1ptx-1200.webp 1200w, /media/local/blog-accessibility-0q9w599-1280.webp 1280w",
++    "width": 1280,
++    "height": 896
++  },
++  "local:blog-ai-ux.png": {
++    "source": "/assets/blog-ai-ux.png",
++    "src": "/media/local/blog-ai-ux-13m9kqd-1280.webp",
++    "srcSet": "/media/local/blog-ai-ux-0zwb3d9-320.webp 320w, /media/local/blog-ai-ux-0pfoy5k-480.webp 480w, /media/local/blog-ai-ux-1j1iwe5-768.webp 768w, /media/local/blog-ai-ux-1ylrn2l-1200.webp 1200w, /media/local/blog-ai-ux-13m9kqd-1280.webp 1280w",
++    "width": 1280,
++    "height": 896
++  },
++  "local:blog-designsystem.png": {
++    "source": "/assets/blog-designsystem.png",
++    "src": "/media/local/blog-designsystem-1tvnf2k-1280.webp",
++    "srcSet": "/media/local/blog-designsystem-12lhk72-320.webp 320w, /media/local/blog-designsystem-0novt7r-480.webp 480w, /media/local/blog-designsystem-1o21toe-768.webp 768w, /media/local/blog-designsystem-0kw58ms-1200.webp 1200w, /media/local/blog-designsystem-1tvnf2k-1280.webp 1280w",
++    "width": 1280,
++    "height": 896
++  },
++  "local:blog-microinteractions.png": {
++    "source": "/assets/blog-microinteractions.png",
++    "src": "/media/local/blog-microinteractions-187l47s-1280.webp",
++    "srcSet": "/media/local/blog-microinteractions-0ug3j9u-320.webp 320w, /media/local/blog-microinteractions-16yffrn-480.webp 480w, /media/local/blog-microinteractions-08zj9si-768.webp 768w, /media/local/blog-microinteractions-038sahc-1200.webp 1200w, /media/local/blog-microinteractions-187l47s-1280.webp 1280w",
++    "width": 1280,
++    "height": 896
++  },
++  "local:blog-mobile-first.png": {
++    "source": "/assets/blog-mobile-first.png",
++    "src": "/media/local/blog-mobile-first-00xn8nm-1280.webp",
++    "srcSet": "/media/local/blog-mobile-first-1gce2vg-320.webp 320w, /media/local/blog-mobile-first-1g1jfq5-480.webp 480w, /media/local/blog-mobile-first-0y2yw4k-768.webp 768w, /media/local/blog-mobile-first-181vp1m-1200.webp 1200w, /media/local/blog-mobile-first-00xn8nm-1280.webp 1280w",
++    "width": 1280,
++    "height": 896
++  },
++  "local:blog-ux-research.png": {
++    "source": "/assets/blog-ux-research.png",
++    "src": "/media/local/blog-ux-research-155xxyk-1280.webp",
++    "srcSet": "/media/local/blog-ux-research-038ozha-320.webp 320w, /media/local/blog-ux-research-1ps2bt3-480.webp 480w, /media/local/blog-ux-research-0op98ym-768.webp 768w, /media/local/blog-ux-research-16o6jro-1200.webp 1200w, /media/local/blog-ux-research-155xxyk-1280.webp 1280w",
++    "width": 1280,
++    "height": 896
++  },
++  "local:hero-bg-pattern.png": {
++    "source": "/assets/hero-bg-pattern.png",
++    "src": "/media/local/hero-bg-pattern-13fm2dl-1408.webp",
++    "srcSet": "/media/local/hero-bg-pattern-1es27yv-320.webp 320w, /media/local/hero-bg-pattern-06vv79u-480.webp 480w, /media/local/hero-bg-pattern-1enr8rr-768.webp 768w, /media/local/hero-bg-pattern-1uc0oq7-1200.webp 1200w, /media/local/hero-bg-pattern-13fm2dl-1408.webp 1408w",
++    "width": 1408,
++    "height": 768
++  },
++  "local:heroes/Hero_about_1789027068380.png": {
++    "source": "/assets/heroes/Hero_about_1789027068380.png",
++    "src": "/media/local/Hero_about_1789027068380-0nyia68-1920.webp",
++    "srcSet": "/media/local/Hero_about_1789027068380-1738hbx-320.webp 320w, /media/local/Hero_about_1789027068380-011ifx4-480.webp 480w, /media/local/Hero_about_1789027068380-0hbrt65-768.webp 768w, /media/local/Hero_about_1789027068380-148wi0t-1200.webp 1200w, /media/local/Hero_about_1789027068380-0km10ih-1600.webp 1600w, /media/local/Hero_about_1789027068380-0nyia68-1920.webp 1920w",
++    "width": 1920,
++    "height": 870
++  },
++  "local:heroes/Hero_about_mobile_1789374396077.png": {
++    "source": "/assets/heroes/Hero_about_mobile_1789374396077.png",
++    "src": "/media/local/Hero_about_mobile_1789374396077-0jhv26d-660.webp",
++    "srcSet": "/media/local/Hero_about_mobile_1789374396077-1ykdv6o-320.webp 320w, /media/local/Hero_about_mobile_1789374396077-0w6n1e1-480.webp 480w, /media/local/Hero_about_mobile_1789374396077-0jhv26d-660.webp 660w",
++    "width": 660,
++    "height": 1350
++  },
++  "local:heroes/Hero_ai_product_1789027068382.png": {
++    "source": "/assets/heroes/Hero_ai_product_1789027068382.png",
++    "src": "/media/local/Hero_ai_product_1789027068382-0q9oeqd-1920.webp",
++    "srcSet": "/media/local/Hero_ai_product_1789027068382-14slyge-320.webp 320w, /media/local/Hero_ai_product_1789027068382-0w7it07-480.webp 480w, /media/local/Hero_ai_product_1789027068382-1q967xq-768.webp 768w, /media/local/Hero_ai_product_1789027068382-0d9few4-1200.webp 1200w, /media/local/Hero_ai_product_1789027068382-0vrmzv4-1600.webp 1600w, /media/local/Hero_ai_product_1789027068382-0q9oeqd-1920.webp 1920w",
++    "width": 1920,
++    "height": 870
++  },
++  "local:heroes/Hero_akadalymentes_1789027068382.png": {
++    "source": "/assets/heroes/Hero_akadalymentes_1789027068382.png",
++    "src": "/media/local/Hero_akadalymentes_1789027068382-197ntic-1920.webp",
++    "srcSet": "/media/local/Hero_akadalymentes_1789027068382-0qdave1-320.webp 320w, /media/local/Hero_akadalymentes_1789027068382-1nnn4jw-480.webp 480w, /media/local/Hero_akadalymentes_1789027068382-1hrwde1-768.webp 768w, /media/local/Hero_akadalymentes_1789027068382-1jy7s5d-1200.webp 1200w, /media/local/Hero_akadalymentes_1789027068382-1hhcx51-1600.webp 1600w, /media/local/Hero_akadalymentes_1789027068382-197ntic-1920.webp 1920w",
++    "width": 1920,
++    "height": 870
++  },
++  "local:heroes/Hero_career_1789027068381.png": {
++    "source": "/assets/heroes/Hero_career_1789027068381.png",
++    "src": "/media/local/Hero_career_1789027068381-1dmwemg-1920.webp",
++    "srcSet": "/media/local/Hero_career_1789027068381-0a57mpx-320.webp 320w, /media/local/Hero_career_1789027068381-0sbdmls-480.webp 480w, /media/local/Hero_career_1789027068381-1nprf7p-768.webp 768w, /media/local/Hero_career_1789027068381-1gywpat-1200.webp 1200w, /media/local/Hero_career_1789027068381-1nwiuoh-1600.webp 1600w, /media/local/Hero_career_1789027068381-1dmwemg-1920.webp 1920w",
++    "width": 1920,
++    "height": 870
++  },
++  "local:heroes/Hero_career_mobile_1789374396078.png": {
++    "source": "/assets/heroes/Hero_career_mobile_1789374396078.png",
++    "src": "/media/local/Hero_career_mobile_1789374396078-0g909wl-660.webp",
++    "srcSet": "/media/local/Hero_career_mobile_1789374396078-0gg3qm8-320.webp 320w, /media/local/Hero_career_mobile_1789374396078-1x2bqjt-480.webp 480w, /media/local/Hero_career_mobile_1789374396078-0g909wl-660.webp 660w",
++    "width": 660,
++    "height": 1350
++  },
++  "local:heroes/Hero_contact_1789027068383.png": {
++    "source": "/assets/heroes/Hero_contact_1789027068383.png",
++    "src": "/media/local/Hero_contact_1789027068383-0ms6e08-1920.webp",
++    "srcSet": "/media/local/Hero_contact_1789027068383-040w97p-320.webp 320w, /media/local/Hero_contact_1789027068383-065n8nk-480.webp 480w, /media/local/Hero_contact_1789027068383-1hlg1ph-768.webp 768w, /media/local/Hero_contact_1789027068383-1tgoagl-1200.webp 1200w, /media/local/Hero_contact_1789027068383-1lxxik1-1600.webp 1600w, /media/local/Hero_contact_1789027068383-0ms6e08-1920.webp 1920w",
++    "width": 1920,
++    "height": 870
++  },
++  "local:heroes/Hero_contact_mobile_1789374396074.png": {
++    "source": "/assets/heroes/Hero_contact_mobile_1789374396074.png",
++    "src": "/media/local/Hero_contact_mobile_1789374396074-0r9a7lj-660.webp",
++    "srcSet": "/media/local/Hero_contact_mobile_1789374396074-1hg90t6-320.webp 320w, /media/local/Hero_contact_mobile_1789374396074-1arupl7-480.webp 480w, /media/local/Hero_contact_mobile_1789374396074-0r9a7lj-660.webp 660w",
++    "width": 660,
++    "height": 1350
++  },
++  "local:heroes/Hero_digitalis_kepessegfejlesztes_1789027068383.png": {
++    "source": "/assets/heroes/Hero_digitalis_kepessegfejlesztes_1789027068383.png",
++    "src": "/media/local/Hero_digitalis_kepessegfejlesztes_1789027068383-094zd8l-1920.webp",
++    "srcSet": "/media/local/Hero_digitalis_kepessegfejlesztes_1789027068383-1jr8bz2-320.webp 320w, /media/local/Hero_digitalis_kepessegfejlesztes_1789027068383-179hmbr-480.webp 480w, /media/local/Hero_digitalis_kepessegfejlesztes_1789027068383-066ojha-768.webp 768w, /media/local/Hero_digitalis_kepessegfejlesztes_1789027068383-12z7250-1200.webp 1200w, /media/local/Hero_digitalis_kepessegfejlesztes_1789027068383-0f2ifwg-1600.webp 1600w, /media/local/Hero_digitalis_kepessegfejlesztes_1789027068383-094zd8l-1920.webp 1920w",
++    "width": 1920,
++    "height": 870
++  },
++  "local:heroes/Hero_home_1789027068381.png": {
++    "source": "/assets/heroes/Hero_home_1789027068381.png",
++    "src": "/media/local/Hero_home_1789027068381-1qkm9tt-1920.webp",
++    "srcSet": "/media/local/Hero_home_1789027068381-1fx1kg2-320.webp 320w, /media/local/Hero_home_1789027068381-0ydn7gj-480.webp 480w, /media/local/Hero_home_1789027068381-1s0vio2-768.webp 768w, /media/local/Hero_home_1789027068381-1u1ahhc-1200.webp 1200w, /media/local/Hero_home_1789027068381-0iwv1qs-1600.webp 1600w, /media/local/Hero_home_1789027068381-1qkm9tt-1920.webp 1920w",
++    "width": 1920,
++    "height": 870
++  },
++  "local:heroes/Hero_home_mobile_1789374396075.png": {
++    "source": "/assets/heroes/Hero_home_mobile_1789374396075.png",
++    "src": "/media/local/Hero_home_mobile_1789374396075-1rgz53x-660.webp",
++    "srcSet": "/media/local/Hero_home_mobile_1789374396075-0uy3xo8-320.webp 320w, /media/local/Hero_home_mobile_1789374396075-095iooh-480.webp 480w, /media/local/Hero_home_mobile_1789374396075-1rgz53x-660.webp 660w",
++    "width": 660,
++    "height": 1350
++  },
++  "local:heroes/Hero_service_accesibility_mobile_1789374396075.png": {
++    "source": "/assets/heroes/Hero_service_accesibility_mobile_1789374396075.png",
++    "src": "/media/local/Hero_service_accesibility_mobile_1789374396075-1oor4db-660.webp",
++    "srcSet": "/media/local/Hero_service_accesibility_mobile_1789374396075-0cbqgqq-320.webp 320w, /media/local/Hero_service_accesibility_mobile_1789374396075-1ttg5qb-480.webp 480w, /media/local/Hero_service_accesibility_mobile_1789374396075-1oor4db-660.webp 660w",
++    "width": 660,
++    "height": 1350
++  },
++  "local:heroes/Hero_service_ai_product_mobile_1789374396075.png": {
++    "source": "/assets/heroes/Hero_service_ai_product_mobile_1789374396075.png",
++    "src": "/media/local/Hero_service_ai_product_mobile_1789374396075-096cg68-660.webp",
++    "srcSet": "/media/local/Hero_service_ai_product_mobile_1789374396075-0sy3p4d-320.webp 320w, /media/local/Hero_service_ai_product_mobile_1789374396075-1jcqxs8-480.webp 480w, /media/local/Hero_service_ai_product_mobile_1789374396075-096cg68-660.webp 660w",
++    "width": 660,
++    "height": 1350
++  },
++  "local:heroes/Hero_service_design_1789027068382.png": {
++    "source": "/assets/heroes/Hero_service_design_1789027068382.png",
++    "src": "/media/local/Hero_service_design_1789027068382-09pdxz9-1920.webp",
++    "srcSet": "/media/local/Hero_service_design_1789027068382-0u421b2-320.webp 320w, /media/local/Hero_service_design_1789027068382-0hmbbnr-480.webp 480w, /media/local/Hero_service_design_1789027068382-1fkmase-768.webp 768w, /media/local/Hero_service_design_1789027068382-13jlmvo-1200.webp 1200w, /media/local/Hero_service_design_1789027068382-0fmx0n4-1600.webp 1600w, /media/local/Hero_service_design_1789027068382-09pdxz9-1920.webp 1920w",
++    "width": 1920,
++    "height": 870
++  },
++  "local:heroes/Hero_service_digital_mobile_1789374396076.png": {
++    "source": "/assets/heroes/Hero_service_digital_mobile_1789374396076.png",
++    "src": "/media/local/Hero_service_digital_mobile_1789374396076-07f3mbp-660.webp",
++    "srcSet": "/media/local/Hero_service_digital_mobile_1789374396076-1mhmfc0-320.webp 320w, /media/local/Hero_service_digital_mobile_1789374396076-0k3vljd-480.webp 480w, /media/local/Hero_service_digital_mobile_1789374396076-07f3mbp-660.webp 660w",
++    "width": 660,
++    "height": 1350
++  },
++  "local:heroes/Hero_service_sevice_design_mobile_1789374396076.png": {
++    "source": "/assets/heroes/Hero_service_sevice_design_mobile_1789374396076.png",
++    "src": "/media/local/Hero_service_sevice_design_mobile_1789374396076-1gykyq5-660.webp",
++    "srcSet": "/media/local/Hero_service_sevice_design_mobile_1789374396076-1afuaeg-320.webp 320w, /media/local/Hero_service_sevice_design_mobile_1789374396076-1nv6ba9-480.webp 480w, /media/local/Hero_service_sevice_design_mobile_1789374396076-1gykyq5-660.webp 660w",
++    "width": 660,
++    "height": 1350
++  },
++  "local:heroes/Hero_service_ux_kutatas_mobile_1789374396076.png": {
++    "source": "/assets/heroes/Hero_service_ux_kutatas_mobile_1789374396076.png",
++    "src": "/media/local/Hero_service_ux_kutatas_mobile_1789374396076-1goei3e-660.webp",
++    "srcSet": "/media/local/Hero_service_ux_kutatas_mobile_1789374396076-1wz7zrb-320.webp 320w, /media/local/Hero_service_ux_kutatas_mobile_1789374396076-0j5ujgi-480.webp 480w, /media/local/Hero_service_ux_kutatas_mobile_1789374396076-1goei3e-660.webp 660w",
++    "width": 660,
++    "height": 1350
++  },
++  "local:heroes/Hero_service_uxui_design_mobile_1789374396077.png": {
++    "source": "/assets/heroes/Hero_service_uxui_design_mobile_1789374396077.png",
++    "src": "/media/local/Hero_service_uxui_design_mobile_1789374396077-1cmafo6-660.webp",
++    "srcSet": "/media/local/Hero_service_uxui_design_mobile_1789374396077-08zexb7-320.webp 320w, /media/local/Hero_service_uxui_design_mobile_1789374396077-04ocpkm-480.webp 480w, /media/local/Hero_service_uxui_design_mobile_1789374396077-1cmafo6-660.webp 660w",
++    "width": 660,
++    "height": 1350
++  },
++  "local:heroes/Hero_ux_kutatas_1789027068382.png": {
++    "source": "/assets/heroes/Hero_ux_kutatas_1789027068382.png",
++    "src": "/media/local/Hero_ux_kutatas_1789027068382-06wejco-1920.webp",
++    "srcSet": "/media/local/Hero_ux_kutatas_1789027068382-06wvd6d-320.webp 320w, /media/local/Hero_ux_kutatas_1789027068382-13ydesg-480.webp 480w, /media/local/Hero_ux_kutatas_1789027068382-1khf5o5-768.webp 768w, /media/local/Hero_ux_kutatas_1789027068382-0cbzqmd-1200.webp 1200w, /media/local/Hero_ux_kutatas_1789027068382-1t1clxd-1600.webp 1600w, /media/local/Hero_ux_kutatas_1789027068382-06wejco-1920.webp 1920w",
++    "width": 1920,
++    "height": 870
++  },
++  "local:heroes/UI_Design_1789027068381.png": {
++    "source": "/assets/heroes/UI_Design_1789027068381.png",
++    "src": "/media/local/UI_Design_1789027068381-0dubz22-1920.webp",
++    "srcSet": "/media/local/UI_Design_1789027068381-0pkf5uf-320.webp 320w, /media/local/UI_Design_1789027068381-1gpc74i-480.webp 480w, /media/local/UI_Design_1789027068381-0pg46nb-768.webp 768w, /media/local/UI_Design_1789027068381-0rpfqgf-1200.webp 1200w, /media/local/UI_Design_1789027068381-0elg363-1600.webp 1600w, /media/local/UI_Design_1789027068381-0dubz22-1920.webp 1920w",
++    "width": 1920,
++    "height": 870
++  },
++  "local:home-hero.png": {
++    "source": "/assets/home-hero.png",
++    "src": "/media/local/home-hero-12cf5dn-1920.webp",
++    "srcSet": "/media/local/home-hero-15ciq58-320.webp 320w, /media/local/home-hero-0jrxvsd-480.webp 480w, /media/local/home-hero-0syh2ic-768.webp 768w, /media/local/home-hero-0bgg78a-1200.webp 1200w, /media/local/home-hero-0bov0ge-1600.webp 1600w, /media/local/home-hero-12cf5dn-1920.webp 1920w",
++    "width": 1920,
++    "height": 1000
++  },
++  "local:project-accessibility-clean.png": {
++    "source": "/assets/project-accessibility-clean.png",
++    "src": "/media/local/project-accessibility-clean-13xjtqw-1280.webp",
++    "srcSet": "/media/local/project-accessibility-clean-0lq28wi-320.webp 320w, /media/local/project-accessibility-clean-0tapyoj-480.webp 480w, /media/local/project-accessibility-clean-009hzf6-768.webp 768w, /media/local/project-accessibility-clean-0oqzqa8-1200.webp 1200w, /media/local/project-accessibility-clean-13xjtqw-1280.webp 1280w",
++    "width": 1280,
++    "height": 896
++  },
++  "local:project-accessibility-mockup.png": {
++    "source": "/assets/project-accessibility-mockup.png",
++    "src": "/media/local/project-accessibility-mockup-1o9s5x4-1280.webp",
++    "srcSet": "/media/local/project-accessibility-mockup-1wzjm42-320.webp 320w, /media/local/project-accessibility-mockup-1a6pnxv-480.webp 480w, /media/local/project-accessibility-mockup-1bizcmq-768.webp 768w, /media/local/project-accessibility-mockup-0yrt6uo-1200.webp 1200w, /media/local/project-accessibility-mockup-1o9s5x4-1280.webp 1280w",
++    "width": 1280,
++    "height": 896
++  },
++  "local:project-ai-design-mockup.png": {
++    "source": "/assets/project-ai-design-mockup.png",
++    "src": "/media/local/project-ai-design-mockup-0evb94x-1280.webp",
++    "srcSet": "/media/local/project-ai-design-mockup-1ei6j5t-320.webp 320w, /media/local/project-ai-design-mockup-0v8emus-480.webp 480w, /media/local/project-ai-design-mockup-0cttr3l-768.webp 768w, /media/local/project-ai-design-mockup-1fd5vft-1200.webp 1200w, /media/local/project-ai-design-mockup-0evb94x-1280.webp 1280w",
++    "width": 1280,
++    "height": 896
++  },
++  "local:project-banking-clean.png": {
++    "source": "/assets/project-banking-clean.png",
++    "src": "/media/local/project-banking-clean-10dbhhm-1280.webp",
++    "srcSet": "/media/local/project-banking-clean-0ou29xg-320.webp 320w, /media/local/project-banking-clean-0g77cg5-480.webp 480w, /media/local/project-banking-clean-0wee6vg-768.webp 768w, /media/local/project-banking-clean-04373gy-1200.webp 1200w, /media/local/project-banking-clean-10dbhhm-1280.webp 1280w",
++    "width": 1280,
++    "height": 896
++  },
++  "local:project-banking-mockup.png": {
++    "source": "/assets/project-banking-mockup.png",
++    "src": "/media/local/project-banking-mockup-0z6ttia-1280.webp",
++    "srcSet": "/media/local/project-banking-mockup-1bs21ss-320.webp 320w, /media/local/project-banking-mockup-1dcfral-480.webp 480w, /media/local/project-banking-mockup-0kbtc50-768.webp 768w, /media/local/project-banking-mockup-0myg8gq-1200.webp 1200w, /media/local/project-banking-mockup-0z6ttia-1280.webp 1280w",
++    "width": 1280,
++    "height": 896
++  },
++  "local:project-fintech-mockup.png": {
++    "source": "/assets/project-fintech-mockup.png",
++    "src": "/media/local/project-fintech-mockup-0ysu8rr-1280.webp",
++    "srcSet": "/media/local/project-fintech-mockup-0rpon8n-320.webp 320w, /media/local/project-fintech-mockup-1pd65wi-480.webp 480w, /media/local/project-fintech-mockup-0xqqdx3-768.webp 768w, /media/local/project-fintech-mockup-0phohq7-1200.webp 1200w, /media/local/project-fintech-mockup-0ysu8rr-1280.webp 1280w",
++    "width": 1280,
++    "height": 896
++  },
++  "local:project-healthcare-mockup.png": {
++    "source": "/assets/project-healthcare-mockup.png",
++    "src": "/media/local/project-healthcare-mockup-1g0ictx-1280.webp",
++    "srcSet": "/media/local/project-healthcare-mockup-0nrebgt-320.webp 320w, /media/local/project-healthcare-mockup-0vjpt48-480.webp 480w, /media/local/project-healthcare-mockup-04ioqpp-768.webp 768w, /media/local/project-healthcare-mockup-0jsmll9-1200.webp 1200w, /media/local/project-healthcare-mockup-1g0ictx-1280.webp 1280w",
++    "width": 1280,
++    "height": 896
++  },
++  "local:project-logistics-clean.png": {
++    "source": "/assets/project-logistics-clean.png",
++    "src": "/media/local/project-logistics-clean-0d2rrrr-1280.webp",
++    "srcSet": "/media/local/project-logistics-clean-1gun42f-320.webp 320w, /media/local/project-logistics-clean-08yg3de-480.webp 480w, /media/local/project-logistics-clean-1gqc4vb-768.webp 768w, /media/local/project-logistics-clean-0dbzbu7-1200.webp 1200w, /media/local/project-logistics-clean-0d2rrrr-1280.webp 1280w",
++    "width": 1280,
++    "height": 896
++  },
++  "local:project-logistics-mockup.png": {
++    "source": "/assets/project-logistics-mockup.png",
++    "src": "/media/local/project-logistics-mockup-16wuyrl-1280.webp",
++    "srcSet": "/media/local/project-logistics-mockup-17yqpdt-320.webp 320w, /media/local/project-logistics-mockup-0ooyt2s-480.webp 480w, /media/local/project-logistics-mockup-06adxbl-768.webp 768w, /media/local/project-logistics-mockup-08dlj3d-1200.webp 1200w, /media/local/project-logistics-mockup-16wuyrl-1280.webp 1280w",
++    "width": 1280,
++    "height": 896
++  }
++};
++
++export const optimizedCmsImageVariants: Record<string, Array<[string, number]>> = {
++  "/strapi/uploads/Frame_26081029_1774516588825_ac6fd641ad.png": [
++    [
++      "1apd5zu",
++      320
++    ],
++    [
++      "101mqtn",
++      480
++    ],
++    [
++      "1ya3znt",
++      756
++    ]
++  ],
++  "/strapi/uploads/New_logo_1773998946128_b9aaae37ad.png": [
++    [
++      "1csv260",
++      260
++    ]
++  ],
++  "/strapi/uploads/Purposeful_1774354143676_da4d5e3ab8.png": [
++    [
++      "0k0q4r5",
++      320
++    ],
++    [
++      "1nbqtdw",
++      480
++    ],
++    [
++      "1w4zwu9",
++      768
++    ],
++    [
++      "10pyxbt",
++      1200
++    ],
++    [
++      "03ggt6w",
++      1542
++    ]
++  ],
++  "/strapi/uploads/alkalmazkodas_new_1789551061821_d296cb66d4.png": [
++    [
++      "0t4lrip",
++      320
++    ],
++    [
++      "1wfmg5g",
++      480
++    ],
++    [
++      "067rhmp",
++      768
++    ],
++    [
++      "03its73",
++      960
++    ]
++  ],
++  "/strapi/uploads/bg_graphic2_1774011568340_bb671557c5.png": [
++    [
++      "0t07gwf",
++      320
++    ],
++    [
++      "1i9rcoq",
++      480
++    ],
++    [
++      "077i6i7",
++      768
++    ],
++    [
++      "1lco3z4",
++      1056
++    ]
++  ],
++  "/strapi/uploads/bg_graphic_1774009634501_6f046d67af.png": [
++    [
++      "12nldwu",
++      320
++    ],
++    [
++      "0u2i8gn",
++      480
++    ],
++    [
++      "1o45ne6",
++      768
++    ],
++    [
++      "03he3ok",
++      1200
++    ],
++    [
++      "0jnkbtk",
++      1279
++    ]
++  ],
++  "/strapi/uploads/contact_bg_1774518452836_75c2598f4c.png": [
++    [
++      "07jke90",
++      320
++    ],
++    [
++      "0nx0zs5",
++      480
++    ],
++    [
++      "00vaxws",
++      768
++    ],
++    [
++      "172h38y",
++      1200
++    ],
++    [
++      "03nlrt2",
++      1600
++    ],
++    [
++      "0mwftoj",
++      1920
++    ],
++    [
++      "05n9j4r",
++      2648
++    ]
++  ],
++  "/strapi/uploads/egyuttmukodes_new_1789551061820_81012c650c.png": [
++    [
++      "01xp15o",
++      320
++    ],
++    [
++      "03i2qnh",
++      480
++    ],
++    [
++      "19ikdh0",
++      768
++    ],
++    [
++      "10x6a4y",
++      960
++    ]
++  ],
++  "/strapi/uploads/empatia_new_1789551061821_932264da68.png": [
++    [
++      "17i81lg",
++      320
++    ],
++    [
++      "1exid79",
++      480
++    ],
++    [
++      "193szrw",
++      768
++    ],
++    [
++      "1ipjypm",
++      960
++    ]
++  ],
++  "/strapi/uploads/homepage_graphic_1773999340930_ace17c6480.png": [
++    [
++      "1j9dxj4",
++      320
++    ],
++    [
++      "10uhvhl",
++      480
++    ],
++    [
++      "19qejig",
++      768
++    ],
++    [
++      "0wlgixy",
++      1200
++    ],
++    [
++      "1qy6jde",
++      1600
++    ],
++    [
++      "0gd7azr",
++      1920
++    ],
++    [
++      "1s61s2h",
++      2268
++    ]
++  ],
++  "/strapi/uploads/works_background_1774441334981_732aab5a80.png": [
++    [
++      "0mbe92k",
++      320
++    ],
++    [
++      "06yhni5",
++      480
++    ],
++    [
++      "1x7ut8k",
++      768
++    ],
++    [
++      "0pv91ii",
++      1200
++    ],
++    [
++      "1rxv4c0",
++      1527
++    ]
++  ]
++};
++
++export default imageManifest;
+diff --git a/artifacts/works-website/src/entry-server.tsx b/artifacts/works-website/src/entry-server.tsx
+index ee11c9d..18dc95f 100644
+--- a/artifacts/works-website/src/entry-server.tsx
++++ b/artifacts/works-website/src/entry-server.tsx
+@@ -14,7 +14,13 @@ export { fallbackPositions as positions } from "./data/fallback";
+ export { getLocaleFallback } from "./data/fallback";
+ export { getLocaleCacheKey } from "./data/fallback";
+ export { getLocaleCounterpartSlug } from "./data/fallback";
+-export { getPageMeta, buildMetaTags, SITE_URL } from "./seo-data";
++export {
++  getPageMeta,
++  getAlternateLinks,
++  buildMetaTags,
++  SITE_URL,
++} from "./seo-data";
++export type { AlternateLink, PageMeta } from "./seo-data";
+ 
+ // Locale-aware route helpers for prerender scripts.
+ export {
+diff --git a/artifacts/works-website/src/pages/About.tsx b/artifacts/works-website/src/pages/About.tsx
+index 6ee66d9..01542dd 100644
+--- a/artifacts/works-website/src/pages/About.tsx
++++ b/artifacts/works-website/src/pages/About.tsx
+@@ -12,6 +12,7 @@ import { useI18n } from "@/i18n";
+ import { FullBleedHero } from "@/components/ui/FullBleedHero";
+ import { TermText } from "@/components/Terminology";
+ import { accessibleTermLabel } from "@/lib/terminology";
++import { ResponsiveImage } from "@/components/ui/ResponsiveImage";
+ import aboutHeroImage from "@/assets/heroes/Hero_about_1789027068380.png";
+ import aboutMobileHeroImage from "@/assets/heroes/Hero_about_mobile_1789374396077.png";
+ 
+@@ -114,9 +115,12 @@ export default function About() {
+                   >
+                     <div className="aspect-square overflow-hidden mb-3 bg-works-muted/20">
+                       {member.image ? (
+-                        <img
++                        <ResponsiveImage
+                           src={member.image}
+                           alt={accessibleTermLabel(member.imageAlt || member.name || "", locale)}
++                           loading="lazy"
++                           pictureClassName="block w-full h-full"
++                           sizes="(min-width: 768px) 20vw, 50vw"
+                           className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500"
+                         />
+                       ) : (
+@@ -163,10 +167,12 @@ export default function About() {
+                       className="pl-4 basis-[calc(100vw-1rem)] sm:basis-[calc((100vw-2rem)/2)] lg:basis-[calc((min(100vw,80rem)-3rem)/3)]"
+                     >
+                       <div className="overflow-hidden">
+-                        <img
++                        <ResponsiveImage
+                           loading="lazy"
+                           src={img.src}
+                           alt={accessibleTermLabel(img.alt || "", locale)}
++                          pictureClassName="block w-full"
++                          sizes="(min-width: 1024px) 33vw, 50vw"
+                           className="w-full aspect-[4/3] object-cover hover:scale-105 transition-transform duration-500"
+                         />
+                       </div>
+diff --git a/artifacts/works-website/src/pages/Blog.tsx b/artifacts/works-website/src/pages/Blog.tsx
+index 6088588..0775a53 100644
+--- a/artifacts/works-website/src/pages/Blog.tsx
++++ b/artifacts/works-website/src/pages/Blog.tsx
+@@ -15,6 +15,7 @@ import { buildLocalePath } from "@/lib/i18n-routes";
+ import { ArrowLinkLabel } from "@/components/ui/arrow-link-label";
+ import { TermText } from "@/components/Terminology";
+ import { accessibleTermLabel } from "@/lib/terminology";
++import { ResponsiveImage } from "@/components/ui/ResponsiveImage";
+ 
+ function FeaturedBlogCard({ slug, title, excerpt, date, image, imageAlt, author, readingTime }: {
+   slug: string;
+@@ -38,9 +39,13 @@ function FeaturedBlogCard({ slug, title, excerpt, date, image, imageAlt, author,
+     >
+       <Link href={buildLocalePath(locale, "blogPost", slug)} className="group flex flex-col lg:flex-row gap-8 lg:gap-12 items-center">
+         <div className="w-full lg:w-1/2 overflow-hidden bg-works-light aspect-[4/3]">
+-          <img
++          <ResponsiveImage
+             src={image}
+             alt={accessibleTermLabel(imageAlt || title, locale)}
++            loading="eager"
++            fetchPriority="high"
++            pictureClassName="block w-full h-full"
++            sizes="(min-width: 1024px) 50vw, 100vw"
+             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+           />
+         </div>
+@@ -91,10 +96,12 @@ function BlogGridCard({ slug, title, excerpt, date, image, imageAlt, author, rea
+     >
+       <Link href={buildLocalePath(locale, "blogPost", slug)} className="group flex flex-col bg-white overflow-hidden border border-works-muted/30 hover:border-works-primary/30 hover:shadow-lg transition-all duration-300">
+         <div className="w-full aspect-[4/3] overflow-hidden">
+-          <img
++          <ResponsiveImage
+             loading="lazy"
+             src={image}
+             alt={accessibleTermLabel(imageAlt || title, locale)}
++            pictureClassName="block w-full h-full"
++            sizes="(min-width: 1024px) 33vw, 50vw"
+             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+           />
+         </div>
+diff --git a/artifacts/works-website/src/pages/Projektek.tsx b/artifacts/works-website/src/pages/Projektek.tsx
+index ed23daf..6dc1ea4 100644
+--- a/artifacts/works-website/src/pages/Projektek.tsx
++++ b/artifacts/works-website/src/pages/Projektek.tsx
+@@ -14,6 +14,7 @@ import { buildLocalePath } from "@/lib/i18n-routes";
+ import { ArrowLinkLabel } from "@/components/ui/arrow-link-label";
+ import { TermText } from "@/components/Terminology";
+ import { accessibleTermLabel } from "@/lib/terminology";
++import { ResponsiveImage } from "@/components/ui/ResponsiveImage";
+ 
+ function FeaturedProjectCard({ slug, title, tags, description, image, imageAlt }: {
+   slug: string;
+@@ -35,9 +36,13 @@ function FeaturedProjectCard({ slug, title, tags, description, image, imageAlt }
+     >
+       <Link href={buildLocalePath(locale, "projectDetail", slug)} className="group flex flex-col lg:flex-row gap-8 lg:gap-12 items-center">
+         <div className="w-full lg:w-1/2 overflow-hidden bg-works-light aspect-[4/3]">
+-          <img
++          <ResponsiveImage
+             src={image}
+             alt={accessibleTermLabel(imageAlt || title, locale)}
++            loading="eager"
++            fetchPriority="high"
++            pictureClassName="block w-full h-full"
++            sizes="(min-width: 1024px) 50vw, 100vw"
+             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+           />
+         </div>
+@@ -87,10 +92,12 @@ function ProjectGridCard({ slug, title, tags, description, image, imageAlt }: {
+     >
+       <Link href={buildLocalePath(locale, "projectDetail", slug)} className="group block">
+         <div className="overflow-hidden bg-works-light aspect-[4/3]">
+-          <img
++          <ResponsiveImage
+             loading="lazy"
+             src={image}
+             alt={accessibleTermLabel(imageAlt || title, locale)}
++            pictureClassName="block w-full h-full"
++            sizes="(min-width: 1024px) 33vw, 50vw"
+             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+           />
+         </div>
+diff --git a/artifacts/works-website/src/pages/ServicePage.tsx b/artifacts/works-website/src/pages/ServicePage.tsx
+index af98eab..d7e9a4c 100644
+--- a/artifacts/works-website/src/pages/ServicePage.tsx
++++ b/artifacts/works-website/src/pages/ServicePage.tsx
+@@ -24,6 +24,7 @@ import { ArrowLinkLabel } from "@/components/ui/arrow-link-label";
+ import { FullBleedHero } from "@/components/ui/FullBleedHero";
+ import { TermText } from "@/components/Terminology";
+ import { accessibleTermLabel } from "@/lib/terminology";
++import { ResponsiveImage } from "@/components/ui/ResponsiveImage";
+ 
+ const fadeUp = {
+   initial: { opacity: 0, y: 20 },
+@@ -498,9 +499,12 @@ function RelatedProjectCard({ p, i, animated = true }: { p: Project; i: number;
+     >
+       <Link href={buildLocalePath(locale, "projectDetail", p.slug)} className="flex flex-col flex-grow">
+         <div className="w-full aspect-[4/3] relative overflow-hidden bg-works-light">
+-          <img
++          <ResponsiveImage
+             src={p.image}
+             alt={accessibleTermLabel(p.imageAlt || p.title, locale)}
++            loading="lazy"
++            pictureClassName="block w-full h-full"
++            sizes="(min-width: 1024px) 33vw, 50vw"
+             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+           />
+         </div>
+diff --git a/artifacts/works-website/src/seo-config.ts b/artifacts/works-website/src/seo-config.ts
+new file mode 100644
+index 0000000..d2f226a
+--- /dev/null
++++ b/artifacts/works-website/src/seo-config.ts
+@@ -0,0 +1,86 @@
++/**
++ * The SEO metadata origin used by both the browser bundle and the
++ * server/prerender bundle. Keep this fallback on the existing Railway
++ * deployment until the production domain is chosen; do not infer an origin
++ * from the current host.
++ *
++ * This setting is deliberately separate from CANONICAL_ORIGIN. SITE_URL
++ * controls generated metadata only; it does not enable server redirects.
++ */
++export const DEFAULT_SITE_URL =
++  "https://workspaceworks-website-production.up.railway.app";
++
++const LOCAL_HTTP_HOSTNAMES = new Set(["localhost", "127.0.0.1", "[::1]"]);
++
++function invalidSiteUrl(): Error {
++  return new Error(
++    "SITE_URL must be an HTTPS origin without credentials, path, query, or fragment",
++  );
++}
++
++/**
++ * Parse a strict origin for SEO metadata. HTTPS is required for deployed
++ * origins; HTTP is accepted only for loopback development hosts.
++ *
++ * URL normalizes dot-segments in paths, so inspect the raw path before
++ * reading url.pathname. This keeps values such as "/foo/.." from being
++ * silently accepted as the root origin.
++ */
++function parseSiteOrigin(value: string): URL {
++  if (typeof value !== "string") throw invalidSiteUrl();
++  const trimmed = value.trim();
++  if (!trimmed || trimmed.includes("\\")) throw invalidSiteUrl();
++
++  const scheme = trimmed.match(/^[a-z][a-z\d+.-]*:\/\//i);
++  if (!scheme) throw invalidSiteUrl();
++
++  const authorityAndPath = trimmed.slice(scheme[0].length);
++  const authorityEnd = authorityAndPath.search(/[/?#]/);
++  const authority =
++    authorityEnd === -1
++      ? authorityAndPath
++      : authorityAndPath.slice(0, authorityEnd);
++  const firstSlash = authorityAndPath.indexOf("/");
++  if (
++    firstSlash !== -1 &&
++    authorityAndPath.slice(firstSlash) !== "/"
++  ) {
++    throw invalidSiteUrl();
++  }
++
++  let url: URL;
++  try {
++    url = new URL(trimmed);
++  } catch {
++    throw invalidSiteUrl();
++  }
++
++  const isHttps = url.protocol === "https:";
++  const isLocalHttp =
++    url.protocol === "http:" &&
++    LOCAL_HTTP_HOSTNAMES.has(url.hostname.toLowerCase());
++  if (
++    (!isHttps && !isLocalHttp) ||
++    authority.includes("@") ||
++    url.username ||
++    url.password ||
++    url.pathname !== "/" ||
++    url.search ||
++    url.hash
++  ) {
++    throw invalidSiteUrl();
++  }
++
++  return url;
++}
++
++export function normalizeSiteUrl(value: string): string {
++  return parseSiteOrigin(value).origin;
++}
++
++export function resolveSiteUrl(value?: string): string {
++  if (value === undefined) return DEFAULT_SITE_URL;
++  if (typeof value !== "string") throw invalidSiteUrl();
++  if (value.trim() === "") return DEFAULT_SITE_URL;
++  return normalizeSiteUrl(value);
++}
+\ No newline at end of file
+diff --git a/artifacts/works-website/src/seo-data.ts b/artifacts/works-website/src/seo-data.ts
+index 059b5e9..d219a0b 100644
+--- a/artifacts/works-website/src/seo-data.ts
++++ b/artifacts/works-website/src/seo-data.ts
+@@ -10,6 +10,7 @@ import {
+   fallbackProjectsPage,
+   fallbackBlogPage,
+   getLocaleFallback,
++  getLocaleCounterpartSlug,
+ } from "./data/fallback";
+ import type { SeoOverride } from "./lib/strapi";
+ import {
+@@ -18,7 +19,9 @@ import {
+   matchLocalePath,
+   stripSearch,
+   type Locale,
++  type RouteKey,
+ } from "./lib/i18n-routes";
++import { DEFAULT_SITE_URL, resolveSiteUrl } from "./seo-config";
+ 
+ export interface PageMeta {
+   title: string;
+@@ -37,17 +40,26 @@ export interface PageMeta {
+    * Defaults to "hu" when absent.
+    */
+   locale?: Locale;
++  /** Reciprocal language alternates for this real, public page. */
++  alternates?: AlternateLink[];
+ }
+ 
++export interface AlternateLink {
++  hreflang: "hu" | "en" | "x-default";
++  href: string;
++}
++
++/*
++ * Vite replaces this value in both the browser and SSR bundles.  The
++ * vite.config.ts define below deliberately gives both bundles the same value,
++ * so a separately configured SITE_URL cannot make client and server disagree.
++ */
+ const configuredSiteUrl =
+   (typeof import.meta !== "undefined" &&
+     (import.meta as { env?: Record<string, string> }).env?.VITE_SITE_URL) ||
+-  (typeof process !== "undefined" && process.env?.SITE_URL) ||
+-  "";
++  DEFAULT_SITE_URL;
+ 
+-export const SITE_URL = (
+-  configuredSiteUrl || "https://workspaceworks-website-production.up.railway.app"
+-).replace(/\/+$/, "");
++export const SITE_URL = resolveSiteUrl(configuredSiteUrl);
+ 
+ function absoluteUrl(pathOrUrl: string): string {
+   if (/^https?:\/\//.test(pathOrUrl)) return pathOrUrl;
+@@ -80,6 +92,116 @@ function formatTitle(pageTitle: string): string {
+   return `${pageTitle} | Works.`;
+ }
+ 
++type DetailRouteKey =
++  | "projectDetail"
++  | "blogPost"
++  | "serviceDetail"
++  | "careerDetail";
++
++const detailCollectionKeys: Record<DetailRouteKey, string> = {
++  projectDetail: "projects",
++  blogPost: "blogPosts",
++  serviceDetail: "services",
++  careerDetail: "careerPositions",
++};
++
++function isDetailRouteKey(routeKey: RouteKey): routeKey is DetailRouteKey {
++  return routeKey in detailCollectionKeys;
++}
++
++function detailRecordExists(
++  locale: Locale,
++  routeKey: DetailRouteKey,
++  slug: string,
++): boolean {
++  const records = getLocaleFallback<{ slug: string }[]>(
++    detailCollectionKeys[routeKey],
++    locale,
++  );
++  return Boolean(records?.some((record) => record.slug === slug));
++}
++
++/**
++ * Returns absolute reciprocal language links only for pages that really exist
++ * in both locale datasets.  Detail pages are paired by Strapi's stable
++ * documentId through getLocaleCounterpartSlug; matching slugs is not safe.
++ *
++ * An HU-only detail page is still a real default-language page, so it gets a
++ * self HU link and x-default.  An EN-only detail page gets no alternates: it
++ * cannot claim a reciprocal HU translation or fabricate an HU URL.
++ */
++export function getAlternateLinks(
++  route: string,
++  locale?: Locale,
++): AlternateLink[] {
++  const pathname = stripSearch(route);
++  const routeMatch = matchLocalePath(pathname);
++  if (!routeMatch) return [];
++
++  const sourceLocale = locale || routeMatch.locale;
++  const routeKey = routeMatch.routeKey;
++  const huPath = buildLocalePath(
++    "hu",
++    routeKey,
++    routeMatch.slug ? decodeURIComponent(routeMatch.slug) : undefined,
++  );
++  const enPath = buildLocalePath(
++    "en",
++    routeKey,
++    routeMatch.slug ? decodeURIComponent(routeMatch.slug) : undefined,
++  );
++
++  if (!isDetailRouteKey(routeKey)) {
++    return [
++      { hreflang: "hu", href: absoluteUrl(huPath) },
++      { hreflang: "en", href: absoluteUrl(enPath) },
++      { hreflang: "x-default", href: absoluteUrl(huPath) },
++    ];
++  }
++
++  const sourceSlug = routeMatch.slug
++    ? decodeURIComponent(routeMatch.slug)
++    : undefined;
++  if (!sourceSlug || !detailRecordExists(sourceLocale, routeKey, sourceSlug)) {
++    return [];
++  }
++
++  const targetLocale: Locale = sourceLocale === "hu" ? "en" : "hu";
++  const counterpartSlug = getLocaleCounterpartSlug(
++    sourceLocale,
++    targetLocale,
++    routeKey,
++    sourceSlug,
++  );
++
++  if (sourceLocale === "en" && !counterpartSlug) {
++    return [];
++  }
++
++  if (!counterpartSlug) {
++    const currentHuPath = buildLocalePath("hu", routeKey, sourceSlug);
++    return [
++      { hreflang: "hu", href: absoluteUrl(currentHuPath) },
++      { hreflang: "x-default", href: absoluteUrl(currentHuPath) },
++    ];
++  }
++
++  const pairedHuPath =
++    sourceLocale === "hu"
++      ? buildLocalePath("hu", routeKey, sourceSlug)
++      : buildLocalePath("hu", routeKey, counterpartSlug);
++  const pairedEnPath =
++    sourceLocale === "en"
++      ? buildLocalePath("en", routeKey, sourceSlug)
++      : buildLocalePath("en", routeKey, counterpartSlug);
++
++  return [
++    { hreflang: "hu", href: absoluteUrl(pairedHuPath) },
++    { hreflang: "en", href: absoluteUrl(pairedEnPath) },
++    { hreflang: "x-default", href: absoluteUrl(pairedHuPath) },
++  ];
++}
++
+ const staticMeta: Record<string, PageMeta> = {
+   "/": {
+     title: DEFAULT_TITLE,
+@@ -216,8 +338,9 @@ export function getPageMeta(route: string, locale?: Locale): PageMeta {
+ 
+   if (lang === "en") {
+     const isEnglishRoute = routeMatch?.locale === "en";
+-    const isArticle =
+-      routeMatch?.routeKey === "blogPost" || routeMatch?.routeKey === "projectDetail";
++    const detailSlug = routeMatch?.slug
++      ? decodeURIComponent(routeMatch.slug)
++      : undefined;
+     const staticDefault = routeMatch ? enStaticMeta[routeMatch.routeKey] : undefined;
+     const detailLabel =
+       routeMatch?.routeKey === "projectDetail"
+@@ -238,17 +361,23 @@ export function getPageMeta(route: string, locale?: Locale): PageMeta {
+             ? buildLocalePath("en", "careers")
+             : undefined;
+     const project = routeMatch?.routeKey === "projectDetail"
+-      ? getLocaleFallback<typeof fallbackProjects[number]>(`project:${routeMatch.slug}`, "en")
++      ? getLocaleFallback<typeof fallbackProjects[number]>(`project:${detailSlug}`, "en")
+       : undefined;
+     const post = routeMatch?.routeKey === "blogPost"
+-      ? getLocaleFallback<typeof fallbackBlogPosts[number]>(`blogPost:${routeMatch.slug}`, "en")
++      ? getLocaleFallback<typeof fallbackBlogPosts[number]>(`blogPost:${detailSlug}`, "en")
+       : undefined;
+     const service = routeMatch?.routeKey === "serviceDetail"
+-      ? getLocaleFallback<typeof fallbackServices[number]>(`service:${routeMatch.slug}`, "en")
++      ? getLocaleFallback<typeof fallbackServices[number]>(`service:${detailSlug}`, "en")
+       : undefined;
+     const position = routeMatch?.routeKey === "careerDetail"
+-      ? getLocaleFallback<typeof fallbackPositions[number]>(`careerPosition:${routeMatch.slug}`, "en")
++      ? getLocaleFallback<typeof fallbackPositions[number]>(`careerPosition:${detailSlug}`, "en")
+       : undefined;
++    const detailRecord = project || post || service || position;
++    const isDetailRoute = routeMatch ? isDetailRouteKey(routeMatch.routeKey) : false;
++    const hasRealEnglishPage = !isDetailRoute || Boolean(detailRecord);
++    const isArticle =
++      hasRealEnglishPage &&
++      (routeMatch?.routeKey === "blogPost" || routeMatch?.routeKey === "projectDetail");
+     const detailSeo = project?.seo || post?.seo || service?.seo || position?.seo;
+     const staticSeo =
+       routeMatch?.routeKey === "projects"
+@@ -258,17 +387,19 @@ export function getPageMeta(route: string, locale?: Locale): PageMeta {
+           : undefined;
+     const detailDescription =
+       project?.caseStudy.heroSubtitle || post?.excerpt || service?.heroDescription || position?.excerpt;
+-    return withOverride({
++    const meta = withOverride({
+       title: staticDefault?.title || EN_DEFAULT_TITLE,
+       description: detailDescription || staticDefault?.description || EN_DEFAULT_DESCRIPTION,
+       ogImage: project?.image || post?.image,
+-      path: isEnglishRoute ? pathname : undefined,
++      // A route pattern alone is not an English detail page.  Only a record
++      // present in the EN dataset may receive a canonical or hreflang URL.
++      path: isEnglishRoute && hasRealEnglishPage ? pathname : undefined,
+       type: isArticle ? "article" : "website",
+       locale: "en",
+       ...(post
+         ? { article: { publishedTime: post.date, author: post.author || undefined } }
+         : {}),
+-      ...(detailLabel
++      ...(detailLabel && detailRecord && hasRealEnglishPage
+         ? {
+             breadcrumbs: [
+               ...(detailParent ? [{ name: detailLabel, path: detailParent }] : []),
+@@ -277,11 +408,24 @@ export function getPageMeta(route: string, locale?: Locale): PageMeta {
+           }
+         : {}),
+     }, detailSeo || staticSeo);
++    return {
++      ...meta,
++      alternates:
++        meta.path && hasRealEnglishPage
++          ? getAlternateLinks(pathname, "en")
++          : [],
++    };
+   }
+ 
+   if (staticMeta[pathname]) {
+     const base = withOverride(staticMeta[pathname], pageSeoOverrides[pathname]);
+-    return { ...base, path: pathname, type: "website", locale: lang };
++    return {
++      ...base,
++      path: pathname,
++      type: "website",
++      locale: lang,
++      alternates: getAlternateLinks(pathname, lang),
++    };
+   }
+ 
+   const projectMatch = pathname.match(/^\/projektek\/(.+)$/);
+@@ -301,6 +445,7 @@ export function getPageMeta(route: string, locale?: Locale): PageMeta {
+         path: pathname,
+         type: "article",
+         locale: lang,
++        alternates: getAlternateLinks(pathname, "hu"),
+         breadcrumbs: [
+           { name: "Projektek", path: "/projektek" },
+           { name: project.title, path: pathname },
+@@ -326,6 +471,7 @@ export function getPageMeta(route: string, locale?: Locale): PageMeta {
+         path: pathname,
+         type: "article",
+         locale: lang,
++        alternates: getAlternateLinks(pathname, "hu"),
+         article: { publishedTime: post.date, author: post.author || undefined },
+         breadcrumbs: [
+           { name: "Blog", path: "/blog" },
+@@ -351,6 +497,7 @@ export function getPageMeta(route: string, locale?: Locale): PageMeta {
+         path: pathname,
+         type: "website",
+         locale: lang,
++        alternates: getAlternateLinks(pathname, "hu"),
+         breadcrumbs: [{ name: service.title, path: pathname }],
+       };
+     }
+@@ -372,6 +519,7 @@ export function getPageMeta(route: string, locale?: Locale): PageMeta {
+         path: pathname,
+         type: "website",
+         locale: lang,
++        alternates: getAlternateLinks(pathname, "hu"),
+         breadcrumbs: [
+           { name: "Karrier", path: "/karrier" },
+           { name: position.title, path: pathname },
+@@ -380,7 +528,13 @@ export function getPageMeta(route: string, locale?: Locale): PageMeta {
+     }
+   }
+ 
+-  return { title: DEFAULT_TITLE, description: DEFAULT_DESCRIPTION, type: "website", locale: lang };
++  return {
++    title: DEFAULT_TITLE,
++    description: DEFAULT_DESCRIPTION,
++    type: "website",
++    locale: lang,
++    alternates: [],
++  };
+ }
+ 
+ function jsonLdScript(data: object): string {
+@@ -473,6 +627,10 @@ export function buildMetaTags(meta: PageMeta): string {
+     `<title data-ssr>${escaped(meta.title)}</title>`,
+     `<meta data-ssr name="description" content="${escaped(meta.description)}" />`,
+     ...(canonical ? [`<link data-ssr rel="canonical" href="${escaped(canonical)}" />`] : []),
++    ...(meta.alternates || []).map(
++      ({ hreflang, href }) =>
++        `<link data-ssr rel="alternate" hreflang="${hreflang}" href="${escaped(href)}" />`,
++    ),
+     `<meta data-ssr property="og:title" content="${escaped(meta.title)}" />`,
+     `<meta data-ssr property="og:description" content="${escaped(meta.description)}" />`,
+     `<meta data-ssr property="og:type" content="${ogType}" />`,
+diff --git a/artifacts/works-website/vite.config.ts b/artifacts/works-website/vite.config.ts
+index 49bc26f..74173f4 100644
+--- a/artifacts/works-website/vite.config.ts
++++ b/artifacts/works-website/vite.config.ts
+@@ -5,6 +5,7 @@ import path from "path";
+ import runtimeErrorOverlay from "@replit/vite-plugin-runtime-error-modal";
+ import { subscribeNewsletter } from "./newsletter-server.mjs";
+ import { sendContactMessage } from "./contact-server.mjs";
++import { DEFAULT_SITE_URL, resolveSiteUrl } from "./src/seo-config";
+ 
+ const rawPort = process.env.PORT;
+ 
+@@ -15,9 +16,20 @@ if (rawPort !== undefined && (Number.isNaN(port) || (port as number) <= 0)) {
+ }
+ 
+ const basePath = process.env.BASE_PATH ?? "/";
++// Keep the SEO metadata origin identical in the browser and SSR bundles.
++// SITE_URL configures metadata only; it does not enable server redirects.
++// CANONICAL_ORIGIN remains a separate, optional server setting until the
++// production domain is confirmed. VITE_SITE_URL remains accepted for local
++// tooling, but cannot diverge from SITE_URL when both are present.
++const siteUrl = resolveSiteUrl(
++  process.env.SITE_URL || process.env.VITE_SITE_URL || DEFAULT_SITE_URL,
++);
+ 
+ export default defineConfig({
+   base: basePath,
++  define: {
++    "import.meta.env.VITE_SITE_URL": JSON.stringify(siteUrl),
++  },
+   plugins: [
+     {
+       name: "admin-redirect",
+diff --git a/pnpm-lock.yaml b/pnpm-lock.yaml
+index 05a10fe..26386b1 100644
+--- a/pnpm-lock.yaml
++++ b/pnpm-lock.yaml
+@@ -603,6 +603,9 @@ importers:
+       react-dom:
+         specifier: 'catalog:'
+         version: 19.1.0(react@19.1.0)
++      sharp:
++        specifier: ^0.33.5
++        version: 0.33.5
+       tailwind-merge:
+         specifier: 'catalog:'
+         version: 3.5.0
+@@ -4066,6 +4069,7 @@ packages:
+   cron-parser@4.9.0:
+     resolution: {integrity: sha512-p0SaNjrHOnQeR8/VnfGbmg9te2kfyYSQ7Sc/j/6DtPL3JQvKxmjO9TSjNFpujqV3vEYYBvNNvXSxzyksBWAx1Q==}
+     engines: {node: '>=12.0.0'}
++    deprecated: v4 is no longer maintained, upgrade to v5
+ 
+   cropperjs@1.6.1:
+     resolution: {integrity: sha512-F4wsi+XkDHCOMrHMYjrTEE4QBOrsHHN5/2VsVAaRq8P7E5z7xQpT75S+f/9WikmBEailas3+yo+6zPIomW+NOA==}

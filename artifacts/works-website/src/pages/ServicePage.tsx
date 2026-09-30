@@ -83,6 +83,7 @@ export default function ServicePage() {
   if (svcLoading) {
     return (
       <div className="min-h-screen bg-works-bg flex flex-col selection:bg-works-primary selection:text-white">
+        <SEOHead ready={false} />
         <Header />
         <main className="flex-grow pt-28 lg:pt-32 flex items-center justify-center">
           <div className="animate-pulse text-works-dark/30 text-lg"><TermText>{t("states.loading")}</TermText></div>
@@ -95,6 +96,7 @@ export default function ServicePage() {
   if (svcError) {
     return (
       <div className="min-h-screen bg-works-bg flex flex-col selection:bg-works-primary selection:text-white">
+        <SEOHead />
         <Header />
         <main className="flex-grow pt-28 lg:pt-32 flex items-center justify-center">
           <div className="text-center">
@@ -111,6 +113,7 @@ export default function ServicePage() {
   if (!service) {
     return (
       <div className="min-h-screen bg-works-bg flex flex-col selection:bg-works-primary selection:text-white">
+        <SEOHead />
         <Header />
         <main className="flex-grow pt-28 lg:pt-32 flex items-center justify-center">
           <div className="text-center">

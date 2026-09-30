@@ -27,6 +27,8 @@ import type { BlogPost, CareerPosition, Project, Service, TeamMember } from "./l
 import cachedContent from "./data/strapi-cache.json";
 
 export interface StructuredContent {
+  project?: Project | null;
+  post?: BlogPost | null;
   service?: Service | null;
   position?: CareerPosition | null;
   team?: TeamMember[] | null;

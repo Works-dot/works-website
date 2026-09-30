@@ -6,11 +6,12 @@ import {
   useState,
   type ReactNode,
 } from "react";
+import { updateTrackingConsent } from "./gtm-tracking";
 
 // Központi süti-hozzájárulás kezelés.
 // Egyetlen kapcsoló: "accepted" | "rejected" | null (még nincs döntés).
 // A döntés localStorage-ben marad meg. Minden sütit használó elem (most a
-// Google Térkép, később pl. Google Analytics) ebből az egy állapotból dolgozik.
+// Google Térkép és Google-mérés ebből az egy állapotból dolgozik.
 
 export type ConsentValue = "accepted" | "rejected" | null;
 
@@ -49,9 +50,19 @@ export function CookieConsentProvider({ children }: { children: ReactNode }) {
     const stored = readStoredConsent();
     setConsent(stored);
     setBannerOpen(stored === null);
+    const onStorage = (event: StorageEvent) => {
+      if (event.key !== STORAGE_KEY && event.key !== null) return;
+      const next = readStoredConsent();
+      updateTrackingConsent(next === "accepted");
+      setConsent(next);
+      setBannerOpen(next === null);
+    };
+    window.addEventListener("storage", onStorage);
+    return () => window.removeEventListener("storage", onStorage);
   }, []);
 
   const persist = useCallback((value: Exclude<ConsentValue, null>) => {
+    updateTrackingConsent(value === "accepted");
     setConsent(value);
     setBannerOpen(false);
     try {

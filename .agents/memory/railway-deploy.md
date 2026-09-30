@@ -28,9 +28,53 @@ description: How the Works. monorepo is hosted on Railway and how Strapi trigger
 ## Watch paths gotcha
 - The website Railway service only redeploys when files under `artifacts/works-website` change; commits touching only `artifacts/strapi` never trigger a website build — to force a website rebuild via git, the commit must touch the website dir. Bootstrap migrations run before the auto-rebuild ready gate opens, so content they change must explicitly request a post-bootstrap rebuild.
 
+## Localized CMS rollout order
+For a release that changes both the production Strapi localization schema and the website's bilingual cache fetch, deploy sequentially: restore the already-localized DB, deploy Strapi, verify the public API returns the requested non-default `locale`, then deploy the website.
+
+**Why:** Railway builds both services concurrently from one commit. The website can reach the old Strapi schema first and fail or bake the wrong locale. A retry commit with an identical tree is skipped as “watched paths not modified.”
+
+**How to apply:** use separate fast-forward commits, or trigger `serviceInstanceRedeploy` after Strapi is live. A Git retry must contain a real change under `artifacts/works-website`, and success must be read from the exact `@workspace/works-website` status context.
+
 ## Browser tests outside the deploy critical path
 Keep Railway's website build path to the strict production Strapi fetch followed by the normal Vite/SSG build. Run the Playwright production regression suite locally or in a dedicated CI environment, not as a Railway Nixpacks build gate.
 
 **Why:** Nixpacks can fail while installing or launching Chromium even when the same strict production-data build and Playwright suite pass locally. Coupling browser runtime dependencies to deploy blocked a valid website release.
 
 **How to apply:** validate with the Playwright suite before publishing, but do not replace Railway's normal build command with `test:production`.
+
+## Launch health and image optimization boundaries
+Keep website readiness independent from live CMS, Mailchimp, and Resend availability, and keep CMS image optimization optional when the local upload snapshot is absent.
+
+**Why:** the published website serves baked content even during upstream outages. The local workspace can contain historical media that was intentionally excluded from website-only GitHub releases; requiring that snapshot would break otherwise valid clean Railway builds.
+
+**How to apply:** validate the immutable static build once at process startup, monitor submission services separately, and preserve original proxied image URLs for any media without generated variants. Compare deployment image gains only against the media actually available in that deployment.
+
+Release verification must reconstruct the remote base plus the exact release allowlist, not reuse workspace build results based only on application-source hashes.
+
+**Why:** prebuild regenerates the image manifest from available uploads. Excluding historical uploads changes the built artifact even when all application source hashes match the previously tested workspace.
+
+**How to apply:** build with the release's actual upload subset, record missing-source coverage, and explicitly exclude full CMS optimization claims unless those sources are supplied. A clean patch-apply check alone does not prove build equivalence.
+
+## Content updates from an external maintenance process
+
+Publishing through a maintenance process connected to the production database does not trigger the running Railway Strapi process's in-memory auto-rebuild hooks.
+
+**Why:** Documents middleware runs in the process making the call; database changes alone do not notify the other process. A successful production CMS update can therefore leave the static website stale.
+
+**How to apply:** include a separately verified website rebuild in any external content-maintenance operation. Prefer the supported rebuild API; an actual production-cache change committed under the website watch path can also trigger the existing GitHub pipeline. Do not report the live website fixed from CMS API verification alone.
+
+## Content refresh does not prove a new code release
+
+Treat CMS-triggered content rebuilds and deployment of the latest GitHub source as separate facts.
+
+**Why:** All nine newly published Hungarian posts appeared on the live site after CMS-triggered rebuilding while Organization fields and additional schema types already on GitHub remained absent. Successful content refresh therefore did not establish that the newest frontend source was running.
+
+**How to apply:** inspect live raw HTML for a code-specific change as well as the expected CMS content. When new code is missing, guide the user to deploy the latest commit for the website service, not merely repeat the old deployment or restart Strapi. Do not infer release success or failure solely from absent GitHub commit statuses.
+
+## Schema success is not content readiness
+
+Verify required published field values before releasing a website that makes them mandatory; a successful Strapi schema deployment alone is insufficient.
+
+**Why:** The legal HTML rollout deployed six new fields successfully but left all six empty in production. The website then failed prerender, blocking an unrelated urgent career fix too.
+
+**How to apply:** Stage schema, backed-up non-overwriting content initialization, published API verification, then website build. Use the supported CMS admin API for production content changes; do not bypass development-only script guards or disable the website's content validation.

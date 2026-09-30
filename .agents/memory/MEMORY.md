@@ -8,3 +8,14 @@
 - [Railway Strapi admin login & DB origin](railway-strapi-admin.md) — dev & prod DBs are separate but prod was pg_dump-seeded from dev (creds drift); reset/create prod admin via env-gated resetAdminFromEnv (ADMIN_RESET_EMAIL/PASSWORD); ADMIN_JWT_SECRET is not the password.
 - [Squarespace blog migration](squarespace-migration.md) — 25 real posts (8 placeholders excluded); captions capped at 255 chars; publish-idempotent migration, seed hands off blog posts.
 - [React head ownership](react-head-ownership.md) — prerendered and client SEO tags need one explicit owner; avoid mixing React 19 native head hoisting with Helmet.
+- [Strapi production sync](strapi-production-sync.md) — PG18→PG16 needs a compatibility SQL; Railway media is the union of DB URLs and build-seeded uploads.
+- [Strapi v5 i18n rollout safety](strapi-v5-i18n.md) — set HU before first localized boot; add locales with update(), not create(); keep rollout guards fail-closed.
+- [Mailchimp newsletter delivery](mailchimp-newsletter.md) — Railway frontend calls a Replit-hosted OAuth endpoint; do not restore the rejected API-key or hosted-form paths.
+- [Hero design approval](hero-design-approval.md) — approved full-background direction; avoid reintroducing rejected height scaling or unsolicited responsive layout changes.
+- [Animated disclosure testing](animated-disclosure-testing.md) — nested exit tests should verify inherited inertness and actual focus prevention, not every descendant's tabindex.
+- [Accessible terminology](accessible-terminology.md) — append definitions after complete labels to preserve speech control; language markup is not proof of actual pronunciation.
+- [Career values approval](career-values-approval.md) — desktop alternation retained; later mobile request supersedes overlay approval with graphics above text.
+- [Mobile viewport diagnostics](mobile-viewport-diagnostics.md) — compare visual and layout viewports; offscreen carousel cards can expand mobile layout despite global overflow hiding.
+- [Legal translation approval](legal-language-approval.md) — EN legal links explicitly label Hungarian targets until separate translation publication approval.
+- [Intentional empty CMS content](cms-empty-content.md) — removed CMS content must not reappear as fabricated demo content; empty and unavailable are different states.
+- [Wouter encoded URLs](wouter-encoded-urls.md) — decoded route hooks are not raw browser URLs; test encoded query/path navigation and stale SEO acknowledgments separately.

@@ -1,6 +1,7 @@
 import {
   Component,
   Suspense,
+  useLayoutEffect,
   type ErrorInfo,
   type ReactNode,
 } from "react";
@@ -11,6 +12,7 @@ import {
   Router as WouterRouter,
   useLocation,
 } from "wouter";
+import { spaPageViews, useRawPagePath } from "@/lib/gtm-tracking";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -164,6 +166,14 @@ function RouteContent({ routes }: { routes: AppRoutes }) {
   );
 }
 
+function SpaTrackingRoute() {
+  const rawPath = useRawPagePath();
+  useLayoutEffect(() => {
+    if (rawPath) spaPageViews.navigate(rawPath);
+  }, [rawPath]);
+  return null;
+}
+
 function LocaleRuntime({ routes }: { routes: AppRoutes }) {
   const [location] = useLocation();
   const locale = getLocaleFromPath(location);
@@ -173,6 +183,7 @@ function LocaleRuntime({ routes }: { routes: AppRoutes }) {
       <QueryClientProvider client={queryClient}>
         <TooltipProvider delayDuration={300}>
           <CookieConsentProvider>
+            <SpaTrackingRoute />
             <ScrollToTop />
             <RouteContent routes={routes} />
             <CookieBanner />

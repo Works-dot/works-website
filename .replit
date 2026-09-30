@@ -46,7 +46,7 @@ externalPort = 3000
 
 [nix]
 channel = "stable-25_05"
-packages = ["glib", "nss", "nspr", "dbus", "atk", "at-spi2-atk", "cups", "libdrm", "expat", "libxkbcommon", "xorg.libX11", "xorg.libXcomposite", "xorg.libXdamage", "xorg.libXext", "xorg.libXfixes", "xorg.libXrandr", "xorg.libxcb", "mesa", "cairo", "pango", "alsa-lib", "gtk3", "libgbm"]
+packages = ["alsa-lib", "at-spi2-atk", "atk", "cairo", "cups", "dbus", "expat", "glib", "gtk3", "libdrm", "libgbm", "libxkbcommon", "mesa", "nspr", "nss", "pango", "xorg.libX11", "xorg.libXcomposite", "xorg.libXdamage", "xorg.libXext", "xorg.libXfixes", "xorg.libXrandr", "xorg.libxcb"]
 
 [userenv]
 
