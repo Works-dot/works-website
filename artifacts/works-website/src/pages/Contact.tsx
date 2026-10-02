@@ -17,6 +17,7 @@ import { buildLocalePath } from "@/lib/i18n-routes";
 import { terminologyRemarkPlugin } from "@/lib/terminology";
 import { PrimaryAction } from "@/components/ui/button";
 import { sendContactMessage } from "@/hooks/use-contact";
+import { emitContactFormSuccess } from "@/lib/contact-tracking";
 import { FullBleedHero } from "@/components/ui/FullBleedHero";
 import { TermText } from "@/components/Terminology";
 import { accessibleTermLabel } from "@/lib/terminology";
@@ -120,7 +121,7 @@ function toMapEmbedUrl(raw: string, locale: "hu" | "en"): string {
 
 export default function Contact() {
   const { locale, messages, t } = useI18n();
-  const { consent, accept } = useCookieConsent();
+  const { consent, mapConsent, storageError, acceptMap } = useCookieConsent();
   const {
     data: contactPage,
     loading: contactLoading,
@@ -147,6 +148,8 @@ export default function Contact() {
   const [submitting, setSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
   const cvInputRef = useRef<HTMLInputElement>(null);
+  const trackingConsentRef = useRef(consent);
+  trackingConsentRef.current = consent;
 
   // Karrier tárgy esetén megjelenő hozzájárulás-checkboxok (CMS-ből).
   const selectedSubject = (contactPage?.formSubjects || []).find((s) => s.value === formData.subject);
@@ -193,6 +196,7 @@ export default function Contact() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!consentsSatisfied || !cvSatisfied || submitting) return;
+    const grantedAtSubmit = trackingConsentRef.current === "accepted";
     setSubmitting(true);
     setSubmitError(null);
     setCvError(null);
@@ -204,6 +208,7 @@ export default function Contact() {
         privacyAccepted: true,
         cvUrl,
       });
+      emitContactFormSuccess(grantedAtSubmit, trackingConsentRef.current === "accepted");
       setSubmitted(true);
     } catch (error) {
       if (error instanceof Error && error.message === "CV_UPLOAD_FAILED") {
@@ -627,7 +632,7 @@ export default function Contact() {
               {...fadeUp}
               className="overflow-hidden"
             >
-              {consent === "accepted" ? (
+              {mapConsent === "accepted" ? (
                 <iframe
                   src={mapEmbedUrl}
                   width="100%"
@@ -647,12 +652,13 @@ export default function Contact() {
                   </p>
                   <PrimaryAction
                     type="button"
-                    onClick={accept}
+                    onClick={acceptMap}
                     className="text-sm"
                     data-testid="button-load-map"
                   >
                     <TermText>{t("contact.mapLoadButton")}</TermText>
                   </PrimaryAction>
+                  {storageError && <p role="alert" className="text-red-700 text-sm"><TermText>{t("cookieBanner.storageError")}</TermText></p>}
                 </div>
               )}
             </motion.div>

@@ -11,7 +11,7 @@ import { accessibleTermLabel } from "@/lib/terminology";
 // Csak kliensoldalon, hidratálás után jelenik meg (bannerOpen az
 // effectben áll be), így a prerenderelt HTML-t nem érinti.
 export function CookieBanner() {
-  const { bannerOpen, accept, reject } = useCookieConsent();
+  const { bannerOpen, storageError, accept, reject } = useCookieConsent();
   const { locale, t } = useI18n();
 
   if (!bannerOpen) return null;
@@ -24,16 +24,19 @@ export function CookieBanner() {
       className="fixed bottom-0 inset-x-0 z-50 bg-works-dark text-white shadow-[0_-4px_20px_rgba(0,0,0,0.25)]"
     >
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-5 flex flex-col md:flex-row md:items-center gap-4">
-        <p className="text-sm leading-relaxed text-works-light/90 md:flex-1">
-          <TermText>{t("cookieBanner.text")}</TermText>{" "}
-          <Link
-            href={buildLocalePath(locale, "cookies")}
-            className="underline text-white hover:text-works-primary transition-colors"
-          >
-            <TermText>{t("cookieBanner.cookiePolicyLinkLabel")}</TermText>{locale === "en" ? " (Hungarian)" : ""}
-          </Link>
-          .
-        </p>
+        <div className="text-sm leading-relaxed text-works-light/90 md:flex-1">
+          <p>
+            <TermText>{t("cookieBanner.text")}</TermText>{" "}
+            <Link
+              href={buildLocalePath(locale, "cookies")}
+              className="underline text-white hover:text-works-primary transition-colors"
+            >
+              <TermText>{t("cookieBanner.cookiePolicyLinkLabel")}</TermText>{locale === "en" ? " (Hungarian)" : ""}
+            </Link>
+            .
+          </p>
+          {storageError && <p role="alert" className="mt-2 text-red-200"><TermText>{t("cookieBanner.storageError")}</TermText></p>}
+        </div>
         <div className="flex gap-3 flex-shrink-0">
           <button
             type="button"

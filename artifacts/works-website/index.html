@@ -7,7 +7,9 @@
       function gtag(){window.dataLayer.push(arguments);}
       (function () {
         try {
-          var choice = localStorage.getItem("works-cookie-consent");
+          // Only this versioned key records explicit tracking consent.
+          // works-cookie-consent was historically a Maps-only decision.
+          var choice = localStorage.getItem("works-tracking-consent-v2");
           var state = choice === "accepted" ? "granted" : "denied";
           gtag("consent", "default", {
             analytics_storage: state, ad_storage: state,

@@ -1,5 +1,6 @@
 /** Initial document navigation is owned by GTM. Only subsequent SPA views are emitted here. */
 import { useSyncExternalStore } from "react";
+import { readConsent } from "./consent-storage.ts";
 
 type DataLayer = unknown[];
 
@@ -19,6 +20,9 @@ export function pushDataLayer(value: unknown) {
 }
 
 export function updateTrackingConsent(accepted: boolean) {
+  // On a first grant GTM's once-per-document Google tag owns the current URL,
+  // even if an SPA route is waiting for its SEO title to commit.
+  spaPageViews.consentUpdated(accepted);
   const state = accepted ? "granted" : "denied";
   // GTM's gtag command format is an Arguments object, not an ordinary event.
   function consentCommand(..._args: unknown[]) { pushDataLayer(arguments); }
@@ -78,8 +82,45 @@ export class SpaPageViews {
   private initialPath: string | null = null;
   private pending: string | null = null;
   private lastSent: string | null = null;
+  private trackingGranted: boolean | null = null;
+  private initialGoogleViewOwned = false;
+
+  constructor() {
+    // Client modules load after the inline consent bootstrap, before any user
+    // can change the stored choice. Do not infer first grant from storage later:
+    // the accept handler writes storage immediately before calling update.
+    this.initializeTracking();
+  }
+
+  private initializeTracking() {
+    if (this.trackingGranted !== null || typeof window === "undefined") return;
+    try {
+      const accepted = readConsent(window.localStorage).tracking === "accepted";
+      this.trackingGranted = accepted;
+      // A persisted grant is already visible to the pre-GTM consent bootstrap:
+      // subsequent regrants must not consume pending SPA navigations.
+      this.initialGoogleViewOwned = accepted;
+    } catch {
+      this.trackingGranted = false;
+    }
+  }
+
+  consentUpdated(granted: boolean) {
+    this.initializeTracking();
+    this.trackingGranted = granted;
+    if (!granted || this.initialGoogleViewOwned || typeof window === "undefined") return;
+    // The first post-load grant starts the Google tag and its automatic page_view.
+    // Claim the live raw URL (not the last SEO-committed URL) before the grant
+    // reaches GTM, so a delayed SEO acknowledgment cannot send it a second time.
+    const path = currentPagePath();
+    this.initialGoogleViewOwned = true;
+    if (this.initialPath === null) this.initialPath = path;
+    this.lastSent = path;
+    this.pending = null;
+  }
 
   navigate(path: string) {
+    this.initializeTracking();
     if (this.initialPath === null) {
       this.initialPath = path;
       this.lastSent = path;
@@ -92,7 +133,15 @@ export class SpaPageViews {
     if (this.pending !== path || currentPagePath() !== path || !title) return;
     this.pending = null;
     this.lastSent = path;
-    pushDataLayer({ event: "page_view_spa", page_path: path, page_title: title });
+    // Do not queue denied page views: a late-loading GTM must not replay them
+    // after a first grant and double the Google tag's automatic current view.
+    if (this.trackingGranted === false) return;
+    pushDataLayer({
+      event: "page_view_spa",
+      page_path: path,
+      page_title: title,
+      page_location: window.location.origin + path,
+    });
   }
 }
 
