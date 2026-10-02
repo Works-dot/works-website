@@ -1,12 +1,11 @@
 import assert from "node:assert/strict";
 
-const apiEndpoint =
-  process.env.CONTACT_API_URL ||
-  "https://works-website.replit.app/api/contact/send";
 const frontendUrl = (
   process.env.CONTACT_FRONTEND_URL ||
-  "https://workspaceworks-website-production.up.railway.app"
+  "https://www.worksdot.hu"
 ).replace(/\/+$/, "");
+const apiEndpoint =
+  process.env.CONTACT_API_URL || `${frontendUrl}/api/contact/send`;
 
 const response = await fetch(apiEndpoint, {
   method: "POST",

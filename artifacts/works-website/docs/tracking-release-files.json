@@ -1,0 +1,12 @@
+[
+  "artifacts/works-website/index.html",
+  "artifacts/works-website/src/components/CookieBanner.tsx",
+  "artifacts/works-website/src/i18n/messages.ts",
+  "artifacts/works-website/src/lib/consent-storage.ts",
+  "artifacts/works-website/src/lib/contact-tracking.ts",
+  "artifacts/works-website/src/lib/cookie-consent.tsx",
+  "artifacts/works-website/src/lib/gtm-tracking.ts",
+  "artifacts/works-website/src/pages/Contact.tsx",
+  "artifacts/works-website/scripts/contact-tracking.test.mjs",
+  "artifacts/works-website/scripts/gtm-tracking.test.mjs"
+]

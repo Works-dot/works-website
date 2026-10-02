@@ -7,9 +7,8 @@ export type ContactPayload = {
   cvUrl?: string;
 };
 
-const CONTACT_API_URL = import.meta.env.DEV
-  ? "/api/contact/send"
-  : "https://works-website.replit.app/api/contact/send";
+// Use the website's own server, including on the public custom domain.
+const CONTACT_API_URL = `${import.meta.env.BASE_URL}api/contact/send`;
 
 export async function sendContactMessage(payload: ContactPayload): Promise<void> {
   const response = await fetch(CONTACT_API_URL, {
