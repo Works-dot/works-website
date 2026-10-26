@@ -7,9 +7,7 @@ type NewsletterResult = {
   code: "subscribed";
 };
 
-const NEWSLETTER_API_URL = import.meta.env.DEV
-  ? "/api/newsletter/subscribe"
-  : "https://works-website.replit.app/api/newsletter/subscribe";
+const NEWSLETTER_API_URL = `${import.meta.env.BASE_URL}api/newsletter/subscribe`;
 
 export class NewsletterError extends Error {
   constructor(public readonly code: "invalid_email" | "provider_error") {

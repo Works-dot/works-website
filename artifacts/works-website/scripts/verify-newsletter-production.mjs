@@ -1,13 +1,12 @@
 // Side-effect-free production contract verification for the newsletter flow.
 import assert from "node:assert/strict";
 
-const apiEndpoint =
-  process.env.NEWSLETTER_API_URL ||
-  "https://works-website.replit.app/api/newsletter/subscribe";
 const frontendUrl = (
   process.env.NEWSLETTER_FRONTEND_URL ||
-  "https://workspaceworks-website-production.up.railway.app"
+  "https://www.worksdot.hu"
 ).replace(/\/+$/, "");
+const apiEndpoint =
+  process.env.NEWSLETTER_API_URL || `${frontendUrl}/api/newsletter/subscribe`;
 
 async function assertInvalidEmailContract() {
   const response = await fetch(apiEndpoint, {
@@ -62,8 +61,10 @@ async function assertFrontendBundleUsesPublicEndpoint() {
     assert.equal(assetResponse.status, 200, `Frontend asset failed: ${assetUrl}`);
     const source = await assetResponse.text();
 
-    if (source.includes(apiEndpoint)) {
-      console.log("✓ Railway frontend bundle uses the public newsletter endpoint");
+    if (/["']\/api\/newsletter\/subscribe["']/.test(source)) {
+      assert.ok(!source.includes("https://works-website.replit.app/api/newsletter/subscribe"),
+        "Newsletter bundle must not retain the unavailable Replit endpoint");
+      console.log("✓ Railway frontend bundle uses the same-origin newsletter endpoint");
       return;
     }
 

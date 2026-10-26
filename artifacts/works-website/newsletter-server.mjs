@@ -1,5 +1,4 @@
 import { createHash } from "node:crypto";
-import { ReplitConnectors } from "@replit/connectors-sdk";
 import {
   ProviderTimeoutError,
   PROVIDER_TIMEOUT_MS,
@@ -26,12 +25,30 @@ export async function subscribeNewsletter(rawEmail) {
   }
 
   try {
-    const connectors = new ReplitConnectors();
+    const apiKey = process.env.MAILCHIMP_API_KEY?.trim();
+    const dataCenter = apiKey?.match(/-(us\d+)$/)?.[1];
+    if (!apiKey || !dataCenter) {
+      console.error("Mailchimp API key is missing or has no valid data-center suffix");
+      return { status: 503, body: { ok: false, code: "service_unavailable" } };
+    }
+    // Derive the data center from the key; do not mix credentials with a
+    // separately configured server prefix. Credentials never reach the client.
+    const request = (path, options) => fetch(
+      `https://${dataCenter}.api.mailchimp.com${path}`,
+      {
+        ...options,
+        redirect: "error",
+        headers: {
+          ...options.headers,
+          Authorization: `Basic ${Buffer.from(`works:${apiKey}`).toString("base64")}`,
+        },
+      },
+    );
     const memberHash = createHash("md5").update(email).digest("hex");
     const memberPath = `/3.0/lists/${AUDIENCE_ID}/members/${memberHash}`;
     const { response: existingResponse, body: existing } = await withTimeout(
       async (signal) => {
-        const response = await connectors.proxy("mailchimp", memberPath, {
+        const response = await request(memberPath, {
           method: "GET",
           signal,
         });
@@ -51,7 +68,7 @@ export async function subscribeNewsletter(rawEmail) {
 
     const { response, body: result } = await withTimeout(
       async (signal) => {
-        const response = await connectors.proxy("mailchimp", memberPath, {
+        const response = await request(memberPath, {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
           signal,
@@ -74,14 +91,18 @@ export async function subscribeNewsletter(rawEmail) {
         : { status: 502, body: { ok: false, code: "provider_error" } };
     }
 
+    if (result?.status !== "subscribed") {
+      console.error("Mailchimp did not confirm subscribed status");
+      return { status: 502, body: { ok: false, code: "provider_error" } };
+    }
     return { status: 200, body: { ok: true, code: "subscribed" } };
   } catch (error) {
     if (error instanceof ProviderTimeoutError) {
       console.error("Newsletter subscription timed out");
       return { status: 503, body: { ok: false, code: "service_unavailable" } };
     }
-    const message = error instanceof Error ? error.message : "unknown error";
-    console.error(`Newsletter subscription failed: ${message}`);
+    // Transport errors can contain URLs or headers; never log provider details.
+    console.error("Newsletter subscription transport failed");
     return { status: 503, body: { ok: false, code: "service_unavailable" } };
   }
 }
