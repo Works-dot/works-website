@@ -412,13 +412,15 @@ export interface CareerPosition {
   seo?: SeoOverride | null;
 }
 
+import { normalizeProjectSlug, PROJECT_SLUG, OLD_PROJECT_SLUG } from "./project-slug.js";
+
 const CAREER_LOCATION = "Budapest / Hybrid";
 const CAREER_TYPE = "Teljes munkaidő";
 
 function mapProject(p: StrapiProject): Project {
   return {
     documentId: p.documentId,
-    slug: p.slug,
+    slug: normalizeProjectSlug(p.slug),
     title: p.title,
     tags: p.tags?.map((t) => t.name) || [],
     description: p.description || "",
@@ -474,7 +476,7 @@ export async function getProjects(locale?: string): Promise<Project[]> {
 export async function getProjectBySlug(slug: string, locale?: string): Promise<Project | null> {
   const res = await fetchApi<StrapiListResponse<StrapiProject>>(
     appendLocale(
-      `/projects?${PROJECT_POPULATE}&filters[slug][$eq]=${encodeURIComponent(slug)}`,
+      `/projects?${PROJECT_POPULATE}&filters[slug][$in][0]=${encodeURIComponent(slug)}${slug === PROJECT_SLUG ? `&filters[slug][$in][1]=${OLD_PROJECT_SLUG}` : ""}`,
       locale
     )
   );

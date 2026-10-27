@@ -18,6 +18,16 @@ import { buildLegacyRedirects, readLegacyRedirects, LEGACY_PATHS } from "../lega
 
 let fixtureRoot;
 let servers = [];
+const hostRequest = (url, options = {}) => new Promise((resolve, reject) => {
+  const request = http.request(url, options, response => {
+    response.resume();
+    response.on("end", () => resolve({
+      status: response.statusCode, headers: new Headers(response.headers),
+    }));
+  });
+  request.on("error", reject);
+  request.end(options.body);
+});
 
 function writeFixture({ missingAsset = false } = {}) {
   const distDir = path.join(fixtureRoot, "dist", "public");
@@ -212,6 +222,36 @@ describe("website health endpoints", () => {
 });
 
 describe("sanitized errors and canonical redirects", () => {
+  it("normalizes host, legacy paths, slash, project case and format in one response", async () => {
+    const base = await listen(createApp({
+      distDir: writeFixture(), canonicalOrigin: null, legacyRedirects: buildLegacyRedirects(),
+    }));
+    const cases = [
+      ["worksdot.hu", "/home/", "/", 301],
+      ["worksdot.hu", "/blog/how-do-we-pay-online/", "/blog/how-do-we-pay-online", 301],
+      ["www.worksdot.hu", "/blog/how-do-we-pay-online/", "/blog/how-do-we-pay-online", 301],
+      ["worksdot.hu", "/?gclid=TEST", "/?gclid=TEST", 308],
+      ["www.worksdot.hu", "/?format=rss&gclid=TEST&utm_source=a%20b", "/?gclid=TEST&utm_source=a%20b", 301],
+      ["worksdot.hu", "/home/?format=json&tag=x&tag=y&utm_source=a+b", "/?tag=x&tag=y&utm_source=a+b", 301],
+      ["www.worksdot.hu", "/projektek/informacios-architektura-B2B-webshophoz/?format=x&gclid=TEST",
+        "/projektek/informacios-architektura-b2b-webshophoz?gclid=TEST", 301],
+      ["www.worksdot.hu", "/blog/how-do-we-pay-online?%66ormat=x&format=y&utm_medium=cpc",
+        "/blog/how-do-we-pay-online?utm_medium=cpc", 301],
+    ];
+    for (const [host, source, destination, status] of cases) {
+      for (const method of ["GET", "HEAD"]) {
+        const response = await hostRequest(base + source, { method, headers: { host } });
+        assert.equal(response.status, status, source);
+        assert.equal(response.headers.get("location"), "https://www.worksdot.hu" + destination);
+        const final = await hostRequest(base + destination, { method, headers: { host: "www.worksdot.hu" } });
+        assert.equal(final.headers.get("location"), null, `No second redirect: ${destination}`);
+      }
+    }
+    const untouched = await hostRequest(base + "/?gclid=TEST&utm_source=a%20b&tag=x&tag=y",
+      { headers: { host: "www.worksdot.hu" } });
+    assert.equal(untouched.status, 200);
+    assert.equal(untouched.headers.get("location"), null);
+  });
   it("redirects only the known website Railway host by default, preserving public and backend traffic", async () => {
     const base = await listen(createApp({ distDir: writeFixture(), canonicalOrigin: null }));
     const railway = "workspaceworks-website-production.up.railway.app";

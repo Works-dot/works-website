@@ -7,6 +7,7 @@ import path from "node:path";
 import { createHash } from "node:crypto";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import { mapContentBlocks, strapiImageUrl } from "../src/lib/content-blocks.js";
+import { normalizeProjectSlug } from "../src/lib/project-slug.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const root = path.resolve(__dirname, "..");
@@ -101,7 +102,7 @@ function mapSeo(seo) {
 function mapProject(p) {
   return {
     documentId: p.documentId,
-    slug: p.slug,
+    slug: normalizeProjectSlug(p.slug),
     title: p.title,
     tags: p.tags?.map((t) => t.name) || [],
     description: p.description || "",

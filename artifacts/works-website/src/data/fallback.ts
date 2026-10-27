@@ -25,6 +25,7 @@ import {
 } from "@/lib/strapi";
 
 import rawCache from "./strapi-cache.json";
+import { normalizeProjectSlug } from "@/lib/project-slug.js";
 import type { Locale } from "@/lib/i18n-routes";
 
 import logoFallbackImg from "@assets/New_logo_1773998946128.png";
@@ -280,9 +281,9 @@ const hardcodedBlogPage: BlogPageData = {
   },
 };
 
-export const fallbackProjects: Project[] = hasData("projects")
+export const fallbackProjects: Project[] = (hasData("projects")
   ? (strapiCache.projects as Project[])
-  : hardcodedProjects;
+  : hardcodedProjects).map(project => ({ ...project, slug: normalizeProjectSlug(project.slug) }));
 
 export const fallbackBlogPosts: BlogPost[] = hasData("blogPosts")
   ? (strapiCache.blogPosts as BlogPost[])
