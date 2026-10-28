@@ -10,11 +10,27 @@ Az első dokumentumbetöltést kizárólag a GTM-konténer kezeli (`gtm.js` / ke
 
 A fejléc meglévő nyelvváltója natív hivatkozás, ezért teljes dokumentumbetöltést végez: ezt a GTM kezdeti oldalmegtekintése méri, nem a SPA esemény. Ha a nyelvi útvonal kliensoldali navigációval változik, arra ugyanúgy egy SPA esemény jut.
 
-A `works-cookie-consent` tárolt választás alapján az inline bootstrap a GTM indítása **előtt** négy jelzés (`analytics_storage`, `ad_storage`, `ad_user_data`, `ad_personalization`) alapértékét `denied`-re vagy korábbi elfogadás esetén `granted`-re állítja. Tárolóhibánál `denied`. Elfogadás, elutasítás, visszavonás és másik fülből érkező módosítás `consent update` parancsot és `works_consent_update` eseményt küld. A megnyitott beállítások önmagukban nem vonják vissza a választást; az Elutasítom gomb igen. A Consent Mode önmagában **nem bizonyítja** a GDPR/ePrivacy megfelelést: a konténerben a tagek hozzájárulási követelményeit, a Google cookieless pingekre vonatkozó jogalapot, a jogi tájékoztató CMS/PDF tartalmát és a szükséges beleegyezési mechanizmust külön felül kell vizsgálni. A standard noscript iframe JavaScript nélkül nem tudja kiolvasni a localStorage-választást vagy alkalmazni a JS consent defaultot; ezt a korlátot jogi/konténeroldali döntéssel kell kezelni, nem állítható róla, hogy opt-in garanciát ad.
+A `works-tracking-consent-v2` kulcs új értéke: `{"version":3,"analytics":false,"advertising":false,"map":false}`. Csak ez a teljes, boolean mezőkből álló séma érvényes. A régi szöveges értékeket és a `works-cookie-consent` kulcsot figyelmen kívül hagyjuk, új döntést kérünk. A GTM előtti bootstrap az analitikából az `analytics_storage`, a hirdetésből az `ad_storage`, `ad_user_data`, `ad_personalization` jelzőket állítja. Mindegyik alapértéke `denied`. A térkép kizárólag a `map` érték alapján tölthető be.
+
+A banner Részletes beállítások pontja és a meglévő lábléc-link ugyanazt a három kapcsolót nyitja meg. A kapcsolók szerkesztése csak a Beállítások mentése után érvényesül. Elfogadom = mindhárom engedélyezve; Elutasítom = mindhárom tiltva. Mentéskor és másik fülből érkező módosításkor `consent update`, majd `works_consent_update` érkezik. A kompatibilis `consent_state` az **analitika** állapota; az esemény a négy Google-jelzőt és a `map_consent` értéket is tartalmazza. A map-only engedély nem engedélyez mérést. Tárolóhiba esetén minden cél tiltott, a banner hibát jelez. Visszavonáskor a hozzáférhető első félhez tartozó Google-mérési sütiket töröljük; más domainek sütijeit a weboldal nem törölheti.
+
+A Consent Mode önmagában **nem bizonyítja** a GDPR/ePrivacy megfelelést: a konténer tageit, a cookieless pingek jogalapját és a CMS/PDF jogi szövegeit külön felül kell vizsgálni. A standard noscript iframe JavaScript nélkül nem tudja olvasni a döntést, ezért nem tekinthető önmagában opt-in garanciának.
 
 ## Konténeroldali feladatok és ellenőrzés
 
-### Friss read-only ellenőrzés — 2026-09-30 08:52 UTC
+### Friss read-only ellenőrzés — 2026-10-28
+
+A publikus GTM-5JQBSGDS konténer már tartalmaz `page_view_spa` és `contact_form_success` eseménytageket, illetve `works_consent_update` inicializálási triggert. Az alábbi akadály viszont még fennáll:
+
+- Google tag (tag_id 3, G-HE050PXZPC): extra `ad_storage` követelmény.
+- GA4 page_view (tag_id 11): extra `analytics_storage` ÉS `ad_storage` követelmény.
+- GA4 contact_form_success (tag_id 12): extra `analytics_storage` ÉS `ad_storage` követelmény.
+
+**GTM-kezelő konkrét teendője:** e három tag Consent Settings / Hozzájárulási beállítások részében a további szükséges hozzájárulás legyen `analytics_storage`, az extra `ad_storage` követelményt törölje. A Google beépített Consent Mode ellenőrzéseit nem kell és nem szabad megkerülni. A Google tag egyszer/dokumentum indítása és a `works_consent_update` + `consent_state=granted` trigger maradjon meg. A GA4 Enhanced Measurement history alapú oldalmérése ne duplázza a `page_view_spa` eseményt. Hirdetési tageket ne lazítsunk erre a feltételre.
+
+A változtatást GTM Preview-ban, majd külön engedélyezett publikálás után tiszta böngészőben kell ellenőrizni. Csak analitika: `_ga` van, `_gcl_au` nincs, collect `gcs=G101`, Google Maps iframe nincs. Elutasítás: egyik süti és térkép sincs. A weboldali eseménytesztek ezt a külső mérési eredményt nem helyettesítik. A jelenlegi konténerrel az analitika-only eset blokkolt; a weboldal nem adhat hozzá hirdetési engedélyt ennek megkerülésére. GTM-publikálás nem történt.
+
+### Korábbi read-only ellenőrzés — 2026-09-30 08:52 UTC
 
 A `https://www.googletagmanager.com/gtm.js?id=GTM-5JQBSGDS` nyilvános erőforrás ismételt letöltése megerősítette az alábbi megfigyelést. A konfiguráció `resource.tags` listája egyetlen `__googtag` taget tartalmaz: `G-HE050PXZPC`, `consent: ["list", "ad_storage"]`, `once_per_event: true`; az egyetlen szabály `gtm.init` eseményre indítja. A `page_view_spa` és `works_consent_update` szöveg nem szerepel a letöltésben, és a taglistában nincs Ads-konverziós tag. A letöltött válasz SHA-256 lenyomata: `7610d5186b331af7a7d16577bfe089dbb52bc888a2c6b6c7c29b8a17d944b766`. A beágyazott `resource.version: "2"` értékből nem következtetünk a GTM felületén látható publikált konténerverzióra.
 

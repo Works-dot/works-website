@@ -8,7 +8,9 @@ import { MAP_CONSENT_KEY, TRACKING_CONSENT_KEY, readConsent, saveConsent } from 
 const html = readFileSync(new URL("../index.html", import.meta.url), "utf8");
 const consentSource = readFileSync(new URL("../src/lib/cookie-consent.tsx", import.meta.url), "utf8");
 const contactSource = readFileSync(new URL("../src/pages/Contact.tsx", import.meta.url), "utf8");
-const grantedStorage = { getItem: (key) => key === TRACKING_CONSENT_KEY ? "accepted" : null };
+const granted = { analytics: true, advertising: true, map: true };
+const denied = { analytics: false, advertising: false, map: false };
+const grantedStorage = { getItem: (key) => key === TRACKING_CONSENT_KEY ? JSON.stringify({ version: 3, ...granted }) : null };
 
 function storage(values = {}, failSet = false) {
   const items = new Map(Object.entries(values));
@@ -132,8 +134,8 @@ test("SPA pages wait for committed SEO, dedupe hydration and refuse obsolete rou
 
 test("consent updates all four signals and emits stable grant/revoke event", () => {
   globalThis.window = { location: { pathname: "/", search: "" }, dataLayer: [{ existing: true }] };
-  updateTrackingConsent(true);
-  updateTrackingConsent(false);
+  updateTrackingConsent(granted);
+  updateTrackingConsent(denied);
   assert.equal(window.dataLayer[1][2].analytics_storage, "granted");
   assert.equal(window.dataLayer[1][2].ad_storage, "granted");
   assert.equal(window.dataLayer[1][2].ad_user_data, "granted");
@@ -142,41 +144,49 @@ test("consent updates all four signals and emits stable grant/revoke event", () 
   assert.equal(window.dataLayer[4].event, "works_consent_update");
 });
 
-test("legacy accepted grants Maps only, never the tracking bootstrap", () => {
-  const stored = storage({ [MAP_CONSENT_KEY]: "accepted" });
-  assert.equal(readConsent(stored).map, "accepted");
-  assert.equal(readConsent(stored).tracking, null);
-  assert.deepEqual(Object.values(bootstrap(stored)), ["denied", "denied", "denied", "denied"]);
-  assert.match(consentSource, /setBannerOpen\(stored\.tracking === null && stored\.map !== "rejected"\)/);
+test("all legacy or malformed choices are ignored, including legacy map permission", () => {
+  for (const choice of ["accepted", "rejected", "null", "{}", '{"version":3,"analytics":true}', '{"version":3,"analytics":"true","advertising":false,"map":false}']) {
+    const stored = storage({ [MAP_CONSENT_KEY]: "accepted", [TRACKING_CONSENT_KEY]: choice });
+    assert.equal(readConsent(stored).map, null);
+    assert.equal(readConsent(stored).tracking, null);
+    assert.equal(readConsent(stored).purposes, null);
+    assert.deepEqual(Object.values(bootstrap(stored)), ["denied", "denied", "denied", "denied"]);
+  }
+  assert.match(consentSource, /setBannerOpen\(stored === null\)/);
 });
 
 test("loading the map alone never updates measurement or ads", () => {
   const stored = storage();
-  assert.equal(saveConsent(stored, MAP_CONSENT_KEY, "accepted"), true);
-  assert.deepEqual(readConsent(stored), { map: "accepted", tracking: null });
+  const mapOnly = { ...denied, map: true };
+  assert.equal(saveConsent(stored, mapOnly), true);
+  assert.deepEqual(readConsent(stored), { map: "accepted", tracking: "rejected", purposes: mapOnly });
   assert.deepEqual(Object.values(bootstrap(stored)), ["denied", "denied", "denied", "denied"]);
   assert.match(contactSource, /onClick=\{acceptMap\}/);
-  assert.match(consentSource, /const acceptMap = useCallback\(\(\) => \{[\s\S]*?saveConsent\(window\.localStorage, MAP_CONSENT_KEY, "accepted"\)/);
-  assert.match(consentSource, /if \(event\.key !== MAP_CONSENT_KEY\) updateTrackingConsent/);
 });
 
-test("fresh explicit acceptance uses a distinct versioned key for all four signals", () => {
-  const stored = storage({ [MAP_CONSENT_KEY]: "rejected" });
-  assert.equal(saveConsent(stored, MAP_CONSENT_KEY, "accepted"), true);
-  assert.equal(saveConsent(stored, TRACKING_CONSENT_KEY, "accepted"), true);
-  assert.deepEqual(readConsent(stored), { map: "accepted", tracking: "accepted" });
-  assert.deepEqual(Object.values(bootstrap(stored)), ["granted", "granted", "granted", "granted"]);
-  assert.match(consentSource, /updateTrackingConsent\(true\)/);
+test("all eight purpose combinations match bootstrap, persisted decision and Consent Mode updates", () => {
+  for (const analytics of [false, true]) for (const advertising of [false, true]) for (const map of [false, true]) {
+    const purposes = { analytics, advertising, map };
+    const stored = storage();
+    assert.equal(saveConsent(stored, purposes), true);
+    assert.deepEqual(readConsent(stored).purposes, purposes);
+    const expected = [analytics ? "granted" : "denied", ...Array(3).fill(advertising ? "granted" : "denied")];
+    assert.deepEqual(Object.values(bootstrap(stored)), expected);
+    globalThis.window = { location: { pathname: "/", search: "" }, dataLayer: [] };
+    updateTrackingConsent(purposes);
+    assert.deepEqual(Object.values(window.dataLayer[0][2]), expected);
+    assert.equal(window.dataLayer[1].consent_state, expected[0]);
+    assert.equal(window.dataLayer[1].map_consent, map ? "granted" : "denied");
+  }
 });
 
 test("revoke removes stale accepted on failed storage overwrites and reload denies", () => {
-  const stored = storage({ [MAP_CONSENT_KEY]: "accepted", [TRACKING_CONSENT_KEY]: "accepted" }, true);
-  assert.equal(saveConsent(stored, TRACKING_CONSENT_KEY, "rejected"), true);
-  assert.equal(saveConsent(stored, MAP_CONSENT_KEY, "rejected"), true);
-  assert.deepEqual(readConsent(stored), { map: null, tracking: null });
+  const stored = storage({ [TRACKING_CONSENT_KEY]: JSON.stringify({ version: 3, ...granted }) }, true);
+  assert.equal(saveConsent(stored, denied), false);
+  assert.deepEqual(readConsent(stored), { map: null, tracking: null, purposes: null });
   assert.deepEqual(Object.values(bootstrap(stored)), ["denied", "denied", "denied", "denied"]);
   const blocked = { getItem() { throw new Error("blocked"); } };
-  assert.deepEqual(readConsent(blocked), { map: null, tracking: null });
+  assert.deepEqual(readConsent(blocked), { map: null, tracking: null, purposes: null });
   assert.deepEqual(Object.values(bootstrap(blocked)), ["denied", "denied", "denied", "denied"]);
 });
 
@@ -186,9 +196,9 @@ test("fully blocked revocation reports failure rather than pretending an old gra
     setItem() { throw new Error("blocked"); },
     removeItem() { throw new Error("blocked"); },
   };
-  assert.equal(saveConsent(stuck, TRACKING_CONSENT_KEY, "rejected"), false);
-  assert.match(consentSource, /setStorageError\(!trackingSaved \|\| !mapSaved\)/);
-  assert.match(consentSource, /updateTrackingConsent\(false\)/);
+  assert.equal(saveConsent(stuck, denied), false);
+  assert.match(consentSource, /setStorageError\(!saved\)/);
+  assert.match(consentSource, /const effective = saved \? next : DENIED_PURPOSES/);
 });
 
 test("pending lazy navigation that returns to the initial URL cannot duplicate the initial view", () => {
@@ -210,7 +220,8 @@ function trackingBrowser(choice) {
   globalThis.window = {
     location: { origin: "https://works.hu", pathname: "/", search: "" },
     dataLayer: [],
-    localStorage: { getItem: (key) => key === TRACKING_CONSENT_KEY ? choice : null },
+    localStorage: { getItem: (key) => key === TRACKING_CONSENT_KEY && choice
+      ? JSON.stringify({ version: 3, ...denied, analytics: choice === "accepted" }) : null },
   };
   return new SpaPageViews();
 }

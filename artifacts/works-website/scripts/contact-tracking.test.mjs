@@ -6,7 +6,9 @@ import { TRACKING_CONSENT_KEY, MAP_CONSENT_KEY } from "../src/lib/consent-storag
 
 function setBrowser(tracking, map = null) {
   const values = new Map();
-  if (tracking) values.set(TRACKING_CONSENT_KEY, tracking);
+  if (tracking) values.set(TRACKING_CONSENT_KEY, JSON.stringify({
+    version: 3, analytics: tracking === "accepted", advertising: false, map: false,
+  }));
   if (map) values.set(MAP_CONSENT_KEY, map);
   const dataLayer = [];
   globalThis.window = { dataLayer, localStorage: { getItem: (key) => values.get(key) ?? null } };

@@ -1,6 +1,6 @@
 /** Initial document navigation is owned by GTM. Only subsequent SPA views are emitted here. */
 import { useSyncExternalStore } from "react";
-import { readConsent } from "./consent-storage.ts";
+import { readConsent, type ConsentPurposes } from "./consent-storage.ts";
 
 type DataLayer = unknown[];
 
@@ -19,21 +19,27 @@ export function pushDataLayer(value: unknown) {
   }
 }
 
-export function updateTrackingConsent(accepted: boolean) {
+export function updateTrackingConsent(purposes: ConsentPurposes) {
   // On a first grant GTM's once-per-document Google tag owns the current URL,
   // even if an SPA route is waiting for its SEO title to commit.
-  spaPageViews.consentUpdated(accepted);
-  const state = accepted ? "granted" : "denied";
+  spaPageViews.consentUpdated(purposes.analytics);
+  const state = purposes.analytics ? "granted" : "denied";
+  const ads = purposes.advertising ? "granted" : "denied";
   // GTM's gtag command format is an Arguments object, not an ordinary event.
   function consentCommand(..._args: unknown[]) { pushDataLayer(arguments); }
   consentCommand("consent", "update", {
     analytics_storage: state,
-    ad_storage: state,
-    ad_user_data: state,
-    ad_personalization: state,
+    ad_storage: ads,
+    ad_user_data: ads,
+    ad_personalization: ads,
   });
   // Container owners can use this event to initialize tags on a subsequent grant.
-  pushDataLayer({ event: "works_consent_update", consent_state: state });
+  pushDataLayer({
+    event: "works_consent_update",
+    consent_state: state, // Existing GA initialization trigger; analytics only.
+    analytics_storage: state, ad_storage: ads, ad_user_data: ads, ad_personalization: ads,
+    map_consent: purposes.map ? "granted" : "denied",
+  });
 }
 
 export function currentPagePath() {

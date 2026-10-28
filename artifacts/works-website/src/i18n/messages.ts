@@ -77,6 +77,11 @@ export interface Messages {
     reject: string;
     accept: string;
     storageError: string;
+    details: string;
+    save: string;
+    analytics: string;
+    advertising: string;
+    map: string;
   };
 
   // Cookie settings page (Sutik.tsx)
@@ -288,10 +293,15 @@ const hu: Messages = {
 
   cookieBanner: {
     dialogLabel: "Süti beállítások",
-    text: "Az Elfogadom gombbal a Google Analytics és hirdetési mérést, valamint a Google Térkép betöltését is engedélyezed. A Kapcsolat oldalon a térkép külön is betölthető, ezzel nem engedélyezed a mérést. Elutasítás esetén a mérési tárolást tiltjuk, a térképet nem töltjük be. Részletek a",
+    text: "Az Elfogadom mindhárom célt engedélyezi, az Elutasítom mindhármat kikapcsolja. A Részletes beállításoknál külön választhatsz az analitika, a hirdetési mérés és a Google Térkép engedélyezéséről. Döntésed a láblécből bármikor módosítható. Részletek a",
     cookiePolicyLinkLabel: "süti tájékoztatóban",
     reject: "Elutasítom",
     accept: "Elfogadom",
+    details: "Részletes beállítások",
+    save: "Beállítások mentése",
+    analytics: "Analitika",
+    advertising: "Hirdetési mérés",
+    map: "Google Térkép",
     storageError: "A hozzájárulási döntést nem sikerült menteni. A korábbi engedély visszavonása a böngészőadatok törlését is igényelheti.",
   },
 
@@ -501,10 +511,15 @@ const en: Messages = {
 
   cookieBanner: {
     dialogLabel: "Cookie settings",
-    text: "Accept allows Google Analytics and advertising measurement and loads Google Maps. On the Contact page you can load the map separately without allowing measurement. Reject denies measurement storage and prevents the map from loading. Details in the",
+    text: "Accept enables all three purposes; Reject disables all three. Detailed settings lets you choose analytics, advertising measurement and Google Maps separately. You can change your choices anytime using the footer link. Details in the",
     cookiePolicyLinkLabel: "cookie policy",
     reject: "Reject",
     accept: "Accept",
+    details: "Detailed settings",
+    save: "Save preferences",
+    analytics: "Analytics",
+    advertising: "Advertising measurement",
+    map: "Google Maps",
     storageError: "Your consent choice could not be saved. Clearing browser data may also be needed to revoke a previously saved permission.",
   },
 

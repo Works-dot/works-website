@@ -1,118 +1,83 @@
-import {
-  createContext,
-  useCallback,
-  useContext,
-  useEffect,
-  useState,
-  type ReactNode,
-} from "react";
+import { createContext, useCallback, useContext, useEffect, useState, type ReactNode } from "react";
 import { updateTrackingConsent } from "./gtm-tracking";
-import {
-  MAP_CONSENT_KEY,
-  TRACKING_CONSENT_KEY,
-  readConsent,
-  saveConsent,
-  type ConsentValue,
-} from "./consent-storage";
+import { clearDeniedCookies } from "./consent-cookies";
+import { TRACKING_CONSENT_KEY, DENIED_PURPOSES, readConsent, saveConsent, type ConsentPurposes, type ConsentValue } from "./consent-storage";
 
 interface CookieConsentContextValue {
-  /** Versioned analytics + advertising decision; legacy map choices cannot grant this. */
   consent: ConsentValue;
-  /** Independent Google Maps embed decision. */
   mapConsent: ConsentValue;
-  /** Igaz, amíg a sáv látszik (nincs döntés, vagy újra megnyitották). */
+  purposes: ConsentPurposes;
   bannerOpen: boolean;
+  detailsOpen: boolean;
   storageError: boolean;
   accept: () => void;
   reject: () => void;
   acceptMap: () => void;
-  /** Újra megnyitja a sávot (lábléc „Süti beállítások” link). */
   openSettings: () => void;
+  savePreferences: (purposes: ConsentPurposes) => void;
 }
-
 const CookieConsentContext = createContext<CookieConsentContextValue | null>(null);
 
 export function CookieConsentProvider({ children }: { children: ReactNode }) {
-  const [consent, setConsent] = useState<ConsentValue>(null);
-  const [mapConsent, setMapConsent] = useState<ConsentValue>(null);
+  const [decision, setDecision] = useState<ConsentPurposes | null>(null);
   const [bannerOpen, setBannerOpen] = useState(false);
+  const [detailsOpen, setDetailsOpen] = useState(false);
   const [storageError, setStorageError] = useState(false);
 
-  // Csak kliensen, hidratálás után olvassuk ki a tárolt döntést,
-  // így a prerenderelt HTML és az első kliens-render megegyezik.
   useEffect(() => {
-    const stored = readConsent(window.localStorage);
-    setConsent(stored.tracking);
-    setMapConsent(stored.map);
-    // An old map acceptance is not a decision about measurement.
-    setBannerOpen(stored.tracking === null && stored.map !== "rejected");
+    const read = () => {
+      try { return readConsent(window.localStorage).purposes; } catch { return null; }
+    };
+    const stored = read();
+    setDecision(stored);
+    clearDeniedCookies(stored || DENIED_PURPOSES);
+    setBannerOpen(stored === null);
     const onStorage = (event: StorageEvent) => {
-      if (event.key !== TRACKING_CONSENT_KEY && event.key !== MAP_CONSENT_KEY && event.key !== null) return;
-      const next = readConsent(window.localStorage);
-      // A Maps-only change in another tab must not emit tracking updates.
-      if (event.key !== MAP_CONSENT_KEY) updateTrackingConsent(next.tracking === "accepted");
-      setConsent(next.tracking);
-      setMapConsent(next.map);
-      setBannerOpen(next.tracking === null && next.map !== "rejected");
+      if (event.key !== TRACKING_CONSENT_KEY && event.key !== null) return;
+      const next = read();
+      updateTrackingConsent(next || DENIED_PURPOSES);
+      clearDeniedCookies(next || DENIED_PURPOSES);
+      setDecision(next);
+      setBannerOpen(next === null);
     };
     window.addEventListener("storage", onStorage);
     return () => window.removeEventListener("storage", onStorage);
   }, []);
 
-  const accept = useCallback(() => {
-    // Both grants must be stored before any tracking update or map embed.
-    const mapSaved = saveConsent(window.localStorage, MAP_CONSENT_KEY, "accepted");
-    const trackingSaved = mapSaved && saveConsent(window.localStorage, TRACKING_CONSENT_KEY, "accepted");
-    if (!trackingSaved || !mapSaved) {
-      // Undo a partial grant. No tracking update can be granted on write failure.
-      saveConsent(window.localStorage, TRACKING_CONSENT_KEY, "rejected");
-      saveConsent(window.localStorage, MAP_CONSENT_KEY, "rejected");
-      updateTrackingConsent(false);
-      setConsent("rejected");
-      setMapConsent("rejected");
-      setStorageError(true);
-      setBannerOpen(true);
-      return;
-    }
-    setStorageError(false);
-    updateTrackingConsent(true);
-    setConsent("accepted");
-    setMapConsent("accepted");
-    setBannerOpen(false);
+  const savePreferences = useCallback((next: ConsentPurposes) => {
+    let saved = false;
+    try { saved = saveConsent(window.localStorage, next); } catch { /* Storage getter may throw. */ }
+    const effective = saved ? next : DENIED_PURPOSES;
+    updateTrackingConsent(effective);
+    clearDeniedCookies(effective);
+    setDecision(effective);
+    setStorageError(!saved);
+    setBannerOpen(!saved);
+    if (saved) setDetailsOpen(false);
   }, []);
-
-  const reject = useCallback(() => {
-    const trackingSaved = saveConsent(window.localStorage, TRACKING_CONSENT_KEY, "rejected");
-    const mapSaved = saveConsent(window.localStorage, MAP_CONSENT_KEY, "rejected");
-    updateTrackingConsent(false);
-    setConsent("rejected");
-    setMapConsent("rejected");
-    setStorageError(!trackingSaved || !mapSaved);
-    setBannerOpen(!trackingSaved || !mapSaved);
-  }, []);
+  const accept = useCallback(() => savePreferences({ analytics: true, advertising: true, map: true }), [savePreferences]);
+  const reject = useCallback(() => savePreferences(DENIED_PURPOSES), [savePreferences]);
   const acceptMap = useCallback(() => {
-    if (saveConsent(window.localStorage, MAP_CONSENT_KEY, "accepted")) {
-      setMapConsent("accepted");
-      setStorageError(false);
-    } else {
-      setStorageError(true);
-    }
+    // Re-read so a map click cannot restore another tab's revoked tracking grant.
+    let current = DENIED_PURPOSES;
+    try { current = readConsent(window.localStorage).purposes || DENIED_PURPOSES; } catch { /* Deny. */ }
+    savePreferences({ ...current, map: true });
+  }, [savePreferences]);
+  const openSettings = useCallback(() => {
+    setDetailsOpen(true);
+    setBannerOpen(true);
   }, []);
-  const openSettings = useCallback(() => setBannerOpen(true), []);
 
-  return (
-    <CookieConsentContext.Provider
-      value={{ consent, mapConsent, bannerOpen, storageError, accept, reject, acceptMap, openSettings }}
-    >
-      {children}
-    </CookieConsentContext.Provider>
-  );
+  return <CookieConsentContext.Provider value={{
+    consent: decision ? decision.analytics ? "accepted" : "rejected" : null,
+    mapConsent: decision ? decision.map ? "accepted" : "rejected" : null,
+    purposes: decision || DENIED_PURPOSES, bannerOpen, detailsOpen, storageError,
+    accept, reject, acceptMap, openSettings, savePreferences,
+  }}>{children}</CookieConsentContext.Provider>;
 }
 
-export function useCookieConsent(): CookieConsentContextValue {
+export function useCookieConsent() {
   const ctx = useContext(CookieConsentContext);
-  if (!ctx) {
-    throw new Error("useCookieConsent csak CookieConsentProvider alatt használható");
-  }
+  if (!ctx) throw new Error("useCookieConsent csak CookieConsentProvider alatt használható");
   return ctx;
 }
