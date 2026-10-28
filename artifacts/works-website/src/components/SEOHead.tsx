@@ -159,7 +159,7 @@ export default function SEOHead({ structuredContent, ready = true, noindex = fal
     routeKey === "serviceDetail" ? structuredContent?.service :
     routeKey === "careerDetail" ? structuredContent?.position : null;
   const detailDescription = detail && ("caseStudy" in detail ? detail.caseStudy.heroSubtitle :
-    "excerpt" in detail ? detail.excerpt :
+    "excerpt" in detail ? (detail.excerpt?.trim() || (routeKey === "blogPost" ? `${detail.title} | Works.` : baseMeta.description)) :
     "heroDescription" in detail ? detail.heroDescription : baseMeta.description);
   const detailSeo = detail?.seo;
   const meta = detail

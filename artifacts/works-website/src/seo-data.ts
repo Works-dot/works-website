@@ -443,8 +443,10 @@ export function getPageMeta(route: string, locale?: Locale): PageMeta {
     const detailDescription =
       project?.caseStudy.heroSubtitle || post?.excerpt || service?.heroDescription || position?.excerpt;
     const meta = withOverride({
-      title: staticDefault?.title || EN_DEFAULT_TITLE,
-      description: detailDescription || staticDefault?.description || EN_DEFAULT_DESCRIPTION,
+      title: post ? `${post.title} | Works.` : staticDefault?.title || EN_DEFAULT_TITLE,
+      description: post
+        ? post.excerpt?.trim() || `${post.title} | Works.`
+        : detailDescription || staticDefault?.description || EN_DEFAULT_DESCRIPTION,
       ogImage: project?.image || post?.image,
       // A route pattern alone is not an English detail page.  Only a record
       // present in the EN dataset may receive a canonical or hreflang URL.
