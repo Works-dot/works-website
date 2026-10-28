@@ -19,6 +19,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { ScrollToTop } from "@/components/ScrollToTop";
 import { CookieConsentProvider } from "@/lib/cookie-consent";
 import { CookieBanner } from "@/components/CookieBanner";
+import { InteractionTracking } from "@/components/InteractionTracking";
 import { I18nProvider, useI18n } from "@/i18n";
 import {
   buildLocalePath,
@@ -184,6 +185,7 @@ function LocaleRuntime({ routes }: { routes: AppRoutes }) {
         <TooltipProvider delayDuration={300}>
           <CookieConsentProvider>
             <SpaTrackingRoute />
+            <InteractionTracking />
             <ScrollToTop />
             <RouteContent routes={routes} />
             <CookieBanner />

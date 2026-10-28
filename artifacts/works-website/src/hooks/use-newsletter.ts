@@ -1,6 +1,7 @@
 import { useMutation } from "@tanstack/react-query";
 import { useToast } from "@/hooks/use-toast";
 import { useI18n } from "@/i18n";
+import { emitInteraction, hasAnalyticsConsent } from "@/lib/interaction-tracking";
 
 type NewsletterResult = {
   ok: boolean;
@@ -21,6 +22,7 @@ export function useSubscribeNewsletter() {
   
   return useMutation({
     mutationFn: async (email: string) => {
+      const grantedAtSubmit = hasAnalyticsConsent();
       const response = await fetch(NEWSLETTER_API_URL, {
         method: "POST",
         credentials: "omit",
@@ -32,10 +34,11 @@ export function useSubscribeNewsletter() {
         | { ok: false; code?: string }
         | null;
 
-      if (!response.ok || !result?.ok) {
+      if (!response.ok || !result?.ok || result.code !== "subscribed") {
         throw new NewsletterError(result?.code === "invalid_email" ? "invalid_email" : "provider_error");
       }
 
+      emitInteraction("newsletter_signup", grantedAtSubmit);
       return result as NewsletterResult;
     },
     onSuccess: () => {

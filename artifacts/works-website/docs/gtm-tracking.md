@@ -18,6 +18,14 @@ A Consent Mode önmagában **nem bizonyítja** a GDPR/ePrivacy megfelelést: a k
 
 ## Konténeroldali feladatok és ellenőrzés
 
+### Új események – GTM-tervezet
+
+Három külön Custom Event trigger, pontos eseménynévvel: `newsletter_signup`, `email_click`, `phone_click`. Mindegyikhez egy GA4 Event tag a meglévő `G-HE050PXZPC` célhellyel és azonos eseménynévvel, eseményenként egyszeri futással. További szükséges hozzájárulás: kizárólag `analytics_storage`; a beépített Consent Mode ellenőrzések maradjanak. Ne használjunk mellé párhuzamos All Links triggert, mert duplázna.
+
+A weboldal kizárólag `{event: eseménynév}` objektumot küld, e-mail, telefonszám és űrlapadat nélkül. A hírlevélesemény csak sikeres HTTP-válasz és `ok:true, code:"subscribed"` esetén érkezik, ha beküldéskor és visszaigazoláskor is engedélyezett az analitika. Hibás válasz, reklám-only vagy régi consent nem elegendő. A mailto/tel mérés a belső elemekre és billentyűzettel aktivált linkekre is vonatkozik; a kattintást nem akadályozza. A hírlevélválasz nem különbözteti meg a már feliratkozott címet az új feliratkozástól: a mérés szerver által sikeresként visszaigazolt feliratkozási műveletet jelent, nem garantáltan új Mailchimp-kontaktot.
+
+A fenti tervezet dokumentált, nem került automatikusan GTM-munkaterületbe vagy publikálásra. GTM Preview-ban mindhárom műveletet engedélyezett és elutasított analitikával is ellenőrizni kell; hírlevélnél hibás szerverválasszal nem lehet esemény. A korábban dokumentált extra `ad_storage` kaput az analitikai tageken előbb javítani kell. Pusztán a dataLayer jelenléte nem bizonyít GA4-adatfogadást.
+
 ### Friss read-only ellenőrzés — 2026-10-28
 
 A publikus GTM-5JQBSGDS konténer már tartalmaz `page_view_spa` és `contact_form_success` eseménytageket, illetve `works_consent_update` inicializálási triggert. Az alábbi akadály viszont még fennáll:
