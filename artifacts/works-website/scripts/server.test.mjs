@@ -84,6 +84,25 @@ afterEach(async () => {
 });
 
 describe("website health endpoints", () => {
+  it("serves the independent temporary sitemap without changing the main sitemap", async () => {
+    const distDir = writeFixture();
+    const mainPath = path.join(distDir, "sitemap.xml");
+    fs.writeFileSync(mainPath,
+      '<?xml version="1.0"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url><loc>https://www.worksdot.hu/</loc></url></urlset>');
+    const mainBefore = fs.readFileSync(mainPath);
+    const xml = fs.readFileSync(new URL("../public/sitemap-old.xml", import.meta.url));
+    fs.writeFileSync(path.join(distDir, "sitemap-old.xml"), xml);
+    const base = await listen(createApp({ distDir, canonicalOrigin: null }));
+    const response = await fetch(base + "/sitemap-old.xml");
+    assert.equal(response.status, 200);
+    assert.match(response.headers.get("content-type"), /(?:application|text)\/xml/);
+    assert.equal(await response.text(), xml.toString());
+    assert.deepEqual(fs.readFileSync(mainPath), mainBefore);
+    const mainResponse = await fetch(base + "/sitemap.xml");
+    assert.equal(await mainResponse.text(), mainBefore.toString());
+    const head = await fetch(base + "/sitemap-old.xml", { method: "HEAD" });
+    assert.equal(head.status, 200);
+  });
   it("temporarily redirects unapproved English legal routes before canonical/static handling", async () => {
     const base = await listen(createApp({
       distDir: writeFixture(), canonicalOrigin: "https://www.worksdot.hu",
