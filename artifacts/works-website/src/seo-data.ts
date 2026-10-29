@@ -25,6 +25,7 @@ import { DEFAULT_SITE_URL, resolveSiteUrl } from "./seo-config";
 import { organizationIdentity } from "./data/organization";
 import type { BlogPost, CareerPosition, Project, Service, TeamMember } from "./lib/strapi";
 import cachedContent from "./data/strapi-cache.json";
+import { canonicalTransitionPath } from "./lib/blog-slug-transition";
 
 export interface StructuredContent {
   project?: Project | null;
@@ -175,7 +176,7 @@ export function getAlternateLinks(
   route: string,
   locale?: Locale,
 ): AlternateLink[] {
-  const pathname = stripSearch(route);
+  const pathname = canonicalTransitionPath(stripSearch(route));
   const routeMatch = matchLocalePath(pathname);
   if (!routeMatch) return [];
 
@@ -381,7 +382,7 @@ export function pageLocale(meta: PageMeta): Locale {
  * @param locale - Optional BCP-47 locale; defaults to "hu".
  */
 export function getPageMeta(route: string, locale?: Locale): PageMeta {
-  const strippedPath = stripSearch(route);
+  const strippedPath = canonicalTransitionPath(stripSearch(route));
   const pathname =
     strippedPath.length > 1 ? strippedPath.replace(/\/+$/, "") : strippedPath;
   const routeMatch = matchLocalePath(pathname);

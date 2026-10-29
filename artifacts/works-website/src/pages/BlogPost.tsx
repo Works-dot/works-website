@@ -14,10 +14,12 @@ import { useI18n } from "@/i18n";
 import { buildLocalePath } from "@/lib/i18n-routes";
 import { PrimaryAction } from "@/components/ui/button";
 import { TermText } from "@/components/Terminology";
+import { sourceHuBlogSlug } from "@/lib/blog-slug-transition";
 
 export default function BlogPost() {
   const { locale, t } = useI18n();
-  const { slug } = useParams<{ slug: string }>();
+  const { slug: requestedSlug } = useParams<{ slug: string }>();
+  const slug = locale === "hu" ? sourceHuBlogSlug(requestedSlug || "") : requestedSlug;
   const fallbackPost = fallbackBlogPosts.find((p) => p.slug === slug) || null;
   const { data: post, loading, error } = useStrapiQuery<BlogPostType | null>(
     `blogPost:${locale}:${slug}`,

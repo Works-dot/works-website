@@ -1,4 +1,5 @@
 import { mapContentBlocks, strapiImageUrl } from "./content-blocks.js";
+import { sourceHuBlogSlug } from "./blog-slug-transition.js";
 
 const STRAPI_API = "/strapi/api";
 
@@ -502,6 +503,7 @@ export async function getBlogPosts(locale?: string): Promise<BlogPost[]> {
 }
 
 export async function getBlogPostBySlug(slug: string, locale?: string): Promise<BlogPost | null> {
+  if (!locale || locale === "hu") slug = sourceHuBlogSlug(slug);
   const res = await fetchApi<StrapiListResponse<StrapiBlogPost>>(
     appendLocale(
       `/blog-posts?${BLOG_POPULATE}&filters[slug][$eq]=${encodeURIComponent(slug)}`,

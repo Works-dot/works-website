@@ -1,4 +1,5 @@
 import { projects as rawProjects } from "./projects";
+import { sourceHuBlogSlug } from "../lib/blog-slug-transition";
 import { blogPosts as rawBlogPosts } from "./blog-posts";
 import { whyUsCards as rawWhyUsCards } from "./careers";
 import { teamMembers as rawTeamMembers } from "./team";
@@ -430,7 +431,8 @@ export function getLocaleFallback<T>(key: string, locale: Locale): T | undefined
 
   const [base, ...parts] = key.split(":");
   if (parts.length > 0) {
-    const slug = parts[parts.length - 1];
+    const requestedSlug = parts[parts.length - 1];
+    const slug = base === "blogPost" ? sourceHuBlogSlug(requestedSlug) : requestedSlug;
     const collections: Record<string, { slug: string }[]> = {
       project: fallbackProjects,
       blogPost: fallbackBlogPosts,
@@ -478,6 +480,7 @@ export function getLocaleCounterpartSlug(
   routeKey: DetailRouteKey,
   sourceSlug: string,
 ): string | undefined {
+  if (sourceLocale === "hu" && routeKey === "blogPost") sourceSlug = sourceHuBlogSlug(sourceSlug);
   const collectionKey = detailCollectionKeys[routeKey];
   const source = getLocaleFallback<{ slug: string; documentId?: string }[]>(
     collectionKey,
