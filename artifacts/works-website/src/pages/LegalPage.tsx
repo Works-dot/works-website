@@ -4,8 +4,9 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import SEOHead from "@/components/SEOHead";
 import { useStrapiQuery } from "@/hooks/useStrapiQuery";
-import { getLegalDocuments, type LegalDocuments } from "@/lib/strapi";
-import { fallbackLegalDocuments } from "@/data/fallback";
+import { getLegalDocuments, getGlobalSettings, type LegalDocuments, type GlobalSettings } from "@/lib/strapi";
+import { fallbackLegalDocuments, fallbackGlobalSettings } from "@/data/fallback";
+import { companyImprint } from "@/data/organization";
 import { useCookieConsent } from "@/lib/cookie-consent";
 import { PrimaryAction } from "@/components/ui/button";
 
@@ -15,7 +16,11 @@ export default function LegalPage({ kind }: { kind: "privacy" | "cookie" | "impr
     "legalDocuments", () => getLegalDocuments("hu"), fallbackLegalDocuments, "hu",
   );
   const title = data?.[`${kind}Title`];
-  const body = data?.[`${kind}Body`];
+  const { data: settings } = useStrapiQuery<GlobalSettings>(
+    "globalSettings", () => getGlobalSettings("hu"), fallbackGlobalSettings, "hu",
+  );
+  const rawBody = data?.[`${kind}Body`];
+  const body = kind === "imprint" && rawBody ? companyImprint(rawBody, settings) : rawBody;
   const pdf = data?.[`${kind}PdfUrl`];
   return (
     <div className="min-h-screen bg-white flex flex-col">

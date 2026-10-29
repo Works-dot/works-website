@@ -204,7 +204,7 @@ export function setupWebsiteAutoRebuild(strapi: StrapiLike) {
     const result = await next();
     try {
       const uid: string = ctx?.uid || "";
-      if (uid.startsWith("api::")) {
+      if (uid.startsWith("api::") && uid !== "api::contact-submission.contact-submission") {
         const hasDraftAndPublish =
           ctx?.contentType?.options?.draftAndPublish === true;
         const action: string = ctx?.action || "";

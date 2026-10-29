@@ -864,6 +864,7 @@ export interface GlobalSettings {
   contactEmail: string;
   contactPhone: string;
   address: string;
+  registeredAddress?: string;
   footerTagline: string;
   copyrightText: string;
   newsletterHeading: string;
@@ -885,6 +886,7 @@ export async function getGlobalSettings(locale?: string): Promise<GlobalSettings
     contactEmail: string;
     contactPhone: string;
     address: string;
+    registeredAddress?: string;
     footerTagline: string;
     copyrightText: string;
     newsletterHeading: string;
@@ -905,6 +907,7 @@ export async function getGlobalSettings(locale?: string): Promise<GlobalSettings
     contactEmail: d.contactEmail || "",
     contactPhone: d.contactPhone || "",
     address: d.address || "",
+    registeredAddress: d.registeredAddress,
     footerTagline: d.footerTagline || "",
     copyrightText: d.copyrightText || "",
     newsletterHeading: d.newsletterHeading || "",

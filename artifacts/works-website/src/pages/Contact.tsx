@@ -23,6 +23,7 @@ import { TermText } from "@/components/Terminology";
 import { accessibleTermLabel } from "@/lib/terminology";
 import contactHeroImage from "@/assets/heroes/Hero_contact_1789027068383.png";
 import contactMobileHeroImage from "@/assets/heroes/Hero_contact_mobile_1789374396074.png";
+import { companyAddresses } from "@/data/organization";
 
 const fadeUp = {
   initial: { opacity: 0, y: 20 },
@@ -139,6 +140,7 @@ export default function Contact() {
     email: "",
     subject: "",
     message: "",
+    referralSource: "",
   });
   const [submitted, setSubmitted] = useState(false);
   const [privacyAccepted, setPrivacyAccepted] = useState(false);
@@ -148,6 +150,7 @@ export default function Contact() {
   const [submitting, setSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
   const cvInputRef = useRef<HTMLInputElement>(null);
+  const uploadedCvRef = useRef<{ file: File; url: string } | null>(null);
   const trackingConsentRef = useRef(consent);
   trackingConsentRef.current = consent;
 
@@ -201,7 +204,13 @@ export default function Contact() {
     setSubmitError(null);
     setCvError(null);
     try {
-      const cvUrl = isCareerSubject && cvFile ? await uploadCv(cvFile) : undefined;
+      let cvUrl: string | undefined;
+      if (isCareerSubject && cvFile) {
+        if (uploadedCvRef.current?.file !== cvFile) {
+          uploadedCvRef.current = { file: cvFile, url: await uploadCv(cvFile) };
+        }
+        cvUrl = uploadedCvRef.current.url;
+      }
       await sendContactMessage({
         ...formData,
         subject: selectedSubject?.label || formData.subject,
@@ -242,7 +251,8 @@ export default function Contact() {
     : "");
   const formSubjects = contactPage?.formSubjects || [];
 
-  const address = globalSettings?.address || "";
+  const addresses = companyAddresses(globalSettings);
+  const address = addresses.office;
   const email = globalSettings?.contactEmail || "hello@works.hu";
   const phone = globalSettings?.contactPhone || (locale === "hu" ? "+36 1 234 5678" : "");
   const openingHours = globalSettings?.openingHours || (locale === "hu" ? [
@@ -433,6 +443,24 @@ export default function Contact() {
                       />
                     </div>
 
+                    <div>
+                      <label htmlFor="referralSource" className="block text-sm font-semibold text-works-dark mb-2">
+                        {t("contact.referralLabel")}
+                      </label>
+                      <div className="relative">
+                        <select id="referralSource" name="referralSource"
+                          value={formData.referralSource} onChange={handleChange}
+                          className={`${inputClass} appearance-none pr-12`}
+                          data-testid="contact-field-referral">
+                          <option value="">{t("contact.referralPlaceholder")}</option>
+                          {messages.contact.referralOptions.map(({ value, label }) => (
+                            <option key={value} value={value}>{label}</option>
+                          ))}
+                        </select>
+                        <ChevronDown aria-hidden="true" className="pointer-events-none absolute right-5 top-1/2 h-4 w-4 -translate-y-1/2" />
+                      </div>
+                    </div>
+
                     {isCareerSubject && (
                       <div>
                         <label className="block text-sm font-semibold text-works-dark mb-2">
@@ -579,9 +607,20 @@ export default function Contact() {
                       <MapPin className="w-5 h-5 text-works-primary" />
                     </div>
                     <p className="text-works-dark/60 leading-relaxed">
-                      <TermText>{address}</TermText>
+                      <strong className="block text-works-dark">{t("footer.officeLabel")}</strong>
+                      {address}
                     </p>
                   </div>}
+                  <div className="flex gap-4 items-center">
+                    <div className="flex-shrink-0 w-12 h-12 bg-works-primary/10 flex items-center justify-center">
+                      <MapPin className="w-5 h-5 text-works-primary" />
+                    </div>
+                    <p className="text-works-dark/60 leading-relaxed">
+                      <strong className="block text-works-dark">{t("footer.registeredLabel")}</strong>
+                      <span className="block">{addresses.legalName}</span>
+                      {addresses.registered}
+                    </p>
+                  </div>
 
                   {phone && <div className="flex gap-4 items-center">
                     <div className="flex-shrink-0 w-12 h-12 bg-works-primary/10 flex items-center justify-center">

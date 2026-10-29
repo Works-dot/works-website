@@ -260,6 +260,7 @@ export default function SEOHead({ structuredContent, ready = true, noindex = fal
     settings?.socialLinks,
     settings?.contactEmail,
     settings?.contactPhone,
+    settings?.registeredAddress,
     structuredContent,
   ]);
 

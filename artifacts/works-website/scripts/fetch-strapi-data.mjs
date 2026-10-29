@@ -336,6 +336,7 @@ async function fetchAll(locale) {
       contactEmail: gd.contactEmail || "",
       contactPhone: gd.contactPhone || "",
       address: gd.address || "",
+      registeredAddress: gd.registeredAddress || "1118 Budapest, Ménesi út 18.",
       footerTagline: gd.footerTagline || "",
       copyrightText: gd.copyrightText || "",
       newsletterHeading: gd.newsletterHeading || "",

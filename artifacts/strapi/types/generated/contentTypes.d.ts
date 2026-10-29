@@ -870,6 +870,54 @@ export interface ApiContactPageContactPage extends Struct.SingleTypeSchema {
   };
 }
 
+export interface ApiContactSubmissionContactSubmission
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'contact_submissions';
+  info: {
+    description: 'Priv\u00E1t kapcsolati megkeres\u00E9sek \u00E9s lev\u00E9lk\u00FCld\u00E9si \u00E1llapotuk';
+    displayName: 'Kapcsolati bek\u00FCld\u00E9sek';
+    pluralName: 'contact-submissions';
+    singularName: 'contact-submission';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    contentHash: Schema.Attribute.String & Schema.Attribute.Required;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    cvUrl: Schema.Attribute.Text;
+    deliveryStatus: Schema.Attribute.Enumeration<['pending', 'sent']> &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'pending'>;
+    email: Schema.Attribute.Email & Schema.Attribute.Required;
+    emailId: Schema.Attribute.String;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::contact-submission.contact-submission'
+    > &
+      Schema.Attribute.Private;
+    message: Schema.Attribute.Text & Schema.Attribute.Required;
+    name: Schema.Attribute.String & Schema.Attribute.Required;
+    privacyAccepted: Schema.Attribute.Boolean & Schema.Attribute.Required;
+    publishedAt: Schema.Attribute.DateTime;
+    referralLabel: Schema.Attribute.String;
+    referralSource: Schema.Attribute.Enumeration<
+      ['google', 'ai', 'linkedin', 'recommendation', 'directory', 'other']
+    >;
+    sentAt: Schema.Attribute.DateTime;
+    subject: Schema.Attribute.String & Schema.Attribute.Required;
+    submissionKey: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.Unique;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiGlobalSettingGlobalSetting extends Struct.SingleTypeSchema {
   collectionName: 'global_settings';
   info: {
@@ -953,6 +1001,8 @@ export interface ApiGlobalSettingGlobalSetting extends Struct.SingleTypeSchema {
         };
       }>;
     publishedAt: Schema.Attribute.DateTime;
+    registeredAddress: Schema.Attribute.String &
+      Schema.Attribute.DefaultTo<'1118 Budapest, M\u00E9nesi \u00FAt 18.'>;
     siteName: Schema.Attribute.String &
       Schema.Attribute.Required &
       Schema.Attribute.SetPluginOptions<{
@@ -2021,6 +2071,7 @@ declare module '@strapi/strapi' {
       'api::career-position.career-position': ApiCareerPositionCareerPosition;
       'api::client.client': ApiClientClient;
       'api::contact-page.contact-page': ApiContactPageContactPage;
+      'api::contact-submission.contact-submission': ApiContactSubmissionContactSubmission;
       'api::global-setting.global-setting': ApiGlobalSettingGlobalSetting;
       'api::homepage.homepage': ApiHomepageHomepage;
       'api::legal-document.legal-document': ApiLegalDocumentLegalDocument;

@@ -22,7 +22,7 @@ import {
   type RouteKey,
 } from "./lib/i18n-routes";
 import { DEFAULT_SITE_URL, resolveSiteUrl } from "./seo-config";
-import { organizationIdentity } from "./data/organization";
+import { organizationIdentity, registeredPostalAddress } from "./data/organization";
 import type { BlogPost, CareerPosition, Project, Service, TeamMember } from "./lib/strapi";
 import cachedContent from "./data/strapi-cache.json";
 import { canonicalTransitionPath } from "./lib/blog-slug-transition";
@@ -640,7 +640,7 @@ export function buildJsonLd(
       legalName: organizationIdentity.legalName,
       url: SITE_URL,
       logo: absoluteUrl(organizationIdentity.logoPath),
-      address: organizationIdentity.address,
+      address: registeredPostalAddress(settings),
       ...(email ? { email } : {}),
       ...(telephone ? { telephone } : {}),
       description: localizedDescription,

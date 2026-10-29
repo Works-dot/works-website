@@ -6,7 +6,9 @@ import {
   triggerWebsiteRebuildNow,
 } from "./website-rebuild";
 import { registerCvUploadRoutes } from "./cv-upload";
+import { registerContactSubmissionRoutes } from "./contact-submissions";
 import { migrateLegacyBlogHungarian } from "./legacy-blog-hu";
+import { migrateCompanyAddresses } from "./company-address-migration";
 import { migrateHuBlogSlugs } from "./hu-blog-slugs";
 
 function registerWebsiteRebuildAdminRoutes(strapi: any) {
@@ -1909,6 +1911,7 @@ async function ensurePublicPermissions(strapi: any) {
 
   for (const [uid, contentType] of Object.entries<any>(strapi.contentTypes)) {
     if (!uid.startsWith("api::")) continue;
+    if (uid === "api::contact-submission.contact-submission") continue;
 
     actions.push(`${uid}.find`);
 
@@ -1929,6 +1932,11 @@ async function ensurePublicPermissions(strapi: any) {
     strapi.log.warn("Public role not found — skipping permission setup");
     return;
   }
+
+  // Private submissions must never inherit the public content read permissions.
+  await strapi.query("plugin::users-permissions.permission").deleteMany({
+    where: { action: { $startsWith: "api::contact-submission.contact-submission." } },
+  });
 
   const existingPermissions = await strapi
     .query("plugin::users-permissions.permission")
@@ -2753,8 +2761,10 @@ export default {
   register({ strapi }) {
     registerWebsiteRebuildAdminRoutes(strapi);
     registerCvUploadRoutes(strapi);
+    registerContactSubmissionRoutes(strapi);
   },
   async bootstrap({ strapi }) {
+    await migrateCompanyAddresses(strapi);
     // Complete the reviewed slug-only migration before serving CMS requests.
     await migrateHuBlogSlugs(strapi);
     await resetAdminFromEnv(strapi);

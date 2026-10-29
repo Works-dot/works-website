@@ -52,6 +52,11 @@ export default {
       "type": "text",
       "pluginOptions": { "i18n": { "localized": true } }
     },
+    "registeredAddress": {
+      "type": "string",
+      "default": "1118 Budapest, Ménesi út 18.",
+      "regex": "^\\d{4} [^,]+, .+\\.$"
+    },
     "openingHours": {
       "type": "component",
       "repeatable": true,

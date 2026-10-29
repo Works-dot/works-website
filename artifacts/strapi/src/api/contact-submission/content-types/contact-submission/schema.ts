@@ -1,0 +1,26 @@
+export default {
+  kind: "collectionType",
+  collectionName: "contact_submissions",
+  info: {
+    singularName: "contact-submission",
+    pluralName: "contact-submissions",
+    displayName: "Kapcsolati beküldések",
+    description: "Privát kapcsolati megkeresések és levélküldési állapotuk",
+  },
+  options: { draftAndPublish: false },
+  attributes: {
+    submissionKey: { type: "string", required: true, unique: true },
+    contentHash: { type: "string", required: true },
+    name: { type: "string", required: true },
+    email: { type: "email", required: true },
+    subject: { type: "string", required: true },
+    message: { type: "text", required: true },
+    cvUrl: { type: "text" },
+    referralSource: { type: "enumeration", enum: ["google", "ai", "linkedin", "recommendation", "directory", "other"] },
+    referralLabel: { type: "string" },
+    privacyAccepted: { type: "boolean", required: true },
+    deliveryStatus: { type: "enumeration", enum: ["pending", "sent"], default: "pending", required: true },
+    emailId: { type: "string" },
+    sentAt: { type: "datetime" },
+  },
+};

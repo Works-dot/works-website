@@ -45,6 +45,8 @@ export interface Messages {
   // Footer
   footer: {
     contentHeading: string;
+    officeLabel: string;
+    registeredLabel: string;
     menuHeading: string;
     servicesHeading: string;
     companyHeading: string;
@@ -126,6 +128,9 @@ export interface Messages {
     formSubjectPlaceholder: string;
     formMessageLabel: string;
     formMessagePlaceholder: string;
+    referralLabel: string;
+    referralPlaceholder: string;
+    referralOptions: { value: string; label: string }[];
     cvUploadLabel: string;
     cvUploadDragText: string;
     cvUploadBrowse: string;
@@ -267,6 +272,8 @@ const hu: Messages = {
 
   footer: {
     contentHeading: "Tartalom lábléc",
+    officeLabel: "Iroda",
+    registeredLabel: "Székhely",
     menuHeading: "Lábléc menü",
     servicesHeading: "Szolgáltatások",
     companyHeading: "Cég",
@@ -344,6 +351,16 @@ const hu: Messages = {
     formSubjectPlaceholder: "Válassz témát...",
     formMessageLabel: "Üzenet",
     formMessagePlaceholder: "Mesélj a projektedről...",
+    referralLabel: "Honnan hallott rólunk?",
+    referralPlaceholder: "Válassz, ha szeretnél (nem kötelező)",
+    referralOptions: [
+      { value: "google", label: "Google-keresés" },
+      { value: "ai", label: "AI-asszisztens (ChatGPT, Gemini stb.)" },
+      { value: "linkedin", label: "LinkedIn" },
+      { value: "recommendation", label: "ajánlás" },
+      { value: "directory", label: "Clutch vagy más katalógus" },
+      { value: "other", label: "egyéb" },
+    ],
     cvUploadLabel: "Önéletrajz feltöltése",
     cvUploadDragText: "Húzd ide az önéletrajzod, vagy",
     cvUploadBrowse: "tallózz",
@@ -485,6 +502,8 @@ const en: Messages = {
 
   footer: {
     contentHeading: "Footer content",
+    officeLabel: "Office",
+    registeredLabel: "Registered office",
     menuHeading: "Footer menu",
     servicesHeading: "Services",
     companyHeading: "Company",
@@ -562,6 +581,16 @@ const en: Messages = {
     formSubjectPlaceholder: "Choose a topic...",
     formMessageLabel: "Message",
     formMessagePlaceholder: "Tell us about your project...",
+    referralLabel: "How did you hear about us?",
+    referralPlaceholder: "Choose an option (optional)",
+    referralOptions: [
+      { value: "google", label: "Google search" },
+      { value: "ai", label: "AI assistant (ChatGPT, Gemini, etc.)" },
+      { value: "linkedin", label: "LinkedIn" },
+      { value: "recommendation", label: "Recommendation" },
+      { value: "directory", label: "Clutch or another directory" },
+      { value: "other", label: "Other" },
+    ],
     cvUploadLabel: "Upload CV",
     cvUploadDragText: "Drag your CV here, or",
     cvUploadBrowse: "browse",

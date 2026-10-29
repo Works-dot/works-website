@@ -12,6 +12,7 @@ import { buildLocalePath } from "@/lib/i18n-routes";
 import { TermText } from "@/components/Terminology";
 import { accessibleTermLabel } from "@/lib/terminology";
 import { validSocialLinks } from "@/seo-data";
+import { companyAddresses } from "@/data/organization";
 
 const SOCIAL_ICONS: Record<string, React.ReactNode> = {
   linkedin: <Linkedin className="w-5 h-5" />,
@@ -55,7 +56,7 @@ export function Footer() {
   const newsletterDescription = settings?.newsletterDescription || (locale === "hu" ? "Heti inspiráció, UX trendek és szakmai tartalmak egyenesen a postaládádba." : "");
   const footerTagline = settings?.footerTagline || (locale === "hu" ? "Digitális élményeket tervezünk és építünk modern vállalatok számára." : "");
   const contactEmail = settings?.contactEmail || "hello@works.hu";
-  const address = settings?.address || "";
+  const addresses = companyAddresses(settings);
   const copyrightText = settings?.copyrightText || `${new Date().getFullYear()} Works.`;
   const socialLinks = validSocialLinks(settings?.socialLinks);
   const footerServices = (services || []).slice(0, 4);
@@ -193,11 +194,16 @@ export function Footer() {
                <TermText>{t("footer.contactHeading")}</TermText>
              </h4>
             <ul role="list" className="space-y-4">
-              <li aria-posinset={1} aria-setsize={2} className="flex flex-col">
-                 <span className="text-sm text-works-muted/60 mb-1"><TermText>{t("footer.addressLabel")}</TermText></span>
-                 <span className="text-works-muted"><TermText>{address}</TermText></span>
+              <li className="flex flex-col">
+                 <span className="text-sm text-works-muted/60 mb-1">{t("footer.officeLabel")}</span>
+                 <span className="text-works-muted">{addresses.office}</span>
               </li>
-              <li aria-posinset={2} aria-setsize={2} className="flex flex-col">
+              <li className="flex flex-col">
+                 <span className="text-sm text-works-muted/60 mb-1">{t("footer.registeredLabel")}</span>
+                 <span>{addresses.legalName}</span>
+                 <span>{addresses.registered}</span>
+              </li>
+              <li className="flex flex-col">
                  <span className="text-sm text-works-muted/60 mb-1"><TermText>{t("footer.emailLabel")}</TermText></span>
                 <a href={`mailto:${contactEmail}`} className="text-works-primary font-semibold hover:underline">{contactEmail}</a>
               </li>
