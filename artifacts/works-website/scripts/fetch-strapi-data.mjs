@@ -8,6 +8,7 @@ import { createHash } from "node:crypto";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import { mapContentBlocks, strapiImageUrl } from "../src/lib/content-blocks.js";
 import { normalizeProjectSlug } from "../src/lib/project-slug.js";
+import { normalizeHuBlogSlug } from "../src/lib/blog-slug-transition.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const root = path.resolve(__dirname, "..");
@@ -125,7 +126,7 @@ function mapProject(p) {
 function mapBlogPost(p) {
   return {
     documentId: p.documentId,
-    slug: p.slug,
+    slug: activeLocale === "hu" ? normalizeHuBlogSlug(p.slug) : p.slug,
     title: p.title,
     excerpt: p.excerpt || "",
     date: p.date || "",

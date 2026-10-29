@@ -7,6 +7,7 @@ import {
 } from "./website-rebuild";
 import { registerCvUploadRoutes } from "./cv-upload";
 import { migrateLegacyBlogHungarian } from "./legacy-blog-hu";
+import { migrateHuBlogSlugs } from "./hu-blog-slugs";
 
 function registerWebsiteRebuildAdminRoutes(strapi: any) {
   strapi.server.routes({
@@ -2754,6 +2755,8 @@ export default {
     registerCvUploadRoutes(strapi);
   },
   async bootstrap({ strapi }) {
+    // Complete the reviewed slug-only migration before serving CMS requests.
+    await migrateHuBlogSlugs(strapi);
     await resetAdminFromEnv(strapi);
     await updateAllLabels(strapi);
     await ensurePublicPermissions(strapi);

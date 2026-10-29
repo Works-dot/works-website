@@ -1,10 +1,13 @@
 import fs from "node:fs";
 import path from "node:path";
+import { HU_BLOG_SLUG_PAIRS } from "./src/lib/blog-slug-transition.js";
 
 export const LEGACY_ORIGIN = "https://www.worksdot.hu";
 // Approved first two CSV columns; the two legal destinations were explicitly
 // changed by the owner to the CMS-backed Hungarian imprint HTML page.
 export const LEGACY_PATHS = {
+  ...Object.fromEntries(Object.entries(HU_BLOG_SLUG_PAIRS).map(([oldSlug, newSlug]) =>
+    [`/blog/${oldSlug}`, `/blog/${newSlug}`])),
   "/user-research": "/szolgaltatasok/ux-kutatas",
   "/ux-ui-design": "/szolgaltatasok/ux-ui-design",
   "/service-design": "/szolgaltatasok/service-design",

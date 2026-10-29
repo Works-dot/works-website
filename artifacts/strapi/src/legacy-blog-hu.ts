@@ -1,6 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { createHash } from "node:crypto";
+import { HU_SLUG_MIGRATION } from "./hu-blog-slugs";
 
 const uid = "api::blog-post.blog-post";
 const migrationKey = "legacy_english_blog_hu_full_translation_v1";
@@ -103,7 +104,8 @@ export async function migrateLegacyBlogHungarian(strapi: any) {
       documentId: record.documentId, locale: "hu", status: "draft",
       populate: populatePost,
     });
-    if (!published || published.slug !== record.slug || !draft || draft.slug !== record.slug) {
+    const allowedSlugs = [record.slug, HU_SLUG_MIGRATION.find(([id]) => id === record.documentId)?.[2]];
+    if (!published || !allowedSlugs.includes(published.slug) || !draft || !allowedSlugs.includes(draft.slug)) {
       throw new Error(`Legacy HU blog post missing or identity mismatch: ${record.slug}`);
     }
     if (JSON.stringify(comparable(published)) !== JSON.stringify(comparable(draft))) {

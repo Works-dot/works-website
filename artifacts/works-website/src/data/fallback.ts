@@ -1,5 +1,5 @@
 import { projects as rawProjects } from "./projects";
-import { sourceHuBlogSlug } from "../lib/blog-slug-transition";
+import { normalizeHuBlogSlug } from "../lib/blog-slug-transition";
 import { blogPosts as rawBlogPosts } from "./blog-posts";
 import { whyUsCards as rawWhyUsCards } from "./careers";
 import { teamMembers as rawTeamMembers } from "./team";
@@ -286,9 +286,9 @@ export const fallbackProjects: Project[] = (hasData("projects")
   ? (strapiCache.projects as Project[])
   : hardcodedProjects).map(project => ({ ...project, slug: normalizeProjectSlug(project.slug) }));
 
-export const fallbackBlogPosts: BlogPost[] = hasData("blogPosts")
+export const fallbackBlogPosts: BlogPost[] = (hasData("blogPosts")
   ? (strapiCache.blogPosts as BlogPost[])
-  : hardcodedBlogPosts;
+  : hardcodedBlogPosts).map(post => ({ ...post, slug: normalizeHuBlogSlug(post.slug) }));
 
 // Empty is valid CMS content. Jobs never have demo/editorial fallbacks.
 export const fallbackPositions: CareerPosition[] = Array.isArray(strapiCache.positions)
@@ -432,7 +432,7 @@ export function getLocaleFallback<T>(key: string, locale: Locale): T | undefined
   const [base, ...parts] = key.split(":");
   if (parts.length > 0) {
     const requestedSlug = parts[parts.length - 1];
-    const slug = base === "blogPost" ? sourceHuBlogSlug(requestedSlug) : requestedSlug;
+    const slug = base === "blogPost" ? normalizeHuBlogSlug(requestedSlug) : requestedSlug;
     const collections: Record<string, { slug: string }[]> = {
       project: fallbackProjects,
       blogPost: fallbackBlogPosts,
@@ -480,7 +480,7 @@ export function getLocaleCounterpartSlug(
   routeKey: DetailRouteKey,
   sourceSlug: string,
 ): string | undefined {
-  if (sourceLocale === "hu" && routeKey === "blogPost") sourceSlug = sourceHuBlogSlug(sourceSlug);
+  if (sourceLocale === "hu" && routeKey === "blogPost") sourceSlug = normalizeHuBlogSlug(sourceSlug);
   const collectionKey = detailCollectionKeys[routeKey];
   const source = getLocaleFallback<{ slug: string; documentId?: string }[]>(
     collectionKey,

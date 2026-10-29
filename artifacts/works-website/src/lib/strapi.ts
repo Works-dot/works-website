@@ -1,5 +1,5 @@
 import { mapContentBlocks, strapiImageUrl } from "./content-blocks.js";
-import { sourceHuBlogSlug } from "./blog-slug-transition.js";
+import { sourceHuBlogSlug, normalizeHuBlogSlug } from "./blog-slug-transition.js";
 
 const STRAPI_API = "/strapi/api";
 
@@ -499,18 +499,26 @@ export async function getBlogPosts(locale?: string): Promise<BlogPost[]> {
       locale
     )
   );
-  return res.data.map(mapBlogPost);
+  return res.data.map(post => {
+    const mapped = mapBlogPost(post);
+    return !locale || locale === "hu" ? { ...mapped, slug: normalizeHuBlogSlug(mapped.slug) } : mapped;
+  });
 }
 
 export async function getBlogPostBySlug(slug: string, locale?: string): Promise<BlogPost | null> {
-  if (!locale || locale === "hu") slug = sourceHuBlogSlug(slug);
+  const hu = !locale || locale === "hu";
+  const filter = hu
+    ? `filters[slug][$in][0]=${encodeURIComponent(sourceHuBlogSlug(slug))}&filters[slug][$in][1]=${encodeURIComponent(normalizeHuBlogSlug(slug))}`
+    : `filters[slug][$eq]=${encodeURIComponent(slug)}`;
   const res = await fetchApi<StrapiListResponse<StrapiBlogPost>>(
     appendLocale(
-      `/blog-posts?${BLOG_POPULATE}&filters[slug][$eq]=${encodeURIComponent(slug)}`,
+      `/blog-posts?${BLOG_POPULATE}&${filter}`,
       locale
     )
   );
-  return res.data[0] ? mapBlogPost(res.data[0]) : null;
+  if (res.data.length > 1) throw new Error("Conflicting HU blog slug records");
+  const post = res.data[0] ? mapBlogPost(res.data[0]) : null;
+  return post && hu ? { ...post, slug: normalizeHuBlogSlug(post.slug) } : post;
 }
 
 export function getNextBlogPost(posts: BlogPost[], currentSlug: string): BlogPost {

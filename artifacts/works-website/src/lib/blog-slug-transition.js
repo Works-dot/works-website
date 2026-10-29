@@ -1,5 +1,4 @@
-// Phase 1: new HU URLs are aliases only. Keep existing CMS slugs and canonical
-// URLs until this release has been deployed and verified on Railway.
+// Final HU URLs. Accept either CMS slug during the deployment transition.
 export const HU_BLOG_SLUG_PAIRS = {
   "why-lofi-design-is-important-in-the-design-process": "miert-fontos-a-lofi-design",
   "microinteractions-when-how-and-why": "mikrointerakciok-mikor-hogyan-miert",
@@ -17,6 +16,9 @@ const originalByAlias = Object.fromEntries(
 export function sourceHuBlogSlug(slug) {
   return Object.hasOwn(originalByAlias, slug) ? originalByAlias[slug] : slug;
 }
+export function normalizeHuBlogSlug(slug) {
+  return Object.hasOwn(HU_BLOG_SLUG_PAIRS, slug) ? HU_BLOG_SLUG_PAIRS[slug] : slug;
+}
 export function canonicalTransitionPath(path) {
-  return path.replace(/^\/blog\/([^/?#]+)/, (_, slug) => `/blog/${sourceHuBlogSlug(slug)}`);
+  return path.replace(/^\/blog\/([^/?#]+)/, (_, slug) => `/blog/${normalizeHuBlogSlug(slug)}`);
 }

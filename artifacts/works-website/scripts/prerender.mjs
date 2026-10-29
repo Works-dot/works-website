@@ -2,7 +2,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { buildLegacyRedirects } from "../legacy-redirects.mjs";
-import { HU_BLOG_SLUG_PAIRS, canonicalTransitionPath } from "../src/lib/blog-slug-transition.js";
+import { canonicalTransitionPath } from "../src/lib/blog-slug-transition.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const root = path.resolve(__dirname, "..");
@@ -66,16 +66,8 @@ async function prerender() {
     ];
 
     allRoutes.push(...staticRoutes, ...dynamicRoutes);
-    if (locale === "hu") {
-      for (const [oldSlug, newSlug] of Object.entries(HU_BLOG_SLUG_PAIRS)) {
-        if (!blogPosts.some((post) => post.slug === oldSlug)) {
-          throw new Error(`HU blog transition source missing: ${oldSlug}`);
-        }
-        if (blogPosts.some((post) => post.slug === newSlug)) {
-          throw new Error(`HU blog transition alias conflicts with published content: ${newSlug}`);
-        }
-        allRoutes.push(`/blog/${newSlug}`);
-      }
+    if (locale === "hu" && new Set(blogPosts.map(post => post.slug)).size !== blogPosts.length) {
+      throw new Error("Conflicting HU blog slugs after normalization");
     }
   }
 

@@ -123,7 +123,7 @@ describe("website health endpoints", () => {
   });
   it("redirects every approved legacy route directly, preserving queries and method boundaries", async () => {
     const redirects = buildLegacyRedirects();
-    assert.equal(Object.keys(redirects).length, 29);
+    assert.equal(Object.keys(redirects).length, 38);
     const base = await listen(createApp({
       distDir: writeFixture(), canonicalOrigin: "https://www.worksdot.hu",
       legacyRedirects: redirects,
@@ -247,15 +247,15 @@ describe("sanitized errors and canonical redirects", () => {
     }));
     const cases = [
       ["worksdot.hu", "/home/", "/", 301],
-      ["worksdot.hu", "/blog/how-do-we-pay-online/", "/blog/how-do-we-pay-online", 301],
-      ["www.worksdot.hu", "/blog/how-do-we-pay-online/", "/blog/how-do-we-pay-online", 301],
+      ["worksdot.hu", "/blog/how-do-we-pay-online/", "/blog/hogyan-fizetunk-online", 301],
+      ["www.worksdot.hu", "/blog/how-do-we-pay-online/", "/blog/hogyan-fizetunk-online", 301],
       ["worksdot.hu", "/?gclid=TEST", "/?gclid=TEST", 308],
       ["www.worksdot.hu", "/?format=rss&gclid=TEST&utm_source=a%20b", "/?gclid=TEST&utm_source=a%20b", 301],
       ["worksdot.hu", "/home/?format=json&tag=x&tag=y&utm_source=a+b", "/?tag=x&tag=y&utm_source=a+b", 301],
       ["www.worksdot.hu", "/projektek/informacios-architektura-B2B-webshophoz/?format=x&gclid=TEST",
         "/projektek/informacios-architektura-b2b-webshophoz?gclid=TEST", 301],
       ["www.worksdot.hu", "/blog/how-do-we-pay-online?%66ormat=x&format=y&utm_medium=cpc",
-        "/blog/how-do-we-pay-online?utm_medium=cpc", 301],
+        "/blog/hogyan-fizetunk-online?utm_medium=cpc", 301],
     ];
     for (const [host, source, destination, status] of cases) {
       for (const method of ["GET", "HEAD"]) {
