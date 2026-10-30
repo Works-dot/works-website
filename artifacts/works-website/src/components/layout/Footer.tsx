@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { ManagedImage } from "@/components/ui/ResponsiveImage";
 import { Link } from "wouter";
 import { Linkedin, Instagram, Dribbble, ArrowRight, Link as LinkIcon } from "lucide-react";
 import { NewsletterError, useSubscribeNewsletter } from "@/hooks/use-newsletter";
@@ -121,7 +122,7 @@ export function Footer() {
         <div className="max-w-6xl lg:max-w-[calc(var(--container-7xl)-4rem)] mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
           <div className="lg:col-span-1">
             {logoImg ? (
-              <img
+              <ManagedImage sizes="128px"
                 src={logoImg}
                 alt={accessibleTermLabel(t("footer.logoAlt"), locale)}
                 className="h-8 w-auto object-contain brightness-0 invert mb-6"

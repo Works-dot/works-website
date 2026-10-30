@@ -45,7 +45,7 @@ function FeaturedBlogCard({ slug, title, excerpt, date, image, imageAlt, author,
             loading="eager"
             fetchPriority="high"
             pictureClassName="block w-full h-full"
-            sizes="(min-width: 1024px) 50vw, 100vw"
+            sizes="(min-width: 1404px) 646px, (min-width: 1024px) calc(50vw - 56px), (min-width: 640px) calc(100vw - 48px), calc(100vw - 32px)"
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
           />
         </div>
@@ -98,7 +98,7 @@ function BlogGridCard({ slug, title, excerpt, date, image, imageAlt, author, rea
             src={image}
             alt={accessibleTermLabel(imageAlt || title, locale)}
             pictureClassName="block w-full h-full"
-            sizes="(min-width: 1024px) 33vw, 50vw"
+            sizes="(min-width: 1404px) 420px, (min-width: 1024px) calc(33.333vw - 48px), (min-width: 768px) calc(50vw - 40px), (min-width: 640px) calc(100vw - 48px), calc(100vw - 32px)"
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
           />
         </div>

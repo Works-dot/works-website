@@ -2,7 +2,7 @@ export interface StrapiContentBlockInput {
   __component: string;
   body?: string;
   quote?: string;
-  image?: { url?: string | null; alternativeText?: string | null } | null;
+  image?: { url?: string | null; alternativeText?: string | null; width?: number; height?: number } | null;
   caption?: string;
 }
 
@@ -11,6 +11,8 @@ export interface MappedContentBlock {
   content: string;
   caption?: string;
   alt?: string;
+  width?: number;
+  height?: number;
 }
 
 export function strapiImageUrl(url: string | undefined | null): string;

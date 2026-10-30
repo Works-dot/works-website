@@ -2,4825 +2,9453 @@
 import type { OptimizedImageManifestEntry } from "./image-manifest-types";
 
 const imageManifest: Record<string, OptimizedImageManifestEntry> = {
+  "/strapi/uploads/AI_tamogatott_kutatas_3cb6dd6087.png": {
+    "source": "/strapi/uploads/AI_tamogatott_kutatas_3cb6dd6087.png",
+    "src": "/media/uploads/AI_tamogatott_kutatas_3cb6dd6087-a7ea795c47aa8c15b6f7-1627.webp",
+    "srcSet": "/media/uploads/AI_tamogatott_kutatas_3cb6dd6087-d54821f1abf1138c8174-64.webp 64w, /media/uploads/AI_tamogatott_kutatas_3cb6dd6087-6303fc910c25e7eb7b11-128.webp 128w, /media/uploads/AI_tamogatott_kutatas_3cb6dd6087-a233638a8f4d32d86a1b-192.webp 192w, /media/uploads/AI_tamogatott_kutatas_3cb6dd6087-99e60c1bdf9a5b0cf2aa-320.webp 320w, /media/uploads/AI_tamogatott_kutatas_3cb6dd6087-5c2e425faaa32b05ba3b-480.webp 480w, /media/uploads/AI_tamogatott_kutatas_3cb6dd6087-9df7b35cb9ad53f6ade2-768.webp 768w, /media/uploads/AI_tamogatott_kutatas_3cb6dd6087-cdf4a30312ef31f8d172-1200.webp 1200w, /media/uploads/AI_tamogatott_kutatas_3cb6dd6087-8e78f975c04999762851-1600.webp 1600w, /media/uploads/AI_tamogatott_kutatas_3cb6dd6087-a7ea795c47aa8c15b6f7-1627.webp 1627w",
+    "width": 1627,
+    "height": 967
+  },
+  "/strapi/uploads/Abacus_505ec49332.png": {
+    "source": "/strapi/uploads/Abacus_505ec49332.png",
+    "src": "/media/uploads/Abacus_505ec49332-d4195682cef6bedbbe6f-246.webp",
+    "srcSet": "/media/uploads/Abacus_505ec49332-588a3225c40d461ceb00-64.webp 64w, /media/uploads/Abacus_505ec49332-a224c91843897e95c861-128.webp 128w, /media/uploads/Abacus_505ec49332-41527e552a175a249b80-192.webp 192w, /media/uploads/Abacus_505ec49332-d4195682cef6bedbbe6f-246.webp 246w",
+    "width": 246,
+    "height": 94
+  },
+  "/strapi/uploads/Akos_48fabd8914.webp": {
+    "source": "/strapi/uploads/Akos_48fabd8914.webp",
+    "src": "/media/uploads/Akos_48fabd8914-e446a6a3819d1f197c9a-440.webp",
+    "srcSet": "/media/uploads/Akos_48fabd8914-a0c49c54312dbdeef54c-64.webp 64w, /media/uploads/Akos_48fabd8914-0490aefb8427f11ea724-128.webp 128w, /media/uploads/Akos_48fabd8914-8c404ab380b0a2319d6d-192.webp 192w, /media/uploads/Akos_48fabd8914-a9c0f2be5243b8e1a6d7-320.webp 320w, /media/uploads/Akos_48fabd8914-e446a6a3819d1f197c9a-440.webp 440w",
+    "width": 440,
+    "height": 440
+  },
+  "/strapi/uploads/Alerant_logoanim_1280x896_a84a03f953.gif": {
+    "source": "/strapi/uploads/Alerant_logoanim_1280x896_a84a03f953.gif",
+    "src": "/strapi/uploads/Alerant_logoanim_1280x896_a84a03f953.gif",
+    "srcSet": "",
+    "width": 1280,
+    "height": 896
+  },
+  "/strapi/uploads/Alerant_rebrand_9cefeb80ae.png": {
+    "source": "/strapi/uploads/Alerant_rebrand_9cefeb80ae.png",
+    "src": "/media/uploads/Alerant_rebrand_9cefeb80ae-dedff248cc553060e213-1024.webp",
+    "srcSet": "/media/uploads/Alerant_rebrand_9cefeb80ae-0a1508029f012920d8c4-64.webp 64w, /media/uploads/Alerant_rebrand_9cefeb80ae-4992bda7143a58a0a22c-128.webp 128w, /media/uploads/Alerant_rebrand_9cefeb80ae-f7d04c31b1607d1dcbd3-192.webp 192w, /media/uploads/Alerant_rebrand_9cefeb80ae-9ac02787daee5f60c01c-320.webp 320w, /media/uploads/Alerant_rebrand_9cefeb80ae-a3f9c8b00a54d36cd23b-480.webp 480w, /media/uploads/Alerant_rebrand_9cefeb80ae-dc1074fa46f03754052d-768.webp 768w, /media/uploads/Alerant_rebrand_9cefeb80ae-dedff248cc553060e213-1024.webp 1024w",
+    "width": 1024,
+    "height": 768
+  },
+  "/strapi/uploads/Alfa_5158d1610f.png": {
+    "source": "/strapi/uploads/Alfa_5158d1610f.png",
+    "src": "/media/uploads/Alfa_5158d1610f-4a6935212e2cbb32a4ed-252.webp",
+    "srcSet": "/media/uploads/Alfa_5158d1610f-9a1a49cbbf0e57f0ec3e-64.webp 64w, /media/uploads/Alfa_5158d1610f-15da2d89cf186bd1663c-128.webp 128w, /media/uploads/Alfa_5158d1610f-58a13645af712180c067-192.webp 192w, /media/uploads/Alfa_5158d1610f-4a6935212e2cbb32a4ed-252.webp 252w",
+    "width": 252,
+    "height": 120
+  },
+  "/strapi/uploads/Alfa_Biztosito_Ugyfelportal_f39ec1d9c4.png": {
+    "source": "/strapi/uploads/Alfa_Biztosito_Ugyfelportal_f39ec1d9c4.png",
+    "src": "/media/uploads/Alfa_Biztosito_Ugyfelportal_f39ec1d9c4-2b9628d51f6386574a6c-1024.webp",
+    "srcSet": "/media/uploads/Alfa_Biztosito_Ugyfelportal_f39ec1d9c4-14dd1a6a4620d4f94911-64.webp 64w, /media/uploads/Alfa_Biztosito_Ugyfelportal_f39ec1d9c4-7fb46fe9dfddc3a67382-128.webp 128w, /media/uploads/Alfa_Biztosito_Ugyfelportal_f39ec1d9c4-27e934fa45197313f826-192.webp 192w, /media/uploads/Alfa_Biztosito_Ugyfelportal_f39ec1d9c4-50ca72d9ac91988a9a5e-320.webp 320w, /media/uploads/Alfa_Biztosito_Ugyfelportal_f39ec1d9c4-2e38c710509bd0cbd0b1-480.webp 480w, /media/uploads/Alfa_Biztosito_Ugyfelportal_f39ec1d9c4-cd018fd2887e0d6691ef-768.webp 768w, /media/uploads/Alfa_Biztosito_Ugyfelportal_f39ec1d9c4-2b9628d51f6386574a6c-1024.webp 1024w",
+    "width": 1024,
+    "height": 768
+  },
+  "/strapi/uploads/Alfa_inside_0ca6d3d8de.png": {
+    "source": "/strapi/uploads/Alfa_inside_0ca6d3d8de.png",
+    "src": "/media/uploads/Alfa_inside_0ca6d3d8de-d03d5e95b4be2c8819f9-1024.webp",
+    "srcSet": "/media/uploads/Alfa_inside_0ca6d3d8de-45221c9d274aa440b412-64.webp 64w, /media/uploads/Alfa_inside_0ca6d3d8de-0d6d324c0eace5ceacd5-128.webp 128w, /media/uploads/Alfa_inside_0ca6d3d8de-f2bea082aa7ac76d9691-192.webp 192w, /media/uploads/Alfa_inside_0ca6d3d8de-e4ea51b7c0c605d4bb88-320.webp 320w, /media/uploads/Alfa_inside_0ca6d3d8de-d8b40dc8b6367767f8ed-480.webp 480w, /media/uploads/Alfa_inside_0ca6d3d8de-5df797bb04dab8acdf74-768.webp 768w, /media/uploads/Alfa_inside_0ca6d3d8de-d03d5e95b4be2c8819f9-1024.webp 1024w",
+    "width": 1024,
+    "height": 768
+  },
+  "/strapi/uploads/Allianz_8057894327.png": {
+    "source": "/strapi/uploads/Allianz_8057894327.png",
+    "src": "/media/uploads/Allianz_8057894327-fe229f22315f7e3f7cd7-226.webp",
+    "srcSet": "/media/uploads/Allianz_8057894327-4b5d5489ac0a6b435363-64.webp 64w, /media/uploads/Allianz_8057894327-d83f8c5b7ff1a65f1013-128.webp 128w, /media/uploads/Allianz_8057894327-28d8a6683d958cd403ef-192.webp 192w, /media/uploads/Allianz_8057894327-fe229f22315f7e3f7cd7-226.webp 226w",
+    "width": 226,
+    "height": 56
+  },
+  "/strapi/uploads/Anna_koezepes_5a54113d95.webp": {
+    "source": "/strapi/uploads/Anna_koezepes_5a54113d95.webp",
+    "src": "/media/uploads/Anna_koezepes_5a54113d95-c1a6caca6beabd077ec1-500.webp",
+    "srcSet": "/media/uploads/Anna_koezepes_5a54113d95-b0eca11c6c2ec94f2d8c-64.webp 64w, /media/uploads/Anna_koezepes_5a54113d95-8834ca9486b280302da3-128.webp 128w, /media/uploads/Anna_koezepes_5a54113d95-b9c22cb881bfb6557ed7-192.webp 192w, /media/uploads/Anna_koezepes_5a54113d95-6265e07850153dbe674d-320.webp 320w, /media/uploads/Anna_koezepes_5a54113d95-01edb4a7668f8ae4dfcf-480.webp 480w, /media/uploads/Anna_koezepes_5a54113d95-c1a6caca6beabd077ec1-500.webp 500w",
+    "width": 500,
+    "height": 500
+  },
+  "/strapi/uploads/Azonositasi_modok_kedveltsege_slide_b7266baf7c.png": {
+    "source": "/strapi/uploads/Azonositasi_modok_kedveltsege_slide_b7266baf7c.png",
+    "src": "/media/uploads/Azonositasi_modok_kedveltsege_slide_b7266baf7c-08d196569c40775b9344-1592.webp",
+    "srcSet": "/media/uploads/Azonositasi_modok_kedveltsege_slide_b7266baf7c-d80d98d1063c76d5f0c7-64.webp 64w, /media/uploads/Azonositasi_modok_kedveltsege_slide_b7266baf7c-4d8c043a04f9f35caa32-128.webp 128w, /media/uploads/Azonositasi_modok_kedveltsege_slide_b7266baf7c-f072ec767b8b6d81250f-192.webp 192w, /media/uploads/Azonositasi_modok_kedveltsege_slide_b7266baf7c-80a23c0043ca1c548a73-320.webp 320w, /media/uploads/Azonositasi_modok_kedveltsege_slide_b7266baf7c-3484b26823534e8dbbc9-480.webp 480w, /media/uploads/Azonositasi_modok_kedveltsege_slide_b7266baf7c-981345be63c3abb0a1cb-768.webp 768w, /media/uploads/Azonositasi_modok_kedveltsege_slide_b7266baf7c-bda71570b3cc7424183d-1200.webp 1200w, /media/uploads/Azonositasi_modok_kedveltsege_slide_b7266baf7c-08d196569c40775b9344-1592.webp 1592w",
+    "width": 1592,
+    "height": 862
+  },
+  "/strapi/uploads/Balazs_37d5da632d.webp": {
+    "source": "/strapi/uploads/Balazs_37d5da632d.webp",
+    "src": "/media/uploads/Balazs_37d5da632d-376da48221076ec10529-439.webp",
+    "srcSet": "/media/uploads/Balazs_37d5da632d-df17db126f830a040c26-64.webp 64w, /media/uploads/Balazs_37d5da632d-62e28eded35408701f7f-128.webp 128w, /media/uploads/Balazs_37d5da632d-4413695b2a71552912a6-192.webp 192w, /media/uploads/Balazs_37d5da632d-b84921d5d989b13d14f7-320.webp 320w, /media/uploads/Balazs_37d5da632d-376da48221076ec10529-439.webp 439w",
+    "width": 439,
+    "height": 439
+  },
+  "/strapi/uploads/Bookline_Home_1_c4e4a45201.png": {
+    "source": "/strapi/uploads/Bookline_Home_1_c4e4a45201.png",
+    "src": "/media/uploads/Bookline_Home_1_c4e4a45201-df59a3824b1576a1f528-442.webp",
+    "srcSet": "/media/uploads/Bookline_Home_1_c4e4a45201-20c20c4d88d488760f88-64.webp 64w, /media/uploads/Bookline_Home_1_c4e4a45201-e8c5a355a14e162bd670-128.webp 128w, /media/uploads/Bookline_Home_1_c4e4a45201-1d962cbedaa588efe0e0-192.webp 192w, /media/uploads/Bookline_Home_1_c4e4a45201-ff31c682d72fa7b60fd1-320.webp 320w, /media/uploads/Bookline_Home_1_c4e4a45201-df59a3824b1576a1f528-442.webp 442w",
+    "width": 442,
+    "height": 661
+  },
+  "/strapi/uploads/Bookline_SD_31c2d3ab97.png": {
+    "source": "/strapi/uploads/Bookline_SD_31c2d3ab97.png",
+    "src": "/media/uploads/Bookline_SD_31c2d3ab97-fbed228b59716ddf4a7d-1024.webp",
+    "srcSet": "/media/uploads/Bookline_SD_31c2d3ab97-2baeec6ee9550baf89c1-64.webp 64w, /media/uploads/Bookline_SD_31c2d3ab97-b59d6ad827f1216df97c-128.webp 128w, /media/uploads/Bookline_SD_31c2d3ab97-ce720db02a938d11df39-192.webp 192w, /media/uploads/Bookline_SD_31c2d3ab97-8468f8194c62afeb3519-320.webp 320w, /media/uploads/Bookline_SD_31c2d3ab97-1f2b3bff11d422fc3ebc-480.webp 480w, /media/uploads/Bookline_SD_31c2d3ab97-2c3683b5122f00d163fe-768.webp 768w, /media/uploads/Bookline_SD_31c2d3ab97-fbed228b59716ddf4a7d-1024.webp 1024w",
+    "width": 1024,
+    "height": 768
+  },
+  "/strapi/uploads/Bookline_ca1c2074a1.png": {
+    "source": "/strapi/uploads/Bookline_ca1c2074a1.png",
+    "src": "/media/uploads/Bookline_ca1c2074a1-37c6c819525a619a9404-227.webp",
+    "srcSet": "/media/uploads/Bookline_ca1c2074a1-6f089e67f2acdab370cd-64.webp 64w, /media/uploads/Bookline_ca1c2074a1-011ab50cc416549688f7-128.webp 128w, /media/uploads/Bookline_ca1c2074a1-aeadb689089c6a265370-192.webp 192w, /media/uploads/Bookline_ca1c2074a1-37c6c819525a619a9404-227.webp 227w",
+    "width": 227,
+    "height": 45
+  },
+  "/strapi/uploads/Chefparade_SD_e1104ed799.png": {
+    "source": "/strapi/uploads/Chefparade_SD_e1104ed799.png",
+    "src": "/media/uploads/Chefparade_SD_e1104ed799-b05685de8a0d5ccabfdf-1024.webp",
+    "srcSet": "/media/uploads/Chefparade_SD_e1104ed799-a22b112600a238fd4bc0-64.webp 64w, /media/uploads/Chefparade_SD_e1104ed799-f2b18857f1ca5d393fb4-128.webp 128w, /media/uploads/Chefparade_SD_e1104ed799-6c986b22b01dc527b351-192.webp 192w, /media/uploads/Chefparade_SD_e1104ed799-a267e51dcf221a0c6e99-320.webp 320w, /media/uploads/Chefparade_SD_e1104ed799-c7833dc7c77cb7296c89-480.webp 480w, /media/uploads/Chefparade_SD_e1104ed799-53a8c4681221ee4eb921-768.webp 768w, /media/uploads/Chefparade_SD_e1104ed799-b05685de8a0d5ccabfdf-1024.webp 1024w",
+    "width": 1024,
+    "height": 768
+  },
+  "/strapi/uploads/Csilla_9e9d478853.webp": {
+    "source": "/strapi/uploads/Csilla_9e9d478853.webp",
+    "src": "/media/uploads/Csilla_9e9d478853-475aa3783267e870146f-440.webp",
+    "srcSet": "/media/uploads/Csilla_9e9d478853-80ab651e832cc3e48da2-64.webp 64w, /media/uploads/Csilla_9e9d478853-19126f8b7040ee2ff85a-128.webp 128w, /media/uploads/Csilla_9e9d478853-55252e50d2ca766f94d0-192.webp 192w, /media/uploads/Csilla_9e9d478853-af1ac0f43a28ac7e1a79-320.webp 320w, /media/uploads/Csilla_9e9d478853-475aa3783267e870146f-440.webp 440w",
+    "width": 440,
+    "height": 440
+  },
+  "/strapi/uploads/Design_kepzes_e538e9780d.jpg": {
+    "source": "/strapi/uploads/Design_kepzes_e538e9780d.jpg",
+    "src": "/media/uploads/Design_kepzes_e538e9780d-1a4250fdb6ac233d986f-1159.webp",
+    "srcSet": "/media/uploads/Design_kepzes_e538e9780d-2779590cab44b1aabcff-64.webp 64w, /media/uploads/Design_kepzes_e538e9780d-6d4c8f64f7bc17dd02c3-128.webp 128w, /media/uploads/Design_kepzes_e538e9780d-8033301f18060e69b68e-192.webp 192w, /media/uploads/Design_kepzes_e538e9780d-d1c4a625337ac6e83e86-320.webp 320w, /media/uploads/Design_kepzes_e538e9780d-dffb1679515f075f0683-480.webp 480w, /media/uploads/Design_kepzes_e538e9780d-8fb79afaf9dae628c7bc-768.webp 768w, /media/uploads/Design_kepzes_e538e9780d-1a4250fdb6ac233d986f-1159.webp 1159w",
+    "width": 1159,
+    "height": 869
+  },
+  "/strapi/uploads/Era_6a70263c6b.webp": {
+    "source": "/strapi/uploads/Era_6a70263c6b.webp",
+    "src": "/media/uploads/Era_6a70263c6b-d9e546c9c1f5c65c6196-440.webp",
+    "srcSet": "/media/uploads/Era_6a70263c6b-b19003ef15960e6998d2-64.webp 64w, /media/uploads/Era_6a70263c6b-0aabde75a2e9fbb22673-128.webp 128w, /media/uploads/Era_6a70263c6b-0918fc7e0a1a474b3c42-192.webp 192w, /media/uploads/Era_6a70263c6b-c7cb2bc349e1856d2b09-320.webp 320w, /media/uploads/Era_6a70263c6b-d9e546c9c1f5c65c6196-440.webp 440w",
+    "width": 440,
+    "height": 440
+  },
+  "/strapi/uploads/Eszti_55e192f9cf.webp": {
+    "source": "/strapi/uploads/Eszti_55e192f9cf.webp",
+    "src": "/media/uploads/Eszti_55e192f9cf-e69754cb479cf57b6cdb-440.webp",
+    "srcSet": "/media/uploads/Eszti_55e192f9cf-4580459f328f2d698677-64.webp 64w, /media/uploads/Eszti_55e192f9cf-17e1b4a5a363f5b1336d-128.webp 128w, /media/uploads/Eszti_55e192f9cf-a88fafc5e5f322c69464-192.webp 192w, /media/uploads/Eszti_55e192f9cf-ae2bb5c82cffbce9c283-320.webp 320w, /media/uploads/Eszti_55e192f9cf-e69754cb479cf57b6cdb-440.webp 440w",
+    "width": 440,
+    "height": 440
+  },
+  "/strapi/uploads/Frame_26081029_1774516588825_ac6fd641ad.png": {
+    "source": "/strapi/uploads/Frame_26081029_1774516588825_ac6fd641ad.png",
+    "src": "/media/uploads/Frame_26081029_1774516588825_ac6fd641ad-85a1c542cf80151e2f89-756.webp",
+    "srcSet": "/media/uploads/Frame_26081029_1774516588825_ac6fd641ad-baeffe16daf02c0a6722-64.webp 64w, /media/uploads/Frame_26081029_1774516588825_ac6fd641ad-1746693c2cff0d191ee6-128.webp 128w, /media/uploads/Frame_26081029_1774516588825_ac6fd641ad-db24a578f658d8b4958d-192.webp 192w, /media/uploads/Frame_26081029_1774516588825_ac6fd641ad-3bf07d788c280f702935-320.webp 320w, /media/uploads/Frame_26081029_1774516588825_ac6fd641ad-705f968496f6baa9b964-480.webp 480w, /media/uploads/Frame_26081029_1774516588825_ac6fd641ad-85a1c542cf80151e2f89-756.webp 756w",
+    "width": 756,
+    "height": 547
+  },
+  "/strapi/uploads/Funpass_Accessibility_design_6451566e64.png": {
+    "source": "/strapi/uploads/Funpass_Accessibility_design_6451566e64.png",
+    "src": "/media/uploads/Funpass_Accessibility_design_6451566e64-cbef5f3fbfb32f06dfc2-1024.webp",
+    "srcSet": "/media/uploads/Funpass_Accessibility_design_6451566e64-40eabb99c47a304ecf10-64.webp 64w, /media/uploads/Funpass_Accessibility_design_6451566e64-3089931f65a4ccdfac0b-128.webp 128w, /media/uploads/Funpass_Accessibility_design_6451566e64-414d954037e70e5e1292-192.webp 192w, /media/uploads/Funpass_Accessibility_design_6451566e64-9b799c47ca8fe0b57df9-320.webp 320w, /media/uploads/Funpass_Accessibility_design_6451566e64-404ad7d2ba3720cc3472-480.webp 480w, /media/uploads/Funpass_Accessibility_design_6451566e64-e7e282d953daa7f3886d-768.webp 768w, /media/uploads/Funpass_Accessibility_design_6451566e64-cbef5f3fbfb32f06dfc2-1024.webp 1024w",
+    "width": 1024,
+    "height": 768
+  },
+  "/strapi/uploads/G_Eszter_fekete_feher_negyzet_9f5e61e978.png": {
+    "source": "/strapi/uploads/G_Eszter_fekete_feher_negyzet_9f5e61e978.png",
+    "src": "/media/uploads/G_Eszter_fekete_feher_negyzet_9f5e61e978-9a93d45f2e172866a2b5-1920.webp",
+    "srcSet": "/media/uploads/G_Eszter_fekete_feher_negyzet_9f5e61e978-60e71349786b8546d53f-64.webp 64w, /media/uploads/G_Eszter_fekete_feher_negyzet_9f5e61e978-fa17f4713f516a6eb744-128.webp 128w, /media/uploads/G_Eszter_fekete_feher_negyzet_9f5e61e978-e4de282afc93114076c6-192.webp 192w, /media/uploads/G_Eszter_fekete_feher_negyzet_9f5e61e978-b93c45ac6fef7ecc62f0-320.webp 320w, /media/uploads/G_Eszter_fekete_feher_negyzet_9f5e61e978-052a9101cd3e2644629c-480.webp 480w, /media/uploads/G_Eszter_fekete_feher_negyzet_9f5e61e978-5f8e716a45c741c43b7a-768.webp 768w, /media/uploads/G_Eszter_fekete_feher_negyzet_9f5e61e978-a8e9ea60d0aa04d23143-1200.webp 1200w, /media/uploads/G_Eszter_fekete_feher_negyzet_9f5e61e978-253b41856d5f1bc20506-1600.webp 1600w, /media/uploads/G_Eszter_fekete_feher_negyzet_9f5e61e978-9a93d45f2e172866a2b5-1920.webp 1920w",
+    "width": 1920,
+    "height": 1920
+  },
+  "/strapi/uploads/Gabi_3a52bf7932.webp": {
+    "source": "/strapi/uploads/Gabi_3a52bf7932.webp",
+    "src": "/media/uploads/Gabi_3a52bf7932-b93f29d2a7881235d82a-440.webp",
+    "srcSet": "/media/uploads/Gabi_3a52bf7932-bbb2b8ff2759270af48d-64.webp 64w, /media/uploads/Gabi_3a52bf7932-3ff68328675e888a6bd0-128.webp 128w, /media/uploads/Gabi_3a52bf7932-56c9c24ba4f6fe3defde-192.webp 192w, /media/uploads/Gabi_3a52bf7932-c3fd808e3ff75d71f16d-320.webp 320w, /media/uploads/Gabi_3a52bf7932-b93f29d2a7881235d82a-440.webp 440w",
+    "width": 440,
+    "height": 440
+  },
+  "/strapi/uploads/Gigi_e9cba3da4a.webp": {
+    "source": "/strapi/uploads/Gigi_e9cba3da4a.webp",
+    "src": "/media/uploads/Gigi_e9cba3da4a-7301ddc5ad83f0353418-440.webp",
+    "srcSet": "/media/uploads/Gigi_e9cba3da4a-181788a6413577be13fd-64.webp 64w, /media/uploads/Gigi_e9cba3da4a-47a5b0a82e7802f1497e-128.webp 128w, /media/uploads/Gigi_e9cba3da4a-f2d54d7afc9331a60995-192.webp 192w, /media/uploads/Gigi_e9cba3da4a-dd3771742d36a62b7e95-320.webp 320w, /media/uploads/Gigi_e9cba3da4a-7301ddc5ad83f0353418-440.webp 440w",
+    "width": 440,
+    "height": 440
+  },
+  "/strapi/uploads/Gizus_a301a6ba02.webp": {
+    "source": "/strapi/uploads/Gizus_a301a6ba02.webp",
+    "src": "/media/uploads/Gizus_a301a6ba02-c286a0fc4148f969a730-440.webp",
+    "srcSet": "/media/uploads/Gizus_a301a6ba02-20da6826f1e34d1827a3-64.webp 64w, /media/uploads/Gizus_a301a6ba02-be025fba935ac90c246b-128.webp 128w, /media/uploads/Gizus_a301a6ba02-6a7b55f9ed5c7651116c-192.webp 192w, /media/uploads/Gizus_a301a6ba02-e2f037e78db32bb9137e-320.webp 320w, /media/uploads/Gizus_a301a6ba02-c286a0fc4148f969a730-440.webp 440w",
+    "width": 440,
+    "height": 440
+  },
+  "/strapi/uploads/Google_Maps_reviews_9041b44302.png": {
+    "source": "/strapi/uploads/Google_Maps_reviews_9041b44302.png",
+    "src": "/media/uploads/Google_Maps_reviews_9041b44302-e9ebedece5fdfcd4eb02-1024.webp",
+    "srcSet": "/media/uploads/Google_Maps_reviews_9041b44302-77430d46f0623dd8fbb9-64.webp 64w, /media/uploads/Google_Maps_reviews_9041b44302-a0f518c648ce4a6a4fd2-128.webp 128w, /media/uploads/Google_Maps_reviews_9041b44302-6da3c3e04a1472bf447d-192.webp 192w, /media/uploads/Google_Maps_reviews_9041b44302-c80ba3b733fbaec2771d-320.webp 320w, /media/uploads/Google_Maps_reviews_9041b44302-8ee852bc2170a0e96b9e-480.webp 480w, /media/uploads/Google_Maps_reviews_9041b44302-61bc2af2a36dd37044d8-768.webp 768w, /media/uploads/Google_Maps_reviews_9041b44302-e9ebedece5fdfcd4eb02-1024.webp 1024w",
+    "width": 1024,
+    "height": 768
+  },
+  "/strapi/uploads/Google_maps_a4ea8c4535.png": {
+    "source": "/strapi/uploads/Google_maps_a4ea8c4535.png",
+    "src": "/media/uploads/Google_maps_a4ea8c4535-e9016a9d30521b83a50d-935.webp",
+    "srcSet": "/media/uploads/Google_maps_a4ea8c4535-6a949a1882d99114d44d-64.webp 64w, /media/uploads/Google_maps_a4ea8c4535-0551618bdff172485e04-128.webp 128w, /media/uploads/Google_maps_a4ea8c4535-ac5325b36683ec0d1e51-192.webp 192w, /media/uploads/Google_maps_a4ea8c4535-ec71d77057f1c8c93d88-320.webp 320w, /media/uploads/Google_maps_a4ea8c4535-3c1e08cf135a8b0c341e-480.webp 480w, /media/uploads/Google_maps_a4ea8c4535-3817b682df00ccc7b9c9-768.webp 768w, /media/uploads/Google_maps_a4ea8c4535-e9016a9d30521b83a50d-935.webp 935w",
+    "width": 935,
+    "height": 681
+  },
+  "/strapi/uploads/H_Laci_fb50a5be83.webp": {
+    "source": "/strapi/uploads/H_Laci_fb50a5be83.webp",
+    "src": "/media/uploads/H_Laci_fb50a5be83-60e0a954f7eb76669fcc-500.webp",
+    "srcSet": "/media/uploads/H_Laci_fb50a5be83-c2ef117792036d6d0664-64.webp 64w, /media/uploads/H_Laci_fb50a5be83-844500db19ddbd4724ea-128.webp 128w, /media/uploads/H_Laci_fb50a5be83-bb901b08751d3a86088a-192.webp 192w, /media/uploads/H_Laci_fb50a5be83-07126f8710534b0944c6-320.webp 320w, /media/uploads/H_Laci_fb50a5be83-0fc1b13ceb594e3388f3-480.webp 480w, /media/uploads/H_Laci_fb50a5be83-60e0a954f7eb76669fcc-500.webp 500w",
+    "width": 500,
+    "height": 500
+  },
+  "/strapi/uploads/IMG_0017_f4fa8a4264.jpg": {
+    "source": "/strapi/uploads/IMG_0017_f4fa8a4264.jpg",
+    "src": "/media/uploads/IMG_0017_f4fa8a4264-6dfbaf6addc388a6ab3a-5712.webp",
+    "srcSet": "/media/uploads/IMG_0017_f4fa8a4264-eb525455628b3c87c32e-64.webp 64w, /media/uploads/IMG_0017_f4fa8a4264-886ac6cf6aed54c05197-128.webp 128w, /media/uploads/IMG_0017_f4fa8a4264-46e026252d4544307c35-192.webp 192w, /media/uploads/IMG_0017_f4fa8a4264-e9c5f25fd1e37928cc61-320.webp 320w, /media/uploads/IMG_0017_f4fa8a4264-c2c44284015e182bcd90-480.webp 480w, /media/uploads/IMG_0017_f4fa8a4264-ef5f10f41342eb52fe8f-768.webp 768w, /media/uploads/IMG_0017_f4fa8a4264-345e4d541940f49d2308-1200.webp 1200w, /media/uploads/IMG_0017_f4fa8a4264-cb424478481d3606d462-1600.webp 1600w, /media/uploads/IMG_0017_f4fa8a4264-b6dc4c3bb31d4ec309da-1920.webp 1920w, /media/uploads/IMG_0017_f4fa8a4264-6dfbaf6addc388a6ab3a-5712.webp 5712w",
+    "width": 5712,
+    "height": 4284
+  },
+  "/strapi/uploads/IMG_0036_1c136ad19d.jpeg": {
+    "source": "/strapi/uploads/IMG_0036_1c136ad19d.jpeg",
+    "src": "/media/uploads/IMG_0036_1c136ad19d-81bda54d2e86e6f59010-4032.webp",
+    "srcSet": "/media/uploads/IMG_0036_1c136ad19d-5fdfd1ada8190a178ec6-64.webp 64w, /media/uploads/IMG_0036_1c136ad19d-b514912dd342ecaa38ea-128.webp 128w, /media/uploads/IMG_0036_1c136ad19d-3bb188ad96645b76ff19-192.webp 192w, /media/uploads/IMG_0036_1c136ad19d-ee2eddcd0e08eac60dd5-320.webp 320w, /media/uploads/IMG_0036_1c136ad19d-5215e9866ce979d21b8d-480.webp 480w, /media/uploads/IMG_0036_1c136ad19d-4b9dd444d005ce3a435c-768.webp 768w, /media/uploads/IMG_0036_1c136ad19d-be5d58cdfd558d64cdcd-1200.webp 1200w, /media/uploads/IMG_0036_1c136ad19d-b85572a53319f616f88b-1600.webp 1600w, /media/uploads/IMG_0036_1c136ad19d-9fff6c6b8fca14e68ba1-1920.webp 1920w, /media/uploads/IMG_0036_1c136ad19d-81bda54d2e86e6f59010-4032.webp 4032w",
+    "width": 4032,
+    "height": 3024
+  },
+  "/strapi/uploads/IMG_0116_1b47f03b71.jpg": {
+    "source": "/strapi/uploads/IMG_0116_1b47f03b71.jpg",
+    "src": "/media/uploads/IMG_0116_1b47f03b71-557c867836e28ab7618b-5712.webp",
+    "srcSet": "/media/uploads/IMG_0116_1b47f03b71-073ede4ae5651e182fac-64.webp 64w, /media/uploads/IMG_0116_1b47f03b71-8e15d3cd6131c85472dd-128.webp 128w, /media/uploads/IMG_0116_1b47f03b71-3f192fd1e42d9d8c4f3c-192.webp 192w, /media/uploads/IMG_0116_1b47f03b71-862459de507bcdc9a778-320.webp 320w, /media/uploads/IMG_0116_1b47f03b71-1925c34eab76490baffa-480.webp 480w, /media/uploads/IMG_0116_1b47f03b71-1ba277c8e8e9270d6a8e-768.webp 768w, /media/uploads/IMG_0116_1b47f03b71-ea3964c51a776f9eb933-1200.webp 1200w, /media/uploads/IMG_0116_1b47f03b71-fdff94b4226e221895c9-1600.webp 1600w, /media/uploads/IMG_0116_1b47f03b71-e97b8bf5ffac453c113d-1920.webp 1920w, /media/uploads/IMG_0116_1b47f03b71-557c867836e28ab7618b-5712.webp 5712w",
+    "width": 5712,
+    "height": 4284
+  },
+  "/strapi/uploads/IMG_0134_6216e799c6.jpg": {
+    "source": "/strapi/uploads/IMG_0134_6216e799c6.jpg",
+    "src": "/media/uploads/IMG_0134_6216e799c6-ef2bcdd0065a3cfd2640-4032.webp",
+    "srcSet": "/media/uploads/IMG_0134_6216e799c6-7dcd25569eec4efe6223-64.webp 64w, /media/uploads/IMG_0134_6216e799c6-4fe644c03fb4b1b7c0c0-128.webp 128w, /media/uploads/IMG_0134_6216e799c6-2f4de6e8aa18e9d41180-192.webp 192w, /media/uploads/IMG_0134_6216e799c6-be6df66b6338c92b4db0-320.webp 320w, /media/uploads/IMG_0134_6216e799c6-20becb30f425f56211b6-480.webp 480w, /media/uploads/IMG_0134_6216e799c6-eeedcc1a663d754255a8-768.webp 768w, /media/uploads/IMG_0134_6216e799c6-69ba99164de11ba79795-1200.webp 1200w, /media/uploads/IMG_0134_6216e799c6-a1c46e007c28bb48f76e-1600.webp 1600w, /media/uploads/IMG_0134_6216e799c6-2946e75ae12b5b92cb23-1920.webp 1920w, /media/uploads/IMG_0134_6216e799c6-ef2bcdd0065a3cfd2640-4032.webp 4032w",
+    "width": 4032,
+    "height": 3024
+  },
+  "/strapi/uploads/IMG_1437_1ebb870c11.jpg": {
+    "source": "/strapi/uploads/IMG_1437_1ebb870c11.jpg",
+    "src": "/media/uploads/IMG_1437_1ebb870c11-355c22a0c82f0be667b5-4032.webp",
+    "srcSet": "/media/uploads/IMG_1437_1ebb870c11-47b6e27165a504ad4bba-64.webp 64w, /media/uploads/IMG_1437_1ebb870c11-1737b6c853016b8be7e3-128.webp 128w, /media/uploads/IMG_1437_1ebb870c11-fc9a8c01c65bc144cf26-192.webp 192w, /media/uploads/IMG_1437_1ebb870c11-cc67533d17c876ee69be-320.webp 320w, /media/uploads/IMG_1437_1ebb870c11-61c4f4f42fdd0a5c64d7-480.webp 480w, /media/uploads/IMG_1437_1ebb870c11-95ccc31c3d9798a15eca-768.webp 768w, /media/uploads/IMG_1437_1ebb870c11-7a6486180fcd34b093f2-1200.webp 1200w, /media/uploads/IMG_1437_1ebb870c11-fdaf201aff30c915fe12-1600.webp 1600w, /media/uploads/IMG_1437_1ebb870c11-339fc4e2b52083ad3a47-1920.webp 1920w, /media/uploads/IMG_1437_1ebb870c11-355c22a0c82f0be667b5-4032.webp 4032w",
+    "width": 4032,
+    "height": 3024
+  },
+  "/strapi/uploads/IMG_1967_40313416b8.jpg": {
+    "source": "/strapi/uploads/IMG_1967_40313416b8.jpg",
+    "src": "/media/uploads/IMG_1967_40313416b8-21b0a6164c141bf4ee99-4032.webp",
+    "srcSet": "/media/uploads/IMG_1967_40313416b8-6c00479895d835e9bdc4-64.webp 64w, /media/uploads/IMG_1967_40313416b8-f283defe6895e929fc25-128.webp 128w, /media/uploads/IMG_1967_40313416b8-3e03d9965c7d0bfd212a-192.webp 192w, /media/uploads/IMG_1967_40313416b8-504c1dd695361fa381da-320.webp 320w, /media/uploads/IMG_1967_40313416b8-685bc896b76a79718661-480.webp 480w, /media/uploads/IMG_1967_40313416b8-2ced7d817c8c59d4af0f-768.webp 768w, /media/uploads/IMG_1967_40313416b8-8890fcfb76de9cb4b2cd-1200.webp 1200w, /media/uploads/IMG_1967_40313416b8-60b652e533b467d0a568-1600.webp 1600w, /media/uploads/IMG_1967_40313416b8-4c0e9f086e52aab12729-1920.webp 1920w, /media/uploads/IMG_1967_40313416b8-21b0a6164c141bf4ee99-4032.webp 4032w",
+    "width": 4032,
+    "height": 3024
+  },
+  "/strapi/uploads/IMG_2912_a58107b3b8.jpg": {
+    "source": "/strapi/uploads/IMG_2912_a58107b3b8.jpg",
+    "src": "/media/uploads/IMG_2912_a58107b3b8-09a4934faf7c2f78415f-4032.webp",
+    "srcSet": "/media/uploads/IMG_2912_a58107b3b8-8712f671787d69aad40a-64.webp 64w, /media/uploads/IMG_2912_a58107b3b8-055e6181ebd6ed4a9828-128.webp 128w, /media/uploads/IMG_2912_a58107b3b8-64119f065ad26e1948f6-192.webp 192w, /media/uploads/IMG_2912_a58107b3b8-5c8a7356bf1834a7ee6a-320.webp 320w, /media/uploads/IMG_2912_a58107b3b8-a7f07d1ec6522c8e1186-480.webp 480w, /media/uploads/IMG_2912_a58107b3b8-de314bb8242bd15563e2-768.webp 768w, /media/uploads/IMG_2912_a58107b3b8-b3aaac3ee3bd981ffe86-1200.webp 1200w, /media/uploads/IMG_2912_a58107b3b8-a371255fa9dd57710505-1600.webp 1600w, /media/uploads/IMG_2912_a58107b3b8-8bf810d2c5c4834e9300-1920.webp 1920w, /media/uploads/IMG_2912_a58107b3b8-09a4934faf7c2f78415f-4032.webp 4032w",
+    "width": 4032,
+    "height": 3024
+  },
+  "/strapi/uploads/IMG_6136_c9ea19c554.jpg": {
+    "source": "/strapi/uploads/IMG_6136_c9ea19c554.jpg",
+    "src": "/media/uploads/IMG_6136_c9ea19c554-8eb7fa960dad8ae18468-5712.webp",
+    "srcSet": "/media/uploads/IMG_6136_c9ea19c554-3ca84be21a89457f42b9-64.webp 64w, /media/uploads/IMG_6136_c9ea19c554-0bc807d555d74c06f665-128.webp 128w, /media/uploads/IMG_6136_c9ea19c554-3b3a1e1269f4ea8f9d67-192.webp 192w, /media/uploads/IMG_6136_c9ea19c554-d902c1f6f1af656ce348-320.webp 320w, /media/uploads/IMG_6136_c9ea19c554-9418db26beb2b008d4d8-480.webp 480w, /media/uploads/IMG_6136_c9ea19c554-e0a22100fa44cc29b0e7-768.webp 768w, /media/uploads/IMG_6136_c9ea19c554-421520c6c7c1e1a31ef3-1200.webp 1200w, /media/uploads/IMG_6136_c9ea19c554-2a3635db1515d22b1e94-1600.webp 1600w, /media/uploads/IMG_6136_c9ea19c554-a12d9ce5b1cb70fc7501-1920.webp 1920w, /media/uploads/IMG_6136_c9ea19c554-8eb7fa960dad8ae18468-5712.webp 5712w",
+    "width": 5712,
+    "height": 4284
+  },
+  "/strapi/uploads/IMG_6140_4ff67ea8be.jpg": {
+    "source": "/strapi/uploads/IMG_6140_4ff67ea8be.jpg",
+    "src": "/media/uploads/IMG_6140_4ff67ea8be-1537c50efafab3582b44-5712.webp",
+    "srcSet": "/media/uploads/IMG_6140_4ff67ea8be-ddc7cf4f84c48a1e5c4d-64.webp 64w, /media/uploads/IMG_6140_4ff67ea8be-da513169cd0c193c53a3-128.webp 128w, /media/uploads/IMG_6140_4ff67ea8be-ef74de5c537369b4d4ee-192.webp 192w, /media/uploads/IMG_6140_4ff67ea8be-501eed73b3ca7ddb146c-320.webp 320w, /media/uploads/IMG_6140_4ff67ea8be-ede64c8e3ffb42c6f272-480.webp 480w, /media/uploads/IMG_6140_4ff67ea8be-519dffe0b829f73aeb57-768.webp 768w, /media/uploads/IMG_6140_4ff67ea8be-36cd3373a136b97dbad7-1200.webp 1200w, /media/uploads/IMG_6140_4ff67ea8be-ff4924923480ba414f8b-1600.webp 1600w, /media/uploads/IMG_6140_4ff67ea8be-68769c5a4fc003dda291-1920.webp 1920w, /media/uploads/IMG_6140_4ff67ea8be-1537c50efafab3582b44-5712.webp 5712w",
+    "width": 5712,
+    "height": 4284
+  },
+  "/strapi/uploads/IMG_6143_2c57757fc4.jpg": {
+    "source": "/strapi/uploads/IMG_6143_2c57757fc4.jpg",
+    "src": "/media/uploads/IMG_6143_2c57757fc4-7e4ac858869a0638a082-5712.webp",
+    "srcSet": "/media/uploads/IMG_6143_2c57757fc4-f55bb30912134766b6fe-64.webp 64w, /media/uploads/IMG_6143_2c57757fc4-c77fe3f6b95231447765-128.webp 128w, /media/uploads/IMG_6143_2c57757fc4-df70e0ee71c99f8ac6fb-192.webp 192w, /media/uploads/IMG_6143_2c57757fc4-064478f3736a3bbf2586-320.webp 320w, /media/uploads/IMG_6143_2c57757fc4-0cc712a542037caab1ab-480.webp 480w, /media/uploads/IMG_6143_2c57757fc4-0fe30658c944951e9dc0-768.webp 768w, /media/uploads/IMG_6143_2c57757fc4-076a806ac4625bf586a5-1200.webp 1200w, /media/uploads/IMG_6143_2c57757fc4-fd30687c8b2ba9fce43f-1600.webp 1600w, /media/uploads/IMG_6143_2c57757fc4-621c6a12edf547797f60-1920.webp 1920w, /media/uploads/IMG_6143_2c57757fc4-7e4ac858869a0638a082-5712.webp 5712w",
+    "width": 5712,
+    "height": 4284
+  },
+  "/strapi/uploads/IMG_6626_21d25ce605.jpg": {
+    "source": "/strapi/uploads/IMG_6626_21d25ce605.jpg",
+    "src": "/media/uploads/IMG_6626_21d25ce605-6305356ab3ffd4e8e3c4-5712.webp",
+    "srcSet": "/media/uploads/IMG_6626_21d25ce605-f480eb437e7f7200fe01-64.webp 64w, /media/uploads/IMG_6626_21d25ce605-a5f4ad414fd5d3901f89-128.webp 128w, /media/uploads/IMG_6626_21d25ce605-c53c1f4595f93d153512-192.webp 192w, /media/uploads/IMG_6626_21d25ce605-ac4009afaf1228c2c7bc-320.webp 320w, /media/uploads/IMG_6626_21d25ce605-edc5ce34b62e74fc9e8e-480.webp 480w, /media/uploads/IMG_6626_21d25ce605-2dd8445da36ce3595dc2-768.webp 768w, /media/uploads/IMG_6626_21d25ce605-83577b3edec124432e28-1200.webp 1200w, /media/uploads/IMG_6626_21d25ce605-d1a7ba007b81523370e8-1600.webp 1600w, /media/uploads/IMG_6626_21d25ce605-97d9701197de2bfd256d-1920.webp 1920w, /media/uploads/IMG_6626_21d25ce605-6305356ab3ffd4e8e3c4-5712.webp 5712w",
+    "width": 5712,
+    "height": 4284
+  },
+  "/strapi/uploads/IMG_6636_fdca1a4b35.jpg": {
+    "source": "/strapi/uploads/IMG_6636_fdca1a4b35.jpg",
+    "src": "/media/uploads/IMG_6636_fdca1a4b35-4faf61e42fa09df043cf-5712.webp",
+    "srcSet": "/media/uploads/IMG_6636_fdca1a4b35-ec89f942b5c1c0e947fc-64.webp 64w, /media/uploads/IMG_6636_fdca1a4b35-3f453399bf729e2c6ecc-128.webp 128w, /media/uploads/IMG_6636_fdca1a4b35-88dde79541774dd3ded2-192.webp 192w, /media/uploads/IMG_6636_fdca1a4b35-d3228391f522facd9e3f-320.webp 320w, /media/uploads/IMG_6636_fdca1a4b35-97b69c01848b28700458-480.webp 480w, /media/uploads/IMG_6636_fdca1a4b35-eb08e4bd825b959a1374-768.webp 768w, /media/uploads/IMG_6636_fdca1a4b35-544673cfe2e8f2fa0475-1200.webp 1200w, /media/uploads/IMG_6636_fdca1a4b35-14ba5f24f92d95d54229-1600.webp 1600w, /media/uploads/IMG_6636_fdca1a4b35-1cd76992d9ca15951af0-1920.webp 1920w, /media/uploads/IMG_6636_fdca1a4b35-4faf61e42fa09df043cf-5712.webp 5712w",
+    "width": 5712,
+    "height": 4284
+  },
+  "/strapi/uploads/IMG_8005_a53211307f.jpg": {
+    "source": "/strapi/uploads/IMG_8005_a53211307f.jpg",
+    "src": "/media/uploads/IMG_8005_a53211307f-2f4bf435768ae8fbdacd-5712.webp",
+    "srcSet": "/media/uploads/IMG_8005_a53211307f-c3dff44191e2d4b62e93-64.webp 64w, /media/uploads/IMG_8005_a53211307f-025b4f636923b7d97969-128.webp 128w, /media/uploads/IMG_8005_a53211307f-99cd161f5e5a1f35f382-192.webp 192w, /media/uploads/IMG_8005_a53211307f-9f4df52fbf5a0cbbc7ce-320.webp 320w, /media/uploads/IMG_8005_a53211307f-73a9ce0e32652af31b93-480.webp 480w, /media/uploads/IMG_8005_a53211307f-64d9c17dee90c0d6a7de-768.webp 768w, /media/uploads/IMG_8005_a53211307f-9e36391143c8d1da5cf4-1200.webp 1200w, /media/uploads/IMG_8005_a53211307f-476003518019cb75394f-1600.webp 1600w, /media/uploads/IMG_8005_a53211307f-8715f7de0ea329532d22-1920.webp 1920w, /media/uploads/IMG_8005_a53211307f-2f4bf435768ae8fbdacd-5712.webp 5712w",
+    "width": 5712,
+    "height": 4284
+  },
+  "/strapi/uploads/IMG_8677_78eefb8a97.jpg": {
+    "source": "/strapi/uploads/IMG_8677_78eefb8a97.jpg",
+    "src": "/media/uploads/IMG_8677_78eefb8a97-dfb460efbe7ae4a0ccb3-5712.webp",
+    "srcSet": "/media/uploads/IMG_8677_78eefb8a97-de39bfa9217f0e4b04f4-64.webp 64w, /media/uploads/IMG_8677_78eefb8a97-5d704ccb2f963af1e542-128.webp 128w, /media/uploads/IMG_8677_78eefb8a97-ccbc8dd4717288dce4b2-192.webp 192w, /media/uploads/IMG_8677_78eefb8a97-04d04375c75b4bb9dd60-320.webp 320w, /media/uploads/IMG_8677_78eefb8a97-57e80dde851fa83c570c-480.webp 480w, /media/uploads/IMG_8677_78eefb8a97-6c5efc407ce5a4de2594-768.webp 768w, /media/uploads/IMG_8677_78eefb8a97-6059247e7832f2f3d282-1200.webp 1200w, /media/uploads/IMG_8677_78eefb8a97-446b97d0e1336558fdc7-1600.webp 1600w, /media/uploads/IMG_8677_78eefb8a97-0ff1e67c02fec75c5935-1920.webp 1920w, /media/uploads/IMG_8677_78eefb8a97-dfb460efbe7ae4a0ccb3-5712.webp 5712w",
+    "width": 5712,
+    "height": 4284
+  },
+  "/strapi/uploads/KH_dfe2b1131a.png": {
+    "source": "/strapi/uploads/KH_dfe2b1131a.png",
+    "src": "/media/uploads/KH_dfe2b1131a-63b92c9b4e477016d137-125.webp",
+    "srcSet": "/media/uploads/KH_dfe2b1131a-19e0560a7658ef43a12f-64.webp 64w, /media/uploads/KH_dfe2b1131a-63b92c9b4e477016d137-125.webp 125w",
+    "width": 125,
+    "height": 96
+  },
+  "/strapi/uploads/K_Gabor_3ef4a6355e.webp": {
+    "source": "/strapi/uploads/K_Gabor_3ef4a6355e.webp",
+    "src": "/media/uploads/K_Gabor_3ef4a6355e-fbc4941a2f984721e886-500.webp",
+    "srcSet": "/media/uploads/K_Gabor_3ef4a6355e-954c081d1c42abc73ac7-64.webp 64w, /media/uploads/K_Gabor_3ef4a6355e-dec79a6482c91f64e3a3-128.webp 128w, /media/uploads/K_Gabor_3ef4a6355e-e7742f2cedecba7d79ee-192.webp 192w, /media/uploads/K_Gabor_3ef4a6355e-60ce90333a01460ef25f-320.webp 320w, /media/uploads/K_Gabor_3ef4a6355e-e9acbdfe668a775309f3-480.webp 480w, /media/uploads/K_Gabor_3ef4a6355e-fbc4941a2f984721e886-500.webp 500w",
+    "width": 500,
+    "height": 500
+  },
+  "/strapi/uploads/Kepzes_slide_light_115a1f96be.png": {
+    "source": "/strapi/uploads/Kepzes_slide_light_115a1f96be.png",
+    "src": "/media/uploads/Kepzes_slide_light_115a1f96be-aa134f58f0c08156312e-904.webp",
+    "srcSet": "/media/uploads/Kepzes_slide_light_115a1f96be-863152aace1f9d2d3e39-64.webp 64w, /media/uploads/Kepzes_slide_light_115a1f96be-5448d41e8cfddebeeb34-128.webp 128w, /media/uploads/Kepzes_slide_light_115a1f96be-a1f6feb4bcd5ad5ca451-192.webp 192w, /media/uploads/Kepzes_slide_light_115a1f96be-31baa1c734d62f161f3d-320.webp 320w, /media/uploads/Kepzes_slide_light_115a1f96be-b864ae89778ec8cc0cc1-480.webp 480w, /media/uploads/Kepzes_slide_light_115a1f96be-88a1eb9dafb41bb9af63-768.webp 768w, /media/uploads/Kepzes_slide_light_115a1f96be-aa134f58f0c08156312e-904.webp 904w",
+    "width": 904,
+    "height": 489
+  },
+  "/strapi/uploads/Linda_5c5070188d.webp": {
+    "source": "/strapi/uploads/Linda_5c5070188d.webp",
+    "src": "/media/uploads/Linda_5c5070188d-afe2f86a53553a3fff87-439.webp",
+    "srcSet": "/media/uploads/Linda_5c5070188d-7e22bdf739aa1b0a5c69-64.webp 64w, /media/uploads/Linda_5c5070188d-465c61029529e626d4c2-128.webp 128w, /media/uploads/Linda_5c5070188d-ae5795d16cfc7874cb16-192.webp 192w, /media/uploads/Linda_5c5070188d-7fcc211609eb29b42fb2-320.webp 320w, /media/uploads/Linda_5c5070188d-afe2f86a53553a3fff87-439.webp 439w",
+    "width": 439,
+    "height": 439
+  },
+  "/strapi/uploads/Lukacs_ed8d609bfd.webp": {
+    "source": "/strapi/uploads/Lukacs_ed8d609bfd.webp",
+    "src": "/media/uploads/Lukacs_ed8d609bfd-71a89e4fdd755085c930-440.webp",
+    "srcSet": "/media/uploads/Lukacs_ed8d609bfd-6be379ea79682330d5ee-64.webp 64w, /media/uploads/Lukacs_ed8d609bfd-ad29e4be1d7565a6002c-128.webp 128w, /media/uploads/Lukacs_ed8d609bfd-aeca7b35dbf3b8f1abd3-192.webp 192w, /media/uploads/Lukacs_ed8d609bfd-e79b84fdaa159fd4f980-320.webp 320w, /media/uploads/Lukacs_ed8d609bfd-71a89e4fdd755085c930-440.webp 440w",
+    "width": 440,
+    "height": 440
+  },
+  "/strapi/uploads/MBH_c1bfb04ec0.png": {
+    "source": "/strapi/uploads/MBH_c1bfb04ec0.png",
+    "src": "/media/uploads/MBH_c1bfb04ec0-3743c78f10cedafaacbc-194.webp",
+    "srcSet": "/media/uploads/MBH_c1bfb04ec0-c869842218c8b16d4145-64.webp 64w, /media/uploads/MBH_c1bfb04ec0-6595c64a2474eb400e97-128.webp 128w, /media/uploads/MBH_c1bfb04ec0-50439509acf1f33a2085-192.webp 192w, /media/uploads/MBH_c1bfb04ec0-3743c78f10cedafaacbc-194.webp 194w",
+    "width": 194,
+    "height": 39
+  },
+  "/strapi/uploads/Magyar_Posta_i_Csekk_1da95fa2d5.png": {
+    "source": "/strapi/uploads/Magyar_Posta_i_Csekk_1da95fa2d5.png",
+    "src": "/media/uploads/Magyar_Posta_i_Csekk_1da95fa2d5-06f5c04892db828a49a1-1024.webp",
+    "srcSet": "/media/uploads/Magyar_Posta_i_Csekk_1da95fa2d5-5986731f2605e8be6b1f-64.webp 64w, /media/uploads/Magyar_Posta_i_Csekk_1da95fa2d5-7a96edbe5173651ecef1-128.webp 128w, /media/uploads/Magyar_Posta_i_Csekk_1da95fa2d5-74499879a6e216fd1658-192.webp 192w, /media/uploads/Magyar_Posta_i_Csekk_1da95fa2d5-3b44e41692704b90e564-320.webp 320w, /media/uploads/Magyar_Posta_i_Csekk_1da95fa2d5-1117cb1cebecf6629db5-480.webp 480w, /media/uploads/Magyar_Posta_i_Csekk_1da95fa2d5-9f9c66e0905cff38f189-768.webp 768w, /media/uploads/Magyar_Posta_i_Csekk_1da95fa2d5-06f5c04892db828a49a1-1024.webp 1024w",
+    "width": 1024,
+    "height": 768
+  },
+  "/strapi/uploads/Motibro_Digitalis_termektervezes_1219eb7b06.png": {
+    "source": "/strapi/uploads/Motibro_Digitalis_termektervezes_1219eb7b06.png",
+    "src": "/media/uploads/Motibro_Digitalis_termektervezes_1219eb7b06-6cd85c2e1a1662216926-1024.webp",
+    "srcSet": "/media/uploads/Motibro_Digitalis_termektervezes_1219eb7b06-8571394f3a68805b129e-64.webp 64w, /media/uploads/Motibro_Digitalis_termektervezes_1219eb7b06-206cf6259d1a54fea848-128.webp 128w, /media/uploads/Motibro_Digitalis_termektervezes_1219eb7b06-352e6906af31eb75a974-192.webp 192w, /media/uploads/Motibro_Digitalis_termektervezes_1219eb7b06-1740a24cf0d433a54bdb-320.webp 320w, /media/uploads/Motibro_Digitalis_termektervezes_1219eb7b06-bfa635e33c05eb3da8d2-480.webp 480w, /media/uploads/Motibro_Digitalis_termektervezes_1219eb7b06-b45494ac8865071cedcb-768.webp 768w, /media/uploads/Motibro_Digitalis_termektervezes_1219eb7b06-6cd85c2e1a1662216926-1024.webp 1024w",
+    "width": 1024,
+    "height": 768
+  },
+  "/strapi/uploads/Motibro_home_afe4693639.png": {
+    "source": "/strapi/uploads/Motibro_home_afe4693639.png",
+    "src": "/media/uploads/Motibro_home_afe4693639-e1c942cffb2bba0cf1ff-1024.webp",
+    "srcSet": "/media/uploads/Motibro_home_afe4693639-4decc7b26f61e9e2347b-64.webp 64w, /media/uploads/Motibro_home_afe4693639-f7fdaf52f15c5146fa54-128.webp 128w, /media/uploads/Motibro_home_afe4693639-c9b35847417a87da6c46-192.webp 192w, /media/uploads/Motibro_home_afe4693639-dc2baba9a424a267872d-320.webp 320w, /media/uploads/Motibro_home_afe4693639-168bc7dba6084ac3d359-480.webp 480w, /media/uploads/Motibro_home_afe4693639-cc02b7112c793634d9b1-768.webp 768w, /media/uploads/Motibro_home_afe4693639-e1c942cffb2bba0cf1ff-1024.webp 1024w",
+    "width": 1024,
+    "height": 768
+  },
+  "/strapi/uploads/Motibro_inside_010f6d0d3f.png": {
+    "source": "/strapi/uploads/Motibro_inside_010f6d0d3f.png",
+    "src": "/media/uploads/Motibro_inside_010f6d0d3f-3903beae4d0b68d231f1-1024.webp",
+    "srcSet": "/media/uploads/Motibro_inside_010f6d0d3f-64d0b1cc807287f76cb7-64.webp 64w, /media/uploads/Motibro_inside_010f6d0d3f-603dc4d745ae877a8889-128.webp 128w, /media/uploads/Motibro_inside_010f6d0d3f-3d1160cf097ebdb20a00-192.webp 192w, /media/uploads/Motibro_inside_010f6d0d3f-3fa9d539b8a2e1e47c0d-320.webp 320w, /media/uploads/Motibro_inside_010f6d0d3f-13c071bc16cbffb250da-480.webp 480w, /media/uploads/Motibro_inside_010f6d0d3f-8ad3a4bfdacf7c5c43bf-768.webp 768w, /media/uploads/Motibro_inside_010f6d0d3f-3903beae4d0b68d231f1-1024.webp 1024w",
+    "width": 1024,
+    "height": 768
+  },
+  "/strapi/uploads/Nam_7bbd9e9646.webp": {
+    "source": "/strapi/uploads/Nam_7bbd9e9646.webp",
+    "src": "/media/uploads/Nam_7bbd9e9646-a2df224dbca6161a6f2d-500.webp",
+    "srcSet": "/media/uploads/Nam_7bbd9e9646-d77a86d59053859269de-64.webp 64w, /media/uploads/Nam_7bbd9e9646-37b0ada8e661494959a1-128.webp 128w, /media/uploads/Nam_7bbd9e9646-c370225923bb86d43c02-192.webp 192w, /media/uploads/Nam_7bbd9e9646-0e71804392d7ef98fe5f-320.webp 320w, /media/uploads/Nam_7bbd9e9646-16383da8c6eceafe9453-480.webp 480w, /media/uploads/Nam_7bbd9e9646-a2df224dbca6161a6f2d-500.webp 500w",
+    "width": 500,
+    "height": 500
+  },
+  "/strapi/uploads/Netti_a0415e1fc5.webp": {
+    "source": "/strapi/uploads/Netti_a0415e1fc5.webp",
+    "src": "/media/uploads/Netti_a0415e1fc5-d8a372e1d0cfc7ce057e-440.webp",
+    "srcSet": "/media/uploads/Netti_a0415e1fc5-37c33294486921a78523-64.webp 64w, /media/uploads/Netti_a0415e1fc5-ad31acc16e85fd1cb880-128.webp 128w, /media/uploads/Netti_a0415e1fc5-daedbec7cb90e05bf00d-192.webp 192w, /media/uploads/Netti_a0415e1fc5-60bb8269bdc6521a3b88-320.webp 320w, /media/uploads/Netti_a0415e1fc5-d8a372e1d0cfc7ce057e-440.webp 440w",
+    "width": 440,
+    "height": 440
+  },
+  "/strapi/uploads/New_logo_1773998946128_b9aaae37ad.png": {
+    "source": "/strapi/uploads/New_logo_1773998946128_b9aaae37ad.png",
+    "src": "/media/uploads/New_logo_1773998946128_b9aaae37ad-0af0bf9387daa104e98c-260.webp",
+    "srcSet": "/media/uploads/New_logo_1773998946128_b9aaae37ad-ac6c4161f86bf5633dfa-64.webp 64w, /media/uploads/New_logo_1773998946128_b9aaae37ad-3110e60e41cc64d3d87c-128.webp 128w, /media/uploads/New_logo_1773998946128_b9aaae37ad-25e1c0036bce797d2551-192.webp 192w, /media/uploads/New_logo_1773998946128_b9aaae37ad-0af0bf9387daa104e98c-260.webp 260w",
+    "width": 260,
+    "height": 65
+  },
+  "/strapi/uploads/ONE_b31379fa21.png": {
+    "source": "/strapi/uploads/ONE_b31379fa21.png",
+    "src": "/media/uploads/ONE_b31379fa21-44e4bb8bbfedda64426a-95.webp",
+    "srcSet": "/media/uploads/ONE_b31379fa21-1c31f249a792a23817f7-64.webp 64w, /media/uploads/ONE_b31379fa21-44e4bb8bbfedda64426a-95.webp 95w",
+    "width": 95,
+    "height": 96
+  },
+  "/strapi/uploads/One_Digitalis_azonositas_21bace577f.png": {
+    "source": "/strapi/uploads/One_Digitalis_azonositas_21bace577f.png",
+    "src": "/media/uploads/One_Digitalis_azonositas_21bace577f-404191e1dabcfbd41cbe-1024.webp",
+    "srcSet": "/media/uploads/One_Digitalis_azonositas_21bace577f-143a747aaacd58ca4794-64.webp 64w, /media/uploads/One_Digitalis_azonositas_21bace577f-15cec6459b69b11cf2f0-128.webp 128w, /media/uploads/One_Digitalis_azonositas_21bace577f-ce873ee8d835678a08e0-192.webp 192w, /media/uploads/One_Digitalis_azonositas_21bace577f-b723979890ec0464d566-320.webp 320w, /media/uploads/One_Digitalis_azonositas_21bace577f-b6d0d6868127eac972dd-480.webp 480w, /media/uploads/One_Digitalis_azonositas_21bace577f-edbbb66df99bf6f2ea95-768.webp 768w, /media/uploads/One_Digitalis_azonositas_21bace577f-404191e1dabcfbd41cbe-1024.webp 1024w",
+    "width": 1024,
+    "height": 768
+  },
+  "/strapi/uploads/Pala_Zoli_f67881b800.webp": {
+    "source": "/strapi/uploads/Pala_Zoli_f67881b800.webp",
+    "src": "/media/uploads/Pala_Zoli_f67881b800-da567dd192118d8832e6-500.webp",
+    "srcSet": "/media/uploads/Pala_Zoli_f67881b800-cce8d51507b3f1931638-64.webp 64w, /media/uploads/Pala_Zoli_f67881b800-388d6210c27a993281a2-128.webp 128w, /media/uploads/Pala_Zoli_f67881b800-92d19eb589319b595642-192.webp 192w, /media/uploads/Pala_Zoli_f67881b800-d1485676c01749b7e44e-320.webp 320w, /media/uploads/Pala_Zoli_f67881b800-1862f0ca3759192119a6-480.webp 480w, /media/uploads/Pala_Zoli_f67881b800-da567dd192118d8832e6-500.webp 500w",
+    "width": 500,
+    "height": 500
+  },
+  "/strapi/uploads/Posta_0864637b73.png": {
+    "source": "/strapi/uploads/Posta_0864637b73.png",
+    "src": "/media/uploads/Posta_0864637b73-e5f8f439f3df72d0a380-252.webp",
+    "srcSet": "/media/uploads/Posta_0864637b73-d628d682e69ddbec01f2-64.webp 64w, /media/uploads/Posta_0864637b73-caf6ee70cc01b2d7a4a0-128.webp 128w, /media/uploads/Posta_0864637b73-dccebc729e0379f5d0fb-192.webp 192w, /media/uploads/Posta_0864637b73-e5f8f439f3df72d0a380-252.webp 252w",
+    "width": 252,
+    "height": 120
+  },
+  "/strapi/uploads/Profirent_design_37fdedf93e.png": {
+    "source": "/strapi/uploads/Profirent_design_37fdedf93e.png",
+    "src": "/media/uploads/Profirent_design_37fdedf93e-62715cbd00c9a662f2e8-1024.webp",
+    "srcSet": "/media/uploads/Profirent_design_37fdedf93e-2e23c4208a1e7d156a75-64.webp 64w, /media/uploads/Profirent_design_37fdedf93e-4c18a696a889b155f57a-128.webp 128w, /media/uploads/Profirent_design_37fdedf93e-55be4fc88014d4404e91-192.webp 192w, /media/uploads/Profirent_design_37fdedf93e-54fe05922f9027a0d0db-320.webp 320w, /media/uploads/Profirent_design_37fdedf93e-dba62fe7b59213babe26-480.webp 480w, /media/uploads/Profirent_design_37fdedf93e-0b9669dcb2d922f463b7-768.webp 768w, /media/uploads/Profirent_design_37fdedf93e-62715cbd00c9a662f2e8-1024.webp 1024w",
+    "width": 1024,
+    "height": 768
+  },
+  "/strapi/uploads/Profirent_inside_2c9b89de7c.png": {
+    "source": "/strapi/uploads/Profirent_inside_2c9b89de7c.png",
+    "src": "/media/uploads/Profirent_inside_2c9b89de7c-758edab5190e9afded6b-1024.webp",
+    "srcSet": "/media/uploads/Profirent_inside_2c9b89de7c-510a6073915982117f73-64.webp 64w, /media/uploads/Profirent_inside_2c9b89de7c-3beba9346f5d75e19ad9-128.webp 128w, /media/uploads/Profirent_inside_2c9b89de7c-b8e50733729d684f1ec3-192.webp 192w, /media/uploads/Profirent_inside_2c9b89de7c-33774a961a1b3ca291b4-320.webp 320w, /media/uploads/Profirent_inside_2c9b89de7c-4322e3788aeb43965b39-480.webp 480w, /media/uploads/Profirent_inside_2c9b89de7c-b21806096fc42b88eac8-768.webp 768w, /media/uploads/Profirent_inside_2c9b89de7c-758edab5190e9afded6b-1024.webp 1024w",
+    "width": 1024,
+    "height": 768
+  },
+  "/strapi/uploads/Purposeful_1774354143676_da4d5e3ab8.png": {
+    "source": "/strapi/uploads/Purposeful_1774354143676_da4d5e3ab8.png",
+    "src": "/media/uploads/Purposeful_1774354143676_da4d5e3ab8-1d112158be2d6fbf7c5e-1542.webp",
+    "srcSet": "/media/uploads/Purposeful_1774354143676_da4d5e3ab8-f8bb1d44659adc94dfef-64.webp 64w, /media/uploads/Purposeful_1774354143676_da4d5e3ab8-4dda02c9df88b84edf94-128.webp 128w, /media/uploads/Purposeful_1774354143676_da4d5e3ab8-33fca12f3242b3fd4709-192.webp 192w, /media/uploads/Purposeful_1774354143676_da4d5e3ab8-6d3b8498480edfed66a1-320.webp 320w, /media/uploads/Purposeful_1774354143676_da4d5e3ab8-38e9a553aa165fb6e682-480.webp 480w, /media/uploads/Purposeful_1774354143676_da4d5e3ab8-dbb1deb3358eef845df8-768.webp 768w, /media/uploads/Purposeful_1774354143676_da4d5e3ab8-d6a8b5f7b5c4feaa947c-1200.webp 1200w, /media/uploads/Purposeful_1774354143676_da4d5e3ab8-1d112158be2d6fbf7c5e-1542.webp 1542w",
+    "width": 1542,
+    "height": 768
+  },
+  "/strapi/uploads/Rudas_Gyogyfurdo_SD_8b184089bd.png": {
+    "source": "/strapi/uploads/Rudas_Gyogyfurdo_SD_8b184089bd.png",
+    "src": "/media/uploads/Rudas_Gyogyfurdo_SD_8b184089bd-1366fd7f9d3b53191796-1024.webp",
+    "srcSet": "/media/uploads/Rudas_Gyogyfurdo_SD_8b184089bd-bfe9e7648bd0e173897f-64.webp 64w, /media/uploads/Rudas_Gyogyfurdo_SD_8b184089bd-44c7c4efda4ae63b79b4-128.webp 128w, /media/uploads/Rudas_Gyogyfurdo_SD_8b184089bd-af66499b4f1d80da6d96-192.webp 192w, /media/uploads/Rudas_Gyogyfurdo_SD_8b184089bd-5ea2cd858fd88139f10c-320.webp 320w, /media/uploads/Rudas_Gyogyfurdo_SD_8b184089bd-c9a2d1ed11554746e044-480.webp 480w, /media/uploads/Rudas_Gyogyfurdo_SD_8b184089bd-db4b314e88928b0cf183-768.webp 768w, /media/uploads/Rudas_Gyogyfurdo_SD_8b184089bd-1366fd7f9d3b53191796-1024.webp 1024w",
+    "width": 1024,
+    "height": 768
+  },
+  "/strapi/uploads/Rudas_asszociacios_kartyak_fcfa1ab918.png": {
+    "source": "/strapi/uploads/Rudas_asszociacios_kartyak_fcfa1ab918.png",
+    "src": "/media/uploads/Rudas_asszociacios_kartyak_fcfa1ab918-8e7305edb5cfddb5bcd9-908.webp",
+    "srcSet": "/media/uploads/Rudas_asszociacios_kartyak_fcfa1ab918-5e2a6301358e6b58436c-64.webp 64w, /media/uploads/Rudas_asszociacios_kartyak_fcfa1ab918-337b5c075f3622291d41-128.webp 128w, /media/uploads/Rudas_asszociacios_kartyak_fcfa1ab918-1f96ecf07b3150da5450-192.webp 192w, /media/uploads/Rudas_asszociacios_kartyak_fcfa1ab918-c497da3d1b72e75ec63c-320.webp 320w, /media/uploads/Rudas_asszociacios_kartyak_fcfa1ab918-d2f2122723ba645bcb74-480.webp 480w, /media/uploads/Rudas_asszociacios_kartyak_fcfa1ab918-b812a7f0b6d4fbc3c346-768.webp 768w, /media/uploads/Rudas_asszociacios_kartyak_fcfa1ab918-8e7305edb5cfddb5bcd9-908.webp 908w",
+    "width": 908,
+    "height": 540
+  },
+  "/strapi/uploads/Sablon_4_3_2_eba32a9976.png": {
+    "source": "/strapi/uploads/Sablon_4_3_2_eba32a9976.png",
+    "src": "/media/uploads/Sablon_4_3_2_eba32a9976-f7d8c929cf5a358c1ee7-1024.webp",
+    "srcSet": "/media/uploads/Sablon_4_3_2_eba32a9976-d2eefc88c4688d0d2bb4-64.webp 64w, /media/uploads/Sablon_4_3_2_eba32a9976-69196f7e164ec1e4feb2-128.webp 128w, /media/uploads/Sablon_4_3_2_eba32a9976-f569ea76eb2b1be5fea5-192.webp 192w, /media/uploads/Sablon_4_3_2_eba32a9976-0d8b337c82ec3a51255f-320.webp 320w, /media/uploads/Sablon_4_3_2_eba32a9976-e1c86023c045c6fc5c55-480.webp 480w, /media/uploads/Sablon_4_3_2_eba32a9976-7bbc9f14058b22a2095d-768.webp 768w, /media/uploads/Sablon_4_3_2_eba32a9976-f7d8c929cf5a358c1ee7-1024.webp 1024w",
+    "width": 1024,
+    "height": 768
+  },
+  "/strapi/uploads/Sari_0142f41f8d.webp": {
+    "source": "/strapi/uploads/Sari_0142f41f8d.webp",
+    "src": "/media/uploads/Sari_0142f41f8d-b623d4e6f400110aa0cd-500.webp",
+    "srcSet": "/media/uploads/Sari_0142f41f8d-d6cc4d7c72c15c02c3d5-64.webp 64w, /media/uploads/Sari_0142f41f8d-34034ce51448882734e3-128.webp 128w, /media/uploads/Sari_0142f41f8d-74a58427647e78162d0f-192.webp 192w, /media/uploads/Sari_0142f41f8d-95c04346e3d96900b7b2-320.webp 320w, /media/uploads/Sari_0142f41f8d-acb4e85a3defea470fb2-480.webp 480w, /media/uploads/Sari_0142f41f8d-b623d4e6f400110aa0cd-500.webp 500w",
+    "width": 500,
+    "height": 500
+  },
+  "/strapi/uploads/Szakmai_kiadvanyok_05_c5ec8d5d3e.png": {
+    "source": "/strapi/uploads/Szakmai_kiadvanyok_05_c5ec8d5d3e.png",
+    "src": "/media/uploads/Szakmai_kiadvanyok_05_c5ec8d5d3e-cd25e4e353a367453e77-1024.webp",
+    "srcSet": "/media/uploads/Szakmai_kiadvanyok_05_c5ec8d5d3e-f9abc400eba0c79de94e-64.webp 64w, /media/uploads/Szakmai_kiadvanyok_05_c5ec8d5d3e-294b9b131491e3db206b-128.webp 128w, /media/uploads/Szakmai_kiadvanyok_05_c5ec8d5d3e-39d0782cdc5be13f3ea0-192.webp 192w, /media/uploads/Szakmai_kiadvanyok_05_c5ec8d5d3e-b2aa1c09e68974f7c623-320.webp 320w, /media/uploads/Szakmai_kiadvanyok_05_c5ec8d5d3e-a4dd25cfd43618c30d7f-480.webp 480w, /media/uploads/Szakmai_kiadvanyok_05_c5ec8d5d3e-0b9397cf354de92a6069-768.webp 768w, /media/uploads/Szakmai_kiadvanyok_05_c5ec8d5d3e-cd25e4e353a367453e77-1024.webp 1024w",
+    "width": 1024,
+    "height": 768
+  },
+  "/strapi/uploads/Szakmai_kiadvanyok_2_c36155a7b4.png": {
+    "source": "/strapi/uploads/Szakmai_kiadvanyok_2_c36155a7b4.png",
+    "src": "/media/uploads/Szakmai_kiadvanyok_2_c36155a7b4-6923fc4533264b873bfc-1180.webp",
+    "srcSet": "/media/uploads/Szakmai_kiadvanyok_2_c36155a7b4-f889e3b520029babb24e-64.webp 64w, /media/uploads/Szakmai_kiadvanyok_2_c36155a7b4-a5f444c20732a32c4569-128.webp 128w, /media/uploads/Szakmai_kiadvanyok_2_c36155a7b4-ab08c10d4e6b95b2a95d-192.webp 192w, /media/uploads/Szakmai_kiadvanyok_2_c36155a7b4-3b2ac6ca7fd3c9bb30af-320.webp 320w, /media/uploads/Szakmai_kiadvanyok_2_c36155a7b4-2e59daa469479a04fd4d-480.webp 480w, /media/uploads/Szakmai_kiadvanyok_2_c36155a7b4-a6ce3dafc36c2f327d65-768.webp 768w, /media/uploads/Szakmai_kiadvanyok_2_c36155a7b4-6923fc4533264b873bfc-1180.webp 1180w",
+    "width": 1180,
+    "height": 738
+  },
+  "/strapi/uploads/Szakmai_kiadvanyok_55b084435a.png": {
+    "source": "/strapi/uploads/Szakmai_kiadvanyok_55b084435a.png",
+    "src": "/media/uploads/Szakmai_kiadvanyok_55b084435a-b15a7aac788e8a11a198-1024.webp",
+    "srcSet": "/media/uploads/Szakmai_kiadvanyok_55b084435a-6e0e6a18b2027b7e0956-64.webp 64w, /media/uploads/Szakmai_kiadvanyok_55b084435a-69cfd237e859af8aee94-128.webp 128w, /media/uploads/Szakmai_kiadvanyok_55b084435a-a97e1346f485e7295521-192.webp 192w, /media/uploads/Szakmai_kiadvanyok_55b084435a-f1c4506d56ae3205a3c9-320.webp 320w, /media/uploads/Szakmai_kiadvanyok_55b084435a-c0fa922b68bc7cfa98d1-480.webp 480w, /media/uploads/Szakmai_kiadvanyok_55b084435a-c7d9e98bddf8290500c4-768.webp 768w, /media/uploads/Szakmai_kiadvanyok_55b084435a-b15a7aac788e8a11a198-1024.webp 1024w",
+    "width": 1024,
+    "height": 768
+  },
+  "/strapi/uploads/Szilvi_762b0e689b.webp": {
+    "source": "/strapi/uploads/Szilvi_762b0e689b.webp",
+    "src": "/media/uploads/Szilvi_762b0e689b-9cb3c8f77e68844698cb-440.webp",
+    "srcSet": "/media/uploads/Szilvi_762b0e689b-261a04eef9f3c61167aa-64.webp 64w, /media/uploads/Szilvi_762b0e689b-2849f372a8d9c76d7017-128.webp 128w, /media/uploads/Szilvi_762b0e689b-807f3ca05b1f38855b22-192.webp 192w, /media/uploads/Szilvi_762b0e689b-61f04af69a7de1a59981-320.webp 320w, /media/uploads/Szilvi_762b0e689b-9cb3c8f77e68844698cb-440.webp 440w",
+    "width": 440,
+    "height": 440
+  },
+  "/strapi/uploads/TV_2_36741e9903.png": {
+    "source": "/strapi/uploads/TV_2_36741e9903.png",
+    "src": "/media/uploads/TV_2_36741e9903-bc8e06e7826032691592-95.webp",
+    "srcSet": "/media/uploads/TV_2_36741e9903-0b43c12cde4af04ad592-64.webp 64w, /media/uploads/TV_2_36741e9903-bc8e06e7826032691592-95.webp 95w",
+    "width": 95,
+    "height": 95
+  },
+  "/strapi/uploads/TV_2_846217ab73.png": {
+    "source": "/strapi/uploads/TV_2_846217ab73.png",
+    "src": "/media/uploads/TV_2_846217ab73-3b12def62ad4643debf4-1029.webp",
+    "srcSet": "/media/uploads/TV_2_846217ab73-0ef3b3e26b54177f0e3c-64.webp 64w, /media/uploads/TV_2_846217ab73-64c45f3beb77046100c7-128.webp 128w, /media/uploads/TV_2_846217ab73-8da110591cdab8f37dc5-192.webp 192w, /media/uploads/TV_2_846217ab73-576b7ffccea83b7fff42-320.webp 320w, /media/uploads/TV_2_846217ab73-f5c425444a3a96784df9-480.webp 480w, /media/uploads/TV_2_846217ab73-08a019332ebbd2c29645-768.webp 768w, /media/uploads/TV_2_846217ab73-3b12def62ad4643debf4-1029.webp 1029w",
+    "width": 1029,
+    "height": 773
+  },
+  "/strapi/uploads/TV_2_Streaming_platform_a1eb39ba7d.png": {
+    "source": "/strapi/uploads/TV_2_Streaming_platform_a1eb39ba7d.png",
+    "src": "/media/uploads/TV_2_Streaming_platform_a1eb39ba7d-51a4a0b8c46427dc5dcb-1024.webp",
+    "srcSet": "/media/uploads/TV_2_Streaming_platform_a1eb39ba7d-ebc67288fd3197f2aa6c-64.webp 64w, /media/uploads/TV_2_Streaming_platform_a1eb39ba7d-401351092dbaa793d77e-128.webp 128w, /media/uploads/TV_2_Streaming_platform_a1eb39ba7d-0a61ed823978415d44b4-192.webp 192w, /media/uploads/TV_2_Streaming_platform_a1eb39ba7d-8aa35d6f20a0d2eec08c-320.webp 320w, /media/uploads/TV_2_Streaming_platform_a1eb39ba7d-5b5867b271cd629603b6-480.webp 480w, /media/uploads/TV_2_Streaming_platform_a1eb39ba7d-5ea6b68a1c4b4c0a78e9-768.webp 768w, /media/uploads/TV_2_Streaming_platform_a1eb39ba7d-51a4a0b8c46427dc5dcb-1024.webp 1024w",
+    "width": 1024,
+    "height": 768
+  },
+  "/strapi/uploads/Tamas_b73e8d97e0.webp": {
+    "source": "/strapi/uploads/Tamas_b73e8d97e0.webp",
+    "src": "/media/uploads/Tamas_b73e8d97e0-14837a460501c3a2048c-440.webp",
+    "srcSet": "/media/uploads/Tamas_b73e8d97e0-9c99fee0910c6199c2e2-64.webp 64w, /media/uploads/Tamas_b73e8d97e0-420a32d2348d2cc45ac2-128.webp 128w, /media/uploads/Tamas_b73e8d97e0-f46f3e36e0631fde73a4-192.webp 192w, /media/uploads/Tamas_b73e8d97e0-0a71ea7a21bb2e8d8efb-320.webp 320w, /media/uploads/Tamas_b73e8d97e0-14837a460501c3a2048c-440.webp 440w",
+    "width": 440,
+    "height": 440
+  },
+  "/strapi/uploads/Tanulo_slide_b46bdc21f1.png": {
+    "source": "/strapi/uploads/Tanulo_slide_b46bdc21f1.png",
+    "src": "/media/uploads/Tanulo_slide_b46bdc21f1-0b938590c846a7a132dd-1295.webp",
+    "srcSet": "/media/uploads/Tanulo_slide_b46bdc21f1-79e03f208bd8d0357911-64.webp 64w, /media/uploads/Tanulo_slide_b46bdc21f1-37589359452577f74e67-128.webp 128w, /media/uploads/Tanulo_slide_b46bdc21f1-6c9fd65e11e6259b4031-192.webp 192w, /media/uploads/Tanulo_slide_b46bdc21f1-5e5eb944ae1666b81b92-320.webp 320w, /media/uploads/Tanulo_slide_b46bdc21f1-3e8d458ccc969da326c9-480.webp 480w, /media/uploads/Tanulo_slide_b46bdc21f1-669fbf9ddd86041778fe-768.webp 768w, /media/uploads/Tanulo_slide_b46bdc21f1-b59a772ff369816685ca-1200.webp 1200w, /media/uploads/Tanulo_slide_b46bdc21f1-0b938590c846a7a132dd-1295.webp 1295w",
+    "width": 1295,
+    "height": 737
+  },
+  "/strapi/uploads/Telekom_AI_alapu_kutatas_cecb398aff.png": {
+    "source": "/strapi/uploads/Telekom_AI_alapu_kutatas_cecb398aff.png",
+    "src": "/media/uploads/Telekom_AI_alapu_kutatas_cecb398aff-ea306ae51b1eed14349f-1024.webp",
+    "srcSet": "/media/uploads/Telekom_AI_alapu_kutatas_cecb398aff-2ae84ca68d02520dd696-64.webp 64w, /media/uploads/Telekom_AI_alapu_kutatas_cecb398aff-49bfa11059c8c183b519-128.webp 128w, /media/uploads/Telekom_AI_alapu_kutatas_cecb398aff-f80ce2ab14c7d7995252-192.webp 192w, /media/uploads/Telekom_AI_alapu_kutatas_cecb398aff-aa15e182dec42bab8443-320.webp 320w, /media/uploads/Telekom_AI_alapu_kutatas_cecb398aff-4f70b97520ba60f220eb-480.webp 480w, /media/uploads/Telekom_AI_alapu_kutatas_cecb398aff-12e3704308a5f02264c6-768.webp 768w, /media/uploads/Telekom_AI_alapu_kutatas_cecb398aff-ea306ae51b1eed14349f-1024.webp 1024w",
+    "width": 1024,
+    "height": 768
+  },
+  "/strapi/uploads/Telekom_Works_partnerseg_56c0ab725f.png": {
+    "source": "/strapi/uploads/Telekom_Works_partnerseg_56c0ab725f.png",
+    "src": "/media/uploads/Telekom_Works_partnerseg_56c0ab725f-1b422d06127d5028a2df-1024.webp",
+    "srcSet": "/media/uploads/Telekom_Works_partnerseg_56c0ab725f-5abff26221cf421acd86-64.webp 64w, /media/uploads/Telekom_Works_partnerseg_56c0ab725f-afe74ef72d4a34f4421e-128.webp 128w, /media/uploads/Telekom_Works_partnerseg_56c0ab725f-645b3c949b3d49e3ada8-192.webp 192w, /media/uploads/Telekom_Works_partnerseg_56c0ab725f-acab7db9be44702a9ccc-320.webp 320w, /media/uploads/Telekom_Works_partnerseg_56c0ab725f-06e4b65eb2e03e935e66-480.webp 480w, /media/uploads/Telekom_Works_partnerseg_56c0ab725f-e52672b2a77d780e049c-768.webp 768w, /media/uploads/Telekom_Works_partnerseg_56c0ab725f-1b422d06127d5028a2df-1024.webp 1024w",
+    "width": 1024,
+    "height": 768
+  },
+  "/strapi/uploads/Telekom_dc5707d72c.png": {
+    "source": "/strapi/uploads/Telekom_dc5707d72c.png",
+    "src": "/media/uploads/Telekom_dc5707d72c-91c83013026cb84bf84f-178.webp",
+    "srcSet": "/media/uploads/Telekom_dc5707d72c-321aece312644842f6c1-64.webp 64w, /media/uploads/Telekom_dc5707d72c-f1323631092ea8ffc0ba-128.webp 128w, /media/uploads/Telekom_dc5707d72c-91c83013026cb84bf84f-178.webp 178w",
+    "width": 178,
+    "height": 86
+  },
+  "/strapi/uploads/UNIQA_ugyfelportal_slide_v2_b18f910b22.png": {
+    "source": "/strapi/uploads/UNIQA_ugyfelportal_slide_v2_b18f910b22.png",
+    "src": "/media/uploads/UNIQA_ugyfelportal_slide_v2_b18f910b22-707fe11cff7e7286fdd5-1245.webp",
+    "srcSet": "/media/uploads/UNIQA_ugyfelportal_slide_v2_b18f910b22-a5201a30d47602f6849a-64.webp 64w, /media/uploads/UNIQA_ugyfelportal_slide_v2_b18f910b22-14a93a86e4395b91fd13-128.webp 128w, /media/uploads/UNIQA_ugyfelportal_slide_v2_b18f910b22-1b263382e352035e784f-192.webp 192w, /media/uploads/UNIQA_ugyfelportal_slide_v2_b18f910b22-7c882e18f18cdb7fea3e-320.webp 320w, /media/uploads/UNIQA_ugyfelportal_slide_v2_b18f910b22-3e289aad6de44e298079-480.webp 480w, /media/uploads/UNIQA_ugyfelportal_slide_v2_b18f910b22-ae76e278ffae1d9dfcda-768.webp 768w, /media/uploads/UNIQA_ugyfelportal_slide_v2_b18f910b22-cd037872fe6183853313-1200.webp 1200w, /media/uploads/UNIQA_ugyfelportal_slide_v2_b18f910b22-707fe11cff7e7286fdd5-1245.webp 1245w",
+    "width": 1245,
+    "height": 702
+  },
+  "/strapi/uploads/Uni_Credit_Akadalymentes_audit_c8d7c0f8fc.png": {
+    "source": "/strapi/uploads/Uni_Credit_Akadalymentes_audit_c8d7c0f8fc.png",
+    "src": "/media/uploads/Uni_Credit_Akadalymentes_audit_c8d7c0f8fc-e206ab259303794b4c6a-1024.webp",
+    "srcSet": "/media/uploads/Uni_Credit_Akadalymentes_audit_c8d7c0f8fc-fee7b0084eade6bea0ee-64.webp 64w, /media/uploads/Uni_Credit_Akadalymentes_audit_c8d7c0f8fc-1cb1ee252169725b6e38-128.webp 128w, /media/uploads/Uni_Credit_Akadalymentes_audit_c8d7c0f8fc-402e59c8e0477e7c0b43-192.webp 192w, /media/uploads/Uni_Credit_Akadalymentes_audit_c8d7c0f8fc-128845edb77185b649de-320.webp 320w, /media/uploads/Uni_Credit_Akadalymentes_audit_c8d7c0f8fc-c215941764728f0e10b2-480.webp 480w, /media/uploads/Uni_Credit_Akadalymentes_audit_c8d7c0f8fc-970a8a4b838c0b906a4a-768.webp 768w, /media/uploads/Uni_Credit_Akadalymentes_audit_c8d7c0f8fc-e206ab259303794b4c6a-1024.webp 1024w",
+    "width": 1024,
+    "height": 768
+  },
+  "/strapi/uploads/Uni_Credit_f956ff172c.png": {
+    "source": "/strapi/uploads/Uni_Credit_f956ff172c.png",
+    "src": "/media/uploads/Uni_Credit_f956ff172c-422e228fb4ba1969855e-228.webp",
+    "srcSet": "/media/uploads/Uni_Credit_f956ff172c-61d3925b8747a2377b64-64.webp 64w, /media/uploads/Uni_Credit_f956ff172c-b86c096e2f7c65dfdcf7-128.webp 128w, /media/uploads/Uni_Credit_f956ff172c-5ad39be5f3ab77065d9c-192.webp 192w, /media/uploads/Uni_Credit_f956ff172c-422e228fb4ba1969855e-228.webp 228w",
+    "width": 228,
+    "height": 46
+  },
+  "/strapi/uploads/Uniqa_Digitalis_ugyintezes_9ad80571da.png": {
+    "source": "/strapi/uploads/Uniqa_Digitalis_ugyintezes_9ad80571da.png",
+    "src": "/media/uploads/Uniqa_Digitalis_ugyintezes_9ad80571da-2e4a7d97a8ec8b183b48-1024.webp",
+    "srcSet": "/media/uploads/Uniqa_Digitalis_ugyintezes_9ad80571da-bb2ff1c96e6a0276f634-64.webp 64w, /media/uploads/Uniqa_Digitalis_ugyintezes_9ad80571da-305750c379823a6a7427-128.webp 128w, /media/uploads/Uniqa_Digitalis_ugyintezes_9ad80571da-f708b2adbd2da1f65fc5-192.webp 192w, /media/uploads/Uniqa_Digitalis_ugyintezes_9ad80571da-49f7eb3c0396ee80dc6c-320.webp 320w, /media/uploads/Uniqa_Digitalis_ugyintezes_9ad80571da-9bdaa8185b09909ae8f9-480.webp 480w, /media/uploads/Uniqa_Digitalis_ugyintezes_9ad80571da-78775d96c10c30998d7c-768.webp 768w, /media/uploads/Uniqa_Digitalis_ugyintezes_9ad80571da-2e4a7d97a8ec8b183b48-1024.webp 1024w",
+    "width": 1024,
+    "height": 768
+  },
+  "/strapi/uploads/Uniqa_dcd48d1817.png": {
+    "source": "/strapi/uploads/Uniqa_dcd48d1817.png",
+    "src": "/media/uploads/Uniqa_dcd48d1817-3c92c7a090be35688547-124.webp",
+    "srcSet": "/media/uploads/Uniqa_dcd48d1817-d8b4a3850ec75de7ea1d-64.webp 64w, /media/uploads/Uniqa_dcd48d1817-3c92c7a090be35688547-124.webp 124w",
+    "width": 124,
+    "height": 96
+  },
+  "/strapi/uploads/Viktor_8767106e5e.webp": {
+    "source": "/strapi/uploads/Viktor_8767106e5e.webp",
+    "src": "/media/uploads/Viktor_8767106e5e-e1bcd4ceea8bb69f4755-500.webp",
+    "srcSet": "/media/uploads/Viktor_8767106e5e-3983f03c2cb946602521-64.webp 64w, /media/uploads/Viktor_8767106e5e-d1e846ef0b6cd3fa559d-128.webp 128w, /media/uploads/Viktor_8767106e5e-29c4f5221fbd495eed33-192.webp 192w, /media/uploads/Viktor_8767106e5e-4c9b01074469d2f6e338-320.webp 320w, /media/uploads/Viktor_8767106e5e-b4c856a92861af1cd54a-480.webp 480w, /media/uploads/Viktor_8767106e5e-e1bcd4ceea8bb69f4755-500.webp 500w",
+    "width": 500,
+    "height": 500
+  },
+  "/strapi/uploads/Virag_fd305993ee.webp": {
+    "source": "/strapi/uploads/Virag_fd305993ee.webp",
+    "src": "/media/uploads/Virag_fd305993ee-ea2a962d2e9d63299b43-500.webp",
+    "srcSet": "/media/uploads/Virag_fd305993ee-c2503db2bb4f0826045a-64.webp 64w, /media/uploads/Virag_fd305993ee-cfca3f9ee2a66e91a2a4-128.webp 128w, /media/uploads/Virag_fd305993ee-e15b0470879d3defa317-192.webp 192w, /media/uploads/Virag_fd305993ee-f2423beac62f822fc822-320.webp 320w, /media/uploads/Virag_fd305993ee-dd6dbec8adbd182a95a5-480.webp 480w, /media/uploads/Virag_fd305993ee-ea2a962d2e9d63299b43-500.webp 500w",
+    "width": 500,
+    "height": 500
+  },
+  "/strapi/uploads/Works_AI_alapu_termekfejlesztes_97315f8150.png": {
+    "source": "/strapi/uploads/Works_AI_alapu_termekfejlesztes_97315f8150.png",
+    "src": "/media/uploads/Works_AI_alapu_termekfejlesztes_97315f8150-390d48adbbc505af2331-1024.webp",
+    "srcSet": "/media/uploads/Works_AI_alapu_termekfejlesztes_97315f8150-b714c17f369107dba018-64.webp 64w, /media/uploads/Works_AI_alapu_termekfejlesztes_97315f8150-7300bcf7ce5c09e17d55-128.webp 128w, /media/uploads/Works_AI_alapu_termekfejlesztes_97315f8150-d807551aed5d30ed8f8d-192.webp 192w, /media/uploads/Works_AI_alapu_termekfejlesztes_97315f8150-146d64d42ab2456aa9f4-320.webp 320w, /media/uploads/Works_AI_alapu_termekfejlesztes_97315f8150-085c2166efd7a287c3db-480.webp 480w, /media/uploads/Works_AI_alapu_termekfejlesztes_97315f8150-3d9021f5e2a3b9bef28e-768.webp 768w, /media/uploads/Works_AI_alapu_termekfejlesztes_97315f8150-390d48adbbc505af2331-1024.webp 1024w",
+    "width": 1024,
+    "height": 768
+  },
+  "/strapi/uploads/Works_Akadalymentes_kepzes_f5b89b3af6.png": {
+    "source": "/strapi/uploads/Works_Akadalymentes_kepzes_f5b89b3af6.png",
+    "src": "/media/uploads/Works_Akadalymentes_kepzes_f5b89b3af6-304217c2046a50d4f873-1024.webp",
+    "srcSet": "/media/uploads/Works_Akadalymentes_kepzes_f5b89b3af6-fe2855ae9b468bd451f2-64.webp 64w, /media/uploads/Works_Akadalymentes_kepzes_f5b89b3af6-5471b1507d0a42570d35-128.webp 128w, /media/uploads/Works_Akadalymentes_kepzes_f5b89b3af6-c587c6ad6d619f491897-192.webp 192w, /media/uploads/Works_Akadalymentes_kepzes_f5b89b3af6-d81fa1143e6c8ebd4478-320.webp 320w, /media/uploads/Works_Akadalymentes_kepzes_f5b89b3af6-bb30fbc37e4265df42da-480.webp 480w, /media/uploads/Works_Akadalymentes_kepzes_f5b89b3af6-761c694bb0b8b6480c5c-768.webp 768w, /media/uploads/Works_Akadalymentes_kepzes_f5b89b3af6-304217c2046a50d4f873-1024.webp 1024w",
+    "width": 1024,
+    "height": 768
+  },
+  "/strapi/uploads/Works_Digitalis_kepessegfejlesztes_ab723186b8.png": {
+    "source": "/strapi/uploads/Works_Digitalis_kepessegfejlesztes_ab723186b8.png",
+    "src": "/media/uploads/Works_Digitalis_kepessegfejlesztes_ab723186b8-4d6bfde610f5cb9b51be-1024.webp",
+    "srcSet": "/media/uploads/Works_Digitalis_kepessegfejlesztes_ab723186b8-60e845c52e1e42b5792c-64.webp 64w, /media/uploads/Works_Digitalis_kepessegfejlesztes_ab723186b8-cfda4d79ac6140fc8177-128.webp 128w, /media/uploads/Works_Digitalis_kepessegfejlesztes_ab723186b8-abffadfc284807a0abdc-192.webp 192w, /media/uploads/Works_Digitalis_kepessegfejlesztes_ab723186b8-8a09ebc80817325accc7-320.webp 320w, /media/uploads/Works_Digitalis_kepessegfejlesztes_ab723186b8-ae1f448b5693d87cbf27-480.webp 480w, /media/uploads/Works_Digitalis_kepessegfejlesztes_ab723186b8-1f1c2146963f2000047f-768.webp 768w, /media/uploads/Works_Digitalis_kepessegfejlesztes_ab723186b8-4d6bfde610f5cb9b51be-1024.webp 1024w",
+    "width": 1024,
+    "height": 768
+  },
+  "/strapi/uploads/Yettel_3_d180234f07.png": {
+    "source": "/strapi/uploads/Yettel_3_d180234f07.png",
+    "src": "/media/uploads/Yettel_3_d180234f07-998dc62996b02767315b-252.webp",
+    "srcSet": "/media/uploads/Yettel_3_d180234f07-1f2b949eefbc753a8a9e-64.webp 64w, /media/uploads/Yettel_3_d180234f07-ae406b3f0f894bbcf5ab-128.webp 128w, /media/uploads/Yettel_3_d180234f07-48a7c9108e691a83a6d2-192.webp 192w, /media/uploads/Yettel_3_d180234f07-998dc62996b02767315b-252.webp 252w",
+    "width": 252,
+    "height": 120
+  },
+  "/strapi/uploads/Yettel_IVR_validacio_207c29f71f.png": {
+    "source": "/strapi/uploads/Yettel_IVR_validacio_207c29f71f.png",
+    "src": "/media/uploads/Yettel_IVR_validacio_207c29f71f-66627b436ce14366695d-1024.webp",
+    "srcSet": "/media/uploads/Yettel_IVR_validacio_207c29f71f-c50f550f93f5983a1ad7-64.webp 64w, /media/uploads/Yettel_IVR_validacio_207c29f71f-3e24d36b8eeb31a4d27d-128.webp 128w, /media/uploads/Yettel_IVR_validacio_207c29f71f-bfd4b12cf05b9e759207-192.webp 192w, /media/uploads/Yettel_IVR_validacio_207c29f71f-c35751407c1aeecd9239-320.webp 320w, /media/uploads/Yettel_IVR_validacio_207c29f71f-1674247e586d3bebc4d7-480.webp 480w, /media/uploads/Yettel_IVR_validacio_207c29f71f-8f9ac015245734755a52-768.webp 768w, /media/uploads/Yettel_IVR_validacio_207c29f71f-66627b436ce14366695d-1024.webp 1024w",
+    "width": 1024,
+    "height": 768
+  },
+  "/strapi/uploads/Yettel_b6d6aecb20.png": {
+    "source": "/strapi/uploads/Yettel_b6d6aecb20.png",
+    "src": "/media/uploads/Yettel_b6d6aecb20-8c2d1696da1fb2a4cc82-396.webp",
+    "srcSet": "/media/uploads/Yettel_b6d6aecb20-4c8a697ace32c9e54c20-64.webp 64w, /media/uploads/Yettel_b6d6aecb20-64a01738e1ec3f165842-128.webp 128w, /media/uploads/Yettel_b6d6aecb20-9a18086b11946b74d53d-192.webp 192w, /media/uploads/Yettel_b6d6aecb20-c9e9aea3cba69c4a07dd-320.webp 320w, /media/uploads/Yettel_b6d6aecb20-8c2d1696da1fb2a4cc82-396.webp 396w",
+    "width": 396,
+    "height": 553
+  },
+  "/strapi/uploads/Zsofi_bf08c261c0.webp": {
+    "source": "/strapi/uploads/Zsofi_bf08c261c0.webp",
+    "src": "/media/uploads/Zsofi_bf08c261c0-b201b8592e1eeaebcfb4-440.webp",
+    "srcSet": "/media/uploads/Zsofi_bf08c261c0-be1963f8f22a5edeed0e-64.webp 64w, /media/uploads/Zsofi_bf08c261c0-884286c41905a4732e4d-128.webp 128w, /media/uploads/Zsofi_bf08c261c0-c7e5c24027c30ae3f6a8-192.webp 192w, /media/uploads/Zsofi_bf08c261c0-e2fdec6da5c7fbc7ca07-320.webp 320w, /media/uploads/Zsofi_bf08c261c0-b201b8592e1eeaebcfb4-440.webp 440w",
+    "width": 440,
+    "height": 440
+  },
+  "/strapi/uploads/Zsu_1_bb91c39a55.webp": {
+    "source": "/strapi/uploads/Zsu_1_bb91c39a55.webp",
+    "src": "/media/uploads/Zsu_1_bb91c39a55-7ff55f5ce4bf0190ecfe-500.webp",
+    "srcSet": "/media/uploads/Zsu_1_bb91c39a55-b76617c1c4881afe5506-64.webp 64w, /media/uploads/Zsu_1_bb91c39a55-8bd50ae786beda4f00f8-128.webp 128w, /media/uploads/Zsu_1_bb91c39a55-4bf47de9c9e3785540c8-192.webp 192w, /media/uploads/Zsu_1_bb91c39a55-039312d2f06450fad042-320.webp 320w, /media/uploads/Zsu_1_bb91c39a55-66b09087de1a280b4aea-480.webp 480w, /media/uploads/Zsu_1_bb91c39a55-7ff55f5ce4bf0190ecfe-500.webp 500w",
+    "width": 500,
+    "height": 500
+  },
+  "/strapi/uploads/alkalmazkodas_new_1789551061821_d296cb66d4.png": {
+    "source": "/strapi/uploads/alkalmazkodas_new_1789551061821_d296cb66d4.png",
+    "src": "/media/uploads/alkalmazkodas_new_1789551061821_d296cb66d4-1e008e75b594b6144556-960.webp",
+    "srcSet": "/media/uploads/alkalmazkodas_new_1789551061821_d296cb66d4-93d982de848cebed2e6d-64.webp 64w, /media/uploads/alkalmazkodas_new_1789551061821_d296cb66d4-2eb163e10ea060e4891f-128.webp 128w, /media/uploads/alkalmazkodas_new_1789551061821_d296cb66d4-2e37bef07e8a4c4159df-192.webp 192w, /media/uploads/alkalmazkodas_new_1789551061821_d296cb66d4-bdf42b4c0fd831756b28-320.webp 320w, /media/uploads/alkalmazkodas_new_1789551061821_d296cb66d4-991cc3ab80fa8ceb9092-480.webp 480w, /media/uploads/alkalmazkodas_new_1789551061821_d296cb66d4-ee24cdcda3dc7637a722-768.webp 768w, /media/uploads/alkalmazkodas_new_1789551061821_d296cb66d4-1e008e75b594b6144556-960.webp 960w",
+    "width": 960,
+    "height": 610
+  },
+  "/strapi/uploads/bg_graphic2_1774011568340_bb671557c5.png": {
+    "source": "/strapi/uploads/bg_graphic2_1774011568340_bb671557c5.png",
+    "src": "/media/uploads/bg_graphic2_1774011568340_bb671557c5-f39c8d77af78eeb60238-1056.webp",
+    "srcSet": "/media/uploads/bg_graphic2_1774011568340_bb671557c5-6cac7ed239c1515daf55-64.webp 64w, /media/uploads/bg_graphic2_1774011568340_bb671557c5-60bab5fdce3abb1b4dc1-128.webp 128w, /media/uploads/bg_graphic2_1774011568340_bb671557c5-dccff67748a9d66f7ddc-192.webp 192w, /media/uploads/bg_graphic2_1774011568340_bb671557c5-a166cdcadf8ef05830f5-320.webp 320w, /media/uploads/bg_graphic2_1774011568340_bb671557c5-d6fba21f6b0221c61880-480.webp 480w, /media/uploads/bg_graphic2_1774011568340_bb671557c5-3b6cade6ed06db0aa395-768.webp 768w, /media/uploads/bg_graphic2_1774011568340_bb671557c5-f39c8d77af78eeb60238-1056.webp 1056w",
+    "width": 1056,
+    "height": 1067
+  },
+  "/strapi/uploads/bg_graphic_1774009634501_6f046d67af.png": {
+    "source": "/strapi/uploads/bg_graphic_1774009634501_6f046d67af.png",
+    "src": "/media/uploads/bg_graphic_1774009634501_6f046d67af-aebb819bb60d701b7228-1279.webp",
+    "srcSet": "/media/uploads/bg_graphic_1774009634501_6f046d67af-38b679369423dae237eb-64.webp 64w, /media/uploads/bg_graphic_1774009634501_6f046d67af-32b5d6151ead52b76ae8-128.webp 128w, /media/uploads/bg_graphic_1774009634501_6f046d67af-53812da4343a7aeded64-192.webp 192w, /media/uploads/bg_graphic_1774009634501_6f046d67af-ad43279e79ebcab4cf8e-320.webp 320w, /media/uploads/bg_graphic_1774009634501_6f046d67af-841e4517fdb4d5ada1ec-480.webp 480w, /media/uploads/bg_graphic_1774009634501_6f046d67af-1603e8bf73072f01fbb9-768.webp 768w, /media/uploads/bg_graphic_1774009634501_6f046d67af-c948dfe6aa620e50c91d-1200.webp 1200w, /media/uploads/bg_graphic_1774009634501_6f046d67af-aebb819bb60d701b7228-1279.webp 1279w",
+    "width": 1279,
+    "height": 997
+  },
+  "/strapi/uploads/contact_bg_1774518452836_75c2598f4c.png": {
+    "source": "/strapi/uploads/contact_bg_1774518452836_75c2598f4c.png",
+    "src": "/media/uploads/contact_bg_1774518452836_75c2598f4c-223ff84dd131896a75f0-2648.webp",
+    "srcSet": "/media/uploads/contact_bg_1774518452836_75c2598f4c-7732b14404a4a593cc1c-64.webp 64w, /media/uploads/contact_bg_1774518452836_75c2598f4c-18b94911e40beb602ddf-128.webp 128w, /media/uploads/contact_bg_1774518452836_75c2598f4c-bd82e3d7774554bc1008-192.webp 192w, /media/uploads/contact_bg_1774518452836_75c2598f4c-02ef21f6f6e12ac6e5c9-320.webp 320w, /media/uploads/contact_bg_1774518452836_75c2598f4c-5b5df8d9dd931c72e4ad-480.webp 480w, /media/uploads/contact_bg_1774518452836_75c2598f4c-2324531f44767b7c71ec-768.webp 768w, /media/uploads/contact_bg_1774518452836_75c2598f4c-26fe602b40d4c39dfb1c-1200.webp 1200w, /media/uploads/contact_bg_1774518452836_75c2598f4c-281e65bc81e13eda5634-1600.webp 1600w, /media/uploads/contact_bg_1774518452836_75c2598f4c-6ae0fe95cba1acebecf2-1920.webp 1920w, /media/uploads/contact_bg_1774518452836_75c2598f4c-223ff84dd131896a75f0-2648.webp 2648w",
+    "width": 2648,
+    "height": 1634
+  },
+  "/strapi/uploads/egyuttmukodes_new_1789551061820_81012c650c.png": {
+    "source": "/strapi/uploads/egyuttmukodes_new_1789551061820_81012c650c.png",
+    "src": "/media/uploads/egyuttmukodes_new_1789551061820_81012c650c-0bac24e62491218c0790-960.webp",
+    "srcSet": "/media/uploads/egyuttmukodes_new_1789551061820_81012c650c-6ca6148b6d961f1f31be-64.webp 64w, /media/uploads/egyuttmukodes_new_1789551061820_81012c650c-6083eaf514d4fc390277-128.webp 128w, /media/uploads/egyuttmukodes_new_1789551061820_81012c650c-fc836c5892097adf3fe0-192.webp 192w, /media/uploads/egyuttmukodes_new_1789551061820_81012c650c-5f42b5793b086626730f-320.webp 320w, /media/uploads/egyuttmukodes_new_1789551061820_81012c650c-ef9b4dc86a8e02d26f2b-480.webp 480w, /media/uploads/egyuttmukodes_new_1789551061820_81012c650c-d80f193d50988515f938-768.webp 768w, /media/uploads/egyuttmukodes_new_1789551061820_81012c650c-0bac24e62491218c0790-960.webp 960w",
+    "width": 960,
+    "height": 610
+  },
+  "/strapi/uploads/empatia_new_1789551061821_932264da68.png": {
+    "source": "/strapi/uploads/empatia_new_1789551061821_932264da68.png",
+    "src": "/media/uploads/empatia_new_1789551061821_932264da68-682f0757a0f31a1f5a60-960.webp",
+    "srcSet": "/media/uploads/empatia_new_1789551061821_932264da68-dca24f988f7ce22b7a4a-64.webp 64w, /media/uploads/empatia_new_1789551061821_932264da68-ee4dc127549c42738de9-128.webp 128w, /media/uploads/empatia_new_1789551061821_932264da68-6167f690918fa2f0f42a-192.webp 192w, /media/uploads/empatia_new_1789551061821_932264da68-b6545d63c5c3a47c13a0-320.webp 320w, /media/uploads/empatia_new_1789551061821_932264da68-7edf1a8a743265bc86df-480.webp 480w, /media/uploads/empatia_new_1789551061821_932264da68-a1b9d328fdee0b96960e-768.webp 768w, /media/uploads/empatia_new_1789551061821_932264da68-682f0757a0f31a1f5a60-960.webp 960w",
+    "width": 960,
+    "height": 610
+  },
+  "/strapi/uploads/favicon_e56c3f9854.png": {
+    "source": "/strapi/uploads/favicon_e56c3f9854.png",
+    "src": "/media/uploads/favicon_e56c3f9854-1a41277b87e9297ef993-32.webp",
+    "srcSet": "/media/uploads/favicon_e56c3f9854-1a41277b87e9297ef993-32.webp 32w",
+    "width": 32,
+    "height": 32
+  },
+  "/strapi/uploads/generali_928376e149.png": {
+    "source": "/strapi/uploads/generali_928376e149.png",
+    "src": "/media/uploads/generali_928376e149-ffb5c516d8e2c0c26ab7-119.webp",
+    "srcSet": "/media/uploads/generali_928376e149-d658c94b4213b35f36e2-64.webp 64w, /media/uploads/generali_928376e149-ffb5c516d8e2c0c26ab7-119.webp 119w",
+    "width": 119,
+    "height": 96
+  },
+  "/strapi/uploads/genertel_e1e006ac6e.png": {
+    "source": "/strapi/uploads/genertel_e1e006ac6e.png",
+    "src": "/media/uploads/genertel_e1e006ac6e-c60cb99cdd6420cbe19d-228.webp",
+    "srcSet": "/media/uploads/genertel_e1e006ac6e-ee83234e24156fbaa660-64.webp 64w, /media/uploads/genertel_e1e006ac6e-4d0798110e02aba1f04d-128.webp 128w, /media/uploads/genertel_e1e006ac6e-a038e74c3292d27446cd-192.webp 192w, /media/uploads/genertel_e1e006ac6e-c60cb99cdd6420cbe19d-228.webp 228w",
+    "width": 228,
+    "height": 66
+  },
+  "/strapi/uploads/homepage_graphic_1773999340930_ace17c6480.png": {
+    "source": "/strapi/uploads/homepage_graphic_1773999340930_ace17c6480.png",
+    "src": "/media/uploads/homepage_graphic_1773999340930_ace17c6480-347f8ba680faccdb4502-2268.webp",
+    "srcSet": "/media/uploads/homepage_graphic_1773999340930_ace17c6480-732211e075ed1defc8f4-64.webp 64w, /media/uploads/homepage_graphic_1773999340930_ace17c6480-674a0e7ffeab4e4d1013-128.webp 128w, /media/uploads/homepage_graphic_1773999340930_ace17c6480-70a6c1b50b7e719874c9-192.webp 192w, /media/uploads/homepage_graphic_1773999340930_ace17c6480-e77b480aaf3538a4601a-320.webp 320w, /media/uploads/homepage_graphic_1773999340930_ace17c6480-cd05bc39fed31dbe3869-480.webp 480w, /media/uploads/homepage_graphic_1773999340930_ace17c6480-dc45752143b8ffb74ea8-768.webp 768w, /media/uploads/homepage_graphic_1773999340930_ace17c6480-2a43284bf0d3a9460a2a-1200.webp 1200w, /media/uploads/homepage_graphic_1773999340930_ace17c6480-fd5918ea8c5c6977851e-1600.webp 1600w, /media/uploads/homepage_graphic_1773999340930_ace17c6480-5bc290e2aefd6f5ad1e4-1920.webp 1920w, /media/uploads/homepage_graphic_1773999340930_ace17c6480-347f8ba680faccdb4502-2268.webp 2268w",
+    "width": 2268,
+    "height": 2420
+  },
+  "/strapi/uploads/icon_AI_bb7b97165a.svg": {
+    "source": "/strapi/uploads/icon_AI_bb7b97165a.svg",
+    "src": "/strapi/uploads/icon_AI_bb7b97165a.svg",
+    "srcSet": "",
+    "width": 32,
+    "height": 32
+  },
+  "/strapi/uploads/icon_AI_products_Binary_80c174434f.svg": {
+    "source": "/strapi/uploads/icon_AI_products_Binary_80c174434f.svg",
+    "src": "/strapi/uploads/icon_AI_products_Binary_80c174434f.svg",
+    "srcSet": "",
+    "width": 32,
+    "height": 32
+  },
+  "/strapi/uploads/icon_AI_products_Browsers_469eed5294.svg": {
+    "source": "/strapi/uploads/icon_AI_products_Browsers_469eed5294.svg",
+    "src": "/strapi/uploads/icon_AI_products_Browsers_469eed5294.svg",
+    "srcSet": "",
+    "width": 32,
+    "height": 32
+  },
+  "/strapi/uploads/icon_AI_products_Chartbar_46e87b1af5.svg": {
+    "source": "/strapi/uploads/icon_AI_products_Chartbar_46e87b1af5.svg",
+    "src": "/strapi/uploads/icon_AI_products_Chartbar_46e87b1af5.svg",
+    "srcSet": "",
+    "width": 32,
+    "height": 32
+  },
+  "/strapi/uploads/icon_AI_products_Check_Circle_dbce18958e.svg": {
+    "source": "/strapi/uploads/icon_AI_products_Check_Circle_dbce18958e.svg",
+    "src": "/strapi/uploads/icon_AI_products_Check_Circle_dbce18958e.svg",
+    "srcSet": "",
+    "width": 32,
+    "height": 32
+  },
+  "/strapi/uploads/icon_AI_products_Fast_Forward_af58f5755f.svg": {
+    "source": "/strapi/uploads/icon_AI_products_Fast_Forward_af58f5755f.svg",
+    "src": "/strapi/uploads/icon_AI_products_Fast_Forward_af58f5755f.svg",
+    "srcSet": "",
+    "width": 32,
+    "height": 32
+  },
+  "/strapi/uploads/icon_AI_products_Hand_Arrow_Up_0fc570ef3a.svg": {
+    "source": "/strapi/uploads/icon_AI_products_Hand_Arrow_Up_0fc570ef3a.svg",
+    "src": "/strapi/uploads/icon_AI_products_Hand_Arrow_Up_0fc570ef3a.svg",
+    "srcSet": "",
+    "width": 32,
+    "height": 32
+  },
+  "/strapi/uploads/icon_AI_products_List_Checks_7e67643599.svg": {
+    "source": "/strapi/uploads/icon_AI_products_List_Checks_7e67643599.svg",
+    "src": "/strapi/uploads/icon_AI_products_List_Checks_7e67643599.svg",
+    "srcSet": "",
+    "width": 32,
+    "height": 32
+  },
+  "/strapi/uploads/icon_AI_products_Machine_learning_643fc663e9.svg": {
+    "source": "/strapi/uploads/icon_AI_products_Machine_learning_643fc663e9.svg",
+    "src": "/strapi/uploads/icon_AI_products_Machine_learning_643fc663e9.svg",
+    "srcSet": "",
+    "width": 32,
+    "height": 32
+  },
+  "/strapi/uploads/icon_AI_products_Robot_313c9287a4.svg": {
+    "source": "/strapi/uploads/icon_AI_products_Robot_313c9287a4.svg",
+    "src": "/strapi/uploads/icon_AI_products_Robot_313c9287a4.svg",
+    "srcSet": "",
+    "width": 32,
+    "height": 32
+  },
+  "/strapi/uploads/icon_AI_products_Trend_Down_c9b1005599.svg": {
+    "source": "/strapi/uploads/icon_AI_products_Trend_Down_c9b1005599.svg",
+    "src": "/strapi/uploads/icon_AI_products_Trend_Down_c9b1005599.svg",
+    "srcSet": "",
+    "width": 32,
+    "height": 32
+  },
+  "/strapi/uploads/icon_Accessibility_83aca1c92a.svg": {
+    "source": "/strapi/uploads/icon_Accessibility_83aca1c92a.svg",
+    "src": "/strapi/uploads/icon_Accessibility_83aca1c92a.svg",
+    "srcSet": "",
+    "width": 32,
+    "height": 32
+  },
+  "/strapi/uploads/icon_Arrow_Square_Right_e7a703214d.svg": {
+    "source": "/strapi/uploads/icon_Arrow_Square_Right_e7a703214d.svg",
+    "src": "/strapi/uploads/icon_Arrow_Square_Right_e7a703214d.svg",
+    "srcSet": "",
+    "width": 32,
+    "height": 32
+  },
+  "/strapi/uploads/icon_Arrows_Counter_Clockwise_c3ff8f68d0.svg": {
+    "source": "/strapi/uploads/icon_Arrows_Counter_Clockwise_c3ff8f68d0.svg",
+    "src": "/strapi/uploads/icon_Arrows_Counter_Clockwise_c3ff8f68d0.svg",
+    "srcSet": "",
+    "width": 32,
+    "height": 32
+  },
+  "/strapi/uploads/icon_Brain_c1e81dcf47.svg": {
+    "source": "/strapi/uploads/icon_Brain_c1e81dcf47.svg",
+    "src": "/strapi/uploads/icon_Brain_c1e81dcf47.svg",
+    "srcSet": "",
+    "width": 32,
+    "height": 32
+  },
+  "/strapi/uploads/icon_Chart_Line_Up_6b2e645c44.svg": {
+    "source": "/strapi/uploads/icon_Chart_Line_Up_6b2e645c44.svg",
+    "src": "/strapi/uploads/icon_Chart_Line_Up_6b2e645c44.svg",
+    "srcSet": "",
+    "width": 32,
+    "height": 32
+  },
+  "/strapi/uploads/icon_Chart_Polar_4050426fc5.svg": {
+    "source": "/strapi/uploads/icon_Chart_Polar_4050426fc5.svg",
+    "src": "/strapi/uploads/icon_Chart_Polar_4050426fc5.svg",
+    "srcSet": "",
+    "width": 32,
+    "height": 32
+  },
+  "/strapi/uploads/icon_Chats_Circle_6984ea23f3.svg": {
+    "source": "/strapi/uploads/icon_Chats_Circle_6984ea23f3.svg",
+    "src": "/strapi/uploads/icon_Chats_Circle_6984ea23f3.svg",
+    "srcSet": "",
+    "width": 32,
+    "height": 32
+  },
+  "/strapi/uploads/icon_Check_Fat_64ab6c24b4.svg": {
+    "source": "/strapi/uploads/icon_Check_Fat_64ab6c24b4.svg",
+    "src": "/strapi/uploads/icon_Check_Fat_64ab6c24b4.svg",
+    "srcSet": "",
+    "width": 32,
+    "height": 32
+  },
+  "/strapi/uploads/icon_Clipboard_Text_cc213668ec.svg": {
+    "source": "/strapi/uploads/icon_Clipboard_Text_cc213668ec.svg",
+    "src": "/strapi/uploads/icon_Clipboard_Text_cc213668ec.svg",
+    "srcSet": "",
+    "width": 32,
+    "height": 32
+  },
+  "/strapi/uploads/icon_Code_3c0d1b9d20.svg": {
+    "source": "/strapi/uploads/icon_Code_3c0d1b9d20.svg",
+    "src": "/strapi/uploads/icon_Code_3c0d1b9d20.svg",
+    "srcSet": "",
+    "width": 32,
+    "height": 32
+  },
+  "/strapi/uploads/icon_Crosshair_486406ad1f.svg": {
+    "source": "/strapi/uploads/icon_Crosshair_486406ad1f.svg",
+    "src": "/strapi/uploads/icon_Crosshair_486406ad1f.svg",
+    "srcSet": "",
+    "width": 32,
+    "height": 32
+  },
+  "/strapi/uploads/icon_Cursor_Click_fb4f4bee3f.svg": {
+    "source": "/strapi/uploads/icon_Cursor_Click_fb4f4bee3f.svg",
+    "src": "/strapi/uploads/icon_Cursor_Click_fb4f4bee3f.svg",
+    "srcSet": "",
+    "width": 32,
+    "height": 32
+  },
+  "/strapi/uploads/icon_Diamonds_Four_94be235b15.svg": {
+    "source": "/strapi/uploads/icon_Diamonds_Four_94be235b15.svg",
+    "src": "/strapi/uploads/icon_Diamonds_Four_94be235b15.svg",
+    "srcSet": "",
+    "width": 32,
+    "height": 32
+  },
+  "/strapi/uploads/icon_Digital_aa66329ace.svg": {
+    "source": "/strapi/uploads/icon_Digital_aa66329ace.svg",
+    "src": "/strapi/uploads/icon_Digital_aa66329ace.svg",
+    "srcSet": "",
+    "width": 32,
+    "height": 32
+  },
+  "/strapi/uploads/icon_File_Magnifying_Glass_8f44fc5928.svg": {
+    "source": "/strapi/uploads/icon_File_Magnifying_Glass_8f44fc5928.svg",
+    "src": "/strapi/uploads/icon_File_Magnifying_Glass_8f44fc5928.svg",
+    "srcSet": "",
+    "width": 32,
+    "height": 32
+  },
+  "/strapi/uploads/icon_Hand_Tap_fd9b9edeaa.svg": {
+    "source": "/strapi/uploads/icon_Hand_Tap_fd9b9edeaa.svg",
+    "src": "/strapi/uploads/icon_Hand_Tap_fd9b9edeaa.svg",
+    "srcSet": "",
+    "width": 32,
+    "height": 32
+  },
+  "/strapi/uploads/icon_Hand_Withdraw_18076634f9.svg": {
+    "source": "/strapi/uploads/icon_Hand_Withdraw_18076634f9.svg",
+    "src": "/strapi/uploads/icon_Hand_Withdraw_18076634f9.svg",
+    "srcSet": "",
+    "width": 32,
+    "height": 32
+  },
+  "/strapi/uploads/icon_Layout_e20efe0ff3.svg": {
+    "source": "/strapi/uploads/icon_Layout_e20efe0ff3.svg",
+    "src": "/strapi/uploads/icon_Layout_e20efe0ff3.svg",
+    "srcSet": "",
+    "width": 32,
+    "height": 32
+  },
+  "/strapi/uploads/icon_List_Dashes_44f0d7b104.svg": {
+    "source": "/strapi/uploads/icon_List_Dashes_44f0d7b104.svg",
+    "src": "/strapi/uploads/icon_List_Dashes_44f0d7b104.svg",
+    "srcSet": "",
+    "width": 32,
+    "height": 32
+  },
+  "/strapi/uploads/icon_Paint_Roller_a22c58a181.svg": {
+    "source": "/strapi/uploads/icon_Paint_Roller_a22c58a181.svg",
+    "src": "/strapi/uploads/icon_Paint_Roller_a22c58a181.svg",
+    "srcSet": "",
+    "width": 32,
+    "height": 32
+  },
+  "/strapi/uploads/icon_Path_a978864a90.svg": {
+    "source": "/strapi/uploads/icon_Path_a978864a90.svg",
+    "src": "/strapi/uploads/icon_Path_a978864a90.svg",
+    "srcSet": "",
+    "width": 32,
+    "height": 32
+  },
+  "/strapi/uploads/icon_Presentation_b5a5833f57.svg": {
+    "source": "/strapi/uploads/icon_Presentation_b5a5833f57.svg",
+    "src": "/strapi/uploads/icon_Presentation_b5a5833f57.svg",
+    "srcSet": "",
+    "width": 32,
+    "height": 32
+  },
+  "/strapi/uploads/icon_Recycle_57e2893515.svg": {
+    "source": "/strapi/uploads/icon_Recycle_57e2893515.svg",
+    "src": "/strapi/uploads/icon_Recycle_57e2893515.svg",
+    "srcSet": "",
+    "width": 32,
+    "height": 32
+  },
+  "/strapi/uploads/icon_Rocket_9d2a1d2fcc.svg": {
+    "source": "/strapi/uploads/icon_Rocket_9d2a1d2fcc.svg",
+    "src": "/strapi/uploads/icon_Rocket_9d2a1d2fcc.svg",
+    "srcSet": "",
+    "width": 32,
+    "height": 32
+  },
+  "/strapi/uploads/icon_SD_6be19cfb5d.svg": {
+    "source": "/strapi/uploads/icon_SD_6be19cfb5d.svg",
+    "src": "/strapi/uploads/icon_SD_6be19cfb5d.svg",
+    "srcSet": "",
+    "width": 32,
+    "height": 32
+  },
+  "/strapi/uploads/icon_SD_Arrow_Fat_Rightk_874a79f47a.svg": {
+    "source": "/strapi/uploads/icon_SD_Arrow_Fat_Rightk_874a79f47a.svg",
+    "src": "/strapi/uploads/icon_SD_Arrow_Fat_Rightk_874a79f47a.svg",
+    "srcSet": "",
+    "width": 32,
+    "height": 32
+  },
+  "/strapi/uploads/icon_SD_Eye_63a71f004a.svg": {
+    "source": "/strapi/uploads/icon_SD_Eye_63a71f004a.svg",
+    "src": "/strapi/uploads/icon_SD_Eye_63a71f004a.svg",
+    "srcSet": "",
+    "width": 32,
+    "height": 32
+  },
+  "/strapi/uploads/icon_SD_Flow_Arrow_1408a1f036.svg": {
+    "source": "/strapi/uploads/icon_SD_Flow_Arrow_1408a1f036.svg",
+    "src": "/strapi/uploads/icon_SD_Flow_Arrow_1408a1f036.svg",
+    "srcSet": "",
+    "width": 32,
+    "height": 32
+  },
+  "/strapi/uploads/icon_SD_Images_4165361c9e.svg": {
+    "source": "/strapi/uploads/icon_SD_Images_4165361c9e.svg",
+    "src": "/strapi/uploads/icon_SD_Images_4165361c9e.svg",
+    "srcSet": "",
+    "width": 32,
+    "height": 32
+  },
+  "/strapi/uploads/icon_SD_List_Checks_d571bcde9e.svg": {
+    "source": "/strapi/uploads/icon_SD_List_Checks_d571bcde9e.svg",
+    "src": "/strapi/uploads/icon_SD_List_Checks_d571bcde9e.svg",
+    "srcSet": "",
+    "width": 32,
+    "height": 32
+  },
+  "/strapi/uploads/icon_SD_Path_08109992f3.svg": {
+    "source": "/strapi/uploads/icon_SD_Path_08109992f3.svg",
+    "src": "/strapi/uploads/icon_SD_Path_08109992f3.svg",
+    "srcSet": "",
+    "width": 32,
+    "height": 32
+  },
+  "/strapi/uploads/icon_SD_Rocket_Launch_becdbbed44.svg": {
+    "source": "/strapi/uploads/icon_SD_Rocket_Launch_becdbbed44.svg",
+    "src": "/strapi/uploads/icon_SD_Rocket_Launch_becdbbed44.svg",
+    "srcSet": "",
+    "width": 32,
+    "height": 32
+  },
+  "/strapi/uploads/icon_SD_Stack_ccb6c19d40.svg": {
+    "source": "/strapi/uploads/icon_SD_Stack_ccb6c19d40.svg",
+    "src": "/strapi/uploads/icon_SD_Stack_ccb6c19d40.svg",
+    "srcSet": "",
+    "width": 32,
+    "height": 32
+  },
+  "/strapi/uploads/icon_SD_Users_Three_49acf33e3b.svg": {
+    "source": "/strapi/uploads/icon_SD_Users_Three_49acf33e3b.svg",
+    "src": "/strapi/uploads/icon_SD_Users_Three_49acf33e3b.svg",
+    "srcSet": "",
+    "width": 32,
+    "height": 32
+  },
+  "/strapi/uploads/icon_Scales_add67f9711.svg": {
+    "source": "/strapi/uploads/icon_Scales_add67f9711.svg",
+    "src": "/strapi/uploads/icon_Scales_add67f9711.svg",
+    "srcSet": "",
+    "width": 32,
+    "height": 32
+  },
+  "/strapi/uploads/icon_Scissors_6ce1fb592d.svg": {
+    "source": "/strapi/uploads/icon_Scissors_6ce1fb592d.svg",
+    "src": "/strapi/uploads/icon_Scissors_6ce1fb592d.svg",
+    "srcSet": "",
+    "width": 32,
+    "height": 32
+  },
+  "/strapi/uploads/icon_Seal_Check_6f1f41c457.svg": {
+    "source": "/strapi/uploads/icon_Seal_Check_6f1f41c457.svg",
+    "src": "/strapi/uploads/icon_Seal_Check_6f1f41c457.svg",
+    "srcSet": "",
+    "width": 32,
+    "height": 32
+  },
+  "/strapi/uploads/icon_Service_AI_generate_d3664c35c3.svg": {
+    "source": "/strapi/uploads/icon_Service_AI_generate_d3664c35c3.svg",
+    "src": "/strapi/uploads/icon_Service_AI_generate_d3664c35c3.svg",
+    "srcSet": "",
+    "width": 32,
+    "height": 32
+  },
+  "/strapi/uploads/icon_Shield_Warning_e9de9d1e1f.svg": {
+    "source": "/strapi/uploads/icon_Shield_Warning_e9de9d1e1f.svg",
+    "src": "/strapi/uploads/icon_Shield_Warning_e9de9d1e1f.svg",
+    "srcSet": "",
+    "width": 32,
+    "height": 32
+  },
+  "/strapi/uploads/icon_Signpost_7efdb5561c.svg": {
+    "source": "/strapi/uploads/icon_Signpost_7efdb5561c.svg",
+    "src": "/strapi/uploads/icon_Signpost_7efdb5561c.svg",
+    "srcSet": "",
+    "width": 32,
+    "height": 32
+  },
+  "/strapi/uploads/icon_Slideshow_36bab31f99.svg": {
+    "source": "/strapi/uploads/icon_Slideshow_36bab31f99.svg",
+    "src": "/strapi/uploads/icon_Slideshow_36bab31f99.svg",
+    "srcSet": "",
+    "width": 32,
+    "height": 32
+  },
+  "/strapi/uploads/icon_Speedometer_9f23201fac.svg": {
+    "source": "/strapi/uploads/icon_Speedometer_9f23201fac.svg",
+    "src": "/strapi/uploads/icon_Speedometer_9f23201fac.svg",
+    "srcSet": "",
+    "width": 32,
+    "height": 32
+  },
+  "/strapi/uploads/icon_Squares_Four_15c6bb1816.svg": {
+    "source": "/strapi/uploads/icon_Squares_Four_15c6bb1816.svg",
+    "src": "/strapi/uploads/icon_Squares_Four_15c6bb1816.svg",
+    "srcSet": "",
+    "width": 32,
+    "height": 32
+  },
+  "/strapi/uploads/icon_Target_3af6af6bc1.svg": {
+    "source": "/strapi/uploads/icon_Target_3af6af6bc1.svg",
+    "src": "/strapi/uploads/icon_Target_3af6af6bc1.svg",
+    "srcSet": "",
+    "width": 32,
+    "height": 32
+  },
+  "/strapi/uploads/icon_Text_Aa_3636e9edf3.svg": {
+    "source": "/strapi/uploads/icon_Text_Aa_3636e9edf3.svg",
+    "src": "/strapi/uploads/icon_Text_Aa_3636e9edf3.svg",
+    "srcSet": "",
+    "width": 32,
+    "height": 32
+  },
+  "/strapi/uploads/icon_Tree_Structure_a899010506.svg": {
+    "source": "/strapi/uploads/icon_Tree_Structure_a899010506.svg",
+    "src": "/strapi/uploads/icon_Tree_Structure_a899010506.svg",
+    "srcSet": "",
+    "width": 32,
+    "height": 32
+  },
+  "/strapi/uploads/icon_UI_d2f4966660.svg": {
+    "source": "/strapi/uploads/icon_UI_d2f4966660.svg",
+    "src": "/strapi/uploads/icon_UI_d2f4966660.svg",
+    "srcSet": "",
+    "width": 32,
+    "height": 32
+  },
+  "/strapi/uploads/icon_UX_bfbb98acc3.svg": {
+    "source": "/strapi/uploads/icon_UX_bfbb98acc3.svg",
+    "src": "/strapi/uploads/icon_UX_bfbb98acc3.svg",
+    "srcSet": "",
+    "width": 32,
+    "height": 32
+  },
+  "/strapi/uploads/icon_User_Circle_Check_3c509792f3.svg": {
+    "source": "/strapi/uploads/icon_User_Circle_Check_3c509792f3.svg",
+    "src": "/strapi/uploads/icon_User_Circle_Check_3c509792f3.svg",
+    "srcSet": "",
+    "width": 32,
+    "height": 32
+  },
+  "/strapi/uploads/icon_Users_Four_46db6124cb.svg": {
+    "source": "/strapi/uploads/icon_Users_Four_46db6124cb.svg",
+    "src": "/strapi/uploads/icon_Users_Four_46db6124cb.svg",
+    "srcSet": "",
+    "width": 32,
+    "height": 32
+  },
+  "/strapi/uploads/image_1785160439920_af0ef5ac33.png": {
+    "source": "/strapi/uploads/image_1785160439920_af0ef5ac33.png",
+    "src": "/media/uploads/image_1785160439920_af0ef5ac33-ad3742f65167dc919a1e-2000.webp",
+    "srcSet": "/media/uploads/image_1785160439920_af0ef5ac33-827c4ece9c8471be04b4-64.webp 64w, /media/uploads/image_1785160439920_af0ef5ac33-2ad305ce8cc7c019b15f-128.webp 128w, /media/uploads/image_1785160439920_af0ef5ac33-45a2d941ee1e63ed4aa5-192.webp 192w, /media/uploads/image_1785160439920_af0ef5ac33-c3a77e3dab06e0d05a80-320.webp 320w, /media/uploads/image_1785160439920_af0ef5ac33-eb957a36d75eccf5a71b-480.webp 480w, /media/uploads/image_1785160439920_af0ef5ac33-bac4fc21a6c3707faa63-768.webp 768w, /media/uploads/image_1785160439920_af0ef5ac33-a0f8d029fe70fa1724f9-1200.webp 1200w, /media/uploads/image_1785160439920_af0ef5ac33-1f15c728371388faae7c-1600.webp 1600w, /media/uploads/image_1785160439920_af0ef5ac33-8da33fe00c7a8f5f89bb-1920.webp 1920w, /media/uploads/image_1785160439920_af0ef5ac33-ad3742f65167dc919a1e-2000.webp 2000w",
+    "width": 2000,
+    "height": 1125
+  },
+  "/strapi/uploads/project_banking_clean_c2205f791d.png": {
+    "source": "/strapi/uploads/project_banking_clean_c2205f791d.png",
+    "src": "/media/uploads/project_banking_clean_c2205f791d-053460141eb0c7bf61fc-1280.webp",
+    "srcSet": "/media/uploads/project_banking_clean_c2205f791d-d7335311600cad4c039e-64.webp 64w, /media/uploads/project_banking_clean_c2205f791d-41dfa1a0264307c4a103-128.webp 128w, /media/uploads/project_banking_clean_c2205f791d-8a7adae7b2ab8245ec04-192.webp 192w, /media/uploads/project_banking_clean_c2205f791d-13c53ed49152830b958e-320.webp 320w, /media/uploads/project_banking_clean_c2205f791d-b0cfe4da50111b819167-480.webp 480w, /media/uploads/project_banking_clean_c2205f791d-1cbf06897711d96824c6-768.webp 768w, /media/uploads/project_banking_clean_c2205f791d-3f49d62c45de7db59553-1200.webp 1200w, /media/uploads/project_banking_clean_c2205f791d-053460141eb0c7bf61fc-1280.webp 1280w",
+    "width": 1280,
+    "height": 896
+  },
+  "/strapi/uploads/sqsp_8_gyakori_hiba_amit_egy_digitalis_akadalymentessegi_audit_feltar_1_d34c61ab76.png": {
+    "source": "/strapi/uploads/sqsp_8_gyakori_hiba_amit_egy_digitalis_akadalymentessegi_audit_feltar_1_d34c61ab76.png",
+    "src": "/media/uploads/sqsp_8_gyakori_hiba_amit_egy_digitalis_akadalymentessegi_audit_feltar_1_d34c61ab76-aebdd48534e104eb3ee5-1500.webp",
+    "srcSet": "/media/uploads/sqsp_8_gyakori_hiba_amit_egy_digitalis_akadalymentessegi_audit_feltar_1_d34c61ab76-cd73ad8f17cf79563739-64.webp 64w, /media/uploads/sqsp_8_gyakori_hiba_amit_egy_digitalis_akadalymentessegi_audit_feltar_1_d34c61ab76-17247e321545bf7d24ce-128.webp 128w, /media/uploads/sqsp_8_gyakori_hiba_amit_egy_digitalis_akadalymentessegi_audit_feltar_1_d34c61ab76-44ab0b5dba252cff37cb-192.webp 192w, /media/uploads/sqsp_8_gyakori_hiba_amit_egy_digitalis_akadalymentessegi_audit_feltar_1_d34c61ab76-dc758b9c285f21b9db84-320.webp 320w, /media/uploads/sqsp_8_gyakori_hiba_amit_egy_digitalis_akadalymentessegi_audit_feltar_1_d34c61ab76-1314f7ec44ce1bf4381e-480.webp 480w, /media/uploads/sqsp_8_gyakori_hiba_amit_egy_digitalis_akadalymentessegi_audit_feltar_1_d34c61ab76-c399c283619284d91986-768.webp 768w, /media/uploads/sqsp_8_gyakori_hiba_amit_egy_digitalis_akadalymentessegi_audit_feltar_1_d34c61ab76-ddae29d4d444509f84c1-1200.webp 1200w, /media/uploads/sqsp_8_gyakori_hiba_amit_egy_digitalis_akadalymentessegi_audit_feltar_1_d34c61ab76-aebdd48534e104eb3ee5-1500.webp 1500w",
+    "width": 1500,
+    "height": 900
+  },
+  "/strapi/uploads/sqsp_8_gyakori_hiba_amit_egy_digitalis_akadalymentessegi_audit_feltar_2_8eeb4adef2.png": {
+    "source": "/strapi/uploads/sqsp_8_gyakori_hiba_amit_egy_digitalis_akadalymentessegi_audit_feltar_2_8eeb4adef2.png",
+    "src": "/media/uploads/sqsp_8_gyakori_hiba_amit_egy_digitalis_akadalymentessegi_audit_feltar_2_8eeb4adef2-4e693db9b8550d75ce5c-758.webp",
+    "srcSet": "/media/uploads/sqsp_8_gyakori_hiba_amit_egy_digitalis_akadalymentessegi_audit_feltar_2_8eeb4adef2-f71b66ceebca7b37caa5-64.webp 64w, /media/uploads/sqsp_8_gyakori_hiba_amit_egy_digitalis_akadalymentessegi_audit_feltar_2_8eeb4adef2-3a184500dc1c7005f672-128.webp 128w, /media/uploads/sqsp_8_gyakori_hiba_amit_egy_digitalis_akadalymentessegi_audit_feltar_2_8eeb4adef2-507f692acb7cd278db7c-192.webp 192w, /media/uploads/sqsp_8_gyakori_hiba_amit_egy_digitalis_akadalymentessegi_audit_feltar_2_8eeb4adef2-923d0fef05b40e0ed9b3-320.webp 320w, /media/uploads/sqsp_8_gyakori_hiba_amit_egy_digitalis_akadalymentessegi_audit_feltar_2_8eeb4adef2-2233121ca96a68a36777-480.webp 480w, /media/uploads/sqsp_8_gyakori_hiba_amit_egy_digitalis_akadalymentessegi_audit_feltar_2_8eeb4adef2-4e693db9b8550d75ce5c-758.webp 758w",
+    "width": 758,
+    "height": 355
+  },
+  "/strapi/uploads/sqsp_8_gyakori_hiba_amit_egy_digitalis_akadalymentessegi_audit_feltar_3_318f45da93.png": {
+    "source": "/strapi/uploads/sqsp_8_gyakori_hiba_amit_egy_digitalis_akadalymentessegi_audit_feltar_3_318f45da93.png",
+    "src": "/media/uploads/sqsp_8_gyakori_hiba_amit_egy_digitalis_akadalymentessegi_audit_feltar_3_318f45da93-59c7dd597c09860f9ff4-1897.webp",
+    "srcSet": "/media/uploads/sqsp_8_gyakori_hiba_amit_egy_digitalis_akadalymentessegi_audit_feltar_3_318f45da93-275ff16e0f12cbf896be-64.webp 64w, /media/uploads/sqsp_8_gyakori_hiba_amit_egy_digitalis_akadalymentessegi_audit_feltar_3_318f45da93-19c723db54b580bed468-128.webp 128w, /media/uploads/sqsp_8_gyakori_hiba_amit_egy_digitalis_akadalymentessegi_audit_feltar_3_318f45da93-e66c96c58c6680b8cf5f-192.webp 192w, /media/uploads/sqsp_8_gyakori_hiba_amit_egy_digitalis_akadalymentessegi_audit_feltar_3_318f45da93-55f1d19e4607933139c2-320.webp 320w, /media/uploads/sqsp_8_gyakori_hiba_amit_egy_digitalis_akadalymentessegi_audit_feltar_3_318f45da93-389ee85b0b6b9e179a9f-480.webp 480w, /media/uploads/sqsp_8_gyakori_hiba_amit_egy_digitalis_akadalymentessegi_audit_feltar_3_318f45da93-476db8dfb09fddcc5881-768.webp 768w, /media/uploads/sqsp_8_gyakori_hiba_amit_egy_digitalis_akadalymentessegi_audit_feltar_3_318f45da93-d1d9093e6d8e7d55bb5e-1200.webp 1200w, /media/uploads/sqsp_8_gyakori_hiba_amit_egy_digitalis_akadalymentessegi_audit_feltar_3_318f45da93-e65e198d1e431a5fd720-1600.webp 1600w, /media/uploads/sqsp_8_gyakori_hiba_amit_egy_digitalis_akadalymentessegi_audit_feltar_3_318f45da93-59c7dd597c09860f9ff4-1897.webp 1897w",
+    "width": 1897,
+    "height": 579
+  },
+  "/strapi/uploads/sqsp_8_gyakori_hiba_amit_egy_digitalis_akadalymentessegi_audit_feltar_4_385581e9df.png": {
+    "source": "/strapi/uploads/sqsp_8_gyakori_hiba_amit_egy_digitalis_akadalymentessegi_audit_feltar_4_385581e9df.png",
+    "src": "/media/uploads/sqsp_8_gyakori_hiba_amit_egy_digitalis_akadalymentessegi_audit_feltar_4_385581e9df-24b1fddf9075b4266422-1908.webp",
+    "srcSet": "/media/uploads/sqsp_8_gyakori_hiba_amit_egy_digitalis_akadalymentessegi_audit_feltar_4_385581e9df-59ed376973a32281282f-64.webp 64w, /media/uploads/sqsp_8_gyakori_hiba_amit_egy_digitalis_akadalymentessegi_audit_feltar_4_385581e9df-12f3dede01f844d6ff68-128.webp 128w, /media/uploads/sqsp_8_gyakori_hiba_amit_egy_digitalis_akadalymentessegi_audit_feltar_4_385581e9df-38bf2d7e29cb9fd796ec-192.webp 192w, /media/uploads/sqsp_8_gyakori_hiba_amit_egy_digitalis_akadalymentessegi_audit_feltar_4_385581e9df-eb056adc93919d755ce4-320.webp 320w, /media/uploads/sqsp_8_gyakori_hiba_amit_egy_digitalis_akadalymentessegi_audit_feltar_4_385581e9df-b3222c3729cb6386edcb-480.webp 480w, /media/uploads/sqsp_8_gyakori_hiba_amit_egy_digitalis_akadalymentessegi_audit_feltar_4_385581e9df-0378fb7854e0020dd6d3-768.webp 768w, /media/uploads/sqsp_8_gyakori_hiba_amit_egy_digitalis_akadalymentessegi_audit_feltar_4_385581e9df-38b0314c79059ce8a8fd-1200.webp 1200w, /media/uploads/sqsp_8_gyakori_hiba_amit_egy_digitalis_akadalymentessegi_audit_feltar_4_385581e9df-aaafcc498756af91b1fd-1600.webp 1600w, /media/uploads/sqsp_8_gyakori_hiba_amit_egy_digitalis_akadalymentessegi_audit_feltar_4_385581e9df-24b1fddf9075b4266422-1908.webp 1908w",
+    "width": 1908,
+    "height": 877
+  },
+  "/strapi/uploads/sqsp_8_gyakori_hiba_amit_egy_digitalis_akadalymentessegi_audit_feltar_5_9442794b13.png": {
+    "source": "/strapi/uploads/sqsp_8_gyakori_hiba_amit_egy_digitalis_akadalymentessegi_audit_feltar_5_9442794b13.png",
+    "src": "/media/uploads/sqsp_8_gyakori_hiba_amit_egy_digitalis_akadalymentessegi_audit_feltar_5_9442794b13-01af3585315827217036-2500.webp",
+    "srcSet": "/media/uploads/sqsp_8_gyakori_hiba_amit_egy_digitalis_akadalymentessegi_audit_feltar_5_9442794b13-1dd407d76a9846aa0d74-64.webp 64w, /media/uploads/sqsp_8_gyakori_hiba_amit_egy_digitalis_akadalymentessegi_audit_feltar_5_9442794b13-fa27878050a684a5f449-128.webp 128w, /media/uploads/sqsp_8_gyakori_hiba_amit_egy_digitalis_akadalymentessegi_audit_feltar_5_9442794b13-210c07f79b8fdcd64e63-192.webp 192w, /media/uploads/sqsp_8_gyakori_hiba_amit_egy_digitalis_akadalymentessegi_audit_feltar_5_9442794b13-e8a0e5e66f9c422f3ae7-320.webp 320w, /media/uploads/sqsp_8_gyakori_hiba_amit_egy_digitalis_akadalymentessegi_audit_feltar_5_9442794b13-114326ddd3a28b521a03-480.webp 480w, /media/uploads/sqsp_8_gyakori_hiba_amit_egy_digitalis_akadalymentessegi_audit_feltar_5_9442794b13-eef647d89a3edc2b75b9-768.webp 768w, /media/uploads/sqsp_8_gyakori_hiba_amit_egy_digitalis_akadalymentessegi_audit_feltar_5_9442794b13-cc1889e30e188fa39d42-1200.webp 1200w, /media/uploads/sqsp_8_gyakori_hiba_amit_egy_digitalis_akadalymentessegi_audit_feltar_5_9442794b13-bd461d0f89b531e09c63-1600.webp 1600w, /media/uploads/sqsp_8_gyakori_hiba_amit_egy_digitalis_akadalymentessegi_audit_feltar_5_9442794b13-34b2dec1d41f5c2d8cd1-1920.webp 1920w, /media/uploads/sqsp_8_gyakori_hiba_amit_egy_digitalis_akadalymentessegi_audit_feltar_5_9442794b13-01af3585315827217036-2500.webp 2500w",
+    "width": 2500,
+    "height": 620
+  },
+  "/strapi/uploads/sqsp_8_gyakori_hiba_amit_egy_digitalis_akadalymentessegi_audit_feltar_6_7b63cc1cdc.png": {
+    "source": "/strapi/uploads/sqsp_8_gyakori_hiba_amit_egy_digitalis_akadalymentessegi_audit_feltar_6_7b63cc1cdc.png",
+    "src": "/media/uploads/sqsp_8_gyakori_hiba_amit_egy_digitalis_akadalymentessegi_audit_feltar_6_7b63cc1cdc-cf1d40df7737d8160b86-1087.webp",
+    "srcSet": "/media/uploads/sqsp_8_gyakori_hiba_amit_egy_digitalis_akadalymentessegi_audit_feltar_6_7b63cc1cdc-cabd681e30d3eee26ee9-64.webp 64w, /media/uploads/sqsp_8_gyakori_hiba_amit_egy_digitalis_akadalymentessegi_audit_feltar_6_7b63cc1cdc-50187fd080656cadd6ba-128.webp 128w, /media/uploads/sqsp_8_gyakori_hiba_amit_egy_digitalis_akadalymentessegi_audit_feltar_6_7b63cc1cdc-2642541ec9199073ec02-192.webp 192w, /media/uploads/sqsp_8_gyakori_hiba_amit_egy_digitalis_akadalymentessegi_audit_feltar_6_7b63cc1cdc-86f5035b0434590b3e47-320.webp 320w, /media/uploads/sqsp_8_gyakori_hiba_amit_egy_digitalis_akadalymentessegi_audit_feltar_6_7b63cc1cdc-c9204115ccfe427d77c7-480.webp 480w, /media/uploads/sqsp_8_gyakori_hiba_amit_egy_digitalis_akadalymentessegi_audit_feltar_6_7b63cc1cdc-7af46ff84386bf0348b7-768.webp 768w, /media/uploads/sqsp_8_gyakori_hiba_amit_egy_digitalis_akadalymentessegi_audit_feltar_6_7b63cc1cdc-cf1d40df7737d8160b86-1087.webp 1087w",
+    "width": 1087,
+    "height": 816
+  },
+  "/strapi/uploads/sqsp_8_gyakori_hiba_amit_egy_digitalis_akadalymentessegi_audit_feltar_7_110bdf47e9.png": {
+    "source": "/strapi/uploads/sqsp_8_gyakori_hiba_amit_egy_digitalis_akadalymentessegi_audit_feltar_7_110bdf47e9.png",
+    "src": "/media/uploads/sqsp_8_gyakori_hiba_amit_egy_digitalis_akadalymentessegi_audit_feltar_7_110bdf47e9-25c64b090fd924d410aa-1919.webp",
+    "srcSet": "/media/uploads/sqsp_8_gyakori_hiba_amit_egy_digitalis_akadalymentessegi_audit_feltar_7_110bdf47e9-881e03ae42e206f6e671-64.webp 64w, /media/uploads/sqsp_8_gyakori_hiba_amit_egy_digitalis_akadalymentessegi_audit_feltar_7_110bdf47e9-d44a15b3b8db325deec6-128.webp 128w, /media/uploads/sqsp_8_gyakori_hiba_amit_egy_digitalis_akadalymentessegi_audit_feltar_7_110bdf47e9-1ec7a5ad85f27ce40552-192.webp 192w, /media/uploads/sqsp_8_gyakori_hiba_amit_egy_digitalis_akadalymentessegi_audit_feltar_7_110bdf47e9-008da28223904cb13d94-320.webp 320w, /media/uploads/sqsp_8_gyakori_hiba_amit_egy_digitalis_akadalymentessegi_audit_feltar_7_110bdf47e9-06b866be25eb76d7a80b-480.webp 480w, /media/uploads/sqsp_8_gyakori_hiba_amit_egy_digitalis_akadalymentessegi_audit_feltar_7_110bdf47e9-068ab4eff75853de3cc7-768.webp 768w, /media/uploads/sqsp_8_gyakori_hiba_amit_egy_digitalis_akadalymentessegi_audit_feltar_7_110bdf47e9-3d5fb79a06c063e0031c-1200.webp 1200w, /media/uploads/sqsp_8_gyakori_hiba_amit_egy_digitalis_akadalymentessegi_audit_feltar_7_110bdf47e9-61b14ac64c64951e40b8-1600.webp 1600w, /media/uploads/sqsp_8_gyakori_hiba_amit_egy_digitalis_akadalymentessegi_audit_feltar_7_110bdf47e9-25c64b090fd924d410aa-1919.webp 1919w",
+    "width": 1919,
+    "height": 891
+  },
+  "/strapi/uploads/sqsp_8_gyakori_hiba_amit_egy_digitalis_akadalymentessegi_audit_feltar_8_0f287566e3.png": {
+    "source": "/strapi/uploads/sqsp_8_gyakori_hiba_amit_egy_digitalis_akadalymentessegi_audit_feltar_8_0f287566e3.png",
+    "src": "/media/uploads/sqsp_8_gyakori_hiba_amit_egy_digitalis_akadalymentessegi_audit_feltar_8_0f287566e3-fb547e7eda160acaeae2-1100.webp",
+    "srcSet": "/media/uploads/sqsp_8_gyakori_hiba_amit_egy_digitalis_akadalymentessegi_audit_feltar_8_0f287566e3-32f03a4cd2a212bba94d-64.webp 64w, /media/uploads/sqsp_8_gyakori_hiba_amit_egy_digitalis_akadalymentessegi_audit_feltar_8_0f287566e3-48e5026aba6e4aa953ed-128.webp 128w, /media/uploads/sqsp_8_gyakori_hiba_amit_egy_digitalis_akadalymentessegi_audit_feltar_8_0f287566e3-f67949005a743d8d0924-192.webp 192w, /media/uploads/sqsp_8_gyakori_hiba_amit_egy_digitalis_akadalymentessegi_audit_feltar_8_0f287566e3-5f9b855b5af35eb34670-320.webp 320w, /media/uploads/sqsp_8_gyakori_hiba_amit_egy_digitalis_akadalymentessegi_audit_feltar_8_0f287566e3-a74072f064050f1dc3b9-480.webp 480w, /media/uploads/sqsp_8_gyakori_hiba_amit_egy_digitalis_akadalymentessegi_audit_feltar_8_0f287566e3-32f46c46223e02174ce0-768.webp 768w, /media/uploads/sqsp_8_gyakori_hiba_amit_egy_digitalis_akadalymentessegi_audit_feltar_8_0f287566e3-fb547e7eda160acaeae2-1100.webp 1100w",
+    "width": 1100,
+    "height": 218
+  },
+  "/strapi/uploads/sqsp_8_gyakori_hiba_amit_egy_digitalis_akadalymentessegi_audit_feltar_hero_fa8bbee622.png": {
+    "source": "/strapi/uploads/sqsp_8_gyakori_hiba_amit_egy_digitalis_akadalymentessegi_audit_feltar_hero_fa8bbee622.png",
+    "src": "/media/uploads/sqsp_8_gyakori_hiba_amit_egy_digitalis_akadalymentessegi_audit_feltar_hero_fa8bbee622-a16c195856806b55c75b-1500.webp",
+    "srcSet": "/media/uploads/sqsp_8_gyakori_hiba_amit_egy_digitalis_akadalymentessegi_audit_feltar_hero_fa8bbee622-57b358e2f31e7f0de7b9-64.webp 64w, /media/uploads/sqsp_8_gyakori_hiba_amit_egy_digitalis_akadalymentessegi_audit_feltar_hero_fa8bbee622-e50ebfc49f698bfc0391-128.webp 128w, /media/uploads/sqsp_8_gyakori_hiba_amit_egy_digitalis_akadalymentessegi_audit_feltar_hero_fa8bbee622-325b667842b0b8138fcb-192.webp 192w, /media/uploads/sqsp_8_gyakori_hiba_amit_egy_digitalis_akadalymentessegi_audit_feltar_hero_fa8bbee622-53b1b0f65e76449a66ea-320.webp 320w, /media/uploads/sqsp_8_gyakori_hiba_amit_egy_digitalis_akadalymentessegi_audit_feltar_hero_fa8bbee622-ae9f85305581e98a99cf-480.webp 480w, /media/uploads/sqsp_8_gyakori_hiba_amit_egy_digitalis_akadalymentessegi_audit_feltar_hero_fa8bbee622-a5af23fa91c035fc0eaa-768.webp 768w, /media/uploads/sqsp_8_gyakori_hiba_amit_egy_digitalis_akadalymentessegi_audit_feltar_hero_fa8bbee622-06504d23a99525650499-1200.webp 1200w, /media/uploads/sqsp_8_gyakori_hiba_amit_egy_digitalis_akadalymentessegi_audit_feltar_hero_fa8bbee622-a16c195856806b55c75b-1500.webp 1500w",
+    "width": 1500,
+    "height": 900
+  },
+  "/strapi/uploads/sqsp_akadalymentes_audit_funkcionalis_teszt_vagy_ux_kutatas_1_5f0cfd2e1a.png": {
+    "source": "/strapi/uploads/sqsp_akadalymentes_audit_funkcionalis_teszt_vagy_ux_kutatas_1_5f0cfd2e1a.png",
+    "src": "/media/uploads/sqsp_akadalymentes_audit_funkcionalis_teszt_vagy_ux_kutatas_1_5f0cfd2e1a-3cff4a385bccbcdfb07b-1709.webp",
+    "srcSet": "/media/uploads/sqsp_akadalymentes_audit_funkcionalis_teszt_vagy_ux_kutatas_1_5f0cfd2e1a-233d8a763a9bcc847c0d-64.webp 64w, /media/uploads/sqsp_akadalymentes_audit_funkcionalis_teszt_vagy_ux_kutatas_1_5f0cfd2e1a-b9195bda111b1509d935-128.webp 128w, /media/uploads/sqsp_akadalymentes_audit_funkcionalis_teszt_vagy_ux_kutatas_1_5f0cfd2e1a-a5dcffa56589fe9062aa-192.webp 192w, /media/uploads/sqsp_akadalymentes_audit_funkcionalis_teszt_vagy_ux_kutatas_1_5f0cfd2e1a-8f300f075f6ad6349f48-320.webp 320w, /media/uploads/sqsp_akadalymentes_audit_funkcionalis_teszt_vagy_ux_kutatas_1_5f0cfd2e1a-77ecc10157dddafd3152-480.webp 480w, /media/uploads/sqsp_akadalymentes_audit_funkcionalis_teszt_vagy_ux_kutatas_1_5f0cfd2e1a-e945fa5aa740e2da3d4b-768.webp 768w, /media/uploads/sqsp_akadalymentes_audit_funkcionalis_teszt_vagy_ux_kutatas_1_5f0cfd2e1a-d4295b83e0cfdb6cd7ba-1200.webp 1200w, /media/uploads/sqsp_akadalymentes_audit_funkcionalis_teszt_vagy_ux_kutatas_1_5f0cfd2e1a-afdff40da9847770ee71-1600.webp 1600w, /media/uploads/sqsp_akadalymentes_audit_funkcionalis_teszt_vagy_ux_kutatas_1_5f0cfd2e1a-3cff4a385bccbcdfb07b-1709.webp 1709w",
+    "width": 1709,
+    "height": 1141
+  },
+  "/strapi/uploads/sqsp_akadalymentes_audit_funkcionalis_teszt_vagy_ux_kutatas_2_7e016c648c.png": {
+    "source": "/strapi/uploads/sqsp_akadalymentes_audit_funkcionalis_teszt_vagy_ux_kutatas_2_7e016c648c.png",
+    "src": "/media/uploads/sqsp_akadalymentes_audit_funkcionalis_teszt_vagy_ux_kutatas_2_7e016c648c-25622540780b38fb72fc-1504.webp",
+    "srcSet": "/media/uploads/sqsp_akadalymentes_audit_funkcionalis_teszt_vagy_ux_kutatas_2_7e016c648c-8f016d7d725b6d260753-64.webp 64w, /media/uploads/sqsp_akadalymentes_audit_funkcionalis_teszt_vagy_ux_kutatas_2_7e016c648c-84678be0233c754332eb-128.webp 128w, /media/uploads/sqsp_akadalymentes_audit_funkcionalis_teszt_vagy_ux_kutatas_2_7e016c648c-8868c382051075994801-192.webp 192w, /media/uploads/sqsp_akadalymentes_audit_funkcionalis_teszt_vagy_ux_kutatas_2_7e016c648c-8a46c759aa7336e730de-320.webp 320w, /media/uploads/sqsp_akadalymentes_audit_funkcionalis_teszt_vagy_ux_kutatas_2_7e016c648c-2703c8da327e18b655c7-480.webp 480w, /media/uploads/sqsp_akadalymentes_audit_funkcionalis_teszt_vagy_ux_kutatas_2_7e016c648c-19f82cdda0ae9f48f340-768.webp 768w, /media/uploads/sqsp_akadalymentes_audit_funkcionalis_teszt_vagy_ux_kutatas_2_7e016c648c-d3875d751d725cab9588-1200.webp 1200w, /media/uploads/sqsp_akadalymentes_audit_funkcionalis_teszt_vagy_ux_kutatas_2_7e016c648c-25622540780b38fb72fc-1504.webp 1504w",
+    "width": 1504,
+    "height": 650
+  },
+  "/strapi/uploads/sqsp_akadalymentes_audit_funkcionalis_teszt_vagy_ux_kutatas_3_4971e68bed.png": {
+    "source": "/strapi/uploads/sqsp_akadalymentes_audit_funkcionalis_teszt_vagy_ux_kutatas_3_4971e68bed.png",
+    "src": "/media/uploads/sqsp_akadalymentes_audit_funkcionalis_teszt_vagy_ux_kutatas_3_4971e68bed-e78c16355bc673875044-1504.webp",
+    "srcSet": "/media/uploads/sqsp_akadalymentes_audit_funkcionalis_teszt_vagy_ux_kutatas_3_4971e68bed-4792cdc184e9683fcbb3-64.webp 64w, /media/uploads/sqsp_akadalymentes_audit_funkcionalis_teszt_vagy_ux_kutatas_3_4971e68bed-61eca478da2c39073e3f-128.webp 128w, /media/uploads/sqsp_akadalymentes_audit_funkcionalis_teszt_vagy_ux_kutatas_3_4971e68bed-d2e24246c97f1dd1ea9e-192.webp 192w, /media/uploads/sqsp_akadalymentes_audit_funkcionalis_teszt_vagy_ux_kutatas_3_4971e68bed-1f31dc26b7603ff37b88-320.webp 320w, /media/uploads/sqsp_akadalymentes_audit_funkcionalis_teszt_vagy_ux_kutatas_3_4971e68bed-b18c7322ad197cb2a2f8-480.webp 480w, /media/uploads/sqsp_akadalymentes_audit_funkcionalis_teszt_vagy_ux_kutatas_3_4971e68bed-10df37cb96469459e8c7-768.webp 768w, /media/uploads/sqsp_akadalymentes_audit_funkcionalis_teszt_vagy_ux_kutatas_3_4971e68bed-927b2ee5cb9ffa3ea94f-1200.webp 1200w, /media/uploads/sqsp_akadalymentes_audit_funkcionalis_teszt_vagy_ux_kutatas_3_4971e68bed-e78c16355bc673875044-1504.webp 1504w",
+    "width": 1504,
+    "height": 552
+  },
+  "/strapi/uploads/sqsp_akadalymentes_audit_funkcionalis_teszt_vagy_ux_kutatas_hero_490524cfb4.jpg": {
+    "source": "/strapi/uploads/sqsp_akadalymentes_audit_funkcionalis_teszt_vagy_ux_kutatas_hero_490524cfb4.jpg",
+    "src": "/media/uploads/sqsp_akadalymentes_audit_funkcionalis_teszt_vagy_ux_kutatas_hero_490524cfb4-3e7c9d9e941971e96d09-1709.webp",
+    "srcSet": "/media/uploads/sqsp_akadalymentes_audit_funkcionalis_teszt_vagy_ux_kutatas_hero_490524cfb4-83520ceb65ef6ca21d50-64.webp 64w, /media/uploads/sqsp_akadalymentes_audit_funkcionalis_teszt_vagy_ux_kutatas_hero_490524cfb4-c905b7881b4d2ae842de-128.webp 128w, /media/uploads/sqsp_akadalymentes_audit_funkcionalis_teszt_vagy_ux_kutatas_hero_490524cfb4-8cba3bdc0a18a81ce972-192.webp 192w, /media/uploads/sqsp_akadalymentes_audit_funkcionalis_teszt_vagy_ux_kutatas_hero_490524cfb4-2c8e06f6f9d8288c9bb0-320.webp 320w, /media/uploads/sqsp_akadalymentes_audit_funkcionalis_teszt_vagy_ux_kutatas_hero_490524cfb4-056a93a1d4fe2c4d7c46-480.webp 480w, /media/uploads/sqsp_akadalymentes_audit_funkcionalis_teszt_vagy_ux_kutatas_hero_490524cfb4-ad3aabc51b304677033b-768.webp 768w, /media/uploads/sqsp_akadalymentes_audit_funkcionalis_teszt_vagy_ux_kutatas_hero_490524cfb4-d36f348ef06355aa91a8-1200.webp 1200w, /media/uploads/sqsp_akadalymentes_audit_funkcionalis_teszt_vagy_ux_kutatas_hero_490524cfb4-a6947070b2de84ce4292-1600.webp 1600w, /media/uploads/sqsp_akadalymentes_audit_funkcionalis_teszt_vagy_ux_kutatas_hero_490524cfb4-3e7c9d9e941971e96d09-1709.webp 1709w",
+    "width": 1709,
+    "height": 1141
+  },
+  "/strapi/uploads/sqsp_akadalymentesseg_jog_nem_jo_cselekedet_1_897166d2e5.jpg": {
+    "source": "/strapi/uploads/sqsp_akadalymentesseg_jog_nem_jo_cselekedet_1_897166d2e5.jpg",
+    "src": "/media/uploads/sqsp_akadalymentesseg_jog_nem_jo_cselekedet_1_897166d2e5-003e1661bf63632edae8-2500.webp",
+    "srcSet": "/media/uploads/sqsp_akadalymentesseg_jog_nem_jo_cselekedet_1_897166d2e5-578490fb78502a95e2f1-64.webp 64w, /media/uploads/sqsp_akadalymentesseg_jog_nem_jo_cselekedet_1_897166d2e5-086b247952b299244fc0-128.webp 128w, /media/uploads/sqsp_akadalymentesseg_jog_nem_jo_cselekedet_1_897166d2e5-b71831699966741d0bc0-192.webp 192w, /media/uploads/sqsp_akadalymentesseg_jog_nem_jo_cselekedet_1_897166d2e5-535a141855b570a1d83f-320.webp 320w, /media/uploads/sqsp_akadalymentesseg_jog_nem_jo_cselekedet_1_897166d2e5-6426c2ca291b35ce8ad8-480.webp 480w, /media/uploads/sqsp_akadalymentesseg_jog_nem_jo_cselekedet_1_897166d2e5-a28bffea39c9e2e73a99-768.webp 768w, /media/uploads/sqsp_akadalymentesseg_jog_nem_jo_cselekedet_1_897166d2e5-59fe1bb41e4939f80cdd-1200.webp 1200w, /media/uploads/sqsp_akadalymentesseg_jog_nem_jo_cselekedet_1_897166d2e5-e1b319f6bb5dc732a046-1600.webp 1600w, /media/uploads/sqsp_akadalymentesseg_jog_nem_jo_cselekedet_1_897166d2e5-9d9cce65f0a8456e9bcd-1920.webp 1920w, /media/uploads/sqsp_akadalymentesseg_jog_nem_jo_cselekedet_1_897166d2e5-003e1661bf63632edae8-2500.webp 2500w",
+    "width": 2500,
+    "height": 3333
+  },
+  "/strapi/uploads/sqsp_akadalymentesseg_jog_nem_jo_cselekedet_2_18189064a0.png": {
+    "source": "/strapi/uploads/sqsp_akadalymentesseg_jog_nem_jo_cselekedet_2_18189064a0.png",
+    "src": "/media/uploads/sqsp_akadalymentesseg_jog_nem_jo_cselekedet_2_18189064a0-6d88a7a7bbbc3d41b40d-2001.webp",
+    "srcSet": "/media/uploads/sqsp_akadalymentesseg_jog_nem_jo_cselekedet_2_18189064a0-c501dd8ce633cef00946-64.webp 64w, /media/uploads/sqsp_akadalymentesseg_jog_nem_jo_cselekedet_2_18189064a0-19f7a93c14f4c373d50a-128.webp 128w, /media/uploads/sqsp_akadalymentesseg_jog_nem_jo_cselekedet_2_18189064a0-303e34240c8e540efb6a-192.webp 192w, /media/uploads/sqsp_akadalymentesseg_jog_nem_jo_cselekedet_2_18189064a0-118eca108255e0c84bb6-320.webp 320w, /media/uploads/sqsp_akadalymentesseg_jog_nem_jo_cselekedet_2_18189064a0-aeabfa8fee8ae004f9eb-480.webp 480w, /media/uploads/sqsp_akadalymentesseg_jog_nem_jo_cselekedet_2_18189064a0-afa69e1751d0bb131773-768.webp 768w, /media/uploads/sqsp_akadalymentesseg_jog_nem_jo_cselekedet_2_18189064a0-e492eedc3cf5670a169a-1200.webp 1200w, /media/uploads/sqsp_akadalymentesseg_jog_nem_jo_cselekedet_2_18189064a0-3d4d1de539769aca2d11-1600.webp 1600w, /media/uploads/sqsp_akadalymentesseg_jog_nem_jo_cselekedet_2_18189064a0-b7d832451e6ea0a9081b-1920.webp 1920w, /media/uploads/sqsp_akadalymentesseg_jog_nem_jo_cselekedet_2_18189064a0-6d88a7a7bbbc3d41b40d-2001.webp 2001w",
+    "width": 2001,
+    "height": 1428
+  },
+  "/strapi/uploads/sqsp_akadalymentesseg_jog_nem_jo_cselekedet_3_6cee6610f6.png": {
+    "source": "/strapi/uploads/sqsp_akadalymentesseg_jog_nem_jo_cselekedet_3_6cee6610f6.png",
+    "src": "/media/uploads/sqsp_akadalymentesseg_jog_nem_jo_cselekedet_3_6cee6610f6-e9794d268a67f047d567-952.webp",
+    "srcSet": "/media/uploads/sqsp_akadalymentesseg_jog_nem_jo_cselekedet_3_6cee6610f6-ed055ca0d8d09f8645c8-64.webp 64w, /media/uploads/sqsp_akadalymentesseg_jog_nem_jo_cselekedet_3_6cee6610f6-2aaf22d63f42a1819955-128.webp 128w, /media/uploads/sqsp_akadalymentesseg_jog_nem_jo_cselekedet_3_6cee6610f6-007492f87e98e5b7197c-192.webp 192w, /media/uploads/sqsp_akadalymentesseg_jog_nem_jo_cselekedet_3_6cee6610f6-658c1886b514ace61b1b-320.webp 320w, /media/uploads/sqsp_akadalymentesseg_jog_nem_jo_cselekedet_3_6cee6610f6-ca8cdedc1bf69a430bd3-480.webp 480w, /media/uploads/sqsp_akadalymentesseg_jog_nem_jo_cselekedet_3_6cee6610f6-a4c00e8b8c2471373d17-768.webp 768w, /media/uploads/sqsp_akadalymentesseg_jog_nem_jo_cselekedet_3_6cee6610f6-e9794d268a67f047d567-952.webp 952w",
+    "width": 952,
+    "height": 1428
+  },
+  "/strapi/uploads/sqsp_akadalymentesseg_jog_nem_jo_cselekedet_4_b1e688745a.jpeg": {
+    "source": "/strapi/uploads/sqsp_akadalymentesseg_jog_nem_jo_cselekedet_4_b1e688745a.jpeg",
+    "src": "/media/uploads/sqsp_akadalymentesseg_jog_nem_jo_cselekedet_4_b1e688745a-dab387376a5561260454-2000.webp",
+    "srcSet": "/media/uploads/sqsp_akadalymentesseg_jog_nem_jo_cselekedet_4_b1e688745a-c65b71e34e912e5c8fd9-64.webp 64w, /media/uploads/sqsp_akadalymentesseg_jog_nem_jo_cselekedet_4_b1e688745a-20df97ed7c91b9ab626f-128.webp 128w, /media/uploads/sqsp_akadalymentesseg_jog_nem_jo_cselekedet_4_b1e688745a-6b086d8afc81f9cb50ca-192.webp 192w, /media/uploads/sqsp_akadalymentesseg_jog_nem_jo_cselekedet_4_b1e688745a-9b832b1d0b174869837f-320.webp 320w, /media/uploads/sqsp_akadalymentesseg_jog_nem_jo_cselekedet_4_b1e688745a-a82294c91e3555d7f5ec-480.webp 480w, /media/uploads/sqsp_akadalymentesseg_jog_nem_jo_cselekedet_4_b1e688745a-421a0e1893e15af63a62-768.webp 768w, /media/uploads/sqsp_akadalymentesseg_jog_nem_jo_cselekedet_4_b1e688745a-e76878409e0fba7bed99-1200.webp 1200w, /media/uploads/sqsp_akadalymentesseg_jog_nem_jo_cselekedet_4_b1e688745a-2b4f746cd8a71d920dc4-1600.webp 1600w, /media/uploads/sqsp_akadalymentesseg_jog_nem_jo_cselekedet_4_b1e688745a-6c0a2829a2b01dd539b2-1920.webp 1920w, /media/uploads/sqsp_akadalymentesseg_jog_nem_jo_cselekedet_4_b1e688745a-dab387376a5561260454-2000.webp 2000w",
+    "width": 2000,
+    "height": 1333
+  },
+  "/strapi/uploads/sqsp_akadalymentesseg_jog_nem_jo_cselekedet_hero_6537aa6f43.png": {
+    "source": "/strapi/uploads/sqsp_akadalymentesseg_jog_nem_jo_cselekedet_hero_6537aa6f43.png",
+    "src": "/media/uploads/sqsp_akadalymentesseg_jog_nem_jo_cselekedet_hero_6537aa6f43-682c04067291ac735588-1080.webp",
+    "srcSet": "/media/uploads/sqsp_akadalymentesseg_jog_nem_jo_cselekedet_hero_6537aa6f43-34540ad2e0c6fb2aecc2-64.webp 64w, /media/uploads/sqsp_akadalymentesseg_jog_nem_jo_cselekedet_hero_6537aa6f43-9e22e3fe19d987839044-128.webp 128w, /media/uploads/sqsp_akadalymentesseg_jog_nem_jo_cselekedet_hero_6537aa6f43-a00de8fecdf485d82043-192.webp 192w, /media/uploads/sqsp_akadalymentesseg_jog_nem_jo_cselekedet_hero_6537aa6f43-6459ebc6685223cc70a1-320.webp 320w, /media/uploads/sqsp_akadalymentesseg_jog_nem_jo_cselekedet_hero_6537aa6f43-d0a147ee097f21f9d67f-480.webp 480w, /media/uploads/sqsp_akadalymentesseg_jog_nem_jo_cselekedet_hero_6537aa6f43-3052016cbc8c71ec382a-768.webp 768w, /media/uploads/sqsp_akadalymentesseg_jog_nem_jo_cselekedet_hero_6537aa6f43-682c04067291ac735588-1080.webp 1080w",
+    "width": 1080,
+    "height": 840
+  },
+  "/strapi/uploads/sqsp_amikor_a_design_ujra_keresi_a_helyet_1_aa67e1f3f8.png": {
+    "source": "/strapi/uploads/sqsp_amikor_a_design_ujra_keresi_a_helyet_1_aa67e1f3f8.png",
+    "src": "/media/uploads/sqsp_amikor_a_design_ujra_keresi_a_helyet_1_aa67e1f3f8-e48965278ae70d46d002-2500.webp",
+    "srcSet": "/media/uploads/sqsp_amikor_a_design_ujra_keresi_a_helyet_1_aa67e1f3f8-943e7f81d0d09bfe0337-64.webp 64w, /media/uploads/sqsp_amikor_a_design_ujra_keresi_a_helyet_1_aa67e1f3f8-91f5fba79400be1b933f-128.webp 128w, /media/uploads/sqsp_amikor_a_design_ujra_keresi_a_helyet_1_aa67e1f3f8-27ea2a8640f85edee876-192.webp 192w, /media/uploads/sqsp_amikor_a_design_ujra_keresi_a_helyet_1_aa67e1f3f8-0839bffdabdf51350ea1-320.webp 320w, /media/uploads/sqsp_amikor_a_design_ujra_keresi_a_helyet_1_aa67e1f3f8-31cd9f7151e8b94cbe04-480.webp 480w, /media/uploads/sqsp_amikor_a_design_ujra_keresi_a_helyet_1_aa67e1f3f8-dacbf77c0ed42a8cbd96-768.webp 768w, /media/uploads/sqsp_amikor_a_design_ujra_keresi_a_helyet_1_aa67e1f3f8-4b6b13f208dd655872e9-1200.webp 1200w, /media/uploads/sqsp_amikor_a_design_ujra_keresi_a_helyet_1_aa67e1f3f8-b7a40f3bb7b072ed4355-1600.webp 1600w, /media/uploads/sqsp_amikor_a_design_ujra_keresi_a_helyet_1_aa67e1f3f8-f3c4ede4ff434fc7efe0-1920.webp 1920w, /media/uploads/sqsp_amikor_a_design_ujra_keresi_a_helyet_1_aa67e1f3f8-e48965278ae70d46d002-2500.webp 2500w",
+    "width": 2500,
+    "height": 1395
+  },
+  "/strapi/uploads/sqsp_amikor_a_design_ujra_keresi_a_helyet_hero_ce8a1e8b72.png": {
+    "source": "/strapi/uploads/sqsp_amikor_a_design_ujra_keresi_a_helyet_hero_ce8a1e8b72.png",
+    "src": "/media/uploads/sqsp_amikor_a_design_ujra_keresi_a_helyet_hero_ce8a1e8b72-2ac11b6599ca13df0312-2500.webp",
+    "srcSet": "/media/uploads/sqsp_amikor_a_design_ujra_keresi_a_helyet_hero_ce8a1e8b72-0352eb4320412ddb2134-64.webp 64w, /media/uploads/sqsp_amikor_a_design_ujra_keresi_a_helyet_hero_ce8a1e8b72-f4037b1ac02e62ce486e-128.webp 128w, /media/uploads/sqsp_amikor_a_design_ujra_keresi_a_helyet_hero_ce8a1e8b72-d90decaeafe6472281a2-192.webp 192w, /media/uploads/sqsp_amikor_a_design_ujra_keresi_a_helyet_hero_ce8a1e8b72-7d998e9ea4cc200091de-320.webp 320w, /media/uploads/sqsp_amikor_a_design_ujra_keresi_a_helyet_hero_ce8a1e8b72-7eb852a5df3223ceca7d-480.webp 480w, /media/uploads/sqsp_amikor_a_design_ujra_keresi_a_helyet_hero_ce8a1e8b72-45c8a3f715087f1909eb-768.webp 768w, /media/uploads/sqsp_amikor_a_design_ujra_keresi_a_helyet_hero_ce8a1e8b72-a8795f8456f9b521eedb-1200.webp 1200w, /media/uploads/sqsp_amikor_a_design_ujra_keresi_a_helyet_hero_ce8a1e8b72-2c02db136512a4dbf03a-1600.webp 1600w, /media/uploads/sqsp_amikor_a_design_ujra_keresi_a_helyet_hero_ce8a1e8b72-328f0ef32bfd44db1d01-1920.webp 1920w, /media/uploads/sqsp_amikor_a_design_ujra_keresi_a_helyet_hero_ce8a1e8b72-2ac11b6599ca13df0312-2500.webp 2500w",
+    "width": 2500,
+    "height": 1395
+  },
+  "/strapi/uploads/sqsp_amikor_a_kivitelezes_mar_nem_kulonboztet_meg_1_105bfc5ede.png": {
+    "source": "/strapi/uploads/sqsp_amikor_a_kivitelezes_mar_nem_kulonboztet_meg_1_105bfc5ede.png",
+    "src": "/media/uploads/sqsp_amikor_a_kivitelezes_mar_nem_kulonboztet_meg_1_105bfc5ede-5a5c40cc304ab04c2d75-1536.webp",
+    "srcSet": "/media/uploads/sqsp_amikor_a_kivitelezes_mar_nem_kulonboztet_meg_1_105bfc5ede-84e6031b98cd860a475c-64.webp 64w, /media/uploads/sqsp_amikor_a_kivitelezes_mar_nem_kulonboztet_meg_1_105bfc5ede-bb620ab70a3abe1851aa-128.webp 128w, /media/uploads/sqsp_amikor_a_kivitelezes_mar_nem_kulonboztet_meg_1_105bfc5ede-c7060ee602b2fc20b926-192.webp 192w, /media/uploads/sqsp_amikor_a_kivitelezes_mar_nem_kulonboztet_meg_1_105bfc5ede-77f0a19484104431e30a-320.webp 320w, /media/uploads/sqsp_amikor_a_kivitelezes_mar_nem_kulonboztet_meg_1_105bfc5ede-d64502c6a427181cf966-480.webp 480w, /media/uploads/sqsp_amikor_a_kivitelezes_mar_nem_kulonboztet_meg_1_105bfc5ede-2f4c0a7886c04286063f-768.webp 768w, /media/uploads/sqsp_amikor_a_kivitelezes_mar_nem_kulonboztet_meg_1_105bfc5ede-14237ae007e215652c6f-1200.webp 1200w, /media/uploads/sqsp_amikor_a_kivitelezes_mar_nem_kulonboztet_meg_1_105bfc5ede-5a5c40cc304ab04c2d75-1536.webp 1536w",
+    "width": 1536,
+    "height": 1024
+  },
+  "/strapi/uploads/sqsp_amikor_a_kivitelezes_mar_nem_kulonboztet_meg_2_971c808b5d.png": {
+    "source": "/strapi/uploads/sqsp_amikor_a_kivitelezes_mar_nem_kulonboztet_meg_2_971c808b5d.png",
+    "src": "/media/uploads/sqsp_amikor_a_kivitelezes_mar_nem_kulonboztet_meg_2_971c808b5d-bc200dc19a0a87bb62cc-1387.webp",
+    "srcSet": "/media/uploads/sqsp_amikor_a_kivitelezes_mar_nem_kulonboztet_meg_2_971c808b5d-c0add9a4a5a5651b5cf4-64.webp 64w, /media/uploads/sqsp_amikor_a_kivitelezes_mar_nem_kulonboztet_meg_2_971c808b5d-ae83ac10f9758b5863ce-128.webp 128w, /media/uploads/sqsp_amikor_a_kivitelezes_mar_nem_kulonboztet_meg_2_971c808b5d-4f519332e9e5d3017e8e-192.webp 192w, /media/uploads/sqsp_amikor_a_kivitelezes_mar_nem_kulonboztet_meg_2_971c808b5d-d663c9f9ce83782e9cc6-320.webp 320w, /media/uploads/sqsp_amikor_a_kivitelezes_mar_nem_kulonboztet_meg_2_971c808b5d-9b76b0ab830e40b2b1ff-480.webp 480w, /media/uploads/sqsp_amikor_a_kivitelezes_mar_nem_kulonboztet_meg_2_971c808b5d-744370ade600f7b9f06c-768.webp 768w, /media/uploads/sqsp_amikor_a_kivitelezes_mar_nem_kulonboztet_meg_2_971c808b5d-f2c9cd0827ed1dcde7ff-1200.webp 1200w, /media/uploads/sqsp_amikor_a_kivitelezes_mar_nem_kulonboztet_meg_2_971c808b5d-bc200dc19a0a87bb62cc-1387.webp 1387w",
+    "width": 1387,
+    "height": 681
+  },
+  "/strapi/uploads/sqsp_amikor_a_kivitelezes_mar_nem_kulonboztet_meg_hero_5fa24394b7.png": {
+    "source": "/strapi/uploads/sqsp_amikor_a_kivitelezes_mar_nem_kulonboztet_meg_hero_5fa24394b7.png",
+    "src": "/media/uploads/sqsp_amikor_a_kivitelezes_mar_nem_kulonboztet_meg_hero_5fa24394b7-ff14416f7a4472350119-1536.webp",
+    "srcSet": "/media/uploads/sqsp_amikor_a_kivitelezes_mar_nem_kulonboztet_meg_hero_5fa24394b7-c6d10cdd1aa620f494d7-64.webp 64w, /media/uploads/sqsp_amikor_a_kivitelezes_mar_nem_kulonboztet_meg_hero_5fa24394b7-a152adb1f1adb88dca6b-128.webp 128w, /media/uploads/sqsp_amikor_a_kivitelezes_mar_nem_kulonboztet_meg_hero_5fa24394b7-ac65f12564a0b473905a-192.webp 192w, /media/uploads/sqsp_amikor_a_kivitelezes_mar_nem_kulonboztet_meg_hero_5fa24394b7-1fa15880703cc9c9a13d-320.webp 320w, /media/uploads/sqsp_amikor_a_kivitelezes_mar_nem_kulonboztet_meg_hero_5fa24394b7-f2bc2cbe7b371458205b-480.webp 480w, /media/uploads/sqsp_amikor_a_kivitelezes_mar_nem_kulonboztet_meg_hero_5fa24394b7-3c68f7c6d383bbf252ca-768.webp 768w, /media/uploads/sqsp_amikor_a_kivitelezes_mar_nem_kulonboztet_meg_hero_5fa24394b7-0e4591e30d2fddace3dc-1200.webp 1200w, /media/uploads/sqsp_amikor_a_kivitelezes_mar_nem_kulonboztet_meg_hero_5fa24394b7-ff14416f7a4472350119-1536.webp 1536w",
+    "width": 1536,
+    "height": 1024
+  },
+  "/strapi/uploads/sqsp_bizzuk_az_ai_ra_a_felhasznaloi_visszajelzesek_elemzeset_1_7e4328d31a.png": {
+    "source": "/strapi/uploads/sqsp_bizzuk_az_ai_ra_a_felhasznaloi_visszajelzesek_elemzeset_1_7e4328d31a.png",
+    "src": "/media/uploads/sqsp_bizzuk_az_ai_ra_a_felhasznaloi_visszajelzesek_elemzeset_1_7e4328d31a-e311497db344c6e90fd7-1536.webp",
+    "srcSet": "/media/uploads/sqsp_bizzuk_az_ai_ra_a_felhasznaloi_visszajelzesek_elemzeset_1_7e4328d31a-69f3c59859742cd24c3b-64.webp 64w, /media/uploads/sqsp_bizzuk_az_ai_ra_a_felhasznaloi_visszajelzesek_elemzeset_1_7e4328d31a-e96b854eafe4f40a1f23-128.webp 128w, /media/uploads/sqsp_bizzuk_az_ai_ra_a_felhasznaloi_visszajelzesek_elemzeset_1_7e4328d31a-7d4b8e349b6a4d61193f-192.webp 192w, /media/uploads/sqsp_bizzuk_az_ai_ra_a_felhasznaloi_visszajelzesek_elemzeset_1_7e4328d31a-5af642a4ce24fd198c0e-320.webp 320w, /media/uploads/sqsp_bizzuk_az_ai_ra_a_felhasznaloi_visszajelzesek_elemzeset_1_7e4328d31a-c3e8924fcb16c75ca255-480.webp 480w, /media/uploads/sqsp_bizzuk_az_ai_ra_a_felhasznaloi_visszajelzesek_elemzeset_1_7e4328d31a-11dc92f62c47f3e263e9-768.webp 768w, /media/uploads/sqsp_bizzuk_az_ai_ra_a_felhasznaloi_visszajelzesek_elemzeset_1_7e4328d31a-53b86a6c94975035e60d-1200.webp 1200w, /media/uploads/sqsp_bizzuk_az_ai_ra_a_felhasznaloi_visszajelzesek_elemzeset_1_7e4328d31a-e311497db344c6e90fd7-1536.webp 1536w",
+    "width": 1536,
+    "height": 1024
+  },
+  "/strapi/uploads/sqsp_bizzuk_az_ai_ra_a_felhasznaloi_visszajelzesek_elemzeset_2_e55fdf6727.png": {
+    "source": "/strapi/uploads/sqsp_bizzuk_az_ai_ra_a_felhasznaloi_visszajelzesek_elemzeset_2_e55fdf6727.png",
+    "src": "/media/uploads/sqsp_bizzuk_az_ai_ra_a_felhasznaloi_visszajelzesek_elemzeset_2_e55fdf6727-588754e2ff3c2b8ce6c3-1374.webp",
+    "srcSet": "/media/uploads/sqsp_bizzuk_az_ai_ra_a_felhasznaloi_visszajelzesek_elemzeset_2_e55fdf6727-81273ff987cb65896331-64.webp 64w, /media/uploads/sqsp_bizzuk_az_ai_ra_a_felhasznaloi_visszajelzesek_elemzeset_2_e55fdf6727-141e659ab37848f2ee1e-128.webp 128w, /media/uploads/sqsp_bizzuk_az_ai_ra_a_felhasznaloi_visszajelzesek_elemzeset_2_e55fdf6727-1102031245df5591e85c-192.webp 192w, /media/uploads/sqsp_bizzuk_az_ai_ra_a_felhasznaloi_visszajelzesek_elemzeset_2_e55fdf6727-7986a12ca9be17cdcb6d-320.webp 320w, /media/uploads/sqsp_bizzuk_az_ai_ra_a_felhasznaloi_visszajelzesek_elemzeset_2_e55fdf6727-8c4fa4a3e60b97b9ab91-480.webp 480w, /media/uploads/sqsp_bizzuk_az_ai_ra_a_felhasznaloi_visszajelzesek_elemzeset_2_e55fdf6727-b1f3d1e790582dd3995d-768.webp 768w, /media/uploads/sqsp_bizzuk_az_ai_ra_a_felhasznaloi_visszajelzesek_elemzeset_2_e55fdf6727-5a9b656c90b9a3605cdd-1200.webp 1200w, /media/uploads/sqsp_bizzuk_az_ai_ra_a_felhasznaloi_visszajelzesek_elemzeset_2_e55fdf6727-588754e2ff3c2b8ce6c3-1374.webp 1374w",
+    "width": 1374,
+    "height": 576
+  },
+  "/strapi/uploads/sqsp_bizzuk_az_ai_ra_a_felhasznaloi_visszajelzesek_elemzeset_3_8205479cbf.png": {
+    "source": "/strapi/uploads/sqsp_bizzuk_az_ai_ra_a_felhasznaloi_visszajelzesek_elemzeset_3_8205479cbf.png",
+    "src": "/media/uploads/sqsp_bizzuk_az_ai_ra_a_felhasznaloi_visszajelzesek_elemzeset_3_8205479cbf-636e8090bd0578cd0187-1140.webp",
+    "srcSet": "/media/uploads/sqsp_bizzuk_az_ai_ra_a_felhasznaloi_visszajelzesek_elemzeset_3_8205479cbf-43529254bfd432169d00-64.webp 64w, /media/uploads/sqsp_bizzuk_az_ai_ra_a_felhasznaloi_visszajelzesek_elemzeset_3_8205479cbf-87698fa73df96f5980f9-128.webp 128w, /media/uploads/sqsp_bizzuk_az_ai_ra_a_felhasznaloi_visszajelzesek_elemzeset_3_8205479cbf-2cc53dff36eb7f0264e5-192.webp 192w, /media/uploads/sqsp_bizzuk_az_ai_ra_a_felhasznaloi_visszajelzesek_elemzeset_3_8205479cbf-54d3c5de7ef794d84a96-320.webp 320w, /media/uploads/sqsp_bizzuk_az_ai_ra_a_felhasznaloi_visszajelzesek_elemzeset_3_8205479cbf-ebb803a16ba1ef65f2ed-480.webp 480w, /media/uploads/sqsp_bizzuk_az_ai_ra_a_felhasznaloi_visszajelzesek_elemzeset_3_8205479cbf-29aca75493b9f074bbeb-768.webp 768w, /media/uploads/sqsp_bizzuk_az_ai_ra_a_felhasznaloi_visszajelzesek_elemzeset_3_8205479cbf-636e8090bd0578cd0187-1140.webp 1140w",
+    "width": 1140,
+    "height": 536
+  },
+  "/strapi/uploads/sqsp_bizzuk_az_ai_ra_a_felhasznaloi_visszajelzesek_elemzeset_4_4443059c6d.png": {
+    "source": "/strapi/uploads/sqsp_bizzuk_az_ai_ra_a_felhasznaloi_visszajelzesek_elemzeset_4_4443059c6d.png",
+    "src": "/media/uploads/sqsp_bizzuk_az_ai_ra_a_felhasznaloi_visszajelzesek_elemzeset_4_4443059c6d-35bc49844ebceddc23b0-1065.webp",
+    "srcSet": "/media/uploads/sqsp_bizzuk_az_ai_ra_a_felhasznaloi_visszajelzesek_elemzeset_4_4443059c6d-93cccd16cb9e95d59e7e-64.webp 64w, /media/uploads/sqsp_bizzuk_az_ai_ra_a_felhasznaloi_visszajelzesek_elemzeset_4_4443059c6d-4069023bd7acd96600a5-128.webp 128w, /media/uploads/sqsp_bizzuk_az_ai_ra_a_felhasznaloi_visszajelzesek_elemzeset_4_4443059c6d-6c3db717b2afb4694279-192.webp 192w, /media/uploads/sqsp_bizzuk_az_ai_ra_a_felhasznaloi_visszajelzesek_elemzeset_4_4443059c6d-61d89ff5eb4dadbee403-320.webp 320w, /media/uploads/sqsp_bizzuk_az_ai_ra_a_felhasznaloi_visszajelzesek_elemzeset_4_4443059c6d-cb10c5761c366e8d2cf0-480.webp 480w, /media/uploads/sqsp_bizzuk_az_ai_ra_a_felhasznaloi_visszajelzesek_elemzeset_4_4443059c6d-e5ced4c04290c4dbe9c6-768.webp 768w, /media/uploads/sqsp_bizzuk_az_ai_ra_a_felhasznaloi_visszajelzesek_elemzeset_4_4443059c6d-35bc49844ebceddc23b0-1065.webp 1065w",
+    "width": 1065,
+    "height": 901
+  },
+  "/strapi/uploads/sqsp_bizzuk_az_ai_ra_a_felhasznaloi_visszajelzesek_elemzeset_5_1da2cdf82d.png": {
+    "source": "/strapi/uploads/sqsp_bizzuk_az_ai_ra_a_felhasznaloi_visszajelzesek_elemzeset_5_1da2cdf82d.png",
+    "src": "/media/uploads/sqsp_bizzuk_az_ai_ra_a_felhasznaloi_visszajelzesek_elemzeset_5_1da2cdf82d-057b53694531d9e3f3bb-1980.webp",
+    "srcSet": "/media/uploads/sqsp_bizzuk_az_ai_ra_a_felhasznaloi_visszajelzesek_elemzeset_5_1da2cdf82d-18377c52bed7e8873eee-64.webp 64w, /media/uploads/sqsp_bizzuk_az_ai_ra_a_felhasznaloi_visszajelzesek_elemzeset_5_1da2cdf82d-5d422e73dd27232b6d71-128.webp 128w, /media/uploads/sqsp_bizzuk_az_ai_ra_a_felhasznaloi_visszajelzesek_elemzeset_5_1da2cdf82d-9e105fa5252c98c6b73f-192.webp 192w, /media/uploads/sqsp_bizzuk_az_ai_ra_a_felhasznaloi_visszajelzesek_elemzeset_5_1da2cdf82d-e377af2bc8a4a67d8eb9-320.webp 320w, /media/uploads/sqsp_bizzuk_az_ai_ra_a_felhasznaloi_visszajelzesek_elemzeset_5_1da2cdf82d-b8addfd254216a3e7d68-480.webp 480w, /media/uploads/sqsp_bizzuk_az_ai_ra_a_felhasznaloi_visszajelzesek_elemzeset_5_1da2cdf82d-ffbd39d6934b5f2206e1-768.webp 768w, /media/uploads/sqsp_bizzuk_az_ai_ra_a_felhasznaloi_visszajelzesek_elemzeset_5_1da2cdf82d-356d4d9d6b044d304eda-1200.webp 1200w, /media/uploads/sqsp_bizzuk_az_ai_ra_a_felhasznaloi_visszajelzesek_elemzeset_5_1da2cdf82d-b02f6dd9e8419d85b6cf-1600.webp 1600w, /media/uploads/sqsp_bizzuk_az_ai_ra_a_felhasznaloi_visszajelzesek_elemzeset_5_1da2cdf82d-fd561e742255cffdc922-1920.webp 1920w, /media/uploads/sqsp_bizzuk_az_ai_ra_a_felhasznaloi_visszajelzesek_elemzeset_5_1da2cdf82d-057b53694531d9e3f3bb-1980.webp 1980w",
+    "width": 1980,
+    "height": 1980
+  },
+  "/strapi/uploads/sqsp_bizzuk_az_ai_ra_a_felhasznaloi_visszajelzesek_elemzeset_hero_78349de9d7.png": {
+    "source": "/strapi/uploads/sqsp_bizzuk_az_ai_ra_a_felhasznaloi_visszajelzesek_elemzeset_hero_78349de9d7.png",
+    "src": "/media/uploads/sqsp_bizzuk_az_ai_ra_a_felhasznaloi_visszajelzesek_elemzeset_hero_78349de9d7-f54d74ec67353ada6eb6-1536.webp",
+    "srcSet": "/media/uploads/sqsp_bizzuk_az_ai_ra_a_felhasznaloi_visszajelzesek_elemzeset_hero_78349de9d7-cf8b0711af513b4fa9d4-64.webp 64w, /media/uploads/sqsp_bizzuk_az_ai_ra_a_felhasznaloi_visszajelzesek_elemzeset_hero_78349de9d7-491bad49ed15b3b190e3-128.webp 128w, /media/uploads/sqsp_bizzuk_az_ai_ra_a_felhasznaloi_visszajelzesek_elemzeset_hero_78349de9d7-b88d41fada9e5c6d4e4a-192.webp 192w, /media/uploads/sqsp_bizzuk_az_ai_ra_a_felhasznaloi_visszajelzesek_elemzeset_hero_78349de9d7-6d27194b8f04e5f7e205-320.webp 320w, /media/uploads/sqsp_bizzuk_az_ai_ra_a_felhasznaloi_visszajelzesek_elemzeset_hero_78349de9d7-18a5036420e2d5698602-480.webp 480w, /media/uploads/sqsp_bizzuk_az_ai_ra_a_felhasznaloi_visszajelzesek_elemzeset_hero_78349de9d7-ee71e93201715fbe760c-768.webp 768w, /media/uploads/sqsp_bizzuk_az_ai_ra_a_felhasznaloi_visszajelzesek_elemzeset_hero_78349de9d7-56a3b9f77f31d9abe076-1200.webp 1200w, /media/uploads/sqsp_bizzuk_az_ai_ra_a_felhasznaloi_visszajelzesek_elemzeset_hero_78349de9d7-f54d74ec67353ada6eb6-1536.webp 1536w",
+    "width": 1536,
+    "height": 1024
+  },
+  "/strapi/uploads/sqsp_digitalis_akadalymentesites_1_9666a5723c.png": {
+    "source": "/strapi/uploads/sqsp_digitalis_akadalymentesites_1_9666a5723c.png",
+    "src": "/media/uploads/sqsp_digitalis_akadalymentesites_1_9666a5723c-4cce088545642770f44b-1500.webp",
+    "srcSet": "/media/uploads/sqsp_digitalis_akadalymentesites_1_9666a5723c-5491a277376480d606a2-64.webp 64w, /media/uploads/sqsp_digitalis_akadalymentesites_1_9666a5723c-5f55273e3edcd65f6215-128.webp 128w, /media/uploads/sqsp_digitalis_akadalymentesites_1_9666a5723c-834aa42433eef94d5892-192.webp 192w, /media/uploads/sqsp_digitalis_akadalymentesites_1_9666a5723c-ec0670643b46abfb4cde-320.webp 320w, /media/uploads/sqsp_digitalis_akadalymentesites_1_9666a5723c-8577d07d5f4bac9fac1c-480.webp 480w, /media/uploads/sqsp_digitalis_akadalymentesites_1_9666a5723c-0d469a3a75ef756050c5-768.webp 768w, /media/uploads/sqsp_digitalis_akadalymentesites_1_9666a5723c-4483fed2fc34ef56b391-1200.webp 1200w, /media/uploads/sqsp_digitalis_akadalymentesites_1_9666a5723c-4cce088545642770f44b-1500.webp 1500w",
+    "width": 1500,
+    "height": 900
+  },
+  "/strapi/uploads/sqsp_digitalis_akadalymentesites_2_d08332ed6a.png": {
+    "source": "/strapi/uploads/sqsp_digitalis_akadalymentesites_2_d08332ed6a.png",
+    "src": "/media/uploads/sqsp_digitalis_akadalymentesites_2_d08332ed6a-c2c91023cb7ccdb1fdde-1500.webp",
+    "srcSet": "/media/uploads/sqsp_digitalis_akadalymentesites_2_d08332ed6a-e7ed35bcd2fd36629dbf-64.webp 64w, /media/uploads/sqsp_digitalis_akadalymentesites_2_d08332ed6a-0e475fa91d029e831df2-128.webp 128w, /media/uploads/sqsp_digitalis_akadalymentesites_2_d08332ed6a-33bd2c1256ef70fc100a-192.webp 192w, /media/uploads/sqsp_digitalis_akadalymentesites_2_d08332ed6a-6ca4800f374ae2808cf6-320.webp 320w, /media/uploads/sqsp_digitalis_akadalymentesites_2_d08332ed6a-f879b4574fafb04fadca-480.webp 480w, /media/uploads/sqsp_digitalis_akadalymentesites_2_d08332ed6a-3f3aba1cdf1aae64e393-768.webp 768w, /media/uploads/sqsp_digitalis_akadalymentesites_2_d08332ed6a-6f74cdfb37c879d98f1f-1200.webp 1200w, /media/uploads/sqsp_digitalis_akadalymentesites_2_d08332ed6a-c2c91023cb7ccdb1fdde-1500.webp 1500w",
+    "width": 1500,
+    "height": 900
+  },
+  "/strapi/uploads/sqsp_digitalis_akadalymentesites_3_843428ccaf.png": {
+    "source": "/strapi/uploads/sqsp_digitalis_akadalymentesites_3_843428ccaf.png",
+    "src": "/media/uploads/sqsp_digitalis_akadalymentesites_3_843428ccaf-570090a09353b1e2f8bf-1500.webp",
+    "srcSet": "/media/uploads/sqsp_digitalis_akadalymentesites_3_843428ccaf-5e18e344a5141967e807-64.webp 64w, /media/uploads/sqsp_digitalis_akadalymentesites_3_843428ccaf-a8a38ffc25929b6a7245-128.webp 128w, /media/uploads/sqsp_digitalis_akadalymentesites_3_843428ccaf-f44bd47f61d597c56cef-192.webp 192w, /media/uploads/sqsp_digitalis_akadalymentesites_3_843428ccaf-2692fb62b0868e278cc9-320.webp 320w, /media/uploads/sqsp_digitalis_akadalymentesites_3_843428ccaf-e8d8dfc6a31f2168abd4-480.webp 480w, /media/uploads/sqsp_digitalis_akadalymentesites_3_843428ccaf-cd56c1bfe192a02c4899-768.webp 768w, /media/uploads/sqsp_digitalis_akadalymentesites_3_843428ccaf-f43caff229dc95dca8dd-1200.webp 1200w, /media/uploads/sqsp_digitalis_akadalymentesites_3_843428ccaf-570090a09353b1e2f8bf-1500.webp 1500w",
+    "width": 1500,
+    "height": 900
+  },
+  "/strapi/uploads/sqsp_digitalis_akadalymentesites_4_7cc31cc3ab.png": {
+    "source": "/strapi/uploads/sqsp_digitalis_akadalymentesites_4_7cc31cc3ab.png",
+    "src": "/media/uploads/sqsp_digitalis_akadalymentesites_4_7cc31cc3ab-5f1694ceee6dfaec2d8a-1500.webp",
+    "srcSet": "/media/uploads/sqsp_digitalis_akadalymentesites_4_7cc31cc3ab-2d2e44dc9edd1d78cda8-64.webp 64w, /media/uploads/sqsp_digitalis_akadalymentesites_4_7cc31cc3ab-a07c8d03e8edef081064-128.webp 128w, /media/uploads/sqsp_digitalis_akadalymentesites_4_7cc31cc3ab-acdddd50641d0ac86a98-192.webp 192w, /media/uploads/sqsp_digitalis_akadalymentesites_4_7cc31cc3ab-9a14cbff5f71b5fae6dc-320.webp 320w, /media/uploads/sqsp_digitalis_akadalymentesites_4_7cc31cc3ab-d483b778f8aaf066b34e-480.webp 480w, /media/uploads/sqsp_digitalis_akadalymentesites_4_7cc31cc3ab-45df0dfaedc6b512499f-768.webp 768w, /media/uploads/sqsp_digitalis_akadalymentesites_4_7cc31cc3ab-e459024aaec7945e837e-1200.webp 1200w, /media/uploads/sqsp_digitalis_akadalymentesites_4_7cc31cc3ab-5f1694ceee6dfaec2d8a-1500.webp 1500w",
+    "width": 1500,
+    "height": 900
+  },
+  "/strapi/uploads/sqsp_digitalis_akadalymentesites_hero_12d76d0319.png": {
+    "source": "/strapi/uploads/sqsp_digitalis_akadalymentesites_hero_12d76d0319.png",
+    "src": "/media/uploads/sqsp_digitalis_akadalymentesites_hero_12d76d0319-eaa63389fb9a5bbdda5e-1500.webp",
+    "srcSet": "/media/uploads/sqsp_digitalis_akadalymentesites_hero_12d76d0319-fc9ad5f2c2dd41e12681-64.webp 64w, /media/uploads/sqsp_digitalis_akadalymentesites_hero_12d76d0319-3eb4c859eca203584efd-128.webp 128w, /media/uploads/sqsp_digitalis_akadalymentesites_hero_12d76d0319-2f77a4267ec18f0c3065-192.webp 192w, /media/uploads/sqsp_digitalis_akadalymentesites_hero_12d76d0319-7e34e6ec77b513be4785-320.webp 320w, /media/uploads/sqsp_digitalis_akadalymentesites_hero_12d76d0319-7e2edeca651e2f898869-480.webp 480w, /media/uploads/sqsp_digitalis_akadalymentesites_hero_12d76d0319-76997b04b83876fc3d26-768.webp 768w, /media/uploads/sqsp_digitalis_akadalymentesites_hero_12d76d0319-a63c1385d46e82cbb0d6-1200.webp 1200w, /media/uploads/sqsp_digitalis_akadalymentesites_hero_12d76d0319-eaa63389fb9a5bbdda5e-1500.webp 1500w",
+    "width": 1500,
+    "height": 900
+  },
+  "/strapi/uploads/sqsp_elerhetobbe_teszi_az_ai_a_ux_kutatast_vagy_csak_olcso_illuziot_kinal_1_59bc8ed681.png": {
+    "source": "/strapi/uploads/sqsp_elerhetobbe_teszi_az_ai_a_ux_kutatast_vagy_csak_olcso_illuziot_kinal_1_59bc8ed681.png",
+    "src": "/media/uploads/sqsp_elerhetobbe_teszi_az_ai_a_ux_kutatast_vagy_csak_olcso_illuziot_kinal_1_59bc8ed681-1ae9adf63d5a340de7d9-1536.webp",
+    "srcSet": "/media/uploads/sqsp_elerhetobbe_teszi_az_ai_a_ux_kutatast_vagy_csak_olcso_illuziot_kinal_1_59bc8ed681-d508481c35bd3c9b6c70-64.webp 64w, /media/uploads/sqsp_elerhetobbe_teszi_az_ai_a_ux_kutatast_vagy_csak_olcso_illuziot_kinal_1_59bc8ed681-8d9f9ec398ebcd8a09d3-128.webp 128w, /media/uploads/sqsp_elerhetobbe_teszi_az_ai_a_ux_kutatast_vagy_csak_olcso_illuziot_kinal_1_59bc8ed681-7f48696e988bd80003fa-192.webp 192w, /media/uploads/sqsp_elerhetobbe_teszi_az_ai_a_ux_kutatast_vagy_csak_olcso_illuziot_kinal_1_59bc8ed681-b894a5f4fed3bae2c470-320.webp 320w, /media/uploads/sqsp_elerhetobbe_teszi_az_ai_a_ux_kutatast_vagy_csak_olcso_illuziot_kinal_1_59bc8ed681-6b0d4612ccccf3db5dc6-480.webp 480w, /media/uploads/sqsp_elerhetobbe_teszi_az_ai_a_ux_kutatast_vagy_csak_olcso_illuziot_kinal_1_59bc8ed681-7e6049cb552c7cbc908d-768.webp 768w, /media/uploads/sqsp_elerhetobbe_teszi_az_ai_a_ux_kutatast_vagy_csak_olcso_illuziot_kinal_1_59bc8ed681-6ebf8a28fe4f798b4544-1200.webp 1200w, /media/uploads/sqsp_elerhetobbe_teszi_az_ai_a_ux_kutatast_vagy_csak_olcso_illuziot_kinal_1_59bc8ed681-1ae9adf63d5a340de7d9-1536.webp 1536w",
+    "width": 1536,
+    "height": 1024
+  },
+  "/strapi/uploads/sqsp_elerhetobbe_teszi_az_ai_a_ux_kutatast_vagy_csak_olcso_illuziot_kinal_2_93f7f2d651.jpg": {
+    "source": "/strapi/uploads/sqsp_elerhetobbe_teszi_az_ai_a_ux_kutatast_vagy_csak_olcso_illuziot_kinal_2_93f7f2d651.jpg",
+    "src": "/media/uploads/sqsp_elerhetobbe_teszi_az_ai_a_ux_kutatast_vagy_csak_olcso_illuziot_kinal_2_93f7f2d651-a0b85aa3d24b01753615-1920.webp",
+    "srcSet": "/media/uploads/sqsp_elerhetobbe_teszi_az_ai_a_ux_kutatast_vagy_csak_olcso_illuziot_kinal_2_93f7f2d651-38e3ea79206d75d93fc9-64.webp 64w, /media/uploads/sqsp_elerhetobbe_teszi_az_ai_a_ux_kutatast_vagy_csak_olcso_illuziot_kinal_2_93f7f2d651-1995f790f8c437bdfc54-128.webp 128w, /media/uploads/sqsp_elerhetobbe_teszi_az_ai_a_ux_kutatast_vagy_csak_olcso_illuziot_kinal_2_93f7f2d651-fe9670fd146d7107fc6b-192.webp 192w, /media/uploads/sqsp_elerhetobbe_teszi_az_ai_a_ux_kutatast_vagy_csak_olcso_illuziot_kinal_2_93f7f2d651-73b1e3625e598212da41-320.webp 320w, /media/uploads/sqsp_elerhetobbe_teszi_az_ai_a_ux_kutatast_vagy_csak_olcso_illuziot_kinal_2_93f7f2d651-c0b5c6ddc8ecec91ab2d-480.webp 480w, /media/uploads/sqsp_elerhetobbe_teszi_az_ai_a_ux_kutatast_vagy_csak_olcso_illuziot_kinal_2_93f7f2d651-fbac20b8f7292183b22a-768.webp 768w, /media/uploads/sqsp_elerhetobbe_teszi_az_ai_a_ux_kutatast_vagy_csak_olcso_illuziot_kinal_2_93f7f2d651-5452fcc6add85e45b5db-1200.webp 1200w, /media/uploads/sqsp_elerhetobbe_teszi_az_ai_a_ux_kutatast_vagy_csak_olcso_illuziot_kinal_2_93f7f2d651-1b54dcf6528d584a2377-1600.webp 1600w, /media/uploads/sqsp_elerhetobbe_teszi_az_ai_a_ux_kutatast_vagy_csak_olcso_illuziot_kinal_2_93f7f2d651-a0b85aa3d24b01753615-1920.webp 1920w",
+    "width": 1920,
+    "height": 1080
+  },
+  "/strapi/uploads/sqsp_elerhetobbe_teszi_az_ai_a_ux_kutatast_vagy_csak_olcso_illuziot_kinal_hero_ffac2f0b86.png": {
+    "source": "/strapi/uploads/sqsp_elerhetobbe_teszi_az_ai_a_ux_kutatast_vagy_csak_olcso_illuziot_kinal_hero_ffac2f0b86.png",
+    "src": "/media/uploads/sqsp_elerhetobbe_teszi_az_ai_a_ux_kutatast_vagy_csak_olcso_illuziot_kinal_hero_ffac2f0b86-f54ab4212dd8151393c1-1536.webp",
+    "srcSet": "/media/uploads/sqsp_elerhetobbe_teszi_az_ai_a_ux_kutatast_vagy_csak_olcso_illuziot_kinal_hero_ffac2f0b86-de1e4b77ead47389884a-64.webp 64w, /media/uploads/sqsp_elerhetobbe_teszi_az_ai_a_ux_kutatast_vagy_csak_olcso_illuziot_kinal_hero_ffac2f0b86-9ad746f143bad876976b-128.webp 128w, /media/uploads/sqsp_elerhetobbe_teszi_az_ai_a_ux_kutatast_vagy_csak_olcso_illuziot_kinal_hero_ffac2f0b86-3b2536839aab6f4c70b4-192.webp 192w, /media/uploads/sqsp_elerhetobbe_teszi_az_ai_a_ux_kutatast_vagy_csak_olcso_illuziot_kinal_hero_ffac2f0b86-9390f511ff836c7c80d0-320.webp 320w, /media/uploads/sqsp_elerhetobbe_teszi_az_ai_a_ux_kutatast_vagy_csak_olcso_illuziot_kinal_hero_ffac2f0b86-75d914f16bfe8d44ff89-480.webp 480w, /media/uploads/sqsp_elerhetobbe_teszi_az_ai_a_ux_kutatast_vagy_csak_olcso_illuziot_kinal_hero_ffac2f0b86-ecd14bff9f0737d36057-768.webp 768w, /media/uploads/sqsp_elerhetobbe_teszi_az_ai_a_ux_kutatast_vagy_csak_olcso_illuziot_kinal_hero_ffac2f0b86-f6a4dd8bbabd304afbd3-1200.webp 1200w, /media/uploads/sqsp_elerhetobbe_teszi_az_ai_a_ux_kutatast_vagy_csak_olcso_illuziot_kinal_hero_ffac2f0b86-f54ab4212dd8151393c1-1536.webp 1536w",
+    "width": 1536,
+    "height": 1024
+  },
+  "/strapi/uploads/sqsp_elveheti_az_ai_a_munkamat_1_4f8b0ffaf7.png": {
+    "source": "/strapi/uploads/sqsp_elveheti_az_ai_a_munkamat_1_4f8b0ffaf7.png",
+    "src": "/media/uploads/sqsp_elveheti_az_ai_a_munkamat_1_4f8b0ffaf7-3702d57283c4276f8507-2500.webp",
+    "srcSet": "/media/uploads/sqsp_elveheti_az_ai_a_munkamat_1_4f8b0ffaf7-21a2722dc71cef4dbd1e-64.webp 64w, /media/uploads/sqsp_elveheti_az_ai_a_munkamat_1_4f8b0ffaf7-33346c73983d7f36516b-128.webp 128w, /media/uploads/sqsp_elveheti_az_ai_a_munkamat_1_4f8b0ffaf7-32f61a448c0e4072e02b-192.webp 192w, /media/uploads/sqsp_elveheti_az_ai_a_munkamat_1_4f8b0ffaf7-3131fe7e29e5e7dd6ef2-320.webp 320w, /media/uploads/sqsp_elveheti_az_ai_a_munkamat_1_4f8b0ffaf7-a422827ad59bc6fa7eba-480.webp 480w, /media/uploads/sqsp_elveheti_az_ai_a_munkamat_1_4f8b0ffaf7-c1730311cb845595a161-768.webp 768w, /media/uploads/sqsp_elveheti_az_ai_a_munkamat_1_4f8b0ffaf7-77d0f29189c70d4995c5-1200.webp 1200w, /media/uploads/sqsp_elveheti_az_ai_a_munkamat_1_4f8b0ffaf7-8bd43e77097d253a90f0-1600.webp 1600w, /media/uploads/sqsp_elveheti_az_ai_a_munkamat_1_4f8b0ffaf7-4aa03ddd0304466ff4bf-1920.webp 1920w, /media/uploads/sqsp_elveheti_az_ai_a_munkamat_1_4f8b0ffaf7-3702d57283c4276f8507-2500.webp 2500w",
+    "width": 2500,
+    "height": 1395
+  },
+  "/strapi/uploads/sqsp_elveheti_az_ai_a_munkamat_2_f6192a46ec.png": {
+    "source": "/strapi/uploads/sqsp_elveheti_az_ai_a_munkamat_2_f6192a46ec.png",
+    "src": "/media/uploads/sqsp_elveheti_az_ai_a_munkamat_2_f6192a46ec-cad0984249456a2cdbce-2500.webp",
+    "srcSet": "/media/uploads/sqsp_elveheti_az_ai_a_munkamat_2_f6192a46ec-8f2d3c10ec25734b01e5-64.webp 64w, /media/uploads/sqsp_elveheti_az_ai_a_munkamat_2_f6192a46ec-566d8c4382cad550b561-128.webp 128w, /media/uploads/sqsp_elveheti_az_ai_a_munkamat_2_f6192a46ec-698ac559e4af11d790fc-192.webp 192w, /media/uploads/sqsp_elveheti_az_ai_a_munkamat_2_f6192a46ec-9ace0770a808418b0011-320.webp 320w, /media/uploads/sqsp_elveheti_az_ai_a_munkamat_2_f6192a46ec-4837da2ad62ff3f7e660-480.webp 480w, /media/uploads/sqsp_elveheti_az_ai_a_munkamat_2_f6192a46ec-32884d2981670c8a48e7-768.webp 768w, /media/uploads/sqsp_elveheti_az_ai_a_munkamat_2_f6192a46ec-27a4a451c73a396d34a1-1200.webp 1200w, /media/uploads/sqsp_elveheti_az_ai_a_munkamat_2_f6192a46ec-65011d0b6ce8c1661346-1600.webp 1600w, /media/uploads/sqsp_elveheti_az_ai_a_munkamat_2_f6192a46ec-f7f1aa518a6d552cc1bb-1920.webp 1920w, /media/uploads/sqsp_elveheti_az_ai_a_munkamat_2_f6192a46ec-cad0984249456a2cdbce-2500.webp 2500w",
+    "width": 2500,
+    "height": 1395
+  },
+  "/strapi/uploads/sqsp_elveheti_az_ai_a_munkamat_3_2f4cf2e577.png": {
+    "source": "/strapi/uploads/sqsp_elveheti_az_ai_a_munkamat_3_2f4cf2e577.png",
+    "src": "/media/uploads/sqsp_elveheti_az_ai_a_munkamat_3_2f4cf2e577-6f86ffa32e9a4361c86e-2500.webp",
+    "srcSet": "/media/uploads/sqsp_elveheti_az_ai_a_munkamat_3_2f4cf2e577-b7eb1fcf0533a758e1d0-64.webp 64w, /media/uploads/sqsp_elveheti_az_ai_a_munkamat_3_2f4cf2e577-3ac7a4db4595e1a3de4e-128.webp 128w, /media/uploads/sqsp_elveheti_az_ai_a_munkamat_3_2f4cf2e577-cc8b82b8113f45388b96-192.webp 192w, /media/uploads/sqsp_elveheti_az_ai_a_munkamat_3_2f4cf2e577-0bc0d60c8e812e730630-320.webp 320w, /media/uploads/sqsp_elveheti_az_ai_a_munkamat_3_2f4cf2e577-ee6b449a4e285e001266-480.webp 480w, /media/uploads/sqsp_elveheti_az_ai_a_munkamat_3_2f4cf2e577-f4d6ed70ea196f22f68c-768.webp 768w, /media/uploads/sqsp_elveheti_az_ai_a_munkamat_3_2f4cf2e577-7f9f0310e1b61f94cb53-1200.webp 1200w, /media/uploads/sqsp_elveheti_az_ai_a_munkamat_3_2f4cf2e577-5d6608c0daf166845d88-1600.webp 1600w, /media/uploads/sqsp_elveheti_az_ai_a_munkamat_3_2f4cf2e577-191202372694502cccef-1920.webp 1920w, /media/uploads/sqsp_elveheti_az_ai_a_munkamat_3_2f4cf2e577-6f86ffa32e9a4361c86e-2500.webp 2500w",
+    "width": 2500,
+    "height": 1395
+  },
+  "/strapi/uploads/sqsp_elveheti_az_ai_a_munkamat_hero_1d6264bad3.png": {
+    "source": "/strapi/uploads/sqsp_elveheti_az_ai_a_munkamat_hero_1d6264bad3.png",
+    "src": "/media/uploads/sqsp_elveheti_az_ai_a_munkamat_hero_1d6264bad3-91e8cd075f6a2724d65f-1024.webp",
+    "srcSet": "/media/uploads/sqsp_elveheti_az_ai_a_munkamat_hero_1d6264bad3-a3448841785f4d3a0756-64.webp 64w, /media/uploads/sqsp_elveheti_az_ai_a_munkamat_hero_1d6264bad3-f40647fe250b65dd5321-128.webp 128w, /media/uploads/sqsp_elveheti_az_ai_a_munkamat_hero_1d6264bad3-40ce74fd74b628de6cdb-192.webp 192w, /media/uploads/sqsp_elveheti_az_ai_a_munkamat_hero_1d6264bad3-78dc41328de289b94db9-320.webp 320w, /media/uploads/sqsp_elveheti_az_ai_a_munkamat_hero_1d6264bad3-469b86757018c16b7d6d-480.webp 480w, /media/uploads/sqsp_elveheti_az_ai_a_munkamat_hero_1d6264bad3-95b5cccfba7eac53253e-768.webp 768w, /media/uploads/sqsp_elveheti_az_ai_a_munkamat_hero_1d6264bad3-91e8cd075f6a2724d65f-1024.webp 1024w",
+    "width": 1024,
+    "height": 768
+  },
+  "/strapi/uploads/sqsp_how_do_we_pay_online_1_5a705e0a99.jpeg": {
+    "source": "/strapi/uploads/sqsp_how_do_we_pay_online_1_5a705e0a99.jpeg",
+    "src": "/media/uploads/sqsp_how_do_we_pay_online_1_5a705e0a99-7479994617a3ef288ff5-2500.webp",
+    "srcSet": "/media/uploads/sqsp_how_do_we_pay_online_1_5a705e0a99-2b40169abd1cc5bd968d-64.webp 64w, /media/uploads/sqsp_how_do_we_pay_online_1_5a705e0a99-bb7e7cf851e0b32fb1ba-128.webp 128w, /media/uploads/sqsp_how_do_we_pay_online_1_5a705e0a99-2606d5c13e94987ad67a-192.webp 192w, /media/uploads/sqsp_how_do_we_pay_online_1_5a705e0a99-5e2ea818e51a775b9320-320.webp 320w, /media/uploads/sqsp_how_do_we_pay_online_1_5a705e0a99-285ff5d0c30e3d7be7ba-480.webp 480w, /media/uploads/sqsp_how_do_we_pay_online_1_5a705e0a99-396d44bb43cf63b32504-768.webp 768w, /media/uploads/sqsp_how_do_we_pay_online_1_5a705e0a99-07a91e48b8d8d7f003af-1200.webp 1200w, /media/uploads/sqsp_how_do_we_pay_online_1_5a705e0a99-b327dc304217496b4501-1600.webp 1600w, /media/uploads/sqsp_how_do_we_pay_online_1_5a705e0a99-9bff51bc043abda7d78a-1920.webp 1920w, /media/uploads/sqsp_how_do_we_pay_online_1_5a705e0a99-7479994617a3ef288ff5-2500.webp 2500w",
+    "width": 2500,
+    "height": 1667
+  },
+  "/strapi/uploads/sqsp_how_do_we_pay_online_2_8c031fbb46.png": {
+    "source": "/strapi/uploads/sqsp_how_do_we_pay_online_2_8c031fbb46.png",
+    "src": "/media/uploads/sqsp_how_do_we_pay_online_2_8c031fbb46-4860902ed1b4adf1ccb2-2000.webp",
+    "srcSet": "/media/uploads/sqsp_how_do_we_pay_online_2_8c031fbb46-b82e1197b3d3c8a2ae75-64.webp 64w, /media/uploads/sqsp_how_do_we_pay_online_2_8c031fbb46-4207cddad4dbb2f45914-128.webp 128w, /media/uploads/sqsp_how_do_we_pay_online_2_8c031fbb46-a034d1a1e0ae898f2b57-192.webp 192w, /media/uploads/sqsp_how_do_we_pay_online_2_8c031fbb46-2731236673932182ed5a-320.webp 320w, /media/uploads/sqsp_how_do_we_pay_online_2_8c031fbb46-2a3c13218b7b5ec9a623-480.webp 480w, /media/uploads/sqsp_how_do_we_pay_online_2_8c031fbb46-b2c78cd7e4ba573fe5ba-768.webp 768w, /media/uploads/sqsp_how_do_we_pay_online_2_8c031fbb46-dd69065799f4496a5c50-1200.webp 1200w, /media/uploads/sqsp_how_do_we_pay_online_2_8c031fbb46-7f8d064c86fe0a02f78c-1600.webp 1600w, /media/uploads/sqsp_how_do_we_pay_online_2_8c031fbb46-bf38d8d1ca1e2d00ac4e-1920.webp 1920w, /media/uploads/sqsp_how_do_we_pay_online_2_8c031fbb46-4860902ed1b4adf1ccb2-2000.webp 2000w",
+    "width": 2000,
+    "height": 1200
+  },
+  "/strapi/uploads/sqsp_how_do_we_pay_online_3_b1f979afce.png": {
+    "source": "/strapi/uploads/sqsp_how_do_we_pay_online_3_b1f979afce.png",
+    "src": "/media/uploads/sqsp_how_do_we_pay_online_3_b1f979afce-4c0ffa4ec564c843d71e-2000.webp",
+    "srcSet": "/media/uploads/sqsp_how_do_we_pay_online_3_b1f979afce-9899f1dfc0fff580659c-64.webp 64w, /media/uploads/sqsp_how_do_we_pay_online_3_b1f979afce-b92ff3ab707d420008eb-128.webp 128w, /media/uploads/sqsp_how_do_we_pay_online_3_b1f979afce-d113df212500bc2e21a0-192.webp 192w, /media/uploads/sqsp_how_do_we_pay_online_3_b1f979afce-458273ca40946aecd0e4-320.webp 320w, /media/uploads/sqsp_how_do_we_pay_online_3_b1f979afce-85f27a209d52100c3e5e-480.webp 480w, /media/uploads/sqsp_how_do_we_pay_online_3_b1f979afce-65e16930bd53d0a40473-768.webp 768w, /media/uploads/sqsp_how_do_we_pay_online_3_b1f979afce-30db7b0225208bf6e5fa-1200.webp 1200w, /media/uploads/sqsp_how_do_we_pay_online_3_b1f979afce-63032981c33525ea391b-1600.webp 1600w, /media/uploads/sqsp_how_do_we_pay_online_3_b1f979afce-e239f10474bd9dfd06e1-1920.webp 1920w, /media/uploads/sqsp_how_do_we_pay_online_3_b1f979afce-4c0ffa4ec564c843d71e-2000.webp 2000w",
+    "width": 2000,
+    "height": 1200
+  },
+  "/strapi/uploads/sqsp_how_do_we_pay_online_4_1b27a9541f.png": {
+    "source": "/strapi/uploads/sqsp_how_do_we_pay_online_4_1b27a9541f.png",
+    "src": "/media/uploads/sqsp_how_do_we_pay_online_4_1b27a9541f-d2bd3fc415ddc0748290-2000.webp",
+    "srcSet": "/media/uploads/sqsp_how_do_we_pay_online_4_1b27a9541f-82ff6e24875c397ebd8f-64.webp 64w, /media/uploads/sqsp_how_do_we_pay_online_4_1b27a9541f-37360dbe3964cf0574c2-128.webp 128w, /media/uploads/sqsp_how_do_we_pay_online_4_1b27a9541f-2be47c78c28539c568ed-192.webp 192w, /media/uploads/sqsp_how_do_we_pay_online_4_1b27a9541f-685e1d7111a41ef79298-320.webp 320w, /media/uploads/sqsp_how_do_we_pay_online_4_1b27a9541f-83a86d1352e486f9ee7b-480.webp 480w, /media/uploads/sqsp_how_do_we_pay_online_4_1b27a9541f-2d61424a3c41401b935a-768.webp 768w, /media/uploads/sqsp_how_do_we_pay_online_4_1b27a9541f-6d4f40f92bf097e28094-1200.webp 1200w, /media/uploads/sqsp_how_do_we_pay_online_4_1b27a9541f-ad8b13e5aae4bd00dd99-1600.webp 1600w, /media/uploads/sqsp_how_do_we_pay_online_4_1b27a9541f-eced7dac0eef3472bea9-1920.webp 1920w, /media/uploads/sqsp_how_do_we_pay_online_4_1b27a9541f-d2bd3fc415ddc0748290-2000.webp 2000w",
+    "width": 2000,
+    "height": 1200
+  },
+  "/strapi/uploads/sqsp_how_do_we_pay_online_5_a66bf8d368.png": {
+    "source": "/strapi/uploads/sqsp_how_do_we_pay_online_5_a66bf8d368.png",
+    "src": "/media/uploads/sqsp_how_do_we_pay_online_5_a66bf8d368-c220076e08a584cdc77b-2000.webp",
+    "srcSet": "/media/uploads/sqsp_how_do_we_pay_online_5_a66bf8d368-2c794504e4790b8b6cc3-64.webp 64w, /media/uploads/sqsp_how_do_we_pay_online_5_a66bf8d368-406658d48667d13a0916-128.webp 128w, /media/uploads/sqsp_how_do_we_pay_online_5_a66bf8d368-3d050c5a205042da7b94-192.webp 192w, /media/uploads/sqsp_how_do_we_pay_online_5_a66bf8d368-ec0823b0f3b8eae68b53-320.webp 320w, /media/uploads/sqsp_how_do_we_pay_online_5_a66bf8d368-b4297c9a9ff71ef2f23c-480.webp 480w, /media/uploads/sqsp_how_do_we_pay_online_5_a66bf8d368-3728fc628748b25e971d-768.webp 768w, /media/uploads/sqsp_how_do_we_pay_online_5_a66bf8d368-e088affb7787b0ddfe29-1200.webp 1200w, /media/uploads/sqsp_how_do_we_pay_online_5_a66bf8d368-6b410ae1edd0db02954e-1600.webp 1600w, /media/uploads/sqsp_how_do_we_pay_online_5_a66bf8d368-6449452f6c97228da310-1920.webp 1920w, /media/uploads/sqsp_how_do_we_pay_online_5_a66bf8d368-c220076e08a584cdc77b-2000.webp 2000w",
+    "width": 2000,
+    "height": 1200
+  },
+  "/strapi/uploads/sqsp_how_do_we_pay_online_6_74eb915952.png": {
+    "source": "/strapi/uploads/sqsp_how_do_we_pay_online_6_74eb915952.png",
+    "src": "/media/uploads/sqsp_how_do_we_pay_online_6_74eb915952-3e38c3cf03836a96f431-2000.webp",
+    "srcSet": "/media/uploads/sqsp_how_do_we_pay_online_6_74eb915952-71973045f0bec6b353b6-64.webp 64w, /media/uploads/sqsp_how_do_we_pay_online_6_74eb915952-372f31270f9276d26336-128.webp 128w, /media/uploads/sqsp_how_do_we_pay_online_6_74eb915952-725277f69238a9742f46-192.webp 192w, /media/uploads/sqsp_how_do_we_pay_online_6_74eb915952-3de86c59b94d237f8f70-320.webp 320w, /media/uploads/sqsp_how_do_we_pay_online_6_74eb915952-4e1d8ee372c290905ae8-480.webp 480w, /media/uploads/sqsp_how_do_we_pay_online_6_74eb915952-625d56de11ec12f9211f-768.webp 768w, /media/uploads/sqsp_how_do_we_pay_online_6_74eb915952-bb3d0ed606d7334f13b4-1200.webp 1200w, /media/uploads/sqsp_how_do_we_pay_online_6_74eb915952-b9c30a801f2f1c5cb9f7-1600.webp 1600w, /media/uploads/sqsp_how_do_we_pay_online_6_74eb915952-7307f7f0c86cb56fce60-1920.webp 1920w, /media/uploads/sqsp_how_do_we_pay_online_6_74eb915952-3e38c3cf03836a96f431-2000.webp 2000w",
+    "width": 2000,
+    "height": 1200
+  },
+  "/strapi/uploads/sqsp_how_do_we_pay_online_7_dc546b6eaa.png": {
+    "source": "/strapi/uploads/sqsp_how_do_we_pay_online_7_dc546b6eaa.png",
+    "src": "/media/uploads/sqsp_how_do_we_pay_online_7_dc546b6eaa-3d14942d725e6006bc6e-2000.webp",
+    "srcSet": "/media/uploads/sqsp_how_do_we_pay_online_7_dc546b6eaa-4108e3d30e977fa603ff-64.webp 64w, /media/uploads/sqsp_how_do_we_pay_online_7_dc546b6eaa-9bcc5651b2b8204fda8c-128.webp 128w, /media/uploads/sqsp_how_do_we_pay_online_7_dc546b6eaa-87d8979157bc30e6b910-192.webp 192w, /media/uploads/sqsp_how_do_we_pay_online_7_dc546b6eaa-ef8e0dd669d788c2e659-320.webp 320w, /media/uploads/sqsp_how_do_we_pay_online_7_dc546b6eaa-417c1f5c2152a309467c-480.webp 480w, /media/uploads/sqsp_how_do_we_pay_online_7_dc546b6eaa-7abd9824bbb26025e2ca-768.webp 768w, /media/uploads/sqsp_how_do_we_pay_online_7_dc546b6eaa-0b17dc096451167f197f-1200.webp 1200w, /media/uploads/sqsp_how_do_we_pay_online_7_dc546b6eaa-93ff202e72d9f58de18e-1600.webp 1600w, /media/uploads/sqsp_how_do_we_pay_online_7_dc546b6eaa-d3ff7ce751482340625b-1920.webp 1920w, /media/uploads/sqsp_how_do_we_pay_online_7_dc546b6eaa-3d14942d725e6006bc6e-2000.webp 2000w",
+    "width": 2000,
+    "height": 1200
+  },
+  "/strapi/uploads/sqsp_how_do_we_pay_online_hero_3f273da9ea.jpeg": {
+    "source": "/strapi/uploads/sqsp_how_do_we_pay_online_hero_3f273da9ea.jpeg",
+    "src": "/media/uploads/sqsp_how_do_we_pay_online_hero_3f273da9ea-4a4cab018835b0b2f4e2-2500.webp",
+    "srcSet": "/media/uploads/sqsp_how_do_we_pay_online_hero_3f273da9ea-ab166e63442cde538668-64.webp 64w, /media/uploads/sqsp_how_do_we_pay_online_hero_3f273da9ea-349f566fb3518b167076-128.webp 128w, /media/uploads/sqsp_how_do_we_pay_online_hero_3f273da9ea-6761fcde6a8908af9ca8-192.webp 192w, /media/uploads/sqsp_how_do_we_pay_online_hero_3f273da9ea-025006132731def1b9b0-320.webp 320w, /media/uploads/sqsp_how_do_we_pay_online_hero_3f273da9ea-2316b27ff81dec4d0111-480.webp 480w, /media/uploads/sqsp_how_do_we_pay_online_hero_3f273da9ea-a1e6614540b0be07a494-768.webp 768w, /media/uploads/sqsp_how_do_we_pay_online_hero_3f273da9ea-0150b3b16db2bb695fd3-1200.webp 1200w, /media/uploads/sqsp_how_do_we_pay_online_hero_3f273da9ea-d0863c0dd3773b79f906-1600.webp 1600w, /media/uploads/sqsp_how_do_we_pay_online_hero_3f273da9ea-2672a1630e3995618ff8-1920.webp 1920w, /media/uploads/sqsp_how_do_we_pay_online_hero_3f273da9ea-4a4cab018835b0b2f4e2-2500.webp 2500w",
+    "width": 2500,
+    "height": 1667
+  },
+  "/strapi/uploads/sqsp_how_state_diagram_can_help_designers_1_35afbf25ed.png": {
+    "source": "/strapi/uploads/sqsp_how_state_diagram_can_help_designers_1_35afbf25ed.png",
+    "src": "/media/uploads/sqsp_how_state_diagram_can_help_designers_1_35afbf25ed-42a7ce8943042563c52f-1892.webp",
+    "srcSet": "/media/uploads/sqsp_how_state_diagram_can_help_designers_1_35afbf25ed-7a6c21ac76c28f23a528-64.webp 64w, /media/uploads/sqsp_how_state_diagram_can_help_designers_1_35afbf25ed-b2701649a5042c371c7a-128.webp 128w, /media/uploads/sqsp_how_state_diagram_can_help_designers_1_35afbf25ed-ede12057612087fc79cc-192.webp 192w, /media/uploads/sqsp_how_state_diagram_can_help_designers_1_35afbf25ed-d2c5e2a228c45ee168b8-320.webp 320w, /media/uploads/sqsp_how_state_diagram_can_help_designers_1_35afbf25ed-6c22086e7f2f0360763e-480.webp 480w, /media/uploads/sqsp_how_state_diagram_can_help_designers_1_35afbf25ed-e921dfcd4989ad836624-768.webp 768w, /media/uploads/sqsp_how_state_diagram_can_help_designers_1_35afbf25ed-9cad3072a907a7006979-1200.webp 1200w, /media/uploads/sqsp_how_state_diagram_can_help_designers_1_35afbf25ed-3b1a5b9d6ee8b47acca0-1600.webp 1600w, /media/uploads/sqsp_how_state_diagram_can_help_designers_1_35afbf25ed-42a7ce8943042563c52f-1892.webp 1892w",
+    "width": 1892,
+    "height": 1032
+  },
+  "/strapi/uploads/sqsp_how_state_diagram_can_help_designers_2_850fb8490c.png": {
+    "source": "/strapi/uploads/sqsp_how_state_diagram_can_help_designers_2_850fb8490c.png",
+    "src": "/media/uploads/sqsp_how_state_diagram_can_help_designers_2_850fb8490c-5678081a231398982071-2500.webp",
+    "srcSet": "/media/uploads/sqsp_how_state_diagram_can_help_designers_2_850fb8490c-5193d328283021d59d52-64.webp 64w, /media/uploads/sqsp_how_state_diagram_can_help_designers_2_850fb8490c-376912f859ee794e38de-128.webp 128w, /media/uploads/sqsp_how_state_diagram_can_help_designers_2_850fb8490c-65d688fee3b1d96eb630-192.webp 192w, /media/uploads/sqsp_how_state_diagram_can_help_designers_2_850fb8490c-07fb8d9503f64dd93a3d-320.webp 320w, /media/uploads/sqsp_how_state_diagram_can_help_designers_2_850fb8490c-a4af97b199e2a9e43b8d-480.webp 480w, /media/uploads/sqsp_how_state_diagram_can_help_designers_2_850fb8490c-02d270a440805f684e27-768.webp 768w, /media/uploads/sqsp_how_state_diagram_can_help_designers_2_850fb8490c-baea5d7e05cea82b9338-1200.webp 1200w, /media/uploads/sqsp_how_state_diagram_can_help_designers_2_850fb8490c-d27875a7fcb1d6ff6f3a-1600.webp 1600w, /media/uploads/sqsp_how_state_diagram_can_help_designers_2_850fb8490c-9ba7ab185dde610d57f2-1920.webp 1920w, /media/uploads/sqsp_how_state_diagram_can_help_designers_2_850fb8490c-5678081a231398982071-2500.webp 2500w",
+    "width": 2500,
+    "height": 474
+  },
+  "/strapi/uploads/sqsp_how_state_diagram_can_help_designers_3_4076621144.png": {
+    "source": "/strapi/uploads/sqsp_how_state_diagram_can_help_designers_3_4076621144.png",
+    "src": "/media/uploads/sqsp_how_state_diagram_can_help_designers_3_4076621144-3f4c40424e91f095cd90-2500.webp",
+    "srcSet": "/media/uploads/sqsp_how_state_diagram_can_help_designers_3_4076621144-6ac2f877601da8a1fc47-64.webp 64w, /media/uploads/sqsp_how_state_diagram_can_help_designers_3_4076621144-ef7c5aaa41bf9deb0484-128.webp 128w, /media/uploads/sqsp_how_state_diagram_can_help_designers_3_4076621144-8c7162854cf471f6bb37-192.webp 192w, /media/uploads/sqsp_how_state_diagram_can_help_designers_3_4076621144-2760a535db9558fee09a-320.webp 320w, /media/uploads/sqsp_how_state_diagram_can_help_designers_3_4076621144-6df915b9b1a18def5be2-480.webp 480w, /media/uploads/sqsp_how_state_diagram_can_help_designers_3_4076621144-d7d4328328c916e61152-768.webp 768w, /media/uploads/sqsp_how_state_diagram_can_help_designers_3_4076621144-29fec908e3a36eb0e4ea-1200.webp 1200w, /media/uploads/sqsp_how_state_diagram_can_help_designers_3_4076621144-e10ee497bc6940967476-1600.webp 1600w, /media/uploads/sqsp_how_state_diagram_can_help_designers_3_4076621144-793dd6187fc3c997bf90-1920.webp 1920w, /media/uploads/sqsp_how_state_diagram_can_help_designers_3_4076621144-3f4c40424e91f095cd90-2500.webp 2500w",
+    "width": 2500,
+    "height": 1119
+  },
+  "/strapi/uploads/sqsp_how_state_diagram_can_help_designers_hero_5b992923ec.png": {
+    "source": "/strapi/uploads/sqsp_how_state_diagram_can_help_designers_hero_5b992923ec.png",
+    "src": "/media/uploads/sqsp_how_state_diagram_can_help_designers_hero_5b992923ec-6d1e15cb95b742f28df6-2500.webp",
+    "srcSet": "/media/uploads/sqsp_how_state_diagram_can_help_designers_hero_5b992923ec-4e1e43979ce08e783dae-64.webp 64w, /media/uploads/sqsp_how_state_diagram_can_help_designers_hero_5b992923ec-f0e1e1b791c163d7d7c1-128.webp 128w, /media/uploads/sqsp_how_state_diagram_can_help_designers_hero_5b992923ec-b0a7654e7f84d1bdbb33-192.webp 192w, /media/uploads/sqsp_how_state_diagram_can_help_designers_hero_5b992923ec-dcfa653997a02c61abad-320.webp 320w, /media/uploads/sqsp_how_state_diagram_can_help_designers_hero_5b992923ec-dc8e9090ea3520d35071-480.webp 480w, /media/uploads/sqsp_how_state_diagram_can_help_designers_hero_5b992923ec-a4e9b1c852e361679ae0-768.webp 768w, /media/uploads/sqsp_how_state_diagram_can_help_designers_hero_5b992923ec-33467657ad92170cc506-1200.webp 1200w, /media/uploads/sqsp_how_state_diagram_can_help_designers_hero_5b992923ec-850bb6ce725c36bce4f8-1600.webp 1600w, /media/uploads/sqsp_how_state_diagram_can_help_designers_hero_5b992923ec-aa6dca609af413777e4f-1920.webp 1920w, /media/uploads/sqsp_how_state_diagram_can_help_designers_hero_5b992923ec-6d1e15cb95b742f28df6-2500.webp 2500w",
+    "width": 2500,
+    "height": 1119
+  },
+  "/strapi/uploads/sqsp_is_the_ux_designer_a_dying_breed_mlfg5_1_fa6a8d9f53.jpg": {
+    "source": "/strapi/uploads/sqsp_is_the_ux_designer_a_dying_breed_mlfg5_1_fa6a8d9f53.jpg",
+    "src": "/media/uploads/sqsp_is_the_ux_designer_a_dying_breed_mlfg5_1_fa6a8d9f53-c1f6e1d259c01aa0cf79-1000.webp",
+    "srcSet": "/media/uploads/sqsp_is_the_ux_designer_a_dying_breed_mlfg5_1_fa6a8d9f53-928118733b030c72e1de-64.webp 64w, /media/uploads/sqsp_is_the_ux_designer_a_dying_breed_mlfg5_1_fa6a8d9f53-5ab84ebd6d6f6330e607-128.webp 128w, /media/uploads/sqsp_is_the_ux_designer_a_dying_breed_mlfg5_1_fa6a8d9f53-c01b147586ed50e9c497-192.webp 192w, /media/uploads/sqsp_is_the_ux_designer_a_dying_breed_mlfg5_1_fa6a8d9f53-847d8ff569a566dcc391-320.webp 320w, /media/uploads/sqsp_is_the_ux_designer_a_dying_breed_mlfg5_1_fa6a8d9f53-fabdd51914ac700aab7c-480.webp 480w, /media/uploads/sqsp_is_the_ux_designer_a_dying_breed_mlfg5_1_fa6a8d9f53-d9fb3771e3c50a420631-768.webp 768w, /media/uploads/sqsp_is_the_ux_designer_a_dying_breed_mlfg5_1_fa6a8d9f53-c1f6e1d259c01aa0cf79-1000.webp 1000w",
+    "width": 1000,
+    "height": 667
+  },
+  "/strapi/uploads/sqsp_is_the_ux_designer_a_dying_breed_mlfg5_2_b1ae069cfb.jpg": {
+    "source": "/strapi/uploads/sqsp_is_the_ux_designer_a_dying_breed_mlfg5_2_b1ae069cfb.jpg",
+    "src": "/media/uploads/sqsp_is_the_ux_designer_a_dying_breed_mlfg5_2_b1ae069cfb-c4b4a3a8d73d928418a7-828.webp",
+    "srcSet": "/media/uploads/sqsp_is_the_ux_designer_a_dying_breed_mlfg5_2_b1ae069cfb-2da8580bd471f267bba0-64.webp 64w, /media/uploads/sqsp_is_the_ux_designer_a_dying_breed_mlfg5_2_b1ae069cfb-540e43744173cc1f8e0a-128.webp 128w, /media/uploads/sqsp_is_the_ux_designer_a_dying_breed_mlfg5_2_b1ae069cfb-c5ff55f5181307328359-192.webp 192w, /media/uploads/sqsp_is_the_ux_designer_a_dying_breed_mlfg5_2_b1ae069cfb-6121389e6341c8ed9535-320.webp 320w, /media/uploads/sqsp_is_the_ux_designer_a_dying_breed_mlfg5_2_b1ae069cfb-9b5c9e68ba8b725ce6d4-480.webp 480w, /media/uploads/sqsp_is_the_ux_designer_a_dying_breed_mlfg5_2_b1ae069cfb-69924cefe2cfb5c1b4af-768.webp 768w, /media/uploads/sqsp_is_the_ux_designer_a_dying_breed_mlfg5_2_b1ae069cfb-c4b4a3a8d73d928418a7-828.webp 828w",
+    "width": 828,
+    "height": 828
+  },
+  "/strapi/uploads/sqsp_is_the_ux_designer_a_dying_breed_mlfg5_hero_70a74ad1f8.jpg": {
+    "source": "/strapi/uploads/sqsp_is_the_ux_designer_a_dying_breed_mlfg5_hero_70a74ad1f8.jpg",
+    "src": "/media/uploads/sqsp_is_the_ux_designer_a_dying_breed_mlfg5_hero_70a74ad1f8-a60ffb152e7cb0fc92a7-1000.webp",
+    "srcSet": "/media/uploads/sqsp_is_the_ux_designer_a_dying_breed_mlfg5_hero_70a74ad1f8-1a98a97ecc51cc7df385-64.webp 64w, /media/uploads/sqsp_is_the_ux_designer_a_dying_breed_mlfg5_hero_70a74ad1f8-7ce2d61b756577b4e8d0-128.webp 128w, /media/uploads/sqsp_is_the_ux_designer_a_dying_breed_mlfg5_hero_70a74ad1f8-34eac2c7bd15d4551bcd-192.webp 192w, /media/uploads/sqsp_is_the_ux_designer_a_dying_breed_mlfg5_hero_70a74ad1f8-e5459d68fd18f07fc682-320.webp 320w, /media/uploads/sqsp_is_the_ux_designer_a_dying_breed_mlfg5_hero_70a74ad1f8-628a6c5e09e204108da1-480.webp 480w, /media/uploads/sqsp_is_the_ux_designer_a_dying_breed_mlfg5_hero_70a74ad1f8-4890c0df2ee4f559edf9-768.webp 768w, /media/uploads/sqsp_is_the_ux_designer_a_dying_breed_mlfg5_hero_70a74ad1f8-a60ffb152e7cb0fc92a7-1000.webp 1000w",
+    "width": 1000,
+    "height": 667
+  },
+  "/strapi/uploads/sqsp_issues_with_packages_1_63ca0242a3.jpg": {
+    "source": "/strapi/uploads/sqsp_issues_with_packages_1_63ca0242a3.jpg",
+    "src": "/media/uploads/sqsp_issues_with_packages_1_63ca0242a3-ee89507582e5a4b3811a-2500.webp",
+    "srcSet": "/media/uploads/sqsp_issues_with_packages_1_63ca0242a3-9e93fbeee7e705461b77-64.webp 64w, /media/uploads/sqsp_issues_with_packages_1_63ca0242a3-5c66e63b8bb2dacf9ad6-128.webp 128w, /media/uploads/sqsp_issues_with_packages_1_63ca0242a3-8b2d248f2e49ade1b048-192.webp 192w, /media/uploads/sqsp_issues_with_packages_1_63ca0242a3-d58fa77e647ee0c925f8-320.webp 320w, /media/uploads/sqsp_issues_with_packages_1_63ca0242a3-bfa24743625d57d8dfdd-480.webp 480w, /media/uploads/sqsp_issues_with_packages_1_63ca0242a3-15c79ca1b6c249fa041a-768.webp 768w, /media/uploads/sqsp_issues_with_packages_1_63ca0242a3-402d70bbe19c558e643c-1200.webp 1200w, /media/uploads/sqsp_issues_with_packages_1_63ca0242a3-55d4c02427acff3c62ec-1600.webp 1600w, /media/uploads/sqsp_issues_with_packages_1_63ca0242a3-1d640dd672d1fb0015a2-1920.webp 1920w, /media/uploads/sqsp_issues_with_packages_1_63ca0242a3-ee89507582e5a4b3811a-2500.webp 2500w",
+    "width": 2500,
+    "height": 1667
+  },
+  "/strapi/uploads/sqsp_issues_with_packages_2_329a52907c.png": {
+    "source": "/strapi/uploads/sqsp_issues_with_packages_2_329a52907c.png",
+    "src": "/media/uploads/sqsp_issues_with_packages_2_329a52907c-5be8cbfb260195b6ae10-1500.webp",
+    "srcSet": "/media/uploads/sqsp_issues_with_packages_2_329a52907c-2d98dade876a2483aeb3-64.webp 64w, /media/uploads/sqsp_issues_with_packages_2_329a52907c-2ddd85411f1c7e3d8248-128.webp 128w, /media/uploads/sqsp_issues_with_packages_2_329a52907c-5584e5d92008bc7f67e8-192.webp 192w, /media/uploads/sqsp_issues_with_packages_2_329a52907c-2103c1648ab1346ea0c9-320.webp 320w, /media/uploads/sqsp_issues_with_packages_2_329a52907c-70cc70989f97362e972e-480.webp 480w, /media/uploads/sqsp_issues_with_packages_2_329a52907c-c3367bfec33f41bd64d5-768.webp 768w, /media/uploads/sqsp_issues_with_packages_2_329a52907c-20843ad05300a376486f-1200.webp 1200w, /media/uploads/sqsp_issues_with_packages_2_329a52907c-5be8cbfb260195b6ae10-1500.webp 1500w",
+    "width": 1500,
+    "height": 900
+  },
+  "/strapi/uploads/sqsp_issues_with_packages_3_fbf1a0f2ef.png": {
+    "source": "/strapi/uploads/sqsp_issues_with_packages_3_fbf1a0f2ef.png",
+    "src": "/media/uploads/sqsp_issues_with_packages_3_fbf1a0f2ef-57c3168d7678ac9b054f-1500.webp",
+    "srcSet": "/media/uploads/sqsp_issues_with_packages_3_fbf1a0f2ef-f9f0d0e1bb2c295bb8ab-64.webp 64w, /media/uploads/sqsp_issues_with_packages_3_fbf1a0f2ef-edc2244fa44c1634a088-128.webp 128w, /media/uploads/sqsp_issues_with_packages_3_fbf1a0f2ef-9310cce34dee3fd49a04-192.webp 192w, /media/uploads/sqsp_issues_with_packages_3_fbf1a0f2ef-922b747aac48ccf32b78-320.webp 320w, /media/uploads/sqsp_issues_with_packages_3_fbf1a0f2ef-c9b9a2cfc93e14164d4b-480.webp 480w, /media/uploads/sqsp_issues_with_packages_3_fbf1a0f2ef-3eeeed339f01bbac7d67-768.webp 768w, /media/uploads/sqsp_issues_with_packages_3_fbf1a0f2ef-0c0acdf3017cf292b88a-1200.webp 1200w, /media/uploads/sqsp_issues_with_packages_3_fbf1a0f2ef-57c3168d7678ac9b054f-1500.webp 1500w",
+    "width": 1500,
+    "height": 900
+  },
+  "/strapi/uploads/sqsp_issues_with_packages_4_4a193ff328.png": {
+    "source": "/strapi/uploads/sqsp_issues_with_packages_4_4a193ff328.png",
+    "src": "/media/uploads/sqsp_issues_with_packages_4_4a193ff328-6a202c83b963f507cca5-1500.webp",
+    "srcSet": "/media/uploads/sqsp_issues_with_packages_4_4a193ff328-add8dc47795a6ca69586-64.webp 64w, /media/uploads/sqsp_issues_with_packages_4_4a193ff328-54eea157b76b8b12fb67-128.webp 128w, /media/uploads/sqsp_issues_with_packages_4_4a193ff328-81135e754aee8337011d-192.webp 192w, /media/uploads/sqsp_issues_with_packages_4_4a193ff328-add749f56c5b18d24889-320.webp 320w, /media/uploads/sqsp_issues_with_packages_4_4a193ff328-eec025dc1404ac089d4c-480.webp 480w, /media/uploads/sqsp_issues_with_packages_4_4a193ff328-dfb08d4c722252374eaf-768.webp 768w, /media/uploads/sqsp_issues_with_packages_4_4a193ff328-e3bbb2e1422265db44a1-1200.webp 1200w, /media/uploads/sqsp_issues_with_packages_4_4a193ff328-6a202c83b963f507cca5-1500.webp 1500w",
+    "width": 1500,
+    "height": 900
+  },
+  "/strapi/uploads/sqsp_issues_with_packages_hero_f702a5700c.jpg": {
+    "source": "/strapi/uploads/sqsp_issues_with_packages_hero_f702a5700c.jpg",
+    "src": "/media/uploads/sqsp_issues_with_packages_hero_f702a5700c-806a7dbe111c1bdefea9-2500.webp",
+    "srcSet": "/media/uploads/sqsp_issues_with_packages_hero_f702a5700c-f191da2a7f3b7f3fc3a0-64.webp 64w, /media/uploads/sqsp_issues_with_packages_hero_f702a5700c-37bedc620def5e26f8e7-128.webp 128w, /media/uploads/sqsp_issues_with_packages_hero_f702a5700c-cb9f1808c902ebcab820-192.webp 192w, /media/uploads/sqsp_issues_with_packages_hero_f702a5700c-b8567d4161ae8a6ee665-320.webp 320w, /media/uploads/sqsp_issues_with_packages_hero_f702a5700c-6fc318fa3c3eb7b06f67-480.webp 480w, /media/uploads/sqsp_issues_with_packages_hero_f702a5700c-38330a9b1c08415dbc1b-768.webp 768w, /media/uploads/sqsp_issues_with_packages_hero_f702a5700c-fb43ce0d796fb640227f-1200.webp 1200w, /media/uploads/sqsp_issues_with_packages_hero_f702a5700c-5c8b03fe1a44ad516586-1600.webp 1600w, /media/uploads/sqsp_issues_with_packages_hero_f702a5700c-1e4e6ef2f7d445bf19fe-1920.webp 1920w, /media/uploads/sqsp_issues_with_packages_hero_f702a5700c-806a7dbe111c1bdefea9-2500.webp 2500w",
+    "width": 2500,
+    "height": 1667
+  },
+  "/strapi/uploads/sqsp_kutatasi_trendek_2025_ben_1_d020ff777b.jpg": {
+    "source": "/strapi/uploads/sqsp_kutatasi_trendek_2025_ben_1_d020ff777b.jpg",
+    "src": "/media/uploads/sqsp_kutatasi_trendek_2025_ben_1_d020ff777b-8d749bb5164bf1110757-2500.webp",
+    "srcSet": "/media/uploads/sqsp_kutatasi_trendek_2025_ben_1_d020ff777b-e001dfa75e72a1247063-64.webp 64w, /media/uploads/sqsp_kutatasi_trendek_2025_ben_1_d020ff777b-da3bf0ef812b9216f5e7-128.webp 128w, /media/uploads/sqsp_kutatasi_trendek_2025_ben_1_d020ff777b-45b21149a630270310cd-192.webp 192w, /media/uploads/sqsp_kutatasi_trendek_2025_ben_1_d020ff777b-d126bf99a37eeae512a4-320.webp 320w, /media/uploads/sqsp_kutatasi_trendek_2025_ben_1_d020ff777b-bab3c4cc102b9af3de2c-480.webp 480w, /media/uploads/sqsp_kutatasi_trendek_2025_ben_1_d020ff777b-7be39a2e75ff7b540068-768.webp 768w, /media/uploads/sqsp_kutatasi_trendek_2025_ben_1_d020ff777b-1a6bb5ac39bc3823965e-1200.webp 1200w, /media/uploads/sqsp_kutatasi_trendek_2025_ben_1_d020ff777b-69caa9d28b3cefae3b0f-1600.webp 1600w, /media/uploads/sqsp_kutatasi_trendek_2025_ben_1_d020ff777b-b7cab85826b33ad1f81a-1920.webp 1920w, /media/uploads/sqsp_kutatasi_trendek_2025_ben_1_d020ff777b-8d749bb5164bf1110757-2500.webp 2500w",
+    "width": 2500,
+    "height": 1667
+  },
+  "/strapi/uploads/sqsp_kutatasi_trendek_2025_ben_2_3548ff3e69.jpg": {
+    "source": "/strapi/uploads/sqsp_kutatasi_trendek_2025_ben_2_3548ff3e69.jpg",
+    "src": "/media/uploads/sqsp_kutatasi_trendek_2025_ben_2_3548ff3e69-b651558266bcfc6a79e3-2500.webp",
+    "srcSet": "/media/uploads/sqsp_kutatasi_trendek_2025_ben_2_3548ff3e69-21e49dd4af6945c3a024-64.webp 64w, /media/uploads/sqsp_kutatasi_trendek_2025_ben_2_3548ff3e69-f24cec25a8edd3ef7531-128.webp 128w, /media/uploads/sqsp_kutatasi_trendek_2025_ben_2_3548ff3e69-bed581bf6890913c4d2f-192.webp 192w, /media/uploads/sqsp_kutatasi_trendek_2025_ben_2_3548ff3e69-675e7db81839182a8eb5-320.webp 320w, /media/uploads/sqsp_kutatasi_trendek_2025_ben_2_3548ff3e69-98e9d5031d3c325500aa-480.webp 480w, /media/uploads/sqsp_kutatasi_trendek_2025_ben_2_3548ff3e69-8590e68259a7f38fa610-768.webp 768w, /media/uploads/sqsp_kutatasi_trendek_2025_ben_2_3548ff3e69-cac142e684187d5b8d37-1200.webp 1200w, /media/uploads/sqsp_kutatasi_trendek_2025_ben_2_3548ff3e69-a441ebe5670dd9f8d01b-1600.webp 1600w, /media/uploads/sqsp_kutatasi_trendek_2025_ben_2_3548ff3e69-7b7b920ca19d855ef371-1920.webp 1920w, /media/uploads/sqsp_kutatasi_trendek_2025_ben_2_3548ff3e69-b651558266bcfc6a79e3-2500.webp 2500w",
+    "width": 2500,
+    "height": 1663
+  },
+  "/strapi/uploads/sqsp_kutatasi_trendek_2025_ben_hero_07ffeaaf8a.jpg": {
+    "source": "/strapi/uploads/sqsp_kutatasi_trendek_2025_ben_hero_07ffeaaf8a.jpg",
+    "src": "/media/uploads/sqsp_kutatasi_trendek_2025_ben_hero_07ffeaaf8a-9f5302a8e8d5ff33005f-2500.webp",
+    "srcSet": "/media/uploads/sqsp_kutatasi_trendek_2025_ben_hero_07ffeaaf8a-b57094540f2b0f26aa9e-64.webp 64w, /media/uploads/sqsp_kutatasi_trendek_2025_ben_hero_07ffeaaf8a-6b12a6b845cdbb527dd8-128.webp 128w, /media/uploads/sqsp_kutatasi_trendek_2025_ben_hero_07ffeaaf8a-82db7926bf1c1cbff3ec-192.webp 192w, /media/uploads/sqsp_kutatasi_trendek_2025_ben_hero_07ffeaaf8a-25e274df756791e04e9a-320.webp 320w, /media/uploads/sqsp_kutatasi_trendek_2025_ben_hero_07ffeaaf8a-91b7e3e96d026be28830-480.webp 480w, /media/uploads/sqsp_kutatasi_trendek_2025_ben_hero_07ffeaaf8a-584fb85e202e2183e23c-768.webp 768w, /media/uploads/sqsp_kutatasi_trendek_2025_ben_hero_07ffeaaf8a-e3d933e69a95cf4531d1-1200.webp 1200w, /media/uploads/sqsp_kutatasi_trendek_2025_ben_hero_07ffeaaf8a-e16cb30ba551e2e5f05d-1600.webp 1600w, /media/uploads/sqsp_kutatasi_trendek_2025_ben_hero_07ffeaaf8a-f80606627217c99d01f6-1920.webp 1920w, /media/uploads/sqsp_kutatasi_trendek_2025_ben_hero_07ffeaaf8a-9f5302a8e8d5ff33005f-2500.webp 2500w",
+    "width": 2500,
+    "height": 1663
+  },
+  "/strapi/uploads/sqsp_messages_during_shipping_1_b138fd0f09.jpg": {
+    "source": "/strapi/uploads/sqsp_messages_during_shipping_1_b138fd0f09.jpg",
+    "src": "/media/uploads/sqsp_messages_during_shipping_1_b138fd0f09-d42d1859f21f5959d27c-1835.webp",
+    "srcSet": "/media/uploads/sqsp_messages_during_shipping_1_b138fd0f09-1fccd23c16f81c1c908a-64.webp 64w, /media/uploads/sqsp_messages_during_shipping_1_b138fd0f09-c473aabb3d4ded9f1036-128.webp 128w, /media/uploads/sqsp_messages_during_shipping_1_b138fd0f09-22aafc6d7d098078af7a-192.webp 192w, /media/uploads/sqsp_messages_during_shipping_1_b138fd0f09-f98080d415c874e84ac0-320.webp 320w, /media/uploads/sqsp_messages_during_shipping_1_b138fd0f09-6287535c48ba5b225bd5-480.webp 480w, /media/uploads/sqsp_messages_during_shipping_1_b138fd0f09-7b70d3a5a70fd0c8549d-768.webp 768w, /media/uploads/sqsp_messages_during_shipping_1_b138fd0f09-b13b9673323011e03b83-1200.webp 1200w, /media/uploads/sqsp_messages_during_shipping_1_b138fd0f09-0d5dd44a21212eb9a849-1600.webp 1600w, /media/uploads/sqsp_messages_during_shipping_1_b138fd0f09-d42d1859f21f5959d27c-1835.webp 1835w",
+    "width": 1835,
+    "height": 1223
+  },
+  "/strapi/uploads/sqsp_messages_during_shipping_2_b64a588ba7.png": {
+    "source": "/strapi/uploads/sqsp_messages_during_shipping_2_b64a588ba7.png",
+    "src": "/media/uploads/sqsp_messages_during_shipping_2_b64a588ba7-23d2831c4bbcfc7bfcda-1500.webp",
+    "srcSet": "/media/uploads/sqsp_messages_during_shipping_2_b64a588ba7-ea20f038596dd1aef2ee-64.webp 64w, /media/uploads/sqsp_messages_during_shipping_2_b64a588ba7-fae8acb2b0cde16c362c-128.webp 128w, /media/uploads/sqsp_messages_during_shipping_2_b64a588ba7-120ed413ed8be4e6f0cc-192.webp 192w, /media/uploads/sqsp_messages_during_shipping_2_b64a588ba7-a929513af9720db66ce9-320.webp 320w, /media/uploads/sqsp_messages_during_shipping_2_b64a588ba7-f3ea10464a52e11c2c61-480.webp 480w, /media/uploads/sqsp_messages_during_shipping_2_b64a588ba7-7ac17ef483393b0162d9-768.webp 768w, /media/uploads/sqsp_messages_during_shipping_2_b64a588ba7-5355fc418b9cd71590b7-1200.webp 1200w, /media/uploads/sqsp_messages_during_shipping_2_b64a588ba7-23d2831c4bbcfc7bfcda-1500.webp 1500w",
+    "width": 1500,
+    "height": 900
+  },
+  "/strapi/uploads/sqsp_messages_during_shipping_3_fce4d0f53f.png": {
+    "source": "/strapi/uploads/sqsp_messages_during_shipping_3_fce4d0f53f.png",
+    "src": "/media/uploads/sqsp_messages_during_shipping_3_fce4d0f53f-01a993818e7147c33506-1500.webp",
+    "srcSet": "/media/uploads/sqsp_messages_during_shipping_3_fce4d0f53f-a965adc6b21a95a13c70-64.webp 64w, /media/uploads/sqsp_messages_during_shipping_3_fce4d0f53f-675ce2d640d82ca48123-128.webp 128w, /media/uploads/sqsp_messages_during_shipping_3_fce4d0f53f-c12cc81b12adaf66ee81-192.webp 192w, /media/uploads/sqsp_messages_during_shipping_3_fce4d0f53f-0edaf6a06f41996b4848-320.webp 320w, /media/uploads/sqsp_messages_during_shipping_3_fce4d0f53f-a00dacb1f0039134bd5d-480.webp 480w, /media/uploads/sqsp_messages_during_shipping_3_fce4d0f53f-62e022d727c1c525bccf-768.webp 768w, /media/uploads/sqsp_messages_during_shipping_3_fce4d0f53f-1a29d4445297956c8d25-1200.webp 1200w, /media/uploads/sqsp_messages_during_shipping_3_fce4d0f53f-01a993818e7147c33506-1500.webp 1500w",
+    "width": 1500,
+    "height": 900
+  },
+  "/strapi/uploads/sqsp_messages_during_shipping_4_afb48c46fe.png": {
+    "source": "/strapi/uploads/sqsp_messages_during_shipping_4_afb48c46fe.png",
+    "src": "/media/uploads/sqsp_messages_during_shipping_4_afb48c46fe-301d895244e8eb585068-1500.webp",
+    "srcSet": "/media/uploads/sqsp_messages_during_shipping_4_afb48c46fe-fb0db6403dd24b29981b-64.webp 64w, /media/uploads/sqsp_messages_during_shipping_4_afb48c46fe-ed2a5513264721fa973d-128.webp 128w, /media/uploads/sqsp_messages_during_shipping_4_afb48c46fe-916cd3f09b80c04e1fdd-192.webp 192w, /media/uploads/sqsp_messages_during_shipping_4_afb48c46fe-51ffe3c9080b174a02d1-320.webp 320w, /media/uploads/sqsp_messages_during_shipping_4_afb48c46fe-eb8caa7f5b877e32b30e-480.webp 480w, /media/uploads/sqsp_messages_during_shipping_4_afb48c46fe-7cec5e8bbe01000cb82c-768.webp 768w, /media/uploads/sqsp_messages_during_shipping_4_afb48c46fe-8fd98991d4cafa6f7977-1200.webp 1200w, /media/uploads/sqsp_messages_during_shipping_4_afb48c46fe-301d895244e8eb585068-1500.webp 1500w",
+    "width": 1500,
+    "height": 900
+  },
+  "/strapi/uploads/sqsp_messages_during_shipping_5_09d205982a.png": {
+    "source": "/strapi/uploads/sqsp_messages_during_shipping_5_09d205982a.png",
+    "src": "/media/uploads/sqsp_messages_during_shipping_5_09d205982a-b8789d381d695094ca31-1500.webp",
+    "srcSet": "/media/uploads/sqsp_messages_during_shipping_5_09d205982a-9d2ff56841267f7d3e92-64.webp 64w, /media/uploads/sqsp_messages_during_shipping_5_09d205982a-4c111d716d12f10344b7-128.webp 128w, /media/uploads/sqsp_messages_during_shipping_5_09d205982a-753637b18068e957c541-192.webp 192w, /media/uploads/sqsp_messages_during_shipping_5_09d205982a-dd3a4db06e7fe07ee005-320.webp 320w, /media/uploads/sqsp_messages_during_shipping_5_09d205982a-c375617f38ec1cc7ccdb-480.webp 480w, /media/uploads/sqsp_messages_during_shipping_5_09d205982a-999b26a58c71e75a2635-768.webp 768w, /media/uploads/sqsp_messages_during_shipping_5_09d205982a-4d4a1f06c73af4e63047-1200.webp 1200w, /media/uploads/sqsp_messages_during_shipping_5_09d205982a-b8789d381d695094ca31-1500.webp 1500w",
+    "width": 1500,
+    "height": 900
+  },
+  "/strapi/uploads/sqsp_messages_during_shipping_hero_cf616ba906.jpg": {
+    "source": "/strapi/uploads/sqsp_messages_during_shipping_hero_cf616ba906.jpg",
+    "src": "/media/uploads/sqsp_messages_during_shipping_hero_cf616ba906-28f4b8d05e15a627c9a4-1920.webp",
+    "srcSet": "/media/uploads/sqsp_messages_during_shipping_hero_cf616ba906-927f03febc5308e412ad-64.webp 64w, /media/uploads/sqsp_messages_during_shipping_hero_cf616ba906-e786beeec51a80e67b5c-128.webp 128w, /media/uploads/sqsp_messages_during_shipping_hero_cf616ba906-f66e48d7fe40bc2788e0-192.webp 192w, /media/uploads/sqsp_messages_during_shipping_hero_cf616ba906-c1772b43533c59ee83a5-320.webp 320w, /media/uploads/sqsp_messages_during_shipping_hero_cf616ba906-777c0e80a9d6f128d834-480.webp 480w, /media/uploads/sqsp_messages_during_shipping_hero_cf616ba906-87efd172878b5a006de7-768.webp 768w, /media/uploads/sqsp_messages_during_shipping_hero_cf616ba906-d1fc75b030fc1306224a-1200.webp 1200w, /media/uploads/sqsp_messages_during_shipping_hero_cf616ba906-10eca351982f7e8490a3-1600.webp 1600w, /media/uploads/sqsp_messages_during_shipping_hero_cf616ba906-28f4b8d05e15a627c9a4-1920.webp 1920w",
+    "width": 1920,
+    "height": 1440
+  },
+  "/strapi/uploads/sqsp_mi_a_kutatas_elokesziteseben_1_9faed93262.png": {
+    "source": "/strapi/uploads/sqsp_mi_a_kutatas_elokesziteseben_1_9faed93262.png",
+    "src": "/media/uploads/sqsp_mi_a_kutatas_elokesziteseben_1_9faed93262-879143f02186393249c6-1920.webp",
+    "srcSet": "/media/uploads/sqsp_mi_a_kutatas_elokesziteseben_1_9faed93262-903aa4d522545bc59fe9-64.webp 64w, /media/uploads/sqsp_mi_a_kutatas_elokesziteseben_1_9faed93262-e4bd13970572b659b592-128.webp 128w, /media/uploads/sqsp_mi_a_kutatas_elokesziteseben_1_9faed93262-44bc104823e03462ca28-192.webp 192w, /media/uploads/sqsp_mi_a_kutatas_elokesziteseben_1_9faed93262-50c1dc7524aadec842c5-320.webp 320w, /media/uploads/sqsp_mi_a_kutatas_elokesziteseben_1_9faed93262-c5958edf67ed3fdbd2ab-480.webp 480w, /media/uploads/sqsp_mi_a_kutatas_elokesziteseben_1_9faed93262-6a5d499c2a6bc4881b7b-768.webp 768w, /media/uploads/sqsp_mi_a_kutatas_elokesziteseben_1_9faed93262-11f8470f10e147bd5d18-1200.webp 1200w, /media/uploads/sqsp_mi_a_kutatas_elokesziteseben_1_9faed93262-1e60f127c0ae567225d9-1600.webp 1600w, /media/uploads/sqsp_mi_a_kutatas_elokesziteseben_1_9faed93262-879143f02186393249c6-1920.webp 1920w",
+    "width": 1920,
+    "height": 1080
+  },
+  "/strapi/uploads/sqsp_mi_a_kutatas_elokesziteseben_2_0fefecf951.png": {
+    "source": "/strapi/uploads/sqsp_mi_a_kutatas_elokesziteseben_2_0fefecf951.png",
+    "src": "/media/uploads/sqsp_mi_a_kutatas_elokesziteseben_2_0fefecf951-c2028855bb77d4f4e3d3-811.webp",
+    "srcSet": "/media/uploads/sqsp_mi_a_kutatas_elokesziteseben_2_0fefecf951-c70ac14a6fcce4dd8db2-64.webp 64w, /media/uploads/sqsp_mi_a_kutatas_elokesziteseben_2_0fefecf951-1b7bcd9a1806bb4fb90a-128.webp 128w, /media/uploads/sqsp_mi_a_kutatas_elokesziteseben_2_0fefecf951-29353180c576c5e4b5a4-192.webp 192w, /media/uploads/sqsp_mi_a_kutatas_elokesziteseben_2_0fefecf951-bb7cf079c4a05acb136a-320.webp 320w, /media/uploads/sqsp_mi_a_kutatas_elokesziteseben_2_0fefecf951-5d1eaa5fb8a5f13e8cd5-480.webp 480w, /media/uploads/sqsp_mi_a_kutatas_elokesziteseben_2_0fefecf951-d1635bea7050135cb287-768.webp 768w, /media/uploads/sqsp_mi_a_kutatas_elokesziteseben_2_0fefecf951-c2028855bb77d4f4e3d3-811.webp 811w",
+    "width": 811,
+    "height": 811
+  },
+  "/strapi/uploads/sqsp_mi_a_kutatas_elokesziteseben_hero_a5df6d262e.png": {
+    "source": "/strapi/uploads/sqsp_mi_a_kutatas_elokesziteseben_hero_a5df6d262e.png",
+    "src": "/media/uploads/sqsp_mi_a_kutatas_elokesziteseben_hero_a5df6d262e-22832f18af4ae879f0f2-1920.webp",
+    "srcSet": "/media/uploads/sqsp_mi_a_kutatas_elokesziteseben_hero_a5df6d262e-d993a487dd090cf8ea1f-64.webp 64w, /media/uploads/sqsp_mi_a_kutatas_elokesziteseben_hero_a5df6d262e-f78d278e7a3a405c2697-128.webp 128w, /media/uploads/sqsp_mi_a_kutatas_elokesziteseben_hero_a5df6d262e-2e3f1fcb0109fa5bdcc7-192.webp 192w, /media/uploads/sqsp_mi_a_kutatas_elokesziteseben_hero_a5df6d262e-a937f1c6f0aa97dcd887-320.webp 320w, /media/uploads/sqsp_mi_a_kutatas_elokesziteseben_hero_a5df6d262e-0cec3669c5f468e2fbe2-480.webp 480w, /media/uploads/sqsp_mi_a_kutatas_elokesziteseben_hero_a5df6d262e-8e4478afccf65961242c-768.webp 768w, /media/uploads/sqsp_mi_a_kutatas_elokesziteseben_hero_a5df6d262e-598d6c1df72903d257ea-1200.webp 1200w, /media/uploads/sqsp_mi_a_kutatas_elokesziteseben_hero_a5df6d262e-01f4ca307c5c22cda53b-1600.webp 1600w, /media/uploads/sqsp_mi_a_kutatas_elokesziteseben_hero_a5df6d262e-22832f18af4ae879f0f2-1920.webp 1920w",
+    "width": 1920,
+    "height": 1080
+  },
+  "/strapi/uploads/sqsp_microinteractions_when_how_and_why_1_a021cf05e7.png": {
+    "source": "/strapi/uploads/sqsp_microinteractions_when_how_and_why_1_a021cf05e7.png",
+    "src": "/media/uploads/sqsp_microinteractions_when_how_and_why_1_a021cf05e7-504a6cda02dcf01b5e90-1920.webp",
+    "srcSet": "/media/uploads/sqsp_microinteractions_when_how_and_why_1_a021cf05e7-a493552fc943c973f5db-64.webp 64w, /media/uploads/sqsp_microinteractions_when_how_and_why_1_a021cf05e7-6d68b0943f716902c176-128.webp 128w, /media/uploads/sqsp_microinteractions_when_how_and_why_1_a021cf05e7-7da8008448ffa31fff45-192.webp 192w, /media/uploads/sqsp_microinteractions_when_how_and_why_1_a021cf05e7-5d9382ea343af82eb365-320.webp 320w, /media/uploads/sqsp_microinteractions_when_how_and_why_1_a021cf05e7-81c84e87dce8498d0256-480.webp 480w, /media/uploads/sqsp_microinteractions_when_how_and_why_1_a021cf05e7-c381f90016f3619911de-768.webp 768w, /media/uploads/sqsp_microinteractions_when_how_and_why_1_a021cf05e7-7f29a25bb505db021419-1200.webp 1200w, /media/uploads/sqsp_microinteractions_when_how_and_why_1_a021cf05e7-f93cab492d5a5919d866-1600.webp 1600w, /media/uploads/sqsp_microinteractions_when_how_and_why_1_a021cf05e7-504a6cda02dcf01b5e90-1920.webp 1920w",
+    "width": 1920,
+    "height": 1080
+  },
+  "/strapi/uploads/sqsp_microinteractions_when_how_and_why_2_e42a99fb72.gif": {
+    "source": "/strapi/uploads/sqsp_microinteractions_when_how_and_why_2_e42a99fb72.gif",
+    "src": "/strapi/uploads/sqsp_microinteractions_when_how_and_why_2_e42a99fb72.gif",
+    "srcSet": "",
+    "width": 928,
+    "height": 640
+  },
+  "/strapi/uploads/sqsp_microinteractions_when_how_and_why_3_cd996e843f.gif": {
+    "source": "/strapi/uploads/sqsp_microinteractions_when_how_and_why_3_cd996e843f.gif",
+    "src": "/strapi/uploads/sqsp_microinteractions_when_how_and_why_3_cd996e843f.gif",
+    "srcSet": "",
+    "width": 600,
+    "height": 450
+  },
+  "/strapi/uploads/sqsp_microinteractions_when_how_and_why_hero_54b13b456f.png": {
+    "source": "/strapi/uploads/sqsp_microinteractions_when_how_and_why_hero_54b13b456f.png",
+    "src": "/media/uploads/sqsp_microinteractions_when_how_and_why_hero_54b13b456f-fe27301f073fcf1e08ca-1920.webp",
+    "srcSet": "/media/uploads/sqsp_microinteractions_when_how_and_why_hero_54b13b456f-4d70c083535f95df75fe-64.webp 64w, /media/uploads/sqsp_microinteractions_when_how_and_why_hero_54b13b456f-545105e50b95e71ba252-128.webp 128w, /media/uploads/sqsp_microinteractions_when_how_and_why_hero_54b13b456f-bae9d61a7f519f643331-192.webp 192w, /media/uploads/sqsp_microinteractions_when_how_and_why_hero_54b13b456f-995f55320134fbc25379-320.webp 320w, /media/uploads/sqsp_microinteractions_when_how_and_why_hero_54b13b456f-9e40f8109a1e777a7cc5-480.webp 480w, /media/uploads/sqsp_microinteractions_when_how_and_why_hero_54b13b456f-621b05b471b95cf279ef-768.webp 768w, /media/uploads/sqsp_microinteractions_when_how_and_why_hero_54b13b456f-a54488bbadc123b02828-1200.webp 1200w, /media/uploads/sqsp_microinteractions_when_how_and_why_hero_54b13b456f-c9ccb03bf528827814ad-1600.webp 1600w, /media/uploads/sqsp_microinteractions_when_how_and_why_hero_54b13b456f-fe27301f073fcf1e08ca-1920.webp 1920w",
+    "width": 1920,
+    "height": 1080
+  },
+  "/strapi/uploads/sqsp_miert_buknak_el_a_cx_kezdemenyezesek_1_d2c3eb4fd4.png": {
+    "source": "/strapi/uploads/sqsp_miert_buknak_el_a_cx_kezdemenyezesek_1_d2c3eb4fd4.png",
+    "src": "/media/uploads/sqsp_miert_buknak_el_a_cx_kezdemenyezesek_1_d2c3eb4fd4-2db6f8dbb49121684574-1024.webp",
+    "srcSet": "/media/uploads/sqsp_miert_buknak_el_a_cx_kezdemenyezesek_1_d2c3eb4fd4-47d9bc1522c07a2d8d22-64.webp 64w, /media/uploads/sqsp_miert_buknak_el_a_cx_kezdemenyezesek_1_d2c3eb4fd4-16e3a08eeb3d542b4916-128.webp 128w, /media/uploads/sqsp_miert_buknak_el_a_cx_kezdemenyezesek_1_d2c3eb4fd4-1edbf73ae84a3709ced6-192.webp 192w, /media/uploads/sqsp_miert_buknak_el_a_cx_kezdemenyezesek_1_d2c3eb4fd4-9ad24f788b56c7825b9f-320.webp 320w, /media/uploads/sqsp_miert_buknak_el_a_cx_kezdemenyezesek_1_d2c3eb4fd4-2eb51c9015e8dfb9da0c-480.webp 480w, /media/uploads/sqsp_miert_buknak_el_a_cx_kezdemenyezesek_1_d2c3eb4fd4-401aa0981e24ac32a493-768.webp 768w, /media/uploads/sqsp_miert_buknak_el_a_cx_kezdemenyezesek_1_d2c3eb4fd4-2db6f8dbb49121684574-1024.webp 1024w",
+    "width": 1024,
+    "height": 768
+  },
+  "/strapi/uploads/sqsp_miert_buknak_el_a_cx_kezdemenyezesek_hero_d6a2aec96e.png": {
+    "source": "/strapi/uploads/sqsp_miert_buknak_el_a_cx_kezdemenyezesek_hero_d6a2aec96e.png",
+    "src": "/media/uploads/sqsp_miert_buknak_el_a_cx_kezdemenyezesek_hero_d6a2aec96e-e797eef96e3748441cea-1024.webp",
+    "srcSet": "/media/uploads/sqsp_miert_buknak_el_a_cx_kezdemenyezesek_hero_d6a2aec96e-019ad5b27c2fb41e301d-64.webp 64w, /media/uploads/sqsp_miert_buknak_el_a_cx_kezdemenyezesek_hero_d6a2aec96e-817f4b48cfdd1ab3b071-128.webp 128w, /media/uploads/sqsp_miert_buknak_el_a_cx_kezdemenyezesek_hero_d6a2aec96e-c1d07c063a9c4e1649e4-192.webp 192w, /media/uploads/sqsp_miert_buknak_el_a_cx_kezdemenyezesek_hero_d6a2aec96e-0f9c55fa5560cc73545c-320.webp 320w, /media/uploads/sqsp_miert_buknak_el_a_cx_kezdemenyezesek_hero_d6a2aec96e-82c805b9318ee42fd47c-480.webp 480w, /media/uploads/sqsp_miert_buknak_el_a_cx_kezdemenyezesek_hero_d6a2aec96e-56c6e02eb4bb49c23907-768.webp 768w, /media/uploads/sqsp_miert_buknak_el_a_cx_kezdemenyezesek_hero_d6a2aec96e-e797eef96e3748441cea-1024.webp 1024w",
+    "width": 1024,
+    "height": 768
+  },
+  "/strapi/uploads/sqsp_miert_fontosak_a_ceges_ertekek_1_c644945eca.jpeg": {
+    "source": "/strapi/uploads/sqsp_miert_fontosak_a_ceges_ertekek_1_c644945eca.jpeg",
+    "src": "/media/uploads/sqsp_miert_fontosak_a_ceges_ertekek_1_c644945eca-319f47a52f957e51a781-2500.webp",
+    "srcSet": "/media/uploads/sqsp_miert_fontosak_a_ceges_ertekek_1_c644945eca-7c0c7a4db9c194f4962b-64.webp 64w, /media/uploads/sqsp_miert_fontosak_a_ceges_ertekek_1_c644945eca-74b9b34493dbd4edba1b-128.webp 128w, /media/uploads/sqsp_miert_fontosak_a_ceges_ertekek_1_c644945eca-01adcaa4e4ed05c36c3b-192.webp 192w, /media/uploads/sqsp_miert_fontosak_a_ceges_ertekek_1_c644945eca-a7196696c34878f4984a-320.webp 320w, /media/uploads/sqsp_miert_fontosak_a_ceges_ertekek_1_c644945eca-52ffc885b06e0d8a5cd7-480.webp 480w, /media/uploads/sqsp_miert_fontosak_a_ceges_ertekek_1_c644945eca-610d42eb9b3f9c7e013b-768.webp 768w, /media/uploads/sqsp_miert_fontosak_a_ceges_ertekek_1_c644945eca-bc15ab2c3832c8bc8b1a-1200.webp 1200w, /media/uploads/sqsp_miert_fontosak_a_ceges_ertekek_1_c644945eca-af0dbe90e7b8253f7dd3-1600.webp 1600w, /media/uploads/sqsp_miert_fontosak_a_ceges_ertekek_1_c644945eca-812d026ba198a6118d33-1920.webp 1920w, /media/uploads/sqsp_miert_fontosak_a_ceges_ertekek_1_c644945eca-319f47a52f957e51a781-2500.webp 2500w",
+    "width": 2500,
+    "height": 1406
+  },
+  "/strapi/uploads/sqsp_miert_fontosak_a_ceges_ertekek_2_8259841311.png": {
+    "source": "/strapi/uploads/sqsp_miert_fontosak_a_ceges_ertekek_2_8259841311.png",
+    "src": "/media/uploads/sqsp_miert_fontosak_a_ceges_ertekek_2_8259841311-6b35830292dac9cd3cbf-1500.webp",
+    "srcSet": "/media/uploads/sqsp_miert_fontosak_a_ceges_ertekek_2_8259841311-ddd003961d344757537d-64.webp 64w, /media/uploads/sqsp_miert_fontosak_a_ceges_ertekek_2_8259841311-523da4518aa80e20fe8d-128.webp 128w, /media/uploads/sqsp_miert_fontosak_a_ceges_ertekek_2_8259841311-c28ccf4275a875fbaa48-192.webp 192w, /media/uploads/sqsp_miert_fontosak_a_ceges_ertekek_2_8259841311-d77d289d69a880b8b789-320.webp 320w, /media/uploads/sqsp_miert_fontosak_a_ceges_ertekek_2_8259841311-8a1fb1c5062a74aab0f5-480.webp 480w, /media/uploads/sqsp_miert_fontosak_a_ceges_ertekek_2_8259841311-750b1bba790cb0514aa5-768.webp 768w, /media/uploads/sqsp_miert_fontosak_a_ceges_ertekek_2_8259841311-31a7b2dd84754b041a90-1200.webp 1200w, /media/uploads/sqsp_miert_fontosak_a_ceges_ertekek_2_8259841311-6b35830292dac9cd3cbf-1500.webp 1500w",
+    "width": 1500,
+    "height": 915
+  },
+  "/strapi/uploads/sqsp_miert_fontosak_a_ceges_ertekek_hero_db4d31bc85.png": {
+    "source": "/strapi/uploads/sqsp_miert_fontosak_a_ceges_ertekek_hero_db4d31bc85.png",
+    "src": "/media/uploads/sqsp_miert_fontosak_a_ceges_ertekek_hero_db4d31bc85-7397af22f770b37b0b3c-2000.webp",
+    "srcSet": "/media/uploads/sqsp_miert_fontosak_a_ceges_ertekek_hero_db4d31bc85-cb2497e4c2bc045625fe-64.webp 64w, /media/uploads/sqsp_miert_fontosak_a_ceges_ertekek_hero_db4d31bc85-6271bb10781313f8f17d-128.webp 128w, /media/uploads/sqsp_miert_fontosak_a_ceges_ertekek_hero_db4d31bc85-31531a0231e222738abe-192.webp 192w, /media/uploads/sqsp_miert_fontosak_a_ceges_ertekek_hero_db4d31bc85-a7a211dbf6a5768942a6-320.webp 320w, /media/uploads/sqsp_miert_fontosak_a_ceges_ertekek_hero_db4d31bc85-5ff4eaff0f15589600b5-480.webp 480w, /media/uploads/sqsp_miert_fontosak_a_ceges_ertekek_hero_db4d31bc85-79a1807552e30b384df0-768.webp 768w, /media/uploads/sqsp_miert_fontosak_a_ceges_ertekek_hero_db4d31bc85-c7a427b90cdbc9674f10-1200.webp 1200w, /media/uploads/sqsp_miert_fontosak_a_ceges_ertekek_hero_db4d31bc85-3ed8b33f75d0abded909-1600.webp 1600w, /media/uploads/sqsp_miert_fontosak_a_ceges_ertekek_hero_db4d31bc85-6a5c5da19985c78f0571-1920.webp 1920w, /media/uploads/sqsp_miert_fontosak_a_ceges_ertekek_hero_db4d31bc85-7397af22f770b37b0b3c-2000.webp 2000w",
+    "width": 2000,
+    "height": 1220
+  },
+  "/strapi/uploads/sqsp_milyen_digitalis_akadalymentesitesi_szolgaltatasra_van_szukseged_1_72344805d9.jpg": {
+    "source": "/strapi/uploads/sqsp_milyen_digitalis_akadalymentesitesi_szolgaltatasra_van_szukseged_1_72344805d9.jpg",
+    "src": "/media/uploads/sqsp_milyen_digitalis_akadalymentesitesi_szolgaltatasra_van_szukseged_1_72344805d9-ffdea4c0bb33b4005fa3-1280.webp",
+    "srcSet": "/media/uploads/sqsp_milyen_digitalis_akadalymentesitesi_szolgaltatasra_van_szukseged_1_72344805d9-414e40c4ae4adc955c19-64.webp 64w, /media/uploads/sqsp_milyen_digitalis_akadalymentesitesi_szolgaltatasra_van_szukseged_1_72344805d9-e152c584aa4c3cad8a21-128.webp 128w, /media/uploads/sqsp_milyen_digitalis_akadalymentesitesi_szolgaltatasra_van_szukseged_1_72344805d9-7ae4281c019c084de979-192.webp 192w, /media/uploads/sqsp_milyen_digitalis_akadalymentesitesi_szolgaltatasra_van_szukseged_1_72344805d9-f44b39f695c578371e99-320.webp 320w, /media/uploads/sqsp_milyen_digitalis_akadalymentesitesi_szolgaltatasra_van_szukseged_1_72344805d9-54e09bd23fa2da6ab845-480.webp 480w, /media/uploads/sqsp_milyen_digitalis_akadalymentesitesi_szolgaltatasra_van_szukseged_1_72344805d9-2887c068cf20ce4eefbd-768.webp 768w, /media/uploads/sqsp_milyen_digitalis_akadalymentesitesi_szolgaltatasra_van_szukseged_1_72344805d9-16acbb7c7081f5bc204a-1200.webp 1200w, /media/uploads/sqsp_milyen_digitalis_akadalymentesitesi_szolgaltatasra_van_szukseged_1_72344805d9-ffdea4c0bb33b4005fa3-1280.webp 1280w",
+    "width": 1280,
+    "height": 960
+  },
+  "/strapi/uploads/sqsp_milyen_digitalis_akadalymentesitesi_szolgaltatasra_van_szukseged_2_d96a189485.jpg": {
+    "source": "/strapi/uploads/sqsp_milyen_digitalis_akadalymentesitesi_szolgaltatasra_van_szukseged_2_d96a189485.jpg",
+    "src": "/media/uploads/sqsp_milyen_digitalis_akadalymentesitesi_szolgaltatasra_van_szukseged_2_d96a189485-98456220dc44dcb831a4-1920.webp",
+    "srcSet": "/media/uploads/sqsp_milyen_digitalis_akadalymentesitesi_szolgaltatasra_van_szukseged_2_d96a189485-861d44d981a36dd4eeb1-64.webp 64w, /media/uploads/sqsp_milyen_digitalis_akadalymentesitesi_szolgaltatasra_van_szukseged_2_d96a189485-4aaea3f41f8daba31640-128.webp 128w, /media/uploads/sqsp_milyen_digitalis_akadalymentesitesi_szolgaltatasra_van_szukseged_2_d96a189485-3c4c175e7f3272a4416e-192.webp 192w, /media/uploads/sqsp_milyen_digitalis_akadalymentesitesi_szolgaltatasra_van_szukseged_2_d96a189485-e662ca91f0291ec5f84c-320.webp 320w, /media/uploads/sqsp_milyen_digitalis_akadalymentesitesi_szolgaltatasra_van_szukseged_2_d96a189485-a308dd646abc5beab7e7-480.webp 480w, /media/uploads/sqsp_milyen_digitalis_akadalymentesitesi_szolgaltatasra_van_szukseged_2_d96a189485-d5f35378b9891f139820-768.webp 768w, /media/uploads/sqsp_milyen_digitalis_akadalymentesitesi_szolgaltatasra_van_szukseged_2_d96a189485-2698b3bf6073a91ded06-1200.webp 1200w, /media/uploads/sqsp_milyen_digitalis_akadalymentesitesi_szolgaltatasra_van_szukseged_2_d96a189485-cdd0b763c949d54ea5c4-1600.webp 1600w, /media/uploads/sqsp_milyen_digitalis_akadalymentesitesi_szolgaltatasra_van_szukseged_2_d96a189485-98456220dc44dcb831a4-1920.webp 1920w",
+    "width": 1920,
+    "height": 1080
+  },
+  "/strapi/uploads/sqsp_milyen_digitalis_akadalymentesitesi_szolgaltatasra_van_szukseged_hero_a5004807fe.jpg": {
+    "source": "/strapi/uploads/sqsp_milyen_digitalis_akadalymentesitesi_szolgaltatasra_van_szukseged_hero_a5004807fe.jpg",
+    "src": "/media/uploads/sqsp_milyen_digitalis_akadalymentesitesi_szolgaltatasra_van_szukseged_hero_a5004807fe-704d7e0400d681a69d67-1280.webp",
+    "srcSet": "/media/uploads/sqsp_milyen_digitalis_akadalymentesitesi_szolgaltatasra_van_szukseged_hero_a5004807fe-6450479eccb24d73bdf2-64.webp 64w, /media/uploads/sqsp_milyen_digitalis_akadalymentesitesi_szolgaltatasra_van_szukseged_hero_a5004807fe-19a9f47589fe0e915d3d-128.webp 128w, /media/uploads/sqsp_milyen_digitalis_akadalymentesitesi_szolgaltatasra_van_szukseged_hero_a5004807fe-2d5738e333f3be2dc9c7-192.webp 192w, /media/uploads/sqsp_milyen_digitalis_akadalymentesitesi_szolgaltatasra_van_szukseged_hero_a5004807fe-e1263ade18324fe8f134-320.webp 320w, /media/uploads/sqsp_milyen_digitalis_akadalymentesitesi_szolgaltatasra_van_szukseged_hero_a5004807fe-cd0e236c186d467c404d-480.webp 480w, /media/uploads/sqsp_milyen_digitalis_akadalymentesitesi_szolgaltatasra_van_szukseged_hero_a5004807fe-f5021c677e89cb9f7f15-768.webp 768w, /media/uploads/sqsp_milyen_digitalis_akadalymentesitesi_szolgaltatasra_van_szukseged_hero_a5004807fe-55f32f0c46d2c554d440-1200.webp 1200w, /media/uploads/sqsp_milyen_digitalis_akadalymentesitesi_szolgaltatasra_van_szukseged_hero_a5004807fe-704d7e0400d681a69d67-1280.webp 1280w",
+    "width": 1280,
+    "height": 960
+  },
+  "/strapi/uploads/sqsp_nalunk_a_munkatarsak_a_sztarok_1_7643e4c21e.jpeg": {
+    "source": "/strapi/uploads/sqsp_nalunk_a_munkatarsak_a_sztarok_1_7643e4c21e.jpeg",
+    "src": "/media/uploads/sqsp_nalunk_a_munkatarsak_a_sztarok_1_7643e4c21e-0d5f146381b264ff7a89-2500.webp",
+    "srcSet": "/media/uploads/sqsp_nalunk_a_munkatarsak_a_sztarok_1_7643e4c21e-db3e6db727131a948f9f-64.webp 64w, /media/uploads/sqsp_nalunk_a_munkatarsak_a_sztarok_1_7643e4c21e-015a25a992a948bd1a05-128.webp 128w, /media/uploads/sqsp_nalunk_a_munkatarsak_a_sztarok_1_7643e4c21e-1dfb59d98a0fe4a95991-192.webp 192w, /media/uploads/sqsp_nalunk_a_munkatarsak_a_sztarok_1_7643e4c21e-37ed10630f16ca123dc8-320.webp 320w, /media/uploads/sqsp_nalunk_a_munkatarsak_a_sztarok_1_7643e4c21e-075f9bae8ca8494bfef1-480.webp 480w, /media/uploads/sqsp_nalunk_a_munkatarsak_a_sztarok_1_7643e4c21e-858e5e1fef0d38eb05c6-768.webp 768w, /media/uploads/sqsp_nalunk_a_munkatarsak_a_sztarok_1_7643e4c21e-33fb14d8bc22164c93ea-1200.webp 1200w, /media/uploads/sqsp_nalunk_a_munkatarsak_a_sztarok_1_7643e4c21e-1ec8d40d9c0afb3d10a9-1600.webp 1600w, /media/uploads/sqsp_nalunk_a_munkatarsak_a_sztarok_1_7643e4c21e-3c91861669af64c977a5-1920.webp 1920w, /media/uploads/sqsp_nalunk_a_munkatarsak_a_sztarok_1_7643e4c21e-0d5f146381b264ff7a89-2500.webp 2500w",
+    "width": 2500,
+    "height": 1406
+  },
+  "/strapi/uploads/sqsp_nalunk_a_munkatarsak_a_sztarok_2_0596026770.jpeg": {
+    "source": "/strapi/uploads/sqsp_nalunk_a_munkatarsak_a_sztarok_2_0596026770.jpeg",
+    "src": "/media/uploads/sqsp_nalunk_a_munkatarsak_a_sztarok_2_0596026770-b4b65811a25b661dbcbd-2500.webp",
+    "srcSet": "/media/uploads/sqsp_nalunk_a_munkatarsak_a_sztarok_2_0596026770-2410f5cfc6e534146c1e-64.webp 64w, /media/uploads/sqsp_nalunk_a_munkatarsak_a_sztarok_2_0596026770-fa5ccced3436d10fc38c-128.webp 128w, /media/uploads/sqsp_nalunk_a_munkatarsak_a_sztarok_2_0596026770-d26f5658f760ebed9091-192.webp 192w, /media/uploads/sqsp_nalunk_a_munkatarsak_a_sztarok_2_0596026770-b7637c80000af6a34a43-320.webp 320w, /media/uploads/sqsp_nalunk_a_munkatarsak_a_sztarok_2_0596026770-f3bc8d7efbc8b287149b-480.webp 480w, /media/uploads/sqsp_nalunk_a_munkatarsak_a_sztarok_2_0596026770-71ed0c41bc21bf1a202c-768.webp 768w, /media/uploads/sqsp_nalunk_a_munkatarsak_a_sztarok_2_0596026770-124bf076ac065b4ad50c-1200.webp 1200w, /media/uploads/sqsp_nalunk_a_munkatarsak_a_sztarok_2_0596026770-c1c1bd00848a4dcc7fae-1600.webp 1600w, /media/uploads/sqsp_nalunk_a_munkatarsak_a_sztarok_2_0596026770-dbb87523007bba5f0917-1920.webp 1920w, /media/uploads/sqsp_nalunk_a_munkatarsak_a_sztarok_2_0596026770-b4b65811a25b661dbcbd-2500.webp 2500w",
+    "width": 2500,
+    "height": 1876
+  },
+  "/strapi/uploads/sqsp_nalunk_a_munkatarsak_a_sztarok_3_2d9ddcd34b.jpeg": {
+    "source": "/strapi/uploads/sqsp_nalunk_a_munkatarsak_a_sztarok_3_2d9ddcd34b.jpeg",
+    "src": "/media/uploads/sqsp_nalunk_a_munkatarsak_a_sztarok_3_2d9ddcd34b-5f763ff33da57988d415-2500.webp",
+    "srcSet": "/media/uploads/sqsp_nalunk_a_munkatarsak_a_sztarok_3_2d9ddcd34b-662712dafcbe60e94e49-64.webp 64w, /media/uploads/sqsp_nalunk_a_munkatarsak_a_sztarok_3_2d9ddcd34b-956250e29312f0889aef-128.webp 128w, /media/uploads/sqsp_nalunk_a_munkatarsak_a_sztarok_3_2d9ddcd34b-39421133efe223730ec9-192.webp 192w, /media/uploads/sqsp_nalunk_a_munkatarsak_a_sztarok_3_2d9ddcd34b-67caa64ddc935ddfd686-320.webp 320w, /media/uploads/sqsp_nalunk_a_munkatarsak_a_sztarok_3_2d9ddcd34b-455c8b76149369eec249-480.webp 480w, /media/uploads/sqsp_nalunk_a_munkatarsak_a_sztarok_3_2d9ddcd34b-b2f3c5e49bc74fb51fa3-768.webp 768w, /media/uploads/sqsp_nalunk_a_munkatarsak_a_sztarok_3_2d9ddcd34b-c5f705860c6eb3066834-1200.webp 1200w, /media/uploads/sqsp_nalunk_a_munkatarsak_a_sztarok_3_2d9ddcd34b-ff7530a859a35dcc7149-1600.webp 1600w, /media/uploads/sqsp_nalunk_a_munkatarsak_a_sztarok_3_2d9ddcd34b-724cf97835ecf67136a8-1920.webp 1920w, /media/uploads/sqsp_nalunk_a_munkatarsak_a_sztarok_3_2d9ddcd34b-5f763ff33da57988d415-2500.webp 2500w",
+    "width": 2500,
+    "height": 1875
+  },
+  "/strapi/uploads/sqsp_nalunk_a_munkatarsak_a_sztarok_4_3ba759611a.jpeg": {
+    "source": "/strapi/uploads/sqsp_nalunk_a_munkatarsak_a_sztarok_4_3ba759611a.jpeg",
+    "src": "/media/uploads/sqsp_nalunk_a_munkatarsak_a_sztarok_4_3ba759611a-19b3535e6886d3aa5a22-2500.webp",
+    "srcSet": "/media/uploads/sqsp_nalunk_a_munkatarsak_a_sztarok_4_3ba759611a-84bec8c3a5e13a6cb618-64.webp 64w, /media/uploads/sqsp_nalunk_a_munkatarsak_a_sztarok_4_3ba759611a-2eaa85f02f619dbeae9b-128.webp 128w, /media/uploads/sqsp_nalunk_a_munkatarsak_a_sztarok_4_3ba759611a-a5e904dc97819f143751-192.webp 192w, /media/uploads/sqsp_nalunk_a_munkatarsak_a_sztarok_4_3ba759611a-dcb3bc4b4d5f3e8fbb8a-320.webp 320w, /media/uploads/sqsp_nalunk_a_munkatarsak_a_sztarok_4_3ba759611a-623441a2e0d35b5294fe-480.webp 480w, /media/uploads/sqsp_nalunk_a_munkatarsak_a_sztarok_4_3ba759611a-e0d550059b7f36953783-768.webp 768w, /media/uploads/sqsp_nalunk_a_munkatarsak_a_sztarok_4_3ba759611a-924d48e35e365ef97041-1200.webp 1200w, /media/uploads/sqsp_nalunk_a_munkatarsak_a_sztarok_4_3ba759611a-ee0baab53bfe73163f3c-1600.webp 1600w, /media/uploads/sqsp_nalunk_a_munkatarsak_a_sztarok_4_3ba759611a-79f8906a707657e3711f-1920.webp 1920w, /media/uploads/sqsp_nalunk_a_munkatarsak_a_sztarok_4_3ba759611a-19b3535e6886d3aa5a22-2500.webp 2500w",
+    "width": 2500,
+    "height": 1875
+  },
+  "/strapi/uploads/sqsp_nalunk_a_munkatarsak_a_sztarok_5_5c791b74aa.jpeg": {
+    "source": "/strapi/uploads/sqsp_nalunk_a_munkatarsak_a_sztarok_5_5c791b74aa.jpeg",
+    "src": "/media/uploads/sqsp_nalunk_a_munkatarsak_a_sztarok_5_5c791b74aa-6a4aaf6b590a2327da05-2500.webp",
+    "srcSet": "/media/uploads/sqsp_nalunk_a_munkatarsak_a_sztarok_5_5c791b74aa-c010d24afe9d3d9ffc29-64.webp 64w, /media/uploads/sqsp_nalunk_a_munkatarsak_a_sztarok_5_5c791b74aa-31013dd7b141f6ef689d-128.webp 128w, /media/uploads/sqsp_nalunk_a_munkatarsak_a_sztarok_5_5c791b74aa-4bcde318702793d989ef-192.webp 192w, /media/uploads/sqsp_nalunk_a_munkatarsak_a_sztarok_5_5c791b74aa-12271ef3bacdf7986158-320.webp 320w, /media/uploads/sqsp_nalunk_a_munkatarsak_a_sztarok_5_5c791b74aa-86d20ef5ffed03b2394a-480.webp 480w, /media/uploads/sqsp_nalunk_a_munkatarsak_a_sztarok_5_5c791b74aa-31c56b8b72962f44d3e1-768.webp 768w, /media/uploads/sqsp_nalunk_a_munkatarsak_a_sztarok_5_5c791b74aa-f625395e29b6302090bc-1200.webp 1200w, /media/uploads/sqsp_nalunk_a_munkatarsak_a_sztarok_5_5c791b74aa-7712507b4381efd2027d-1600.webp 1600w, /media/uploads/sqsp_nalunk_a_munkatarsak_a_sztarok_5_5c791b74aa-6cf52fddb3dd56f8ce02-1920.webp 1920w, /media/uploads/sqsp_nalunk_a_munkatarsak_a_sztarok_5_5c791b74aa-6a4aaf6b590a2327da05-2500.webp 2500w",
+    "width": 2500,
+    "height": 1875
+  },
+  "/strapi/uploads/sqsp_nalunk_a_munkatarsak_a_sztarok_hero_cd07bc72b2.jpeg": {
+    "source": "/strapi/uploads/sqsp_nalunk_a_munkatarsak_a_sztarok_hero_cd07bc72b2.jpeg",
+    "src": "/media/uploads/sqsp_nalunk_a_munkatarsak_a_sztarok_hero_cd07bc72b2-1384762bbe287f850c4c-2500.webp",
+    "srcSet": "/media/uploads/sqsp_nalunk_a_munkatarsak_a_sztarok_hero_cd07bc72b2-eff9bd7eac9b18b4d8ce-64.webp 64w, /media/uploads/sqsp_nalunk_a_munkatarsak_a_sztarok_hero_cd07bc72b2-b3276c0d267a1203596b-128.webp 128w, /media/uploads/sqsp_nalunk_a_munkatarsak_a_sztarok_hero_cd07bc72b2-e2110d7a63a34747855d-192.webp 192w, /media/uploads/sqsp_nalunk_a_munkatarsak_a_sztarok_hero_cd07bc72b2-9323d46dc7a0a679478b-320.webp 320w, /media/uploads/sqsp_nalunk_a_munkatarsak_a_sztarok_hero_cd07bc72b2-a01d89dd767447d04808-480.webp 480w, /media/uploads/sqsp_nalunk_a_munkatarsak_a_sztarok_hero_cd07bc72b2-78a95e3818276e2326a0-768.webp 768w, /media/uploads/sqsp_nalunk_a_munkatarsak_a_sztarok_hero_cd07bc72b2-2255a0b5e3e23addf11f-1200.webp 1200w, /media/uploads/sqsp_nalunk_a_munkatarsak_a_sztarok_hero_cd07bc72b2-e33a3e658a1a24d22f03-1600.webp 1600w, /media/uploads/sqsp_nalunk_a_munkatarsak_a_sztarok_hero_cd07bc72b2-c6f7bb2e6390ebdda528-1920.webp 1920w, /media/uploads/sqsp_nalunk_a_munkatarsak_a_sztarok_hero_cd07bc72b2-1384762bbe287f850c4c-2500.webp 2500w",
+    "width": 2500,
+    "height": 1406
+  },
+  "/strapi/uploads/sqsp_shipping_and_receiving_1_e11a2d6d68.jpg": {
+    "source": "/strapi/uploads/sqsp_shipping_and_receiving_1_e11a2d6d68.jpg",
+    "src": "/media/uploads/sqsp_shipping_and_receiving_1_e11a2d6d68-9c92405fda74f4f7cc2f-2500.webp",
+    "srcSet": "/media/uploads/sqsp_shipping_and_receiving_1_e11a2d6d68-17a12415f1178dabe2fc-64.webp 64w, /media/uploads/sqsp_shipping_and_receiving_1_e11a2d6d68-9560acd7a20c088a7090-128.webp 128w, /media/uploads/sqsp_shipping_and_receiving_1_e11a2d6d68-7481e0e652f15b3ac3ed-192.webp 192w, /media/uploads/sqsp_shipping_and_receiving_1_e11a2d6d68-a6aae718e3059b1727e1-320.webp 320w, /media/uploads/sqsp_shipping_and_receiving_1_e11a2d6d68-405636cba7253f5460fa-480.webp 480w, /media/uploads/sqsp_shipping_and_receiving_1_e11a2d6d68-548be3eb02f0a1260fd7-768.webp 768w, /media/uploads/sqsp_shipping_and_receiving_1_e11a2d6d68-7a87752bf94183a9d279-1200.webp 1200w, /media/uploads/sqsp_shipping_and_receiving_1_e11a2d6d68-7071588983786ec17653-1600.webp 1600w, /media/uploads/sqsp_shipping_and_receiving_1_e11a2d6d68-dab3f1063e00199cc866-1920.webp 1920w, /media/uploads/sqsp_shipping_and_receiving_1_e11a2d6d68-9c92405fda74f4f7cc2f-2500.webp 2500w",
+    "width": 2500,
+    "height": 1668
+  },
+  "/strapi/uploads/sqsp_shipping_and_receiving_2_b3515d18f8.jpg": {
+    "source": "/strapi/uploads/sqsp_shipping_and_receiving_2_b3515d18f8.jpg",
+    "src": "/media/uploads/sqsp_shipping_and_receiving_2_b3515d18f8-5bb548231fe0f22c368f-1500.webp",
+    "srcSet": "/media/uploads/sqsp_shipping_and_receiving_2_b3515d18f8-eb366c7bc69a244a6b12-64.webp 64w, /media/uploads/sqsp_shipping_and_receiving_2_b3515d18f8-61ea546da86c571109ba-128.webp 128w, /media/uploads/sqsp_shipping_and_receiving_2_b3515d18f8-5e94c58ba7265097d8ea-192.webp 192w, /media/uploads/sqsp_shipping_and_receiving_2_b3515d18f8-b575e1cb596a5498d28d-320.webp 320w, /media/uploads/sqsp_shipping_and_receiving_2_b3515d18f8-13c4057e552fe5e8515c-480.webp 480w, /media/uploads/sqsp_shipping_and_receiving_2_b3515d18f8-d9d03ced447d75007590-768.webp 768w, /media/uploads/sqsp_shipping_and_receiving_2_b3515d18f8-ed00c1b10b01104b5bbd-1200.webp 1200w, /media/uploads/sqsp_shipping_and_receiving_2_b3515d18f8-5bb548231fe0f22c368f-1500.webp 1500w",
+    "width": 1500,
+    "height": 900
+  },
+  "/strapi/uploads/sqsp_shipping_and_receiving_3_fc45f027f5.jpg": {
+    "source": "/strapi/uploads/sqsp_shipping_and_receiving_3_fc45f027f5.jpg",
+    "src": "/media/uploads/sqsp_shipping_and_receiving_3_fc45f027f5-d884e8b870429c2bee7e-1500.webp",
+    "srcSet": "/media/uploads/sqsp_shipping_and_receiving_3_fc45f027f5-8d7104e91171109c388f-64.webp 64w, /media/uploads/sqsp_shipping_and_receiving_3_fc45f027f5-3064b64dda7ccbf8adc2-128.webp 128w, /media/uploads/sqsp_shipping_and_receiving_3_fc45f027f5-3df58a9eaa2e5a33ebed-192.webp 192w, /media/uploads/sqsp_shipping_and_receiving_3_fc45f027f5-4e3785642babb9b38f41-320.webp 320w, /media/uploads/sqsp_shipping_and_receiving_3_fc45f027f5-9bd6bef727432108faed-480.webp 480w, /media/uploads/sqsp_shipping_and_receiving_3_fc45f027f5-cd1207b32eaea5a8477b-768.webp 768w, /media/uploads/sqsp_shipping_and_receiving_3_fc45f027f5-e5d8a8e589e5644d9678-1200.webp 1200w, /media/uploads/sqsp_shipping_and_receiving_3_fc45f027f5-d884e8b870429c2bee7e-1500.webp 1500w",
+    "width": 1500,
+    "height": 900
+  },
+  "/strapi/uploads/sqsp_shipping_and_receiving_4_b3b381c3ec.jpg": {
+    "source": "/strapi/uploads/sqsp_shipping_and_receiving_4_b3b381c3ec.jpg",
+    "src": "/media/uploads/sqsp_shipping_and_receiving_4_b3b381c3ec-2cc3127dcbe3799618a7-1500.webp",
+    "srcSet": "/media/uploads/sqsp_shipping_and_receiving_4_b3b381c3ec-fddc8e381d14861bdb4d-64.webp 64w, /media/uploads/sqsp_shipping_and_receiving_4_b3b381c3ec-049e9ae57a8024868b4e-128.webp 128w, /media/uploads/sqsp_shipping_and_receiving_4_b3b381c3ec-a54f41576d97088a3b48-192.webp 192w, /media/uploads/sqsp_shipping_and_receiving_4_b3b381c3ec-c2ae5c581dc9608ed506-320.webp 320w, /media/uploads/sqsp_shipping_and_receiving_4_b3b381c3ec-9dbd4447e4cf37baa29d-480.webp 480w, /media/uploads/sqsp_shipping_and_receiving_4_b3b381c3ec-72a0bc98d6e9025d9190-768.webp 768w, /media/uploads/sqsp_shipping_and_receiving_4_b3b381c3ec-3beb5125e1a0f613de38-1200.webp 1200w, /media/uploads/sqsp_shipping_and_receiving_4_b3b381c3ec-2cc3127dcbe3799618a7-1500.webp 1500w",
+    "width": 1500,
+    "height": 900
+  },
+  "/strapi/uploads/sqsp_shipping_and_receiving_5_656fa398f8.jpg": {
+    "source": "/strapi/uploads/sqsp_shipping_and_receiving_5_656fa398f8.jpg",
+    "src": "/media/uploads/sqsp_shipping_and_receiving_5_656fa398f8-a327790679df16c7d83d-1500.webp",
+    "srcSet": "/media/uploads/sqsp_shipping_and_receiving_5_656fa398f8-7fec4c51db0566973749-64.webp 64w, /media/uploads/sqsp_shipping_and_receiving_5_656fa398f8-046643c80cafb36fc559-128.webp 128w, /media/uploads/sqsp_shipping_and_receiving_5_656fa398f8-1c0d39a22c4d3297f72b-192.webp 192w, /media/uploads/sqsp_shipping_and_receiving_5_656fa398f8-3ec42c6ea98b06c1213a-320.webp 320w, /media/uploads/sqsp_shipping_and_receiving_5_656fa398f8-e3177f6bb1500af4c644-480.webp 480w, /media/uploads/sqsp_shipping_and_receiving_5_656fa398f8-6918ae98fc100b087281-768.webp 768w, /media/uploads/sqsp_shipping_and_receiving_5_656fa398f8-15ccc6c52a93ff73046d-1200.webp 1200w, /media/uploads/sqsp_shipping_and_receiving_5_656fa398f8-a327790679df16c7d83d-1500.webp 1500w",
+    "width": 1500,
+    "height": 900
+  },
+  "/strapi/uploads/sqsp_shipping_and_receiving_6_54bdb80d64.jpg": {
+    "source": "/strapi/uploads/sqsp_shipping_and_receiving_6_54bdb80d64.jpg",
+    "src": "/media/uploads/sqsp_shipping_and_receiving_6_54bdb80d64-a441acdd2d8b0709a0cf-2500.webp",
+    "srcSet": "/media/uploads/sqsp_shipping_and_receiving_6_54bdb80d64-ab974f0658f6ffc60f5d-64.webp 64w, /media/uploads/sqsp_shipping_and_receiving_6_54bdb80d64-bf40900d49af5c41e82b-128.webp 128w, /media/uploads/sqsp_shipping_and_receiving_6_54bdb80d64-1463bce27b31b53d1389-192.webp 192w, /media/uploads/sqsp_shipping_and_receiving_6_54bdb80d64-e0cfed5f836de62043f2-320.webp 320w, /media/uploads/sqsp_shipping_and_receiving_6_54bdb80d64-67a66cca5c9eba5a698f-480.webp 480w, /media/uploads/sqsp_shipping_and_receiving_6_54bdb80d64-f54f955056a05f9df9b5-768.webp 768w, /media/uploads/sqsp_shipping_and_receiving_6_54bdb80d64-affc410200fdbd6a56a1-1200.webp 1200w, /media/uploads/sqsp_shipping_and_receiving_6_54bdb80d64-1b054e2d9eea8025f93d-1600.webp 1600w, /media/uploads/sqsp_shipping_and_receiving_6_54bdb80d64-da379b48714c1af56294-1920.webp 1920w, /media/uploads/sqsp_shipping_and_receiving_6_54bdb80d64-a441acdd2d8b0709a0cf-2500.webp 2500w",
+    "width": 2500,
+    "height": 1500
+  },
+  "/strapi/uploads/sqsp_shipping_and_receiving_7_14b73451c2.jpg": {
+    "source": "/strapi/uploads/sqsp_shipping_and_receiving_7_14b73451c2.jpg",
+    "src": "/media/uploads/sqsp_shipping_and_receiving_7_14b73451c2-f2c3271970193e44d8dd-2500.webp",
+    "srcSet": "/media/uploads/sqsp_shipping_and_receiving_7_14b73451c2-9cca644c8ffc502c5922-64.webp 64w, /media/uploads/sqsp_shipping_and_receiving_7_14b73451c2-9be95292c47246875730-128.webp 128w, /media/uploads/sqsp_shipping_and_receiving_7_14b73451c2-216c506821e99964dbc8-192.webp 192w, /media/uploads/sqsp_shipping_and_receiving_7_14b73451c2-c64f169366d7a4127461-320.webp 320w, /media/uploads/sqsp_shipping_and_receiving_7_14b73451c2-4a1470ae08ef041f0029-480.webp 480w, /media/uploads/sqsp_shipping_and_receiving_7_14b73451c2-bb64a5e3c984ac1d0056-768.webp 768w, /media/uploads/sqsp_shipping_and_receiving_7_14b73451c2-8793ca42502bdaa175be-1200.webp 1200w, /media/uploads/sqsp_shipping_and_receiving_7_14b73451c2-c2d89cca5f779110d049-1600.webp 1600w, /media/uploads/sqsp_shipping_and_receiving_7_14b73451c2-d444de698ddc8e17a096-1920.webp 1920w, /media/uploads/sqsp_shipping_and_receiving_7_14b73451c2-f2c3271970193e44d8dd-2500.webp 2500w",
+    "width": 2500,
+    "height": 1500
+  },
+  "/strapi/uploads/sqsp_shipping_and_receiving_8_3b1825935b.jpg": {
+    "source": "/strapi/uploads/sqsp_shipping_and_receiving_8_3b1825935b.jpg",
+    "src": "/media/uploads/sqsp_shipping_and_receiving_8_3b1825935b-f6ab33967d7633b5f3b1-2500.webp",
+    "srcSet": "/media/uploads/sqsp_shipping_and_receiving_8_3b1825935b-6732e0937da18463826e-64.webp 64w, /media/uploads/sqsp_shipping_and_receiving_8_3b1825935b-62b71665d301acb2f8ab-128.webp 128w, /media/uploads/sqsp_shipping_and_receiving_8_3b1825935b-5a686dacaab90928e5c4-192.webp 192w, /media/uploads/sqsp_shipping_and_receiving_8_3b1825935b-241247124b5325daa84a-320.webp 320w, /media/uploads/sqsp_shipping_and_receiving_8_3b1825935b-eb376b5392e3e48001ce-480.webp 480w, /media/uploads/sqsp_shipping_and_receiving_8_3b1825935b-874ecf68d04444ac64a4-768.webp 768w, /media/uploads/sqsp_shipping_and_receiving_8_3b1825935b-59093e5945ae77b6d529-1200.webp 1200w, /media/uploads/sqsp_shipping_and_receiving_8_3b1825935b-77bdb170f2088d885740-1600.webp 1600w, /media/uploads/sqsp_shipping_and_receiving_8_3b1825935b-1b7cdb597e5f3a2d8618-1920.webp 1920w, /media/uploads/sqsp_shipping_and_receiving_8_3b1825935b-f6ab33967d7633b5f3b1-2500.webp 2500w",
+    "width": 2500,
+    "height": 1500
+  },
+  "/strapi/uploads/sqsp_shipping_and_receiving_hero_40c72e9b0d.jpg": {
+    "source": "/strapi/uploads/sqsp_shipping_and_receiving_hero_40c72e9b0d.jpg",
+    "src": "/media/uploads/sqsp_shipping_and_receiving_hero_40c72e9b0d-18acd1518e3745a32a47-2500.webp",
+    "srcSet": "/media/uploads/sqsp_shipping_and_receiving_hero_40c72e9b0d-1079bd4264e0af29303b-64.webp 64w, /media/uploads/sqsp_shipping_and_receiving_hero_40c72e9b0d-00f5bcc63c8642b0b1aa-128.webp 128w, /media/uploads/sqsp_shipping_and_receiving_hero_40c72e9b0d-1866889242886125b951-192.webp 192w, /media/uploads/sqsp_shipping_and_receiving_hero_40c72e9b0d-8927577ac8f6ffb8fa89-320.webp 320w, /media/uploads/sqsp_shipping_and_receiving_hero_40c72e9b0d-14e2a36a1be47da42723-480.webp 480w, /media/uploads/sqsp_shipping_and_receiving_hero_40c72e9b0d-bc5c92ddc7396df8b37b-768.webp 768w, /media/uploads/sqsp_shipping_and_receiving_hero_40c72e9b0d-ff81f19c2e7801151e91-1200.webp 1200w, /media/uploads/sqsp_shipping_and_receiving_hero_40c72e9b0d-1400722e903dc5d6225d-1600.webp 1600w, /media/uploads/sqsp_shipping_and_receiving_hero_40c72e9b0d-d8ca108f1b2750e2bfa7-1920.webp 1920w, /media/uploads/sqsp_shipping_and_receiving_hero_40c72e9b0d-18acd1518e3745a32a47-2500.webp 2500w",
+    "width": 2500,
+    "height": 1668
+  },
+  "/strapi/uploads/sqsp_the_economic_effects_of_covid_19_1_355f81ad3e.jpg": {
+    "source": "/strapi/uploads/sqsp_the_economic_effects_of_covid_19_1_355f81ad3e.jpg",
+    "src": "/media/uploads/sqsp_the_economic_effects_of_covid_19_1_355f81ad3e-0c574480e6842469f638-2500.webp",
+    "srcSet": "/media/uploads/sqsp_the_economic_effects_of_covid_19_1_355f81ad3e-b098caa60b9484ee9e75-64.webp 64w, /media/uploads/sqsp_the_economic_effects_of_covid_19_1_355f81ad3e-84c67a4d15e029b5c111-128.webp 128w, /media/uploads/sqsp_the_economic_effects_of_covid_19_1_355f81ad3e-e2f106424ba0c8fd3ba5-192.webp 192w, /media/uploads/sqsp_the_economic_effects_of_covid_19_1_355f81ad3e-edb59b671db8a70220f4-320.webp 320w, /media/uploads/sqsp_the_economic_effects_of_covid_19_1_355f81ad3e-1dc95d0c8cb0ea6a85f7-480.webp 480w, /media/uploads/sqsp_the_economic_effects_of_covid_19_1_355f81ad3e-621c7870f97af13f3ab2-768.webp 768w, /media/uploads/sqsp_the_economic_effects_of_covid_19_1_355f81ad3e-3a31d988c0be2b170626-1200.webp 1200w, /media/uploads/sqsp_the_economic_effects_of_covid_19_1_355f81ad3e-0125dbc54833c71b10c4-1600.webp 1600w, /media/uploads/sqsp_the_economic_effects_of_covid_19_1_355f81ad3e-4b6c49bf8b2e3b01688c-1920.webp 1920w, /media/uploads/sqsp_the_economic_effects_of_covid_19_1_355f81ad3e-0c574480e6842469f638-2500.webp 2500w",
+    "width": 2500,
+    "height": 1661
+  },
+  "/strapi/uploads/sqsp_the_economic_effects_of_covid_19_2_345a665c78.png": {
+    "source": "/strapi/uploads/sqsp_the_economic_effects_of_covid_19_2_345a665c78.png",
+    "src": "/media/uploads/sqsp_the_economic_effects_of_covid_19_2_345a665c78-b3e93f468d91671273fa-1500.webp",
+    "srcSet": "/media/uploads/sqsp_the_economic_effects_of_covid_19_2_345a665c78-e4e7cd08740894893083-64.webp 64w, /media/uploads/sqsp_the_economic_effects_of_covid_19_2_345a665c78-17419e4f67cf0a7716a5-128.webp 128w, /media/uploads/sqsp_the_economic_effects_of_covid_19_2_345a665c78-aca80bafbd435c65412e-192.webp 192w, /media/uploads/sqsp_the_economic_effects_of_covid_19_2_345a665c78-1159c5bbabb64ecf93b2-320.webp 320w, /media/uploads/sqsp_the_economic_effects_of_covid_19_2_345a665c78-aec9f6f8c5df2bb47e40-480.webp 480w, /media/uploads/sqsp_the_economic_effects_of_covid_19_2_345a665c78-516b42321c1338e128b8-768.webp 768w, /media/uploads/sqsp_the_economic_effects_of_covid_19_2_345a665c78-2a3e45ead9604ffde231-1200.webp 1200w, /media/uploads/sqsp_the_economic_effects_of_covid_19_2_345a665c78-b3e93f468d91671273fa-1500.webp 1500w",
+    "width": 1500,
+    "height": 900
+  },
+  "/strapi/uploads/sqsp_the_economic_effects_of_covid_19_3_3beeec88fc.png": {
+    "source": "/strapi/uploads/sqsp_the_economic_effects_of_covid_19_3_3beeec88fc.png",
+    "src": "/media/uploads/sqsp_the_economic_effects_of_covid_19_3_3beeec88fc-08d023a5bb0b269fdf74-1500.webp",
+    "srcSet": "/media/uploads/sqsp_the_economic_effects_of_covid_19_3_3beeec88fc-7ffef76b2290a6b25405-64.webp 64w, /media/uploads/sqsp_the_economic_effects_of_covid_19_3_3beeec88fc-b7515620c8e53fafcd46-128.webp 128w, /media/uploads/sqsp_the_economic_effects_of_covid_19_3_3beeec88fc-a61bc72bbeae37a26990-192.webp 192w, /media/uploads/sqsp_the_economic_effects_of_covid_19_3_3beeec88fc-2a411e4bb427a26e64af-320.webp 320w, /media/uploads/sqsp_the_economic_effects_of_covid_19_3_3beeec88fc-dcaea268df400ca71adb-480.webp 480w, /media/uploads/sqsp_the_economic_effects_of_covid_19_3_3beeec88fc-6eac2837e95ec7959414-768.webp 768w, /media/uploads/sqsp_the_economic_effects_of_covid_19_3_3beeec88fc-2318c37c95ea31ac6389-1200.webp 1200w, /media/uploads/sqsp_the_economic_effects_of_covid_19_3_3beeec88fc-08d023a5bb0b269fdf74-1500.webp 1500w",
+    "width": 1500,
+    "height": 900
+  },
+  "/strapi/uploads/sqsp_the_economic_effects_of_covid_19_4_4555a489da.png": {
+    "source": "/strapi/uploads/sqsp_the_economic_effects_of_covid_19_4_4555a489da.png",
+    "src": "/media/uploads/sqsp_the_economic_effects_of_covid_19_4_4555a489da-4a4a8c7bcd2bd451b0d8-1500.webp",
+    "srcSet": "/media/uploads/sqsp_the_economic_effects_of_covid_19_4_4555a489da-401ce1cc1cda1ecc409d-64.webp 64w, /media/uploads/sqsp_the_economic_effects_of_covid_19_4_4555a489da-a759553ed6f1a12c7e1c-128.webp 128w, /media/uploads/sqsp_the_economic_effects_of_covid_19_4_4555a489da-17851bd9d1aa0c652afc-192.webp 192w, /media/uploads/sqsp_the_economic_effects_of_covid_19_4_4555a489da-d0c8b94b3cdbb5e0d31d-320.webp 320w, /media/uploads/sqsp_the_economic_effects_of_covid_19_4_4555a489da-9fc529bfb16244488deb-480.webp 480w, /media/uploads/sqsp_the_economic_effects_of_covid_19_4_4555a489da-4ce159900e1fe3b6b9bc-768.webp 768w, /media/uploads/sqsp_the_economic_effects_of_covid_19_4_4555a489da-2c0f1ff6de20f3eafd50-1200.webp 1200w, /media/uploads/sqsp_the_economic_effects_of_covid_19_4_4555a489da-4a4a8c7bcd2bd451b0d8-1500.webp 1500w",
+    "width": 1500,
+    "height": 900
+  },
+  "/strapi/uploads/sqsp_the_economic_effects_of_covid_19_5_8ab7d9f87e.png": {
+    "source": "/strapi/uploads/sqsp_the_economic_effects_of_covid_19_5_8ab7d9f87e.png",
+    "src": "/media/uploads/sqsp_the_economic_effects_of_covid_19_5_8ab7d9f87e-0a8feba38dde05a7fec0-1500.webp",
+    "srcSet": "/media/uploads/sqsp_the_economic_effects_of_covid_19_5_8ab7d9f87e-f9c2f1e09aee041f63ec-64.webp 64w, /media/uploads/sqsp_the_economic_effects_of_covid_19_5_8ab7d9f87e-6f0f218ff6d5f0926852-128.webp 128w, /media/uploads/sqsp_the_economic_effects_of_covid_19_5_8ab7d9f87e-cc8bf7f65e087ec95af3-192.webp 192w, /media/uploads/sqsp_the_economic_effects_of_covid_19_5_8ab7d9f87e-1afa3ca76b7e317559b0-320.webp 320w, /media/uploads/sqsp_the_economic_effects_of_covid_19_5_8ab7d9f87e-d717b260ff8e705bfd19-480.webp 480w, /media/uploads/sqsp_the_economic_effects_of_covid_19_5_8ab7d9f87e-2533a6edd837351d6d61-768.webp 768w, /media/uploads/sqsp_the_economic_effects_of_covid_19_5_8ab7d9f87e-e718f1c800c8e5768815-1200.webp 1200w, /media/uploads/sqsp_the_economic_effects_of_covid_19_5_8ab7d9f87e-0a8feba38dde05a7fec0-1500.webp 1500w",
+    "width": 1500,
+    "height": 900
+  },
+  "/strapi/uploads/sqsp_the_economic_effects_of_covid_19_6_673a0ccda3.png": {
+    "source": "/strapi/uploads/sqsp_the_economic_effects_of_covid_19_6_673a0ccda3.png",
+    "src": "/media/uploads/sqsp_the_economic_effects_of_covid_19_6_673a0ccda3-353d9d6c82db8e8376c2-1500.webp",
+    "srcSet": "/media/uploads/sqsp_the_economic_effects_of_covid_19_6_673a0ccda3-dd89e1b4bffc0c226f57-64.webp 64w, /media/uploads/sqsp_the_economic_effects_of_covid_19_6_673a0ccda3-d2535ce3786c633a3a67-128.webp 128w, /media/uploads/sqsp_the_economic_effects_of_covid_19_6_673a0ccda3-98e09aaeadc271134a14-192.webp 192w, /media/uploads/sqsp_the_economic_effects_of_covid_19_6_673a0ccda3-de7a1297100ddb4e8323-320.webp 320w, /media/uploads/sqsp_the_economic_effects_of_covid_19_6_673a0ccda3-3fec5035d46875b80e66-480.webp 480w, /media/uploads/sqsp_the_economic_effects_of_covid_19_6_673a0ccda3-699da1bad1fb66bf7c6d-768.webp 768w, /media/uploads/sqsp_the_economic_effects_of_covid_19_6_673a0ccda3-3e954c277a6536c21d93-1200.webp 1200w, /media/uploads/sqsp_the_economic_effects_of_covid_19_6_673a0ccda3-353d9d6c82db8e8376c2-1500.webp 1500w",
+    "width": 1500,
+    "height": 900
+  },
+  "/strapi/uploads/sqsp_the_economic_effects_of_covid_19_7_68fde3eaa5.png": {
+    "source": "/strapi/uploads/sqsp_the_economic_effects_of_covid_19_7_68fde3eaa5.png",
+    "src": "/media/uploads/sqsp_the_economic_effects_of_covid_19_7_68fde3eaa5-19b32d93af8c564d08c2-1500.webp",
+    "srcSet": "/media/uploads/sqsp_the_economic_effects_of_covid_19_7_68fde3eaa5-227fce05f2f77f24c787-64.webp 64w, /media/uploads/sqsp_the_economic_effects_of_covid_19_7_68fde3eaa5-0c8316a7373d79f5cb37-128.webp 128w, /media/uploads/sqsp_the_economic_effects_of_covid_19_7_68fde3eaa5-ed9dbec54b923ab0947f-192.webp 192w, /media/uploads/sqsp_the_economic_effects_of_covid_19_7_68fde3eaa5-b0456f1859eff46fbca5-320.webp 320w, /media/uploads/sqsp_the_economic_effects_of_covid_19_7_68fde3eaa5-d51c8896321a3fc8e631-480.webp 480w, /media/uploads/sqsp_the_economic_effects_of_covid_19_7_68fde3eaa5-feb2a2973ce27f3891f0-768.webp 768w, /media/uploads/sqsp_the_economic_effects_of_covid_19_7_68fde3eaa5-a9a4fe6107f5f099b4d3-1200.webp 1200w, /media/uploads/sqsp_the_economic_effects_of_covid_19_7_68fde3eaa5-19b32d93af8c564d08c2-1500.webp 1500w",
+    "width": 1500,
+    "height": 900
+  },
+  "/strapi/uploads/sqsp_the_economic_effects_of_covid_19_hero_d269548fd7.jpg": {
+    "source": "/strapi/uploads/sqsp_the_economic_effects_of_covid_19_hero_d269548fd7.jpg",
+    "src": "/media/uploads/sqsp_the_economic_effects_of_covid_19_hero_d269548fd7-89774297e7916a815c20-2500.webp",
+    "srcSet": "/media/uploads/sqsp_the_economic_effects_of_covid_19_hero_d269548fd7-5cbce5f55f749d79caa2-64.webp 64w, /media/uploads/sqsp_the_economic_effects_of_covid_19_hero_d269548fd7-e54b3f130d260d3cac2d-128.webp 128w, /media/uploads/sqsp_the_economic_effects_of_covid_19_hero_d269548fd7-f3e8d8156062cf304095-192.webp 192w, /media/uploads/sqsp_the_economic_effects_of_covid_19_hero_d269548fd7-28d668d454a1dbfb60b9-320.webp 320w, /media/uploads/sqsp_the_economic_effects_of_covid_19_hero_d269548fd7-b7611bf08ed730e37277-480.webp 480w, /media/uploads/sqsp_the_economic_effects_of_covid_19_hero_d269548fd7-5cb3670c3453e4b39f00-768.webp 768w, /media/uploads/sqsp_the_economic_effects_of_covid_19_hero_d269548fd7-2b5824750e6000d0c676-1200.webp 1200w, /media/uploads/sqsp_the_economic_effects_of_covid_19_hero_d269548fd7-5821e00974850fab13da-1600.webp 1600w, /media/uploads/sqsp_the_economic_effects_of_covid_19_hero_d269548fd7-1a725e848d21e2f594b0-1920.webp 1920w, /media/uploads/sqsp_the_economic_effects_of_covid_19_hero_d269548fd7-89774297e7916a815c20-2500.webp 2500w",
+    "width": 2500,
+    "height": 1661
+  },
+  "/strapi/uploads/sqsp_uj_belepobol_kollega_1_e847a224ef.png": {
+    "source": "/strapi/uploads/sqsp_uj_belepobol_kollega_1_e847a224ef.png",
+    "src": "/media/uploads/sqsp_uj_belepobol_kollega_1_e847a224ef-81c63f72b2e37793f0ee-1536.webp",
+    "srcSet": "/media/uploads/sqsp_uj_belepobol_kollega_1_e847a224ef-93fc6d49b6929562a716-64.webp 64w, /media/uploads/sqsp_uj_belepobol_kollega_1_e847a224ef-5f5702ff2414a90ba46d-128.webp 128w, /media/uploads/sqsp_uj_belepobol_kollega_1_e847a224ef-de8ef3eb14f6235b2471-192.webp 192w, /media/uploads/sqsp_uj_belepobol_kollega_1_e847a224ef-f49aebb19f2be5828ef8-320.webp 320w, /media/uploads/sqsp_uj_belepobol_kollega_1_e847a224ef-716bff2a97c2714073d2-480.webp 480w, /media/uploads/sqsp_uj_belepobol_kollega_1_e847a224ef-14744f0901fe9bbc770a-768.webp 768w, /media/uploads/sqsp_uj_belepobol_kollega_1_e847a224ef-95fa641240d4e290a272-1200.webp 1200w, /media/uploads/sqsp_uj_belepobol_kollega_1_e847a224ef-81c63f72b2e37793f0ee-1536.webp 1536w",
+    "width": 1536,
+    "height": 1024
+  },
+  "/strapi/uploads/sqsp_uj_belepobol_kollega_hero_0345c3033d.png": {
+    "source": "/strapi/uploads/sqsp_uj_belepobol_kollega_hero_0345c3033d.png",
+    "src": "/media/uploads/sqsp_uj_belepobol_kollega_hero_0345c3033d-16dac59e3d2837ed36ae-1536.webp",
+    "srcSet": "/media/uploads/sqsp_uj_belepobol_kollega_hero_0345c3033d-ba80b52b0868e34628a6-64.webp 64w, /media/uploads/sqsp_uj_belepobol_kollega_hero_0345c3033d-c16e2aee61729897f27c-128.webp 128w, /media/uploads/sqsp_uj_belepobol_kollega_hero_0345c3033d-2202b24e9b9cf6ffff48-192.webp 192w, /media/uploads/sqsp_uj_belepobol_kollega_hero_0345c3033d-38accfe083a76ec2d52a-320.webp 320w, /media/uploads/sqsp_uj_belepobol_kollega_hero_0345c3033d-1e001ba463b870f80dcd-480.webp 480w, /media/uploads/sqsp_uj_belepobol_kollega_hero_0345c3033d-5b910680754cd02de6de-768.webp 768w, /media/uploads/sqsp_uj_belepobol_kollega_hero_0345c3033d-fc8ae3072b70fa6f6fbb-1200.webp 1200w, /media/uploads/sqsp_uj_belepobol_kollega_hero_0345c3033d-16dac59e3d2837ed36ae-1536.webp 1536w",
+    "width": 1536,
+    "height": 1024
+  },
+  "/strapi/uploads/sqsp_why_lofi_design_is_important_in_the_design_process_1_f03e748ad0.jpg": {
+    "source": "/strapi/uploads/sqsp_why_lofi_design_is_important_in_the_design_process_1_f03e748ad0.jpg",
+    "src": "/media/uploads/sqsp_why_lofi_design_is_important_in_the_design_process_1_f03e748ad0-fd2d8d3cffe936e736d6-525.webp",
+    "srcSet": "/media/uploads/sqsp_why_lofi_design_is_important_in_the_design_process_1_f03e748ad0-2d44a6d90cb06dcebb8d-64.webp 64w, /media/uploads/sqsp_why_lofi_design_is_important_in_the_design_process_1_f03e748ad0-85d7f1415f47352940d3-128.webp 128w, /media/uploads/sqsp_why_lofi_design_is_important_in_the_design_process_1_f03e748ad0-9486e193840bc6f09505-192.webp 192w, /media/uploads/sqsp_why_lofi_design_is_important_in_the_design_process_1_f03e748ad0-119a01c947e42ec947c5-320.webp 320w, /media/uploads/sqsp_why_lofi_design_is_important_in_the_design_process_1_f03e748ad0-58e8ff5c8ffc193fee7b-480.webp 480w, /media/uploads/sqsp_why_lofi_design_is_important_in_the_design_process_1_f03e748ad0-fd2d8d3cffe936e736d6-525.webp 525w",
+    "width": 525,
+    "height": 721
+  },
+  "/strapi/uploads/sqsp_why_lofi_design_is_important_in_the_design_process_2_47c478c86a.png": {
+    "source": "/strapi/uploads/sqsp_why_lofi_design_is_important_in_the_design_process_2_47c478c86a.png",
+    "src": "/media/uploads/sqsp_why_lofi_design_is_important_in_the_design_process_2_47c478c86a-e4dd7e8e10f85b31f332-525.webp",
+    "srcSet": "/media/uploads/sqsp_why_lofi_design_is_important_in_the_design_process_2_47c478c86a-2e54ed67950ad6dc5ba2-64.webp 64w, /media/uploads/sqsp_why_lofi_design_is_important_in_the_design_process_2_47c478c86a-e4e1ed379c6121a708ee-128.webp 128w, /media/uploads/sqsp_why_lofi_design_is_important_in_the_design_process_2_47c478c86a-44bd859ff2e8d06bd3c7-192.webp 192w, /media/uploads/sqsp_why_lofi_design_is_important_in_the_design_process_2_47c478c86a-912714bac95156f0b7f3-320.webp 320w, /media/uploads/sqsp_why_lofi_design_is_important_in_the_design_process_2_47c478c86a-adc4ca11be8fe90f891e-480.webp 480w, /media/uploads/sqsp_why_lofi_design_is_important_in_the_design_process_2_47c478c86a-e4dd7e8e10f85b31f332-525.webp 525w",
+    "width": 525,
+    "height": 424
+  },
+  "/strapi/uploads/sqsp_why_lofi_design_is_important_in_the_design_process_3_f2090caf32.png": {
+    "source": "/strapi/uploads/sqsp_why_lofi_design_is_important_in_the_design_process_3_f2090caf32.png",
+    "src": "/media/uploads/sqsp_why_lofi_design_is_important_in_the_design_process_3_f2090caf32-8d8abe7728146e4b6096-525.webp",
+    "srcSet": "/media/uploads/sqsp_why_lofi_design_is_important_in_the_design_process_3_f2090caf32-20e4e7f61e9567095657-64.webp 64w, /media/uploads/sqsp_why_lofi_design_is_important_in_the_design_process_3_f2090caf32-9f11fa6f704022390f28-128.webp 128w, /media/uploads/sqsp_why_lofi_design_is_important_in_the_design_process_3_f2090caf32-9ce7464ae7bc2148cf59-192.webp 192w, /media/uploads/sqsp_why_lofi_design_is_important_in_the_design_process_3_f2090caf32-6dd3f52bdbe6d90e603e-320.webp 320w, /media/uploads/sqsp_why_lofi_design_is_important_in_the_design_process_3_f2090caf32-08acc2c25138caebbea9-480.webp 480w, /media/uploads/sqsp_why_lofi_design_is_important_in_the_design_process_3_f2090caf32-8d8abe7728146e4b6096-525.webp 525w",
+    "width": 525,
+    "height": 394
+  },
+  "/strapi/uploads/sqsp_why_lofi_design_is_important_in_the_design_process_4_a4becf1d24.png": {
+    "source": "/strapi/uploads/sqsp_why_lofi_design_is_important_in_the_design_process_4_a4becf1d24.png",
+    "src": "/media/uploads/sqsp_why_lofi_design_is_important_in_the_design_process_4_a4becf1d24-6730cce0fdbee18e90f3-525.webp",
+    "srcSet": "/media/uploads/sqsp_why_lofi_design_is_important_in_the_design_process_4_a4becf1d24-c999a4c337dc1c8fa0cb-64.webp 64w, /media/uploads/sqsp_why_lofi_design_is_important_in_the_design_process_4_a4becf1d24-d246b01859333005615b-128.webp 128w, /media/uploads/sqsp_why_lofi_design_is_important_in_the_design_process_4_a4becf1d24-eea4559bd912f749f713-192.webp 192w, /media/uploads/sqsp_why_lofi_design_is_important_in_the_design_process_4_a4becf1d24-a2629cdb79afb9804512-320.webp 320w, /media/uploads/sqsp_why_lofi_design_is_important_in_the_design_process_4_a4becf1d24-4a26cdd3fa94a2d53e05-480.webp 480w, /media/uploads/sqsp_why_lofi_design_is_important_in_the_design_process_4_a4becf1d24-6730cce0fdbee18e90f3-525.webp 525w",
+    "width": 525,
+    "height": 235
+  },
+  "/strapi/uploads/sqsp_why_lofi_design_is_important_in_the_design_process_hero_eca926cebb.png": {
+    "source": "/strapi/uploads/sqsp_why_lofi_design_is_important_in_the_design_process_hero_eca926cebb.png",
+    "src": "/media/uploads/sqsp_why_lofi_design_is_important_in_the_design_process_hero_eca926cebb-a9803b0ac4d96c45794e-525.webp",
+    "srcSet": "/media/uploads/sqsp_why_lofi_design_is_important_in_the_design_process_hero_eca926cebb-aba87237394878eeb2ef-64.webp 64w, /media/uploads/sqsp_why_lofi_design_is_important_in_the_design_process_hero_eca926cebb-2db301b19b9db7f3017a-128.webp 128w, /media/uploads/sqsp_why_lofi_design_is_important_in_the_design_process_hero_eca926cebb-acacc118fba6f62dab5f-192.webp 192w, /media/uploads/sqsp_why_lofi_design_is_important_in_the_design_process_hero_eca926cebb-8b1dd019b2a8a41227a5-320.webp 320w, /media/uploads/sqsp_why_lofi_design_is_important_in_the_design_process_hero_eca926cebb-7ca16c541eccd3eea5fc-480.webp 480w, /media/uploads/sqsp_why_lofi_design_is_important_in_the_design_process_hero_eca926cebb-a9803b0ac4d96c45794e-525.webp 525w",
+    "width": 525,
+    "height": 272
+  },
+  "/strapi/uploads/szlahu_23aba421d5.png": {
+    "source": "/strapi/uploads/szlahu_23aba421d5.png",
+    "src": "/media/uploads/szlahu_23aba421d5-34b3b70baa0d64ed93fa-228.webp",
+    "srcSet": "/media/uploads/szlahu_23aba421d5-12481570e0c750a49cf0-64.webp 64w, /media/uploads/szlahu_23aba421d5-18d6e06e94c95f219d29-128.webp 128w, /media/uploads/szlahu_23aba421d5-73b41d0dfedb78fa172a-192.webp 192w, /media/uploads/szlahu_23aba421d5-34b3b70baa0d64ed93fa-228.webp 228w",
+    "width": 228,
+    "height": 57
+  },
+  "/strapi/uploads/works_background_1774441334981_732aab5a80.png": {
+    "source": "/strapi/uploads/works_background_1774441334981_732aab5a80.png",
+    "src": "/media/uploads/works_background_1774441334981_732aab5a80-ad46e77f282d7e5255a8-1527.webp",
+    "srcSet": "/media/uploads/works_background_1774441334981_732aab5a80-b97da56cc479cafd976d-64.webp 64w, /media/uploads/works_background_1774441334981_732aab5a80-33c36f47c18dfeec1265-128.webp 128w, /media/uploads/works_background_1774441334981_732aab5a80-0aef618e7a3254e83071-192.webp 192w, /media/uploads/works_background_1774441334981_732aab5a80-fa2bedd01f8642eca52a-320.webp 320w, /media/uploads/works_background_1774441334981_732aab5a80-152ce843b4e9b9f295a8-480.webp 480w, /media/uploads/works_background_1774441334981_732aab5a80-42f40eca9a25ff5ff07b-768.webp 768w, /media/uploads/works_background_1774441334981_732aab5a80-db09cc42b5443fff3e6d-1200.webp 1200w, /media/uploads/works_background_1774441334981_732aab5a80-ad46e77f282d7e5255a8-1527.webp 1527w",
+    "width": 1527,
+    "height": 1761
+  },
+  "local:bg_graphic_1774009634501.png": {
+    "source": "/assets/bg_graphic_1774009634501.png",
+    "src": "/media/local/bg_graphic_1774009634501-ad01c80e8427463fc8de-1279.webp",
+    "srcSet": "/media/local/bg_graphic_1774009634501-f77be149149478ed090e-64.webp 64w, /media/local/bg_graphic_1774009634501-b5fb688def23c8dd5f0c-128.webp 128w, /media/local/bg_graphic_1774009634501-ad96e18e563fec41fa69-192.webp 192w, /media/local/bg_graphic_1774009634501-9746d6a7ebd54b4ac674-320.webp 320w, /media/local/bg_graphic_1774009634501-89dd325eec24bd648f1d-480.webp 480w, /media/local/bg_graphic_1774009634501-e927e0906070c61be4e2-768.webp 768w, /media/local/bg_graphic_1774009634501-a2bdf4cd712a7a6903fc-1200.webp 1200w, /media/local/bg_graphic_1774009634501-ad01c80e8427463fc8de-1279.webp 1279w",
+    "width": 1279,
+    "height": 997
+  },
+  "local:bg_graphic2_1774011568340.png": {
+    "source": "/assets/bg_graphic2_1774011568340.png",
+    "src": "/media/local/bg_graphic2_1774011568340-1f2c79ee3875615aa896-1056.webp",
+    "srcSet": "/media/local/bg_graphic2_1774011568340-302467d95585886d7e9c-64.webp 64w, /media/local/bg_graphic2_1774011568340-f1e10008dbb84e497567-128.webp 128w, /media/local/bg_graphic2_1774011568340-b26f7be0b09ed409a601-192.webp 192w, /media/local/bg_graphic2_1774011568340-3ce2021ca44ed4d827e2-320.webp 320w, /media/local/bg_graphic2_1774011568340-3f312219b66448025bb9-480.webp 480w, /media/local/bg_graphic2_1774011568340-db1331fa07a3874d337b-768.webp 768w, /media/local/bg_graphic2_1774011568340-1f2c79ee3875615aa896-1056.webp 1056w",
+    "width": 1056,
+    "height": 1067
+  },
   "local:blog-accessibility.png": {
     "source": "/assets/blog-accessibility.png",
-    "src": "/media/local/blog-accessibility-0q9w599-1280.webp",
-    "srcSet": "/media/local/blog-accessibility-0ivfqwl-320.webp 320w, /media/local/blog-accessibility-1fwxsio-480.webp 480w, /media/local/blog-accessibility-1wfzjed-768.webp 768w, /media/local/blog-accessibility-11p1ptx-1200.webp 1200w, /media/local/blog-accessibility-0q9w599-1280.webp 1280w",
+    "src": "/media/local/blog-accessibility-ba32ae71445cfc6c01a5-1280.webp",
+    "srcSet": "/media/local/blog-accessibility-01bf07f84f646c42812c-64.webp 64w, /media/local/blog-accessibility-5a1aa97dc22d13550429-128.webp 128w, /media/local/blog-accessibility-41d20e2faf591377c392-192.webp 192w, /media/local/blog-accessibility-50bde8a9d015acea9bc8-320.webp 320w, /media/local/blog-accessibility-e79d25bc19e0e0122a12-480.webp 480w, /media/local/blog-accessibility-9a5783bba63430ddda75-768.webp 768w, /media/local/blog-accessibility-b50dde632c0e19162608-1200.webp 1200w, /media/local/blog-accessibility-ba32ae71445cfc6c01a5-1280.webp 1280w",
     "width": 1280,
     "height": 896
   },
   "local:blog-ai-ux.png": {
     "source": "/assets/blog-ai-ux.png",
-    "src": "/media/local/blog-ai-ux-13m9kqd-1280.webp",
-    "srcSet": "/media/local/blog-ai-ux-0zwb3d9-320.webp 320w, /media/local/blog-ai-ux-0pfoy5k-480.webp 480w, /media/local/blog-ai-ux-1j1iwe5-768.webp 768w, /media/local/blog-ai-ux-1ylrn2l-1200.webp 1200w, /media/local/blog-ai-ux-13m9kqd-1280.webp 1280w",
+    "src": "/media/local/blog-ai-ux-0002ddebf33ce860a1a8-1280.webp",
+    "srcSet": "/media/local/blog-ai-ux-40aa20da1b608955d7c3-64.webp 64w, /media/local/blog-ai-ux-92221ee41a2b8864844f-128.webp 128w, /media/local/blog-ai-ux-aa68b4444f40a6cf6735-192.webp 192w, /media/local/blog-ai-ux-67a9fdfd28e676391108-320.webp 320w, /media/local/blog-ai-ux-74d00f73b915c17627b2-480.webp 480w, /media/local/blog-ai-ux-9a3b9af1428b35ca9c7b-768.webp 768w, /media/local/blog-ai-ux-613ba767a671950dda2f-1200.webp 1200w, /media/local/blog-ai-ux-0002ddebf33ce860a1a8-1280.webp 1280w",
     "width": 1280,
     "height": 896
   },
   "local:blog-designsystem.png": {
     "source": "/assets/blog-designsystem.png",
-    "src": "/media/local/blog-designsystem-1tvnf2k-1280.webp",
-    "srcSet": "/media/local/blog-designsystem-12lhk72-320.webp 320w, /media/local/blog-designsystem-0novt7r-480.webp 480w, /media/local/blog-designsystem-1o21toe-768.webp 768w, /media/local/blog-designsystem-0kw58ms-1200.webp 1200w, /media/local/blog-designsystem-1tvnf2k-1280.webp 1280w",
+    "src": "/media/local/blog-designsystem-06ef7bce5972dc8f80e6-1280.webp",
+    "srcSet": "/media/local/blog-designsystem-3bde3866ec4049499e8c-64.webp 64w, /media/local/blog-designsystem-7826a6e8f8d4167cedb0-128.webp 128w, /media/local/blog-designsystem-695bbca5f3490af944d5-192.webp 192w, /media/local/blog-designsystem-163bfd8a14dcad1c28e9-320.webp 320w, /media/local/blog-designsystem-8ccca1f92acf041edade-480.webp 480w, /media/local/blog-designsystem-a3a9a63b7f8f058b0b8f-768.webp 768w, /media/local/blog-designsystem-c59d6c7e3ecb618d8e6d-1200.webp 1200w, /media/local/blog-designsystem-06ef7bce5972dc8f80e6-1280.webp 1280w",
     "width": 1280,
     "height": 896
   },
   "local:blog-microinteractions.png": {
     "source": "/assets/blog-microinteractions.png",
-    "src": "/media/local/blog-microinteractions-187l47s-1280.webp",
-    "srcSet": "/media/local/blog-microinteractions-0ug3j9u-320.webp 320w, /media/local/blog-microinteractions-16yffrn-480.webp 480w, /media/local/blog-microinteractions-08zj9si-768.webp 768w, /media/local/blog-microinteractions-038sahc-1200.webp 1200w, /media/local/blog-microinteractions-187l47s-1280.webp 1280w",
+    "src": "/media/local/blog-microinteractions-ca3a2cc9b3bece20ab74-1280.webp",
+    "srcSet": "/media/local/blog-microinteractions-19668a7dd39907f270cc-64.webp 64w, /media/local/blog-microinteractions-f31eaa663b0b94d27239-128.webp 128w, /media/local/blog-microinteractions-9e7dce94c47b0d80b9db-192.webp 192w, /media/local/blog-microinteractions-e8742605b2245ec11545-320.webp 320w, /media/local/blog-microinteractions-500f90eecf496b7de87a-480.webp 480w, /media/local/blog-microinteractions-0fc191e34722543cce01-768.webp 768w, /media/local/blog-microinteractions-fd9ec9a2b491c5c8e1fc-1200.webp 1200w, /media/local/blog-microinteractions-ca3a2cc9b3bece20ab74-1280.webp 1280w",
     "width": 1280,
     "height": 896
   },
   "local:blog-mobile-first.png": {
     "source": "/assets/blog-mobile-first.png",
-    "src": "/media/local/blog-mobile-first-00xn8nm-1280.webp",
-    "srcSet": "/media/local/blog-mobile-first-1gce2vg-320.webp 320w, /media/local/blog-mobile-first-1g1jfq5-480.webp 480w, /media/local/blog-mobile-first-0y2yw4k-768.webp 768w, /media/local/blog-mobile-first-181vp1m-1200.webp 1200w, /media/local/blog-mobile-first-00xn8nm-1280.webp 1280w",
+    "src": "/media/local/blog-mobile-first-e55a56f9c01a7f1b9cbf-1280.webp",
+    "srcSet": "/media/local/blog-mobile-first-18f857288c4c6f95f3aa-64.webp 64w, /media/local/blog-mobile-first-a098045bfbe8374d8354-128.webp 128w, /media/local/blog-mobile-first-71c333a5696aa1a64916-192.webp 192w, /media/local/blog-mobile-first-4855fc763fab22b73d84-320.webp 320w, /media/local/blog-mobile-first-39a50df74849eb443879-480.webp 480w, /media/local/blog-mobile-first-409b1d00cd4d7458f8dc-768.webp 768w, /media/local/blog-mobile-first-df651219302886451030-1200.webp 1200w, /media/local/blog-mobile-first-e55a56f9c01a7f1b9cbf-1280.webp 1280w",
     "width": 1280,
     "height": 896
   },
   "local:blog-ux-research.png": {
     "source": "/assets/blog-ux-research.png",
-    "src": "/media/local/blog-ux-research-155xxyk-1280.webp",
-    "srcSet": "/media/local/blog-ux-research-038ozha-320.webp 320w, /media/local/blog-ux-research-1ps2bt3-480.webp 480w, /media/local/blog-ux-research-0op98ym-768.webp 768w, /media/local/blog-ux-research-16o6jro-1200.webp 1200w, /media/local/blog-ux-research-155xxyk-1280.webp 1280w",
+    "src": "/media/local/blog-ux-research-b41b0b6241d2f8d69a11-1280.webp",
+    "srcSet": "/media/local/blog-ux-research-f817ce9207783f79c26a-64.webp 64w, /media/local/blog-ux-research-b734638189f661bbffde-128.webp 128w, /media/local/blog-ux-research-51b74238aadf9b7d3c64-192.webp 192w, /media/local/blog-ux-research-a957d264bf78ff4ab43f-320.webp 320w, /media/local/blog-ux-research-45f49e78b5710fea2343-480.webp 480w, /media/local/blog-ux-research-fbb78c63f43152cdadf8-768.webp 768w, /media/local/blog-ux-research-aec8d301bf72670d3080-1200.webp 1200w, /media/local/blog-ux-research-b41b0b6241d2f8d69a11-1280.webp 1280w",
     "width": 1280,
     "height": 896
   },
+  "local:contact-bg_1774518452836.png": {
+    "source": "/assets/contact-bg_1774518452836.png",
+    "src": "/media/local/contact-bg_1774518452836-d2146e4798457b768fcc-2648.webp",
+    "srcSet": "/media/local/contact-bg_1774518452836-74addfa54ae93c193dfe-64.webp 64w, /media/local/contact-bg_1774518452836-6ac1b528c3d040e68689-128.webp 128w, /media/local/contact-bg_1774518452836-25a50f7c8cee29f13c04-192.webp 192w, /media/local/contact-bg_1774518452836-8e39e145ca8aaf518d56-320.webp 320w, /media/local/contact-bg_1774518452836-2e99ccc4d445b2480986-480.webp 480w, /media/local/contact-bg_1774518452836-63e440f06acd5d9b9eb6-768.webp 768w, /media/local/contact-bg_1774518452836-962752f7c253b139858e-1200.webp 1200w, /media/local/contact-bg_1774518452836-a16cfb33eaa1ab713791-1600.webp 1600w, /media/local/contact-bg_1774518452836-66691dbdc65e27898a3f-1920.webp 1920w, /media/local/contact-bg_1774518452836-d2146e4798457b768fcc-2648.webp 2648w",
+    "width": 2648,
+    "height": 1634
+  },
+  "local:Frame_26081029_1774516588825.png": {
+    "source": "/assets/Frame_26081029_1774516588825.png",
+    "src": "/media/local/Frame_26081029_1774516588825-10be44b0c370624ad94f-756.webp",
+    "srcSet": "/media/local/Frame_26081029_1774516588825-d33a85f0f178aa41f16f-64.webp 64w, /media/local/Frame_26081029_1774516588825-4e5f511750479e466e9b-128.webp 128w, /media/local/Frame_26081029_1774516588825-7cdee639869f1e845609-192.webp 192w, /media/local/Frame_26081029_1774516588825-e917967b53ba182be309-320.webp 320w, /media/local/Frame_26081029_1774516588825-98952f58e7fb27228c33-480.webp 480w, /media/local/Frame_26081029_1774516588825-10be44b0c370624ad94f-756.webp 756w",
+    "width": 756,
+    "height": 547
+  },
   "local:hero-bg-pattern.png": {
     "source": "/assets/hero-bg-pattern.png",
-    "src": "/media/local/hero-bg-pattern-13fm2dl-1408.webp",
-    "srcSet": "/media/local/hero-bg-pattern-1es27yv-320.webp 320w, /media/local/hero-bg-pattern-06vv79u-480.webp 480w, /media/local/hero-bg-pattern-1enr8rr-768.webp 768w, /media/local/hero-bg-pattern-1uc0oq7-1200.webp 1200w, /media/local/hero-bg-pattern-13fm2dl-1408.webp 1408w",
+    "src": "/media/local/hero-bg-pattern-4e5a7e44500cbcbf6489-1408.webp",
+    "srcSet": "/media/local/hero-bg-pattern-ae193d3a1d5001dcab63-64.webp 64w, /media/local/hero-bg-pattern-40ae32ccba085b8c3029-128.webp 128w, /media/local/hero-bg-pattern-ac5d74d41de3a76ff6e0-192.webp 192w, /media/local/hero-bg-pattern-33a9acf2ba53eed26824-320.webp 320w, /media/local/hero-bg-pattern-1ec530d107fe5ca6e51c-480.webp 480w, /media/local/hero-bg-pattern-6c4c3fa25276488b62fd-768.webp 768w, /media/local/hero-bg-pattern-78a04bf493f6e2b9ff47-1200.webp 1200w, /media/local/hero-bg-pattern-4e5a7e44500cbcbf6489-1408.webp 1408w",
     "width": 1408,
     "height": 768
   },
   "local:heroes/Hero_about_1789027068380.png": {
     "source": "/assets/heroes/Hero_about_1789027068380.png",
-    "src": "/media/local/Hero_about_1789027068380-0nyia68-1920.webp",
-    "srcSet": "/media/local/Hero_about_1789027068380-1738hbx-320.webp 320w, /media/local/Hero_about_1789027068380-011ifx4-480.webp 480w, /media/local/Hero_about_1789027068380-0hbrt65-768.webp 768w, /media/local/Hero_about_1789027068380-148wi0t-1200.webp 1200w, /media/local/Hero_about_1789027068380-0km10ih-1600.webp 1600w, /media/local/Hero_about_1789027068380-0nyia68-1920.webp 1920w",
+    "src": "/media/local/Hero_about_1789027068380-04a045952354f2f25b18-1920.webp",
+    "srcSet": "/media/local/Hero_about_1789027068380-523ddd127b3a3abc4bb8-64.webp 64w, /media/local/Hero_about_1789027068380-aab56962573c15aa2d24-128.webp 128w, /media/local/Hero_about_1789027068380-f6ab585de3fe35ae88c1-192.webp 192w, /media/local/Hero_about_1789027068380-ac8e154112a416bc785e-320.webp 320w, /media/local/Hero_about_1789027068380-347358bbbf16b195c54f-480.webp 480w, /media/local/Hero_about_1789027068380-f48e3c04d3f29f136ad6-768.webp 768w, /media/local/Hero_about_1789027068380-86737440d21ca9948942-1200.webp 1200w, /media/local/Hero_about_1789027068380-684aa64f38eba5e8960c-1600.webp 1600w, /media/local/Hero_about_1789027068380-04a045952354f2f25b18-1920.webp 1920w",
     "width": 1920,
     "height": 870
   },
   "local:heroes/Hero_about_mobile_1789374396077.png": {
     "source": "/assets/heroes/Hero_about_mobile_1789374396077.png",
-    "src": "/media/local/Hero_about_mobile_1789374396077-0jhv26d-660.webp",
-    "srcSet": "/media/local/Hero_about_mobile_1789374396077-1ykdv6o-320.webp 320w, /media/local/Hero_about_mobile_1789374396077-0w6n1e1-480.webp 480w, /media/local/Hero_about_mobile_1789374396077-0jhv26d-660.webp 660w",
+    "src": "/media/local/Hero_about_mobile_1789374396077-481d1fa5d142480d8663-660.webp",
+    "srcSet": "/media/local/Hero_about_mobile_1789374396077-b16428b157a712c9ddee-64.webp 64w, /media/local/Hero_about_mobile_1789374396077-db6a4ceb3b08f9ad7c7e-128.webp 128w, /media/local/Hero_about_mobile_1789374396077-835f5a2e32e338edb89f-192.webp 192w, /media/local/Hero_about_mobile_1789374396077-3709a71e068bf5441041-320.webp 320w, /media/local/Hero_about_mobile_1789374396077-1dbf1c212d669233d86f-480.webp 480w, /media/local/Hero_about_mobile_1789374396077-481d1fa5d142480d8663-660.webp 660w",
     "width": 660,
     "height": 1350
   },
   "local:heroes/Hero_ai_product_1789027068382.png": {
     "source": "/assets/heroes/Hero_ai_product_1789027068382.png",
-    "src": "/media/local/Hero_ai_product_1789027068382-0q9oeqd-1920.webp",
-    "srcSet": "/media/local/Hero_ai_product_1789027068382-14slyge-320.webp 320w, /media/local/Hero_ai_product_1789027068382-0w7it07-480.webp 480w, /media/local/Hero_ai_product_1789027068382-1q967xq-768.webp 768w, /media/local/Hero_ai_product_1789027068382-0d9few4-1200.webp 1200w, /media/local/Hero_ai_product_1789027068382-0vrmzv4-1600.webp 1600w, /media/local/Hero_ai_product_1789027068382-0q9oeqd-1920.webp 1920w",
+    "src": "/media/local/Hero_ai_product_1789027068382-947b35baf2179ca92bad-1920.webp",
+    "srcSet": "/media/local/Hero_ai_product_1789027068382-b88b7ac99e0b0d222d17-64.webp 64w, /media/local/Hero_ai_product_1789027068382-fa6b2d8a656392e48a21-128.webp 128w, /media/local/Hero_ai_product_1789027068382-38f81c72778dc47a329e-192.webp 192w, /media/local/Hero_ai_product_1789027068382-257dd3ce9271c4c09a2b-320.webp 320w, /media/local/Hero_ai_product_1789027068382-c181289cdfbb8628cece-480.webp 480w, /media/local/Hero_ai_product_1789027068382-6e471d18394285ba4437-768.webp 768w, /media/local/Hero_ai_product_1789027068382-3213739905c849d49f6b-1200.webp 1200w, /media/local/Hero_ai_product_1789027068382-10e766af2867a10709da-1600.webp 1600w, /media/local/Hero_ai_product_1789027068382-947b35baf2179ca92bad-1920.webp 1920w",
     "width": 1920,
     "height": 870
   },
   "local:heroes/Hero_akadalymentes_1789027068382.png": {
     "source": "/assets/heroes/Hero_akadalymentes_1789027068382.png",
-    "src": "/media/local/Hero_akadalymentes_1789027068382-197ntic-1920.webp",
-    "srcSet": "/media/local/Hero_akadalymentes_1789027068382-0qdave1-320.webp 320w, /media/local/Hero_akadalymentes_1789027068382-1nnn4jw-480.webp 480w, /media/local/Hero_akadalymentes_1789027068382-1hrwde1-768.webp 768w, /media/local/Hero_akadalymentes_1789027068382-1jy7s5d-1200.webp 1200w, /media/local/Hero_akadalymentes_1789027068382-1hhcx51-1600.webp 1600w, /media/local/Hero_akadalymentes_1789027068382-197ntic-1920.webp 1920w",
+    "src": "/media/local/Hero_akadalymentes_1789027068382-6517262e528671d6393c-1920.webp",
+    "srcSet": "/media/local/Hero_akadalymentes_1789027068382-ff615c462d3a94b2f26b-64.webp 64w, /media/local/Hero_akadalymentes_1789027068382-f05cf7fc5b4fcbe9e705-128.webp 128w, /media/local/Hero_akadalymentes_1789027068382-8c1fb2a43c4ec310ca13-192.webp 192w, /media/local/Hero_akadalymentes_1789027068382-8643c13db0c5f841567e-320.webp 320w, /media/local/Hero_akadalymentes_1789027068382-b3a78d8b4a8a438f9b33-480.webp 480w, /media/local/Hero_akadalymentes_1789027068382-7938e8ea103cf2e0c7c3-768.webp 768w, /media/local/Hero_akadalymentes_1789027068382-e812786e48eaa677f05a-1200.webp 1200w, /media/local/Hero_akadalymentes_1789027068382-2cb26be5d1a5ddf85fdd-1600.webp 1600w, /media/local/Hero_akadalymentes_1789027068382-6517262e528671d6393c-1920.webp 1920w",
     "width": 1920,
     "height": 870
   },
   "local:heroes/Hero_career_1789027068381.png": {
     "source": "/assets/heroes/Hero_career_1789027068381.png",
-    "src": "/media/local/Hero_career_1789027068381-1dmwemg-1920.webp",
-    "srcSet": "/media/local/Hero_career_1789027068381-0a57mpx-320.webp 320w, /media/local/Hero_career_1789027068381-0sbdmls-480.webp 480w, /media/local/Hero_career_1789027068381-1nprf7p-768.webp 768w, /media/local/Hero_career_1789027068381-1gywpat-1200.webp 1200w, /media/local/Hero_career_1789027068381-1nwiuoh-1600.webp 1600w, /media/local/Hero_career_1789027068381-1dmwemg-1920.webp 1920w",
+    "src": "/media/local/Hero_career_1789027068381-ad9ce9ea586432fdcc1f-1920.webp",
+    "srcSet": "/media/local/Hero_career_1789027068381-67c91053d1f569c90aec-64.webp 64w, /media/local/Hero_career_1789027068381-dc553828926b745ea597-128.webp 128w, /media/local/Hero_career_1789027068381-679684ba9aa41d7a0863-192.webp 192w, /media/local/Hero_career_1789027068381-5fd133a4838d05277c03-320.webp 320w, /media/local/Hero_career_1789027068381-9303bd682582d29c8bd1-480.webp 480w, /media/local/Hero_career_1789027068381-bd45565a25ccee1158e9-768.webp 768w, /media/local/Hero_career_1789027068381-292f0ec5d402010eb099-1200.webp 1200w, /media/local/Hero_career_1789027068381-ae8537e9cdfe9abfd85f-1600.webp 1600w, /media/local/Hero_career_1789027068381-ad9ce9ea586432fdcc1f-1920.webp 1920w",
     "width": 1920,
     "height": 870
   },
   "local:heroes/Hero_career_mobile_1789374396078.png": {
     "source": "/assets/heroes/Hero_career_mobile_1789374396078.png",
-    "src": "/media/local/Hero_career_mobile_1789374396078-0g909wl-660.webp",
-    "srcSet": "/media/local/Hero_career_mobile_1789374396078-0gg3qm8-320.webp 320w, /media/local/Hero_career_mobile_1789374396078-1x2bqjt-480.webp 480w, /media/local/Hero_career_mobile_1789374396078-0g909wl-660.webp 660w",
+    "src": "/media/local/Hero_career_mobile_1789374396078-e2aa0f199426f7a2a7ea-660.webp",
+    "srcSet": "/media/local/Hero_career_mobile_1789374396078-cf5ba166592d2ebbd612-64.webp 64w, /media/local/Hero_career_mobile_1789374396078-62d611536d8b679b71f2-128.webp 128w, /media/local/Hero_career_mobile_1789374396078-72f9d110ae41c23be8c6-192.webp 192w, /media/local/Hero_career_mobile_1789374396078-7bfee813d5f14cc83923-320.webp 320w, /media/local/Hero_career_mobile_1789374396078-d87cc03c0181e65e4daa-480.webp 480w, /media/local/Hero_career_mobile_1789374396078-e2aa0f199426f7a2a7ea-660.webp 660w",
     "width": 660,
     "height": 1350
   },
   "local:heroes/Hero_contact_1789027068383.png": {
     "source": "/assets/heroes/Hero_contact_1789027068383.png",
-    "src": "/media/local/Hero_contact_1789027068383-0ms6e08-1920.webp",
-    "srcSet": "/media/local/Hero_contact_1789027068383-040w97p-320.webp 320w, /media/local/Hero_contact_1789027068383-065n8nk-480.webp 480w, /media/local/Hero_contact_1789027068383-1hlg1ph-768.webp 768w, /media/local/Hero_contact_1789027068383-1tgoagl-1200.webp 1200w, /media/local/Hero_contact_1789027068383-1lxxik1-1600.webp 1600w, /media/local/Hero_contact_1789027068383-0ms6e08-1920.webp 1920w",
+    "src": "/media/local/Hero_contact_1789027068383-81c7921fecd2f798f724-1920.webp",
+    "srcSet": "/media/local/Hero_contact_1789027068383-f5ec9414795367a04c95-64.webp 64w, /media/local/Hero_contact_1789027068383-506b3cd893f22b944dba-128.webp 128w, /media/local/Hero_contact_1789027068383-8774b11d8bc0b70385c0-192.webp 192w, /media/local/Hero_contact_1789027068383-94511adc43535a8ad86a-320.webp 320w, /media/local/Hero_contact_1789027068383-a43b5dd9442cd293c209-480.webp 480w, /media/local/Hero_contact_1789027068383-04867e768249d027212d-768.webp 768w, /media/local/Hero_contact_1789027068383-989387dfacfce6a2c1d7-1200.webp 1200w, /media/local/Hero_contact_1789027068383-50de7f3976c45285dc9b-1600.webp 1600w, /media/local/Hero_contact_1789027068383-81c7921fecd2f798f724-1920.webp 1920w",
     "width": 1920,
     "height": 870
   },
   "local:heroes/Hero_contact_mobile_1789374396074.png": {
     "source": "/assets/heroes/Hero_contact_mobile_1789374396074.png",
-    "src": "/media/local/Hero_contact_mobile_1789374396074-0r9a7lj-660.webp",
-    "srcSet": "/media/local/Hero_contact_mobile_1789374396074-1hg90t6-320.webp 320w, /media/local/Hero_contact_mobile_1789374396074-1arupl7-480.webp 480w, /media/local/Hero_contact_mobile_1789374396074-0r9a7lj-660.webp 660w",
+    "src": "/media/local/Hero_contact_mobile_1789374396074-bf10ce4e59ab0422aed1-660.webp",
+    "srcSet": "/media/local/Hero_contact_mobile_1789374396074-8668370658d368a03994-64.webp 64w, /media/local/Hero_contact_mobile_1789374396074-0b9bb5c71c4191bd7f04-128.webp 128w, /media/local/Hero_contact_mobile_1789374396074-378b345eeb1aca50f64e-192.webp 192w, /media/local/Hero_contact_mobile_1789374396074-7830a98b6e0b6f43e3f5-320.webp 320w, /media/local/Hero_contact_mobile_1789374396074-fe66a93d24c7c13f85b5-480.webp 480w, /media/local/Hero_contact_mobile_1789374396074-bf10ce4e59ab0422aed1-660.webp 660w",
     "width": 660,
     "height": 1350
   },
   "local:heroes/Hero_digitalis_kepessegfejlesztes_1789027068383.png": {
     "source": "/assets/heroes/Hero_digitalis_kepessegfejlesztes_1789027068383.png",
-    "src": "/media/local/Hero_digitalis_kepessegfejlesztes_1789027068383-094zd8l-1920.webp",
-    "srcSet": "/media/local/Hero_digitalis_kepessegfejlesztes_1789027068383-1jr8bz2-320.webp 320w, /media/local/Hero_digitalis_kepessegfejlesztes_1789027068383-179hmbr-480.webp 480w, /media/local/Hero_digitalis_kepessegfejlesztes_1789027068383-066ojha-768.webp 768w, /media/local/Hero_digitalis_kepessegfejlesztes_1789027068383-12z7250-1200.webp 1200w, /media/local/Hero_digitalis_kepessegfejlesztes_1789027068383-0f2ifwg-1600.webp 1600w, /media/local/Hero_digitalis_kepessegfejlesztes_1789027068383-094zd8l-1920.webp 1920w",
+    "src": "/media/local/Hero_digitalis_kepessegfejlesztes_1789027068383-52cefaf08aed7f29663b-1920.webp",
+    "srcSet": "/media/local/Hero_digitalis_kepessegfejlesztes_1789027068383-ce49292a7ecdb6e7bd60-64.webp 64w, /media/local/Hero_digitalis_kepessegfejlesztes_1789027068383-d5640673d258a987f000-128.webp 128w, /media/local/Hero_digitalis_kepessegfejlesztes_1789027068383-43fa5684e074ea4dcce6-192.webp 192w, /media/local/Hero_digitalis_kepessegfejlesztes_1789027068383-0813267e7d61c81ee7bd-320.webp 320w, /media/local/Hero_digitalis_kepessegfejlesztes_1789027068383-e3592db27dbcd896d0be-480.webp 480w, /media/local/Hero_digitalis_kepessegfejlesztes_1789027068383-f2c5a9f48dd9235bcf26-768.webp 768w, /media/local/Hero_digitalis_kepessegfejlesztes_1789027068383-c320ccd2a09989cc234f-1200.webp 1200w, /media/local/Hero_digitalis_kepessegfejlesztes_1789027068383-459bc17c20d68ffc6116-1600.webp 1600w, /media/local/Hero_digitalis_kepessegfejlesztes_1789027068383-52cefaf08aed7f29663b-1920.webp 1920w",
     "width": 1920,
     "height": 870
   },
   "local:heroes/Hero_home_1789027068381.png": {
     "source": "/assets/heroes/Hero_home_1789027068381.png",
-    "src": "/media/local/Hero_home_1789027068381-1qkm9tt-1920.webp",
-    "srcSet": "/media/local/Hero_home_1789027068381-1fx1kg2-320.webp 320w, /media/local/Hero_home_1789027068381-0ydn7gj-480.webp 480w, /media/local/Hero_home_1789027068381-1s0vio2-768.webp 768w, /media/local/Hero_home_1789027068381-1u1ahhc-1200.webp 1200w, /media/local/Hero_home_1789027068381-0iwv1qs-1600.webp 1600w, /media/local/Hero_home_1789027068381-1qkm9tt-1920.webp 1920w",
+    "src": "/media/local/Hero_home_1789027068381-e26b7323f75727ada314-1920.webp",
+    "srcSet": "/media/local/Hero_home_1789027068381-e3029d8ae45ab8c738a9-64.webp 64w, /media/local/Hero_home_1789027068381-81e54316446e3ffd35b9-128.webp 128w, /media/local/Hero_home_1789027068381-e9ab3463b0234dc40838-192.webp 192w, /media/local/Hero_home_1789027068381-06613ba927d0031787f8-320.webp 320w, /media/local/Hero_home_1789027068381-4056ba04aa07fe3d37ae-480.webp 480w, /media/local/Hero_home_1789027068381-c9a5dd537c43d83d4fcc-768.webp 768w, /media/local/Hero_home_1789027068381-c0b52bf9a503bc149425-1200.webp 1200w, /media/local/Hero_home_1789027068381-7cb0ef0cb36e443cbd90-1600.webp 1600w, /media/local/Hero_home_1789027068381-e26b7323f75727ada314-1920.webp 1920w",
     "width": 1920,
     "height": 870
   },
   "local:heroes/Hero_home_mobile_1789374396075.png": {
     "source": "/assets/heroes/Hero_home_mobile_1789374396075.png",
-    "src": "/media/local/Hero_home_mobile_1789374396075-1rgz53x-660.webp",
-    "srcSet": "/media/local/Hero_home_mobile_1789374396075-0uy3xo8-320.webp 320w, /media/local/Hero_home_mobile_1789374396075-095iooh-480.webp 480w, /media/local/Hero_home_mobile_1789374396075-1rgz53x-660.webp 660w",
+    "src": "/media/local/Hero_home_mobile_1789374396075-eb9b3ec22183cd24c9e4-660.webp",
+    "srcSet": "/media/local/Hero_home_mobile_1789374396075-df4d2dc6ba33f96b4f3d-64.webp 64w, /media/local/Hero_home_mobile_1789374396075-1e25e4dfd709545a2890-128.webp 128w, /media/local/Hero_home_mobile_1789374396075-c3c16e9c27272bd2fe54-192.webp 192w, /media/local/Hero_home_mobile_1789374396075-f71beb8b3678efc09284-320.webp 320w, /media/local/Hero_home_mobile_1789374396075-4432464c88769c9d353b-480.webp 480w, /media/local/Hero_home_mobile_1789374396075-eb9b3ec22183cd24c9e4-660.webp 660w",
     "width": 660,
     "height": 1350
   },
   "local:heroes/Hero_service_accesibility_mobile_1789374396075.png": {
     "source": "/assets/heroes/Hero_service_accesibility_mobile_1789374396075.png",
-    "src": "/media/local/Hero_service_accesibility_mobile_1789374396075-1oor4db-660.webp",
-    "srcSet": "/media/local/Hero_service_accesibility_mobile_1789374396075-0cbqgqq-320.webp 320w, /media/local/Hero_service_accesibility_mobile_1789374396075-1ttg5qb-480.webp 480w, /media/local/Hero_service_accesibility_mobile_1789374396075-1oor4db-660.webp 660w",
+    "src": "/media/local/Hero_service_accesibility_mobile_1789374396075-3aa338d34878222d0384-660.webp",
+    "srcSet": "/media/local/Hero_service_accesibility_mobile_1789374396075-4e266c40a9cf2c766e88-64.webp 64w, /media/local/Hero_service_accesibility_mobile_1789374396075-102a9fa75e44dec2bf61-128.webp 128w, /media/local/Hero_service_accesibility_mobile_1789374396075-a1295bc8cdb61500469a-192.webp 192w, /media/local/Hero_service_accesibility_mobile_1789374396075-a066905ecec72afaef8a-320.webp 320w, /media/local/Hero_service_accesibility_mobile_1789374396075-db2816ac32359dec4eac-480.webp 480w, /media/local/Hero_service_accesibility_mobile_1789374396075-3aa338d34878222d0384-660.webp 660w",
     "width": 660,
     "height": 1350
   },
   "local:heroes/Hero_service_ai_product_mobile_1789374396075.png": {
     "source": "/assets/heroes/Hero_service_ai_product_mobile_1789374396075.png",
-    "src": "/media/local/Hero_service_ai_product_mobile_1789374396075-096cg68-660.webp",
-    "srcSet": "/media/local/Hero_service_ai_product_mobile_1789374396075-0sy3p4d-320.webp 320w, /media/local/Hero_service_ai_product_mobile_1789374396075-1jcqxs8-480.webp 480w, /media/local/Hero_service_ai_product_mobile_1789374396075-096cg68-660.webp 660w",
+    "src": "/media/local/Hero_service_ai_product_mobile_1789374396075-ac95185ca521bfcfcd52-660.webp",
+    "srcSet": "/media/local/Hero_service_ai_product_mobile_1789374396075-180285f91748a3301360-64.webp 64w, /media/local/Hero_service_ai_product_mobile_1789374396075-9442e75058fe0837c414-128.webp 128w, /media/local/Hero_service_ai_product_mobile_1789374396075-98460641add0ff4f288c-192.webp 192w, /media/local/Hero_service_ai_product_mobile_1789374396075-fa62d5b2b90d338c0149-320.webp 320w, /media/local/Hero_service_ai_product_mobile_1789374396075-eb038e72e1837e6bde5b-480.webp 480w, /media/local/Hero_service_ai_product_mobile_1789374396075-ac95185ca521bfcfcd52-660.webp 660w",
     "width": 660,
     "height": 1350
   },
   "local:heroes/Hero_service_design_1789027068382.png": {
     "source": "/assets/heroes/Hero_service_design_1789027068382.png",
-    "src": "/media/local/Hero_service_design_1789027068382-09pdxz9-1920.webp",
-    "srcSet": "/media/local/Hero_service_design_1789027068382-0u421b2-320.webp 320w, /media/local/Hero_service_design_1789027068382-0hmbbnr-480.webp 480w, /media/local/Hero_service_design_1789027068382-1fkmase-768.webp 768w, /media/local/Hero_service_design_1789027068382-13jlmvo-1200.webp 1200w, /media/local/Hero_service_design_1789027068382-0fmx0n4-1600.webp 1600w, /media/local/Hero_service_design_1789027068382-09pdxz9-1920.webp 1920w",
+    "src": "/media/local/Hero_service_design_1789027068382-06904281778235bdf4b8-1920.webp",
+    "srcSet": "/media/local/Hero_service_design_1789027068382-150977d561350e288007-64.webp 64w, /media/local/Hero_service_design_1789027068382-c1b30a5981a88d793819-128.webp 128w, /media/local/Hero_service_design_1789027068382-35ae2db6209bfddcf880-192.webp 192w, /media/local/Hero_service_design_1789027068382-48b3e90ba42715e1343a-320.webp 320w, /media/local/Hero_service_design_1789027068382-bb7b9b335fd80a30d22f-480.webp 480w, /media/local/Hero_service_design_1789027068382-9fd53b4f4c571b3c617a-768.webp 768w, /media/local/Hero_service_design_1789027068382-16fb4cae205a47604395-1200.webp 1200w, /media/local/Hero_service_design_1789027068382-d4b572c5f359514f8f97-1600.webp 1600w, /media/local/Hero_service_design_1789027068382-06904281778235bdf4b8-1920.webp 1920w",
     "width": 1920,
     "height": 870
   },
   "local:heroes/Hero_service_digital_mobile_1789374396076.png": {
     "source": "/assets/heroes/Hero_service_digital_mobile_1789374396076.png",
-    "src": "/media/local/Hero_service_digital_mobile_1789374396076-07f3mbp-660.webp",
-    "srcSet": "/media/local/Hero_service_digital_mobile_1789374396076-1mhmfc0-320.webp 320w, /media/local/Hero_service_digital_mobile_1789374396076-0k3vljd-480.webp 480w, /media/local/Hero_service_digital_mobile_1789374396076-07f3mbp-660.webp 660w",
+    "src": "/media/local/Hero_service_digital_mobile_1789374396076-d7e2565ede3659bded27-660.webp",
+    "srcSet": "/media/local/Hero_service_digital_mobile_1789374396076-6cacc9388f2db6cb4a98-64.webp 64w, /media/local/Hero_service_digital_mobile_1789374396076-9f88dc993c99495f6ff2-128.webp 128w, /media/local/Hero_service_digital_mobile_1789374396076-a62608b0e3c7738bd5ac-192.webp 192w, /media/local/Hero_service_digital_mobile_1789374396076-44945d0286d451555171-320.webp 320w, /media/local/Hero_service_digital_mobile_1789374396076-385898a1602fa3c7e9a5-480.webp 480w, /media/local/Hero_service_digital_mobile_1789374396076-d7e2565ede3659bded27-660.webp 660w",
     "width": 660,
     "height": 1350
   },
   "local:heroes/Hero_service_sevice_design_mobile_1789374396076.png": {
     "source": "/assets/heroes/Hero_service_sevice_design_mobile_1789374396076.png",
-    "src": "/media/local/Hero_service_sevice_design_mobile_1789374396076-1gykyq5-660.webp",
-    "srcSet": "/media/local/Hero_service_sevice_design_mobile_1789374396076-1afuaeg-320.webp 320w, /media/local/Hero_service_sevice_design_mobile_1789374396076-1nv6ba9-480.webp 480w, /media/local/Hero_service_sevice_design_mobile_1789374396076-1gykyq5-660.webp 660w",
+    "src": "/media/local/Hero_service_sevice_design_mobile_1789374396076-d3f1b5eaab2f55fa7954-660.webp",
+    "srcSet": "/media/local/Hero_service_sevice_design_mobile_1789374396076-74142bf10ef78a41b7f6-64.webp 64w, /media/local/Hero_service_sevice_design_mobile_1789374396076-5c88be33b4a03262696e-128.webp 128w, /media/local/Hero_service_sevice_design_mobile_1789374396076-39dbe94d81324e9bb576-192.webp 192w, /media/local/Hero_service_sevice_design_mobile_1789374396076-df2f48cd2d16dc4151fd-320.webp 320w, /media/local/Hero_service_sevice_design_mobile_1789374396076-7e1690377f893e555138-480.webp 480w, /media/local/Hero_service_sevice_design_mobile_1789374396076-d3f1b5eaab2f55fa7954-660.webp 660w",
     "width": 660,
     "height": 1350
   },
   "local:heroes/Hero_service_ux_kutatas_mobile_1789374396076.png": {
     "source": "/assets/heroes/Hero_service_ux_kutatas_mobile_1789374396076.png",
-    "src": "/media/local/Hero_service_ux_kutatas_mobile_1789374396076-1goei3e-660.webp",
-    "srcSet": "/media/local/Hero_service_ux_kutatas_mobile_1789374396076-1wz7zrb-320.webp 320w, /media/local/Hero_service_ux_kutatas_mobile_1789374396076-0j5ujgi-480.webp 480w, /media/local/Hero_service_ux_kutatas_mobile_1789374396076-1goei3e-660.webp 660w",
+    "src": "/media/local/Hero_service_ux_kutatas_mobile_1789374396076-46d98f09e1cfcdac12cb-660.webp",
+    "srcSet": "/media/local/Hero_service_ux_kutatas_mobile_1789374396076-0289b5507ec31956c13c-64.webp 64w, /media/local/Hero_service_ux_kutatas_mobile_1789374396076-5981942d561a825a51de-128.webp 128w, /media/local/Hero_service_ux_kutatas_mobile_1789374396076-c0070eb8434f2b7fb974-192.webp 192w, /media/local/Hero_service_ux_kutatas_mobile_1789374396076-7c06a5b2ba2723ca01c8-320.webp 320w, /media/local/Hero_service_ux_kutatas_mobile_1789374396076-014dfe7070612fc63411-480.webp 480w, /media/local/Hero_service_ux_kutatas_mobile_1789374396076-46d98f09e1cfcdac12cb-660.webp 660w",
     "width": 660,
     "height": 1350
   },
   "local:heroes/Hero_service_uxui_design_mobile_1789374396077.png": {
     "source": "/assets/heroes/Hero_service_uxui_design_mobile_1789374396077.png",
-    "src": "/media/local/Hero_service_uxui_design_mobile_1789374396077-1cmafo6-660.webp",
-    "srcSet": "/media/local/Hero_service_uxui_design_mobile_1789374396077-08zexb7-320.webp 320w, /media/local/Hero_service_uxui_design_mobile_1789374396077-04ocpkm-480.webp 480w, /media/local/Hero_service_uxui_design_mobile_1789374396077-1cmafo6-660.webp 660w",
+    "src": "/media/local/Hero_service_uxui_design_mobile_1789374396077-bd6340bacef9262dc72a-660.webp",
+    "srcSet": "/media/local/Hero_service_uxui_design_mobile_1789374396077-cdf6f8d2c94dfa06d9f5-64.webp 64w, /media/local/Hero_service_uxui_design_mobile_1789374396077-583c235e62ea6643e621-128.webp 128w, /media/local/Hero_service_uxui_design_mobile_1789374396077-15dbd8d41886b6fcf95f-192.webp 192w, /media/local/Hero_service_uxui_design_mobile_1789374396077-41d0d849e528c8fd9d7d-320.webp 320w, /media/local/Hero_service_uxui_design_mobile_1789374396077-9ee228e4284c01494674-480.webp 480w, /media/local/Hero_service_uxui_design_mobile_1789374396077-bd6340bacef9262dc72a-660.webp 660w",
     "width": 660,
     "height": 1350
   },
   "local:heroes/Hero_ux_kutatas_1789027068382.png": {
     "source": "/assets/heroes/Hero_ux_kutatas_1789027068382.png",
-    "src": "/media/local/Hero_ux_kutatas_1789027068382-06wejco-1920.webp",
-    "srcSet": "/media/local/Hero_ux_kutatas_1789027068382-06wvd6d-320.webp 320w, /media/local/Hero_ux_kutatas_1789027068382-13ydesg-480.webp 480w, /media/local/Hero_ux_kutatas_1789027068382-1khf5o5-768.webp 768w, /media/local/Hero_ux_kutatas_1789027068382-0cbzqmd-1200.webp 1200w, /media/local/Hero_ux_kutatas_1789027068382-1t1clxd-1600.webp 1600w, /media/local/Hero_ux_kutatas_1789027068382-06wejco-1920.webp 1920w",
+    "src": "/media/local/Hero_ux_kutatas_1789027068382-7c69076e0b861cd6bbf8-1920.webp",
+    "srcSet": "/media/local/Hero_ux_kutatas_1789027068382-1976eedc889957539d2c-64.webp 64w, /media/local/Hero_ux_kutatas_1789027068382-90f7891e8e530481eddc-128.webp 128w, /media/local/Hero_ux_kutatas_1789027068382-d1ff62867360ac42d639-192.webp 192w, /media/local/Hero_ux_kutatas_1789027068382-401a45c365ac732a2fed-320.webp 320w, /media/local/Hero_ux_kutatas_1789027068382-488ef83f5330c67535bb-480.webp 480w, /media/local/Hero_ux_kutatas_1789027068382-5037d64727d0b0c418c1-768.webp 768w, /media/local/Hero_ux_kutatas_1789027068382-1a95bd9546619522deac-1200.webp 1200w, /media/local/Hero_ux_kutatas_1789027068382-e9e37163b922e2b84939-1600.webp 1600w, /media/local/Hero_ux_kutatas_1789027068382-7c69076e0b861cd6bbf8-1920.webp 1920w",
     "width": 1920,
     "height": 870
   },
   "local:heroes/UI_Design_1789027068381.png": {
     "source": "/assets/heroes/UI_Design_1789027068381.png",
-    "src": "/media/local/UI_Design_1789027068381-0dubz22-1920.webp",
-    "srcSet": "/media/local/UI_Design_1789027068381-0pkf5uf-320.webp 320w, /media/local/UI_Design_1789027068381-1gpc74i-480.webp 480w, /media/local/UI_Design_1789027068381-0pg46nb-768.webp 768w, /media/local/UI_Design_1789027068381-0rpfqgf-1200.webp 1200w, /media/local/UI_Design_1789027068381-0elg363-1600.webp 1600w, /media/local/UI_Design_1789027068381-0dubz22-1920.webp 1920w",
+    "src": "/media/local/UI_Design_1789027068381-ea0bd59ad5824c819165-1920.webp",
+    "srcSet": "/media/local/UI_Design_1789027068381-30f9ecb97d7c19f825ff-64.webp 64w, /media/local/UI_Design_1789027068381-07ef68db9db8ea6f845a-128.webp 128w, /media/local/UI_Design_1789027068381-2afa49069ff73437398a-192.webp 192w, /media/local/UI_Design_1789027068381-950ff13489d6d453fd7c-320.webp 320w, /media/local/UI_Design_1789027068381-d58c9ccddcd812e67dad-480.webp 480w, /media/local/UI_Design_1789027068381-9d117b8cc3b5ccbeda26-768.webp 768w, /media/local/UI_Design_1789027068381-8f6dec9d0acc04461620-1200.webp 1200w, /media/local/UI_Design_1789027068381-0065706e1108f5bf7c82-1600.webp 1600w, /media/local/UI_Design_1789027068381-ea0bd59ad5824c819165-1920.webp 1920w",
     "width": 1920,
     "height": 870
   },
   "local:home-hero.png": {
     "source": "/assets/home-hero.png",
-    "src": "/media/local/home-hero-12cf5dn-1920.webp",
-    "srcSet": "/media/local/home-hero-15ciq58-320.webp 320w, /media/local/home-hero-0jrxvsd-480.webp 480w, /media/local/home-hero-0syh2ic-768.webp 768w, /media/local/home-hero-0bgg78a-1200.webp 1200w, /media/local/home-hero-0bov0ge-1600.webp 1600w, /media/local/home-hero-12cf5dn-1920.webp 1920w",
+    "src": "/media/local/home-hero-61e001cb2f5838041bc7-1920.webp",
+    "srcSet": "/media/local/home-hero-c7c43dc7eff6f721854a-64.webp 64w, /media/local/home-hero-14f3f98146e6b003ee50-128.webp 128w, /media/local/home-hero-7812b8ef6bf44b368e0e-192.webp 192w, /media/local/home-hero-21b76dc9fe8d68613b92-320.webp 320w, /media/local/home-hero-655de870558ded5f7851-480.webp 480w, /media/local/home-hero-d3324fea04ffe56c2f86-768.webp 768w, /media/local/home-hero-16b17017752fd2626f0d-1200.webp 1200w, /media/local/home-hero-d2b43361b85f5d267965-1600.webp 1600w, /media/local/home-hero-61e001cb2f5838041bc7-1920.webp 1920w",
     "width": 1920,
     "height": 1000
   },
+  "local:homepage_graphic_1773999340930.png": {
+    "source": "/assets/homepage_graphic_1773999340930.png",
+    "src": "/media/local/homepage_graphic_1773999340930-3c7bc8fe119c6d40ad6c-2268.webp",
+    "srcSet": "/media/local/homepage_graphic_1773999340930-b9cb6c38f15b6e03ef1b-64.webp 64w, /media/local/homepage_graphic_1773999340930-de5f908ce3ca2be83ee8-128.webp 128w, /media/local/homepage_graphic_1773999340930-056565c3f322fafca861-192.webp 192w, /media/local/homepage_graphic_1773999340930-1171e0fbdf9e31691a79-320.webp 320w, /media/local/homepage_graphic_1773999340930-f1f0a70b3534893ae203-480.webp 480w, /media/local/homepage_graphic_1773999340930-2c01ae191ec3ff5f9f1b-768.webp 768w, /media/local/homepage_graphic_1773999340930-f98d49b8a01db46e9e34-1200.webp 1200w, /media/local/homepage_graphic_1773999340930-dee1f87fd1e307cc313a-1600.webp 1600w, /media/local/homepage_graphic_1773999340930-3a496c54744fae7f2235-1920.webp 1920w, /media/local/homepage_graphic_1773999340930-3c7bc8fe119c6d40ad6c-2268.webp 2268w",
+    "width": 2268,
+    "height": 2420
+  },
+  "local:New_logo_1773998946128.png": {
+    "source": "/assets/New_logo_1773998946128.png",
+    "src": "/media/local/New_logo_1773998946128-cbf57cf6413db64fc1bb-260.webp",
+    "srcSet": "/media/local/New_logo_1773998946128-ed4e4188ba2fb0d4a4f8-64.webp 64w, /media/local/New_logo_1773998946128-917029f6454d600e15d8-128.webp 128w, /media/local/New_logo_1773998946128-8fb703f29b9bda7304af-192.webp 192w, /media/local/New_logo_1773998946128-cbf57cf6413db64fc1bb-260.webp 260w",
+    "width": 260,
+    "height": 65
+  },
   "local:project-accessibility-clean.png": {
     "source": "/assets/project-accessibility-clean.png",
-    "src": "/media/local/project-accessibility-clean-13xjtqw-1280.webp",
-    "srcSet": "/media/local/project-accessibility-clean-0lq28wi-320.webp 320w, /media/local/project-accessibility-clean-0tapyoj-480.webp 480w, /media/local/project-accessibility-clean-009hzf6-768.webp 768w, /media/local/project-accessibility-clean-0oqzqa8-1200.webp 1200w, /media/local/project-accessibility-clean-13xjtqw-1280.webp 1280w",
+    "src": "/media/local/project-accessibility-clean-e78e9aacd64760f0ddb6-1280.webp",
+    "srcSet": "/media/local/project-accessibility-clean-06c8f1716a3260062524-64.webp 64w, /media/local/project-accessibility-clean-320fa7773ace52526055-128.webp 128w, /media/local/project-accessibility-clean-532959dcdeabd9086ce8-192.webp 192w, /media/local/project-accessibility-clean-0b4d74236f566869f318-320.webp 320w, /media/local/project-accessibility-clean-05aa1fde458c0d4d345c-480.webp 480w, /media/local/project-accessibility-clean-0a929e7f6383d23f7f3b-768.webp 768w, /media/local/project-accessibility-clean-e144a04e982bd85d96d4-1200.webp 1200w, /media/local/project-accessibility-clean-e78e9aacd64760f0ddb6-1280.webp 1280w",
     "width": 1280,
     "height": 896
   },
   "local:project-accessibility-mockup.png": {
     "source": "/assets/project-accessibility-mockup.png",
-    "src": "/media/local/project-accessibility-mockup-1o9s5x4-1280.webp",
-    "srcSet": "/media/local/project-accessibility-mockup-1wzjm42-320.webp 320w, /media/local/project-accessibility-mockup-1a6pnxv-480.webp 480w, /media/local/project-accessibility-mockup-1bizcmq-768.webp 768w, /media/local/project-accessibility-mockup-0yrt6uo-1200.webp 1200w, /media/local/project-accessibility-mockup-1o9s5x4-1280.webp 1280w",
+    "src": "/media/local/project-accessibility-mockup-a735dc5151a005b2e2eb-1280.webp",
+    "srcSet": "/media/local/project-accessibility-mockup-26b0ad0a9c0b16d10df7-64.webp 64w, /media/local/project-accessibility-mockup-c3e035149de319f9d41c-128.webp 128w, /media/local/project-accessibility-mockup-4b656533aa1a3b5e3e9f-192.webp 192w, /media/local/project-accessibility-mockup-d6eb7490435e8674d061-320.webp 320w, /media/local/project-accessibility-mockup-3c812b925f313f718004-480.webp 480w, /media/local/project-accessibility-mockup-a4b1df70f7f591d5cb40-768.webp 768w, /media/local/project-accessibility-mockup-c58a767fa0e15501cd86-1200.webp 1200w, /media/local/project-accessibility-mockup-a735dc5151a005b2e2eb-1280.webp 1280w",
     "width": 1280,
     "height": 896
   },
   "local:project-ai-design-mockup.png": {
     "source": "/assets/project-ai-design-mockup.png",
-    "src": "/media/local/project-ai-design-mockup-0evb94x-1280.webp",
-    "srcSet": "/media/local/project-ai-design-mockup-1ei6j5t-320.webp 320w, /media/local/project-ai-design-mockup-0v8emus-480.webp 480w, /media/local/project-ai-design-mockup-0cttr3l-768.webp 768w, /media/local/project-ai-design-mockup-1fd5vft-1200.webp 1200w, /media/local/project-ai-design-mockup-0evb94x-1280.webp 1280w",
+    "src": "/media/local/project-ai-design-mockup-11d6ac9a1f4e2d4a22d7-1280.webp",
+    "srcSet": "/media/local/project-ai-design-mockup-561d42795d6b1800244e-64.webp 64w, /media/local/project-ai-design-mockup-f2c1e166e7e50d4939e0-128.webp 128w, /media/local/project-ai-design-mockup-76490e91810376069fbf-192.webp 192w, /media/local/project-ai-design-mockup-9d3968968d8e7fcd9ad5-320.webp 320w, /media/local/project-ai-design-mockup-981e4c40d6373cf7b7d8-480.webp 480w, /media/local/project-ai-design-mockup-53404737237940024a30-768.webp 768w, /media/local/project-ai-design-mockup-8c76af08e48d48a84c10-1200.webp 1200w, /media/local/project-ai-design-mockup-11d6ac9a1f4e2d4a22d7-1280.webp 1280w",
     "width": 1280,
     "height": 896
   },
   "local:project-banking-clean.png": {
     "source": "/assets/project-banking-clean.png",
-    "src": "/media/local/project-banking-clean-10dbhhm-1280.webp",
-    "srcSet": "/media/local/project-banking-clean-0ou29xg-320.webp 320w, /media/local/project-banking-clean-0g77cg5-480.webp 480w, /media/local/project-banking-clean-0wee6vg-768.webp 768w, /media/local/project-banking-clean-04373gy-1200.webp 1200w, /media/local/project-banking-clean-10dbhhm-1280.webp 1280w",
+    "src": "/media/local/project-banking-clean-aa6b07a1f2c361176e0a-1280.webp",
+    "srcSet": "/media/local/project-banking-clean-812a37b522ce8649eece-64.webp 64w, /media/local/project-banking-clean-2f55a689e8900f691542-128.webp 128w, /media/local/project-banking-clean-4022bf3480d9bca2324f-192.webp 192w, /media/local/project-banking-clean-2dad831a9e07853aec10-320.webp 320w, /media/local/project-banking-clean-65b26d5359948b889b6e-480.webp 480w, /media/local/project-banking-clean-17ac81e34f8c939190d6-768.webp 768w, /media/local/project-banking-clean-fc562906f2e908e54480-1200.webp 1200w, /media/local/project-banking-clean-aa6b07a1f2c361176e0a-1280.webp 1280w",
     "width": 1280,
     "height": 896
   },
   "local:project-banking-mockup.png": {
     "source": "/assets/project-banking-mockup.png",
-    "src": "/media/local/project-banking-mockup-0z6ttia-1280.webp",
-    "srcSet": "/media/local/project-banking-mockup-1bs21ss-320.webp 320w, /media/local/project-banking-mockup-1dcfral-480.webp 480w, /media/local/project-banking-mockup-0kbtc50-768.webp 768w, /media/local/project-banking-mockup-0myg8gq-1200.webp 1200w, /media/local/project-banking-mockup-0z6ttia-1280.webp 1280w",
+    "src": "/media/local/project-banking-mockup-fa0b652c8fee30425ce8-1280.webp",
+    "srcSet": "/media/local/project-banking-mockup-b910f02eeac6b0915f1c-64.webp 64w, /media/local/project-banking-mockup-f4722988fc8900583da6-128.webp 128w, /media/local/project-banking-mockup-58bd82cb6fb8a33e03d7-192.webp 192w, /media/local/project-banking-mockup-ffb4eaa3fd8f41b45686-320.webp 320w, /media/local/project-banking-mockup-b6a38e12872ec7f99f8a-480.webp 480w, /media/local/project-banking-mockup-e6a5d5149225b3cb910a-768.webp 768w, /media/local/project-banking-mockup-d51657fa97400d50d624-1200.webp 1200w, /media/local/project-banking-mockup-fa0b652c8fee30425ce8-1280.webp 1280w",
     "width": 1280,
     "height": 896
   },
   "local:project-fintech-mockup.png": {
     "source": "/assets/project-fintech-mockup.png",
-    "src": "/media/local/project-fintech-mockup-0ysu8rr-1280.webp",
-    "srcSet": "/media/local/project-fintech-mockup-0rpon8n-320.webp 320w, /media/local/project-fintech-mockup-1pd65wi-480.webp 480w, /media/local/project-fintech-mockup-0xqqdx3-768.webp 768w, /media/local/project-fintech-mockup-0phohq7-1200.webp 1200w, /media/local/project-fintech-mockup-0ysu8rr-1280.webp 1280w",
+    "src": "/media/local/project-fintech-mockup-8a3b9b1b2994eed36984-1280.webp",
+    "srcSet": "/media/local/project-fintech-mockup-a1e45c1a03437571c9d2-64.webp 64w, /media/local/project-fintech-mockup-4d8d1c38cb4f6ddd8ad8-128.webp 128w, /media/local/project-fintech-mockup-d7a8e1125475288eac27-192.webp 192w, /media/local/project-fintech-mockup-d7263ab8fdcf91a21f03-320.webp 320w, /media/local/project-fintech-mockup-fe5ea50c004a5cf914b2-480.webp 480w, /media/local/project-fintech-mockup-f675570b2d55ab745c22-768.webp 768w, /media/local/project-fintech-mockup-fc0d37b0db16b625b0e8-1200.webp 1200w, /media/local/project-fintech-mockup-8a3b9b1b2994eed36984-1280.webp 1280w",
     "width": 1280,
     "height": 896
   },
   "local:project-healthcare-mockup.png": {
     "source": "/assets/project-healthcare-mockup.png",
-    "src": "/media/local/project-healthcare-mockup-1g0ictx-1280.webp",
-    "srcSet": "/media/local/project-healthcare-mockup-0nrebgt-320.webp 320w, /media/local/project-healthcare-mockup-0vjpt48-480.webp 480w, /media/local/project-healthcare-mockup-04ioqpp-768.webp 768w, /media/local/project-healthcare-mockup-0jsmll9-1200.webp 1200w, /media/local/project-healthcare-mockup-1g0ictx-1280.webp 1280w",
+    "src": "/media/local/project-healthcare-mockup-1ec51aae180d8705e38d-1280.webp",
+    "srcSet": "/media/local/project-healthcare-mockup-84bf0133b886bea420ed-64.webp 64w, /media/local/project-healthcare-mockup-b038f97b00e21b9af968-128.webp 128w, /media/local/project-healthcare-mockup-2355e3e3298f9ff82f99-192.webp 192w, /media/local/project-healthcare-mockup-8136a0f89600fb4194cc-320.webp 320w, /media/local/project-healthcare-mockup-a772f7e70b0bce0db94e-480.webp 480w, /media/local/project-healthcare-mockup-4aef7e5c1af86ca8c0a7-768.webp 768w, /media/local/project-healthcare-mockup-8332f5f80fd9b18bb490-1200.webp 1200w, /media/local/project-healthcare-mockup-1ec51aae180d8705e38d-1280.webp 1280w",
     "width": 1280,
     "height": 896
   },
   "local:project-logistics-clean.png": {
     "source": "/assets/project-logistics-clean.png",
-    "src": "/media/local/project-logistics-clean-0d2rrrr-1280.webp",
-    "srcSet": "/media/local/project-logistics-clean-1gun42f-320.webp 320w, /media/local/project-logistics-clean-08yg3de-480.webp 480w, /media/local/project-logistics-clean-1gqc4vb-768.webp 768w, /media/local/project-logistics-clean-0dbzbu7-1200.webp 1200w, /media/local/project-logistics-clean-0d2rrrr-1280.webp 1280w",
+    "src": "/media/local/project-logistics-clean-07978cdbcf60ea0b065e-1280.webp",
+    "srcSet": "/media/local/project-logistics-clean-d01e4a80041e1fa60f77-64.webp 64w, /media/local/project-logistics-clean-0d147cffa8e5eda1f895-128.webp 128w, /media/local/project-logistics-clean-4b047f9e0b6a24db2d3f-192.webp 192w, /media/local/project-logistics-clean-5e47b8e0ce44db56e251-320.webp 320w, /media/local/project-logistics-clean-a1cefbe54a9ac9ff90b5-480.webp 480w, /media/local/project-logistics-clean-642def61388525390b24-768.webp 768w, /media/local/project-logistics-clean-9ba19439695df8d6cc0f-1200.webp 1200w, /media/local/project-logistics-clean-07978cdbcf60ea0b065e-1280.webp 1280w",
     "width": 1280,
     "height": 896
   },
   "local:project-logistics-mockup.png": {
     "source": "/assets/project-logistics-mockup.png",
-    "src": "/media/local/project-logistics-mockup-16wuyrl-1280.webp",
-    "srcSet": "/media/local/project-logistics-mockup-17yqpdt-320.webp 320w, /media/local/project-logistics-mockup-0ooyt2s-480.webp 480w, /media/local/project-logistics-mockup-06adxbl-768.webp 768w, /media/local/project-logistics-mockup-08dlj3d-1200.webp 1200w, /media/local/project-logistics-mockup-16wuyrl-1280.webp 1280w",
+    "src": "/media/local/project-logistics-mockup-21033874f9bfdd4baa80-1280.webp",
+    "srcSet": "/media/local/project-logistics-mockup-27100eec2b07ce562ea5-64.webp 64w, /media/local/project-logistics-mockup-59e2d802f38a303a04c7-128.webp 128w, /media/local/project-logistics-mockup-aceb918ecd8d8ccf2396-192.webp 192w, /media/local/project-logistics-mockup-98252371fde057ff7cb3-320.webp 320w, /media/local/project-logistics-mockup-8dfa4420d7d2655c2c3b-480.webp 480w, /media/local/project-logistics-mockup-f1cc560977e4e0497009-768.webp 768w, /media/local/project-logistics-mockup-4f20ef62fc97555ae007-1200.webp 1200w, /media/local/project-logistics-mockup-21033874f9bfdd4baa80-1280.webp 1280w",
     "width": 1280,
     "height": 896
+  },
+  "local:Purposeful_1774354143676.png": {
+    "source": "/assets/Purposeful_1774354143676.png",
+    "src": "/media/local/Purposeful_1774354143676-f6fd1f79cf949cb6479f-1542.webp",
+    "srcSet": "/media/local/Purposeful_1774354143676-488fd137e208d66079df-64.webp 64w, /media/local/Purposeful_1774354143676-7559e8f73f39a291f4da-128.webp 128w, /media/local/Purposeful_1774354143676-169d1c925f4ce8c103dd-192.webp 192w, /media/local/Purposeful_1774354143676-275ca92ae69ed0d12815-320.webp 320w, /media/local/Purposeful_1774354143676-79cbedff439b09b4f0fe-480.webp 480w, /media/local/Purposeful_1774354143676-bba5f1012f4312964c0e-768.webp 768w, /media/local/Purposeful_1774354143676-f806ee3b0dea465a7527-1200.webp 1200w, /media/local/Purposeful_1774354143676-f6fd1f79cf949cb6479f-1542.webp 1542w",
+    "width": 1542,
+    "height": 768
+  },
+  "local:works-background_1774441334981.png": {
+    "source": "/assets/works-background_1774441334981.png",
+    "src": "/media/local/works-background_1774441334981-090cc8e078e3e115950f-1527.webp",
+    "srcSet": "/media/local/works-background_1774441334981-66f5b2f4b23d907bee9e-64.webp 64w, /media/local/works-background_1774441334981-cf6f20cd358f01111ac5-128.webp 128w, /media/local/works-background_1774441334981-3a7f80116b3be2615122-192.webp 192w, /media/local/works-background_1774441334981-c59b336ff4d374ecc9fb-320.webp 320w, /media/local/works-background_1774441334981-ff493099b8737371c07c-480.webp 480w, /media/local/works-background_1774441334981-d911853931791702326f-768.webp 768w, /media/local/works-background_1774441334981-47d8679665722669d07c-1200.webp 1200w, /media/local/works-background_1774441334981-090cc8e078e3e115950f-1527.webp 1527w",
+    "width": 1527,
+    "height": 1761
   }
 };
 
 export const optimizedCmsImageVariants: Record<string, Array<[string, number]>> = {
   "/strapi/uploads/AI_tamogatott_kutatas_3cb6dd6087.png": [
     [
-      "1r3xkl4",
+      "d54821f1abf1138c8174",
+      64
+    ],
+    [
+      "6303fc910c25e7eb7b11",
+      128
+    ],
+    [
+      "a233638a8f4d32d86a1b",
+      192
+    ],
+    [
+      "99e60c1bdf9a5b0cf2aa",
       320
     ],
     [
-      "1eqqbox",
+      "5c2e425faaa32b05ba3b",
       480
     ],
     [
-      "0a0muvk",
+      "9df7b35cb9ad53f6ade2",
       768
     ],
     [
-      "0uiefla",
+      "cdf4a30312ef31f8d172",
       1200
     ],
     [
-      "1a2znqy",
+      "8e78f975c04999762851",
       1600
     ],
     [
-      "0boifrf",
+      "a7ea795c47aa8c15b6f7",
       1627
     ]
   ],
   "/strapi/uploads/Abacus_505ec49332.png": [
     [
-      "0qn7y8f",
+      "588a3225c40d461ceb00",
+      64
+    ],
+    [
+      "a224c91843897e95c861",
+      128
+    ],
+    [
+      "41527e552a175a249b80",
+      192
+    ],
+    [
+      "d4195682cef6bedbbe6f",
       246
     ]
   ],
   "/strapi/uploads/Akos_48fabd8914.webp": [
     [
-      "17qtmj6",
+      "a0c49c54312dbdeef54c",
+      64
+    ],
+    [
+      "0490aefb8427f11ea724",
+      128
+    ],
+    [
+      "8c404ab380b0a2319d6d",
+      192
+    ],
+    [
+      "a9c0f2be5243b8e1a6d7",
       320
     ],
     [
-      "18bkudj",
+      "e446a6a3819d1f197c9a",
       440
     ]
   ],
   "/strapi/uploads/Alerant_rebrand_9cefeb80ae.png": [
     [
-      "1ybk0kc",
+      "0a1508029f012920d8c4",
+      64
+    ],
+    [
+      "4992bda7143a58a0a22c",
+      128
+    ],
+    [
+      "f7d04c31b1607d1dcbd3",
+      192
+    ],
+    [
+      "9ac02787daee5f60c01c",
       320
     ],
     [
-      "1cqz67h",
+      "a3f9c8b00a54d36cd23b",
       480
     ],
     [
-      "1lxicxg",
+      "dc1074fa46f03754052d",
       768
     ],
     [
-      "0dm7x9m",
+      "dedff248cc553060e213",
       1024
     ]
   ],
   "/strapi/uploads/Alfa_5158d1610f.png": [
     [
-      "0hxqzct",
+      "9a1a49cbbf0e57f0ec3e",
+      64
+    ],
+    [
+      "15da2d89cf186bd1663c",
+      128
+    ],
+    [
+      "58a13645af712180c067",
+      192
+    ],
+    [
+      "4a6935212e2cbb32a4ed",
       252
     ]
   ],
   "/strapi/uploads/Alfa_Biztosito_Ugyfelportal_f39ec1d9c4.png": [
     [
-      "1wteqp8",
+      "14dd1a6a4620d4f94911",
+      64
+    ],
+    [
+      "7fb46fe9dfddc3a67382",
+      128
+    ],
+    [
+      "27e934fa45197313f826",
+      192
+    ],
+    [
+      "50ca72d9ac91988a9a5e",
       320
     ],
     [
-      "0llwbct",
+      "2e38c710509bd0cbd0b1",
       480
     ],
     [
-      "1ixidvo",
+      "cd018fd2887e0d6691ef",
       768
     ],
     [
-      "14p9s8q",
+      "2b9628d51f6386574a6c",
       1024
     ]
   ],
   "/strapi/uploads/Alfa_inside_0ca6d3d8de.png": [
     [
-      "0ezg7b5",
+      "45221c9d274aa440b412",
+      64
+    ],
+    [
+      "0d6d324c0eace5ceacd5",
+      128
+    ],
+    [
+      "f2bea082aa7ac76d9691",
+      192
+    ],
+    [
+      "e4ea51b7c0c605d4bb88",
       320
     ],
     [
-      "1uqscz8",
+      "d8b40dc8b6367767f8ed",
       480
     ],
     [
-      "1cc7h81",
+      "5df797bb04dab8acdf74",
       768
     ],
     [
-      "1djiput",
+      "d03d5e95b4be2c8819f9",
       1024
     ]
   ],
   "/strapi/uploads/Allianz_8057894327.png": [
     [
-      "09inlqt",
+      "4b5d5489ac0a6b435363",
+      64
+    ],
+    [
+      "d83f8c5b7ff1a65f1013",
+      128
+    ],
+    [
+      "28d8a6683d958cd403ef",
+      192
+    ],
+    [
+      "fe229f22315f7e3f7cd7",
       226
     ]
   ],
   "/strapi/uploads/Anna_koezepes_5a54113d95.webp": [
     [
-      "1u7gl6i",
+      "b0eca11c6c2ec94f2d8c",
+      64
+    ],
+    [
+      "8834ca9486b280302da3",
+      128
+    ],
+    [
+      "b9c22cb881bfb6557ed7",
+      192
+    ],
+    [
+      "6265e07850153dbe674d",
       320
     ],
     [
-      "1sknfxn",
+      "01edb4a7668f8ae4dfcf",
       480
     ],
     [
-      "1vp9syq",
+      "c1a6caca6beabd077ec1",
       500
     ]
   ],
   "/strapi/uploads/Azonositasi_modok_kedveltsege_slide_b7266baf7c.png": [
     [
-      "0t6ayqv",
+      "d80d98d1063c76d5f0c7",
+      64
+    ],
+    [
+      "4d8c043a04f9f35caa32",
+      128
+    ],
+    [
+      "f072ec767b8b6d81250f",
+      192
+    ],
+    [
+      "80a23c0043ca1c548a73",
       320
     ],
     [
-      "1310i76",
+      "3484b26823534e8dbbc9",
       480
     ],
     [
-      "01hmyev",
+      "981345be63c3abb0a1cb",
       768
     ],
     [
-      "07knthb",
+      "bda71570b3cc7424183d",
       1200
     ],
     [
-      "0na09kx",
+      "08d196569c40775b9344",
       1592
     ]
   ],
   "/strapi/uploads/Balazs_37d5da632d.webp": [
     [
-      "0xzyn8x",
+      "df17db126f830a040c26",
+      64
+    ],
+    [
+      "62e28eded35408701f7f",
+      128
+    ],
+    [
+      "4413695b2a71552912a6",
+      192
+    ],
+    [
+      "b84921d5d989b13d14f7",
       320
     ],
     [
-      "1sx9lbg",
+      "376da48221076ec10529",
       439
     ]
   ],
   "/strapi/uploads/Bookline_Home_1_c4e4a45201.png": [
     [
-      "1ee5m46",
+      "20c20c4d88d488760f88",
+      64
+    ],
+    [
+      "e8c5a355a14e162bd670",
+      128
+    ],
+    [
+      "1d962cbedaa588efe0e0",
+      192
+    ],
+    [
+      "ff31c682d72fa7b60fd1",
       320
     ],
     [
-      "1eapo9d",
+      "df59a3824b1576a1f528",
       442
     ]
   ],
   "/strapi/uploads/Bookline_SD_31c2d3ab97.png": [
     [
-      "16ijedu",
+      "2baeec6ee9550baf89c1",
+      64
+    ],
+    [
+      "b59d6ad827f1216df97c",
+      128
+    ],
+    [
+      "ce720db02a938d11df39",
+      192
+    ],
+    [
+      "8468f8194c62afeb3519",
       320
     ],
     [
-      "1e3745v",
+      "1f2b3bff11d422fc3ebc",
       480
     ],
     [
-      "0l1z4wi",
+      "2c3683b5122f00d163fe",
       768
     ],
     [
-      "1yt2hg8",
+      "fbed228b59716ddf4a7d",
       1024
     ]
   ],
   "/strapi/uploads/Bookline_ca1c2074a1.png": [
     [
-      "1h6lw2i",
+      "6f089e67f2acdab370cd",
+      64
+    ],
+    [
+      "011ab50cc416549688f7",
+      128
+    ],
+    [
+      "aeadb689089c6a265370",
+      192
+    ],
+    [
+      "37c6c819525a619a9404",
       227
     ]
   ],
   "/strapi/uploads/Chefparade_SD_e1104ed799.png": [
     [
-      "0ty1m40",
+      "a22b112600a238fd4bc0",
+      64
+    ],
+    [
+      "f2b18857f1ca5d393fb4",
+      128
+    ],
+    [
+      "6c986b22b01dc527b351",
+      192
+    ],
+    [
+      "a267e51dcf221a0c6e99",
       320
     ],
     [
-      "0ecxf89",
+      "c7833dc7c77cb7296c89",
       480
     ],
     [
-      "0apppo8",
+      "53a8c4681221ee4eb921",
       768
     ],
     [
-      "1a9gvke",
+      "b05685de8a0d5ccabfdf",
       1024
     ]
   ],
   "/strapi/uploads/Csilla_9e9d478853.webp": [
     [
-      "0jks8qz",
+      "80ab651e832cc3e48da2",
+      64
+    ],
+    [
+      "19126f8b7040ee2ff85a",
+      128
+    ],
+    [
+      "55252e50d2ca766f94d0",
+      192
+    ],
+    [
+      "af1ac0f43a28ac7e1a79",
       320
     ],
     [
-      "1a72jw2",
+      "475aa3783267e870146f",
       440
     ]
   ],
   "/strapi/uploads/Design_kepzes_e538e9780d.jpg": [
     [
-      "12odly9",
+      "2779590cab44b1aabcff",
+      64
+    ],
+    [
+      "6d4c8f64f7bc17dd02c3",
+      128
+    ],
+    [
+      "8033301f18060e69b68e",
+      192
+    ],
+    [
+      "d1c4a625337ac6e83e86",
       320
     ],
     [
-      "0ru88ic",
+      "dffb1679515f075f0683",
       480
     ],
     [
-      "0y42d75",
+      "8fb79afaf9dae628c7bc",
       768
     ],
     [
-      "0yu5zbc",
+      "1a4250fdb6ac233d986f",
       1159
     ]
   ],
   "/strapi/uploads/Era_6a70263c6b.webp": [
     [
-      "0p8t07l",
+      "b19003ef15960e6998d2",
+      64
+    ],
+    [
+      "0aabde75a2e9fbb22673",
+      128
+    ],
+    [
+      "0918fc7e0a1a474b3c42",
+      192
+    ],
+    [
+      "c7cb2bc349e1856d2b09",
       320
     ],
     [
-      "13w69vk",
+      "d9e546c9c1f5c65c6196",
       440
     ]
   ],
   "/strapi/uploads/Eszti_55e192f9cf.webp": [
     [
-      "15tnyhz",
+      "4580459f328f2d698677",
+      64
+    ],
+    [
+      "17e1b4a5a363f5b1336d",
+      128
+    ],
+    [
+      "a88fafc5e5f322c69464",
+      192
+    ],
+    [
+      "ae2bb5c82cffbce9c283",
       320
     ],
     [
-      "1vrun0e",
+      "e69754cb479cf57b6cdb",
       440
     ]
   ],
   "/strapi/uploads/Frame_26081029_1774516588825_ac6fd641ad.png": [
     [
-      "1apd5zu",
+      "baeffe16daf02c0a6722",
+      64
+    ],
+    [
+      "1746693c2cff0d191ee6",
+      128
+    ],
+    [
+      "db24a578f658d8b4958d",
+      192
+    ],
+    [
+      "3bf07d788c280f702935",
       320
     ],
     [
-      "101mqtn",
+      "705f968496f6baa9b964",
       480
     ],
     [
-      "1ya3znt",
+      "85a1c542cf80151e2f89",
       756
     ]
   ],
   "/strapi/uploads/Funpass_Accessibility_design_6451566e64.png": [
     [
-      "0gof8lg",
+      "40eabb99c47a304ecf10",
+      64
+    ],
+    [
+      "3089931f65a4ccdfac0b",
+      128
+    ],
+    [
+      "414d954037e70e5e1292",
+      192
+    ],
+    [
+      "9b799c47ca8fe0b57df9",
       320
     ],
     [
-      "081kb45",
+      "404ad7d2ba3720cc3472",
       480
     ],
     [
-      "0o8r5jg",
+      "e7e282d953daa7f3886d",
       768
     ],
     [
-      "05gwyw2",
+      "cbef5f3fbfb32f06dfc2",
       1024
     ]
   ],
   "/strapi/uploads/G_Eszter_fekete_feher_negyzet_9f5e61e978.png": [
     [
-      "10lktvl",
+      "60e71349786b8546d53f",
+      64
+    ],
+    [
+      "fa17f4713f516a6eb744",
+      128
+    ],
+    [
+      "e4de282afc93114076c6",
+      192
+    ],
+    [
+      "b93c45ac6fef7ecc62f0",
       320
     ],
     [
-      "16evilw",
+      "052a9101cd3e2644629c",
       480
     ],
     [
-      "1y0uhbl",
+      "5f8e716a45c741c43b7a",
       768
     ],
     [
-      "18t3smh",
+      "a8e9ea60d0aa04d23143",
       1200
     ],
     [
-      "1d6jurx",
+      "253b41856d5f1bc20506",
       1600
     ],
     [
-      "1e7hkgs",
+      "9a93d45f2e172866a2b5",
       1920
     ]
   ],
   "/strapi/uploads/Gabi_3a52bf7932.webp": [
     [
-      "1m9kh7s",
+      "bbb2b8ff2759270af48d",
+      64
+    ],
+    [
+      "3ff68328675e888a6bd0",
+      128
+    ],
+    [
+      "56c9c24ba4f6fe3defde",
+      192
+    ],
+    [
+      "c3fd808e3ff75d71f16d",
       320
     ],
     [
-      "197k3x1",
+      "b93f29d2a7881235d82a",
       440
     ]
   ],
   "/strapi/uploads/Gigi_e9cba3da4a.webp": [
     [
-      "093e8ni",
+      "181788a6413577be13fd",
+      64
+    ],
+    [
+      "47a5b0a82e7802f1497e",
+      128
+    ],
+    [
+      "f2d54d7afc9331a60995",
+      192
+    ],
+    [
+      "dd3771742d36a62b7e95",
       320
     ],
     [
-      "022rxkz",
+      "7301ddc5ad83f0353418",
       440
     ]
   ],
   "/strapi/uploads/Gizus_a301a6ba02.webp": [
     [
-      "0k3h9je",
+      "20da6826f1e34d1827a3",
+      64
+    ],
+    [
+      "be025fba935ac90c246b",
+      128
+    ],
+    [
+      "6a7b55f9ed5c7651116c",
+      192
+    ],
+    [
+      "e2f037e78db32bb9137e",
       320
     ],
     [
-      "1togxnj",
+      "c286a0fc4148f969a730",
       440
     ]
   ],
   "/strapi/uploads/Google_Maps_reviews_9041b44302.png": [
     [
-      "1ozg5i0",
+      "77430d46f0623dd8fbb9",
+      64
+    ],
+    [
+      "a0f518c648ce4a6a4fd2",
+      128
+    ],
+    [
+      "6da3c3e04a1472bf447d",
+      192
+    ],
+    [
+      "c80ba3b733fbaec2771d",
       320
     ],
     [
-      "1hj3gy9",
+      "8ee852bc2170a0e96b9e",
       480
     ],
     [
-      "0j8h7sg",
+      "61bc2af2a36dd37044d8",
       768
     ],
     [
-      "083elwm",
+      "e9ebedece5fdfcd4eb02",
       1024
     ]
   ],
   "/strapi/uploads/Google_maps_a4ea8c4535.png": [
     [
-      "1r48i8o",
+      "6a949a1882d99114d44d",
+      64
+    ],
+    [
+      "0551618bdff172485e04",
+      128
+    ],
+    [
+      "ac5325b36683ec0d1e51",
+      192
+    ],
+    [
+      "ec71d77057f1c8c93d88",
       320
     ],
     [
-      "1jnvtox",
+      "3c1e08cf135a8b0c341e",
       480
     ],
     [
-      "0ld9kj4",
+      "3817b682df00ccc7b9c9",
       768
     ],
     [
-      "1bm8i14",
+      "e9016a9d30521b83a50d",
       935
     ]
   ],
   "/strapi/uploads/H_Laci_fb50a5be83.webp": [
     [
-      "1ydhojg",
+      "c2ef117792036d6d0664",
+      64
+    ],
+    [
+      "844500db19ddbd4724ea",
+      128
+    ],
+    [
+      "bb901b08751d3a86088a",
+      192
+    ],
+    [
+      "07126f8710534b0944c6",
       320
     ],
     [
-      "04o08ct",
+      "0fc1b13ceb594e3388f3",
       480
     ],
     [
-      "05jk05w",
+      "60e0a954f7eb76669fcc",
       500
     ]
   ],
   "/strapi/uploads/IMG_0017_f4fa8a4264.jpg": [
     [
-      "16dofju",
+      "eb525455628b3c87c32e",
+      64
+    ],
+    [
+      "886ac6cf6aed54c05197",
+      128
+    ],
+    [
+      "46e026252d4544307c35",
+      192
+    ],
+    [
+      "e9c5f25fd1e37928cc61",
       320
     ],
     [
-      "14qvaaz",
+      "c2c44284015e182bcd90",
       480
     ],
     [
-      "0iz4t7u",
+      "ef5f10f41342eb52fe8f",
       768
     ],
     [
-      "11xtrd4",
+      "345e4d541940f49d2308",
       1200
     ],
     [
-      "1ak4tek",
+      "cb424478481d3606d462",
       1600
     ],
     [
-      "1273m6x",
+      "b6dc4c3bb31d4ec309da",
       1920
     ],
     [
-      "1wqwfa4",
+      "6dfbaf6addc388a6ab3a",
       5712
     ]
   ],
   "/strapi/uploads/IMG_0036_1c136ad19d.jpeg": [
     [
-      "1ib7n7t",
+      "5fdfd1ada8190a178ec6",
+      64
+    ],
+    [
+      "b514912dd342ecaa38ea",
+      128
+    ],
+    [
+      "3bb188ad96645b76ff19",
+      192
+    ],
+    [
+      "ee2eddcd0e08eac60dd5",
       320
     ],
     [
-      "01aml2k",
+      "5215e9866ce979d21b8d",
       480
     ],
     [
-      "03r85nt",
+      "4b9dd444d005ce3a435c",
       768
     ],
     [
-      "1b2lcpt",
+      "be5d58cdfd558d64cdcd",
       1200
     ],
     [
-      "162m9b9",
+      "b85572a53319f616f88b",
       1600
     ],
     [
-      "15ltcw4",
+      "9fff6c6b8fca14e68ba1",
       1920
     ],
     [
-      "0mhm6xz",
+      "81bda54d2e86e6f59010",
       4032
     ]
   ],
   "/strapi/uploads/IMG_0116_1b47f03b71.jpg": [
     [
-      "0e082ah",
+      "073ede4ae5651e182fac",
+      64
+    ],
+    [
+      "8e15d3cd6131c85472dd",
+      128
+    ],
+    [
+      "3f192fd1e42d9d8c4f3c",
+      192
+    ],
+    [
+      "862459de507bcdc9a778",
       320
     ],
     [
-      "07kezgc",
+      "1925c34eab76490baffa",
       480
     ],
     [
-      "0hxnf5l",
+      "1ba277c8e8e9270d6a8e",
       768
     ],
     [
-      "1q6y94h",
+      "ea3964c51a776f9eb933",
       1200
     ],
     [
-      "1xpp111",
+      "fdff94b4226e221895c9",
       1600
     ],
     [
-      "0cv3sic",
+      "e97b8bf5ffac453c113d",
       1920
     ],
     [
-      "0g80nmp",
+      "557c867836e28ab7618b",
       5712
     ]
   ],
   "/strapi/uploads/IMG_0134_6216e799c6.jpg": [
     [
-      "15kfm1q",
+      "7dcd25569eec4efe6223",
+      64
+    ],
+    [
+      "4fe644c03fb4b1b7c0c0",
+      128
+    ],
+    [
+      "2f4de6e8aa18e9d41180",
+      192
+    ],
+    [
+      "be6df66b6338c92b4db0",
       320
     ],
     [
-      "0kk1kp3",
+      "20becb30f425f56211b6",
       480
     ],
     [
-      "1r0zvj2",
+      "eeedcc1a663d754255a8",
       768
     ],
     [
-      "0awzo44",
+      "69ba99164de11ba79795",
       1200
     ],
     [
-      "18mkfuo",
+      "a1c46e007c28bb48f76e",
       1600
     ],
     [
-      "1yk1og5",
+      "2946e75ae12b5b92cb23",
       1920
     ],
     [
-      "1r0wlda",
+      "ef2bcdd0065a3cfd2640",
       4032
     ]
   ],
   "/strapi/uploads/IMG_1437_1ebb870c11.jpg": [
     [
-      "11ezeld",
+      "47b6e27165a504ad4bba",
+      64
+    ],
+    [
+      "1737b6c853016b8be7e3",
+      128
+    ],
+    [
+      "fc9a8c01c65bc144cf26",
+      192
+    ],
+    [
+      "cc67533d17c876ee69be",
       320
     ],
     [
-      "0vdxtuc",
+      "61c4f4f42fdd0a5c64d7",
       480
     ],
     [
-      "177mump",
+      "95ccc31c3d9798a15eca",
       768
     ],
     [
-      "0twkb2h",
+      "7a6486180fcd34b093f2",
       1200
     ],
     [
-      "1c61lv1",
+      "fdaf201aff30c915fe12",
       1600
     ],
     [
-      "1iysaik",
+      "339fc4e2b52083ad3a47",
       1920
     ],
     [
-      "16e09yn",
+      "355c22a0c82f0be667b5",
       4032
     ]
   ],
   "/strapi/uploads/IMG_1967_40313416b8.jpg": [
     [
-      "0d9jpm9",
+      "6c00479895d835e9bdc4",
+      64
+    ],
+    [
+      "f283defe6895e929fc25",
+      128
+    ],
+    [
+      "3e03d9965c7d0bfd212a",
+      192
+    ],
+    [
+      "504c1dd695361fa381da",
       320
     ],
     [
-      "06e1i1w",
+      "685bc896b76a79718661",
       480
     ],
     [
-      "0c260yp",
+      "2ced7d817c8c59d4af0f",
       768
     ],
     [
-      "1noplzt",
+      "8890fcfb76de9cb4b2cd",
       1200
     ],
     [
-      "14lu7st",
+      "60b652e533b467d0a568",
       1600
     ],
     [
-      "0ago5ak",
+      "4c0e9f086e52aab12729",
       1920
     ],
     [
-      "1h5u3wf",
+      "21b0a6164c141bf4ee99",
       4032
     ]
   ],
   "/strapi/uploads/IMG_2912_a58107b3b8.jpg": [
     [
-      "0kq1uvn",
+      "8712f671787d69aad40a",
+      64
+    ],
+    [
+      "055e6181ebd6ed4a9828",
+      128
+    ],
+    [
+      "64119f065ad26e1948f6",
+      192
+    ],
+    [
+      "5c8a7356bf1834a7ee6a",
       320
     ],
     [
-      "0g51k12",
+      "a7f07d1ec6522c8e1186",
       480
     ],
     [
-      "166m4cz",
+      "de314bb8242bd15563e2",
       768
     ],
     [
-      "0ow2rer",
+      "b3aaac3ee3bd981ffe86",
       1200
     ],
     [
-      "1l14qiv",
+      "a371255fa9dd57710505",
       1600
     ],
     [
-      "1u7axim",
+      "8bf810d2c5c4834e9300",
       1920
     ],
     [
-      "1id9bad",
+      "09a4934faf7c2f78415f",
       4032
     ]
   ],
   "/strapi/uploads/IMG_6136_c9ea19c554.jpg": [
     [
-      "1frk4md",
+      "3ca84be21a89457f42b9",
+      64
+    ],
+    [
+      "0bc807d555d74c06f665",
+      128
+    ],
+    [
+      "3b3a1e1269f4ea8f9d67",
+      192
+    ],
+    [
+      "d902c1f6f1af656ce348",
       320
     ],
     [
-      "1a56xcg",
+      "9418db26beb2b008d4d8",
       480
     ],
     [
-      "0uazv51",
+      "e0a22100fa44cc29b0e7",
       768
     ],
     [
-      "0hhofn9",
+      "421520c6c7c1e1a31ef3",
       1200
     ],
     [
-      "13jk2gh",
+      "2a3635db1515d22b1e94",
       1600
     ],
     [
-      "1k9hzmw",
+      "a12d9ce5b1cb70fc7501",
       1920
     ],
     [
-      "1ewfr05",
+      "8eb7fa960dad8ae18468",
       5712
     ]
   ],
   "/strapi/uploads/IMG_6140_4ff67ea8be.jpg": [
     [
-      "05y4ihp",
+      "ddc7cf4f84c48a1e5c4d",
+      64
+    ],
+    [
+      "da513169cd0c193c53a3",
+      128
+    ],
+    [
+      "ef74de5c537369b4d4ee",
+      192
+    ],
+    [
+      "501eed73b3ca7ddb146c",
       320
     ],
     [
-      "0bxovso",
+      "ede64c8e3ffb42c6f272",
       480
     ],
     [
-      "1vd0z0t",
+      "519dffe0b829f73aeb57",
       768
     ],
     [
-      "1pd42vx",
+      "36cd3373a136b97dbad7",
       1200
     ],
     [
-      "0o6x4mx",
+      "ff4924923480ba414f8b",
       1600
     ],
     [
-      "0eb3fts",
+      "68769c5a4fc003dda291",
       1920
     ],
     [
-      "0ckb5gd",
+      "1537c50efafab3582b44",
       5712
     ]
   ],
   "/strapi/uploads/IMG_6143_2c57757fc4.jpg": [
     [
-      "0eegypp",
+      "f55bb30912134766b6fe",
+      64
+    ],
+    [
+      "c77fe3f6b95231447765",
+      128
+    ],
+    [
+      "df70e0ee71c99f8ac6fb",
+      192
+    ],
+    [
+      "064478f3736a3bbf2586",
       320
     ],
     [
-      "17duza0",
+      "0cc712a542037caab1ab",
       480
     ],
     [
-      "1no4cj1",
+      "0fe30658c944951e9dc0",
       768
     ],
     [
-      "1l2818d",
+      "076a806ac4625bf586a5",
       1200
     ],
     [
-      "11fcjq1",
+      "fd30687c8b2ba9fce43f",
       1600
     ],
     [
-      "14rttds",
+      "621c6a12edf547797f60",
       1920
     ],
     [
-      "14iuwal",
+      "7e4ac858869a0638a082",
       5712
     ]
   ],
   "/strapi/uploads/IMG_6626_21d25ce605.jpg": [
     [
-      "13cxtjn",
+      "f480eb437e7f7200fe01",
+      64
+    ],
+    [
+      "a5f4ad414fd5d3901f89",
+      128
+    ],
+    [
+      "c53c1f4595f93d153512",
+      192
+    ],
+    [
+      "ac4009afaf1228c2c7bc",
       320
     ],
     [
-      "01fk3c6",
+      "edc5ce34b62e74fc9e8e",
       480
     ],
     [
-      "1oti30z",
+      "2dd8445da36ce3595dc2",
       768
     ],
     [
-      "1d7ubk3",
+      "83577b3edec124432e28",
       1200
     ],
     [
-      "1dzckcn",
+      "d1a7ba007b81523370e8",
       1600
     ],
     [
-      "1hkwzqm",
+      "97d9701197de2bfd256d",
       1920
     ],
     [
-      "05zkpfb",
+      "6305356ab3ffd4e8e3c4",
       5712
     ]
   ],
   "/strapi/uploads/IMG_6636_fdca1a4b35.jpg": [
     [
-      "0ry1eid",
+      "ec89f942b5c1c0e947fc",
+      64
+    ],
+    [
+      "3f453399bf729e2c6ecc",
+      128
+    ],
+    [
+      "88dde79541774dd3ded2",
+      192
+    ],
+    [
+      "d3228391f522facd9e3f",
       320
     ],
     [
-      "048x5cw",
+      "97b69c01848b28700458",
       480
     ],
     [
-      "06hh511",
+      "eb08e4bd825b959a1374",
       768
     ],
     [
-      "1tmr5mt",
+      "544673cfe2e8f2fa0475",
       1200
     ],
     [
-      "1w3m0n5",
+      "14ba5f24f92d95d54229",
       1600
     ],
     [
-      "0f01gl4",
+      "1cd76992d9ca15951af0",
       1920
     ],
     [
-      "1gb3eo5",
+      "4faf61e42fa09df043cf",
       5712
     ]
   ],
   "/strapi/uploads/IMG_8005_a53211307f.jpg": [
     [
-      "1dtc0y0",
+      "c3dff44191e2d4b62e93",
+      64
+    ],
+    [
+      "025b4f636923b7d97969",
+      128
+    ],
+    [
+      "99cd161f5e5a1f35f382",
+      192
+    ],
+    [
+      "9f4df52fbf5a0cbbc7ce",
       320
     ],
     [
-      "1vzh5j5",
+      "73a9ce0e32652af31b93",
       480
     ],
     [
-      "0o6nba8",
+      "64d9c17dee90c0d6a7de",
       768
     ],
     [
-      "0as4xvi",
+      "9e36391143c8d1da5cf4",
       1200
     ],
     [
-      "0jqy4ei",
+      "476003518019cb75394f",
       1600
     ],
     [
-      "1f96i4v",
+      "8715f7de0ea329532d22",
       1920
     ],
     [
-      "106wxse",
+      "2f4bf435768ae8fbdacd",
       5712
     ]
   ],
   "/strapi/uploads/IMG_8677_78eefb8a97.jpg": [
     [
-      "0wz7ki8",
+      "de39bfa9217f0e4b04f4",
+      64
+    ],
+    [
+      "5d704ccb2f963af1e542",
+      128
+    ],
+    [
+      "ccbc8dd4717288dce4b2",
+      192
+    ],
+    [
+      "04d04375c75b4bb9dd60",
       320
     ],
     [
-      "14v3l89",
+      "57e80dde851fa83c570c",
       480
     ],
     [
-      "1ghg4rc",
+      "6c5efc407ce5a4de2594",
       768
     ],
     [
-      "0jvgbau",
+      "6059247e7832f2f3d282",
       1200
     ],
     [
-      "1vw5btu",
+      "446b97d0e1336558fdc7",
       1600
     ],
     [
-      "0bg4kxj",
+      "0ff1e67c02fec75c5935",
       1920
     ],
     [
-      "0tgrqo6",
+      "dfb460efbe7ae4a0ccb3",
       5712
     ]
   ],
   "/strapi/uploads/KH_dfe2b1131a.png": [
     [
-      "1cel08c",
+      "19e0560a7658ef43a12f",
+      64
+    ],
+    [
+      "63b92c9b4e477016d137",
       125
     ]
   ],
   "/strapi/uploads/K_Gabor_3ef4a6355e.webp": [
     [
-      "12neim7",
+      "954c081d1c42abc73ac7",
+      64
+    ],
+    [
+      "dec79a6482c91f64e3a3",
+      128
+    ],
+    [
+      "e7742f2cedecba7d79ee",
+      192
+    ],
+    [
+      "60ce90333a01460ef25f",
       320
     ],
     [
-      "1qq7oyy",
+      "e9acbdfe668a775309f3",
       480
     ],
     [
-      "1oqfr83",
+      "fbc4941a2f984721e886",
       500
     ]
   ],
   "/strapi/uploads/Kepzes_slide_light_115a1f96be.png": [
     [
-      "01x0bee",
+      "863152aace1f9d2d3e39",
+      64
+    ],
+    [
+      "5448d41e8cfddebeeb34",
+      128
+    ],
+    [
+      "a1f6feb4bcd5ad5ca451",
+      192
+    ],
+    [
+      "31baa1c734d62f161f3d",
       320
     ],
     [
-      "0f33qof",
+      "b864ae89778ec8cc0cc1",
       480
     ],
     [
-      "1wnr7ra",
+      "88a1eb9dafb41bb9af63",
       768
     ],
     [
-      "0uui9se",
+      "aa134f58f0c08156312e",
       904
     ]
   ],
   "/strapi/uploads/Linda_5c5070188d.webp": [
     [
-      "0l44hbs",
+      "7e22bdf739aa1b0a5c69",
+      64
+    ],
+    [
+      "465c61029529e626d4c2",
+      128
+    ],
+    [
+      "ae5795d16cfc7874cb16",
+      192
+    ],
+    [
+      "7fcc211609eb29b42fb2",
       320
     ],
     [
-      "1cj78h5",
+      "afe2f86a53553a3fff87",
       439
     ]
   ],
   "/strapi/uploads/Lukacs_ed8d609bfd.webp": [
     [
-      "0r1l6og",
+      "6be379ea79682330d5ee",
+      64
+    ],
+    [
+      "ad29e4be1d7565a6002c",
+      128
+    ],
+    [
+      "aeca7b35dbf3b8f1abd3",
+      192
+    ],
+    [
+      "e79b84fdaa159fd4f980",
       320
     ],
     [
-      "0j4ryzh",
+      "71a89e4fdd755085c930",
       440
     ]
   ],
   "/strapi/uploads/MBH_c1bfb04ec0.png": [
     [
-      "0v94v0o",
+      "c869842218c8b16d4145",
+      64
+    ],
+    [
+      "6595c64a2474eb400e97",
+      128
+    ],
+    [
+      "50439509acf1f33a2085",
+      192
+    ],
+    [
+      "3743c78f10cedafaacbc",
       194
     ]
   ],
   "/strapi/uploads/Magyar_Posta_i_Csekk_1da95fa2d5.png": [
     [
-      "00wxabx",
+      "5986731f2605e8be6b1f",
+      64
+    ],
+    [
+      "7a96edbe5173651ecef1",
+      128
+    ],
+    [
+      "74499879a6e216fd1658",
+      192
+    ],
+    [
+      "3b44e41692704b90e564",
       320
     ],
     [
-      "08p8rzc",
+      "1117cb1cebecf6629db5",
       480
     ],
     [
-      "1gpbrjx",
+      "9f9c66e0905cff38f189",
       768
     ],
     [
-      "1pw6wo1",
+      "06f5c04892db828a49a1",
       1024
     ]
   ],
   "/strapi/uploads/Motibro_Digitalis_termektervezes_1219eb7b06.png": [
     [
-      "1kgmtkz",
+      "8571394f3a68805b129e",
+      64
+    ],
+    [
+      "206cf6259d1a54fea848",
+      128
+    ],
+    [
+      "352e6906af31eb75a974",
+      192
+    ],
+    [
+      "1740a24cf0d433a54bdb",
       320
     ],
     [
-      "13pmzdi",
+      "bfa635e33c05eb3da8d2",
       480
     ],
     [
-      "18csvcz",
+      "b45494ac8865071cedcb",
       768
     ],
     [
-      "0007ynz",
+      "6cd85c2e1a1662216926",
       1024
     ]
   ],
   "/strapi/uploads/Motibro_home_afe4693639.png": [
     [
-      "09fwvke",
+      "4decc7b26f61e9e2347b",
+      64
+    ],
+    [
+      "f7fdaf52f15c5146fa54",
+      128
+    ],
+    [
+      "c9b35847417a87da6c46",
+      192
+    ],
+    [
+      "dc2baba9a424a267872d",
       320
     ],
     [
-      "055evw7",
+      "168bc7dba6084ac3d359",
       480
     ],
     [
-      "1wd6zbi",
+      "cc02b7112c793634d9b1",
       768
     ],
     [
-      "1bl46yc",
+      "e1c942cffb2bba0cf1ff",
       1024
     ]
   ],
   "/strapi/uploads/Motibro_inside_010f6d0d3f.png": [
     [
-      "0qczhep",
+      "64d0b1cc807287f76cb7",
+      64
+    ],
+    [
+      "603dc4d745ae877a8889",
+      128
+    ],
+    [
+      "3d1160cf097ebdb20a00",
+      192
+    ],
+    [
+      "3fa9d539b8a2e1e47c0d",
       320
     ],
     [
-      "0fiu3ys",
+      "13c071bc16cbffb250da",
       480
     ],
     [
-      "0lso8nl",
+      "8ad3a4bfdacf7c5c43bf",
       768
     ],
     [
-      "11uifr9",
+      "3903beae4d0b68d231f1",
       1024
     ]
   ],
   "/strapi/uploads/Nam_7bbd9e9646.webp": [
     [
-      "1t5x5hf",
+      "d77a86d59053859269de",
+      64
+    ],
+    [
+      "37b0ada8e661494959a1",
+      128
+    ],
+    [
+      "c370225923bb86d43c02",
+      192
+    ],
+    [
+      "0e71804392d7ef98fe5f",
       320
     ],
     [
-      "16se5w6",
+      "16383da8c6eceafe9453",
       480
     ],
     [
-      "14sjenz",
+      "a2df224dbca6161a6f2d",
       500
     ]
   ],
   "/strapi/uploads/Netti_a0415e1fc5.webp": [
     [
-      "1ixmieo",
+      "37c33294486921a78523",
+      64
+    ],
+    [
+      "ad31acc16e85fd1cb880",
+      128
+    ],
+    [
+      "daedbec7cb90e05bf00d",
+      192
+    ],
+    [
+      "60bb8269bdc6521a3b88",
       320
     ],
     [
-      "129xev1",
+      "d8a372e1d0cfc7ce057e",
       440
     ]
   ],
   "/strapi/uploads/New_logo_1773998946128_b9aaae37ad.png": [
     [
-      "1csv260",
+      "ac6c4161f86bf5633dfa",
+      64
+    ],
+    [
+      "3110e60e41cc64d3d87c",
+      128
+    ],
+    [
+      "25e1c0036bce797d2551",
+      192
+    ],
+    [
+      "0af0bf9387daa104e98c",
       260
     ]
   ],
   "/strapi/uploads/ONE_b31379fa21.png": [
     [
-      "1woq0mm",
+      "1c31f249a792a23817f7",
+      64
+    ],
+    [
+      "44e4bb8bbfedda64426a",
       95
     ]
   ],
   "/strapi/uploads/One_Digitalis_azonositas_21bace577f.png": [
     [
-      "1khlrxk",
+      "143a747aaacd58ca4794",
+      64
+    ],
+    [
+      "15cec6459b69b11cf2f0",
+      128
+    ],
+    [
+      "ce873ee8d835678a08e0",
+      192
+    ],
+    [
+      "b723979890ec0464d566",
       320
     ],
     [
-      "1xwxstd",
+      "b6d0d6868127eac972dd",
       480
     ],
     [
-      "1c0x7b4",
+      "edbbb66df99bf6f2ea95",
       768
     ],
     [
-      "06xx646",
+      "404191e1dabcfbd41cbe",
       1024
     ]
   ],
   "/strapi/uploads/Pala_Zoli_f67881b800.webp": [
     [
-      "1v9bidq",
+      "cce8d51507b3f1931638",
+      64
+    ],
+    [
+      "388d6210c27a993281a2",
+      128
+    ],
+    [
+      "92d19eb589319b595642",
+      192
+    ],
+    [
+      "d1485676c01749b7e44e",
       320
     ],
     [
-      "1qytipj",
+      "1862f0ca3759192119a6",
       480
     ],
     [
-      "0bm63b2",
+      "da567dd192118d8832e6",
       500
     ]
   ],
   "/strapi/uploads/Posta_0864637b73.png": [
     [
-      "1xk4f7p",
+      "d628d682e69ddbec01f2",
+      64
+    ],
+    [
+      "caf6ee70cc01b2d7a4a0",
+      128
+    ],
+    [
+      "dccebc729e0379f5d0fb",
+      192
+    ],
+    [
+      "e5f8f439f3df72d0a380",
       252
     ]
   ],
   "/strapi/uploads/Profirent_design_37fdedf93e.png": [
     [
-      "15mda8y",
+      "2e23c4208a1e7d156a75",
+      64
+    ],
+    [
+      "4c18a696a889b155f57a",
+      128
+    ],
+    [
+      "55be4fc88014d4404e91",
+      192
+    ],
+    [
+      "54fe05922f9027a0d0db",
       320
     ],
     [
-      "0yha0gz",
+      "dba62fe7b59213babe26",
       480
     ],
     [
-      "0k5t0rm",
+      "0b9669dcb2d922f463b7",
       768
     ],
     [
-      "0be34tk",
+      "62715cbd00c9a662f2e8",
       1024
     ]
   ],
   "/strapi/uploads/Profirent_inside_2c9b89de7c.png": [
     [
-      "1gq9ltq",
+      "510a6073915982117f73",
+      64
+    ],
+    [
+      "3beba9346f5d75e19ad9",
+      128
+    ],
+    [
+      "b8e50733729d684f1ec3",
+      192
+    ],
+    [
+      "33774a961a1b3ca291b4",
       320
     ],
     [
-      "1pmfu1z",
+      "4322e3788aeb43965b39",
       480
     ],
     [
-      "035ptby",
+      "b21806096fc42b88eac8",
       768
     ],
     [
-      "1ihbpgk",
+      "758edab5190e9afded6b",
       1024
     ]
   ],
   "/strapi/uploads/Purposeful_1774354143676_da4d5e3ab8.png": [
     [
-      "0k0q4r5",
+      "f8bb1d44659adc94dfef",
+      64
+    ],
+    [
+      "4dda02c9df88b84edf94",
+      128
+    ],
+    [
+      "33fca12f3242b3fd4709",
+      192
+    ],
+    [
+      "6d3b8498480edfed66a1",
       320
     ],
     [
-      "1nbqtdw",
+      "38e9a553aa165fb6e682",
       480
     ],
     [
-      "1w4zwu9",
+      "dbb1deb3358eef845df8",
       768
     ],
     [
-      "10pyxbt",
+      "d6a8b5f7b5c4feaa947c",
       1200
     ],
     [
-      "03ggt6w",
+      "1d112158be2d6fbf7c5e",
       1542
     ]
   ],
   "/strapi/uploads/Rudas_Gyogyfurdo_SD_8b184089bd.png": [
     [
-      "04wsf7x",
+      "bfe9e7648bd0e173897f",
+      64
+    ],
+    [
+      "44c7c4efda4ae63b79b4",
+      128
+    ],
+    [
+      "af66499b4f1d80da6d96",
+      192
+    ],
+    [
+      "5ea2cd858fd88139f10c",
       320
     ],
     [
-      "0cp3wvc",
+      "c9a2d1ed11554746e044",
       480
     ],
     [
-      "1kp6wfx",
+      "db4b314e88928b0cf183",
       768
     ],
     [
-      "035lcgx",
+      "1366fd7f9d3b53191796",
       1024
     ]
   ],
   "/strapi/uploads/Rudas_asszociacios_kartyak_fcfa1ab918.png": [
     [
-      "1koaqaz",
+      "5e2a6301358e6b58436c",
+      64
+    ],
+    [
+      "337b5c075f3622291d41",
+      128
+    ],
+    [
+      "1f96ecf07b3150da5450",
+      192
+    ],
+    [
+      "c497da3d1b72e75ec63c",
       320
     ],
     [
-      "1j37hta",
+      "d2f2122723ba645bcb74",
       480
     ],
     [
-      "1lw2ebf",
+      "b812a7f0b6d4fbc3c346",
       768
     ],
     [
-      "1fj81v7",
+      "8e7305edb5cfddb5bcd9",
       908
     ]
   ],
   "/strapi/uploads/Sablon_4_3_2_eba32a9976.png": [
     [
-      "12r8g6q",
+      "d2eefc88c4688d0d2bb4",
+      64
+    ],
+    [
+      "69196f7e164ec1e4feb2",
+      128
+    ],
+    [
+      "f569ea76eb2b1be5fea5",
+      192
+    ],
+    [
+      "0d8b337c82ec3a51255f",
       320
     ],
     [
-      "0x0a94j",
+      "e1c86023c045c6fc5c55",
       480
     ],
     [
-      "0hao6pe",
+      "7bbc9f14058b22a2095d",
       768
     ],
     [
-      "1jdwfjs",
+      "f7d8c929cf5a358c1ee7",
       1024
     ]
   ],
   "/strapi/uploads/Sari_0142f41f8d.webp": [
     [
-      "1ka0zza",
+      "d6cc4d7c72c15c02c3d5",
+      64
+    ],
+    [
+      "34034ce51448882734e3",
+      128
+    ],
+    [
+      "74a58427647e78162d0f",
+      192
+    ],
+    [
+      "95c04346e3d96900b7b2",
       320
     ],
     [
-      "041s03j",
+      "acb4e85a3defea470fb2",
       480
     ],
     [
-      "061mrbq",
+      "b623d4e6f400110aa0cd",
       500
     ]
   ],
   "/strapi/uploads/Szakmai_kiadvanyok_05_c5ec8d5d3e.png": [
     [
-      "1li1uup",
+      "f9abc400eba0c79de94e",
+      64
+    ],
+    [
+      "294b9b131491e3db206b",
+      128
+    ],
+    [
+      "39d0782cdc5be13f3ea0",
+      192
+    ],
+    [
+      "b2aa1c09e68974f7c623",
       320
     ],
     [
-      "1emjnac",
+      "a4dd25cfd43618c30d7f",
       480
     ],
     [
-      "1kao675",
+      "0b9397cf354de92a6069",
       768
     ],
     [
-      "0nz7s9h",
+      "cd25e4e353a367453e77",
       1024
     ]
   ],
   "/strapi/uploads/Szakmai_kiadvanyok_2_c36155a7b4.png": [
     [
-      "0yeap4u",
+      "f889e3b520029babb24e",
+      64
+    ],
+    [
+      "a5f444c20732a32c4569",
+      128
+    ],
+    [
+      "ab08c10d4e6b95b2a95d",
+      192
+    ],
+    [
+      "3b2ac6ca7fd3c9bb30af",
       320
     ],
     [
-      "17agxd3",
+      "2e59daa469479a04fd4d",
       480
     ],
     [
-      "1juuym6",
+      "a6ce3dafc36c2f327d65",
       768
     ],
     [
-      "1350qlj",
+      "6923fc4533264b873bfc",
       1180
     ]
   ],
   "/strapi/uploads/Szakmai_kiadvanyok_55b084435a.png": [
     [
-      "05hykgv",
+      "6e0e6a18b2027b7e0956",
+      64
+    ],
+    [
+      "69cfd237e859af8aee94",
+      128
+    ],
+    [
+      "a97e1346f485e7295521",
+      192
+    ],
+    [
+      "f1c4506d56ae3205a3c9",
       320
     ],
     [
-      "15m6qh6",
+      "c0fa922b68bc7cfa98d1",
       480
     ],
     [
-      "07tpjun",
+      "c7d9e98bddf8290500c4",
       768
     ],
     [
-      "09p9fcb",
+      "b15a7aac788e8a11a198",
       1024
     ]
   ],
   "/strapi/uploads/Szilvi_762b0e689b.webp": [
     [
-      "0bpib6t",
+      "261a04eef9f3c61167aa",
+      64
+    ],
+    [
+      "2849f372a8d9c76d7017",
+      128
+    ],
+    [
+      "807f3ca05b1f38855b22",
+      192
+    ],
+    [
+      "61f04af69a7de1a59981",
       320
     ],
     [
-      "1htyqs4",
+      "9cb3c8f77e68844698cb",
       440
     ]
   ],
   "/strapi/uploads/TV_2_36741e9903.png": [
     [
-      "0dit72x",
+      "0b43c12cde4af04ad592",
+      64
+    ],
+    [
+      "bc8e06e7826032691592",
       95
     ]
   ],
   "/strapi/uploads/TV_2_846217ab73.png": [
     [
-      "0wntujq",
+      "0ef3b3e26b54177f0e3c",
+      64
+    ],
+    [
+      "64c45f3beb77046100c7",
+      128
+    ],
+    [
+      "8da110591cdab8f37dc5",
+      192
+    ],
+    [
+      "576b7ffccea83b7fff42",
       320
     ],
     [
-      "074evjz",
+      "f5c425444a3a96784df9",
       480
     ],
     [
-      "0ru4y0m",
+      "08a019332ebbd2c29645",
       768
     ],
     [
-      "0vij9ax",
+      "3b12def62ad4643debf4",
       1029
     ]
   ],
   "/strapi/uploads/TV_2_Streaming_platform_a1eb39ba7d.png": [
     [
-      "16blcpb",
+      "ebc67288fd3197f2aa6c",
+      64
+    ],
+    [
+      "401351092dbaa793d77e",
+      128
+    ],
+    [
+      "0a61ed823978415d44b4",
+      192
+    ],
+    [
+      "8aa35d6f20a0d2eec08c",
       320
     ],
     [
-      "01b75fe",
+      "5b5867b271cd629603b6",
       480
     ],
     [
-      "16xhbqn",
+      "5ea6b68a1c4b4c0a78e9",
       768
     ],
     [
-      "0bfd23f",
+      "51a4a0b8c46427dc5dcb",
       1024
     ]
   ],
   "/strapi/uploads/Tamas_b73e8d97e0.webp": [
     [
-      "1onxjw3",
+      "9c99fee0910c6199c2e2",
+      64
+    ],
+    [
+      "420a32d2348d2cc45ac2",
+      128
+    ],
+    [
+      "f46f3e36e0631fde73a4",
+      192
+    ],
+    [
+      "0a71ea7a21bb2e8d8efb",
       320
     ],
     [
-      "1wew20q",
+      "14837a460501c3a2048c",
       440
     ]
   ],
   "/strapi/uploads/Tanulo_slide_b46bdc21f1.png": [
     [
-      "1pzda5m",
+      "79e03f208bd8d0357911",
+      64
+    ],
+    [
+      "37589359452577f74e67",
+      128
+    ],
+    [
+      "6c9fd65e11e6259b4031",
+      192
+    ],
+    [
+      "5e5eb944ae1666b81b92",
       320
     ],
     [
-      "1nmvp3v",
+      "3e8d458ccc969da326c9",
       480
     ],
     [
-      "0awuhga",
+      "669fbf9ddd86041778fe",
       768
     ],
     [
-      "1arfcjc",
+      "b59a772ff369816685ca",
       1200
     ],
     [
-      "14w130e",
+      "0b938590c846a7a132dd",
       1295
     ]
   ],
   "/strapi/uploads/Telekom_AI_alapu_kutatas_cecb398aff.png": [
     [
-      "02r2v8y",
+      "2ae84ca68d02520dd696",
+      64
+    ],
+    [
+      "49bfa11059c8c183b519",
+      128
+    ],
+    [
+      "f80ce2ab14c7d7995252",
+      192
+    ],
+    [
+      "aa15e182dec42bab8443",
       320
     ],
     [
-      "1ezcz1v",
+      "4f70b97520ba60f220eb",
       480
     ],
     [
-      "1gbmnqq",
+      "12e3704308a5f02264c6",
       768
     ],
     [
-      "049ykfs",
+      "ea306ae51b1eed14349f",
       1024
     ]
   ],
   "/strapi/uploads/Telekom_Works_partnerseg_56c0ab725f.png": [
     [
-      "1037ul3",
+      "5abff26221cf421acd86",
+      64
+    ],
+    [
+      "afe74ef72d4a34f4421e",
+      128
+    ],
+    [
+      "645b3c949b3d49e3ada8",
+      192
+    ],
+    [
+      "acab7db9be44702a9ccc",
       320
     ],
     [
-      "1e7j58y",
+      "06e4b65eb2e03e935e66",
       480
     ],
     [
-      "147hhwn",
+      "e52672b2a77d780e049c",
       768
     ],
     [
-      "0uhnz1v",
+      "1b422d06127d5028a2df",
       1024
     ]
   ],
   "/strapi/uploads/Telekom_dc5707d72c.png": [
     [
-      "0v2v0kq",
+      "321aece312644842f6c1",
+      64
+    ],
+    [
+      "f1323631092ea8ffc0ba",
+      128
+    ],
+    [
+      "91c83013026cb84bf84f",
       178
     ]
   ],
   "/strapi/uploads/UNIQA_ugyfelportal_slide_v2_b18f910b22.png": [
     [
-      "19x0zq1",
+      "a5201a30d47602f6849a",
+      64
+    ],
+    [
+      "14a93a86e4395b91fd13",
+      128
+    ],
+    [
+      "1b263382e352035e784f",
+      192
+    ],
+    [
+      "7c882e18f18cdb7fea3e",
       320
     ],
     [
-      "0p4m88s",
+      "3e289aad6de44e298079",
       480
     ],
     [
-      "0xp79vd",
+      "ae76e278ffae1d9dfcda",
       768
     ],
     [
-      "0u4grqp",
+      "cd037872fe6183853313",
       1200
     ],
     [
-      "1ivvopc",
+      "707fe11cff7e7286fdd5",
       1245
     ]
   ],
   "/strapi/uploads/Uni_Credit_Akadalymentes_audit_c8d7c0f8fc.png": [
     [
-      "0rkfl44",
+      "fee7b0084eade6bea0ee",
+      64
+    ],
+    [
+      "1cb1ee252169725b6e38",
+      128
+    ],
+    [
+      "402e59c8e0477e7c0b43",
+      192
+    ],
+    [
+      "128845edb77185b649de",
       320
     ],
     [
-      "17xw6n9",
+      "c215941764728f0e10b2",
       480
     ],
     [
-      "0kw64rw",
+      "970a8a4b838c0b906a4a",
       768
     ],
     [
-      "1cb277m",
+      "e206ab259303794b4c6a",
       1024
     ]
   ],
   "/strapi/uploads/Uni_Credit_f956ff172c.png": [
     [
-      "0753t6u",
+      "61d3925b8747a2377b64",
+      64
+    ],
+    [
+      "b86c096e2f7c65dfdcf7",
+      128
+    ],
+    [
+      "5ad39be5f3ab77065d9c",
+      192
+    ],
+    [
+      "422e228fb4ba1969855e",
       228
     ]
   ],
   "/strapi/uploads/Uniqa_Digitalis_ugyintezes_9ad80571da.png": [
     [
-      "1k7nkg3",
+      "bb2ff1c96e6a0276f634",
+      64
+    ],
+    [
+      "305750c379823a6a7427",
+      128
+    ],
+    [
+      "f708b2adbd2da1f65fc5",
+      192
+    ],
+    [
+      "49f7eb3c0396ee80dc6c",
       320
     ],
     [
-      "13gnq8m",
+      "9bdaa8185b09909ae8f9",
       480
     ],
     [
-      "183tm83",
+      "78775d96c10c30998d7c",
       768
     ],
     [
-      "15jssvz",
+      "2e4a7d97a8ec8b183b48",
       1024
     ]
   ],
   "/strapi/uploads/Uniqa_dcd48d1817.png": [
     [
-      "14ew6ey",
+      "d8b4a3850ec75de7ea1d",
+      64
+    ],
+    [
+      "3c92c7a090be35688547",
       124
     ]
   ],
   "/strapi/uploads/Viktor_8767106e5e.webp": [
     [
-      "08fdfxw",
+      "3983f03c2cb946602521",
+      64
+    ],
+    [
+      "d1e846ef0b6cd3fa559d",
+      128
+    ],
+    [
+      "29c4f5221fbd495eed33",
+      192
+    ],
+    [
+      "4c9b01074469d2f6e338",
       320
     ],
     [
-      "0w2wylx",
+      "b4c856a92861af1cd54a",
       480
     ],
     [
-      "0uuiv8s",
+      "e1bcd4ceea8bb69f4755",
       500
     ]
   ],
   "/strapi/uploads/Virag_fd305993ee.webp": [
     [
-      "1hsajpx",
+      "c2503db2bb4f0826045a",
+      64
+    ],
+    [
+      "cfca3f9ee2a66e91a2a4",
+      128
+    ],
+    [
+      "e15b0470879d3defa317",
+      192
+    ],
+    [
+      "f2423beac62f822fc822",
       320
     ],
     [
-      "0mgblvk",
+      "dd6dbec8adbd182a95a5",
       480
     ],
     [
-      "0135zkp",
+      "ea2a962d2e9d63299b43",
       500
     ]
   ],
   "/strapi/uploads/Works_AI_alapu_termekfejlesztes_97315f8150.png": [
     [
-      "147q7ae",
+      "b714c17f369107dba018",
+      64
+    ],
+    [
+      "7300bcf7ce5c09e17d55",
+      128
+    ],
+    [
+      "d807551aed5d30ed8f8d",
+      192
+    ],
+    [
+      "146d64d42ab2456aa9f4",
       320
     ],
     [
-      "0eob8an",
+      "085c2166efd7a287c3db",
       480
     ],
     [
-      "0ze1ara",
+      "3d9021f5e2a3b9bef28e",
       768
     ],
     [
-      "0lnu5h8",
+      "390d48adbbc505af2331",
       1024
     ]
   ],
   "/strapi/uploads/Works_Akadalymentes_kepzes_f5b89b3af6.png": [
     [
-      "1ujwvkb",
+      "fe2855ae9b468bd451f2",
+      64
+    ],
+    [
+      "5471b1507d0a42570d35",
+      128
+    ],
+    [
+      "c587c6ad6d619f491897",
+      192
+    ],
+    [
+      "d81fa1143e6c8ebd4478",
       320
     ],
     [
-      "06ey1zi",
+      "bb30fbc37e4265df42da",
       480
     ],
     [
-      "1h1t4wr",
+      "761c694bb0b8b6480c5c",
       768
     ],
     [
-      "0mmqnav",
+      "304217c2046a50d4f873",
       1024
     ]
   ],
   "/strapi/uploads/Works_Digitalis_kepessegfejlesztes_ab723186b8.png": [
     [
-      "1q9m43m",
+      "60e845c52e1e42b5792c",
+      64
+    ],
+    [
+      "cfda4d79ac6140fc8177",
+      128
+    ],
+    [
+      "abffadfc284807a0abdc",
+      192
+    ],
+    [
+      "8a09ebc80817325accc7",
       320
     ],
     [
-      "18q7r43",
+      "ae1f448b5693d87cbf27",
       480
     ],
     [
-      "03cc0ci",
+      "1f1c2146963f2000047f",
       768
     ],
     [
-      "0mj2o5k",
+      "4d6bfde610f5cb9b51be",
       1024
     ]
   ],
   "/strapi/uploads/Yettel_3_d180234f07.png": [
     [
-      "03v6dz4",
+      "1f2b949eefbc753a8a9e",
+      64
+    ],
+    [
+      "ae406b3f0f894bbcf5ab",
+      128
+    ],
+    [
+      "48a7c9108e691a83a6d2",
+      192
+    ],
+    [
+      "998dc62996b02767315b",
       252
     ]
   ],
   "/strapi/uploads/Yettel_IVR_validacio_207c29f71f.png": [
     [
-      "034e3kf",
+      "c50f550f93f5983a1ad7",
+      64
+    ],
+    [
+      "3e24d36b8eeb31a4d27d",
+      128
+    ],
+    [
+      "bfd4b12cf05b9e759207",
+      192
+    ],
+    [
+      "c35751407c1aeecd9239",
       320
     ],
     [
-      "0x53y9m",
+      "1674247e586d3bebc4d7",
       480
     ],
     [
-      "03qa2lr",
+      "8f9ac015245734755a52",
       768
     ],
     [
-      "1hpa0uz",
+      "66627b436ce14366695d",
       1024
     ]
   ],
   "/strapi/uploads/Yettel_b6d6aecb20.png": [
     [
-      "19c3hjw",
+      "4c8a697ace32c9e54c20",
+      64
+    ],
+    [
+      "64a01738e1ec3f165842",
+      128
+    ],
+    [
+      "9a18086b11946b74d53d",
+      192
+    ],
+    [
+      "c9e9aea3cba69c4a07dd",
       320
     ],
     [
-      "06aywmj",
+      "8c2d1696da1fb2a4cc82",
       396
     ]
   ],
   "/strapi/uploads/Zsofi_bf08c261c0.webp": [
     [
-      "0cddqmz",
+      "be1963f8f22a5edeed0e",
+      64
+    ],
+    [
+      "884286c41905a4732e4d",
+      128
+    ],
+    [
+      "c7e5c24027c30ae3f6a8",
+      192
+    ],
+    [
+      "e2fdec6da5c7fbc7ca07",
       320
     ],
     [
-      "0sekmde",
+      "b201b8592e1eeaebcfb4",
       440
     ]
   ],
   "/strapi/uploads/Zsu_1_bb91c39a55.webp": [
     [
-      "1l20lsp",
+      "b76617c1c4881afe5506",
+      64
+    ],
+    [
+      "8bd50ae786beda4f00f8",
+      128
+    ],
+    [
+      "4bf47de9c9e3785540c8",
+      192
+    ],
+    [
+      "039312d2f06450fad042",
       320
     ],
     [
-      "109lubg",
+      "66b09087de1a280b4aea",
       480
     ],
     [
-      "1bs9vr9",
+      "7ff55f5ce4bf0190ecfe",
       500
     ]
   ],
   "/strapi/uploads/alkalmazkodas_new_1789551061821_d296cb66d4.png": [
     [
-      "0t4lrip",
+      "93d982de848cebed2e6d",
+      64
+    ],
+    [
+      "2eb163e10ea060e4891f",
+      128
+    ],
+    [
+      "2e37bef07e8a4c4159df",
+      192
+    ],
+    [
+      "bdf42b4c0fd831756b28",
       320
     ],
     [
-      "1wfmg5g",
+      "991cc3ab80fa8ceb9092",
       480
     ],
     [
-      "067rhmp",
+      "ee24cdcda3dc7637a722",
       768
     ],
     [
-      "03its73",
+      "1e008e75b594b6144556",
       960
     ]
   ],
   "/strapi/uploads/bg_graphic2_1774011568340_bb671557c5.png": [
     [
-      "0t07gwf",
+      "6cac7ed239c1515daf55",
+      64
+    ],
+    [
+      "60bab5fdce3abb1b4dc1",
+      128
+    ],
+    [
+      "dccff67748a9d66f7ddc",
+      192
+    ],
+    [
+      "a166cdcadf8ef05830f5",
       320
     ],
     [
-      "1i9rcoq",
+      "d6fba21f6b0221c61880",
       480
     ],
     [
-      "077i6i7",
+      "3b6cade6ed06db0aa395",
       768
     ],
     [
-      "1lco3z4",
+      "f39c8d77af78eeb60238",
       1056
     ]
   ],
   "/strapi/uploads/bg_graphic_1774009634501_6f046d67af.png": [
     [
-      "12nldwu",
+      "38b679369423dae237eb",
+      64
+    ],
+    [
+      "32b5d6151ead52b76ae8",
+      128
+    ],
+    [
+      "53812da4343a7aeded64",
+      192
+    ],
+    [
+      "ad43279e79ebcab4cf8e",
       320
     ],
     [
-      "0u2i8gn",
+      "841e4517fdb4d5ada1ec",
       480
     ],
     [
-      "1o45ne6",
+      "1603e8bf73072f01fbb9",
       768
     ],
     [
-      "03he3ok",
+      "c948dfe6aa620e50c91d",
       1200
     ],
     [
-      "0jnkbtk",
+      "aebb819bb60d701b7228",
       1279
     ]
   ],
   "/strapi/uploads/contact_bg_1774518452836_75c2598f4c.png": [
     [
-      "07jke90",
+      "7732b14404a4a593cc1c",
+      64
+    ],
+    [
+      "18b94911e40beb602ddf",
+      128
+    ],
+    [
+      "bd82e3d7774554bc1008",
+      192
+    ],
+    [
+      "02ef21f6f6e12ac6e5c9",
       320
     ],
     [
-      "0nx0zs5",
+      "5b5df8d9dd931c72e4ad",
       480
     ],
     [
-      "00vaxws",
+      "2324531f44767b7c71ec",
       768
     ],
     [
-      "172h38y",
+      "26fe602b40d4c39dfb1c",
       1200
     ],
     [
-      "03nlrt2",
+      "281e65bc81e13eda5634",
       1600
     ],
     [
-      "0mwftoj",
+      "6ae0fe95cba1acebecf2",
       1920
     ],
     [
-      "05n9j4r",
+      "223ff84dd131896a75f0",
       2648
     ]
   ],
   "/strapi/uploads/egyuttmukodes_new_1789551061820_81012c650c.png": [
     [
-      "01xp15o",
+      "6ca6148b6d961f1f31be",
+      64
+    ],
+    [
+      "6083eaf514d4fc390277",
+      128
+    ],
+    [
+      "fc836c5892097adf3fe0",
+      192
+    ],
+    [
+      "5f42b5793b086626730f",
       320
     ],
     [
-      "03i2qnh",
+      "ef9b4dc86a8e02d26f2b",
       480
     ],
     [
-      "19ikdh0",
+      "d80f193d50988515f938",
       768
     ],
     [
-      "10x6a4y",
+      "0bac24e62491218c0790",
       960
     ]
   ],
   "/strapi/uploads/empatia_new_1789551061821_932264da68.png": [
     [
-      "17i81lg",
+      "dca24f988f7ce22b7a4a",
+      64
+    ],
+    [
+      "ee4dc127549c42738de9",
+      128
+    ],
+    [
+      "6167f690918fa2f0f42a",
+      192
+    ],
+    [
+      "b6545d63c5c3a47c13a0",
       320
     ],
     [
-      "1exid79",
+      "7edf1a8a743265bc86df",
       480
     ],
     [
-      "193szrw",
+      "a1b9d328fdee0b96960e",
       768
     ],
     [
-      "1ipjypm",
+      "682f0757a0f31a1f5a60",
       960
     ]
   ],
   "/strapi/uploads/favicon_e56c3f9854.png": [
     [
-      "0n8nwrg",
+      "1a41277b87e9297ef993",
       32
     ]
   ],
   "/strapi/uploads/generali_928376e149.png": [
     [
-      "14q86f5",
+      "d658c94b4213b35f36e2",
+      64
+    ],
+    [
+      "ffb5c516d8e2c0c26ab7",
       119
     ]
   ],
   "/strapi/uploads/genertel_e1e006ac6e.png": [
     [
-      "0su8ao1",
+      "ee83234e24156fbaa660",
+      64
+    ],
+    [
+      "4d0798110e02aba1f04d",
+      128
+    ],
+    [
+      "a038e74c3292d27446cd",
+      192
+    ],
+    [
+      "c60cb99cdd6420cbe19d",
       228
     ]
   ],
   "/strapi/uploads/homepage_graphic_1773999340930_ace17c6480.png": [
     [
-      "1j9dxj4",
+      "732211e075ed1defc8f4",
+      64
+    ],
+    [
+      "674a0e7ffeab4e4d1013",
+      128
+    ],
+    [
+      "70a6c1b50b7e719874c9",
+      192
+    ],
+    [
+      "e77b480aaf3538a4601a",
       320
     ],
     [
-      "10uhvhl",
+      "cd05bc39fed31dbe3869",
       480
     ],
     [
-      "19qejig",
+      "dc45752143b8ffb74ea8",
       768
     ],
     [
-      "0wlgixy",
+      "2a43284bf0d3a9460a2a",
       1200
     ],
     [
-      "1qy6jde",
+      "fd5918ea8c5c6977851e",
       1600
     ],
     [
-      "0gd7azr",
+      "5bc290e2aefd6f5ad1e4",
       1920
     ],
     [
-      "1s61s2h",
+      "347f8ba680faccdb4502",
       2268
     ]
   ],
   "/strapi/uploads/image_1785160439920_af0ef5ac33.png": [
     [
-      "09lbt56",
+      "827c4ece9c8471be04b4",
+      64
+    ],
+    [
+      "2ad305ce8cc7c019b15f",
+      128
+    ],
+    [
+      "45a2d941ee1e63ed4aa5",
+      192
+    ],
+    [
+      "c3a77e3dab06e0d05a80",
       320
     ],
     [
-      "15hjssb",
+      "eb957a36d75eccf5a71b",
       480
     ],
     [
-      "0gska62",
+      "bac4fc21a6c3707faa63",
       768
     ],
     [
-      "1g7tk9k",
+      "a0f8d029fe70fa1724f9",
       1200
     ],
     [
-      "0wqhnzg",
+      "1f15c728371388faae7c",
       1600
     ],
     [
-      "1s5p0x5",
+      "8da33fe00c7a8f5f89bb",
       1920
     ],
     [
-      "1mggnhb",
+      "ad3742f65167dc919a1e",
       2000
     ]
   ],
   "/strapi/uploads/project_banking_clean_c2205f791d.png": [
     [
-      "16z070d",
+      "d7335311600cad4c039e",
+      64
+    ],
+    [
+      "41dfa1a0264307c4a103",
+      128
+    ],
+    [
+      "8a7adae7b2ab8245ec04",
+      192
+    ],
+    [
+      "13c53ed49152830b958e",
       320
     ],
     [
-      "12mqgns",
+      "b0cfe4da50111b819167",
       480
     ],
     [
-      "1yaw7jh",
+      "1cbf06897711d96824c6",
       768
     ],
     [
-      "08rdkl9",
+      "3f49d62c45de7db59553",
       1200
     ],
     [
-      "1tw1011",
+      "053460141eb0c7bf61fc",
       1280
     ]
   ],
   "/strapi/uploads/sqsp_8_gyakori_hiba_amit_egy_digitalis_akadalymentessegi_audit_feltar_1_d34c61ab76.png": [
     [
-      "1pwe4j3",
+      "cd73ad8f17cf79563739",
+      64
+    ],
+    [
+      "17247e321545bf7d24ce",
+      128
+    ],
+    [
+      "44ab0b5dba252cff37cb",
+      192
+    ],
+    [
+      "dc758b9c285f21b9db84",
       320
     ],
     [
-      "0tkiwbe",
+      "1314f7ec44ce1bf4381e",
       480
     ],
     [
-      "1todqq7",
+      "c399c283619284d91986",
       768
     ],
     [
-      "1v8zmxj",
+      "ddae29d4d444509f84c1",
       1200
     ],
     [
-      "1jv12xk",
+      "aebdd48534e104eb3ee5",
       1500
     ]
   ],
   "/strapi/uploads/sqsp_8_gyakori_hiba_amit_egy_digitalis_akadalymentessegi_audit_feltar_2_8eeb4adef2.png": [
     [
-      "1mubvpz",
+      "f71b66ceebca7b37caa5",
+      64
+    ],
+    [
+      "3a184500dc1c7005f672",
+      128
+    ],
+    [
+      "507f692acb7cd278db7c",
+      192
+    ],
+    [
+      "923d0fef05b40e0ed9b3",
       320
     ],
     [
-      "0ey4v0y",
+      "2233121ca96a68a36777",
       480
     ],
     [
-      "0r7l6j6",
+      "4e693db9b8550d75ce5c",
       758
     ]
   ],
   "/strapi/uploads/sqsp_8_gyakori_hiba_amit_egy_digitalis_akadalymentessegi_audit_feltar_3_318f45da93.png": [
     [
-      "0z8v9te",
+      "275ff16e0f12cbf896be",
+      64
+    ],
+    [
+      "19c723db54b580bed468",
+      128
+    ],
+    [
+      "e66c96c58c6680b8cf5f",
+      192
+    ],
+    [
+      "55f1d19e4607933139c2",
       320
     ],
     [
-      "0thx2r7",
+      "389ee85b0b6b9e179a9f",
       480
     ],
     [
-      "0dsb0c2",
+      "476db8dfb09fddcc5881",
       768
     ],
     [
-      "0nhg9ps",
+      "d1d9093e6d8e7d55bb5e",
       1200
     ],
     [
-      "0dy57b8",
+      "e65e198d1e431a5fd720",
       1600
     ],
     [
-      "0ot0zey",
+      "59c7dd597c09860f9ff4",
       1897
     ]
   ],
   "/strapi/uploads/sqsp_8_gyakori_hiba_amit_egy_digitalis_akadalymentessegi_audit_feltar_4_385581e9df.png": [
     [
-      "0wyj4on",
+      "59ed376973a32281282f",
+      64
+    ],
+    [
+      "12f3dede01f844d6ff68",
+      128
+    ],
+    [
+      "38bf2d7e29cb9fd796ec",
+      192
+    ],
+    [
+      "eb056adc93919d755ce4",
       320
     ],
     [
-      "1sej2nm",
+      "b3222c3729cb6386edcb",
       480
     ],
     [
-      "0hjkrt3",
+      "0378fb7854e0020dd6d3",
       768
     ],
     [
-      "1aqz2z3",
+      "38b0314c79059ce8a8fd",
       1200
     ],
     [
-      "1m10z3f",
+      "aaafcc498756af91b1fd",
       1600
     ],
     [
-      "1bsdyys",
+      "24b1fddf9075b4266422",
       1908
     ]
   ],
   "/strapi/uploads/sqsp_8_gyakori_hiba_amit_egy_digitalis_akadalymentessegi_audit_feltar_5_9442794b13.png": [
     [
-      "1jhykz1",
+      "1dd407d76a9846aa0d74",
+      64
+    ],
+    [
+      "fa27878050a684a5f449",
+      128
+    ],
+    [
+      "210c07f79b8fdcd64e63",
+      192
+    ],
+    [
+      "e8a0e5e66f9c422f3ae7",
       320
     ],
     [
-      "1wg8dag",
+      "114326ddd3a28b521a03",
       480
     ],
     [
-      "1hzdpp9",
+      "eef647d89a3edc2b75b9",
       768
     ],
     [
-      "00tj8fh",
+      "cc1889e30e188fa39d42",
       1200
     ],
     [
-      "1hl5zm1",
+      "bd461d0f89b531e09c63",
       1600
     ],
     [
-      "17zsvg0",
+      "34b2dec1d41f5c2d8cd1",
       1920
     ],
     [
-      "0nr6k6n",
+      "01af3585315827217036",
       2500
     ]
   ],
   "/strapi/uploads/sqsp_8_gyakori_hiba_amit_egy_digitalis_akadalymentessegi_audit_feltar_6_7b63cc1cdc.png": [
     [
-      "1ny615g",
+      "cabd681e30d3eee26ee9",
+      64
+    ],
+    [
+      "50187fd080656cadd6ba",
+      128
+    ],
+    [
+      "2642541ec9199073ec02",
+      192
+    ],
+    [
+      "86f5035b0434590b3e47",
       320
     ],
     [
-      "15yog45",
+      "c9204115ccfe427d77c7",
       480
     ],
     [
-      "02ik5zw",
+      "7af46ff84386bf0348b7",
       768
     ],
     [
-      "0yrr5l3",
+      "cf1d40df7737d8160b86",
       1087
     ]
   ],
   "/strapi/uploads/sqsp_8_gyakori_hiba_amit_egy_digitalis_akadalymentessegi_audit_feltar_7_110bdf47e9.png": [
     [
-      "1moc26n",
+      "881e03ae42e206f6e671",
+      64
+    ],
+    [
+      "d44a15b3b8db325deec6",
+      128
+    ],
+    [
+      "1ec7a5ad85f27ce40552",
+      192
+    ],
+    [
+      "008da28223904cb13d94",
       320
     ],
     [
-      "0hnxuwq",
+      "06b866be25eb76d7a80b",
       480
     ],
     [
-      "1na817z",
+      "068ab4eff75853de3cc7",
       768
     ],
     [
-      "1n705br",
+      "3d5fb79a06c063e0031c",
       1200
     ],
     [
-      "1vu654j",
+      "61b14ac64c64951e40b8",
       1600
     ],
     [
-      "1le7ex2",
+      "25c64b090fd924d410aa",
       1919
     ]
   ],
   "/strapi/uploads/sqsp_8_gyakori_hiba_amit_egy_digitalis_akadalymentessegi_audit_feltar_8_0f287566e3.png": [
     [
-      "0bfardp",
+      "32f03a4cd2a212bba94d",
+      64
+    ],
+    [
+      "48e5026aba6e4aa953ed",
+      128
+    ],
+    [
+      "f67949005a743d8d0924",
+      192
+    ],
+    [
+      "5f9b855b5af35eb34670",
       320
     ],
     [
-      "0hev4oo",
+      "a74072f064050f1dc3b9",
       480
     ],
     [
-      "01t35xp",
+      "32f46c46223e02174ce0",
       768
     ],
     [
-      "1nzngra",
+      "fb547e7eda160acaeae2",
       1100
     ]
   ],
   "/strapi/uploads/sqsp_8_gyakori_hiba_amit_egy_digitalis_akadalymentessegi_audit_feltar_hero_fa8bbee622.png": [
     [
-      "113zyxu",
+      "57b358e2f31e7f0de7b9",
+      64
+    ],
+    [
+      "e50ebfc49f698bfc0391",
+      128
+    ],
+    [
+      "325b667842b0b8138fcb",
+      192
+    ],
+    [
+      "53b1b0f65e76449a66ea",
       320
     ],
     [
-      "0tywp5v",
+      "ae9f85305581e98a99cf",
       480
     ],
     [
-      "0fnfpgi",
+      "a5af23fa91c035fc0eaa",
       768
     ],
     [
-      "0df6mlc",
+      "06504d23a99525650499",
       1200
     ],
     [
-      "130nq9r",
+      "a16c195856806b55c75b",
       1500
     ]
   ],
   "/strapi/uploads/sqsp_akadalymentes_audit_funkcionalis_teszt_vagy_ux_kutatas_1_5f0cfd2e1a.png": [
     [
-      "1gvfa00",
+      "233d8a763a9bcc847c0d",
+      64
+    ],
+    [
+      "b9195bda111b1509d935",
+      128
+    ],
+    [
+      "a5dcffa56589fe9062aa",
+      192
+    ],
+    [
+      "8f300f075f6ad6349f48",
       320
     ],
     [
-      "1kr143t",
+      "77ecc10157dddafd3152",
       480
     ],
     [
-      "0muoroo",
+      "e945fa5aa740e2da3d4b",
       768
     ],
     [
-      "0ic2kee",
+      "d4295b83e0cfdb6cd7ba",
       1200
     ],
     [
-      "19cptv6",
+      "afdff40da9847770ee71",
       1600
     ],
     [
-      "0vixr02",
+      "3cff4a385bccbcdfb07b",
       1709
     ]
   ],
   "/strapi/uploads/sqsp_akadalymentes_audit_funkcionalis_teszt_vagy_ux_kutatas_2_7e016c648c.png": [
     [
-      "1ekxxed",
+      "8f016d7d725b6d260753",
+      64
+    ],
+    [
+      "84678be0233c754332eb",
+      128
+    ],
+    [
+      "8868c382051075994801",
+      192
+    ],
+    [
+      "8a46c759aa7336e730de",
       320
     ],
     [
-      "0j8yzk0",
+      "2703c8da327e18b655c7",
       480
     ],
     [
-      "1qorvmd",
+      "19f82cdda0ae9f48f340",
       768
     ],
     [
-      "00sg6sl",
+      "d3875d751d725cab9588",
       1200
     ],
     [
-      "0g20gxq",
+      "25622540780b38fb72fc",
       1504
     ]
   ],
   "/strapi/uploads/sqsp_akadalymentes_audit_funkcionalis_teszt_vagy_ux_kutatas_3_4971e68bed.png": [
     [
-      "1uo74wa",
+      "4792cdc184e9683fcbb3",
+      64
+    ],
+    [
+      "61eca478da2c39073e3f",
+      128
+    ],
+    [
+      "d2e24246c97f1dd1ea9e",
+      192
+    ],
+    [
+      "1f31dc26b7603ff37b88",
       320
     ],
     [
-      "1lid7zv",
+      "b18c7322ad197cb2a2f8",
       480
     ],
     [
-      "049ppdm",
+      "10df37cb96469459e8c7",
       768
     ],
     [
-      "0jfkwwo",
+      "927b2ee5cb9ffa3ea94f",
       1200
     ],
     [
-      "02idxub",
+      "e78c16355bc673875044",
       1504
     ]
   ],
   "/strapi/uploads/sqsp_akadalymentes_audit_funkcionalis_teszt_vagy_ux_kutatas_hero_490524cfb4.jpg": [
     [
-      "0eeb377",
+      "83520ceb65ef6ca21d50",
+      64
+    ],
+    [
+      "c905b7881b4d2ae842de",
+      128
+    ],
+    [
+      "8cba3bdc0a18a81ce972",
+      192
+    ],
+    [
+      "2c8e06f6f9d8288c9bb0",
       320
     ],
     [
-      "1wtdrwm",
+      "056a93a1d4fe2c4d7c46",
       480
     ],
     [
-      "0zuvcoj",
+      "ad3aabc51b304677033b",
       768
     ],
     [
-      "0kv9sf7",
+      "d36f348ef06355aa91a8",
       1200
     ],
     [
-      "146tcbr",
+      "a6947070b2de84ce4292",
       1600
     ],
     [
-      "0kg77hj",
+      "3e7c9d9e941971e96d09",
       1709
     ]
   ],
   "/strapi/uploads/sqsp_akadalymentesseg_jog_nem_jo_cselekedet_1_897166d2e5.jpg": [
     [
-      "0s0hqfx",
+      "578490fb78502a95e2f1",
+      64
+    ],
+    [
+      "086b247952b299244fc0",
+      128
+    ],
+    [
+      "b71831699966741d0bc0",
+      192
+    ],
+    [
+      "535a141855b570a1d83f",
       320
     ],
     [
-      "0y023qw",
+      "6426c2ca291b35ce8ad8",
       480
     ],
     [
-      "0iea4zx",
+      "a28bffea39c9e2e73a99",
       768
     ],
     [
-      "13hh731",
+      "59fe1bb41e4939f80cdd",
       1200
     ],
     [
-      "02ba8u1",
+      "e1b319f6bb5dc732a046",
       1600
     ],
     [
-      "1rgkm00",
+      "9d9cce65f0a8456e9bcd",
       1920
     ],
     [
-      "0g056zj",
+      "003e1661bf63632edae8",
       2500
     ]
   ],
   "/strapi/uploads/sqsp_akadalymentesseg_jog_nem_jo_cselekedet_2_18189064a0.png": [
     [
-      "1qcq9cj",
+      "c501dd8ce633cef00946",
+      64
+    ],
+    [
+      "19f7a93c14f4c373d50a",
+      128
+    ],
+    [
+      "303e34240c8e540efb6a",
+      192
+    ],
+    [
+      "118eca108255e0c84bb6",
       320
     ],
     [
-      "0ofcj52",
+      "aeabfa8fee8ae004f9eb",
       480
     ],
     [
-      "0cs6gur",
+      "afa69e1751d0bb131773",
       768
     ],
     [
-      "0atg16r",
+      "e492eedc3cf5670a169a",
       1200
     ],
     [
-      "0bky9zb",
+      "3d4d1de539769aca2d11",
       1600
     ],
     [
-      "0f6ipda",
+      "b7d832451e6ea0a9081b",
       1920
     ],
     [
-      "1kvubnd",
+      "6d88a7a7bbbc3d41b40d",
       2001
     ]
   ],
   "/strapi/uploads/sqsp_akadalymentesseg_jog_nem_jo_cselekedet_3_6cee6610f6.png": [
     [
-      "1ff4edi",
+      "ed055ca0d8d09f8645c8",
+      64
+    ],
+    [
+      "2aaf22d63f42a1819955",
+      128
+    ],
+    [
+      "007492f87e98e5b7197c",
+      192
+    ],
+    [
+      "658c1886b514ace61b1b",
       320
     ],
     [
-      "01o9gyn",
+      "ca8cdedc1bf69a430bd3",
       480
     ],
     [
-      "0n0io7q",
+      "a4c00e8b8c2471373d17",
       768
     ],
     [
-      "0kyp163",
+      "e9794d268a67f047d567",
       952
     ]
   ],
   "/strapi/uploads/sqsp_akadalymentesseg_jog_nem_jo_cselekedet_4_b1e688745a.jpeg": [
     [
-      "0if8njp",
+      "c65b71e34e912e5c8fd9",
+      64
+    ],
+    [
+      "20df97ed7c91b9ab626f",
+      128
+    ],
+    [
+      "6b086d8afc81f9cb50ca",
+      192
+    ],
+    [
+      "9b832b1d0b174869837f",
       320
     ],
     [
-      "1tr8gdc",
+      "a82294c91e3555d7f5ec",
       480
     ],
     [
-      "1vzsg1h",
+      "421a0e1893e15af63a62",
       768
     ],
     [
-      "0scg98l",
+      "e76878409e0fba7bed99",
       1200
     ],
     [
-      "0utb48x",
+      "2b4f746cd8a71d920dc4",
       1600
     ],
     [
-      "1cqum60",
+      "6c0a2829a2b01dd539b2",
       1920
     ],
     [
-      "1axna9u",
+      "dab387376a5561260454",
       2000
     ]
   ],
   "/strapi/uploads/sqsp_akadalymentesseg_jog_nem_jo_cselekedet_hero_6537aa6f43.png": [
     [
-      "12cqkmb",
+      "34540ad2e0c6fb2aecc2",
+      64
+    ],
+    [
+      "9e22e3fe19d987839044",
+      128
+    ],
+    [
+      "a00de8fecdf485d82043",
+      192
+    ],
+    [
+      "6459ebc6685223cc70a1",
       320
     ],
     [
-      "1wi8vue",
+      "d0a147ee097f21f9d67f",
       480
     ],
     [
-      "1ntau3n",
+      "3052016cbc8c71ec382a",
       768
     ],
     [
-      "1vycc1t",
+      "682c04067291ac735588",
       1080
     ]
   ],
   "/strapi/uploads/sqsp_amikor_a_design_ujra_keresi_a_helyet_1_aa67e1f3f8.png": [
     [
-      "0wpmopb",
+      "943e7f81d0d09bfe0337",
+      64
+    ],
+    [
+      "91f5fba79400be1b933f",
+      128
+    ],
+    [
+      "27ea2a8640f85edee876",
+      192
+    ],
+    [
+      "0839bffdabdf51350ea1",
       320
     ],
     [
-      "1qqcjei",
+      "31cd9f7151e8b94cbe04",
       480
     ],
     [
-      "0xbinqn",
+      "dacbf77c0ed42a8cbd96",
       768
     ],
     [
-      "01py9o7",
+      "4b6b13f208dd655872e9",
       1200
     ],
     [
-      "0ad49gz",
+      "b7a40f3bb7b072ed4355",
       1600
     ],
     [
-      "0uk4pjm",
+      "f3c4ede4ff434fc7efe0",
       1920
     ],
     [
-      "15iqjzl",
+      "e48965278ae70d46d002",
       2500
     ]
   ],
   "/strapi/uploads/sqsp_amikor_a_design_ujra_keresi_a_helyet_hero_ce8a1e8b72.png": [
     [
-      "0pg28ey",
+      "0352eb4320412ddb2134",
+      64
+    ],
+    [
+      "f4037b1ac02e62ce486e",
+      128
+    ],
+    [
+      "d90decaeafe6472281a2",
+      192
+    ],
+    [
+      "7d998e9ea4cc200091de",
       320
     ],
     [
-      "0esbt8r",
+      "7eb852a5df3223ceca7d",
       480
     ],
     [
-      "15wdgei",
+      "45c8a3f715087f1909eb",
       768
     ],
     [
-      "11yxi5k",
+      "a8795f8456f9b521eedb",
       1200
     ],
     [
-      "04ftikc",
+      "2c02db136512a4dbf03a",
       1600
     ],
     [
-      "1ij4ard",
+      "328f0ef32bfd44db1d01",
       1920
     ],
     [
-      "09ctgbu",
+      "2ac11b6599ca13df0312",
       2500
     ]
   ],
   "/strapi/uploads/sqsp_amikor_a_kivitelezes_mar_nem_kulonboztet_meg_1_105bfc5ede.png": [
     [
-      "1hk3tr3",
+      "84e6031b98cd860a475c",
+      64
+    ],
+    [
+      "bb620ab70a3abe1851aa",
+      128
+    ],
+    [
+      "c7060ee602b2fc20b926",
+      192
+    ],
+    [
+      "77f0a19484104431e30a",
       320
     ],
     [
-      "13vcukq",
+      "d64502c6a427181cf966",
       480
     ],
     [
-      "0si7bi7",
+      "2f4c0a7886c04286063f",
       768
     ],
     [
-      "1xtww07",
+      "14237ae007e215652c6f",
       1200
     ],
     [
-      "1tt3ckn",
+      "5a5c40cc304ab04c2d75",
       1536
     ]
   ],
   "/strapi/uploads/sqsp_amikor_a_kivitelezes_mar_nem_kulonboztet_meg_2_971c808b5d.png": [
     [
-      "1z0jhfz",
+      "c0add9a4a5a5651b5cf4",
+      64
+    ],
+    [
+      "ae83ac10f9758b5863ce",
+      128
+    ],
+    [
+      "4f519332e9e5d3017e8e",
+      192
+    ],
+    [
+      "d663c9f9ce83782e9cc6",
       320
     ],
     [
-      "0u05a62",
+      "9b76b0ab830e40b2b1ff",
       480
     ],
     [
-      "00lbei7",
+      "744370ade600f7b9f06c",
       768
     ],
     [
-      "1no84jb",
+      "f2c9cd0827ed1dcde7ff",
       1200
     ],
     [
-      "0qxiqcp",
+      "bc200dc19a0a87bb62cc",
       1387
     ]
   ],
   "/strapi/uploads/sqsp_amikor_a_kivitelezes_mar_nem_kulonboztet_meg_hero_5fa24394b7.png": [
     [
-      "02kczav",
+      "c6d10cdd1aa620f494d7",
+      64
+    ],
+    [
+      "a152adb1f1adb88dca6b",
+      128
+    ],
+    [
+      "ac65f12564a0b473905a",
+      192
+    ],
+    [
+      "1fa15880703cc9c9a13d",
       320
     ],
     [
-      "1pt88du",
+      "f2bc2cbe7b371458205b",
       480
     ],
     [
-      "0u6l153",
+      "3c68f7c6d383bbf252ca",
       768
     ],
     [
-      "0tbpthr",
+      "0e4591e30d2fddace3dc",
       1200
     ],
     [
-      "0udl97z",
+      "ff14416f7a4472350119",
       1536
     ]
   ],
   "/strapi/uploads/sqsp_bizzuk_az_ai_ra_a_felhasznaloi_visszajelzesek_elemzeset_1_7e4328d31a.png": [
     [
-      "0ewf08s",
+      "69f3c59859742cd24c3b",
+      64
+    ],
+    [
+      "e96b854eafe4f40a1f23",
+      128
+    ],
+    [
+      "7d4b8e349b6a4d61193f",
+      192
+    ],
+    [
+      "5af642a4ce24fd198c0e",
       320
     ],
     [
-      "0k81m19",
+      "c3e8924fcb16c75ca255",
       480
     ],
     [
-      "01ejxjo",
+      "11dc92f62c47f3e263e9",
       768
     ],
     [
-      "1v98jay",
+      "53b86a6c94975035e60d",
       1200
     ],
     [
-      "1i2f8l6",
+      "e311497db344c6e90fd7",
       1536
     ]
   ],
   "/strapi/uploads/sqsp_bizzuk_az_ai_ra_a_felhasznaloi_visszajelzesek_elemzeset_2_e55fdf6727.png": [
     [
-      "1v4n50s",
+      "81273ff987cb65896331",
+      64
+    ],
+    [
+      "141e659ab37848f2ee1e",
+      128
+    ],
+    [
+      "1102031245df5591e85c",
+      192
+    ],
+    [
+      "7986a12ca9be17cdcb6d",
       320
     ],
     [
-      "0jx4pod",
+      "8c4fa4a3e60b97b9ab91",
       480
     ],
     [
-      "1h8qs78",
+      "b1f3d1e790582dd3995d",
       768
     ],
     [
-      "0f67222",
+      "5a9b656c90b9a3605cdd",
       1200
     ],
     [
-      "18wryli",
+      "588754e2ff3c2b8ce6c3",
       1374
     ]
   ],
   "/strapi/uploads/sqsp_bizzuk_az_ai_ra_a_felhasznaloi_visszajelzesek_elemzeset_3_8205479cbf.png": [
     [
-      "1q43k1y",
+      "43529254bfd432169d00",
+      64
+    ],
+    [
+      "87698fa73df96f5980f9",
+      128
+    ],
+    [
+      "2cc53dff36eb7f0264e5",
+      192
+    ],
+    [
+      "54d3c5de7ef794d84a96",
       320
     ],
     [
-      "0cd8mn3",
+      "ebb803a16ba1ef65f2ed",
       480
     ],
     [
-      "0xphtw6",
+      "29aca75493b9f074bbeb",
       768
     ],
     [
-      "0ut6sx7",
+      "636e8090bd0578cd0187",
       1140
     ]
   ],
   "/strapi/uploads/sqsp_bizzuk_az_ai_ra_a_felhasznaloi_visszajelzesek_elemzeset_4_4443059c6d.png": [
     [
-      "0ahqm9r",
+      "93cccd16cb9e95d59e7e",
+      64
+    ],
+    [
+      "4069023bd7acd96600a5",
+      128
+    ],
+    [
+      "6c3db717b2afb4694279",
+      192
+    ],
+    [
+      "61d89ff5eb4dadbee403",
       320
     ],
     [
-      "0ykjsmi",
+      "cb10c5761c366e8d2cf0",
       480
     ],
     [
-      "0ke1skf",
+      "e5ced4c04290c4dbe9c6",
       768
     ],
     [
-      "16hhsfy",
+      "35bc49844ebceddc23b0",
       1065
     ]
   ],
   "/strapi/uploads/sqsp_bizzuk_az_ai_ra_a_felhasznaloi_visszajelzesek_elemzeset_5_1da2cdf82d.png": [
     [
-      "0tozjvn",
+      "18377c52bed7e8873eee",
+      64
+    ],
+    [
+      "5d422e73dd27232b6d71",
+      128
+    ],
+    [
+      "9e105fa5252c98c6b73f",
+      192
+    ],
+    [
+      "e377af2bc8a4a67d8eb9",
       320
     ],
     [
-      "1nuhv3q",
+      "b8addfd254216a3e7d68",
       480
     ],
     [
-      "1f5jtcz",
+      "ffbd39d6934b5f2206e1",
       768
     ],
     [
-      "03bwb83",
+      "356d4d9d6b044d304eda",
       1200
     ],
     [
-      "13nfm53",
+      "b02f6dd9e8419d85b6cf",
       1600
     ],
     [
-      "0bb76ta",
+      "fd561e742255cffdc922",
       1920
     ],
     [
-      "1brodgo",
+      "057b53694531d9e3f3bb",
       1980
     ]
   ],
   "/strapi/uploads/sqsp_bizzuk_az_ai_ra_a_felhasznaloi_visszajelzesek_elemzeset_hero_78349de9d7.png": [
     [
-      "0kwack5",
+      "cf8b0711af513b4fa9d4",
+      64
+    ],
+    [
+      "491bad49ed15b3b190e3",
+      128
+    ],
+    [
+      "b88d41fada9e5c6d4e4a",
+      192
+    ],
+    [
+      "6d27194b8f04e5f7e205",
       320
     ],
     [
-      "01k8ncw",
+      "18a5036420e2d5698602",
       480
     ],
     [
-      "0x04as5",
+      "ee71e93201715fbe760c",
       768
     ],
     [
-      "0ozpeat",
+      "56a3b9f77f31d9abe076",
       1200
     ],
     [
-      "1cz58gh",
+      "f54d74ec67353ada6eb6",
       1536
     ]
   ],
   "/strapi/uploads/sqsp_digitalis_akadalymentesites_1_9666a5723c.png": [
     [
-      "1jo95c5",
+      "5491a277376480d606a2",
+      64
+    ],
+    [
+      "5f55273e3edcd65f6215",
+      128
+    ],
+    [
+      "834aa42433eef94d5892",
+      192
+    ],
+    [
+      "ec0670643b46abfb4cde",
       320
     ],
     [
-      "02tb38w",
+      "8577d07d5f4bac9fac1c",
       480
     ],
     [
-      "0y7ovut",
+      "0d469a3a75ef756050c5",
       768
     ],
     [
-      "13n9xg5",
+      "4483fed2fc34ef56b391",
       1200
     ],
     [
-      "0cuzn0a",
+      "4cce088545642770f44b",
       1500
     ]
   ],
   "/strapi/uploads/sqsp_digitalis_akadalymentesites_2_d08332ed6a.png": [
     [
-      "05uhv82",
+      "e7ed35bcd2fd36629dbf",
+      64
+    ],
+    [
+      "0e475fa91d029e831df2",
+      128
+    ],
+    [
+      "33bd2c1256ef70fc100a",
+      192
+    ],
+    [
+      "6ca4800f374ae2808cf6",
       320
     ],
     [
-      "0ictrpv",
+      "f879b4574fafb04fadca",
       480
     ],
     [
-      "1jf1npu",
+      "3f3aba1cdf1aae64e393",
       768
     ],
     [
-      "0xqzr4g",
+      "6f74cdfb37c879d98f1f",
       1200
     ],
     [
-      "0fbumy7",
+      "c2c91023cb7ccdb1fdde",
       1500
     ]
   ],
   "/strapi/uploads/sqsp_digitalis_akadalymentesites_3_843428ccaf.png": [
     [
-      "0tjjufl",
+      "5e18e344a5141967e807",
+      64
+    ],
+    [
+      "a8a38ffc25929b6a7245",
+      128
+    ],
+    [
+      "f44bd47f61d597c56cef",
+      192
+    ],
+    [
+      "2692fb62b0868e278cc9",
       320
     ],
     [
-      "0picebo",
+      "e8d8dfc6a31f2168abd4",
       480
     ],
     [
-      "0ej0v29",
+      "cd56c1bfe192a02c4899",
       768
     ],
     [
-      "0fox0jd",
+      "f43caff229dc95dca8dd",
       1200
     ],
     [
-      "00k09jq",
+      "570090a09353b1e2f8bf",
       1500
     ]
   ],
   "/strapi/uploads/sqsp_digitalis_akadalymentesites_4_7cc31cc3ab.png": [
     [
-      "1y9c3pr",
+      "2d2e44dc9edd1d78cda8",
+      64
+    ],
+    [
+      "a07c8d03e8edef081064",
+      128
+    ],
+    [
+      "acdddd50641d0ac86a98",
+      192
+    ],
+    [
+      "9a14cbff5f71b5fae6dc",
       320
     ],
     [
-      "0ohrxiy",
+      "d483b778f8aaf066b34e",
       480
     ],
     [
-      "1cgmtbj",
+      "45df0dfaedc6b512499f",
       768
     ],
     [
-      "086wit3",
+      "e459024aaec7945e837e",
       1200
     ],
     [
-      "0q9c9vc",
+      "5f1694ceee6dfaec2d8a",
       1500
     ]
   ],
   "/strapi/uploads/sqsp_digitalis_akadalymentesites_hero_12d76d0319.png": [
     [
-      "13z56nf",
+      "fc9ad5f2c2dd41e12681",
+      64
+    ],
+    [
+      "3eb4c859eca203584efd",
+      128
+    ],
+    [
+      "2f77a4267ec18f0c3065",
+      192
+    ],
+    [
+      "7e34e6ec77b513be4785",
       320
     ],
     [
-      "1rsxooe",
+      "7e2edeca651e2f898869",
       480
     ],
     [
-      "1ldw08r",
+      "76997b04b83876fc3d26",
       768
     ],
     [
-      "0ry8egb",
+      "a63c1385d46e82cbb0d6",
       1200
     ],
     [
-      "1qjhex0",
+      "eaa63389fb9a5bbdda5e",
       1500
     ]
   ],
   "/strapi/uploads/sqsp_elerhetobbe_teszi_az_ai_a_ux_kutatast_vagy_csak_olcso_illuziot_kinal_1_59bc8ed681.png": [
     [
-      "103cgko",
+      "d508481c35bd3c9b6c70",
+      64
+    ],
+    [
+      "8d9f9ec398ebcd8a09d3",
+      128
+    ],
+    [
+      "7f48696e988bd80003fa",
+      192
+    ],
+    [
+      "b894a5f4fed3bae2c470",
       320
     ],
     [
-      "0wrehy9",
+      "6b0d4612ccccf3db5dc6",
       480
     ],
     [
-      "0jh4rr4",
+      "7e6049cb552c7cbc908d",
       768
     ],
     [
-      "1qtar6m",
+      "6ebf8a28fe4f798b4544",
       1200
     ],
     [
-      "04slfvi",
+      "1ae9adf63d5a340de7d9",
       1536
     ]
   ],
   "/strapi/uploads/sqsp_elerhetobbe_teszi_az_ai_a_ux_kutatast_vagy_csak_olcso_illuziot_kinal_2_93f7f2d651.jpg": [
     [
-      "1eays2d",
+      "38e3ea79206d75d93fc9",
+      64
+    ],
+    [
+      "1995f790f8c437bdfc54",
+      128
+    ],
+    [
+      "fe9670fd146d7107fc6b",
+      192
+    ],
+    [
+      "73b1e3625e598212da41",
       320
     ],
     [
-      "0uyx2v4",
+      "c0b5c6ddc8ecec91ab2d",
       480
     ],
     [
-      "1qesqad",
+      "fbac20b8f7292183b22a",
       768
     ],
     [
-      "1dnxued",
+      "5452fcc6add85e45b5db",
       1200
     ],
     [
-      "1inwxsx",
+      "1b54dcf6528d584a2377",
       1600
     ],
     [
-      "0lqdllk",
+      "a0b85aa3d24b01753615",
       1920
     ]
   ],
   "/strapi/uploads/sqsp_elerhetobbe_teszi_az_ai_a_ux_kutatast_vagy_csak_olcso_illuziot_kinal_hero_ffac2f0b86.png": [
     [
-      "01t1omg",
+      "de1e4b77ead47389884a",
+      64
+    ],
+    [
+      "9ad746f143bad876976b",
+      128
+    ],
+    [
+      "3b2536839aab6f4c70b4",
+      192
+    ],
+    [
+      "9390f511ff836c7c80d0",
       320
     ],
     [
-      "1xi7rz5",
+      "75d914f16bfe8d44ff89",
       480
     ],
     [
-      "1k7y1s0",
+      "ecd14bff9f0737d36057",
       768
     ],
     [
-      "0piiiam",
+      "f6a4dd8bbabd304afbd3",
       1200
     ],
     [
-      "12ix8ym",
+      "f54ab4212dd8151393c1",
       1536
     ]
   ],
   "/strapi/uploads/sqsp_elveheti_az_ai_a_munkamat_1_4f8b0ffaf7.png": [
     [
-      "1g161ci",
+      "21a2722dc71cef4dbd1e",
+      64
+    ],
+    [
+      "33346c73983d7f36516b",
+      128
+    ],
+    [
+      "32f61a448c0e4072e02b",
+      192
+    ],
+    [
+      "3131fe7e29e5e7dd6ef2",
       320
     ],
     [
-      "1sjhxub",
+      "a422827ad59bc6fa7eba",
       480
     ],
     [
-      "0uklrv6",
+      "c1730311cb845595a161",
       768
     ],
     [
-      "10c1xcg",
+      "77d0f29189c70d4995c5",
       1200
     ],
     [
-      "0htucdg",
+      "8bd43e77097d253a90f0",
       1600
     ],
     [
-      "11rphld",
+      "4aa03ddd0304466ff4bf",
       1920
     ],
     [
-      "1ibsfma",
+      "3702d57283c4276f8507",
       2500
     ]
   ],
   "/strapi/uploads/sqsp_elveheti_az_ai_a_munkamat_2_f6192a46ec.png": [
     [
-      "1ujgh0c",
+      "8f2d3c10ec25734b01e5",
+      64
+    ],
+    [
+      "566d8c4382cad550b561",
+      128
+    ],
+    [
+      "698ac559e4af11d790fc",
+      192
+    ],
+    [
+      "9ace0770a808418b0011",
       320
     ],
     [
-      "1w3u6i5",
+      "4837da2ad62ff3f7e660",
       480
     ],
     [
-      "1337rck",
+      "32884d2981670c8a48e7",
       768
     ],
     [
-      "0iwenoa",
+      "27a4a451c73a396d34a1",
       1200
     ],
     [
-      "1e0djgu",
+      "65011d0b6ce8c1661346",
       1600
     ],
     [
-      "0uscf5n",
+      "f7f1aa518a6d552cc1bb",
       1920
     ],
     [
-      "1gfymz0",
+      "cad0984249456a2cdbce",
       2500
     ]
   ],
   "/strapi/uploads/sqsp_elveheti_az_ai_a_munkamat_3_2f4cf2e577.png": [
     [
-      "1btr543",
+      "b7eb1fcf0533a758e1d0",
+      64
+    ],
+    [
+      "3ac7a4db4595e1a3de4e",
+      128
+    ],
+    [
+      "cc8b82b8113f45388b96",
+      192
+    ],
+    [
+      "0bc0d60c8e812e730630",
       320
     ],
     [
-      "17ioxdi",
+      "ee6b449a4e285e001266",
       480
     ],
     [
-      "1xabelf",
+      "f4d6ed70ea196f22f68c",
       768
     ],
     [
-      "1cocgib",
+      "7f9f0310e1b61f94cb53",
       1200
     ],
     [
-      "0m1p9cn",
+      "5d6608c0daf166845d88",
       1600
     ],
     [
-      "1nhbri6",
+      "191202372694502cccef",
       1920
     ],
     [
-      "02y7pxx",
+      "6f86ffa32e9a4361c86e",
       2500
     ]
   ],
   "/strapi/uploads/sqsp_elveheti_az_ai_a_munkamat_hero_1d6264bad3.png": [
     [
-      "0q0ts7g",
+      "a3448841785f4d3a0756",
+      64
+    ],
+    [
+      "f40647fe250b65dd5321",
+      128
+    ],
+    [
+      "40ce74fd74b628de6cdb",
+      192
+    ],
+    [
+      "78dc41328de289b94db9",
       320
     ],
     [
-      "0ppz525",
+      "469b86757018c16b7d6d",
       480
     ],
     [
-      "07relgk",
+      "95b5cccfba7eac53253e",
       768
     ],
     [
-      "0zgzdlm",
+      "91e8cd075f6a2724d65f",
       1024
     ]
   ],
   "/strapi/uploads/sqsp_how_do_we_pay_online_1_5a705e0a99.jpeg": [
     [
-      "006kjz5",
+      "2b40169abd1cc5bd968d",
+      64
+    ],
+    [
+      "bb7e7cf851e0b32fb1ba",
+      128
+    ],
+    [
+      "2606d5c13e94987ad67a",
+      192
+    ],
+    [
+      "5e2ea818e51a775b9320",
       320
     ],
     [
-      "1t6n178",
+      "285ff5d0c30e3d7be7ba",
       480
     ],
     [
-      "05z800h",
+      "396d44bb43cf63b32504",
       768
     ],
     [
-      "1brn62x",
+      "07a91e48b8d8d7f003af",
       1200
     ],
     [
-      "1u14gvh",
+      "b327dc304217496b4501",
       1600
     ],
     [
-      "01sr3jw",
+      "9bff51bc043abda7d78a",
       1920
     ],
     [
-      "1jzf7wj",
+      "7479994617a3ef288ff5",
       2500
     ]
   ],
   "/strapi/uploads/sqsp_how_do_we_pay_online_2_8c031fbb46.png": [
     [
-      "101y57i",
+      "b82e1197b3d3c8a2ae75",
+      64
+    ],
+    [
+      "4207cddad4dbb2f45914",
+      128
+    ],
+    [
+      "a034d1a1e0ae898f2b57",
+      192
+    ],
+    [
+      "2731236673932182ed5a",
       320
     ],
     [
-      "0f1k3uv",
+      "2a3c13218b7b5ec9a623",
       480
     ],
     [
-      "1liieou",
+      "b2c78cd7e4ba573fe5ba",
       768
     ],
     [
-      "0qghw0k",
+      "dd69065799f4496a5c50",
       1200
     ],
     [
-      "1o62nr4",
+      "7f8d064c86fe0a02f78c",
       1600
     ],
     [
-      "0f2fudh",
+      "bf38d8d1ca1e2d00ac4e",
       1920
     ],
     [
-      "1opoey3",
+      "4860902ed1b4adf1ccb2",
       2000
     ]
   ],
   "/strapi/uploads/sqsp_how_do_we_pay_online_3_b1f979afce.png": [
     [
-      "1thsnbj",
+      "9899f1dfc0fff580659c",
+      64
+    ],
+    [
+      "b92ff3ab707d420008eb",
+      128
+    ],
+    [
+      "d113df212500bc2e21a0",
+      192
+    ],
+    [
+      "458273ca40946aecd0e4",
       320
     ],
     [
-      "0oheg1m",
+      "85f27a209d52100c3e5e",
       480
     ],
     [
-      "1u3omcv",
+      "65e16930bd53d0a40473",
       768
     ],
     [
-      "10sam0n",
+      "30db7b0225208bf6e5fa",
       1200
     ],
     [
-      "19fgltf",
+      "63032981c33525ea391b",
       1600
     ],
     [
-      "1tmh1w2",
+      "e239f10474bd9dfd06e1",
       1920
     ],
     [
-      "1grhot0",
+      "4c0ffa4ec564c843d71e",
       2000
     ]
   ],
   "/strapi/uploads/sqsp_how_do_we_pay_online_4_1b27a9541f.png": [
     [
-      "18qq7db",
+      "82ff6e24875c397ebd8f",
+      64
+    ],
+    [
+      "37360dbe3964cf0574c2",
+      128
+    ],
+    [
+      "2be47c78c28539c568ed",
+      192
+    ],
+    [
+      "685e1d7111a41ef79298",
       320
     ],
     [
-      "1y0a35m",
+      "83a86d1352e486f9ee7b",
       480
     ],
     [
-      "0my0wz3",
+      "2d61424a3c41401b935a",
       768
     ],
     [
-      "0od3dx3",
+      "6d4f40f92bf097e28094",
       1200
     ],
     [
-      "06twdyr",
+      "ad8b13e5aae4bd00dd99",
       1600
     ],
     [
-      "1yvk7pu",
+      "eced7dac0eef3472bea9",
       1920
     ],
     [
-      "1l8007o",
+      "d2bd3fc415ddc0748290",
       2000
     ]
   ],
   "/strapi/uploads/sqsp_how_do_we_pay_online_5_a66bf8d368.png": [
     [
-      "087xmdy",
+      "2c794504e4790b8b6cc3",
+      64
+    ],
+    [
+      "406658d48667d13a0916",
+      128
+    ],
+    [
+      "3d050c5a205042da7b94",
+      192
+    ],
+    [
+      "ec0823b0f3b8eae68b53",
       320
     ],
     [
-      "1lya1bj",
+      "b4297c9a9ff71ef2f23c",
       480
     ],
     [
-      "0x0p8me",
+      "3728fc628748b25e971d",
       768
     ],
     [
-      "02f3nz0",
+      "e088affb7787b0ddfe29",
       1200
     ],
     [
-      "0ue4m4o",
+      "6b410ae1edd0db02954e",
       1600
     ],
     [
-      "1f7ib3x",
+      "6449452f6c97228da310",
       1920
     ],
     [
-      "1pqhysz",
+      "c220076e08a584cdc77b",
       2000
     ]
   ],
   "/strapi/uploads/sqsp_how_do_we_pay_online_6_74eb915952.png": [
     [
-      "08isoao",
+      "71973045f0bec6b353b6",
+      64
+    ],
+    [
+      "372f31270f9276d26336",
+      128
+    ],
+    [
+      "725277f69238a9742f46",
+      192
+    ],
+    [
+      "3de86c59b94d237f8f70",
       320
     ],
     [
-      "1p50o89",
+      "4e1d8ee372c290905ae8",
       480
     ],
     [
-      "1y0xc94",
+      "625d56de11ec12f9211f",
       768
     ],
     [
-      "0k4cova",
+      "bb3d0ed606d7334f13b4",
       1200
     ],
     [
-      "1eh2paq",
+      "b9c30a801f2f1c5cb9f7",
       1600
     ],
     [
-      "03w3gx3",
+      "7307f7f0c86cb56fce60",
       1920
     ],
     [
-      "1d13y5h",
+      "3e38c3cf03836a96f431",
       2000
     ]
   ],
   "/strapi/uploads/sqsp_how_do_we_pay_online_7_dc546b6eaa.png": [
     [
-      "1izjf47",
+      "4108e3d30e977fa603ff",
+      64
+    ],
+    [
+      "9bcc5651b2b8204fda8c",
+      128
+    ],
+    [
+      "87d8979157bc30e6b910",
+      192
+    ],
+    [
+      "ef8e0dd669d788c2e659",
       320
     ],
     [
-      "0565yte",
+      "417c1f5c2152a309467c",
       480
     ],
     [
-      "1uhoxzr",
+      "7abd9824bbb26025e2ca",
       768
     ],
     [
-      "1hhbqzj",
+      "0b17dc096451167f197f",
       1200
     ],
     [
-      "00noph7",
+      "93ff202e72d9f58de18e",
       1600
     ],
     [
-      "0odw3ze",
+      "d3ff7ce751482340625b",
       1920
     ],
     [
-      "0l9t9ss",
+      "3d14942d725e6006bc6e",
       2000
     ]
   ],
   "/strapi/uploads/sqsp_how_do_we_pay_online_hero_3f273da9ea.jpeg": [
     [
-      "0trpbnf",
+      "ab166e63442cde538668",
+      64
+    ],
+    [
+      "349f566fb3518b167076",
+      128
+    ],
+    [
+      "6761fcde6a8908af9ca8",
+      192
+    ],
+    [
+      "025006132731def1b9b0",
       320
     ],
     [
-      "0bd9dj2",
+      "2316b27ff81dec4d0111",
       480
     ],
     [
-      "1orx1fv",
+      "a1e6614540b0be07a494",
       768
     ],
     [
-      "1uu7xrv",
+      "0150b3b16db2bb695fd3",
       1200
     ],
     [
-      "13vtonz",
+      "d0863c0dd3773b79f906",
       1600
     ],
     [
-      "09r612u",
+      "2672a1630e3995618ff8",
       1920
     ],
     [
-      "1sayc59",
+      "4a4cab018835b0b2f4e2",
       2500
     ]
   ],
   "/strapi/uploads/sqsp_how_state_diagram_can_help_designers_1_35afbf25ed.png": [
     [
-      "0ltnq7n",
+      "7a6c21ac76c28f23a528",
+      64
+    ],
+    [
+      "b2701649a5042c371c7a",
+      128
+    ],
+    [
+      "ede12057612087fc79cc",
+      192
+    ],
+    [
+      "d2c5e2a228c45ee168b8",
       320
     ],
     [
-      "057mcxy",
+      "6c22086e7f2f0360763e",
       480
     ],
     [
-      "17a7zoz",
+      "e921dfcd4989ad836624",
       768
     ],
     [
-      "1txl4f7",
+      "9cad3072a907a7006979",
       1200
     ],
     [
-      "0e80mcn",
+      "3b1a5b9d6ee8b47acca0",
       1600
     ],
     [
-      "0so4o4c",
+      "42a7ce8943042563c52f",
       1892
     ]
   ],
   "/strapi/uploads/sqsp_how_state_diagram_can_help_designers_2_850fb8490c.png": [
     [
-      "12xc4cc",
+      "5193d328283021d59d52",
+      64
+    ],
+    [
+      "376912f859ee794e38de",
+      128
+    ],
+    [
+      "65d688fee3b1d96eb630",
+      192
+    ],
+    [
+      "07fb8d9503f64dd93a3d",
       320
     ],
     [
-      "188yq4t",
+      "a4af97b199e2a9e43b8d",
       480
     ],
     [
-      "0pfh1n8",
+      "02d270a440805f684e27",
       768
     ],
     [
-      "0ibhwhm",
+      "baea5d7e05cea82b9338",
       1200
     ],
     [
-      "14ih99q",
+      "d27875a7fcb1d6ff6f3a",
       1600
     ],
     [
-      "0ucw0wr",
+      "9ba7ab185dde610d57f2",
       1920
     ],
     [
-      "1tm4qzw",
+      "5678081a231398982071",
       2500
     ]
   ],
   "/strapi/uploads/sqsp_how_state_diagram_can_help_designers_3_4076621144.png": [
     [
-      "05jclzh",
+      "6ac2f877601da8a1fc47",
+      64
+    ],
+    [
+      "ef7c5aaa41bf9deb0484",
+      128
+    ],
+    [
+      "8c7162854cf471f6bb37",
+      192
+    ],
+    [
+      "2760a535db9558fee09a",
       320
     ],
     [
-      "1u3uiqw",
+      "6df915b9b1a18def5be2",
       480
     ],
     [
-      "0ookf0d",
+      "d7d4328328c916e61152",
       768
     ],
     [
-      "0hckglp",
+      "29fec908e3a36eb0e4ea",
       1200
     ],
     [
-      "0cz4eg9",
+      "e10ee497bc6940967476",
       1600
     ],
     [
-      "16fvt1s",
+      "793dd6187fc3c997bf90",
       1920
     ],
     [
-      "1dpzbgv",
+      "3f4c40424e91f095cd90",
       2500
     ]
   ],
   "/strapi/uploads/sqsp_how_state_diagram_can_help_designers_hero_5b992923ec.png": [
     [
-      "09kvq9o",
+      "4e1e43979ce08e783dae",
+      64
+    ],
+    [
+      "f0e1e1b791c163d7d7c1",
+      128
+    ],
+    [
+      "b0a7654e7f84d1bdbb33",
+      192
+    ],
+    [
+      "dcfa653997a02c61abad",
       320
     ],
     [
-      "0zbo87h",
+      "dc8e9090ea3520d35071",
       480
     ],
     [
-      "1kbhys4",
+      "a4e9b1c852e361679ae0",
       768
     ],
     [
-      "01rtsze",
+      "33467657ad92170cc506",
       1200
     ],
     [
-      "1l8cmsu",
+      "850bb6ce725c36bce4f8",
       1600
     ],
     [
-      "0dxbt97",
+      "aa6dca609af413777e4f",
       1920
     ],
     [
-      "0n3t52k",
+      "6d1e15cb95b742f28df6",
       2500
     ]
   ],
   "/strapi/uploads/sqsp_is_the_ux_designer_a_dying_breed_mlfg5_1_fa6a8d9f53.jpg": [
     [
-      "1javjek",
+      "928118733b030c72e1de",
+      64
+    ],
+    [
+      "5ab84ebd6d6f6330e607",
+      128
+    ],
+    [
+      "c01b147586ed50e9c497",
+      192
+    ],
+    [
+      "847d8ff569a566dcc391",
       320
     ],
     [
-      "1omi571",
+      "fabdd51914ac700aab7c",
       480
     ],
     [
-      "15t0gpg",
+      "d9fb3771e3c50a420631",
       768
     ],
     [
-      "1obdysg",
+      "c1f6e1d259c01aa0cf79",
       1000
     ]
   ],
   "/strapi/uploads/sqsp_is_the_ux_designer_a_dying_breed_mlfg5_2_b1ae069cfb.jpg": [
     [
-      "0je9s83",
+      "2da8580bd471f267bba0",
+      64
+    ],
+    [
+      "540e43744173cc1f8e0a",
+      128
+    ],
+    [
+      "c5ff55f5181307328359",
+      192
+    ],
+    [
+      "6121389e6341c8ed9535",
       320
     ],
     [
-      "0f37khi",
+      "9b5c9e68ba8b725ce6d4",
       480
     ],
     [
-      "14uu1pf",
+      "69924cefe2cfb5c1b4af",
       768
     ],
     [
-      "0gc47bg",
+      "c4b4a3a8d73d928418a7",
       828
     ]
   ],
   "/strapi/uploads/sqsp_is_the_ux_designer_a_dying_breed_mlfg5_hero_70a74ad1f8.jpg": [
     [
-      "047tuav",
+      "1a98a97ecc51cc7df385",
+      64
+    ],
+    [
+      "7ce2d61b756577b4e8d0",
+      128
+    ],
+    [
+      "34eac2c7bd15d4551bcd",
+      192
+    ],
+    [
+      "e5459d68fd18f07fc682",
       320
     ],
     [
-      "11vbcyq",
+      "628a6c5e09e204108da1",
       480
     ],
     [
-      "0a8vkzb",
+      "4890c0df2ee4f559edf9",
       768
     ],
     [
-      "0rmrixh",
+      "a60ffb152e7cb0fc92a7",
       1000
     ]
   ],
   "/strapi/uploads/sqsp_issues_with_packages_1_63ca0242a3.jpg": [
     [
-      "0kgbura",
+      "9e93fbeee7e705461b77",
+      64
+    ],
+    [
+      "5c66e63b8bb2dacf9ad6",
+      128
+    ],
+    [
+      "8b2d248f2e49ade1b048",
+      192
+    ],
+    [
+      "d58fa77e647ee0c925f8",
       320
     ],
     [
-      "17uk6mn",
+      "bfa24743625d57d8dfdd",
       480
     ],
     [
-      "15ekc06",
+      "15c79ca1b6c249fa041a",
       768
     ],
     [
-      "1o4g35o",
+      "402d70bbe19c558e643c",
       1200
     ],
     [
-      "1izgjqg",
+      "55d4c02427acff3c62ec",
       1600
     ],
     [
-      "0phqhwd",
+      "1d640dd672d1fb0015a2",
       1920
     ],
     [
-      "1j698zq",
+      "ee89507582e5a4b3811a",
       2500
     ]
   ],
   "/strapi/uploads/sqsp_issues_with_packages_2_329a52907c.png": [
     [
-      "0xq0zm7",
+      "2d98dade876a2483aeb3",
+      64
+    ],
+    [
+      "2ddd85411f1c7e3d8248",
+      128
+    ],
+    [
+      "5584e5d92008bc7f67e8",
+      192
+    ],
+    [
+      "2103c1648ab1346ea0c9",
       320
     ],
     [
-      "1mzkvei",
+      "70cc70989f97362e972e",
       480
     ],
     [
-      "0bxbp7z",
+      "c3367bfec33f41bd64d5",
       768
     ],
     [
-      "0myd0vr",
+      "20843ad05300a376486f",
       1200
     ],
     [
-      "150sry0",
+      "5be8cbfb260195b6ae10",
       1500
     ]
   ],
   "/strapi/uploads/sqsp_issues_with_packages_3_fbf1a0f2ef.png": [
     [
-      "19imv70",
+      "f9f0d0e1bb2c295bb8ab",
+      64
+    ],
+    [
+      "edc2244fa44c1634a088",
+      128
+    ],
+    [
+      "9310cce34dee3fd49a04",
+      192
+    ],
+    [
+      "922b747aac48ccf32b78",
       320
     ],
     [
-      "0u5q9ml",
+      "c9b9a2cfc93e14164d4b",
       480
     ],
     [
-      "0ldzddw",
+      "3eeeed339f01bbac7d67",
       768
     ],
     [
-      "1yuxii2",
+      "0c0acdf3017cf292b88a",
       1200
     ],
     [
-      "18i8yh1",
+      "57c3168d7678ac9b054f",
       1500
     ]
   ],
   "/strapi/uploads/sqsp_issues_with_packages_4_4a193ff328.png": [
     [
-      "0oj87pv",
+      "add8dc47795a6ca69586",
+      64
+    ],
+    [
+      "54eea157b76b8b12fb67",
+      128
+    ],
+    [
+      "81135e754aee8337011d",
+      192
+    ],
+    [
+      "add749f56c5b18d24889",
       320
     ],
     [
-      "0jy7wva",
+      "eec025dc1404ac089d4c",
       480
     ],
     [
-      "19zsh77",
+      "dfb08d4c722252374eaf",
       768
     ],
     [
-      "0xcbb9f",
+      "e3bbb2e1422265db44a1",
       1200
     ],
     [
-      "1bxt670",
+      "6a202c83b963f507cca5",
       1500
     ]
   ],
   "/strapi/uploads/sqsp_issues_with_packages_hero_f702a5700c.jpg": [
     [
-      "12f1kjl",
+      "f191da2a7f3b7f3fc3a0",
+      64
+    ],
+    [
+      "37bedc620def5e26f8e7",
+      128
+    ],
+    [
+      "cb9f1808c902ebcab820",
+      192
+    ],
+    [
+      "b8567d4161ae8a6ee665",
       320
     ],
     [
-      "188c99w",
+      "6fc318fa3c3eb7b06f67",
       480
     ],
     [
-      "00t760h",
+      "38330a9b1c08415dbc1b",
       768
     ],
     [
-      "1vcdrjd",
+      "fb43ce0d796fb640227f",
       1200
     ],
     [
-      "00oprpp",
+      "5c8b03fe1a44ad516586",
       1600
     ],
     [
-      "01pnhek",
+      "1e4e6ef2f7d445bf19fe",
       1920
     ],
     [
-      "1ormy1v",
+      "806a7dbe111c1bdefea9",
       2500
     ]
   ],
   "/strapi/uploads/sqsp_kutatasi_trendek_2025_ben_1_d020ff777b.jpg": [
     [
-      "0oaja6p",
+      "e001dfa75e72a1247063",
+      64
+    ],
+    [
+      "da3bf0ef812b9216f5e7",
+      128
+    ],
+    [
+      "45b21149a630270310cd",
+      192
+    ],
+    [
+      "d126bf99a37eeae512a4",
       320
     ],
     [
-      "0k9bu2s",
+      "bab3c4cc102b9af3de2c",
       480
     ],
     [
-      "09a0atd",
+      "7be39a2e75ff7b540068",
       768
     ],
     [
-      "1u7k1a1",
+      "1a6bb5ac39bc3823965e",
       1200
     ],
     [
-      "0g9b8m5",
+      "69caa9d28b3cefae3b0f",
       1600
     ],
     [
-      "1qnlang",
+      "b7cab85826b33ad1f81a",
       1920
     ],
     [
-      "1pa7g1f",
+      "8d749bb5164bf1110757",
       2500
     ]
   ],
   "/strapi/uploads/sqsp_kutatasi_trendek_2025_ben_2_3548ff3e69.jpg": [
     [
-      "0zzxasg",
+      "21e49dd4af6945c3a024",
+      64
+    ],
+    [
+      "f24cec25a8edd3ef7531",
+      128
+    ],
+    [
+      "bed581bf6890913c4d2f",
+      192
+    ],
+    [
+      "675e7db81839182a8eb5",
       320
     ],
     [
-      "13vj4w9",
+      "98e9d5031d3c325500aa",
       480
     ],
     [
-      "05z6sh4",
+      "8590e68259a7f38fa610",
       768
     ],
     [
-      "0162ngm",
+      "cac142e684187d5b8d37",
       1200
     ],
     [
-      "0s6pwxe",
+      "a441ebe5670dd9f8d01b",
       1600
     ],
     [
-      "174303r",
+      "7b7b920ca19d855ef371",
       1920
     ],
     [
-      "0efle6o",
+      "b651558266bcfc6a79e3",
       2500
     ]
   ],
   "/strapi/uploads/sqsp_kutatasi_trendek_2025_ben_hero_07ffeaaf8a.jpg": [
     [
-      "1uh1xio",
+      "b57094540f2b0f26aa9e",
+      64
+    ],
+    [
+      "6b12a6b845cdbb527dd8",
+      128
+    ],
+    [
+      "82db7926bf1c1cbff3ec",
+      192
+    ],
+    [
+      "25e274df756791e04e9a",
       320
     ],
     [
-      "1k0v5eh",
+      "91b7e3e96d026be28830",
       480
     ],
     [
-      "1yign3s",
+      "584fb85e202e2183e23c",
       768
     ],
     [
-      "0yanj12",
+      "e3d933e69a95cf4531d1",
       1200
     ],
     [
-      "0xdbw1u",
+      "e16cb30ba551e2e5f05d",
       1600
     ],
     [
-      "0cqobx3",
+      "f80606627217c99d01f6",
       1920
     ],
     [
-      "1kl4a1s",
+      "9f5302a8e8d5ff33005f",
       2500
     ]
   ],
   "/strapi/uploads/sqsp_messages_during_shipping_1_b138fd0f09.jpg": [
     [
-      "1jwsdk8",
+      "1fccd23c16f81c1c908a",
+      64
+    ],
+    [
+      "c473aabb3d4ded9f1036",
+      128
+    ],
+    [
+      "22aafc6d7d098078af7a",
+      192
+    ],
+    [
+      "f98080d415c874e84ac0",
       320
     ],
     [
-      "1xc4eg1",
+      "6287535c48ba5b225bd5",
       480
     ],
     [
-      "1bg3sxs",
+      "7b70d3a5a70fd0c8549d",
       768
     ],
     [
-      "1p0txem",
+      "b13b9673323011e03b83",
       1200
     ],
     [
-      "02nh2y2",
+      "0d5dd44a21212eb9a849",
       1600
     ],
     [
-      "0xjh0ow",
+      "d42d1859f21f5959d27c",
       1835
     ]
   ],
   "/strapi/uploads/sqsp_messages_during_shipping_2_b64a588ba7.png": [
     [
-      "0ht7npy",
+      "ea20f038596dd1aef2ee",
+      64
+    ],
+    [
+      "fae8acb2b0cde16c362c",
+      128
+    ],
+    [
+      "120ed413ed8be4e6f0cc",
+      192
+    ],
+    [
+      "a929513af9720db66ce9",
       320
     ],
     [
-      "1kc30j3",
+      "f3ea10464a52e11c2c61",
       480
     ],
     [
-      "0skda92",
+      "7ac17ef483393b0162d9",
       768
     ],
     [
-      "0wcoafw",
+      "5355fc418b9cd71590b7",
       1200
     ],
     [
-      "1qwv3lv",
+      "23d2831c4bbcfc7bfcda",
       1500
     ]
   ],
   "/strapi/uploads/sqsp_messages_during_shipping_3_fce4d0f53f.png": [
     [
-      "06gskkn",
+      "a965adc6b21a95a13c70",
+      64
+    ],
+    [
+      "675ce2d640d82ca48123",
+      128
+    ],
+    [
+      "c12cc81b12adaf66ee81",
+      192
+    ],
+    [
+      "0edaf6a06f41996b4848",
       320
     ],
     [
-      "144a38i",
+      "a00dacb1f0039134bd5d",
       480
     ],
     [
-      "0chub93",
+      "62e022d727c1c525bccf",
       768
     ],
     [
-      "0m6p933",
+      "1a29d4445297956c8d25",
       1200
     ],
     [
-      "1vmc7ds",
+      "01a993818e7147c33506",
       1500
     ]
   ],
   "/strapi/uploads/sqsp_messages_during_shipping_4_afb48c46fe.png": [
     [
-      "0lg9y91",
+      "fb0db6403dd24b29981b",
+      64
+    ],
+    [
+      "ed2a5513264721fa973d",
+      128
+    ],
+    [
+      "916cd3f09b80c04e1fdd",
+      192
+    ],
+    [
+      "51ffe3c9080b174a02d1",
       320
     ],
     [
-      "0nl0xow",
+      "eb8caa7f5b877e32b30e",
       480
     ],
     [
-      "1z0tqqt",
+      "7cec5e8bbe01000cb82c",
       768
     ],
     [
-      "1kku4tx",
+      "8fd98991d4cafa6f7977",
       1200
     ],
     [
-      "1c7u00q",
+      "301d895244e8eb585068",
       1500
     ]
   ],
   "/strapi/uploads/sqsp_messages_during_shipping_5_09d205982a.png": [
     [
-      "1eaxgmd",
+      "9d2ff56841267f7d3e92",
+      64
+    ],
+    [
+      "4c111d716d12f10344b7",
+      128
+    ],
+    [
+      "753637b18068e957c541",
+      192
+    ],
+    [
+      "dd3a4db06e7fe07ee005",
       320
     ],
     [
-      "18ok9cg",
+      "c375617f38ec1cc7ccdb",
       480
     ],
     [
-      "0sud751",
+      "999b26a58c71e75a2635",
       768
     ],
     [
-      "1vly9f9",
+      "4d4a1f06c73af4e63047",
       1200
     ],
     [
-      "05eorfe",
+      "b8789d381d695094ca31",
       1500
     ]
   ],
   "/strapi/uploads/sqsp_messages_during_shipping_hero_cf616ba906.jpg": [
     [
-      "1o0coq6",
+      "927f03febc5308e412ad",
+      64
+    ],
+    [
+      "e786beeec51a80e67b5c",
+      128
+    ],
+    [
+      "f66e48d7fe40bc2788e0",
+      192
+    ],
+    [
+      "c1772b43533c59ee83a5",
       320
     ],
     [
-      "1ff9j9z",
+      "777c0e80a9d6f128d834",
       480
     ],
     [
-      "0afsw8e",
+      "87efd172878b5a006de7",
       768
     ],
     [
-      "1e2xk10",
+      "d1fc75b030fc1306224a",
       1200
     ],
     [
-      "1wl5500",
+      "10eca351982f7e8490a3",
       1600
     ],
     [
-      "1r36jv9",
+      "28f4b8d05e15a627c9a4",
       1920
     ]
   ],
   "/strapi/uploads/sqsp_mi_a_kutatas_elokesziteseben_1_9faed93262.png": [
     [
-      "0dott9c",
+      "903aa4d522545bc59fe9",
+      64
+    ],
+    [
+      "e4bd13970572b659b592",
+      128
+    ],
+    [
+      "44bc104823e03462ca28",
+      192
+    ],
+    [
+      "50c1dc7524aadec842c5",
       320
     ],
     [
-      "0hkfnd5",
+      "c5958edf67ed3fdbd2ab",
       480
     ],
     [
-      "1ip7cx4",
+      "6a5d499c2a6bc4881b7b",
       768
     ],
     [
-      "1vdwedi",
+      "11f8470f10e147bd5d18",
       1200
     ],
     [
-      "0ndflv6",
+      "1e60f127c0ae567225d9",
       1600
     ],
     [
-      "12asp1j",
+      "879143f02186393249c6",
       1920
     ]
   ],
   "/strapi/uploads/sqsp_mi_a_kutatas_elokesziteseben_2_0fefecf951.png": [
     [
-      "1e764fu",
+      "c70ac14a6fcce4dd8db2",
+      64
+    ],
+    [
+      "1b7bcd9a1806bb4fb90a",
+      128
+    ],
+    [
+      "29353180c576c5e4b5a4",
+      192
+    ],
+    [
+      "bb7cf079c4a05acb136a",
       320
     ],
     [
-      "107o4rv",
+      "5d1eaa5fb8a5f13e8cd5",
       480
     ],
     [
-      "1glbrje",
+      "d1635bea7050135cb287",
       768
     ],
     [
-      "09l7r5x",
+      "c2028855bb77d4f4e3d3",
       811
     ]
   ],
   "/strapi/uploads/sqsp_mi_a_kutatas_elokesziteseben_hero_a5df6d262e.png": [
     [
-      "11zcq9x",
+      "d993a487dd090cf8ea1f",
+      64
+    ],
+    [
+      "f78d278e7a3a405c2697",
+      128
+    ],
+    [
+      "2e3f1fcb0109fa5bdcc7",
+      192
+    ],
+    [
+      "a937f1c6f0aa97dcd887",
       320
     ],
     [
-      "071sjxs",
+      "0cec3669c5f468e2fbe2",
       480
     ],
     [
-      "0gisgsl",
+      "8e4478afccf65961242c",
       768
     ],
     [
-      "13tg1jp",
+      "598d6c1df72903d257ea",
       1200
     ],
     [
-      "0r9jv69",
+      "01f4ca307c5c22cda53b",
       1600
     ],
     [
-      "1lvrtfs",
+      "22832f18af4ae879f0f2",
       1920
     ]
   ],
   "/strapi/uploads/sqsp_microinteractions_when_how_and_why_1_a021cf05e7.png": [
     [
-      "0pnrlri",
+      "a493552fc943c973f5db",
+      64
+    ],
+    [
+      "6d68b0943f716902c176",
+      128
+    ],
+    [
+      "7da8008448ffa31fff45",
+      192
+    ],
+    [
+      "5d9382ea343af82eb365",
       320
     ],
     [
-      "0938xp3",
+      "81c84e87dce8498d0256",
       480
     ],
     [
-      "1b4bv8u",
+      "c381f90016f3619911de",
       768
     ],
     [
-      "18plvxg",
+      "7f29a25bb505db021419",
       1200
     ],
     [
-      "08gcr0w",
+      "f93cab492d5a5919d866",
       1600
     ],
     [
-      "0sqgcb9",
+      "504a6cda02dcf01b5e90",
       1920
     ]
   ],
   "/strapi/uploads/sqsp_microinteractions_when_how_and_why_hero_54b13b456f.png": [
     [
-      "0tbsrap",
+      "4d70c083535f95df75fe",
+      64
+    ],
+    [
+      "545105e50b95e71ba252",
+      128
+    ],
+    [
+      "bae9d61a7f519f643331",
+      192
+    ],
+    [
+      "995f55320134fbc25379",
       320
     ],
     [
-      "03ee5wk",
+      "9e40f8109a1e777a7cc5",
       480
     ],
     [
-      "0l9r6sh",
+      "621b05b471b95cf279ef",
       768
     ],
     [
-      "0uj5p09",
+      "a54488bbadc123b02828",
       1200
     ],
     [
-      "1e616il",
+      "c9ccb03bf528827814ad",
       1600
     ],
     [
-      "0a6nk7g",
+      "fe27301f073fcf1e08ca",
       1920
     ]
   ],
   "/strapi/uploads/sqsp_miert_buknak_el_a_cx_kezdemenyezesek_1_d2c3eb4fd4.png": [
     [
-      "1fglncn",
+      "47d9bc1522c07a2d8d22",
+      64
+    ],
+    [
+      "16e3a08eeb3d542b4916",
+      128
+    ],
+    [
+      "1edbf73ae84a3709ced6",
+      192
+    ],
+    [
+      "9ad24f788b56c7825b9f",
       320
     ],
     [
-      "0bvhjci",
+      "2eb51c9015e8dfb9da0c",
       480
     ],
     [
-      "101nah3",
+      "401aa0981e24ac32a493",
       768
     ],
     [
-      "16wgnf7",
+      "2db6f8dbb49121684574",
       1024
     ]
   ],
   "/strapi/uploads/sqsp_miert_buknak_el_a_cx_kezdemenyezesek_hero_d6a2aec96e.png": [
     [
-      "06r58r1",
+      "019ad5b27c2fb41e301d",
+      64
+    ],
+    [
+      "817f4b48cfdd1ab3b071",
+      128
+    ],
+    [
+      "c1d07c063a9c4e1649e4",
+      192
+    ],
+    [
+      "0f9c55fa5560cc73545c",
       320
     ],
     [
-      "0ejgqeg",
+      "82c805b9318ee42fd47c",
       480
     ],
     [
-      "1mjjpz1",
+      "56c6e02eb4bb49c23907",
       768
     ],
     [
-      "005fco1",
+      "e797eef96e3748441cea",
       1024
     ]
   ],
   "/strapi/uploads/sqsp_miert_fontosak_a_ceges_ertekek_1_c644945eca.jpeg": [
     [
-      "0d6pf7w",
+      "7c0c7a4db9c194f4962b",
+      64
+    ],
+    [
+      "74b9b34493dbd4edba1b",
+      128
+    ],
+    [
+      "01adcaa4e4ed05c36c3b",
+      192
+    ],
+    [
+      "a7196696c34878f4984a",
       320
     ],
     [
-      "0lc87tp",
+      "52ffc885b06e0d8a5cd7",
       480
     ],
     [
-      "0wb4dwk",
+      "610d42eb9b3f9c7e013b",
       768
     ],
     [
-      "06qx362",
+      "bc15ab2c3832c8bc8b1a",
       1200
     ],
     [
-      "1wt7ym6",
+      "af0dbe90e7b8253f7dd3",
       1600
     ],
     [
-      "1dj7d0r",
+      "812d026ba198a6118d33",
       1920
     ],
     [
-      "0df5dj0",
+      "319f47a52f957e51a781",
       2500
     ]
   ],
   "/strapi/uploads/sqsp_miert_fontosak_a_ceges_ertekek_2_8259841311.png": [
     [
-      "080eta4",
+      "ddd003961d344757537d",
+      64
+    ],
+    [
+      "523da4518aa80e20fe8d",
+      128
+    ],
+    [
+      "c28ccf4275a875fbaa48",
+      192
+    ],
+    [
+      "d77d289d69a880b8b789",
       320
     ],
     [
-      "0xr7b7x",
+      "8a1fb1c5062a74aab0f5",
       480
     ],
     [
-      "1ir11sk",
+      "750b1bba790cb0514aa5",
       768
     ],
     [
-      "08wh0qi",
+      "31a7b2dd84754b041a90",
       1200
     ],
     [
-      "02r3j9x",
+      "6b35830292dac9cd3cbf",
       1500
     ]
   ],
   "/strapi/uploads/sqsp_miert_fontosak_a_ceges_ertekek_hero_db4d31bc85.png": [
     [
-      "17mo8vo",
+      "cb2497e4c2bc045625fe",
+      64
+    ],
+    [
+      "6271bb10781313f8f17d",
+      128
+    ],
+    [
+      "31531a0231e222738abe",
+      192
+    ],
+    [
+      "a7a211dbf6a5768942a6",
       320
     ],
     [
-      "1va7rjp",
+      "5ff4eaff0f15589600b5",
       480
     ],
     [
-      "07nherg",
+      "79a1807552e30b384df0",
       768
     ],
     [
-      "1enltoi",
+      "c7a427b90cdbc9674f10",
       1200
     ],
     [
-      "1fkxgnq",
+      "3ed8b33f75d0abded909",
       1600
     ],
     [
-      "1sqj0lv",
+      "6a5c5da19985c78f0571",
       1920
     ],
     [
-      "1nab3dd",
+      "7397af22f770b37b0b3c",
       2000
     ]
   ],
   "/strapi/uploads/sqsp_milyen_digitalis_akadalymentesitesi_szolgaltatasra_van_szukseged_1_72344805d9.jpg": [
     [
-      "1gk1c4y",
+      "414e40c4ae4adc955c19",
+      64
+    ],
+    [
+      "e152c584aa4c3cad8a21",
+      128
+    ],
+    [
+      "7ae4281c019c084de979",
+      192
+    ],
+    [
+      "f44b39f695c578371e99",
       320
     ],
     [
-      "0tr7dyr",
+      "54e09bd23fa2da6ab845",
       480
     ],
     [
-      "0v3h2nm",
+      "2887c068cf20ce4eefbd",
       768
     ],
     [
-      "0j1omi8",
+      "16acbb7c7081f5bc204a",
       1200
     ],
     [
-      "18jnlko",
+      "ffdea4c0bb33b4005fa3",
       1280
     ]
   ],
   "/strapi/uploads/sqsp_milyen_digitalis_akadalymentesitesi_szolgaltatasra_van_szukseged_2_d96a189485.jpg": [
     [
-      "08mxtfy",
+      "861d44d981a36dd4eeb1",
+      64
+    ],
+    [
+      "4aaea3f41f8daba31640",
+      128
+    ],
+    [
+      "3c4c175e7f3272a4416e",
+      192
+    ],
+    [
+      "e662ca91f0291ec5f84c",
       320
     ],
     [
-      "04cftrr",
+      "a308dd646abc5beab7e7",
       480
     ],
     [
-      "1vk7x72",
+      "d5f35378b9891f139820",
       768
     ],
     [
-      "05hzm10",
+      "2698b3bf6073a91ded06",
       1200
     ],
     [
-      "0f1aofk",
+      "cdd0b763c949d54ea5c4",
       1600
     ],
     [
-      "18g67n9",
+      "98456220dc44dcb831a4",
       1920
     ]
   ],
   "/strapi/uploads/sqsp_milyen_digitalis_akadalymentesitesi_szolgaltatasra_van_szukseged_hero_a5004807fe.jpg": [
     [
-      "0bukox1",
+      "6450479eccb24d73bdf2",
+      64
+    ],
+    [
+      "19a9f47589fe0e915d3d",
+      128
+    ],
+    [
+      "2d5738e333f3be2dc9c7",
+      192
+    ],
+    [
+      "e1263ade18324fe8f134",
       320
     ],
     [
-      "0dzbocw",
+      "cd0e236c186d467c404d",
       480
     ],
     [
-      "1pf4het",
+      "f5021c677e89cb9f7f15",
       768
     ],
     [
-      "1ltpn5h",
+      "55f32f0c46d2c554d440",
       1200
     ],
     [
-      "0pltvwt",
+      "704d7e0400d681a69d67",
       1280
     ]
   ],
   "/strapi/uploads/sqsp_nalunk_a_munkatarsak_a_sztarok_1_7643e4c21e.jpeg": [
     [
-      "1vi9e9w",
+      "db3e6db727131a948f9f",
+      64
+    ],
+    [
+      "015a25a992a948bd1a05",
+      128
+    ],
+    [
+      "1dfb59d98a0fe4a95991",
+      192
+    ],
+    [
+      "37ed10630f16ca123dc8",
       320
     ],
     [
-      "1jjxrph",
+      "075f9bae8ca8494bfef1",
       480
     ],
     [
-      "10amo7g",
+      "858e5e1fef0d38eb05c6",
       768
     ],
     [
-      "0pyhuoi",
+      "33fb14d8bc22164c93ea",
       1200
     ],
     [
-      "1umvw86",
+      "1ec8d40d9c0afb3d10a9",
       1600
     ],
     [
-      "1h48xyb",
+      "3c91861669af64c977a5",
       1920
     ],
     [
-      "0reyf2c",
+      "0d5f146381b264ff7a89",
       2500
     ]
   ],
   "/strapi/uploads/sqsp_nalunk_a_munkatarsak_a_sztarok_2_0596026770.jpeg": [
     [
-      "0pwrctv",
+      "2410f5cfc6e534146c1e",
+      64
+    ],
+    [
+      "fa5ccced3436d10fc38c",
+      128
+    ],
+    [
+      "d26f5658f760ebed9091",
+      192
+    ],
+    [
+      "b7637c80000af6a34a43",
       320
     ],
     [
-      "04n2afa",
+      "f3bc8d7efbc8b287149b",
       480
     ],
     [
-      "1bdbmb7",
+      "71ed0c41bc21bf1a202c",
       768
     ],
     [
-      "0hymjqb",
+      "124bf076ac065b4ad50c",
       1200
     ],
     [
-      "0f90a1z",
+      "c1c1bd00848a4dcc7fae",
       1600
     ],
     [
-      "17zb49a",
+      "dbb87523007bba5f0917",
       1920
     ],
     [
-      "12knckl",
+      "b4b65811a25b661dbcbd",
       2500
     ]
   ],
   "/strapi/uploads/sqsp_nalunk_a_munkatarsak_a_sztarok_3_2d9ddcd34b.jpeg": [
     [
-      "17nf9bl",
+      "662712dafcbe60e94e49",
+      64
+    ],
+    [
+      "956250e29312f0889aef",
+      128
+    ],
+    [
+      "39421133efe223730ec9",
+      192
+    ],
+    [
+      "67caa64ddc935ddfd686",
       320
     ],
     [
-      "10rx1r8",
+      "455c8b76149369eec249",
       480
     ],
     [
-      "16g1ko1",
+      "b2f3c5e49bc74fb51fa3",
       768
     ],
     [
-      "1g6xpuh",
+      "c5f705860c6eb3066834",
       1200
     ],
     [
-      "0x42bnh",
+      "ff7530a859a35dcc7149",
       1600
     ],
     [
-      "02yw958",
+      "724cf97835ecf67136a8",
       1920
     ],
     [
-      "18p9eoj",
+      "5f763ff33da57988d415",
       2500
     ]
   ],
   "/strapi/uploads/sqsp_nalunk_a_munkatarsak_a_sztarok_4_3ba759611a.jpeg": [
     [
-      "0cbt9p3",
+      "84bec8c3a5e13a6cb618",
+      64
+    ],
+    [
+      "2eaa85f02f619dbeae9b",
+      128
+    ],
+    [
+      "a5e904dc97819f143751",
+      192
+    ],
+    [
+      "dcb3bc4b4d5f3e8fbb8a",
       320
     ],
     [
-      "13gqaz6",
+      "623441a2e0d35b5294fe",
       480
     ],
     [
-      "0c7iahz",
+      "e0d550059b7f36953783",
       768
     ],
     [
-      "0jnsywf",
+      "924d48e35e365ef97041",
       1200
     ],
     [
-      "06jtbm3",
+      "ee0baab53bfe73163f3c",
       1600
     ],
     [
-      "05sp7i2",
+      "79f8906a707657e3711f",
       1920
     ],
     [
-      "0y9bqp5",
+      "19b3535e6886d3aa5a22",
       2500
     ]
   ],
   "/strapi/uploads/sqsp_nalunk_a_munkatarsak_a_sztarok_5_5c791b74aa.jpeg": [
     [
-      "0lmfr9k",
+      "c010d24afe9d3d9ffc29",
+      64
+    ],
+    [
+      "31013dd7b141f6ef689d",
+      128
+    ],
+    [
+      "4bcde318702793d989ef",
+      192
+    ],
+    [
+      "12271ef3bacdf7986158",
       320
     ],
     [
-      "13skvup",
+      "86d20ef5ffed03b2394a",
       480
     ],
     [
-      "1v0v3kw",
+      "31c56b8b72962f44d3e1",
       768
     ],
     [
-      "0eixda6",
+      "f625395e29b6302090bc",
       1200
     ],
     [
-      "0nhqjt6",
+      "7712507b4381efd2027d",
       1600
     ],
     [
-      "1izyxjj",
+      "6cf52fddb3dd56f8ce02",
       1920
     ],
     [
-      "1rp2trc",
+      "6a4aaf6b590a2327da05",
       2500
     ]
   ],
   "/strapi/uploads/sqsp_nalunk_a_munkatarsak_a_sztarok_hero_cd07bc72b2.jpeg": [
     [
-      "1w6u3w5",
+      "eff9bd7eac9b18b4d8ce",
+      64
+    ],
+    [
+      "b3276c0d267a1203596b",
+      128
+    ],
+    [
+      "e2110d7a63a34747855d",
+      192
+    ],
+    [
+      "9323d46dc7a0a679478b",
       320
     ],
     [
-      "18hpuqo",
+      "a01d89dd767447d04808",
       480
     ],
     [
-      "1aq9uet",
+      "78a95e3818276e2326a0",
       768
     ],
     [
-      "1hjurid",
+      "2255a0b5e3e23addf11f",
       1200
     ],
     [
-      "1k0pmip",
+      "e33a3e658a1a24d22f03",
       1600
     ],
     [
-      "02x52go",
+      "c6f7bb2e6390ebdda528",
       1920
     ],
     [
-      "0bwshif",
+      "1384762bbe287f850c4c",
       2500
     ]
   ],
   "/strapi/uploads/sqsp_shipping_and_receiving_1_e11a2d6d68.jpg": [
     [
-      "1r8c23f",
+      "17a12415f1178dabe2fc",
+      64
+    ],
+    [
+      "9560acd7a20c088a7090",
+      128
+    ],
+    [
+      "7481e0e652f15b3ac3ed",
+      192
+    ],
+    [
+      "a6aae718e3059b1727e1",
       320
     ],
     [
-      "05odr4u",
+      "405636cba7253f5460fa",
       480
     ],
     [
-      "0s3kiy3",
+      "548be3eb02f0a1260fd7",
       768
     ],
     [
-      "1ditk0r",
+      "7a87752bf94183a9d279",
       1200
     ],
     [
-      "0q0k7wf",
+      "7071588983786ec17653",
       1600
     ],
     [
-      "1a13brq",
+      "dab3f1063e00199cc866",
       1920
     ],
     [
-      "1j2ue3h",
+      "9c92405fda74f4f7cc2f",
       2500
     ]
   ],
   "/strapi/uploads/sqsp_shipping_and_receiving_2_b3515d18f8.jpg": [
     [
-      "01s8tk5",
+      "eb366c7bc69a244a6b12",
+      64
+    ],
+    [
+      "61ea546da86c571109ba",
+      128
+    ],
+    [
+      "5e94c58ba7265097d8ea",
+      192
+    ],
+    [
+      "b575e1cb596a5498d28d",
       320
     ],
     [
-      "03wzt00",
+      "13c4057e552fe5e8515c",
       480
     ],
     [
-      "1fcsm1x",
+      "d9d03ced447d75007590",
       768
     ],
     [
-      "0ezoph1",
+      "ed00c1b10b01104b5bbd",
       1200
     ],
     [
-      "06moknu",
+      "5bb548231fe0f22c368f",
       1500
     ]
   ],
   "/strapi/uploads/sqsp_shipping_and_receiving_3_fc45f027f5.jpg": [
     [
-      "0h2z1bj",
+      "8d7104e91171109c388f",
+      64
+    ],
+    [
+      "3064b64dda7ccbf8adc2",
+      128
+    ],
+    [
+      "3df58a9eaa2e5a33ebed",
+      192
+    ],
+    [
+      "4e3785642babb9b38f41",
       320
     ],
     [
-      "1js7v2y",
+      "9bd6bef727432108faed",
       480
     ],
     [
-      "0kuynin",
+      "cd1207b32eaea5a8477b",
       768
     ],
     [
-      "1bron2v",
+      "e5d8a8e589e5644d9678",
       1200
     ],
     [
-      "10dq32w",
+      "d884e8b870429c2bee7e",
       1500
     ]
   ],
   "/strapi/uploads/sqsp_shipping_and_receiving_4_b3b381c3ec.jpg": [
     [
-      "1vk0g3x",
+      "fddc8e381d14861bdb4d",
+      64
+    ],
+    [
+      "049e9ae57a8024868b4e",
+      128
+    ],
+    [
+      "a54f41576d97088a3b48",
+      192
+    ],
+    [
+      "c2ae5c581dc9608ed506",
       320
     ],
     [
-      "04b7vs8",
+      "9dbd4447e4cf37baa29d",
       480
     ],
     [
-      "1cbavct",
+      "72a0bc98d6e9025d9190",
       768
     ],
     [
-      "1hgeyfh",
+      "3beb5125e1a0f613de38",
       1200
     ],
     [
-      "05ab1f6",
+      "2cc3127dcbe3799618a7",
       1500
     ]
   ],
   "/strapi/uploads/sqsp_shipping_and_receiving_5_656fa398f8.jpg": [
     [
-      "0rqn37b",
+      "7fec4c51db0566973749",
+      64
+    ],
+    [
+      "046643c80cafb36fc559",
+      128
+    ],
+    [
+      "1c0d39a22c4d3297f72b",
+      192
+    ],
+    [
+      "3ec42c6ea98b06c1213a",
       320
     ],
     [
-      "1n6n16a",
+      "e3177f6bb1500af4c644",
       480
     ],
     [
-      "0cboqbr",
+      "6918ae98fc100b087281",
       768
     ],
     [
-      "12u447j",
+      "15ccc6c52a93ff73046d",
       1200
     ],
     [
-      "0n7m180",
+      "a327790679df16c7d83d",
       1500
     ]
   ],
   "/strapi/uploads/sqsp_shipping_and_receiving_6_54bdb80d64.jpg": [
     [
-      "1eeh3ix",
+      "ab974f0658f6ffc60f5d",
+      64
+    ],
+    [
+      "bf40900d49af5c41e82b",
+      128
+    ],
+    [
+      "1463bce27b31b53d1389",
+      192
+    ],
+    [
+      "e0cfed5f836de62043f2",
       320
     ],
     [
-      "17yo0os",
+      "67a66cca5c9eba5a698f",
       480
     ],
     [
-      "1ibwge1",
+      "f54f955056a05f9df9b5",
       768
     ],
     [
-      "1pubqr5",
+      "affc410200fdbd6a56a1",
       1200
     ],
     [
-      "1xd2inp",
+      "1b054e2d9eea8025f93d",
       1600
     ],
     [
-      "0ciha50",
+      "da379b48714c1af56294",
       1920
     ],
     [
-      "1kgia4r",
+      "a441acdd2d8b0709a0cf",
       2500
     ]
   ],
   "/strapi/uploads/sqsp_shipping_and_receiving_7_14b73451c2.jpg": [
     [
-      "1orvzix",
+      "9cca644c8ffc502c5922",
+      64
+    ],
+    [
+      "9be95292c47246875730",
+      128
+    ],
+    [
+      "216c506821e99964dbc8",
+      192
+    ],
+    [
+      "c64f169366d7a4127461",
       320
     ],
     [
-      "1ic2wos",
+      "4a1470ae08ef041f0029",
       480
     ],
     [
-      "1spbce1",
+      "bb64a5e3c984ac1d0056",
       768
     ],
     [
-      "0fnsp81",
+      "8793ca42502bdaa175be",
       1200
     ],
     [
-      "0n6jh4l",
+      "c2d89cca5f779110d049",
       1600
     ],
     [
-      "11d2al0",
+      "d444de698ddc8e17a096",
       1920
     ],
     [
-      "0a9z8ln",
+      "f2c3271970193e44d8dd",
       2500
     ]
   ],
   "/strapi/uploads/sqsp_shipping_and_receiving_8_3b1825935b.jpg": [
     [
-      "1sutjfo",
+      "6732e0937da18463826e",
+      64
+    ],
+    [
+      "62b71665d301acb2f8ab",
+      128
+    ],
+    [
+      "5a686dacaab90928e5c4",
+      192
+    ],
+    [
+      "241247124b5325daa84a",
       320
     ],
     [
-      "0a762zp",
+      "eb376b5392e3e48001ce",
       480
     ],
     [
-      "1m6k33g",
+      "874ecf68d04444ac64a4",
       768
     ],
     [
-      "0jho9wy",
+      "59093e5945ae77b6d529",
       1200
     ],
     [
-      "1f3x0g6",
+      "77bdb170f2088d885740",
       1600
     ],
     [
-      "1ycr2bn",
+      "1b7cdb597e5f3a2d8618",
       1920
     ],
     [
-      "1g69p44",
+      "f6ab33967d7633b5f3b1",
       2500
     ]
   ],
   "/strapi/uploads/sqsp_shipping_and_receiving_hero_40c72e9b0d.jpg": [
     [
-      "1e8vlr0",
+      "1079bd4264e0af29303b",
+      64
+    ],
+    [
+      "00f5bcc63c8642b0b1aa",
+      128
+    ],
+    [
+      "1866889242886125b951",
+      192
+    ],
+    [
+      "8927577ac8f6ffb8fa89",
       320
     ],
     [
-      "0soare5",
+      "14e2a36a1be47da42723",
       480
     ],
     [
-      "11uty44",
+      "bc5c92ddc7396df8b37b",
       768
     ],
     [
-      "1a4z996",
+      "ff81f19c2e7801151e91",
       1200
     ],
     [
-      "1ade2ha",
+      "1400722e903dc5d6225d",
       1600
     ],
     [
-      "01zu5ff",
+      "d8ca108f1b2750e2bfa7",
       1920
     ],
     [
-      "1c8v4ss",
+      "18acd1518e3745a32a47",
       2500
     ]
   ],
   "/strapi/uploads/sqsp_the_economic_effects_of_covid_19_1_355f81ad3e.jpg": [
     [
-      "0jevh1q",
+      "b098caa60b9484ee9e75",
+      64
+    ],
+    [
+      "84c67a4d15e029b5c111",
+      128
+    ],
+    [
+      "e2f106424ba0c8fd3ba5",
+      192
+    ],
+    [
+      "edb59b671db8a70220f4",
       320
     ],
     [
-      "0ebhik7",
+      "1dc95d0c8cb0ea6a85f7",
       480
     ],
     [
-      "07b1itq",
+      "621c7870f97af13f3ab2",
       768
     ],
     [
-      "13bcio4",
+      "3a31d988c0be2b170626",
       1200
     ],
     [
-      "1vgkrqo",
+      "0125dbc54833c71b10c4",
       1600
     ],
     [
-      "0h2z7ud",
+      "4b6c49bf8b2e3b01688c",
       1920
     ],
     [
-      "0ppgka6",
+      "0c574480e6842469f638",
       2500
     ]
   ],
   "/strapi/uploads/sqsp_the_economic_effects_of_covid_19_2_345a665c78.png": [
     [
-      "0k06h9a",
+      "e4e7cd08740894893083",
+      64
+    ],
+    [
+      "17419e4f67cf0a7716a5",
+      128
+    ],
+    [
+      "aca80bafbd435c65412e",
+      192
+    ],
+    [
+      "1159c5bbabb64ecf93b2",
       320
     ],
     [
-      "1y0whvr",
+      "aec9f6f8c5df2bb47e40",
       480
     ],
     [
-      "15gqqqm",
+      "516b42321c1338e128b8",
       768
     ],
     [
-      "0mh1ro4",
+      "2a3e45ead9604ffde231",
       1200
     ],
     [
-      "1w1u4zf",
+      "b3e93f468d91671273fa",
       1500
     ]
   ],
   "/strapi/uploads/sqsp_the_economic_effects_of_covid_19_3_3beeec88fc.png": [
     [
-      "04wdxzz",
+      "7ffef76b2290a6b25405",
+      64
+    ],
+    [
+      "b7515620c8e53fafcd46",
+      128
+    ],
+    [
+      "a61bc72bbeae37a26990",
+      192
+    ],
+    [
+      "2a411e4bb427a26e64af",
       320
     ],
     [
-      "1q8r0sq",
+      "dcaea268df400ca71adb",
       480
     ],
     [
-      "1evlhq7",
+      "6eac2837e95ec7959414",
       768
     ],
     [
-      "1su9kp3",
+      "2318c37c95ea31ac6389",
       1200
     ],
     [
-      "0ow9gp4",
+      "08d023a5bb0b269fdf74",
       1500
     ]
   ],
   "/strapi/uploads/sqsp_the_economic_effects_of_covid_19_4_4555a489da.png": [
     [
-      "0vp5n7q",
+      "401ce1cc1cda1ecc409d",
+      64
+    ],
+    [
+      "a759553ed6f1a12c7e1c",
+      128
+    ],
+    [
+      "17851bd9d1aa0c652afc",
+      192
+    ],
+    [
+      "d0c8b94b3cdbb5e0d31d",
       320
     ],
     [
-      "1gzerrz",
+      "9fc529bfb16244488deb",
       480
     ],
     [
-      "03ajx1y",
+      "4ce159900e1fe3b6b9bc",
       768
     ],
     [
-      "1gol3m4",
+      "2c0f1ff6de20f3eafd50",
       1200
     ],
     [
-      "0k9cagj",
+      "4a4a8c7bcd2bd451b0d8",
       1500
     ]
   ],
   "/strapi/uploads/sqsp_the_economic_effects_of_covid_19_5_8ab7d9f87e.png": [
     [
-      "1oik6wm",
+      "f9c2f1e09aee041f63ec",
+      64
+    ],
+    [
+      "6f0f218ff6d5f0926852",
+      128
+    ],
+    [
+      "cc8bf7f65e087ec95af3",
+      192
+    ],
+    [
+      "1afa3ca76b7e317559b0",
       320
     ],
     [
-      "0cvogsv",
+      "d717b260ff8e705bfd19",
       480
     ],
     [
-      "0afom6e",
+      "2533a6edd837351d6d61",
       768
     ],
     [
-      "19knlh8",
+      "e718f1c800c8e5768815",
       1200
     ],
     [
-      "0qjyasj",
+      "0a8feba38dde05a7fec0",
       1500
     ]
   ],
   "/strapi/uploads/sqsp_the_economic_effects_of_covid_19_6_673a0ccda3.png": [
     [
-      "1i171fr",
+      "dd89e1b4bffc0c226f57",
+      64
+    ],
+    [
+      "d2535ce3786c633a3a67",
+      128
+    ],
+    [
+      "98e09aaeadc271134a14",
+      192
+    ],
+    [
+      "de7a1297100ddb4e8323",
       320
     ],
     [
-      "1yt35mq",
+      "3fec5035d46875b80e66",
       480
     ],
     [
-      "0r5uswn",
+      "699da1bad1fb66bf7c6d",
       768
     ],
     [
-      "0gglswv",
+      "3e954c277a6536c21d93",
       1200
     ],
     [
-      "0vjsgg0",
+      "353d9d6c82db8e8376c2",
       1500
     ]
   ],
   "/strapi/uploads/sqsp_the_economic_effects_of_covid_19_7_68fde3eaa5.png": [
     [
-      "1nm1p1n",
+      "227fce05f2f77f24c787",
+      64
+    ],
+    [
+      "0c8316a7373d79f5cb37",
+      128
+    ],
+    [
+      "ed9dbec54b923ab0947f",
+      192
+    ],
+    [
+      "b0456f1859eff46fbca5",
       320
     ],
     [
-      "0qdau32",
+      "d51c8896321a3fc8e631",
       480
     ],
     [
-      "17zd5y3",
+      "feb2a2973ce27f3891f0",
       768
     ],
     [
-      "15twibv",
+      "a9a4fe6107f5f099b4d3",
       1200
     ],
     [
-      "0rehp0k",
+      "19b32d93af8c564d08c2",
       1500
     ]
   ],
   "/strapi/uploads/sqsp_the_economic_effects_of_covid_19_hero_d269548fd7.jpg": [
     [
-      "115btyb",
+      "5cbce5f55f749d79caa2",
+      64
+    ],
+    [
+      "e54b3f130d260d3cac2d",
+      128
+    ],
+    [
+      "f3e8d8156062cf304095",
+      192
+    ],
+    [
+      "28d668d454a1dbfb60b9",
       320
     ],
     [
-      "1vau56e",
+      "b7611bf08ed730e37277",
       480
     ],
     [
-      "1mlw3fn",
+      "5cb3670c3453e4b39f00",
       768
     ],
     [
-      "0nyms43",
+      "2b5824750e6000d0c676",
       1200
     ],
     [
-      "1oa6313",
+      "5821e00974850fab13da",
       1600
     ],
     [
-      "0vxxnpa",
+      "1a725e848d21e2f594b0",
       1920
     ],
     [
-      "07sdahh",
+      "89774297e7916a815c20",
       2500
     ]
   ],
   "/strapi/uploads/sqsp_uj_belepobol_kollega_1_e847a224ef.png": [
     [
-      "06a0whw",
+      "93fc6d49b6929562a716",
+      64
+    ],
+    [
+      "5f5702ff2414a90ba46d",
+      128
+    ],
+    [
+      "de8ef3eb14f6235b2471",
+      192
+    ],
+    [
+      "f49aebb19f2be5828ef8",
       320
     ],
     [
-      "1tctbwl",
+      "716bff2a97c2714073d2",
       480
     ],
     [
-      "1a3i8ek",
+      "14744f0901fe9bbc770a",
       768
     ],
     [
-      "1xilxn6",
+      "95fa641240d4e290a272",
       1200
     ],
     [
-      "0jugdte",
+      "81c63f72b2e37793f0ee",
       1536
     ]
   ],
   "/strapi/uploads/sqsp_uj_belepobol_kollega_hero_0345c3033d.png": [
     [
-      "0khpr7r",
+      "ba80b52b0868e34628a6",
+      64
+    ],
+    [
+      "c16e2aee61729897f27c",
+      128
+    ],
+    [
+      "2202b24e9b9cf6ffff48",
+      192
+    ],
+    [
+      "38accfe083a76ec2d52a",
       320
     ],
     [
-      "119lveq",
+      "1e001ba463b870f80dcd",
       480
     ],
     [
-      "1snhknr",
+      "5b910680754cd02de6de",
       768
     ],
     [
-      "1uamun3",
+      "fc8ae3072b70fa6f6fbb",
       1200
     ],
     [
-      "13jec8v",
+      "16dac59e3d2837ed36ae",
       1536
     ]
   ],
   "/strapi/uploads/sqsp_why_lofi_design_is_important_in_the_design_process_1_f03e748ad0.jpg": [
     [
-      "0w6sdu3",
+      "2d44a6d90cb06dcebb8d",
+      64
+    ],
+    [
+      "85d7f1415f47352940d3",
+      128
+    ],
+    [
+      "9486e193840bc6f09505",
+      192
+    ],
+    [
+      "119a01c947e42ec947c5",
       320
     ],
     [
-      "1xz5kum",
+      "58e8ff5c8ffc193fee7b",
       480
     ],
     [
-      "0q59new",
+      "fd2d8d3cffe936e736d6",
       525
     ]
   ],
   "/strapi/uploads/sqsp_why_lofi_design_is_important_in_the_design_process_2_47c478c86a.png": [
     [
-      "0dn2pex",
+      "2e54ed67950ad6dc5ba2",
+      64
+    ],
+    [
+      "e4e1ed379c6121a708ee",
+      128
+    ],
+    [
+      "44bd859ff2e8d06bd3c7",
+      192
+    ],
+    [
+      "912714bac95156f0b7f3",
       320
     ],
     [
-      "08czczw",
+      "adc4ca11be8fe90f891e",
       480
     ],
     [
-      "0gs0myy",
+      "e4dd7e8e10f85b31f332",
       525
     ]
   ],
   "/strapi/uploads/sqsp_why_lofi_design_is_important_in_the_design_process_3_f2090caf32.png": [
     [
-      "1of3i8b",
+      "20e4e7f61e9567095657",
+      64
+    ],
+    [
+      "9f11fa6f704022390f28",
+      128
+    ],
+    [
+      "9ce7464ae7bc2148cf59",
+      192
+    ],
+    [
+      "6dd3f52bdbe6d90e603e",
       320
     ],
     [
-      "0r6cn9q",
+      "08acc2c25138caebbea9",
       480
     ],
     [
-      "1idkrt4",
+      "8d8abe7728146e4b6096",
       525
     ]
   ],
   "/strapi/uploads/sqsp_why_lofi_design_is_important_in_the_design_process_4_a4becf1d24.png": [
     [
-      "0u56468",
+      "c999a4c337dc1c8fa0cb",
+      64
+    ],
+    [
+      "d246b01859333005615b",
+      128
+    ],
+    [
+      "eea4559bd912f749f713",
+      192
+    ],
+    [
+      "a2629cdb79afb9804512",
       320
     ],
     [
-      "1qsjccp",
+      "4a26cdd3fa94a2d53e05",
       480
     ],
     [
-      "0qpqok3",
+      "6730cce0fdbee18e90f3",
       525
     ]
   ],
   "/strapi/uploads/sqsp_why_lofi_design_is_important_in_the_design_process_hero_eca926cebb.png": [
     [
-      "1axq1k6",
+      "aba87237394878eeb2ef",
+      64
+    ],
+    [
+      "2db301b19b9db7f3017a",
+      128
+    ],
+    [
+      "acacc118fba6f62dab5f",
+      192
+    ],
+    [
+      "8b1dd019b2a8a41227a5",
       320
     ],
     [
-      "0leb2kf",
+      "7ca16c541eccd3eea5fc",
       480
     ],
     [
-      "07avehx",
+      "a9803b0ac4d96c45794e",
       525
     ]
   ],
   "/strapi/uploads/szlahu_23aba421d5.png": [
     [
-      "1h53bi7",
+      "12481570e0c750a49cf0",
+      64
+    ],
+    [
+      "18d6e06e94c95f219d29",
+      128
+    ],
+    [
+      "73b41d0dfedb78fa172a",
+      192
+    ],
+    [
+      "34b3b70baa0d64ed93fa",
       228
     ]
   ],
   "/strapi/uploads/works_background_1774441334981_732aab5a80.png": [
     [
-      "0mbe92k",
+      "b97da56cc479cafd976d",
+      64
+    ],
+    [
+      "33c36f47c18dfeec1265",
+      128
+    ],
+    [
+      "0aef618e7a3254e83071",
+      192
+    ],
+    [
+      "fa2bedd01f8642eca52a",
       320
     ],
     [
-      "06yhni5",
+      "152ce843b4e9b9f295a8",
       480
     ],
     [
-      "1x7ut8k",
+      "42f40eca9a25ff5ff07b",
       768
     ],
     [
-      "0pv91ii",
+      "db09cc42b5443fff3e6d",
       1200
     ],
     [
-      "1rxv4c0",
+      "ad46e77f282d7e5255a8",
       1527
     ]
   ]

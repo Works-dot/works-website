@@ -37,7 +37,8 @@ export function Markdown({ className, children }: { className: string; children:
 
   return (
     <div className={className}>
-      <ReactMarkdown remarkPlugins={[remarkGfm, terminologyRemarkPlugin(locale)]}>
+      <ReactMarkdown remarkPlugins={[remarkGfm, terminologyRemarkPlugin(locale)]}
+        components={{ img: ({ src, alt }) => src ? <ResponsiveImage src={src} alt={alt || ""} sizes="(min-width: 896px) 832px, calc(100vw - 32px)" /> : null }}>
         {children}
       </ReactMarkdown>
     </div>
@@ -67,6 +68,9 @@ export function ContentBlock({ block }: { block: ContentBlockType }) {
         <div className="overflow-hidden bg-works-light">
           <ResponsiveImage
             src={block.content}
+            width={block.width}
+            height={block.height}
+            sizes="(min-width: 896px) 832px, calc(100vw - 32px)"
             alt={accessibleTermLabel(imageAlt, locale)}
             loading="lazy"
             pictureClassName="block w-full"

@@ -1,4 +1,5 @@
 import { TermText } from "@/components/Terminology";
+import { ManagedImage } from "@/components/ui/ResponsiveImage";
 import { useI18n } from "@/i18n";
 import type { CareerWhyUsSection } from "@/lib/strapi";
 
@@ -45,7 +46,7 @@ export function CareerValues({ values }: { values?: CareerWhyUsSection }) {
                 aria-hidden="true"
               >
                 {item.image ? (
-                  <img
+                  <ManagedImage sizes="(min-width: 1024px) 50vw, 100vw"
                     src={item.image}
                     alt=""
                     loading="lazy"

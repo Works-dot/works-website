@@ -4,6 +4,7 @@ import type { Client } from "@/lib/strapi";
 import { fallbackClients } from "@/data/fallback";
 import { useI18n } from "@/i18n";
 import { TermText } from "@/components/Terminology";
+import { ManagedImage } from "@/components/ui/ResponsiveImage";
 import { accessibleTermLabel } from "@/lib/terminology";
 
 const hardcodedClients: Client[] = [
@@ -46,7 +47,7 @@ export function Clients() {
               className="group/card flex-shrink-0 flex flex-col items-center justify-center w-56 h-24 mx-4 bg-works-bg border border-works-muted/50 transition-all duration-300 cursor-default gap-1"
             >
               {client.logo ? (
-                <img
+                <ManagedImage sizes="160px"
                   src={client.logo}
                   alt={accessibleTermLabel(client.logoAlt || client.name, locale)}
                   loading="lazy"

@@ -9,6 +9,7 @@ import { useI18n } from "@/i18n";
 import { buildLocalePath } from "@/lib/i18n-routes";
 import { ArrowLinkLabel } from "@/components/ui/arrow-link-label";
 import { TermText } from "@/components/Terminology";
+import { ManagedImage } from "@/components/ui/ResponsiveImage";
 
 export function Projects() {
   const { locale, t } = useI18n();
@@ -32,7 +33,7 @@ export function Projects() {
   return (
     <section id="projects" className="py-24 lg:py-32 bg-works-bg relative overflow-hidden">
       {bgGraphic2 && (
-        <img
+        <ManagedImage
           src={bgGraphic2}
           alt=""
           aria-hidden="true"

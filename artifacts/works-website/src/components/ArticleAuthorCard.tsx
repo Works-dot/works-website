@@ -1,4 +1,5 @@
 import { articleAuthor, linkedinProfile } from "@/lib/article-author.js";
+import { ManagedImage } from "@/components/ui/ResponsiveImage";
 import type { BlogPost } from "@/lib/strapi";
 import { useI18n } from "@/i18n";
 
@@ -12,7 +13,7 @@ export function ArticleAuthorCard({ post }: { post: BlogPost }) {
     <aside aria-label={en ? "About the author" : "A szerzőről"}
       className="mt-12 border-t-2 border-works-primary bg-works-light p-6 md:p-8">
       <div className="flex flex-col sm:flex-row items-start gap-6">
-        {author.image && <img src={author.image} alt={author.imageAlt || author.name}
+        {author.image && <ManagedImage sizes="88px" src={author.image} alt={author.imageAlt || author.name}
           loading="lazy" width={88} height={88} className="w-22 h-22 object-cover rounded-full shrink-0" />}
         <div className="min-w-0">
           <p className="text-xs font-semibold uppercase tracking-widest text-works-primary mb-2">{en ? "About the author" : "A szerzőről"}</p>

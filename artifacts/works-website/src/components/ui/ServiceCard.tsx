@@ -1,4 +1,5 @@
 import { Search, ArrowRight } from "lucide-react";
+import { ManagedImage } from "@/components/ui/ResponsiveImage";
 import { motion } from "framer-motion";
 import { Link } from "wouter";
 import { TermText } from "@/components/Terminology";
@@ -23,7 +24,7 @@ export function ServiceCard({ iconSrc, title, description, index, href }: Servic
       <div className="flex items-start gap-3 mb-4">
         <div className="w-7 h-7 text-works-primary flex items-center justify-center shrink-0">
           {iconSrc ? (
-            <img src={iconSrc} alt="" aria-hidden="true" className="w-6 h-6 object-contain" />
+            <ManagedImage sizes="24px" src={iconSrc} alt="" aria-hidden="true" className="w-6 h-6 object-contain" />
           ) : (
             <Search className="w-6 h-6" strokeWidth={1.5} />
           )}

@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { ManagedImage } from "@/components/ui/ResponsiveImage";
 import { useParams, Link } from "wouter";
 import { motion } from "framer-motion";
 import { ArrowLeft, ArrowRight, MapPin, Users, Briefcase } from "lucide-react";
@@ -92,7 +93,7 @@ export default function CareerDetail() {
         <section className="relative pt-28 lg:pt-32 pb-16 lg:pb-24 bg-works-dark overflow-hidden">
           {heroBgPattern && (
             <div className="absolute inset-0 opacity-15">
-              <img
+              <ManagedImage loading="eager"
                 src={heroBgPattern}
                 alt=""
                 aria-hidden="true"

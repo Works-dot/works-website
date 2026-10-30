@@ -1,4 +1,5 @@
 import { useParams } from "wouter";
+import { ManagedImage } from "@/components/ui/ResponsiveImage";
 import { Link } from "wouter";
 import { motion } from "framer-motion";
 import { ArrowRight, Search, HelpCircle } from "lucide-react";
@@ -37,7 +38,7 @@ function IconBox({ icon, className = "" }: { icon?: string; className?: string }
   return (
     <div className={`w-7 h-7 text-works-primary flex items-center justify-center shrink-0 ${className}`}>
       {icon ? (
-        <img src={icon} alt="" aria-hidden="true" className="w-6 h-6 object-contain" />
+        <ManagedImage sizes="24px" src={icon} alt="" aria-hidden="true" className="w-6 h-6 object-contain" />
       ) : (
         <ArrowRight className="w-6 h-6" strokeWidth={1.5} />
       )}
@@ -233,7 +234,7 @@ export default function ServicePage() {
         {help && help.cards.length > 0 && (
           <section className="py-20 lg:py-28 bg-works-light relative overflow-hidden">
             {bgGraphic && (
-              <img
+              <ManagedImage sizes="(min-width: 1024px) 800px, (min-width: 768px) 650px, 500px"
                 src={bgGraphic}
                 alt=""
                 aria-hidden="true"
@@ -272,7 +273,7 @@ export default function ServicePage() {
         {process && process.steps.length > 0 && (
           <section className="py-20 lg:py-28 relative overflow-hidden">
             {bgGraphic2 && (
-              <img
+              <ManagedImage sizes="(min-width: 1024px) 560px, (min-width: 768px) 455px, 350px"
                 src={bgGraphic2}
                 alt=""
                 aria-hidden="true"
@@ -459,7 +460,7 @@ export default function ServicePage() {
                         <div className="flex items-start gap-3 mb-4">
                           <div className="w-7 h-7 text-works-primary flex items-center justify-center shrink-0">
                             {rel.icon ? (
-                              <img src={rel.icon} alt="" aria-hidden="true" className="w-6 h-6 object-contain" />
+                              <ManagedImage sizes="24px" src={rel.icon} alt="" aria-hidden="true" className="w-6 h-6 object-contain" />
                             ) : (
                               <Search className="w-6 h-6" strokeWidth={1.5} />
                             )}

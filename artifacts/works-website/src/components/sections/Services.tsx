@@ -6,6 +6,7 @@ import { fallbackServices, fallbackHomepage, bgGraphic1FallbackImg } from "@/dat
 import { useI18n } from "@/i18n";
 import { buildLocalePath } from "@/lib/i18n-routes";
 import { TermText } from "@/components/Terminology";
+import { ManagedImage } from "@/components/ui/ResponsiveImage";
 
 export function Services() {
   const { locale, t } = useI18n();
@@ -28,7 +29,7 @@ export function Services() {
   return (
     <section id="services" className="py-24 lg:py-32 bg-works-light relative overflow-hidden">
       {bgGraphic && (
-        <img
+        <ManagedImage
           src={bgGraphic}
           alt=""
           aria-hidden="true"

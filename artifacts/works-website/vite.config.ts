@@ -161,6 +161,8 @@ export default defineConfig({
   },
   root: path.resolve(import.meta.dirname),
   build: {
+    // Keep imported media URLs identifiable by the intrinsic-dimension manifest.
+    assetsInlineLimit: 0,
     outDir: path.resolve(import.meta.dirname, "dist/public"),
     emptyOutDir: true,
   },

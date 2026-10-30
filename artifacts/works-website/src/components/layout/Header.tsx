@@ -1,3 +1,4 @@
+import { ManagedImage } from "@/components/ui/ResponsiveImage";
 import {
   useState,
   useEffect,
@@ -487,7 +488,7 @@ export function Header() {
           }}
         >
           {logoImg ? (
-            <img src={logoImg} alt={accessibleTermLabel(t("footer.logoAlt"), locale)} className="h-8 w-auto object-contain" />
+            <ManagedImage loading="eager" sizes="128px" src={logoImg} alt={accessibleTermLabel(t("footer.logoAlt"), locale)} className="h-8 w-auto object-contain" />
           ) : (
             <span className="text-xl font-bold text-works-dark">Works.</span>
           )}
