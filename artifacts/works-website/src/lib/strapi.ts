@@ -140,6 +140,9 @@ interface StrapiTeamMember {
 }
 
 interface StrapiBlogPost {
+  originalPublishedAt?: string | null;
+  publishedAt?: string | null;
+  updatedAt?: string | null;
   authorMode?: string;
   manualAuthor?: StrapiTeamMember | null;
   id: number;
@@ -288,6 +291,9 @@ export interface Project {
 }
 
 export interface BlogPost {
+  originalPublishedAt?: string | null;
+  publishedAt?: string | null;
+  updatedAt?: string | null;
   documentId?: string;
   slug: string;
   title: string;
@@ -458,6 +464,9 @@ function mapBlogPost(p: StrapiBlogPost): BlogPost {
     title: p.title,
     excerpt: p.excerpt || "",
     date: p.date || "",
+    originalPublishedAt: p.originalPublishedAt,
+    publishedAt: p.publishedAt,
+    updatedAt: p.updatedAt,
     author: authorDetails?.name || "",
     authorDetails,
     image: strapiImageUrl(p.image?.url),

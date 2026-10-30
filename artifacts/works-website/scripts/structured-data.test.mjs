@@ -60,14 +60,15 @@ test("jobs only on actual detail records; only sourced publication and office lo
     assert.equal(job.title, "UX Researcher");
     assert.equal(job.inLanguage, locale);
     assert.ok(job.description.includes("kutatás") || job.description.includes("research"));
-    for (const key of ["datePosted", "validThrough", "baseSalary", "employmentType"]) {
+    const source = fallback.getLocaleFallback(`careerPosition:ux-researcher`, locale);
+    assert.equal(job.datePosted, source.publishedAt || undefined);
+    for (const key of ["validThrough", "baseSalary", "employmentType"]) {
       assert.equal(job[key], undefined, key);
     }
     assert.deepEqual(job.jobLocation.address, {
       "@type": "PostalAddress", addressLocality: "Budapest", addressCountry: "HU",
     });
     assert.equal(ofType(graphs(meta, { position: null }), "JobPosting").length, 0);
-    const source = fallback.getLocaleFallback(`careerPosition:ux-researcher`, locale);
     const [dated] = ofType(graphs(meta, { position: {
       ...source, publishedAt: "2025-03-12T10:00:00.000Z", location: "Budapest / Hybrid",
     } }), "JobPosting");

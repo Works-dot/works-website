@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useLocation, useSearch } from "wouter";
+import { articleDates } from "@/lib/article-dates.js";
 import { matchesRouteSnapshot, spaPageViews, useRawPagePath } from "@/lib/gtm-tracking";
 import {
   buildJsonLd,
@@ -168,6 +169,9 @@ export default function SEOHead({ structuredContent, ready = true, noindex = fal
         title: detailSeo?.metaTitle?.trim() || `${detail.title} | Works.`,
         description: detailSeo?.metaDescription?.trim() || detailDescription || baseMeta.description,
         ogImage: detailSeo?.ogImage || baseMeta.ogImage,
+        ...(structuredContent?.post ? {
+          article: { ...baseMeta.article, ...articleDates(structuredContent.post) },
+        } : {}),
       }
     : pageSeo
     ? {
@@ -226,6 +230,12 @@ export default function SEOHead({ structuredContent, ready = true, noindex = fal
       removeMeta("property", "article:published_time");
     }
 
+    if (meta.article?.modifiedTime) {
+      upsertMeta("property", "article:modified_time", meta.article.modifiedTime);
+    } else {
+      removeMeta("property", "article:modified_time");
+    }
+
     syncJsonLd(buildJsonLd(meta, settings, structuredContent));
 
     document
@@ -246,6 +256,7 @@ export default function SEOHead({ structuredContent, ready = true, noindex = fal
     meta.description,
     meta.title,
     meta.article?.publishedTime,
+    meta.article?.modifiedTime,
     JSON.stringify(meta.article?.authorDetails),
     location,
     pagePath,

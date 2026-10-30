@@ -593,6 +593,18 @@ export interface ApiBlogPostBlogPost extends Struct.CollectionTypeSchema {
         };
       }>;
     order: Schema.Attribute.Integer;
+    originalPublishedAt: Schema.Attribute.DateTime &
+      Schema.Attribute.SetPluginOptions<{
+        'content-manager': {
+          visible: false;
+        };
+        'content-type-builder': {
+          visible: false;
+        };
+        i18n: {
+          localized: true;
+        };
+      }>;
     publishedAt: Schema.Attribute.DateTime;
     readingTime: Schema.Attribute.String &
       Schema.Attribute.SetPluginOptions<{

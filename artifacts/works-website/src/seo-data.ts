@@ -24,6 +24,7 @@ import {
 import { DEFAULT_SITE_URL, resolveSiteUrl } from "./seo-config";
 import { organizationIdentity, registeredPostalAddress } from "./data/organization";
 import { articleAuthor, personSchema, type ArticleAuthor } from "./lib/article-author.js";
+import { articleDates } from "./lib/article-dates.js";
 import type { BlogPost, CareerPosition, Project, Service, TeamMember } from "./lib/strapi";
 import cachedContent from "./data/strapi-cache.json";
 import { canonicalTransitionPath } from "./lib/blog-slug-transition";
@@ -75,7 +76,7 @@ export interface PageMeta {
   /** og:type — "article" for blog posts & case studies, otherwise "website". */
   type?: "website" | "article";
   /** Extra data for BlogPosting JSON-LD on blog articles. */
-  article?: { publishedTime?: string; author?: string; authorDetails?: ArticleAuthor | null };
+  article?: { publishedTime?: string; modifiedTime?: string; author?: string; authorDetails?: ArticleAuthor | null };
   /** Breadcrumb trail for BreadcrumbList JSON-LD (home is added automatically). */
   breadcrumbs?: { name: string; path: string }[];
   /**
@@ -456,7 +457,7 @@ export function getPageMeta(route: string, locale?: Locale): PageMeta {
       type: isArticle ? "article" : "website",
       locale: "en",
       ...(post
-        ? { article: { publishedTime: post.date, author: post.author || undefined, authorDetails: articleAuthor(post) } }
+        ? { article: { ...articleDates(post), author: post.author || undefined, authorDetails: articleAuthor(post) } }
         : {}),
       ...(detailLabel && detailRecord && hasRealEnglishPage
         ? {
@@ -531,7 +532,7 @@ export function getPageMeta(route: string, locale?: Locale): PageMeta {
         type: "article",
         locale: lang,
         alternates: getAlternateLinks(pathname, "hu"),
-        article: { publishedTime: post.date, author: post.author || undefined, authorDetails: articleAuthor(post) },
+        article: { ...articleDates(post), author: post.author || undefined, authorDetails: articleAuthor(post) },
         breadcrumbs: [
           { name: "Blog", path: "/blog" },
           { name: post.title, path: pathname },
@@ -694,7 +695,9 @@ export function buildJsonLd(
       publisher: { "@type": "Organization", name: "Works.", url: SITE_URL },
       mainEntityOfPage: meta.path ? absoluteUrl(meta.path) : SITE_URL,
     };
-    if (meta.article.publishedTime) posting.datePublished = meta.article.publishedTime;
+    const dates = supplied?.post ? articleDates(supplied.post) : meta.article;
+    if (dates.publishedTime) posting.datePublished = dates.publishedTime;
+    if (dates.modifiedTime) posting.dateModified = dates.modifiedTime;
     const author = personSchema(articleAuthor(meta.article), absoluteUrl, `${SITE_URL.replace(/\/$/, "")}/#organization`);
     if (author) posting.author = author;
     scripts.push(jsonLdScript(posting));
@@ -815,6 +818,12 @@ export function buildMetaTags(meta: PageMeta): string {
   if (meta.article?.publishedTime) {
     tags.push(
       `<meta data-ssr property="article:published_time" content="${escaped(meta.article.publishedTime)}" />`
+    );
+  }
+
+  if (meta.article?.modifiedTime) {
+    tags.push(
+      `<meta data-ssr property="article:modified_time" content="${escaped(meta.article.modifiedTime)}" />`
     );
   }
 

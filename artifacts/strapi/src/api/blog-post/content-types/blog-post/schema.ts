@@ -16,6 +16,15 @@ export default {
     }
   },
   "attributes": {
+    "originalPublishedAt": {
+      "type": "datetime",
+      "configurable": false,
+      "pluginOptions": {
+        "i18n": { "localized": true },
+        "content-manager": { "visible": false },
+        "content-type-builder": { "visible": false }
+      }
+    },
     "authorMode": {
       "type": "enumeration",
       "enum": ["colleague", "manual"],

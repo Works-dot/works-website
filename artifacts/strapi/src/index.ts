@@ -10,6 +10,7 @@ import { registerContactSubmissionRoutes } from "./contact-submissions";
 import { migrateLegacyBlogHungarian } from "./legacy-blog-hu";
 import { migrateCompanyAddresses } from "./company-address-migration";
 import { backfillLocalizedAuthors } from "./article-author-backfill";
+import { registerArticlePublicationDates } from "./article-publication-dates";
 import { migrateHuBlogSlugs } from "./hu-blog-slugs";
 
 function registerWebsiteRebuildAdminRoutes(strapi: any) {
@@ -2780,6 +2781,7 @@ async function runBootstrapContentMigrations(strapi: any) {
 
 export default {
   register({ strapi }) {
+    registerArticlePublicationDates(strapi);
     registerWebsiteRebuildAdminRoutes(strapi);
     registerCvUploadRoutes(strapi);
     registerContactSubmissionRoutes(strapi);
