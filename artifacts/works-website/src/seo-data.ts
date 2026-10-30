@@ -23,6 +23,7 @@ import {
 } from "./lib/i18n-routes";
 import { DEFAULT_SITE_URL, resolveSiteUrl } from "./seo-config";
 import { organizationIdentity, registeredPostalAddress } from "./data/organization";
+import { articleAuthor, personSchema, type ArticleAuthor } from "./lib/article-author.js";
 import type { BlogPost, CareerPosition, Project, Service, TeamMember } from "./lib/strapi";
 import cachedContent from "./data/strapi-cache.json";
 import { canonicalTransitionPath } from "./lib/blog-slug-transition";
@@ -74,7 +75,7 @@ export interface PageMeta {
   /** og:type — "article" for blog posts & case studies, otherwise "website". */
   type?: "website" | "article";
   /** Extra data for BlogPosting JSON-LD on blog articles. */
-  article?: { publishedTime?: string; author?: string };
+  article?: { publishedTime?: string; author?: string; authorDetails?: ArticleAuthor | null };
   /** Breadcrumb trail for BreadcrumbList JSON-LD (home is added automatically). */
   breadcrumbs?: { name: string; path: string }[];
   /**
@@ -455,7 +456,7 @@ export function getPageMeta(route: string, locale?: Locale): PageMeta {
       type: isArticle ? "article" : "website",
       locale: "en",
       ...(post
-        ? { article: { publishedTime: post.date, author: post.author || undefined } }
+        ? { article: { publishedTime: post.date, author: post.author || undefined, authorDetails: articleAuthor(post) } }
         : {}),
       ...(detailLabel && detailRecord && hasRealEnglishPage
         ? {
@@ -530,7 +531,7 @@ export function getPageMeta(route: string, locale?: Locale): PageMeta {
         type: "article",
         locale: lang,
         alternates: getAlternateLinks(pathname, "hu"),
-        article: { publishedTime: post.date, author: post.author || undefined },
+        article: { publishedTime: post.date, author: post.author || undefined, authorDetails: articleAuthor(post) },
         breadcrumbs: [
           { name: "Blog", path: "/blog" },
           { name: post.title, path: pathname },
@@ -636,6 +637,7 @@ export function buildJsonLd(
     jsonLdScript({
       "@context": "https://schema.org",
       "@type": "Organization",
+      "@id": `${SITE_URL.replace(/\/$/, "")}/#organization`,
       name: "Works.",
       legalName: organizationIdentity.legalName,
       url: SITE_URL,
@@ -693,7 +695,8 @@ export function buildJsonLd(
       mainEntityOfPage: meta.path ? absoluteUrl(meta.path) : SITE_URL,
     };
     if (meta.article.publishedTime) posting.datePublished = meta.article.publishedTime;
-    if (meta.article.author) posting.author = { "@type": "Person", name: meta.article.author };
+    const author = personSchema(articleAuthor(meta.article), absoluteUrl, `${SITE_URL.replace(/\/$/, "")}/#organization`);
+    if (author) posting.author = author;
     scripts.push(jsonLdScript(posting));
   }
 

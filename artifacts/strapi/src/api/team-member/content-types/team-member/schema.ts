@@ -16,6 +16,14 @@ export default {
     }
   },
   "attributes": {
+    "linkedinUrl": {
+      "type": "string",
+      "regex": "^(https://(www\\.)?linkedin\\.com/in/[^/?#\\s]+/?([?#][^\\s]*)?)?$"
+    },
+    "bio": {
+      "type": "text",
+      "pluginOptions": { "i18n": { "localized": true } }
+    },
     "name": {
       "type": "string",
       "required": true

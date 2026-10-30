@@ -16,6 +16,18 @@ export default {
     }
   },
   "attributes": {
+    "authorMode": {
+      "type": "enumeration",
+      "enum": ["colleague", "manual"],
+      "default": "colleague",
+      "pluginOptions": { "i18n": { "localized": true } }
+    },
+    "manualAuthor": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.article-author",
+      "pluginOptions": { "i18n": { "localized": true } }
+    },
     "slug": {
       "type": "uid",
       "targetField": "title",

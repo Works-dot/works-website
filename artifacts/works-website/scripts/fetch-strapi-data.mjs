@@ -7,6 +7,7 @@ import path from "node:path";
 import { createHash } from "node:crypto";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import { mapContentBlocks, strapiImageUrl } from "../src/lib/content-blocks.js";
+import { resolveArticleAuthor, linkedinProfile, fetchAuthorResponse } from "../src/lib/article-author.js";
 import { normalizeProjectSlug } from "../src/lib/project-slug.js";
 import { normalizeHuBlogSlug } from "../src/lib/blog-slug-transition.js";
 
@@ -73,7 +74,7 @@ let activeLocale = "hu";
 async function fetchApi(endpoint) {
   const separator = endpoint.includes("?") ? "&" : "?";
   const url = `${STRAPI_API}${endpoint}${separator}locale=${encodeURIComponent(activeLocale)}`;
-  const res = await fetch(url);
+  const res = await fetchAuthorResponse(fetch, url);
   if (!res.ok) {
     const err = new Error(`${res.status} ${res.statusText} — ${url}`);
     err.status = res.status;
@@ -124,13 +125,15 @@ function mapProject(p) {
 }
 
 function mapBlogPost(p) {
+  const authorDetails = resolveArticleAuthor(p, strapiImageUrl);
   return {
     documentId: p.documentId,
     slug: activeLocale === "hu" ? normalizeHuBlogSlug(p.slug) : p.slug,
     title: p.title,
     excerpt: p.excerpt || "",
     date: p.date || "",
-    author: p.author?.name || "",
+    author: authorDetails?.name || "",
+    authorDetails,
     image: strapiImageUrl(p.image?.url),
     imageAlt: p.image?.alternativeText || "",
     tags: p.tags?.map((t) => t.name) || [],
@@ -249,7 +252,7 @@ async function fetchAll(locale) {
   console.log(`  ✓ ${cache.projects.length} project(s)`);
 
   const BLOG_POPULATE =
-    "populate[0]=image&populate[1]=tags&populate[2]=contentBlocks.image&populate[3]=author&populate[4]=seo.ogImage";
+    "populate[0]=image&populate[1]=tags&populate[2]=contentBlocks.image&populate[3]=author.image&populate[4]=seo.ogImage&populate[5]=manualAuthor.image";
   const blogRes = await fetchApi(
     `/blog-posts?${BLOG_POPULATE}&pagination[pageSize]=100&sort=date:desc`
   );
@@ -275,6 +278,8 @@ async function fetchAll(locale) {
   );
   cache.teamMembers = teamRes.data.map((m) => ({
     name: m.name,
+    linkedinUrl: linkedinProfile(m.linkedinUrl),
+    bio: m.bio || "",
     title: m.title,
     image: strapiImageUrl(m.image?.url),
     imageAlt: m.image?.alternativeText || "",

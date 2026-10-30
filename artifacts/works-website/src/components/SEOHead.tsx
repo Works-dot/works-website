@@ -246,6 +246,7 @@ export default function SEOHead({ structuredContent, ready = true, noindex = fal
     meta.description,
     meta.title,
     meta.article?.publishedTime,
+    JSON.stringify(meta.article?.authorDetails),
     location,
     pagePath,
     search,

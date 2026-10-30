@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
+import { linkedinProfile } from "@/lib/article-author.js";
 import { motion } from "framer-motion";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
@@ -129,7 +130,12 @@ export default function About() {
                         </div>
                       )}
                     </div>
-                    <h3 className="font-bold text-works-dark text-sm"><TermText>{member.name}</TermText></h3>
+                    <h3 className="font-bold text-works-dark text-sm">
+                      {linkedinProfile(member.linkedinUrl) ? <a href={linkedinProfile(member.linkedinUrl)} target="_blank" rel="noopener noreferrer"
+                        aria-label={`${member.name} – LinkedIn (${locale === "en" ? "opens in a new tab" : "új lapon nyílik"})`}
+                        className="hover:underline focus-visible:underline"><TermText>{member.name}</TermText></a>
+                        : <TermText>{member.name}</TermText>}
+                    </h3>
                     <p className="text-sm text-works-dark/60"><TermText>{member.title}</TermText></p>
                   </motion.div>
                 ))}

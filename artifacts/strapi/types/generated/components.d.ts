@@ -722,6 +722,21 @@ export interface ServiceSectionIntro extends Struct.ComponentSchema {
   };
 }
 
+export interface SharedArticleAuthor extends Struct.ComponentSchema {
+  collectionName: 'components_shared_article_authors';
+  info: {
+    description: 'K\u00FCls\u0151 szerz\u0151 adatai; csak k\u00E9zi szerz\u0151m\u00F3dban jelenik meg.';
+    displayName: 'K\u00E9zzel megadott szerz\u0151';
+  };
+  attributes: {
+    bio: Schema.Attribute.Text;
+    image: Schema.Attribute.Media<'images'>;
+    linkedinUrl: Schema.Attribute.String;
+    name: Schema.Attribute.String;
+    title: Schema.Attribute.String;
+  };
+}
+
 export interface SharedHero extends Struct.ComponentSchema {
   collectionName: 'components_shared_heroes';
   info: {
@@ -867,6 +882,7 @@ declare module '@strapi/strapi' {
       'service.question-card': ServiceQuestionCard;
       'service.questions-section': ServiceQuestionsSection;
       'service.section-intro': ServiceSectionIntro;
+      'shared.article-author': SharedArticleAuthor;
       'shared.hero': SharedHero;
       'shared.legal-link': SharedLegalLink;
       'shared.opening-hours': SharedOpeningHours;

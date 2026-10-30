@@ -9,6 +9,7 @@ import { registerCvUploadRoutes } from "./cv-upload";
 import { registerContactSubmissionRoutes } from "./contact-submissions";
 import { migrateLegacyBlogHungarian } from "./legacy-blog-hu";
 import { migrateCompanyAddresses } from "./company-address-migration";
+import { backfillLocalizedAuthors } from "./article-author-backfill";
 import { migrateHuBlogSlugs } from "./hu-blog-slugs";
 
 function registerWebsiteRebuildAdminRoutes(strapi: any) {
@@ -186,6 +187,13 @@ const BLOG_PAGE_FIELD_LABELS: Record<string, { label: string; description?: stri
 const BLOG_PAGE_EDIT_ORDER = ["heading", "description", "seo"];
 
 const COMPONENT_FIELD_LABELS: Record<string, Record<string, { label: string; description?: string }>> = {
+  "shared.article-author": {
+    name: { label: "Szerző neve" },
+    title: { label: "Pozíció / titulus" },
+    bio: { label: "Rövid bemutatkozás" },
+    linkedinUrl: { label: "LinkedIn-profil", description: "Opcionális https://www.linkedin.com/in/... cím" },
+    image: { label: "Szerző képe" },
+  },
   "contact.form-subject": {
     label: { label: "Megnevezés", description: "Ez látszik a legördülő menüben" },
     value: { label: "Érték", description: "Technikai azonosító (pl. karrier)" },
@@ -219,6 +227,7 @@ const collectionTypeUids = [
 ];
 
 const componentUids = [
+  "shared.article-author",
   "about.intro",
   "contact.form-subject",
   "contact.career-consent",
@@ -282,6 +291,18 @@ async function updateAllLabels(strapi: any) {
 
     if (config.metadatas) {
       applyLabels(config.metadatas);
+      if (uid === "api::blog-post.blog-post" || uid === "api::team-member.team-member") {
+        const authorLabels = {
+          authorMode: ["Szerző forrása", "colleague: válassz kollégát. manual: kizárólag a kézi szerzőadatok jelennek meg."],
+          author: ["Szerző – kolléga", "A kolléga neve, pozíciója, képe és bemutatkozása kerül a cikkhez."],
+          manualAuthor: ["Kézzel megadott szerző", "Csak manual módban jelenik meg. A név nélküli szerzőkártya rejtett."],
+          linkedinUrl: ["LinkedIn-profil", "Opcionális https://www.linkedin.com/in/... profilcím. Új lapon nyílik."],
+          bio: ["Rövid bemutatkozás", "Opcionális, a cikk végi szerzőkártyában jelenik meg; a Rólunk listában nem."],
+        };
+        for (const [field, [label, description]] of Object.entries(authorLabels)) {
+          if (config.metadatas[field]?.edit) Object.assign(config.metadatas[field].edit, { label, description });
+        }
+      }
 
       if (uid === "api::service.service") {
         for (const removed of ["valueProposition", "activities", "benefits", "tools", "howWeWork"]) {
@@ -2765,6 +2786,7 @@ export default {
   },
   async bootstrap({ strapi }) {
     await migrateCompanyAddresses(strapi);
+    await backfillLocalizedAuthors(strapi);
     // Complete the reviewed slug-only migration before serving CMS requests.
     await migrateHuBlogSlugs(strapi);
     await resetAdminFromEnv(strapi);

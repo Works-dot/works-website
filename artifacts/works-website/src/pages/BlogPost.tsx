@@ -14,6 +14,7 @@ import { useI18n } from "@/i18n";
 import { buildLocalePath } from "@/lib/i18n-routes";
 import { PrimaryAction } from "@/components/ui/button";
 import { TermText } from "@/components/Terminology";
+import { ArticleAuthorCard } from "@/components/ArticleAuthorCard";
 import { normalizeHuBlogSlug } from "@/lib/blog-slug-transition";
 
 export default function BlogPost() {
@@ -164,6 +165,7 @@ export default function BlogPost() {
               {post.content.map((block, i) => (
                 <ContentBlock key={i} block={block} />
               ))}
+              <ArticleAuthorCard post={post} />
             </motion.div>
           </div>
         </section>

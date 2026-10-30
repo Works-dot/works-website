@@ -1,4 +1,5 @@
 import { mapContentBlocks, strapiImageUrl } from "./content-blocks.js";
+import { resolveArticleAuthor, linkedinProfile, fetchAuthorResponse, type ArticleAuthor } from "./article-author.js";
 import { sourceHuBlogSlug, normalizeHuBlogSlug } from "./blog-slug-transition.js";
 
 const STRAPI_API = "/strapi/api";
@@ -17,7 +18,7 @@ async function fetchApi<T>(path: string, params?: Record<string, string>): Promi
   const previewStatus = getPreviewStatus();
   if (url.pathname.endsWith("/legal-document") || url.pathname.endsWith("/career-positions")) url.searchParams.set("status", "published");
   else if (previewStatus) url.searchParams.set("status", previewStatus);
-  const res = await fetch(url.toString());
+  const res = await fetchAuthorResponse(fetch, url.toString());
   if (!res.ok) throw new Error(`Strapi API error: ${res.status} ${res.statusText}`);
   return res.json();
 }
@@ -128,6 +129,8 @@ interface StrapiProject {
 }
 
 interface StrapiTeamMember {
+  linkedinUrl?: string;
+  bio?: string;
   id: number;
   documentId: string;
   name: string;
@@ -137,6 +140,8 @@ interface StrapiTeamMember {
 }
 
 interface StrapiBlogPost {
+  authorMode?: string;
+  manualAuthor?: StrapiTeamMember | null;
   id: number;
   documentId: string;
   slug: string;
@@ -289,6 +294,7 @@ export interface BlogPost {
   excerpt: string;
   date: string;
   author: string;
+  authorDetails?: ArticleAuthor | null;
   image: string;
   imageAlt?: string;
   tags: string[];
@@ -300,6 +306,8 @@ export interface BlogPost {
 }
 
 export interface TeamMember {
+  linkedinUrl?: string;
+  bio?: string;
   name: string;
   title: string;
   image: string;
@@ -443,13 +451,15 @@ function mapProject(p: StrapiProject): Project {
 }
 
 function mapBlogPost(p: StrapiBlogPost): BlogPost {
+  const authorDetails = resolveArticleAuthor(p, strapiImageUrl);
   return {
     documentId: p.documentId,
     slug: p.slug,
     title: p.title,
     excerpt: p.excerpt || "",
     date: p.date || "",
-    author: p.author?.name || "",
+    author: authorDetails?.name || "",
+    authorDetails,
     image: strapiImageUrl(p.image?.url),
     imageAlt: p.image?.alternativeText || "",
     tags: p.tags?.map((t) => t.name) || [],
@@ -490,7 +500,7 @@ export function getNextProject(projects: Project[], currentSlug: string): Projec
 }
 
 const BLOG_POPULATE =
-  "populate[0]=image&populate[1]=tags&populate[2]=contentBlocks.image&populate[3]=author&populate[4]=seo.ogImage";
+  "populate[0]=image&populate[1]=tags&populate[2]=contentBlocks.image&populate[3]=author.image&populate[4]=seo.ogImage&populate[5]=manualAuthor.image";
 
 export async function getBlogPosts(locale?: string): Promise<BlogPost[]> {
   const res = await fetchApi<StrapiListResponse<StrapiBlogPost>>(
@@ -535,6 +545,8 @@ export async function getTeamMembers(locale?: string): Promise<TeamMember[]> {
   );
   return res.data.map((m) => ({
     name: m.name,
+    linkedinUrl: linkedinProfile(m.linkedinUrl),
+    bio: m.bio || "",
     title: m.title,
     image: strapiImageUrl(m.image?.url),
     imageAlt: m.image?.alternativeText || "",
