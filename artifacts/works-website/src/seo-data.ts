@@ -25,6 +25,7 @@ import { DEFAULT_SITE_URL, resolveSiteUrl } from "./seo-config";
 import { organizationIdentity, registeredPostalAddress } from "./data/organization";
 import { articleAuthor, personSchema, type ArticleAuthor } from "./lib/article-author.js";
 import { articleDates } from "./lib/article-dates.js";
+import { featuredOgImage, ogImageProperties } from "./lib/og-image";
 import type { BlogPost, CareerPosition, Project, Service, TeamMember } from "./lib/strapi";
 import cachedContent from "./data/strapi-cache.json";
 import { canonicalTransitionPath } from "./lib/blog-slug-transition";
@@ -71,6 +72,9 @@ export interface PageMeta {
   title: string;
   description: string;
   ogImage?: string;
+  ogImageAlt?: string;
+  ogImageWidth?: number;
+  ogImageHeight?: number;
   /** Route path, e.g. "/blog/cikk-slug" — used for canonical / og:url. */
   path?: string;
   /** og:type — "article" for blog posts & case studies, otherwise "website". */
@@ -470,6 +474,7 @@ export function getPageMeta(route: string, locale?: Locale): PageMeta {
     }, detailSeo || staticSeo);
     return {
       ...meta,
+      ...(project || post ? featuredOgImage((project || post)!) : {}),
       alternates:
         meta.path && hasRealEnglishPage
           ? getAlternateLinks(pathname, "en")
@@ -502,6 +507,7 @@ export function getPageMeta(route: string, locale?: Locale): PageMeta {
       );
       return {
         ...base,
+        ...featuredOgImage(project),
         path: pathname,
         type: "article",
         locale: lang,
@@ -528,6 +534,7 @@ export function getPageMeta(route: string, locale?: Locale): PageMeta {
       );
       return {
         ...base,
+        ...featuredOgImage(post),
         path: pathname,
         type: "article",
         locale: lang,
@@ -691,7 +698,7 @@ export function buildJsonLd(
       headline: meta.title.replace(/ \| Works\.$/, ""),
       description: meta.description,
       inLanguage: lang,
-      image: absoluteUrl(meta.ogImage || DEFAULT_OG_IMAGE),
+      image: absoluteUrl((supplied?.post ? featuredOgImage(supplied.post).ogImage : meta.ogImage) || DEFAULT_OG_IMAGE),
       publisher: { "@type": "Organization", name: "Works.", url: SITE_URL },
       mainEntityOfPage: meta.path ? absoluteUrl(meta.path) : SITE_URL,
     };
@@ -809,6 +816,9 @@ export function buildMetaTags(meta: PageMeta): string {
     `<meta data-ssr property="og:locale" content="${ogLocale}" />`,
     `<meta data-ssr property="og:site_name" content="Works." />`,
     `<meta data-ssr property="og:image" content="${escaped(ogImage)}" />`,
+    ...ogImageProperties(meta).filter(([, value]) => value !== undefined).map(
+      ([key, value]) => `<meta data-ssr property="${key}" content="${escaped(value!)}" />`,
+    ),
     `<meta data-ssr name="twitter:card" content="summary_large_image" />`,
     `<meta data-ssr name="twitter:title" content="${escaped(meta.title)}" />`,
     `<meta data-ssr name="twitter:description" content="${escaped(meta.description)}" />`,

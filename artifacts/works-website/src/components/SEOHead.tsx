@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useLocation, useSearch } from "wouter";
 import { articleDates } from "@/lib/article-dates.js";
+import { featuredOgImage, syncOgImageProperties } from "@/lib/og-image";
 import { matchesRouteSnapshot, spaPageViews, useRawPagePath } from "@/lib/gtm-tracking";
 import {
   buildJsonLd,
@@ -169,6 +170,8 @@ export default function SEOHead({ structuredContent, ready = true, noindex = fal
         title: detailSeo?.metaTitle?.trim() || `${detail.title} | Works.`,
         description: detailSeo?.metaDescription?.trim() || detailDescription || baseMeta.description,
         ogImage: detailSeo?.ogImage || baseMeta.ogImage,
+        ...((routeKey === "blogPost" || routeKey === "projectDetail") && "image" in detail
+          ? featuredOgImage(detail) : {}),
         ...(structuredContent?.post ? {
           article: { ...baseMeta.article, ...articleDates(structuredContent.post) },
         } : {}),
@@ -214,6 +217,9 @@ export default function SEOHead({ structuredContent, ready = true, noindex = fal
     upsertMeta("property", "og:locale", ogLocale);
     upsertMeta("property", "og:site_name", settings?.siteName || "Works.");
     upsertMeta("property", "og:image", ogImage);
+    syncOgImageProperties(meta,
+      (key, value) => upsertMeta("property", key, value),
+      (key) => removeMeta("property", key));
     upsertMeta("name", "twitter:card", "summary_large_image");
     upsertMeta("name", "twitter:title", meta.title);
     upsertMeta("name", "twitter:description", meta.description);
@@ -265,6 +271,9 @@ export default function SEOHead({ structuredContent, ready = true, noindex = fal
     ready,
     noindex,
     ogImage,
+    meta.ogImageAlt,
+    meta.ogImageWidth,
+    meta.ogImageHeight,
     ogLocale,
     ogType,
     alternates,

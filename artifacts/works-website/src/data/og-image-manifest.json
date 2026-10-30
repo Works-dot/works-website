@@ -1,0 +1,237 @@
+{
+  "/opengraph.jpg": {
+    "url": "/media/og/01d96b1aaa92e37817900688f827cb1f18ba7cbc4081ef3318ee54ce43b3cc70.jpg",
+    "width": 1200,
+    "height": 630
+  },
+  "/strapi/uploads/Alerant_rebrand_9cefeb80ae.png": {
+    "url": "/media/og/644bad623bc05d2599304c3385c0f045b5b19fb439e6b9452339919ce0cacd38.jpg",
+    "width": 1200,
+    "height": 630
+  },
+  "/strapi/uploads/Alfa_Biztosito_Ugyfelportal_f39ec1d9c4.png": {
+    "url": "/media/og/26b01625c183d699d1bd8d66fa706a22e8a83d6bb9d36a111170bc1d6528dd3e.jpg",
+    "width": 1200,
+    "height": 630
+  },
+  "/strapi/uploads/Bookline_SD_31c2d3ab97.png": {
+    "url": "/media/og/50b8dd7e4f7bff5ae2650852f574cb6b57a6c198f829ba9d6d434345e1dde4f8.jpg",
+    "width": 1200,
+    "height": 630
+  },
+  "/strapi/uploads/Chefparade_SD_e1104ed799.png": {
+    "url": "/media/og/5a0721b55e9ecdb83291569c9061b995e2a897d8fbaa632de31eb4cec176d3a1.jpg",
+    "width": 1200,
+    "height": 630
+  },
+  "/strapi/uploads/Funpass_Accessibility_design_6451566e64.png": {
+    "url": "/media/og/358d22414cca837f86030b27d0315340cfe0cc044a28ec5b0494df81926ff4a9.jpg",
+    "width": 1200,
+    "height": 630
+  },
+  "/strapi/uploads/Google_Maps_reviews_9041b44302.png": {
+    "url": "/media/og/1fe0979db64557f39a7827f107dd0915b1bfa3cc3ba9bc2dad2cdb2b67bd1348.jpg",
+    "width": 1200,
+    "height": 630
+  },
+  "/strapi/uploads/Magyar_Posta_i_Csekk_1da95fa2d5.png": {
+    "url": "/media/og/f3c238aaa9bbb4c24acc4db65fecfeb5481ee9b2012734afcbfbfd42b52d5211.jpg",
+    "width": 1200,
+    "height": 630
+  },
+  "/strapi/uploads/Motibro_home_afe4693639.png": {
+    "url": "/media/og/89b5a3cd4f946b10c6cc0a5cd42008ab8b559199cc42c50a4087ddcde771afc4.jpg",
+    "width": 1200,
+    "height": 630
+  },
+  "/strapi/uploads/One_Digitalis_azonositas_21bace577f.png": {
+    "url": "/media/og/c563065ab41de4cd4d15f8b1e0851084cba1207a3b2f9579c89d5bace8380b93.jpg",
+    "width": 1200,
+    "height": 630
+  },
+  "/strapi/uploads/Profirent_design_37fdedf93e.png": {
+    "url": "/media/og/6e4aedb0d359feff8ddca261f3d15983a9a7dcbd8b04cfbe6812619977e8723e.jpg",
+    "width": 1200,
+    "height": 630
+  },
+  "/strapi/uploads/Rudas_Gyogyfurdo_SD_8b184089bd.png": {
+    "url": "/media/og/8ecd44a17d08b26df581ce5c84c8c8729d75254585a34c7a730573c5b8c4036d.jpg",
+    "width": 1200,
+    "height": 630
+  },
+  "/strapi/uploads/Szakmai_kiadvanyok_2_c36155a7b4.png": {
+    "url": "/media/og/aa8065551a174676a17d99df652a1558cf58ef2e1ab6c1c4df6247584fda6e61.jpg",
+    "width": 1200,
+    "height": 630
+  },
+  "/strapi/uploads/TV_2_Streaming_platform_a1eb39ba7d.png": {
+    "url": "/media/og/1223efb514312596cc0ef23fb31aab936996330293f92afa53a97ee586c75fc1.jpg",
+    "width": 1200,
+    "height": 630
+  },
+  "/strapi/uploads/Telekom_AI_alapu_kutatas_cecb398aff.png": {
+    "url": "/media/og/7127733364ddd12a10fa1cc5dc214e425bc3b989b352f6b3bad5739dae7be405.jpg",
+    "width": 1200,
+    "height": 630
+  },
+  "/strapi/uploads/Telekom_Works_partnerseg_56c0ab725f.png": {
+    "url": "/media/og/1f5f598c451a2a766efff79009204870f65434d3e231f342d6a713d727f4cbd5.jpg",
+    "width": 1200,
+    "height": 630
+  },
+  "/strapi/uploads/Uni_Credit_Akadalymentes_audit_c8d7c0f8fc.png": {
+    "url": "/media/og/19e81fb0a8db08bcfa6da61e657fee920f38b5c85e2f8352b4214c565f72f3c9.jpg",
+    "width": 1200,
+    "height": 630
+  },
+  "/strapi/uploads/Uniqa_Digitalis_ugyintezes_9ad80571da.png": {
+    "url": "/media/og/fa1ebbab97f9139c3f287c00183b6db613c9672257d8333009d4376733e8e801.jpg",
+    "width": 1200,
+    "height": 630
+  },
+  "/strapi/uploads/Works_AI_alapu_termekfejlesztes_97315f8150.png": {
+    "url": "/media/og/03a1e559a85d469e7bfcf45389be434ef97ed6762a2dc3b85d2c92d1260c02b2.jpg",
+    "width": 1200,
+    "height": 630
+  },
+  "/strapi/uploads/Works_Akadalymentes_kepzes_f5b89b3af6.png": {
+    "url": "/media/og/16b609c55d01902cb0806e0849f1c8e22a363cafcee63d0ce7dfee98823274b5.jpg",
+    "width": 1200,
+    "height": 630
+  },
+  "/strapi/uploads/Works_Digitalis_kepessegfejlesztes_ab723186b8.png": {
+    "url": "/media/og/14b95c650477eecf97207a4f57d209217dd4e7c2e4fca3d17b4deb25964f3c4f.jpg",
+    "width": 1200,
+    "height": 630
+  },
+  "/strapi/uploads/Yettel_IVR_validacio_207c29f71f.png": {
+    "url": "/media/og/0d904ac90df68ba85350d3274f9d049a11acc6a5400a936981d5f2783e0e6503.jpg",
+    "width": 1200,
+    "height": 630
+  },
+  "/strapi/uploads/sqsp_8_gyakori_hiba_amit_egy_digitalis_akadalymentessegi_audit_feltar_hero_fa8bbee622.png": {
+    "url": "/media/og/e6ea81e16a053837f52df2c16cd123a5c0e03a1844b304ea59316a94ae37fc76.jpg",
+    "width": 1200,
+    "height": 630
+  },
+  "/strapi/uploads/sqsp_akadalymentes_audit_funkcionalis_teszt_vagy_ux_kutatas_hero_490524cfb4.jpg": {
+    "url": "/media/og/5b3e9ea454219ed8e90f6d0763e7bc82b95b1ca5e75baa052ff5da0e17a0ba6c.jpg",
+    "width": 1200,
+    "height": 630
+  },
+  "/strapi/uploads/sqsp_akadalymentesseg_jog_nem_jo_cselekedet_hero_6537aa6f43.png": {
+    "url": "/media/og/37e4d9037349f640796846276d3742336ccfd7f25bedd9309ece1cba2a690fbb.jpg",
+    "width": 1200,
+    "height": 630
+  },
+  "/strapi/uploads/sqsp_amikor_a_design_ujra_keresi_a_helyet_hero_ce8a1e8b72.png": {
+    "url": "/media/og/93f30bf2aefc080671792c848a885e64d12beac93e8e8546693afb60de61551c.jpg",
+    "width": 1200,
+    "height": 630
+  },
+  "/strapi/uploads/sqsp_amikor_a_kivitelezes_mar_nem_kulonboztet_meg_hero_5fa24394b7.png": {
+    "url": "/media/og/d82c10bea1d36790044bc06963359f801eeffd3885e5bef31d84d96100669242.jpg",
+    "width": 1200,
+    "height": 630
+  },
+  "/strapi/uploads/sqsp_bizzuk_az_ai_ra_a_felhasznaloi_visszajelzesek_elemzeset_hero_78349de9d7.png": {
+    "url": "/media/og/94fdf4542dba5db8c306bd21af3ef3c673911cf6a8801efba53a4df14062282c.jpg",
+    "width": 1200,
+    "height": 630
+  },
+  "/strapi/uploads/sqsp_digitalis_akadalymentesites_hero_12d76d0319.png": {
+    "url": "/media/og/43396d74d676b8a4ca2fdbf56aeb78f24ecdb2d2de17ee69209e060ca6d35ebe.jpg",
+    "width": 1200,
+    "height": 630
+  },
+  "/strapi/uploads/sqsp_elerhetobbe_teszi_az_ai_a_ux_kutatast_vagy_csak_olcso_illuziot_kinal_hero_ffac2f0b86.png": {
+    "url": "/media/og/381d0140d50d2fde557e67e4efe10993231840d8cc53d503dbd63547c77c0ef1.jpg",
+    "width": 1200,
+    "height": 630
+  },
+  "/strapi/uploads/sqsp_elveheti_az_ai_a_munkamat_hero_1d6264bad3.png": {
+    "url": "/media/og/5a4695ece12059b8ab65d10819461479e13925dd87e6b91430ba31455822c5c6.jpg",
+    "width": 1200,
+    "height": 630
+  },
+  "/strapi/uploads/sqsp_how_do_we_pay_online_hero_3f273da9ea.jpeg": {
+    "url": "/media/og/f5737cbe8ed2c61afdba0820f2d26efefe7acda12012dbc4bc933a9e4c5af381.jpg",
+    "width": 1200,
+    "height": 630
+  },
+  "/strapi/uploads/sqsp_how_state_diagram_can_help_designers_hero_5b992923ec.png": {
+    "url": "/media/og/c5f31df1f502ecda4a7edf82cb6673752fa44ed529aea80a124aa91bede97750.jpg",
+    "width": 1200,
+    "height": 630
+  },
+  "/strapi/uploads/sqsp_is_the_ux_designer_a_dying_breed_mlfg5_hero_70a74ad1f8.jpg": {
+    "url": "/media/og/d1b288c178a6a7b70f0717977e88b3c3888b7097adee46bb36fb2609aea36d28.jpg",
+    "width": 1200,
+    "height": 630
+  },
+  "/strapi/uploads/sqsp_issues_with_packages_hero_f702a5700c.jpg": {
+    "url": "/media/og/10b4c8fd166b99ad2991908f709219375fb61c943928f06728473d2f13bd0d3e.jpg",
+    "width": 1200,
+    "height": 630
+  },
+  "/strapi/uploads/sqsp_kutatasi_trendek_2025_ben_hero_07ffeaaf8a.jpg": {
+    "url": "/media/og/bbbebdd88f36f5ca38ebc2a6da4fcece6df50c91f6ad25f7c7a666e75971b01b.jpg",
+    "width": 1200,
+    "height": 630
+  },
+  "/strapi/uploads/sqsp_messages_during_shipping_hero_cf616ba906.jpg": {
+    "url": "/media/og/915e78e0d7246d2f5894606f315d3ab791db209abcf762e0789d0e51c6bd033a.jpg",
+    "width": 1200,
+    "height": 630
+  },
+  "/strapi/uploads/sqsp_mi_a_kutatas_elokesziteseben_hero_a5df6d262e.png": {
+    "url": "/media/og/b06d4f160b0e5cadc4d388ee6776630352f12834b1c41b2389c0683f0013f1cb.jpg",
+    "width": 1200,
+    "height": 630
+  },
+  "/strapi/uploads/sqsp_microinteractions_when_how_and_why_hero_54b13b456f.png": {
+    "url": "/media/og/523bbcfc463b8308de94e475c2ec54d153aa224700315b34d2f15832e4c18bde.jpg",
+    "width": 1200,
+    "height": 630
+  },
+  "/strapi/uploads/sqsp_miert_buknak_el_a_cx_kezdemenyezesek_hero_d6a2aec96e.png": {
+    "url": "/media/og/e4ad2c7acd1d0116c33f1ad65c7bd7ac6f3e48731b1fb886df1bc57388d84516.jpg",
+    "width": 1200,
+    "height": 630
+  },
+  "/strapi/uploads/sqsp_miert_fontosak_a_ceges_ertekek_hero_db4d31bc85.png": {
+    "url": "/media/og/ba00182377d52fc6f5f55862a88b595d6261cad1e03eca27e3defed84e682393.jpg",
+    "width": 1200,
+    "height": 630
+  },
+  "/strapi/uploads/sqsp_milyen_digitalis_akadalymentesitesi_szolgaltatasra_van_szukseged_hero_a5004807fe.jpg": {
+    "url": "/media/og/1111516215cbc89847afecea9e420c52133e3a88a8218db8cf7e2d7af4b1cd52.jpg",
+    "width": 1200,
+    "height": 630
+  },
+  "/strapi/uploads/sqsp_nalunk_a_munkatarsak_a_sztarok_hero_cd07bc72b2.jpeg": {
+    "url": "/media/og/5374f83589dc444698f7bc5a1db86e3609b55de346f6e0b3bf7aa71655495aa3.jpg",
+    "width": 1200,
+    "height": 630
+  },
+  "/strapi/uploads/sqsp_shipping_and_receiving_hero_40c72e9b0d.jpg": {
+    "url": "/media/og/0b9215248efb89da12e6acaa8c20d593be9d874865f67e6cf4ca185e43774fc1.jpg",
+    "width": 1200,
+    "height": 630
+  },
+  "/strapi/uploads/sqsp_the_economic_effects_of_covid_19_hero_d269548fd7.jpg": {
+    "url": "/media/og/21ccebfa52b976665b13c1385b7b900c7392de1fd8c7f9427ee7a5a5164ddb48.jpg",
+    "width": 1200,
+    "height": 630
+  },
+  "/strapi/uploads/sqsp_uj_belepobol_kollega_hero_0345c3033d.png": {
+    "url": "/media/og/c4fbfbcb3c77200e43c87681bcd9ce28bac0d76188f09453c268406d51bdb7db.jpg",
+    "width": 1200,
+    "height": 630
+  },
+  "/strapi/uploads/sqsp_why_lofi_design_is_important_in_the_design_process_hero_eca926cebb.png": {
+    "url": "/media/og/1d4e0a78127657de9bfe9889fe66258f83530823f740bb3c119f34601190edf0.jpg",
+    "width": 1200,
+    "height": 630
+  }
+}

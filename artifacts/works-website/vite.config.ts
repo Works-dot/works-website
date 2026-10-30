@@ -7,6 +7,7 @@ import { subscribeNewsletter } from "./newsletter-server.mjs";
 import { sendContactMessage } from "./contact-server.mjs";
 import { DEFAULT_SITE_URL, resolveSiteUrl } from "./src/seo-config";
 import { pendingLegalRedirect } from "./legal-redirects.mjs";
+import { generateOgImages } from "./scripts/generate-og-images.mjs";
 
 const rawPort = process.env.PORT;
 
@@ -36,6 +37,10 @@ export default defineConfig({
     "import.meta.env.VITE_SITE_URL": JSON.stringify(siteUrl),
   },
   plugins: [
+    {
+      name: "generated-og-images",
+      async buildStart() { await generateOgImages(); },
+    },
     {
       name: "admin-redirect",
       configureServer(server) {

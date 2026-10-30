@@ -12,6 +12,8 @@
     "test:production": "playwright install chromium && VITE_STRAPI_ENABLED=false pnpm run build && node scripts/test-production.mjs",
     "perf:browser": "node scripts/perf-browser.mjs",
     "test:images": "node --test scripts/optimize-images.test.mjs",
+    "test:og": "node --test scripts/og-images.test.mjs",
+    "verify:og": "node scripts/verify-built-og.mjs",
     "test:seo": "node scripts/validate-locale.mjs",
     "test:seo-config": "node --test scripts/seo-config.test.mjs",
     "test:structured-data": "node --test scripts/structured-data.test.mjs",

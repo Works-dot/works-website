@@ -276,6 +276,12 @@ function addStaticRoutes(app, distDir) {
     }),
   );
 
+  // A missing share image must never be served as an HTML page.
+  app.use("/media/og", (_req, res) => {
+    res.setHeader("Cache-Control", "no-store");
+    res.status(404).end();
+  });
+
   const notFoundPage = path.join(distDir, "404.html");
   app.get(/.*/, (req, res) => {
     res.setHeader("Cache-Control", "no-cache");
