@@ -1,7 +1,7 @@
 import { useEffect, useState, useMemo } from "react";
 import { Link } from "wouter";
 import { motion, AnimatePresence } from "framer-motion";
-import { Calendar } from "lucide-react";
+import { DateLabel } from "@/components/ui/DateLabel";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { ResponsiveFilter } from "@/components/ui/ResponsiveFilter";
@@ -50,11 +50,8 @@ function FeaturedBlogCard({ slug, title, excerpt, date, image, imageAlt, author,
           />
         </div>
         <div className="w-full lg:w-1/2 flex flex-col items-start py-2">
-          <div className="flex items-center gap-4 text-sm text-works-dark/50 mb-4 font-medium">
-            <span className="flex items-center gap-1.5">
-              <Calendar className="w-4 h-4 text-works-primary" />
-              <TermText>{date}</TermText>
-            </span>
+          <div className="flex flex-wrap items-center gap-4 text-sm text-works-dark/50 mb-4 font-medium">
+            <DateLabel value={date} locale={locale} className="flex items-center gap-1.5" iconClassName="w-4 h-4 text-works-primary" />
             <span><TermText>{readingTime}</TermText></span>
           </div>
           <h3 className="text-2xl lg:text-3xl font-bold text-works-dark mb-3 leading-tight group-hover:text-works-primary transition-colors">
@@ -106,11 +103,8 @@ function BlogGridCard({ slug, title, excerpt, date, image, imageAlt, author, rea
           />
         </div>
         <div className="p-6 sm:p-8 flex flex-col flex-grow">
-          <div className="flex items-center gap-4 text-sm text-works-dark/50 mb-4 font-medium">
-            <span className="flex items-center gap-1.5">
-              <Calendar className="w-4 h-4 text-works-primary" />
-              <TermText>{date}</TermText>
-            </span>
+          <div className="flex flex-wrap items-center gap-4 text-sm text-works-dark/50 mb-4 font-medium">
+            <DateLabel value={date} locale={locale} className="flex items-center gap-1.5" iconClassName="w-4 h-4 text-works-primary" />
             <span><TermText>{readingTime}</TermText></span>
           </div>
           <div className="mb-2 min-h-[3.5rem]">

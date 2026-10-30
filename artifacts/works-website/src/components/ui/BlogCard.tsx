@@ -1,6 +1,6 @@
 import { Link } from "wouter";
 import { motion } from "framer-motion";
-import { Calendar } from "lucide-react";
+import { DateLabel } from "@/components/ui/DateLabel";
 import { useI18n } from "@/i18n";
 import { buildLocalePath } from "@/lib/i18n-routes";
 import { ArrowLinkLabel } from "@/components/ui/arrow-link-label";
@@ -50,10 +50,9 @@ export function BlogCard({ slug, title, excerpt, date, image, imageAlt, index, a
         </div>
         
         <div className="p-6 sm:p-8 flex flex-col flex-grow">
-          <div className="flex items-center text-sm text-works-dark/50 mb-4 font-medium">
-            <Calendar className="w-4 h-4 mr-2 text-works-primary" />
-            {date}
-          </div>
+          <DateLabel value={date} locale={locale}
+            className="flex items-center text-sm text-works-dark/50 mb-4 font-medium"
+            iconClassName="w-4 h-4 mr-2 text-works-primary" />
           
           <div className="mb-3 min-h-[3.5rem] sm:min-h-[4rem]">
             <h3 className="text-xl sm:text-2xl font-bold text-works-dark line-clamp-2 group-hover:text-works-primary transition-colors">

@@ -1,7 +1,8 @@
 import { useEffect } from "react";
 import { useParams, Link } from "wouter";
 import { motion } from "framer-motion";
-import { ArrowLeft, ArrowRight, Calendar, Clock, User } from "lucide-react";
+import { ArrowLeft, ArrowRight, Clock, User } from "lucide-react";
+import { DateLabel } from "@/components/ui/DateLabel";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import SEOHead from "@/components/SEOHead";
@@ -143,10 +144,7 @@ export default function BlogPost() {
                   <span><TermText>{post.author}</TermText></span>
                 </div>
               )}
-              <div className="flex items-center gap-2">
-                <Calendar className="w-4 h-4" />
-                <span><TermText>{post.date}</TermText></span>
-              </div>
+              <DateLabel value={post.date} locale={locale} className="flex items-center gap-2" />
               <div className="flex items-center gap-2">
                 <Clock className="w-4 h-4" />
                 <span><TermText>{post.readingTime}</TermText></span>
