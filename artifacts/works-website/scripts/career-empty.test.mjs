@@ -3,11 +3,11 @@ import fs from "node:fs";
 import vm from "node:vm";
 import { test } from "node:test";
 import { transformWithEsbuild } from "vite";
+import { isOpenJob, jobFields, jobLocationLabel, jobTypeLabel } from "../src/lib/job-posting.js";
 
 const read = (file) => fs.readFileSync(new URL(`../${file}`, import.meta.url), "utf8");
-const rawStrapi = read("src/lib/strapi.ts").replaceAll("import.meta.env", '({ BASE_URL: "/" })').replace(
-  '"./content-blocks.js"', JSON.stringify(new URL("../src/lib/content-blocks.js", import.meta.url).href),
-);
+const rawStrapi = read("src/lib/strapi.ts").replaceAll("import.meta.env", '({ BASE_URL: "/" })')
+  .replace(/"(\.\/[^"]+\.js)"/g, (_, name) => JSON.stringify(new URL(`../src/lib/${name.slice(2)}`, import.meta.url).href));
 const { code } = await transformWithEsbuild(rawStrapi, "strapi.ts", { loader: "ts" });
 const api = await import(`data:text/javascript;base64,${Buffer.from(code).toString("base64")}`);
 const active = { documentId: "cms-test", slug: "genuine-cms-position", title: "Published CMS position", isActive: true, publishedAt: "2026-01-01", contentBlocks: [] };
@@ -115,13 +115,12 @@ test("career hook bypasses stale cache, refreshes on mount/focus/poll, clears er
   }
 });
 
-test("static production retains genuine embedded CMS jobs without fetching", async () => {
+test("production hydrates embedded jobs then refreshes availability", async () => {
   const h = await hookHarness(false);
   for (const locale of ["hu", "en"]) {
-    const view = h.render("careerPositions", () => { throw new Error("must not fetch"); }, locale);
-    assert.equal(view.data[0].slug, active.slug);
-    assert.equal(view.loading, false);
+    h.render("careerPositions", async () => [], locale);
     await h.flush();
+    assert.equal(h.render("careerPositions", async () => [], locale).data.length, 0);
   }
   h.close();
 });
@@ -132,7 +131,8 @@ test("build fetch also excludes inactive/draft positions", () => {
   assert.match(section, /filters\[isActive\]\[\$eq\]=true&status=published/);
   for (const rows of [[], [active], [{ ...active, isActive: false }], [{ ...active, publishedAt: null }]]) {
     const mapping = section.slice(section.indexOf("  cache.positions"));
-    const context = { cache: {}, careersRes: { data: rows }, mapContentBlocks: () => [], mapSeo: () => null };
+    const context = { cache: {}, careersRes: { data: rows }, mapContentBlocks: () => [], mapSeo: () => null,
+      isOpenJob, jobFields, jobLocationLabel, jobTypeLabel, locale: "hu" };
     vm.runInNewContext(mapping, context);
     assert.equal(context.cache.positions.length, rows.filter((r) => r.isActive && r.publishedAt).length);
   }

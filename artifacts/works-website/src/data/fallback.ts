@@ -26,6 +26,7 @@ import {
 } from "@/lib/strapi";
 
 import rawCache from "./strapi-cache.json";
+import { isOpenJob } from "@/lib/job-posting.js";
 import { normalizeProjectSlug } from "@/lib/project-slug.js";
 import type { Locale } from "@/lib/i18n-routes";
 
@@ -413,7 +414,23 @@ export function getLocaleCacheKey(key: string): string {
  * fallbacks; EN is deliberately cache-only so incomplete/old snapshots fail
  * closed instead of leaking Hungarian editorial content.
  */
+let requestJobs: Partial<Record<Locale, CareerPosition[]>> | undefined;
+export function withCareerSnapshot<T>(snapshot: Partial<Record<Locale, CareerPosition[]>>, render: () => T): T {
+  const previous = requestJobs;
+  requestJobs = snapshot;
+  try { return render(); } finally { requestJobs = previous; }
+}
+
 export function getLocaleFallback<T>(key: string, locale: Locale): T | undefined {
+  if (getLocaleCacheKey(key) === "positions") {
+    const browserJobs = typeof window !== "undefined"
+      ? (window as unknown as { __CAREER_JOBS__?: Partial<Record<Locale, CareerPosition[]>> }).__CAREER_JOBS__ : undefined;
+    const rows = (requestJobs?.[locale] ?? browserJobs?.[locale] ??
+      (locale === "hu" ? fallbackPositions : localizedCache.en?.positions) ?? []) as CareerPosition[];
+    const open = rows.filter(job => isOpenJob(job));
+    const parts = key.split(":");
+    return (parts.length > 1 ? open.find(job => job.slug === parts[parts.length - 1]) : open) as T | undefined;
+  }
   if (locale === "en") {
     const dataset = localizedCache.en;
     if (!dataset) return undefined;

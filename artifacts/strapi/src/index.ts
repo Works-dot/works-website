@@ -11,6 +11,7 @@ import { migrateLegacyBlogHungarian } from "./legacy-blog-hu";
 import { migrateCompanyAddresses } from "./company-address-migration";
 import { backfillLocalizedAuthors } from "./article-author-backfill";
 import { registerArticlePublicationDates } from "./article-publication-dates";
+import { registerCareerPublication } from "./career-publication";
 import { migrateHuBlogSlugs } from "./hu-blog-slugs";
 
 function registerWebsiteRebuildAdminRoutes(strapi: any) {
@@ -292,6 +293,21 @@ async function updateAllLabels(strapi: any) {
 
     if (config.metadatas) {
       applyLabels(config.metadatas);
+      if (uid === "api::career-position.career-position") {
+        const labels: Record<string, [string, string]> = {
+          originalPublishedAt: ["Eredeti közzététel", "Automatikus, újrapublikáláskor nem változik."],
+          validThrough: ["Jelentkezési határidő", "Dátum és pontos idő. Lejáratkor az állás automatikusan 404-et ad."],
+          employmentType: ["Foglalkoztatás típusa", "FULL_TIME: teljes munkaidő; PART_TIME: részmunkaidő; CONTRACTOR: vállalkozói."],
+          streetAddress: ["Munkavégzés – utca, házszám", "Tényleges munkavégzési hely, nem feltétlenül a székhely."],
+          postalCode: ["Munkavégzés – irányítószám", ""],
+          addressLocality: ["Munkavégzés – város", "A JobPostinghoz szükséges."],
+          addressRegion: ["Munkavégzés – megye/régió", ""],
+          addressCountry: ["Munkavégzés – országkód", "Két nagybetűs ISO kód, például HU. A JobPostinghoz szükséges."],
+        };
+        for (const [field, [label, description]] of Object.entries(labels)) {
+          if (config.metadatas[field]?.edit) Object.assign(config.metadatas[field].edit, { label, description });
+        }
+      }
       if (uid === "api::blog-post.blog-post" || uid === "api::team-member.team-member") {
         const authorLabels = {
           authorMode: ["Szerző forrása", "colleague: válassz kollégát. manual: kizárólag a kézi szerzőadatok jelennek meg."],
@@ -2781,6 +2797,7 @@ async function runBootstrapContentMigrations(strapi: any) {
 
 export default {
   register({ strapi }) {
+    registerCareerPublication(strapi);
     registerArticlePublicationDates(strapi);
     registerWebsiteRebuildAdminRoutes(strapi);
     registerCvUploadRoutes(strapi);

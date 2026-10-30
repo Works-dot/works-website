@@ -14,6 +14,7 @@ import { useI18n } from "@/i18n";
 import { buildLocalePath } from "@/lib/i18n-routes";
 import { PrimaryAction } from "@/components/ui/button";
 import { TermText } from "@/components/Terminology";
+import { jobIso } from "@/lib/job-posting.js";
 
 export default function CareerDetail() {
   const { locale, t } = useI18n();
@@ -37,7 +38,7 @@ export default function CareerDetail() {
   if (loading) {
     return (
       <div className="min-h-screen bg-works-bg flex flex-col selection:bg-works-primary selection:text-white">
-        <SEOHead ready={false} />
+        <SEOHead ready={false} structuredContent={{ position: null }} />
         <Header />
         <main className="flex-grow pt-28 lg:pt-32 flex items-center justify-center">
             <div className="animate-pulse text-works-dark/30 text-lg"><TermText>{t("states.loading")}</TermText></div>
@@ -50,7 +51,7 @@ export default function CareerDetail() {
   if (error) {
     return (
       <div className="min-h-screen bg-works-bg flex flex-col selection:bg-works-primary selection:text-white">
-        <SEOHead />
+        <SEOHead structuredContent={{ position: null }} />
         <Header />
         <main className="flex-grow pt-28 lg:pt-32 flex items-center justify-center">
           <div className="text-center">
@@ -67,7 +68,7 @@ export default function CareerDetail() {
   if (!position) {
     return (
       <div className="min-h-screen bg-works-bg flex flex-col selection:bg-works-primary selection:text-white">
-        <SEOHead />
+        <SEOHead structuredContent={{ position: null }} />
         <Header />
         <main className="flex-grow pt-28 lg:pt-32 flex items-center justify-center">
           <div className="text-center">
@@ -134,18 +135,23 @@ export default function CareerDetail() {
             </motion.div>
 
             <div className="mt-10 flex flex-wrap gap-8 text-white/60 text-sm">
-              <div className="flex items-center gap-2">
+              {position.team && <div className="flex items-center gap-2">
                 <Users className="w-4 h-4" />
                 <span><TermText>{position.team}</TermText></span>
-              </div>
-              <div className="flex items-center gap-2">
+              </div>}
+              {position.location && <div className="flex items-center gap-2">
                 <MapPin className="w-4 h-4" />
                 <span><TermText>{position.location}</TermText></span>
-              </div>
-              <div className="flex items-center gap-2">
+              </div>}
+              {position.type && <div className="flex items-center gap-2">
                 <Briefcase className="w-4 h-4" />
                 <span><TermText>{position.type}</TermText></span>
-              </div>
+              </div>}
+              {jobIso(position.validThrough) && <div>
+                {locale === "hu" ? "Jelentkezési határidő: " : "Application deadline: "}
+                <time dateTime={position.validThrough!}>{new Intl.DateTimeFormat(locale === "hu" ? "hu-HU" : "en-US",
+                  { dateStyle: "long", timeStyle: "short", timeZone: "Europe/Budapest" }).format(new Date(position.validThrough!))} ({locale === "hu" ? "budapesti idő" : "Budapest time"})</time>
+              </div>}
             </div>
           </div>
         </section>

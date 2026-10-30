@@ -53,37 +53,27 @@ test("no LocalBusiness claims a customer-facing office from registered or mailin
   }
 });
 
-test("jobs only on actual detail records; only sourced publication and office locality", () => {
+test("jobs require complete sourced fields and link the Organization identity", () => {
   for (const [locale, path] of [["hu", "/karrier/ux-researcher"], ["en", "/en/careers/ux-researcher"]]) {
-    const meta = seo.getPageMeta(path);
-    const [job] = ofType(graphs(meta), "JobPosting");
-    assert.equal(job.title, "UX Researcher");
-    assert.equal(job.inLanguage, locale);
-    assert.ok(job.description.includes("kutatás") || job.description.includes("research"));
-    const source = fallback.getLocaleFallback(`careerPosition:ux-researcher`, locale);
-    assert.equal(job.datePosted, source.publishedAt || undefined);
-    for (const key of ["validThrough", "baseSalary", "employmentType"]) {
-      assert.equal(job[key], undefined, key);
-    }
-    assert.deepEqual(job.jobLocation.address, {
-      "@type": "PostalAddress", addressLocality: "Budapest", addressCountry: "HU",
+    const source = { slug: "ux-researcher", title: "UX Researcher", excerpt: "Research",
+      content: [], publishedAt: "2026-01-01T10:00:00Z", originalPublishedAt: "2025-03-12T10:00:00Z",
+      validThrough: "2099-12-31T23:00:00Z", employmentType: "FULL_TIME",
+      addressLocality: "Budapest", addressCountry: "HU", tags: [], team: "", location: "", type: "" };
+    fallback.withCareerSnapshot({ [locale]: [source] }, () => {
+      const meta = seo.getPageMeta(path);
+      const nodes = graphs(meta, { position: source });
+      const [job] = ofType(nodes, "JobPosting");
+      assert.equal(job.title, source.title);
+      assert.equal(job.inLanguage, locale);
+      assert.equal(job.datePosted, "2025-03-12T10:00:00.000Z");
+      assert.equal(job.employmentType, "FULL_TIME");
+      assert.equal(job.hiringOrganization["@id"], ofType(nodes, "Organization")[0]["@id"]);
+      for (const patch of [{ validThrough: null }, { addressCountry: "" }, { employmentType: null },
+        { validThrough: "2020-01-01T00:00:00Z" }, { isActive: false }]) {
+        assert.equal(ofType(graphs(meta, { position: { ...source, ...patch } }), "JobPosting").length, 0);
+      }
+      assert.equal(ofType(graphs(meta, { position: null }), "JobPosting").length, 0);
     });
-    assert.equal(ofType(graphs(meta, { position: null }), "JobPosting").length, 0);
-    const [dated] = ofType(graphs(meta, { position: {
-      ...source, publishedAt: "2025-03-12T10:00:00.000Z", location: "Budapest / Hybrid",
-    } }), "JobPosting");
-    assert.equal(dated.datePosted, "2025-03-12T10:00:00.000Z");
-    assert.equal(dated.jobLocation.address.addressLocality, "Budapest");
-    assert.equal(dated.jobLocation.address.streetAddress, undefined);
-    const [invalidDate] = ofType(graphs(meta, { position: {
-      ...source, publishedAt: "unknown",
-    } }), "JobPosting");
-    assert.equal(invalidDate.datePosted, undefined);
-    const [noOffice] = ofType(graphs(meta, { position: {
-      ...source, location: "Budapest / Hybrid",
-      content: [], excerpt: "A genuine job without a stated office",
-    } }), "JobPosting");
-    assert.equal(noOffice.jobLocation, undefined);
   }
   assert.equal(ofType(graphs(seo.getPageMeta("/karrier/nem-letezik")), "JobPosting").length, 0);
 });

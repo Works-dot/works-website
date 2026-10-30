@@ -1,6 +1,17 @@
 import { renderToString } from "react-dom/server";
 import App from "./App";
 import { routes } from "./routes.static";
+import { withCareerSnapshot } from "./data/fallback";
+import { getPageMeta as pageMeta, buildMetaTags as metaTags } from "./seo-data";
+import type { CareerPosition } from "./lib/strapi";
+
+// Synchronous render scope: no await inside, no cross-request snapshot leak.
+export function renderCareer(url: string, jobs: { hu: CareerPosition[]; en: CareerPosition[] }) {
+  return withCareerSnapshot(jobs, () => ({
+    ...render(url),
+    head: metaTags(pageMeta(url)),
+  }));
+}
 
 export function render(url: string) {
   const html = renderToString(<App ssrPath={url} routes={routes} />);

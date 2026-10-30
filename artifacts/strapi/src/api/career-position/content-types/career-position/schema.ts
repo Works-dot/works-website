@@ -16,6 +16,17 @@ export default {
     }
   },
   "attributes": {
+    "originalPublishedAt": { "type": "datetime", "configurable": false },
+    "validThrough": { "type": "datetime" },
+    "employmentType": {
+      "type": "enumeration",
+      "enum": ["FULL_TIME", "PART_TIME", "CONTRACTOR", "TEMPORARY", "INTERN", "VOLUNTEER", "PER_DIEM", "OTHER"]
+    },
+    "streetAddress": { "type": "string" },
+    "postalCode": { "type": "string" },
+    "addressLocality": { "type": "string" },
+    "addressRegion": { "type": "string" },
+    "addressCountry": { "type": "string", "regex": "^[A-Z]{2}$" },
     "slug": {
       "type": "uid",
       "targetField": "title",

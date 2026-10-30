@@ -25,6 +25,7 @@ import { DEFAULT_SITE_URL, resolveSiteUrl } from "./seo-config";
 import { organizationIdentity, registeredPostalAddress } from "./data/organization";
 import { articleAuthor, personSchema, type ArticleAuthor } from "./lib/article-author.js";
 import { articleDates } from "./lib/article-dates.js";
+import { jobSchema } from "./lib/job-posting.js";
 import { featuredOgImage, ogImageProperties } from "./lib/og-image";
 import type { BlogPost, CareerPosition, Project, Service, TeamMember } from "./lib/strapi";
 import cachedContent from "./data/strapi-cache.json";
@@ -572,7 +573,7 @@ export function getPageMeta(route: string, locale?: Locale): PageMeta {
 
   const careerMatch = pathname.match(/^\/karrier\/(.+)$/);
   if (careerMatch) {
-    const position = fallbackPositions.find((p) => p.slug === careerMatch[1]);
+    const position = getLocaleFallback<CareerPosition>(`careerPosition:${decodeURIComponent(careerMatch[1])}`, "hu");
     if (position) {
       const base = withOverride(
         {
@@ -736,27 +737,11 @@ export function buildJsonLd(
 
   if (route?.routeKey === "careerDetail" && content.position?.slug === slug &&
       content.position.title?.trim() && (content.position.excerpt?.trim() || content.position.content?.length)) {
-    const position = content.position;
-    const description = position.content?.filter((block) => block.type !== "image")
-      .map((block) => block.content).filter(Boolean).join("\n\n") || position.excerpt;
-    // The positions collection contains only active, published Strapi records.
-    // Only these explicit job-copy statements establish a Budapest office.
-    // Do not mistake the registered/mailing address or generic UI label for
-    // the office. Other jobs need a structured CMS location.
-    const budapestOffice = /\bbudapesti irodai jelenlét\w*|\bBudapest office\b/i.test(description);
-    // Strapi's publishedAt is the only sourced publication timestamp.
-    scripts.push(jsonLdScript({
-      "@context": "https://schema.org", "@type": "JobPosting",
-      title: position.title, description,
-      url, inLanguage: lang,
-      ...(position.publishedAt && !Number.isNaN(Date.parse(position.publishedAt))
-        ? { datePosted: position.publishedAt } : {}),
-      ...(budapestOffice ? { jobLocation: {
-        "@type": "Place",
-        address: { "@type": "PostalAddress", addressLocality: "Budapest", addressCountry: "HU" },
-      } } : {}),
-      hiringOrganization: { "@type": "Organization", name: "Works.", sameAs: SITE_URL, logo: absoluteUrl(organizationIdentity.logoPath) },
-    }));
+    const schema = jobSchema(content.position, { url, locale: lang, organization: {
+      "@id": `${SITE_URL.replace(/\/$/, "")}/#organization`,
+      "@type": "Organization", name: "Works.", sameAs: SITE_URL, logo: absoluteUrl(organizationIdentity.logoPath),
+    } });
+    if (schema) scripts.push(jsonLdScript(schema));
   }
 
   if (route?.routeKey === "about" && content.team?.length) {

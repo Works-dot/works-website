@@ -39,7 +39,7 @@ export function useStrapiQuery<T>(
 
   useEffect(() => {
     setResolvedKey(cacheKey);
-    if (!STRAPI_ENABLED) {
+    if (!STRAPI_ENABLED && !isCareer) {
       // Strapi is disabled at runtime (production SSG build). The component
       // instance is reused across client-side navigations (e.g. service ->
       // service), so we must sync state to the new key's fallback data here.

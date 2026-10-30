@@ -1,4 +1,5 @@
 import { mapContentBlocks, strapiImageUrl } from "./content-blocks.js";
+import { isOpenJob, jobFields, jobLocationLabel, jobTypeLabel, type JobFields } from "./job-posting.js";
 import { resolveArticleAuthor, linkedinProfile, fetchAuthorResponse, type ArticleAuthor } from "./article-author.js";
 import { sourceHuBlogSlug, normalizeHuBlogSlug } from "./blog-slug-transition.js";
 
@@ -247,7 +248,7 @@ interface StrapiClient {
 }
 
 
-interface StrapiCareerPosition {
+interface StrapiCareerPosition extends JobFields {
   id: number;
   documentId: string;
   slug: string;
@@ -412,7 +413,7 @@ export interface CareerWorkWithUs {
   description: string;
 }
 
-export interface CareerPosition {
+export interface CareerPosition extends JobFields {
   documentId?: string;
   /** Strapi publication timestamp; only present for an active published job. */
   publishedAt?: string;
@@ -428,9 +429,6 @@ export interface CareerPosition {
 }
 
 import { normalizeProjectSlug, PROJECT_SLUG, OLD_PROJECT_SLUG } from "./project-slug.js";
-
-const CAREER_LOCATION = "Budapest / Hybrid";
-const CAREER_TYPE = "Teljes munkaidő";
 
 function mapProject(p: StrapiProject): Project {
   return {
@@ -722,14 +720,15 @@ export async function getCareerPositions(locale?: string): Promise<CareerPositio
       locale
     )
   );
-  return res.data.filter((c) => c.isActive === true && !!c.publishedAt).map((c) => ({
+  return res.data.filter((c) => c.isActive === true && isOpenJob(c)).map((c) => ({
+    ...jobFields(c),
     documentId: c.documentId,
     publishedAt: c.publishedAt!,
     slug: c.slug,
     title: c.title,
     team: c.team || "",
-    location: CAREER_LOCATION,
-    type: CAREER_TYPE,
+    location: jobLocationLabel(c),
+    type: jobTypeLabel(c.employmentType, locale),
     tags: c.tags?.map((t) => t.name) || [],
     excerpt: c.excerpt || "",
     content: mapContentBlocks(c.contentBlocks),
@@ -744,15 +743,16 @@ export async function getCareerPositionBySlug(slug: string, locale?: string): Pr
       locale
     )
   );
-  return res.data[0]?.isActive === true && !!res.data[0].publishedAt
+  return res.data[0]?.isActive === true && isOpenJob(res.data[0])
     ? {
+        ...jobFields(res.data[0]),
         documentId: res.data[0].documentId,
         publishedAt: res.data[0].publishedAt!,
         slug: res.data[0].slug,
         title: res.data[0].title,
         team: res.data[0].team || "",
-        location: CAREER_LOCATION,
-        type: CAREER_TYPE,
+        location: jobLocationLabel(res.data[0]),
+        type: jobTypeLabel(res.data[0].employmentType, locale),
         tags: res.data[0].tags?.map((t) => t.name) || [],
         excerpt: res.data[0].excerpt || "",
         content: mapContentBlocks(res.data[0].contentBlocks),
@@ -761,9 +761,9 @@ export async function getCareerPositionBySlug(slug: string, locale?: string): Pr
     : null;
 }
 
-export function getNextPosition(positions: CareerPosition[], currentSlug: string): CareerPosition {
-  const idx = positions.findIndex((p) => p.slug === currentSlug);
-  return positions[(idx + 1) % positions.length];
+export function getNextPosition(positions: CareerPosition[], currentSlug: string): CareerPosition | null {
+  const open = positions.filter(p => p.slug !== currentSlug && isOpenJob(p));
+  return open[0] || null;
 }
 
 export interface HomepageData {

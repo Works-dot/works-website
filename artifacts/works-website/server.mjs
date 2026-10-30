@@ -8,6 +8,7 @@ import { pendingLegalRedirect } from "./legal-redirects.mjs";
 import { addUrlNormalization } from "./url-normalization.mjs";
 import { subscribeNewsletter } from "./newsletter-server.mjs";
 import { sendContactMessage } from "./contact-server.mjs";
+import { careerMiddleware, readLiveJobs } from "./career-server.mjs";
 import {
   classifyBodyParserError,
   sendSanitizedError,
@@ -318,6 +319,10 @@ export function createApp({
   addCanonicalRedirect(app, canonicalOrigin);
   addHealthRoutes(app, { readinessResult });
   addApiRoutes(app);
+  app.use(careerMiddleware({
+    distDir,
+    readJobs: locale => readLiveJobs(process.env.STRAPI_URL || process.env.STRAPI_PROXY_TARGET, locale),
+  }));
   addStaticRoutes(app, distDir);
 
   // Express 5 forwards rejected async handlers here.  Keep parser errors and

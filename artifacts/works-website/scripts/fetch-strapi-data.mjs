@@ -7,6 +7,7 @@ import path from "node:path";
 import { createHash } from "node:crypto";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import { mapContentBlocks, strapiImageUrl } from "../src/lib/content-blocks.js";
+import { isOpenJob, jobFields, jobLocationLabel, jobTypeLabel, missingJobFields } from "../src/lib/job-posting.js";
 import { resolveArticleAuthor, linkedinProfile, fetchAuthorResponse } from "../src/lib/article-author.js";
 import { normalizeProjectSlug } from "../src/lib/project-slug.js";
 import { normalizeHuBlogSlug } from "../src/lib/blog-slug-transition.js";
@@ -306,20 +307,25 @@ async function fetchAll(locale) {
   const careersRes = await fetchApi(
     `/career-positions?${CAREER_POPULATE}&pagination[pageSize]=100&filters[isActive][$eq]=true&status=published`
   );
-  cache.positions = careersRes.data.filter((c) => c.isActive === true && !!c.publishedAt).map((c) => ({
+  cache.positions = careersRes.data.filter((c) => c.isActive === true && isOpenJob(c)).map((c) => ({
+    ...jobFields(c),
     documentId: c.documentId,
     publishedAt: c.publishedAt,
     slug: c.slug,
     title: c.title,
     team: c.team || "",
-    location: c.location || "",
-    type: c.type || "",
+    location: jobLocationLabel(c),
+    type: jobTypeLabel(c.employmentType, locale),
     tags: c.tags?.map((t) => t.name) || [],
     excerpt: c.excerpt || "",
     content: mapContentBlocks(c.contentBlocks),
     seo: mapSeo(c.seo),
   }));
   console.log(`  ✓ ${cache.positions.length} career position(s)`);
+  for (const job of cache.positions) {
+    const missing = missingJobFields(job);
+    if (missing.length) console.warn(`  ⚠ JobPosting ${locale}/${job.slug}: fill CMS fields: ${missing.join(", ")}. Page retained, incomplete schema omitted.`);
+  }
 
   try {
     const galleryRes = await fetchApi("/about-page?populate[0]=galleryImages");

@@ -718,6 +718,9 @@ export interface ApiCareerPositionCareerPosition
     };
   };
   attributes: {
+    addressCountry: Schema.Attribute.String;
+    addressLocality: Schema.Attribute.String;
+    addressRegion: Schema.Attribute.String;
     contentBlocks: Schema.Attribute.DynamicZone<
       ['content.text-block', 'content.image-block', 'content.highlight-block']
     > &
@@ -729,6 +732,18 @@ export interface ApiCareerPositionCareerPosition
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    employmentType: Schema.Attribute.Enumeration<
+      [
+        'FULL_TIME',
+        'PART_TIME',
+        'CONTRACTOR',
+        'TEMPORARY',
+        'INTERN',
+        'VOLUNTEER',
+        'PER_DIEM',
+        'OTHER',
+      ]
+    >;
     excerpt: Schema.Attribute.Text &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
@@ -741,6 +756,8 @@ export interface ApiCareerPositionCareerPosition
       'oneToMany',
       'api::career-position.career-position'
     >;
+    originalPublishedAt: Schema.Attribute.DateTime;
+    postalCode: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
     seo: Schema.Attribute.Component<'shared.seo', false> &
       Schema.Attribute.SetPluginOptions<{
@@ -755,6 +772,7 @@ export interface ApiCareerPositionCareerPosition
           localized: true;
         };
       }>;
+    streetAddress: Schema.Attribute.String;
     tags: Schema.Attribute.Relation<'manyToMany', 'api::tag.tag'> &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
@@ -777,6 +795,7 @@ export interface ApiCareerPositionCareerPosition
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    validThrough: Schema.Attribute.DateTime;
   };
 }
 
