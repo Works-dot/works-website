@@ -825,6 +825,9 @@ export interface SharedSeo extends Struct.ComponentSchema {
         i18n: {
           localized: true;
         };
+      }> &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 160;
       }>;
     metaTitle: Schema.Attribute.String &
       Schema.Attribute.Required &

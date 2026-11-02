@@ -1,5 +1,6 @@
 import { ArrowClockwise } from '@strapi/icons';
 import { AbbreviationRichText } from './components/AbbreviationRichText';
+import { EditorialText } from './components/EditorialText';
 
 declare const window: {
   localStorage: Storage;
@@ -28,6 +29,7 @@ export default {
   },
   register(app: any) {
     app.addFields({ type: 'richtext', Component: AbbreviationRichText });
+    app.addFields({ type: 'text', Component: EditorialText });
     app.widgets.register({
       icon: ArrowClockwise,
       title: {

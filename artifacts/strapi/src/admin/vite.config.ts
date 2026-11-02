@@ -1,6 +1,8 @@
 import { createRequire } from "node:module";
 import { dirname, join } from "node:path";
 import { existsSync } from "node:fs";
+import { fileURLToPath } from "node:url";
+import { editorialAdapter } from "./editorial-adapter";
 
 export default (config) => {
   const require = createRequire(import.meta.url);
@@ -13,6 +15,7 @@ export default (config) => {
   config.resolve.alias = Array.isArray(config.resolve.alias)
     ? [...config.resolve.alias, alias]
     : { ...config.resolve.alias, [alias.find]: alias.replacement };
+  config.plugins = [...(config.plugins || []), editorialAdapter(fileURLToPath(new URL("./components/ImageEditorialFields.tsx", import.meta.url)))];
   config.server = config.server || {};
   config.server.allowedHosts = true;
   config.server.hmr = false;

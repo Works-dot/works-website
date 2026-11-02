@@ -1,3 +1,4 @@
+import { normalizeEditorialContent } from "./editorial/content";
 const isTitle = (key: string) => /^(title|name|heading|slug|metaTitle|metaDescription|seoTitle|seoDescription)$/.test(key) ||
   /(?:Title|Heading)$/.test(key);
 
@@ -25,6 +26,7 @@ export function registerContentTrimming(strapi: any) {
   strapi.documents.use(async (ctx: any, next: () => Promise<any>) => {
     if (["create", "update"].includes(ctx.action) && ctx.uid.startsWith("api::") && ctx.params?.data) {
       ctx.params.data = trimContentFields(ctx.params.data, strapi.contentTypes[ctx.uid], strapi.components);
+      ctx.params.data = normalizeEditorialContent(ctx.params.data, strapi.contentTypes[ctx.uid], strapi.components);
     }
     return next();
   });

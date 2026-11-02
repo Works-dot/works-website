@@ -49,7 +49,7 @@ export function Clients() {
               {client.logo ? (
                 <ManagedImage sizes="160px"
                   src={client.logo}
-                  alt={accessibleTermLabel(client.logoAlt || client.name, locale)}
+                  alt={accessibleTermLabel(client.logoAlt ?? client.name, locale)}
                   loading="lazy"
                   className="h-10 max-w-[70%] w-auto object-contain"
                 />

@@ -41,7 +41,7 @@ export function ProjectCard({ slug, title, tags, description, image, imageAlt, r
         <div className="w-full aspect-[4/3] relative overflow-hidden flex items-center justify-center">
           <ResponsiveImage
             src={image}
-            alt={accessibleTermLabel(imageAlt || title, locale)}
+            alt={accessibleTermLabel(imageAlt ?? title, locale)}
             className="relative z-10 w-full h-full object-contain"
             pictureClassName="block w-full h-full"
             loading={priority ? "eager" : "lazy"}

@@ -40,7 +40,7 @@ export function BlogCard({ slug, title, excerpt, date, image, imageAlt, index, a
         <div className="w-full aspect-[4/3] relative overflow-hidden">
           <ResponsiveImage
             src={image}
-            alt={accessibleTermLabel(imageAlt || title, locale)}
+            alt={accessibleTermLabel(imageAlt ?? title, locale)}
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
             pictureClassName="block w-full h-full"
             loading={priority ? "eager" : "lazy"}

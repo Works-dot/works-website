@@ -118,7 +118,7 @@ export default function About() {
                       {member.image ? (
                         <ResponsiveImage
                           src={member.image}
-                          alt={accessibleTermLabel(member.imageAlt || member.name || "", locale)}
+                          alt={accessibleTermLabel(member.imageAlt ?? member.name ?? "", locale)}
                            loading="lazy"
                            pictureClassName="block w-full h-full"
                            sizes="(min-width: 768px) 20vw, 50vw"

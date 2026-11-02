@@ -579,7 +579,7 @@ async function uploadSvgIcon(strapi: any, filePath: string, name: string): Promi
       .plugin("upload")
       .service("upload")
       .upload({
-        data: {},
+        data: { fileInfo: { decorative: true, alternativeText: "" } },
         files: fileData,
       });
     return uploaded?.[0]?.id || null;
@@ -2621,7 +2621,7 @@ async function uploadGalleryImage(
       .service("upload")
       .upload({
         data: {
-          fileInfo: { name: fileName, alternativeText: image.alt, caption: image.alt },
+          fileInfo: { name: fileName, alternativeText: image.alt, caption: image.alt, decorative: !image.alt.trim() },
         },
         files: {
           filepath: tmpPath,

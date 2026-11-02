@@ -14,6 +14,7 @@ export default {
     },
     "metaDescription": {
       "type": "text",
+      "maxLength": 160,
       "pluginOptions": { "i18n": { "localized": true } }
     },
     "ogImage": {

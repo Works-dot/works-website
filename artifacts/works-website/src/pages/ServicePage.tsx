@@ -505,7 +505,7 @@ function RelatedProjectCard({ p, i, animated = true }: { p: Project; i: number; 
         <div className="w-full aspect-[4/3] relative overflow-hidden bg-works-light">
           <ResponsiveImage
             src={p.image}
-            alt={accessibleTermLabel(p.imageAlt || p.title, locale)}
+            alt={accessibleTermLabel(p.imageAlt ?? p.title, locale)}
             loading="lazy"
             pictureClassName="block w-full h-full"
             sizes="(min-width: 1024px) 33vw, 50vw"
