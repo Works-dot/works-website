@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "vite --config vite.config.ts --host 0.0.0.0",
     "prebuild": "node scripts/optimize-images.mjs",
-    "build": "vite build --config vite.config.ts && vite build --config vite.config.ts --ssr src/entry-server.tsx --outDir dist/server && node scripts/prerender.mjs",
+    "build": "vite build --config vite.config.ts && vite build --config vite.config.ts --ssr src/entry-server.tsx --outDir dist/server && node scripts/prerender.mjs && node scripts/prepare-cache.mjs",
+    "test:cache": "node --test scripts/cache.test.mjs",
     "serve": "vite preview --config vite.config.ts --host 0.0.0.0",
     "start": "node server.mjs",
     "test:production": "playwright install chromium && VITE_STRAPI_ENABLED=false pnpm run build && node scripts/test-production.mjs",

@@ -117,7 +117,11 @@ async function writeVariants({
   const intrinsicHeight = swapped ? metadata.width : (metadata.pageHeight || metadata.height);
   // Preserve SVG and animation bytes; still record their intrinsic dimensions.
   if (!isRasterSource(source) || (metadata.pages && metadata.pages > 1)) {
-    manifest[key] = { source, src: source, srcSet: "", width: intrinsicWidth, height: intrinsicHeight };
+    const hash = createHash("sha256").update(bytes).digest("hex").slice(0, 20);
+    const filename = `${safeName(path.basename(source, path.extname(source)))}-${hash}${path.extname(source)}`;
+    await fs.mkdir(path.join(mediaDir, "originals"), { recursive: true });
+    await fs.writeFile(path.join(mediaDir, "originals", filename), bytes);
+    manifest[key] = { source, src: `/media/originals/${filename}`, srcSet: "", width: intrinsicWidth, height: intrinsicHeight };
     return false;
   }
 
@@ -221,9 +225,11 @@ async function main() {
     "",
   ].join("\n");
   await fs.writeFile(manifestPath, manifestSource);
-  const used = new Set(Object.values(manifest).flatMap(entry =>
-    entry.srcSet.split(", ").filter(Boolean).map(candidate => path.basename(candidate.split(" ")[0]))));
-  for (const subdir of ["uploads", "local"]) {
+  const used = new Set(Object.values(manifest).flatMap(entry => [
+    path.basename(entry.src),
+    ...entry.srcSet.split(", ").filter(Boolean).map(candidate => path.basename(candidate.split(" ")[0])),
+  ]));
+  for (const subdir of ["uploads", "local", "originals"]) {
     const directory = path.join(mediaDir, subdir);
     for (const filename of await fs.readdir(directory).catch(() => [])) {
       if (!used.has(filename)) await fs.unlink(path.join(directory, filename));

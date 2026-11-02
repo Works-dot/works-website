@@ -3,6 +3,7 @@ import { createProxyMiddleware } from "http-proxy-middleware";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import fs from "node:fs";
+import { readCacheManifest, staticCachePolicy, HTML_CACHE } from "./cache-policy.mjs";
 import { addLegacyRedirects, readLegacyRedirects } from "./legacy-redirects.mjs";
 import { pendingLegalRedirect } from "./legal-redirects.mjs";
 import { addUrlNormalization } from "./url-normalization.mjs";
@@ -236,10 +237,15 @@ function addApiRoutes(app) {
 
 function addStaticRoutes(app, distDir) {
   const publicDir = path.resolve(distDir);
-  const immutableDirectories = [
-    `${path.join(publicDir, "assets")}${path.sep}`,
-    `${path.join(publicDir, "media")}${path.sep}`,
-  ];
+  const cacheManifest = readCacheManifest(publicDir);
+  app.use((req, res, next) => {
+    const destination = cacheManifest.redirects?.[req.path];
+    if (destination && ["GET", "HEAD"].includes(req.method)) {
+      res.setHeader("Cache-Control", "no-cache");
+      return res.redirect(307, destination);
+    }
+    next();
+  });
   const strapiTarget = process.env.STRAPI_URL || process.env.STRAPI_PROXY_TARGET;
   if (strapiTarget) {
     app.use(
@@ -259,20 +265,7 @@ function addStaticRoutes(app, distDir) {
       index: "index.html",
       redirect: false,
       setHeaders: (res, filePath) => {
-        // A Vite hash assetjei (dist/public/assets/*) örökre cache-elhetők;
-        // a generált, content-hashed média (dist/public/media/*) is;
-        // a HTML és a generált sitemap/robots mindig revalidálódjon.
-        if (immutableDirectories.some((directory) => filePath.startsWith(directory))) {
-          res.setHeader("Cache-Control", "public, max-age=31536000, immutable");
-        } else if (
-          filePath.endsWith(".html") ||
-          filePath.endsWith("sitemap.xml") ||
-          filePath.endsWith("robots.txt")
-        ) {
-          res.setHeader("Cache-Control", "no-cache");
-        } else {
-          res.setHeader("Cache-Control", "public, max-age=3600");
-        }
+        res.setHeader("Cache-Control", staticCachePolicy(filePath, publicDir, cacheManifest));
       },
     }),
   );
@@ -285,10 +278,11 @@ function addStaticRoutes(app, distDir) {
 
   const notFoundPage = path.join(distDir, "404.html");
   app.get(/.*/, (req, res) => {
-    res.setHeader("Cache-Control", "no-cache");
+    res.setHeader("Cache-Control", cacheManifest.version === 1 ? HTML_CACHE : "no-cache");
     const candidate = path.join(distDir, req.path, "index.html");
     res.sendFile(candidate, (error) => {
       if (!error) return;
+      res.setHeader("Cache-Control", "no-store");
 
       // Ismeretlen cím: 404-es státusz + 404-es oldal (ne a főoldal 200-zal).
       if (fs.existsSync(notFoundPage)) {
@@ -312,6 +306,8 @@ export function createApp({
   const readinessResult = readinessCheck({ distDir, canonicalOrigin });
 
   app.disable("x-powered-by");
+  // Include malformed JSON and OPTIONS responses, not only successful POSTs.
+  app.use("/api", (_req, res, next) => { setNoStore(res); next(); });
   app.use(express.json({ limit: "10kb" }));
   app.use(pendingLegalRedirect);
   addUrlNormalization(app, canonicalOrigin, legacyRedirects);
@@ -329,6 +325,7 @@ export function createApp({
   // all unexpected failures JSON and deliberately free of implementation
   // details.
   app.use((error, req, res, _next) => {
+    setNoStore(res);
     setApiCors(req, res);
     const parserError = classifyBodyParserError(error);
     if (parserError) {

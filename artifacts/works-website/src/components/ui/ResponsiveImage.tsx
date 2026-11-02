@@ -24,7 +24,7 @@ export interface ResponsiveImageProps
 /** No wrapper: preserves flex/grid/absolute positioning of existing img nodes. */
 export function ManagedImage({ src, sizes = "100vw", loading = "lazy", ...props }: ResponsiveImageProps) {
   const image = getResponsiveImageSource(src);
-  return <img {...props} src={image?.srcSet ? image.src : src}
+  return <img {...props} src={image?.src || src}
     srcSet={image?.srcSet || undefined} sizes={image?.srcSet ? sizes : undefined}
     width={image?.width ?? props.width} height={image?.height ?? props.height}
     loading={loading} decoding="async" />;
@@ -112,7 +112,7 @@ export function ResponsiveImage({
       <Source source={src} sizes={sizes} />
       <img
         {...props}
-        src={responsive?.srcSet ? responsive.src : src}
+        src={responsive?.src || src}
         srcSet={responsive?.srcSet || undefined}
         sizes={responsive?.srcSet ? sizes : undefined}
         alt={alt}

@@ -25,7 +25,7 @@ const imageManifest: Record<string, OptimizedImageManifestEntry> = {
   },
   "/strapi/uploads/Alerant_logoanim_1280x896_a84a03f953.gif": {
     "source": "/strapi/uploads/Alerant_logoanim_1280x896_a84a03f953.gif",
-    "src": "/strapi/uploads/Alerant_logoanim_1280x896_a84a03f953.gif",
+    "src": "/media/originals/Alerant_logoanim_1280x896_a84a03f953-38cfe7b8ac308ccee0b3.gif",
     "srcSet": "",
     "width": 1280,
     "height": 896
@@ -732,427 +732,427 @@ const imageManifest: Record<string, OptimizedImageManifestEntry> = {
   },
   "/strapi/uploads/icon_AI_bb7b97165a.svg": {
     "source": "/strapi/uploads/icon_AI_bb7b97165a.svg",
-    "src": "/strapi/uploads/icon_AI_bb7b97165a.svg",
+    "src": "/media/originals/icon_AI_bb7b97165a-0625906e4442ba941ab3.svg",
     "srcSet": "",
     "width": 32,
     "height": 32
   },
   "/strapi/uploads/icon_AI_products_Binary_80c174434f.svg": {
     "source": "/strapi/uploads/icon_AI_products_Binary_80c174434f.svg",
-    "src": "/strapi/uploads/icon_AI_products_Binary_80c174434f.svg",
+    "src": "/media/originals/icon_AI_products_Binary_80c174434f-3a6f75ab616504696ae1.svg",
     "srcSet": "",
     "width": 32,
     "height": 32
   },
   "/strapi/uploads/icon_AI_products_Browsers_469eed5294.svg": {
     "source": "/strapi/uploads/icon_AI_products_Browsers_469eed5294.svg",
-    "src": "/strapi/uploads/icon_AI_products_Browsers_469eed5294.svg",
+    "src": "/media/originals/icon_AI_products_Browsers_469eed5294-566a592d2402e5d23f50.svg",
     "srcSet": "",
     "width": 32,
     "height": 32
   },
   "/strapi/uploads/icon_AI_products_Chartbar_46e87b1af5.svg": {
     "source": "/strapi/uploads/icon_AI_products_Chartbar_46e87b1af5.svg",
-    "src": "/strapi/uploads/icon_AI_products_Chartbar_46e87b1af5.svg",
+    "src": "/media/originals/icon_AI_products_Chartbar_46e87b1af5-76b3e63b14638ebe66c0.svg",
     "srcSet": "",
     "width": 32,
     "height": 32
   },
   "/strapi/uploads/icon_AI_products_Check_Circle_dbce18958e.svg": {
     "source": "/strapi/uploads/icon_AI_products_Check_Circle_dbce18958e.svg",
-    "src": "/strapi/uploads/icon_AI_products_Check_Circle_dbce18958e.svg",
+    "src": "/media/originals/icon_AI_products_Check_Circle_dbce18958e-f094e8232a9d12cf2b07.svg",
     "srcSet": "",
     "width": 32,
     "height": 32
   },
   "/strapi/uploads/icon_AI_products_Fast_Forward_af58f5755f.svg": {
     "source": "/strapi/uploads/icon_AI_products_Fast_Forward_af58f5755f.svg",
-    "src": "/strapi/uploads/icon_AI_products_Fast_Forward_af58f5755f.svg",
+    "src": "/media/originals/icon_AI_products_Fast_Forward_af58f5755f-830f09eb9ce9a04a394e.svg",
     "srcSet": "",
     "width": 32,
     "height": 32
   },
   "/strapi/uploads/icon_AI_products_Hand_Arrow_Up_0fc570ef3a.svg": {
     "source": "/strapi/uploads/icon_AI_products_Hand_Arrow_Up_0fc570ef3a.svg",
-    "src": "/strapi/uploads/icon_AI_products_Hand_Arrow_Up_0fc570ef3a.svg",
+    "src": "/media/originals/icon_AI_products_Hand_Arrow_Up_0fc570ef3a-f564708f88c3fbf475b3.svg",
     "srcSet": "",
     "width": 32,
     "height": 32
   },
   "/strapi/uploads/icon_AI_products_List_Checks_7e67643599.svg": {
     "source": "/strapi/uploads/icon_AI_products_List_Checks_7e67643599.svg",
-    "src": "/strapi/uploads/icon_AI_products_List_Checks_7e67643599.svg",
+    "src": "/media/originals/icon_AI_products_List_Checks_7e67643599-444e079738c5ae8ed049.svg",
     "srcSet": "",
     "width": 32,
     "height": 32
   },
   "/strapi/uploads/icon_AI_products_Machine_learning_643fc663e9.svg": {
     "source": "/strapi/uploads/icon_AI_products_Machine_learning_643fc663e9.svg",
-    "src": "/strapi/uploads/icon_AI_products_Machine_learning_643fc663e9.svg",
+    "src": "/media/originals/icon_AI_products_Machine_learning_643fc663e9-eac484ec69f6597eb11b.svg",
     "srcSet": "",
     "width": 32,
     "height": 32
   },
   "/strapi/uploads/icon_AI_products_Robot_313c9287a4.svg": {
     "source": "/strapi/uploads/icon_AI_products_Robot_313c9287a4.svg",
-    "src": "/strapi/uploads/icon_AI_products_Robot_313c9287a4.svg",
+    "src": "/media/originals/icon_AI_products_Robot_313c9287a4-68d33e3fa53d9e3dda24.svg",
     "srcSet": "",
     "width": 32,
     "height": 32
   },
   "/strapi/uploads/icon_AI_products_Trend_Down_c9b1005599.svg": {
     "source": "/strapi/uploads/icon_AI_products_Trend_Down_c9b1005599.svg",
-    "src": "/strapi/uploads/icon_AI_products_Trend_Down_c9b1005599.svg",
+    "src": "/media/originals/icon_AI_products_Trend_Down_c9b1005599-b2e7142319e7579c623e.svg",
     "srcSet": "",
     "width": 32,
     "height": 32
   },
   "/strapi/uploads/icon_Accessibility_83aca1c92a.svg": {
     "source": "/strapi/uploads/icon_Accessibility_83aca1c92a.svg",
-    "src": "/strapi/uploads/icon_Accessibility_83aca1c92a.svg",
+    "src": "/media/originals/icon_Accessibility_83aca1c92a-5dd62a56dd08739bf1a6.svg",
     "srcSet": "",
     "width": 32,
     "height": 32
   },
   "/strapi/uploads/icon_Arrow_Square_Right_e7a703214d.svg": {
     "source": "/strapi/uploads/icon_Arrow_Square_Right_e7a703214d.svg",
-    "src": "/strapi/uploads/icon_Arrow_Square_Right_e7a703214d.svg",
+    "src": "/media/originals/icon_Arrow_Square_Right_e7a703214d-40293b2ed12a0c8f11e8.svg",
     "srcSet": "",
     "width": 32,
     "height": 32
   },
   "/strapi/uploads/icon_Arrows_Counter_Clockwise_c3ff8f68d0.svg": {
     "source": "/strapi/uploads/icon_Arrows_Counter_Clockwise_c3ff8f68d0.svg",
-    "src": "/strapi/uploads/icon_Arrows_Counter_Clockwise_c3ff8f68d0.svg",
+    "src": "/media/originals/icon_Arrows_Counter_Clockwise_c3ff8f68d0-1c03ba71222e49c9a547.svg",
     "srcSet": "",
     "width": 32,
     "height": 32
   },
   "/strapi/uploads/icon_Brain_c1e81dcf47.svg": {
     "source": "/strapi/uploads/icon_Brain_c1e81dcf47.svg",
-    "src": "/strapi/uploads/icon_Brain_c1e81dcf47.svg",
+    "src": "/media/originals/icon_Brain_c1e81dcf47-80dde7c4be748b5ae6ae.svg",
     "srcSet": "",
     "width": 32,
     "height": 32
   },
   "/strapi/uploads/icon_Chart_Line_Up_6b2e645c44.svg": {
     "source": "/strapi/uploads/icon_Chart_Line_Up_6b2e645c44.svg",
-    "src": "/strapi/uploads/icon_Chart_Line_Up_6b2e645c44.svg",
+    "src": "/media/originals/icon_Chart_Line_Up_6b2e645c44-1276b8e5c52c1fbbed16.svg",
     "srcSet": "",
     "width": 32,
     "height": 32
   },
   "/strapi/uploads/icon_Chart_Polar_4050426fc5.svg": {
     "source": "/strapi/uploads/icon_Chart_Polar_4050426fc5.svg",
-    "src": "/strapi/uploads/icon_Chart_Polar_4050426fc5.svg",
+    "src": "/media/originals/icon_Chart_Polar_4050426fc5-1d68ac95155c2b0859ae.svg",
     "srcSet": "",
     "width": 32,
     "height": 32
   },
   "/strapi/uploads/icon_Chats_Circle_6984ea23f3.svg": {
     "source": "/strapi/uploads/icon_Chats_Circle_6984ea23f3.svg",
-    "src": "/strapi/uploads/icon_Chats_Circle_6984ea23f3.svg",
+    "src": "/media/originals/icon_Chats_Circle_6984ea23f3-e43f84a94d7da7d3e1f2.svg",
     "srcSet": "",
     "width": 32,
     "height": 32
   },
   "/strapi/uploads/icon_Check_Fat_64ab6c24b4.svg": {
     "source": "/strapi/uploads/icon_Check_Fat_64ab6c24b4.svg",
-    "src": "/strapi/uploads/icon_Check_Fat_64ab6c24b4.svg",
+    "src": "/media/originals/icon_Check_Fat_64ab6c24b4-c63adc5a1c949bbaf526.svg",
     "srcSet": "",
     "width": 32,
     "height": 32
   },
   "/strapi/uploads/icon_Clipboard_Text_cc213668ec.svg": {
     "source": "/strapi/uploads/icon_Clipboard_Text_cc213668ec.svg",
-    "src": "/strapi/uploads/icon_Clipboard_Text_cc213668ec.svg",
+    "src": "/media/originals/icon_Clipboard_Text_cc213668ec-9d8966524d17c570178a.svg",
     "srcSet": "",
     "width": 32,
     "height": 32
   },
   "/strapi/uploads/icon_Code_3c0d1b9d20.svg": {
     "source": "/strapi/uploads/icon_Code_3c0d1b9d20.svg",
-    "src": "/strapi/uploads/icon_Code_3c0d1b9d20.svg",
+    "src": "/media/originals/icon_Code_3c0d1b9d20-ea8be6aeaaf3bd1b3010.svg",
     "srcSet": "",
     "width": 32,
     "height": 32
   },
   "/strapi/uploads/icon_Crosshair_486406ad1f.svg": {
     "source": "/strapi/uploads/icon_Crosshair_486406ad1f.svg",
-    "src": "/strapi/uploads/icon_Crosshair_486406ad1f.svg",
+    "src": "/media/originals/icon_Crosshair_486406ad1f-8b6986af6e5710e58975.svg",
     "srcSet": "",
     "width": 32,
     "height": 32
   },
   "/strapi/uploads/icon_Cursor_Click_fb4f4bee3f.svg": {
     "source": "/strapi/uploads/icon_Cursor_Click_fb4f4bee3f.svg",
-    "src": "/strapi/uploads/icon_Cursor_Click_fb4f4bee3f.svg",
+    "src": "/media/originals/icon_Cursor_Click_fb4f4bee3f-211e0c0abc5467bf682e.svg",
     "srcSet": "",
     "width": 32,
     "height": 32
   },
   "/strapi/uploads/icon_Diamonds_Four_94be235b15.svg": {
     "source": "/strapi/uploads/icon_Diamonds_Four_94be235b15.svg",
-    "src": "/strapi/uploads/icon_Diamonds_Four_94be235b15.svg",
+    "src": "/media/originals/icon_Diamonds_Four_94be235b15-2c9d6e793fcb02da680d.svg",
     "srcSet": "",
     "width": 32,
     "height": 32
   },
   "/strapi/uploads/icon_Digital_aa66329ace.svg": {
     "source": "/strapi/uploads/icon_Digital_aa66329ace.svg",
-    "src": "/strapi/uploads/icon_Digital_aa66329ace.svg",
+    "src": "/media/originals/icon_Digital_aa66329ace-b8c2bde04ac92f614645.svg",
     "srcSet": "",
     "width": 32,
     "height": 32
   },
   "/strapi/uploads/icon_File_Magnifying_Glass_8f44fc5928.svg": {
     "source": "/strapi/uploads/icon_File_Magnifying_Glass_8f44fc5928.svg",
-    "src": "/strapi/uploads/icon_File_Magnifying_Glass_8f44fc5928.svg",
+    "src": "/media/originals/icon_File_Magnifying_Glass_8f44fc5928-5d79c682540f52b82899.svg",
     "srcSet": "",
     "width": 32,
     "height": 32
   },
   "/strapi/uploads/icon_Hand_Tap_fd9b9edeaa.svg": {
     "source": "/strapi/uploads/icon_Hand_Tap_fd9b9edeaa.svg",
-    "src": "/strapi/uploads/icon_Hand_Tap_fd9b9edeaa.svg",
+    "src": "/media/originals/icon_Hand_Tap_fd9b9edeaa-1dd60876f2d7fead005b.svg",
     "srcSet": "",
     "width": 32,
     "height": 32
   },
   "/strapi/uploads/icon_Hand_Withdraw_18076634f9.svg": {
     "source": "/strapi/uploads/icon_Hand_Withdraw_18076634f9.svg",
-    "src": "/strapi/uploads/icon_Hand_Withdraw_18076634f9.svg",
+    "src": "/media/originals/icon_Hand_Withdraw_18076634f9-b178e20d8d79ff358b77.svg",
     "srcSet": "",
     "width": 32,
     "height": 32
   },
   "/strapi/uploads/icon_Layout_e20efe0ff3.svg": {
     "source": "/strapi/uploads/icon_Layout_e20efe0ff3.svg",
-    "src": "/strapi/uploads/icon_Layout_e20efe0ff3.svg",
+    "src": "/media/originals/icon_Layout_e20efe0ff3-9ab1db5b6b3d2fecb489.svg",
     "srcSet": "",
     "width": 32,
     "height": 32
   },
   "/strapi/uploads/icon_List_Dashes_44f0d7b104.svg": {
     "source": "/strapi/uploads/icon_List_Dashes_44f0d7b104.svg",
-    "src": "/strapi/uploads/icon_List_Dashes_44f0d7b104.svg",
+    "src": "/media/originals/icon_List_Dashes_44f0d7b104-9748e945703801516ce6.svg",
     "srcSet": "",
     "width": 32,
     "height": 32
   },
   "/strapi/uploads/icon_Paint_Roller_a22c58a181.svg": {
     "source": "/strapi/uploads/icon_Paint_Roller_a22c58a181.svg",
-    "src": "/strapi/uploads/icon_Paint_Roller_a22c58a181.svg",
+    "src": "/media/originals/icon_Paint_Roller_a22c58a181-3a230bba5de5a6bb8fae.svg",
     "srcSet": "",
     "width": 32,
     "height": 32
   },
   "/strapi/uploads/icon_Path_a978864a90.svg": {
     "source": "/strapi/uploads/icon_Path_a978864a90.svg",
-    "src": "/strapi/uploads/icon_Path_a978864a90.svg",
+    "src": "/media/originals/icon_Path_a978864a90-a1d94ce01825bab36133.svg",
     "srcSet": "",
     "width": 32,
     "height": 32
   },
   "/strapi/uploads/icon_Presentation_b5a5833f57.svg": {
     "source": "/strapi/uploads/icon_Presentation_b5a5833f57.svg",
-    "src": "/strapi/uploads/icon_Presentation_b5a5833f57.svg",
+    "src": "/media/originals/icon_Presentation_b5a5833f57-b65d058a16dfb6c02b99.svg",
     "srcSet": "",
     "width": 32,
     "height": 32
   },
   "/strapi/uploads/icon_Recycle_57e2893515.svg": {
     "source": "/strapi/uploads/icon_Recycle_57e2893515.svg",
-    "src": "/strapi/uploads/icon_Recycle_57e2893515.svg",
+    "src": "/media/originals/icon_Recycle_57e2893515-898ef91cca4df5a2c4ea.svg",
     "srcSet": "",
     "width": 32,
     "height": 32
   },
   "/strapi/uploads/icon_Rocket_9d2a1d2fcc.svg": {
     "source": "/strapi/uploads/icon_Rocket_9d2a1d2fcc.svg",
-    "src": "/strapi/uploads/icon_Rocket_9d2a1d2fcc.svg",
+    "src": "/media/originals/icon_Rocket_9d2a1d2fcc-906e89c8a66f4ad675a1.svg",
     "srcSet": "",
     "width": 32,
     "height": 32
   },
   "/strapi/uploads/icon_SD_6be19cfb5d.svg": {
     "source": "/strapi/uploads/icon_SD_6be19cfb5d.svg",
-    "src": "/strapi/uploads/icon_SD_6be19cfb5d.svg",
+    "src": "/media/originals/icon_SD_6be19cfb5d-ef5fcb0d6c170650f84c.svg",
     "srcSet": "",
     "width": 32,
     "height": 32
   },
   "/strapi/uploads/icon_SD_Arrow_Fat_Rightk_874a79f47a.svg": {
     "source": "/strapi/uploads/icon_SD_Arrow_Fat_Rightk_874a79f47a.svg",
-    "src": "/strapi/uploads/icon_SD_Arrow_Fat_Rightk_874a79f47a.svg",
+    "src": "/media/originals/icon_SD_Arrow_Fat_Rightk_874a79f47a-220fd82720a2ee1a8fa8.svg",
     "srcSet": "",
     "width": 32,
     "height": 32
   },
   "/strapi/uploads/icon_SD_Eye_63a71f004a.svg": {
     "source": "/strapi/uploads/icon_SD_Eye_63a71f004a.svg",
-    "src": "/strapi/uploads/icon_SD_Eye_63a71f004a.svg",
+    "src": "/media/originals/icon_SD_Eye_63a71f004a-3f65dc8ab640cb06125c.svg",
     "srcSet": "",
     "width": 32,
     "height": 32
   },
   "/strapi/uploads/icon_SD_Flow_Arrow_1408a1f036.svg": {
     "source": "/strapi/uploads/icon_SD_Flow_Arrow_1408a1f036.svg",
-    "src": "/strapi/uploads/icon_SD_Flow_Arrow_1408a1f036.svg",
+    "src": "/media/originals/icon_SD_Flow_Arrow_1408a1f036-2fdcf8e92a6405fb6d5a.svg",
     "srcSet": "",
     "width": 32,
     "height": 32
   },
   "/strapi/uploads/icon_SD_Images_4165361c9e.svg": {
     "source": "/strapi/uploads/icon_SD_Images_4165361c9e.svg",
-    "src": "/strapi/uploads/icon_SD_Images_4165361c9e.svg",
+    "src": "/media/originals/icon_SD_Images_4165361c9e-616828edc9b3f6b8c7d9.svg",
     "srcSet": "",
     "width": 32,
     "height": 32
   },
   "/strapi/uploads/icon_SD_List_Checks_d571bcde9e.svg": {
     "source": "/strapi/uploads/icon_SD_List_Checks_d571bcde9e.svg",
-    "src": "/strapi/uploads/icon_SD_List_Checks_d571bcde9e.svg",
+    "src": "/media/originals/icon_SD_List_Checks_d571bcde9e-ba6595b6ffb846cc4d1f.svg",
     "srcSet": "",
     "width": 32,
     "height": 32
   },
   "/strapi/uploads/icon_SD_Path_08109992f3.svg": {
     "source": "/strapi/uploads/icon_SD_Path_08109992f3.svg",
-    "src": "/strapi/uploads/icon_SD_Path_08109992f3.svg",
+    "src": "/media/originals/icon_SD_Path_08109992f3-a1d94ce01825bab36133.svg",
     "srcSet": "",
     "width": 32,
     "height": 32
   },
   "/strapi/uploads/icon_SD_Rocket_Launch_becdbbed44.svg": {
     "source": "/strapi/uploads/icon_SD_Rocket_Launch_becdbbed44.svg",
-    "src": "/strapi/uploads/icon_SD_Rocket_Launch_becdbbed44.svg",
+    "src": "/media/originals/icon_SD_Rocket_Launch_becdbbed44-3250db266e2300dee332.svg",
     "srcSet": "",
     "width": 32,
     "height": 32
   },
   "/strapi/uploads/icon_SD_Stack_ccb6c19d40.svg": {
     "source": "/strapi/uploads/icon_SD_Stack_ccb6c19d40.svg",
-    "src": "/strapi/uploads/icon_SD_Stack_ccb6c19d40.svg",
+    "src": "/media/originals/icon_SD_Stack_ccb6c19d40-0b0cf618f605332fbcb9.svg",
     "srcSet": "",
     "width": 32,
     "height": 32
   },
   "/strapi/uploads/icon_SD_Users_Three_49acf33e3b.svg": {
     "source": "/strapi/uploads/icon_SD_Users_Three_49acf33e3b.svg",
-    "src": "/strapi/uploads/icon_SD_Users_Three_49acf33e3b.svg",
+    "src": "/media/originals/icon_SD_Users_Three_49acf33e3b-c4f2fa381b144f198018.svg",
     "srcSet": "",
     "width": 32,
     "height": 32
   },
   "/strapi/uploads/icon_Scales_add67f9711.svg": {
     "source": "/strapi/uploads/icon_Scales_add67f9711.svg",
-    "src": "/strapi/uploads/icon_Scales_add67f9711.svg",
+    "src": "/media/originals/icon_Scales_add67f9711-547d0190a08752759bc0.svg",
     "srcSet": "",
     "width": 32,
     "height": 32
   },
   "/strapi/uploads/icon_Scissors_6ce1fb592d.svg": {
     "source": "/strapi/uploads/icon_Scissors_6ce1fb592d.svg",
-    "src": "/strapi/uploads/icon_Scissors_6ce1fb592d.svg",
+    "src": "/media/originals/icon_Scissors_6ce1fb592d-980bca1292ffe4c7fb6e.svg",
     "srcSet": "",
     "width": 32,
     "height": 32
   },
   "/strapi/uploads/icon_Seal_Check_6f1f41c457.svg": {
     "source": "/strapi/uploads/icon_Seal_Check_6f1f41c457.svg",
-    "src": "/strapi/uploads/icon_Seal_Check_6f1f41c457.svg",
+    "src": "/media/originals/icon_Seal_Check_6f1f41c457-5825406afd188e0ff17b.svg",
     "srcSet": "",
     "width": 32,
     "height": 32
   },
   "/strapi/uploads/icon_Service_AI_generate_d3664c35c3.svg": {
     "source": "/strapi/uploads/icon_Service_AI_generate_d3664c35c3.svg",
-    "src": "/strapi/uploads/icon_Service_AI_generate_d3664c35c3.svg",
+    "src": "/media/originals/icon_Service_AI_generate_d3664c35c3-b94779a75afcc8451848.svg",
     "srcSet": "",
     "width": 32,
     "height": 32
   },
   "/strapi/uploads/icon_Shield_Warning_e9de9d1e1f.svg": {
     "source": "/strapi/uploads/icon_Shield_Warning_e9de9d1e1f.svg",
-    "src": "/strapi/uploads/icon_Shield_Warning_e9de9d1e1f.svg",
+    "src": "/media/originals/icon_Shield_Warning_e9de9d1e1f-3bcffa14eb5d4d2b1cd8.svg",
     "srcSet": "",
     "width": 32,
     "height": 32
   },
   "/strapi/uploads/icon_Signpost_7efdb5561c.svg": {
     "source": "/strapi/uploads/icon_Signpost_7efdb5561c.svg",
-    "src": "/strapi/uploads/icon_Signpost_7efdb5561c.svg",
+    "src": "/media/originals/icon_Signpost_7efdb5561c-b9201e861e82fe4f5de2.svg",
     "srcSet": "",
     "width": 32,
     "height": 32
   },
   "/strapi/uploads/icon_Slideshow_36bab31f99.svg": {
     "source": "/strapi/uploads/icon_Slideshow_36bab31f99.svg",
-    "src": "/strapi/uploads/icon_Slideshow_36bab31f99.svg",
+    "src": "/media/originals/icon_Slideshow_36bab31f99-61e78edd36243130064d.svg",
     "srcSet": "",
     "width": 32,
     "height": 32
   },
   "/strapi/uploads/icon_Speedometer_9f23201fac.svg": {
     "source": "/strapi/uploads/icon_Speedometer_9f23201fac.svg",
-    "src": "/strapi/uploads/icon_Speedometer_9f23201fac.svg",
+    "src": "/media/originals/icon_Speedometer_9f23201fac-b5fcf4745a7ec4f28068.svg",
     "srcSet": "",
     "width": 32,
     "height": 32
   },
   "/strapi/uploads/icon_Squares_Four_15c6bb1816.svg": {
     "source": "/strapi/uploads/icon_Squares_Four_15c6bb1816.svg",
-    "src": "/strapi/uploads/icon_Squares_Four_15c6bb1816.svg",
+    "src": "/media/originals/icon_Squares_Four_15c6bb1816-bd3d6a99724ec01c1bbf.svg",
     "srcSet": "",
     "width": 32,
     "height": 32
   },
   "/strapi/uploads/icon_Target_3af6af6bc1.svg": {
     "source": "/strapi/uploads/icon_Target_3af6af6bc1.svg",
-    "src": "/strapi/uploads/icon_Target_3af6af6bc1.svg",
+    "src": "/media/originals/icon_Target_3af6af6bc1-6f2b96813445f74a6bcb.svg",
     "srcSet": "",
     "width": 32,
     "height": 32
   },
   "/strapi/uploads/icon_Text_Aa_3636e9edf3.svg": {
     "source": "/strapi/uploads/icon_Text_Aa_3636e9edf3.svg",
-    "src": "/strapi/uploads/icon_Text_Aa_3636e9edf3.svg",
+    "src": "/media/originals/icon_Text_Aa_3636e9edf3-7dcb388014c8b6bc0591.svg",
     "srcSet": "",
     "width": 32,
     "height": 32
   },
   "/strapi/uploads/icon_Tree_Structure_a899010506.svg": {
     "source": "/strapi/uploads/icon_Tree_Structure_a899010506.svg",
-    "src": "/strapi/uploads/icon_Tree_Structure_a899010506.svg",
+    "src": "/media/originals/icon_Tree_Structure_a899010506-d798d7b570dd84d2b40e.svg",
     "srcSet": "",
     "width": 32,
     "height": 32
   },
   "/strapi/uploads/icon_UI_d2f4966660.svg": {
     "source": "/strapi/uploads/icon_UI_d2f4966660.svg",
-    "src": "/strapi/uploads/icon_UI_d2f4966660.svg",
+    "src": "/media/originals/icon_UI_d2f4966660-09a7f2e818798ea37aa4.svg",
     "srcSet": "",
     "width": 32,
     "height": 32
   },
   "/strapi/uploads/icon_UX_bfbb98acc3.svg": {
     "source": "/strapi/uploads/icon_UX_bfbb98acc3.svg",
-    "src": "/strapi/uploads/icon_UX_bfbb98acc3.svg",
+    "src": "/media/originals/icon_UX_bfbb98acc3-8e000040ec9205414801.svg",
     "srcSet": "",
     "width": 32,
     "height": 32
   },
   "/strapi/uploads/icon_User_Circle_Check_3c509792f3.svg": {
     "source": "/strapi/uploads/icon_User_Circle_Check_3c509792f3.svg",
-    "src": "/strapi/uploads/icon_User_Circle_Check_3c509792f3.svg",
+    "src": "/media/originals/icon_User_Circle_Check_3c509792f3-ed9a6d3ae1f62c4efa34.svg",
     "srcSet": "",
     "width": 32,
     "height": 32
   },
   "/strapi/uploads/icon_Users_Four_46db6124cb.svg": {
     "source": "/strapi/uploads/icon_Users_Four_46db6124cb.svg",
-    "src": "/strapi/uploads/icon_Users_Four_46db6124cb.svg",
+    "src": "/media/originals/icon_Users_Four_46db6124cb-2efcd8d09bd80bcbb7c0.svg",
     "srcSet": "",
     "width": 32,
     "height": 32
@@ -1691,14 +1691,14 @@ const imageManifest: Record<string, OptimizedImageManifestEntry> = {
   },
   "/strapi/uploads/sqsp_microinteractions_when_how_and_why_2_e42a99fb72.gif": {
     "source": "/strapi/uploads/sqsp_microinteractions_when_how_and_why_2_e42a99fb72.gif",
-    "src": "/strapi/uploads/sqsp_microinteractions_when_how_and_why_2_e42a99fb72.gif",
+    "src": "/media/originals/sqsp_microinteractions_when_how_and_why_2_e42a99fb72-e3ca09ceb561b11ba016.gif",
     "srcSet": "",
     "width": 928,
     "height": 640
   },
   "/strapi/uploads/sqsp_microinteractions_when_how_and_why_3_cd996e843f.gif": {
     "source": "/strapi/uploads/sqsp_microinteractions_when_how_and_why_3_cd996e843f.gif",
-    "src": "/strapi/uploads/sqsp_microinteractions_when_how_and_why_3_cd996e843f.gif",
+    "src": "/media/originals/sqsp_microinteractions_when_how_and_why_3_cd996e843f-986556cab61be85fd720.gif",
     "srcSet": "",
     "width": 600,
     "height": 450

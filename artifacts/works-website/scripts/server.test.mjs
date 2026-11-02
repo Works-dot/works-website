@@ -47,6 +47,9 @@ function writeFixture({ missingAsset = false } = {}) {
   fs.writeFileSync(path.join(distDir, "en", "index.html"), html("/en"));
   fs.writeFileSync(path.join(distDir, "assets", "site.js"), "console.log('ok')");
   fs.writeFileSync(path.join(distDir, "media", "test-abc123.webp"), "fixture");
+  fs.writeFileSync(path.join(distDir, "asset-cache.json"), JSON.stringify({
+    version: 1, assets: [{ url: "/media/test-abc123.webp" }], redirects: {},
+  }));
   fs.writeFileSync(
     path.join(distDir, "assets", "site.css"),
     missingAsset ? "body { background: url('/assets/missing.png') }" : "body { color: black }",
