@@ -1,3 +1,4 @@
+import { trimContent } from "../src/lib/trim-content.js";
 // NOTE: Railway only redeploys this service when files under
 // artifacts/works-website change — content-only Strapi commits do not
 // trigger a website build (the Strapi-side auto-rebuild handles those).
@@ -81,7 +82,7 @@ async function fetchApi(endpoint) {
     err.status = res.status;
     throw err;
   }
-  return res.json();
+  return trimContent(await res.json());
 }
 
 // In strict (production) mode only a genuine 404 (content simply not created)

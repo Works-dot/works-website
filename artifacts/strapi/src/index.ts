@@ -1,3 +1,4 @@
+import { registerContentTrimming } from "./trim-content-fields";
 import {
   setupWebsiteAutoRebuild,
   markWebsiteAutoRebuildReady,
@@ -2797,6 +2798,7 @@ async function runBootstrapContentMigrations(strapi: any) {
 
 export default {
   register({ strapi }) {
+    registerContentTrimming(strapi);
     registerCareerPublication(strapi);
     registerArticlePublicationDates(strapi);
     registerWebsiteRebuildAdminRoutes(strapi);

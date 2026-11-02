@@ -28,7 +28,9 @@ import { articleDates } from "./lib/article-dates.js";
 import { jobSchema } from "./lib/job-posting.js";
 import { featuredOgImage, ogImageProperties } from "./lib/og-image";
 import type { BlogPost, CareerPosition, Project, Service, TeamMember } from "./lib/strapi";
-import cachedContent from "./data/strapi-cache.json";
+import untrimmedContent from "./data/strapi-cache.json";
+import { trimContent } from "./lib/trim-content.js";
+const cachedContent = trimContent(untrimmedContent);
 import { canonicalTransitionPath } from "./lib/blog-slug-transition";
 
 export interface StructuredContent {
@@ -684,7 +686,7 @@ export function buildJsonLd(
           ...meta.breadcrumbs.map((crumb, i) => ({
             "@type": "ListItem",
             position: i + 2,
-            name: crumb.name,
+            name: crumb.name.trim(),
             item: absoluteUrl(crumb.path),
           })),
         ],

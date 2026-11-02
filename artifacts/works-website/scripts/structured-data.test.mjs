@@ -25,6 +25,17 @@ const graphs = (meta, supplied) => seo.buildJsonLd(meta, undefined, supplied)
   .map((script) => JSON.parse(script.match(/<script[^>]*>([\s\S]*)<\/script>/)[1]));
 const ofType = (nodes, type) => nodes.filter((node) => node["@type"] === type);
 
+test("HU/EN BreadcrumbList strips surrounding whitespace from legacy titles", () => {
+  for (const locale of ["hu", "en"]) {
+    const meta = { ...seo.getPageMeta(locale === "hu" ? "/blog" : "/en/blog"),
+      breadcrumbs: [{ name: "\u00a0 Cím  / Title \t\n", path: "/blog" }] };
+    const node = ofType(graphs(meta), "BreadcrumbList")[0];
+    assert.ok(node);
+    assert.equal(node.itemListElement.at(-1).name, "Cím  / Title");
+    assert.ok(node.itemListElement.every(item => item.name === item.name.trim()));
+  }
+});
+
 test("HU/EN service FAQ exactly matches published visible questions; missing content emits nothing", () => {
   for (const [locale, slug, path] of [
     ["hu", "ux-kutatas", "/szolgaltatasok/ux-kutatas"],

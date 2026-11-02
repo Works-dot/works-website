@@ -1,3 +1,4 @@
+import { trimContent } from "./src/lib/trim-content.js";
 import fs from "node:fs";
 import path from "node:path";
 import { pathToFileURL } from "node:url";
@@ -25,7 +26,7 @@ export async function readLiveJobs(base, locale, fetcher = fetch) {
       location: jobLocationLabel(c), type: jobTypeLabel(c.employmentType, locale),
       tags: (c.tags || []).map(t => t.name), content: mapContentBlocks(c.contentBlocks),
       seo: c.seo ? { metaTitle: c.seo.metaTitle, metaDescription: c.seo.metaDescription, ogImage: c.seo.ogImage?.url } : null,
-    })));
+    })).map(trimContent));
     if (page >= (payload.meta?.pagination?.pageCount || 1)) break;
     if (page >= 100) throw new Error("Career pagination limit exceeded");
   }

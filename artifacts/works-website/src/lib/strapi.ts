@@ -1,3 +1,4 @@
+import { trimContent } from "./trim-content.js";
 import { mapContentBlocks, strapiImageUrl } from "./content-blocks.js";
 import { isOpenJob, jobFields, jobLocationLabel, jobTypeLabel, type JobFields } from "./job-posting.js";
 import { resolveArticleAuthor, linkedinProfile, fetchAuthorResponse, type ArticleAuthor } from "./article-author.js";
@@ -21,7 +22,29 @@ async function fetchApi<T>(path: string, params?: Record<string, string>): Promi
   else if (previewStatus) url.searchParams.set("status", previewStatus);
   const res = await fetchAuthorResponse(fetch, url.toString());
   if (!res.ok) throw new Error(`Strapi API error: ${res.status} ${res.statusText}`);
-  return res.json();
+  const payload = trimContent(await res.json());
+  // Older drafts can still contain padded slugs. Keep their cleaned links
+  // resolvable without renaming records or loosening other query filters.
+  const slugFilters = [...url.searchParams.entries()].filter(([key]) =>
+    /^filters(?:\[general\])?\[slug\]\[\$(?:eq|in)\](?:\[\d+\])?$/.test(key));
+  const slugFilter = slugFilters[0];
+  if (slugFilter && Array.isArray(payload.data) && payload.data.length === 0) {
+    slugFilters.forEach(([key]) => url.searchParams.delete(key));
+    url.searchParams.set("pagination[pageSize]", "100");
+    for (let page = 1; page <= 100; page++) {
+      url.searchParams.set("pagination[page]", String(page));
+      const retry = await fetchAuthorResponse(fetch, url.toString());
+      if (!retry.ok) throw new Error(`Strapi API error: ${retry.status}`);
+      const candidates = trimContent(await retry.json());
+      if (!Array.isArray(candidates.data)) throw new Error("Invalid Strapi list response");
+      const found = candidates.data.find((item: any) => slugFilters.some(([key, value]) =>
+        (key.includes("[general]") ? item.general?.slug : item.slug) === value.trim()));
+      if (found) return { ...payload, data: [found] };
+      if (page >= (candidates.meta?.pagination?.pageCount || 1)) return payload;
+    }
+    throw new Error("Strapi slug lookup exceeded pagination limit");
+  }
+  return payload;
 }
 
 /**

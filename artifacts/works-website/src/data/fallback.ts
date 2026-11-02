@@ -25,7 +25,9 @@ import {
   type LegalDocuments,
 } from "@/lib/strapi";
 
-import rawCache from "./strapi-cache.json";
+import untrimmedCache from "./strapi-cache.json";
+import { trimContent } from "../lib/trim-content.js";
+const rawCache = trimContent(untrimmedCache);
 import { isOpenJob } from "@/lib/job-posting.js";
 import { normalizeProjectSlug } from "@/lib/project-slug.js";
 import type { Locale } from "@/lib/i18n-routes";
