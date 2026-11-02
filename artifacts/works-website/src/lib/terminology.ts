@@ -767,7 +767,7 @@ function collectInlineContent(
   locale: TerminologyLocale,
   linkOwner?: MarkdownNode,
 ): void {
-  if (node.type === "code" || node.type === "inlineCode") {
+  if (node.type === "code" || node.type === "inlineCode" || node.type === "abbreviation") {
     appendInlineBoundary(collection);
     return;
   }
@@ -979,7 +979,7 @@ function transformMarkdownTree(
   node: MarkdownNode,
   locale: TerminologyLocale,
 ): void {
-  if (node.type === "code" || node.type === "inlineCode") return;
+  if (node.type === "code" || node.type === "inlineCode" || node.type === "abbreviation") return;
 
   if (node.type === "image" && typeof node.alt === "string") {
     node.alt = accessibleTermLabel(node.alt, locale);

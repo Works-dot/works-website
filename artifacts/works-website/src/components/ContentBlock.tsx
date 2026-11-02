@@ -1,5 +1,6 @@
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import { abbreviationRemarkPlugin } from "@/lib/abbreviations";
 import type { ContentBlock as ContentBlockType } from "@/lib/strapi";
 import { useI18n } from "@/i18n";
 import {
@@ -37,7 +38,7 @@ export function Markdown({ className, children }: { className: string; children:
 
   return (
     <div className={className}>
-      <ReactMarkdown remarkPlugins={[remarkGfm, terminologyRemarkPlugin(locale)]}
+      <ReactMarkdown remarkPlugins={[remarkGfm, abbreviationRemarkPlugin, terminologyRemarkPlugin(locale)]}
         components={{ img: ({ src, alt }) => src ? <ResponsiveImage src={src} alt={alt || ""} sizes="(min-width: 896px) 832px, calc(100vw - 32px)" /> : null }}>
         {children}
       </ReactMarkdown>
